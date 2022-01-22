@@ -5,7 +5,7 @@
  */
 module.exports = {
   title: 'Vite',
-  description: 'Next Generation Frontend Tooling',
+  description: 'Herramientas Frontend de próxima generación',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   themeConfig: {
     repo: 'vitejs/vite',
@@ -13,7 +13,7 @@ module.exports = {
     docsDir: 'docs',
     docsBranch: 'main',
     editLinks: true,
-    editLinkText: 'Suggest changes to this page',
+    editLinkText: 'Sugiere cambios para esta página',
 
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
@@ -29,18 +29,18 @@ module.exports = {
     },
 
     nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Config', link: '/config/' },
-      { text: 'Plugins', link: '/plugins/' },
+      { text: 'Guía', link: '/guide/' },
+      { text: 'Configuración', link: '/config/' },
+      { text: 'Complementos', link: '/plugins/' },
       {
-        text: 'Links',
+        text: 'Enlaces',
         items: [
           {
             text: 'Twitter',
             link: 'https://twitter.com/vite_js'
           },
           {
-            text: 'Discord Chat',
+            text: 'Chat de Discord',
             link: 'https://chat.vitejs.dev'
           },
           {
@@ -52,21 +52,25 @@ module.exports = {
             link: 'https://dev.to/t/vite'
           },
           {
-            text: 'Rollup Plugins Compat',
+            text: 'Complementos de Rollup compatibles',
             link: 'https://vite-rollup-plugins.patak.dev/'
           },
           {
-            text: 'Changelog',
+            text: 'Lista de Cambios',
             link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
           }
         ]
       },
       {
-        text: 'Languages',
+        text: 'Idiomas',
         items: [
           {
             text: 'English',
             link: 'https://vitejs.dev'
+          },
+          {
+            text: 'Español',
+            link: 'https://es.vitejs.dev'
           },
           {
             text: '简体中文',
@@ -86,58 +90,58 @@ module.exports = {
       // catch-all fallback
       '/': [
         {
-          text: 'Guide',
+          text: 'Guía',
           children: [
             {
-              text: 'Why Vite',
+              text: 'Por qué Vite',
               link: '/guide/why'
             },
             {
-              text: 'Getting Started',
+              text: 'Introducción',
               link: '/guide/'
             },
             {
-              text: 'Features',
+              text: 'Funcionalidades',
               link: '/guide/features'
             },
             {
-              text: 'Using Plugins',
+              text: 'Uso de complementos',
               link: '/guide/using-plugins'
             },
             {
-              text: 'Dependency Pre-Bundling',
+              text: 'Preempaquetado de dependencia',
               link: '/guide/dep-pre-bundling'
             },
             {
-              text: 'Static Asset Handling',
+              text: 'Manejo de recursos estáticos',
               link: '/guide/assets'
             },
             {
-              text: 'Building for Production',
+              text: 'Compilación en producción',
               link: '/guide/build'
             },
             {
-              text: 'Deploying a Static Site',
+              text: 'Implementación de un sitio estático',
               link: '/guide/static-deploy'
             },
             {
-              text: 'Env Variables and Modes',
+              text: 'Variables y modos de entorno',
               link: '/guide/env-and-mode'
             },
             {
-              text: 'Server-Side Rendering (SSR)',
+              text: 'Server-side Rendering (SSR)',
               link: '/guide/ssr'
             },
             {
-              text: 'Backend Integration',
+              text: 'Integración al Backend',
               link: '/guide/backend-integration'
             },
             {
-              text: 'Comparisons',
+              text: 'Comparación',
               link: '/guide/comparisons'
             },
             {
-              text: 'Migration from v1',
+              text: 'Migración desde v1',
               link: '/guide/migration'
             }
           ]
