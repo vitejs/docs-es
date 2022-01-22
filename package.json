@@ -1,0 +1,71 @@
+{
+  "name": "vite-docs-spanish",
+  "version": "1.0.0",
+  "description": "Vite docs spanish translation",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "@microsoft/api-extractor": "^7.19.3",
+    "@types/fs-extra": "^9.0.13",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.17",
+    "@types/prompts": "^2.0.14",
+    "@types/semver": "^7.3.9",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "conventional-changelog-cli": "^2.2.2",
+    "cross-env": "^7.0.3",
+    "esbuild": "0.14.3",
+    "eslint": "^8.5.0",
+    "eslint-define-config": "^1.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "execa": "^5.1.1",
+    "fs-extra": "^10.0.0",
+    "jest": "^27.4.5",
+    "lint-staged": "^12.1.4",
+    "minimist": "^1.2.5",
+    "node-fetch": "^2.6.6",
+    "npm-run-all": "^4.1.5",
+    "picocolors": "^1.0.0",
+    "playwright-chromium": "^1.17.1",
+    "prettier": "2.5.1",
+    "prompts": "^2.4.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.59.0",
+    "semver": "^7.3.5",
+    "simple-git-hooks": "^2.7.0",
+    "sirv": "^2.0.0",
+    "ts-jest": "^27.1.2",
+    "ts-node": "^10.4.0",
+    "typescript": "~4.5.4",
+    "vite": "latest",
+    "vitepress": "^0.20.10"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrcego/vite-spanish-docs-translation.git"
+  },
+  "keywords": [
+    "frontend",
+    "hmr",
+    "dev-server",
+    "build-tool",
+    "vite",
+    "spanish",
+    "translation",
+    "docs"
+  ],
+  "author": "Cesar Gomez <cesargomezh90@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrcego/vite-spanish-docs-translation/issues"
+  },
+  "homepage": "https://github.com/mrcego/vite-spanish-docs-translation#readme"
+}
