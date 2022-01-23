@@ -13,7 +13,7 @@ jobs:
       - uses: vuejs-translations/ryu-cho@v1
         with:
           # GitHub access token. Required.
-          access-token: ${{ secrets.SECRET_RYU_CHO }}
+          access-token: ${{ secrets.ACCESS_TOKEN }}
 
           # Git user name to use when making issues and PRs. Required.
           username: mrcego
