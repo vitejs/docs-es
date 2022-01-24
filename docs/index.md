@@ -6,7 +6,7 @@ actionText: Introducción
 actionLink: /guide/
 
 # altActionText: Learn More
-altActionText: Aprende más
+altActionText: Saber más
 altActionLink: /guide/why
 
 # features:
