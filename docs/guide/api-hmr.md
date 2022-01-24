@@ -1,12 +1,12 @@
 # API HMR
 
-:::tip Note
-Estes es el cliente para la API HMR. Para lidiar con una actualización HMR en los complementos, dale un vistazo a [manejoActualizacionesInstantaneas](./api-plugin#handlehotupdate).
+:::tip Nota
+Esta es la API cliente de HMR. Para manejar actualizaciones HMR en los complementos, dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate).
 
-La API HMR está pensada para autores del framework o autores de herramientas. Como usuario final, HMR ya está siendo manejado por ti en las plantillas de inicio de Vite.
+La API HMR está pensada para autores de marco de trabajo y autores de herramientas. Como usuario final, HMR ya está siendo manejado para ti en las plantillas de inicio del marco de trabajo específico.
 :::
 
-Vite expone su API HMR a través de el objeto especial `import.meta.hot`:
+Vite expone su API HMR a través del objeto especial `import.meta.hot`:
 
 ```ts
 interface ImportMeta {
@@ -28,9 +28,9 @@ interface ImportMeta {
 }
 ```
 
-## Required Conditional Guard
+## Encapsulamiento Condicional Requerido
 
-Primero que nada, debes asegurarte de tener todos los llamados a la API HMR en un bloque condicional, para que el código pueda ser eliminado en producción:
+Primero que nada, debes asegurarte de tener todos los llamados a la API HMR en un bloque condicional, para que el código pueda ser descartado en producción:
 
 ```js
 if (import.meta.hot) {
@@ -40,21 +40,21 @@ if (import.meta.hot) {
 
 ## `hot.accept(cb)`
 
-Para que un módulo pueda ser actualizado, debes utilizar `import.meta.hot.accept()` con una función de callback que recibe el módulo actualizado:
+Para que un módulo pueda ser actualizado, debes utilizar `import.meta.hot.accept()` con un callback que recibe el módulo actualizado:
 
 ```js
 export const count = 1
 
 if (import.meta.hot) {
   import.meta.hot.accept((newModule) => {
-    console.log('actualizado: la cuenta ahora es ', newModule.count)
+    console.log('actualizado: count ahora es ', newModule.count)
   })
 }
 ```
 
 Un módulo que "acepta" actualizaciones instantáneas es considerado un **Límite HMR**.
 
-Ten en cuenta que el HMR de Vite en realidad no intercambia el módulo importado originalmente: si los límites de un módulo HMR reexportan las importaciones desde un dep, entonces es responsable de actualizar esas reexportaciones (y estas exportaciones deben usar `let`). Además, los importadores del tope de la cadena de los límites del módulo no serán notificados de este cambio.
+Ten en cuenta que el HMR de Vite en realidad no intercambia el módulo importado originalmente: si los límites de un módulo HMR reexportan las importaciones desde un dep, entonces es responsable de actualizar esas reexportaciones (y estas exportaciones deben usar `let`). Además, los importadores relacionados con los límites del modulo no serán notificados de este cambio.
 
 Esta implementación simplificada de HMR es suficiente para la mayoría de casos de uso de desarrollo, ya que nos permiten evitar el costoso trabajo de generar módulos proxy.
 
@@ -73,7 +73,7 @@ if (import.meta.hot) {
     newFoo.foo()
   })
 
-  // Puede aceptar un array de módulos dep:
+  // Puede aceptar un array de módulos de dependencia:
   import.meta.hot.accept(
     ['./foo.js', './bar.js'],
     ([newFooModule, newBarModule]) => {
@@ -120,6 +120,6 @@ Los siguientes eventos HMR son enviados por Vite automáticamente:
 - `'vite:beforeUpdate'` cuando se va a aplicar una actualización (por ejemplo, se reemplazará un módulo).
 - `'vite:beforeFullReload'` cuando una recarga completa está a punto de ser ejecutada.
 - `'vite:beforePrune'` cuando los módulos que ya no se necesitan están a punto de ser eliminados.
-- `'vite:error'` cuando un error ocurre (e.g. error de sintaxis).
+- `'vite:error'` cuando un error ocurre (Por ejemplo error de sintaxis).
 
-Eventos HMR personalizados también se pueden enviar desde complementos. dale un vistazo a [manejoActualizacionesInstantaneas](./api-plugin#handlehotupdate) para más detalles.
+Los eventos HMR personalizados también se pueden enviar desde complementos. Dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate) para más detalles.
