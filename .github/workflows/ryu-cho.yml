@@ -10,7 +10,7 @@ jobs:
     name: Ryu Cho
     runs-on: ubuntu-latest
     steps:
-      - uses: mrcego/ryu-cho@v1
+      - uses: vuejs-translations/ryu-cho@v1
         with:
           # GitHub access token. Required.
           access-token: ${{ secrets.ACCESS_TOKEN }}
