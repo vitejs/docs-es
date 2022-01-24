@@ -12,7 +12,7 @@ Vite está pensado para proveer un soporte listo para usar para los patrones de 
 
 ### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
 
-- Provee soporte de JSX en Vue 3 (por medio de [dedicated Babel transform](https://github.com/vuejs/jsx-next)).
+- Provee soporte de JSX en Vue 3 (por medio de la [transformación dedicada de Babel](https://github.com/vuejs/jsx-next)).
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite/tree/main/packages/plugin-react)
 
