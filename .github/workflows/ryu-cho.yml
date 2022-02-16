@@ -37,7 +37,7 @@ jobs:
 
           # The git commit sha of head repo to start tracking. Ryu-Cho will
           # only track commit from this hash. Required.
-          track-from: e6b06e535fb26e064f5c341703df4bcb30aa6432
+          track-from: 3f27d58036bfe4149e563a105c08c2d4771db288
 
           # File path to track. In this example, Ryu-Cho will only track
           # commits that modified files under `docs` folder. Optional.
