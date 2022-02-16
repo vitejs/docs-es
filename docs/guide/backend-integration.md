@@ -1,12 +1,22 @@
-# Backend Integration
+<!-- # Backend Integration -->
 
-:::tip Note
+# Integración al Backend
+
+<!-- :::tip Note
 If you want to serve the HTML using a traditional backend (e.g. Rails, Laravel) but use Vite for serving assets, check for existing integrations listed in [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
 
 If you need a custom integration, you can follow the steps in this guide to configure it manually
+::: -->
+
+:::tip Nota
+Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
+
+Si necesitas una integración personalizada, puedes seguir los pasos de esta guía para configuración manual.
 :::
 
-1. In your Vite config, configure the entry and enable build manifest:
+<!-- 1. In your Vite config, configure the entry and enable build manifest: -->
+
+1. En tu configuración de Vite, configura el archivo de entrada y habilita el manifest de compilación:
 
    ```js
    // vite.config.js
@@ -22,14 +32,14 @@ If you need a custom integration, you can follow the steps in this guide to conf
    })
    ```
 
-   If you haven't disabled the [module preload polyfill](/config/#build-polyfillmodulepreload), you also need to import the polyfill in your entry
+   Si no has desactivado el [polyfill de precarga de modulos](/config/#build-polyfillmodulepreload), tambien necesitarás importar el polyfill en tu entrada.
 
    ```js
-   // add the beginning of your app entry
+   // agrega esto en el archivo de entrada de tu app
    import 'vite/modulepreload-polyfill'
    ```
 
-2. For development, inject the following in your server's HTML template (substitute `http://localhost:3000` with the local URL Vite is running at):
+2. Para desarrollo: inyecta lo siguiente en la plantilla de servidor HTML (reemplaza `http://localhost:3000` con la URL local donde Vite se está ejecutando):
 
    ```html
    <!-- if development -->
@@ -37,9 +47,9 @@ If you need a custom integration, you can follow the steps in this guide to conf
    <script type="module" src="http://localhost:3000/main.js"></script>
    ```
 
-   Also make sure the server is configured to serve static assets in the Vite working directory, otherwise assets such as images won't be loaded properly.
+   Asegurate tambien que el servidor está configurado para servir recursos estaticos en la carpeta de trabajo de Vite, de otra forma los recursos tales como imagenes no cargarán correctamente.
 
-   Note if you are using React with `@vitejs/plugin-react`, you'll also need to add this before the above scripts, since the plugin is not able to modify the HTML you are serving:
+   Ten en cuenta que si estas usando React con `@vitejs/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo:
 
    ```html
    <script type="module">
@@ -51,7 +61,7 @@ If you need a custom integration, you can follow the steps in this guide to conf
    </script>
    ```
 
-3. For production: after running `vite build`, a `manifest.json` file will be generated alongside other asset files. An example manifest file looks like this:
+3. Para producción: despues de correr `vite build`, se generará un archivo `manifest.json` junto a otros archivos de recurso. Un ejemplo de un archivo manifest sería algo como esto:
 
    ```json
    {
@@ -75,12 +85,11 @@ If you need a custom integration, you can follow the steps in this guide to conf
    }
    ```
 
-   - The manifest has a `Record<name, chunk>` structure
-   - For entry or dynamic entry chunks, the key is the relative src path from project root.
-   - For non entry chunks, the key is the base name of the generated file prefixed with `_`.
-   - Chunks will contain information on its static and dynamic imports (both are keys that maps to the corresponding chunk in the manifest), and also its corresponding CSS and asset files (if any).
+   - El manifest tiene una estructura `Record<name, chunk>`.
+   - Para chunks de entrada fija o dinámica, la key es la ruta src relativa de la raíz del proyecto.
+   - Los chunks contendrán información en sus importaciones estaticas y dinamicas (ambos son keys que mapean al correspondiente chunk en el manifest), y tambien su correspondiente css y archivo de recurso estatico (si los hay).
 
-   You can use this file to render links or preload directives with hashed filenames (note: the syntax here is for explanation only, substitute with your server templating language):
+   Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash (nota: la sintaxis aquí es meramente explicativa, sustituye con el lenguage de plantilla del servidor.)
 
    ```html
    <!-- if production -->

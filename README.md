@@ -14,32 +14,32 @@
 
 # Vite ⚡
 
-> Next Generation Frontend Tooling
+> Herramientas frontend de próxima generación
 
-- 💡 Instant Server Start
-- ⚡️ Lightning Fast HMR
-- 🛠️ Rich Features
-- 📦 Optimized Build
-- 🔩 Universal Plugin Interface
-- 🔑 Fully Typed APIs
+- 💡 Inicio de servidor al instante
+- ⚡️ HMR ultra rápido
+- 🛠️ Funcionalidades enriquecidas
+- 📦 Compilación optimizada
+- 🔩 Interfaz universal para complementos
+- 🔑 APIs completamente tipadas
 
-Vite (French word for "quick", pronounced [`/vit/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), like "veet") is a new breed of frontend build tool that significantly improves the frontend development experience. It consists of two major parts:
+Vite (palabra en francés para "rápido", pronunciado como [`/vit/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), como "vit") es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
 
-- A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), with [rich built-in features](https://vitejs.dev/guide/features.html) and astonishingly fast [Hot Module Replacement (HMR)](https://vitejs.dev/guide/features.html#hot-module-replacement).
+- Un servidor de desarrollo que proporciona [mejoras enriquecidas de funcionalidades](./features) sobre [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), por ejemplo [Hot Module Replacement (HMR)](./features#hot-module-replacement) extremadamente rápido.
 
-- A [build command](https://vitejs.dev/guide/build.html) that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
+- Un comando de compilación que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar activos estáticos altamente optimizados para producción.
 
-In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/guide/api-plugin.html) and [JavaScript API](https://vitejs.dev/guide/api-javascript.html) with full typing support.
+Además, Vite es altamente extensible a través de sus [API de complementos](./api-plugin) y [API de JavaScript](./api-javascript) con soporte completo de tipado.
 
-[Read the Docs to Learn More](https://vitejs.dev).
+[Lee la documentación para saber más](https://vitejs.dev).
 
-## Migrating from 1.x
+## Migración desde 1.x
 
-Check out the [Migration Guide](https://vitejs.dev/guide/migration.html) if you are upgrading from 1.x.
+Revisa la [Guía de Migración](https://vitejs.dev/guide/migration.html) si estás actualizando desde 1.x.
 
-## Packages
+## Paquetes
 
-| Package                                           | Version (click for changelogs)                                                                                                       |
+| Paquete                                           | Version (click para lista de cambios)                                                                                                |
 | ------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
 | [vite](packages/vite)                             | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](packages/vite/CHANGELOG.md)                                       |
 | [@vitejs/plugin-vue](packages/plugin-vue)         | [![plugin-vue version](https://img.shields.io/npm/v/@vitejs/plugin-vue.svg?label=%20)](packages/plugin-vue/CHANGELOG.md)             |
@@ -48,10 +48,10 @@ Check out the [Migration Guide](https://vitejs.dev/guide/migration.html) if you 
 | [@vitejs/plugin-legacy](packages/plugin-legacy)   | [![plugin-legacy version](https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20)](packages/plugin-legacy/CHANGELOG.md)    |
 | [create-vite](packages/create-vite)               | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](packages/create-vite/CHANGELOG.md)                  |
 
-## Contribution
+## Contribución
 
-See [Contributing Guide](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md).
+See [Guía de Contribución](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md).
 
-## License
+## Licencia
 
 MIT

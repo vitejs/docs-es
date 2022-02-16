@@ -32,7 +32,7 @@ features:
     details: Soporte para TypeScript, JSX, CSS y más, listos para usar.
   - title: 📦 Compilación optimizada
     details: Compilación de Rollup preconfigurada con soporte de modo multi-página y librería.
-  - title: 🔩 Complementos universales
+  - title: 🔩 Interfaz universal para complementos
     details: Interfaz de complemento para superconjuntos de Rollup compartida entre dev y build.
   - title: 🔑 APIs completamente tipadas
     details: APIs programáticas flexibles con tipado completo en TypeScript.
