@@ -23,14 +23,14 @@ jobs:
 
           # The url for the upstream repo. This is the repository that you
           # set up Ryu-Cho. Required.
-          upstream-repo: https://github.com/mrcego/vite-spanish-docs-translation.git
+          upstream-repo: https://github.com/mrcego/vite-spanish-docs-translation
 
           # The branch for the upstream repo. Optional. Defaults to `main`.
           upstream-repo-branch: main
 
           # The head repo to track. This is the repository you want to
           # take a diff. Required.
-          head-repo: https://github.com/vitejs/vite.git
+          head-repo: https://github.com/vitejs/vite
 
           # The branch for the head repo. Optional. Defaults to `main`.
           head-repo-branch: main
