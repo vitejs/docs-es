@@ -24,7 +24,7 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 ## Probar Vite en línea
 
-Puedes probar Vite en línea en [StackBlitz](https://vite.new/). Este ejecuta la configuración de compilación basada en Vite directamente en el navegador, por lo que es casi idéntica a la configuración local pero con la diferencia que no requieres instalar nada en tu máquina. Puedes navegar a `vite.new/{template}` para seleccionar qué marco de trabajo utilizar.
+Puedes probar Vite en línea en [StackBlitz](https://vite.new/). Éste ejecuta la configuración de compilación basada en Vite directamente en el navegador, por lo que es casi idéntica a la configuración local pero con la diferencia que no requiere que instales nada en tu máquina. Puedes navegar a `vite.new/{template}` para seleccionar qué marco de trabajo utilizar.
 
 Los ajustes preestablecidos de plantilla admitidos son:
 
@@ -69,7 +69,7 @@ También puedes especificar directamente el nombre del proyecto y la plantilla q
 # npm 6.x
 npm create vite@latest my-vue-app --template vue
 
-# npm 7+, extra doble guión necesario:
+# npm 7+, se requiere guión doble extra:
 npm create vite@latest my-vue-app -- --template vue
 
 # yarn
@@ -103,7 +103,7 @@ npx degit user/project#main my-project
 
 Una cosa que puedes haber notado es que en un proyecto de Vite, `index.html` es frontal y central en lugar de estar escondido dentro de `public`. Esto es intencional: durante el desarrollo, Vite es un servidor e `index.html` es el punto de entrada a tu aplicación.
 
-Vite trata a `index.html` como código fuente y parte del gráfico de módulo. Esto resuelve a `<script type="module" src="...">` que hace referencia a tu código JavaScript. Incluso `<script type="module">` inline y el CSS referenciado a través de `<link href>` también disfrutan de características específicas de Vite. Además, las URLs dentro de `index.html` se reorganizan automáticamente, por lo que no se necesitan marcadores de posición especiales para `%PUBLIC_URL%`.
+Vite trata a `index.html` cómo código fuente y cómo parte del grafo de módulos. Esto resuelve a `<script type="module" src="...">` que hace referencia a tu código JavaScript. Incluso `<script type="module">` inline y el CSS referenciado a través de `<link href>` también disfrutan de características específicas de Vite. Además, las URLs dentro de `index.html` se reorganizan automáticamente, por lo que no se necesitan marcadores de posición especiales para `%PUBLIC_URL%`.
 
 Similar a los servidores http estáticos, Vite tiene el concepto de un "directorio raíz" desde el cual se sirven tus archivos. Lo verás referenciado como `<root>` en el resto de la documentación. Las URL absolutas en el código se resolverán utilizando la raíz del proyecto como base, por lo que puedes escribir código como si estuvieras trabajando con un servidor de archivos estático normal (¡excepto que es mucho más poderoso!). Vite también es capaz de manejar dependencias que se resuelven en ubicaciones del sistema de archivos fuera de la raíz, lo que lo hace utilizable incluso en una configuración basada en monorepos.
 
@@ -121,9 +121,9 @@ En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus 
 ```json5
 {
   "scripts": {
-    "dev": "vite", // inicia el servidor de desarrollo, aliases: `vite dev`, `vite serve`
-    "build": "vite build", // compila en producción
-    "preview": "vite preview" // vista previa local de compilación en producción
+    "dev": "vite", // inicia el servidor de desarrollo, alias: `vite dev`, `vite serve`
+    "build": "vite build", // compila para producción
+    "preview": "vite preview" // vista previa local de compilación para producción
   }
 }
 ```
@@ -132,7 +132,7 @@ Puedes especificar opciones CLI adicionales como `--port` o `--https`. Para obte
 
 ## Uso de confirmaciones no publicadas
 
-Si no puedes esperar una nueva versión para probar las funciones más recientes, deberás clonar el [repo de vite](https://github.com/vitejs/vite) en tu máquina local y luego compilarlo y vincularlo tu mismo. ([pnpm](https://pnpm.io/) es obligatorio):
+Si no puedes esperar a una nueva versión para probar las funciones más recientes, deberás clonar el [repo de vite](https://github.com/vitejs/vite) en tu máquina local y luego compilarlo y vincularlo tu mismo. ([pnpm](https://pnpm.io/) es obligatorio):
 
 ```bash
 git clone https://github.com/vitejs/vite.git
