@@ -4,21 +4,21 @@
 
 Antes de los que módulos ES estuvieran disponibles para navegadores web, los desarrolladores no tenían un mecanismo nativo para crear código Javascript en forma modular. Este es el por qué estamos familizariados con el concepto de "empaquetado": el uso de herramientas que analizan, procesan y concatenan nuestros módulos en archivos que puedan ser ejecutados en el navegador.
 
-Con el tiempo hemos visto herramienta como [webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org) y [Parcel](https://parceljs.org/), las cuales han mejorado considerablemente la experiencia de desarrollo de los desarrolladores frontend.
+Con el tiempo hemos visto herramientas como [webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org) y [Parcel](https://parceljs.org/), las cuales han mejorado considerablemente la experiencia de desarrollo de los desarrolladores frontend.
 
 Sin embargo, a medida que comenzamos a crear aplicaciones cada vez más ambiciosas, la cantidad de código JavaScript con la que estamos trabajando tambien crecerá exponencialmente. No es raro que los proyectos a gran escala contengan miles de módulos. En este punto empezamos a encontrarnos con un cuello de botella en el rendimiento de las herramientas basadas en JavaScript: a menudo puede llevar a una espera excesivamente larga (¡a veces hasta de minutos!) poner en marcha un servidor de desarrollo, e incluso con HMR, las ediciones de archivos pueden tardar un par de segundos en reflejarse en el navegador. El ciclo lento de retroalimentación puede afectar en gran medida la productividad y felicidad de los desarrolladores.
 
 Vite viene a corregir estos problemas aprovechando los nuevos avances en el ecosistema: la disponibilidad de módulos ES nativos en el navegador, y el surgimiento de herramientas JavaScript escritas en lenguajes de compilación a nativo.
 
-### Inicio lento de servidor
+### Inicio lento del servidor
 
-Cuando se inicia desde cero el servidor de desarrollo, la configuración de compilación basada en empaquetadores tiene que analizar y compilar de forma estricta toda la aplicación antes que pueda ser servido.
+Cuando se inicia desde cero el servidor de desarrollo, la configuración de compilación basada en empaquetadores tiene que analizar y compilar de forma estricta toda la aplicación antes de que pueda ser servida.
 
 Vite mejora el tiempo de inicio del servidor de desarrollo dividiendo primero los módulos de una aplicación en dos categorías: **dependencias** y **código fuente**.
 
 - Las **dependencias** son en su mayoría código JavaScript plano que no cambia con frecuencia durante el desarrollo. Algunas dependencias grandes (por ejemplo, librerías de componentes con cientos de módulos) también son bastante complejas de procesar. Las dependencias también pueden estar disponibles en varios formatos de módulos (por ejemplo, ESM o CommonJS).
 
-  Vite [preempaqueta dependencias](./dep-pre-bundling) usando [esbuild](https://esbuild.github.io/). Esbuild está escrito en Go y preempaqueta dependencias 10 a 100 veces más rápido que los empaquetadores basados ​​en JavaScript.
+  Vite [preempaqueta dependencias](./dep-pre-bundling) usando [esbuild](https://esbuild.github.io/). Esbuild está escrito en Go y preempaqueta dependencias de 10 a 100 veces más rápido que los empaquetadores basados en JavaScript.
 
 - **El código fuente** a menudo contiene código JavaScript no plano que necesita transformación (por ejemplo, JSX, CSS o componentes Vue/Svelte) y que se editará con mucha frecuencia. Además, no es necesario cargar todo el código fuente al mismo tiempo (por ejemplo, con división de código basado en rutas).
 
