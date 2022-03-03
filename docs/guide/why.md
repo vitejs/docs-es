@@ -26,13 +26,13 @@ Vite sirve código fuente sobre [ESM nativo](https://developer.mozilla.org/en-US
 
 ![Servidor de desarrollo basado en empaquetador](/images/bundler.png)
 
-![Servidor de desarrollo basado en esm](/images/esm.png)
+![Servidor de desarrollo basado en ESM](/images/esm.png)
 
 ### Actualizaciones lentas
 
 Cuando se edita un archivo con una configuración de compilación basada en empaquetadores, es ineficiente recompilar todo el paquete por razones obvias: la velocidad de actualización se degradará linealmente con el tamaño de la aplicación.
 
-Algunos servidores de desarrollo de empaquetado ejecutan el paquete en memoria, por lo que solo necesita invalidar parte de su gráfico de módulo cuando cambia un archivo, pero aún así necesita recompilar todo el paquete y recargar la página web. Recompilar el paquete puede ser costoso y recargar la página arruina el estado actual de la aplicación. Esta es la razón por la que algunos empaquetadores tienen soporte para Hot Module Replacement (HMR): permite que un módulo se "reemplace en caliente" a sí mismo sin afectar el resto de la página. Esto mejora enormemente la experiencia de desarrollo; sin embargo, en la práctica hemos descubierto que incluso con la actualización vía HMR la velocidad se deteriora significativamente a medida que crece el tamaño de la aplicación.
+En algunos empaquetadores, el servidor de desarrollo ejecuta el empaquetado en memoria, por lo que solo necesita invalidar parte de su gráfico de módulo cuando cambia un archivo, pero aún así necesita recompilar todo el paquete y recargar la página web. Recompilar el paquete puede ser costoso y recargar la página arruina el estado actual de la aplicación. Esta es la razón por la que algunos empaquetadores tienen soporte para Hot Module Replacement (HMR): permite que un módulo se "reemplace en caliente" a sí mismo sin afectar el resto de la página. Esto mejora enormemente la experiencia de desarrollo; sin embargo, en la práctica hemos descubierto que incluso con la actualización vía HMR la velocidad se deteriora significativamente a medida que crece el tamaño de la aplicación.
 
 En Vite, el HMR es realizado sobre ESM nativo. Cuando se edita un archivo, Vite solo necesita invalidar precisamente la relación entre el módulo editado y su límite HMR más cercano (la mayoría de las veces solo el módulo en sí), lo que hace que las actualizaciones vía HMR sean consistentemente rápidas, independientemente del tamaño de tu aplicación.
 
