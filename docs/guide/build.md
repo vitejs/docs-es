@@ -26,7 +26,7 @@ Las URL de recursos importados por JS, las referencias de CSS `url()` y las refe
 
 La excepción es cuando se necesita concatenar dinámicamente URL sobre la marcha. En este caso, puedes usar la variable `import.meta.env.BASE_URL` inyectada globalmente, que será la ruta base pública. Ten en cuenta que esta variable se reemplaza estáticamente durante la compilación, por lo que debe aparecer exactamente como está (es decir, `import.meta.env['BASE_URL']` no funcionará).
 
-## Personalizar la compilación
+## Personalizando la compilación
 
 La compilación se puede personalizar a través de varias [opciones de configuración de compilación](/config/#build-options). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/guide/en/#big-list-of-options) fundamentales a través de `build.rollupOptions`:
 
@@ -43,6 +43,20 @@ module.exports = defineConfig({
 
 Por ejemplo, puedes especificar varias salidas de Rollup con complementos que solo son aplicados durante la compilación.
 
+## Chunking Strategy
+
+You can configure how chunks are split using `build.rollupOptions.manualChunks` (see [Rollup docs](https://rollupjs.org/guide/en/#outputmanualchunks)). Until Vite 2.7, the default chunking strategy divided the chunks into `index` and `vendor`. It is a good strategy for some SPAs, but it is hard to provide a general solution for every Vite target use case. From Vite 2.8, `manualChunks` is no longer modified by default. You can continue to use the Split Vendor Chunk strategy by adding the `splitVendorChunkPlugin` in your config file:
+
+```js
+// vite.config.js
+import { splitVendorChunkPlugin } from 'vite'
+module.exports = defineConfig({
+  plugins: [splitVendorChunkPlugin()]
+})
+```
+
+This strategy is also provided as a `splitVendorChunk({ cache: SplitVendorChunkCache })` factory, in case composition with custom logic is needed. `cache.reset()` needs to be called at `buildStart` for build watch mode to work correctly in this case.
+
 ## Recompilar en cambios de archivos
 
 Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options) a través de `build.watch`:
@@ -57,6 +71,8 @@ module.exports = defineConfig({
   }
 })
 ```
+
+With the `--watch` flag enabled, changes to the `vite.config.js`, as well as any files to be bundled, will trigger a rebuild.
 
 ## Aplicación multipáginas
 
@@ -127,6 +143,15 @@ module.exports = defineConfig({
     }
   }
 })
+```
+
+The entry file would contain exports that can be imported by users of your package:
+
+```js
+// lib/main.js
+import Foo from './Foo.vue'
+import Bar from './Bar.vue'
+export { Foo, Bar }
 ```
 
 Ejecutar `vite build` con esta configuración utiliza un ajuste preestablecido de Rollup que está orientado a la distribución de librerías y produce dos formatos de empaquetado: `es` y `umd` (configurable a través de `build.lib`):
