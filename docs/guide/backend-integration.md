@@ -43,7 +43,6 @@ Si necesitas una integraciÃ³n personalizada, puedes seguir los pasos de esta guÃ
 
    ```html
    <!-- if development -->
-   <script type="module" src="http://localhost:3000/@vite/client"></script>
    <script type="module" src="http://localhost:3000/main.js"></script>
    ```
 
