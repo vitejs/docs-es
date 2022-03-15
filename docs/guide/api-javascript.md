@@ -32,10 +32,10 @@ const { createServer } = require('vite')
 
 ## `InlineConfig`
 
-La interfaz `InlineConfig` hereda `UserConfig` con propiedades adicionales:
+La interfaz `InlineConfig` extiende `UserConfig` con propiedades adicionales:
 
 - `configFile`: Especifica el archivo de configuración a utilizar. Si no se establece, Vite tratará de resolver automáticamente uno de la raíz del proyecto. Establezca `false` para desactivar la resolución automática.
-- `envFile`: Establezca `false` para desactivar los archivos `.env`.
+- `envFile`: Establece a `false` para desactivar los archivos `.env`.
 
 ## `ViteDevServer`
 
@@ -47,7 +47,7 @@ interface ViteDevServer {
   config: ResolvedConfig
   /**
    * Una instancia de aplicación de conexión
-   * - Puede utilizarse para adjuntar middlewares personalizados al servidor dev.
+   * - Puede utilizarse para adjuntar middlewares personalizados al servidor de desarrollo.
    * - También se puede utilizar como la función manejadora de un servidor http personalizado
    * o como un middleware en cualquier framework Node.js de estilo connect.
    *
@@ -86,11 +86,11 @@ interface ViteDevServer {
     options?: TransformOptions
   ): Promise<TransformResult | null>
   /**
-   * Aplique las transformaciones HTML integradas en Vite y las transformaciones HTML de cualquier plugin.
+   * Aplica las transformaciones HTML integradas en Vite y las transformaciones HTML de cualquier plugin.
    */
   transformIndexHtml(url: string, html: string): Promise<string>
   /**
-   * Cargar una URL dada como un módulo instanciado para SSR.
+   * Carga una URL dada como un módulo instanciado para SSR.
    */
   ssrLoadModule(
     url: string,
@@ -107,11 +107,11 @@ interface ViteDevServer {
   /**
    * Reinicia el servidor.
    *
-   * @param forceOptimize - forzar al optimizador a recomponer el paquete, igual que la bandera --force cli
+   * @param forceOptimize - Fuerza al optimizador a recomponer el paquete, igual que la bandera --force cli
    */
   restart(forceOptimize?: boolean): Promise<void>
   /**
-   * Detener el servidor.
+   * Detiene el servidor.
    */
   close(): Promise<void>
 }
