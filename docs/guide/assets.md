@@ -176,3 +176,7 @@ Durante la compilación en producción, Vite realizará las transformaciones nec
 ::: warning Nota: No funciona con SSR
 Este patrón no funciona si estás utilizando Vite para Server-Side Rendering, porque `import.meta.url` tiene una semántica diferente en navegadores con respecto a Node.js. El empaquetado del servidor tampoco puede determinar la URL del host del cliente con anticipación.
 :::
+
+::: warning Esbuild target config is necessary
+This pattern needs esbuild target to be set to `es2020` or higher. `vite@2.x` use `es2019` as default target. Set [build-target](https://vitejs.dev/config/#build-target) and [optimizedeps.esbuildoptions.target](https://vitejs.dev/config/#optimizedeps-esbuildoptions) to `es2020` or higher if you intend to use this partten.
+:::
