@@ -1,10 +1,10 @@
 # JavaScript API
 
-Las APIs de JavaScript de Vite están totalmente tipificadas, y se recomienda utilizar TypeScript o habilitar la comprobación de tipos JS en VSCode para aprovechar el intellisense y la validación.
+Las APIs de JavaScript de Vite están totalmente tipificadas, y se recomienda utilizar TypeScript o habilitar la comprobación de tipos JS en Visual Studio Code para aprovechar el intellisense y la validación.
 
 ## `createServer`
 
-**Firma de Tipo:** 
+**Firma de Tipo:**
 
 ```ts
 async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
@@ -119,7 +119,7 @@ interface ViteDevServer {
 
 ## `build`
 
-**Firma de Tipo:** 
+**Firma de Tipo:**
 
 ```ts
 async function build(
@@ -176,7 +176,7 @@ const { preview } = require('vite')
 
 ## `resolveConfig`
 
-**Firma de Tipo:** 
+**Firma de Tipo:**
 
 ```ts
 async function resolveConfig(
@@ -190,7 +190,7 @@ El valor de `command` es `serve` en dev (en el cli `vite`, `vite dev`, y `vite s
 
 ## `transformWithEsbuild`
 
-**Firma de Tipo:** 
+**Firma de Tipo:**
 
 ```ts
 async function transformWithEsbuild(

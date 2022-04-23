@@ -165,13 +165,23 @@ function getImageUrl(name) {
 }
 ```
 
-<!-- During the production build, Vite will perform necessary transforms so that the URLs still point to the correct location even after bundling and asset hashing.
+<!-- During the production build, Vite will perform necessary transforms so that the URLs still point to the correct location even after bundling and asset hashing. However, the URL string must be static so it can be analyzed, otherwise the code will be left as is, which can cause runtime errors if `build.target` does not support `import.meta.url`
+
+```js
+// Vite will not transform this
+const imgUrl = new URL(imagePath, import.meta.url).href
+```
 
 ::: warning Note: Does not work with SSR
 This pattern does not work if you are using Vite for Server-Side Rendering, because `import.meta.url` have different semantics in browsers vs. Node.js. The server bundle also cannot determine the client host URL ahead of time.
 ::: -->
 
-Durante la compilación en producción, Vite realizará las transformaciones necesarias para que las URL sigan apuntando a la ubicación correcta incluso después del empaquetado y el hashing de recursos.
+Durante la compilación en producción, Vite realizará las transformaciones necesarias para que las URL sigan apuntando a la ubicación correcta incluso después del empaquetado y el hashing de recursos. Sin embargo, la cadena de texto de URL debe ser estática la cual permita ser analizada, de otro modo el codigo permanecerá como está, causando errores en tiempo de ejecución si `build.target` no soporta `import.meta.url`.
+
+```js
+// Vite will not transform this
+const imgUrl = new URL(imagePath, import.meta.url).href
+```
 
 ::: warning Nota: No funciona con SSR
 Este patrón no funciona si estás utilizando Vite para Server-Side Rendering, porque `import.meta.url` tiene una semántica diferente en navegadores con respecto a Node.js. El empaquetado del servidor tampoco puede determinar la URL del host del cliente con anticipación.

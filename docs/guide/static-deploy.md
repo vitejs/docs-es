@@ -269,7 +269,7 @@ You can also deploy to a [custom domain](http://surge.sh/help/adding-a-custom-do
 
 To deploy your Vite app with a [Vercel for Git](https://vercel.com/docs/git), make sure it has been pushed to a Git repository.
 
-Go to https://vercel.com/import/git and import the project into Vercel using your Git of choice (GitHub, GitLab or BitBucket). Follow the wizard to select the project root with the project's `package.json` and override the build step using `npm run build` and the output dir to be `./dist`
+Go to https://vercel.com/import/git and import the project into Vercel using your Git of choice (GitHub, GitLab or Bitbucket). Follow the wizard to select the project root with the project's `package.json` and override the build step using `npm run build` and the output dir to be `./dist`
 
 ![Override Vercel Configuration](../images/vercel-configuration.png)
 

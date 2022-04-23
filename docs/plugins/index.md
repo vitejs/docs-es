@@ -4,6 +4,8 @@
 Vite está pensado para proveer un soporte listo para usar para los patrones de desarrollo web comunes. Antes de buscar algún complemento para Vite o de Rollup , dale un vistazo a la [Guía de características](../guide/features.md). Muchos de los casos en los que se necesita un complemento de Rollup ya están cubiertos en Vite.
 :::
 
+Revisa [Uso de complementos](../guide/using-plugins.md) para más información sobre cómo utilizarlos.
+
 ## Complementos Oficiales
 
 ### [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)

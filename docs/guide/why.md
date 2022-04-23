@@ -18,7 +18,7 @@ Vite mejora el tiempo de inicio del servidor de desarrollo dividiendo primero lo
 
 - Las **dependencias** son en su mayoría código JavaScript plano que no cambia con frecuencia durante el desarrollo. Algunas dependencias grandes (por ejemplo, librerías de componentes con cientos de módulos) también son bastante complejas de procesar. Las dependencias también pueden estar disponibles en varios formatos de módulos (por ejemplo, ESM o CommonJS).
 
-  Vite [preempaqueta dependencias](./dep-pre-bundling) usando [esbuild](https://esbuild.github.io/). Esbuild está escrito en Go y preempaqueta dependencias de 10 a 100 veces más rápido que los empaquetadores basados en JavaScript.
+  Vite [preempaqueta dependencias](./dep-pre-bundling) usando [esbuild](https://esbuild.github.io/). esbuild está escrito en Go y preempaqueta dependencias de 10 a 100 veces más rápido que los empaquetadores basados en JavaScript.
 
 - **El código fuente** a menudo contiene código JavaScript no plano que necesita transformación (por ejemplo, JSX, CSS o componentes Vue/Svelte) y que se editará con mucha frecuencia. Además, no es necesario cargar todo el código fuente al mismo tiempo (por ejemplo, con división de código basado en rutas).
 
