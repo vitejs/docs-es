@@ -2,7 +2,7 @@
 sidebar: false
 ---
 
-# Annunciando Vite 2.0
+# Anunciando Vite 2.0
 
 <p style="text-align:center">
   <img src="/logo.svg" style="height:200px">
