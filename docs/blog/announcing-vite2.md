@@ -2,64 +2,64 @@
 sidebar: false
 ---
 
-# Announcing Vite 2.0
+# Annunciando Vite 2.0
 
 <p style="text-align:center">
   <img src="/logo.svg" style="height:200px">
 </p>
 
-Today we are excited to announce the official release of Vite 2.0!
+¡Hoy estamos emocionados de anunciar el lanzamiento oficial de Vite 2.0!
 
-Vite (French word for "fast", pronounced `/vit/`) is a new kind of build tool for frontend web development. Think a pre-configured dev server + bundler combo, but leaner and faster. It leverages browser's [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) support and tools written in compile-to-native languages like [esbuild](https://esbuild.github.io/) to deliver a snappy and modern development experience.
+Vite (palabra francesa que significa "rápido", pronunciado como `/vit/`) es un nuevo tipo de herramienta de construcción para el desarrollo web frontend. Piensa en un conjunto pre configurado de servidor web + empaquetador, pero más ligero y rapido. Este aprovecha el soporte de los navegadores para los [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) y herramientas escritas en lenguajes para compilar-a-nativo como [esbuild](https://esbuild.github.io/) para entregar una rápida y moderna experiencia de desarrollo.
 
-To get a sense of how fast Vite is, check out [this video comparison](https://twitter.com/amasad/status/1355379680275128321) of booting up a React application on Repl.it using Vite vs. `create-react-app` (CRA).
+Para tener una idea de cuan rápido es Vite, revisa este [video de comparaciones](https://twitter.com/amasad/status/1355379680275128321) arrancando una aplicacián de React en Repl.it usando Vite vs. `create-react-app` (CRA).
 
-If you've never heard of Vite before and would love to learn more about it, check out [the rationale behind the project](https://vitejs.dev/guide/why.html). If you are interested in how Vite differs from other similar tools, check out the [comparisons](https://vitejs.dev/guide/comparisons.html).
+Si nunca antes habías escuchado de Vite y quieres aprender más sobre este, revisa la [razón detrás del proyecto](https://vitejs.dev/guide/why.html). Si estás interesado en como Vite se diferencia de otras herramientas similares, revisa las [comparaciones](https://vitejs.dev/guide/comparisons.html).
 
-## What's New in 2.0
+## Que hay de nuevo en la versioó 2.0
 
-Since we decided to completely refactor the internals before 1.0 got out of RC, this is in fact the first stable release of Vite. That said, Vite 2.0 brings about many big improvements over its previous incarnation:
+Desde que decidimos refactorizar completamente los archivos internos antes que la versión 1.0 salga de RC, esta es la primera publicación estable de Vite. Dicho esto, Vite 2.0 viene con muchas grandes mejoras sobre su versión anterior.
 
-### Framework Agnostic Core
+### Nucleo independiente del marco de trabajo
 
-The original idea of Vite started as a [hacky prototype that serves Vue single-file components over native ESM](https://github.com/vuejs/vue-dev-server). Vite 1 was a continuation of that idea with HMR implemented on top.
+La idea original de Vite comenzo como un [prototipo trucado que entragaba componentes de una pagina de Vue sobre ESM nativo](https://github.com/vuejs/vue-dev-server). Vite 1 fue la continuación de esa idea con HMR implementado en base a esta.
 
-Vite 2.0 takes what we learned along the way and is redesigned from scratch with a more robust internal architecture. It is now completely framework agnostic, and all framework-specific support is delegated to plugins. There are now [official templates for Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), and ongoing community efforts for Svelte integration.
+Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
 
-### New Plugin Format and API
+### Nuevo formato de Plugin y API
 
-Inspired by [WMR](https://github.com/preactjs/wmr), the new plugin system extends Rollup's plugin interface and is [compatible with many Rollup plugins](https://vite-rollup-plugins.patak.dev/) out of the box. Plugins can use Rollup-compatible hooks, with additional Vite-specific hooks and properties to adjust Vite-only behavior (e.g. differentiating dev vs. build or custom handling of HMR).
+Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de plugins extiende la interfaz de plugins de Rollup y es [compatible con varios plugins de Rollup](https://vite-rollup-plugins.patak.dev/) por defecto. Los plugins pueden usar hooks de Rollup compatibles, adicionalmente con hooks específicos de Vite y propiedades para ajustar el comportamiento específico de Vite (ej. diferenciar desarrollo vs construcción o manejo personalizado del HMR).
 
-The [programmatic API](https://vitejs.dev/guide/api-javascript.html) has also been greatly improved to facilitate higher level tools / frameworks built on top of Vite.
+La [API programable](https://vitejs.dev/guide/api-javascript.html) también fue mejorada para facilitar herramientas de alto nivel / marcos de trabajos construidos con base en Vite.
 
-### esbuild Powered Dep Pre-Bundling
+### Pre-empaquetado de dependencias impulsado por esbuild
 
-Since Vite is a native ESM dev server, it pre-bundles dependencies to reduce the number browser requests and handle CommonJS to ESM conversion. Previously Vite did this using Rollup, and in 2.0 it now uses `esbuild` which results in 10-100x faster dependency pre-bundling. As a reference, cold-booting a test app with heavy dependencies like React Material UI previously took 28 seconds on an M1-powered MacBook Pro and now takes ~1.5 seconds. Expect similar improvements if you are switching from a traditional bundler based setup.
+Ya que Vite un servidor de desarrollo nativo de ESM, este pre-empaqueta dependencias para reducir el número de llamadas del navegador y manejar la conversión de CommonJS hacia ESM. Previamente, Vite hacia esto usando Rollup, y en la versión 2.0 ahora usa `esbuild` el cual resulta en un pre-empaquetado de dependencias 10-100x veces más rápido. Como referencia, arrancando en frío una aplicación de prueba con dependencias grandes como React Material UI anteriormente tomaba 28 segundos en una MacBook Pro con M1 y ahora toma ~1.5 segundos. Puedes esperar mejoras similares si estás cambiando desde una configuración basada en un empaquetador tradicional.
 
-### First-class CSS Support
+### Soporte de primera clase para CSS
 
-Vite treats CSS as a first-class citizen of the module graph and supports the following out of the box:
+Vite trata el CSS como un elemento de primera clase en el gráfico de módulos y soporta las siguientes características listas para usar:
 
-- **Resolver enhancement**: `@import` and `url()` paths in CSS are enhanced with Vite's resolver to respect aliases and npm dependencies.
-- **URL rebasing**: `url()` paths are automatically rebased regardless of where the file is imported from.
-- **CSS code splitting**: a code-split JS chunk also emits a corresponding CSS file, which is automatically loaded in parallel with the JS chunk when requested.
+- **Mejora del resolvedor de rutas**: El manejo de rutas con `@import` y `url()` es mejorado con el resolvedor de Vite para respetar los alias y las dependencias de npm.
+- **Rebasado de URL**: Las rutas con `url()` son automáticamente resueltas independientemente de donde sean importadas.
+- **División de código CSS**: Un chunk de cádigo JS dividido, también emite un archivo CSS correspondiente, el cual es automáticamente cargado en paralelo junto al chunk de JS cuando es requerido.
 
-### Server-Side Rendering (SSR) Support
+### Soporte para renderizado del lado del servidor (SSR)
 
-Vite 2.0 ships with [experimental SSR support](https://vitejs.dev/guide/ssr.html). Vite provides APIs to efficiently load and update ESM-based source code in Node.js during development (almost like server-side HMR), and automatically externalizes CommonJS-compatible dependencies to improve development and SSR build speed. The production server can be completely decoupled from Vite, and the same setup can be easily adapted to perform pre-rendering / SSG.
+Vite 2.0 viene con [soporte experimental para SSR](https://vitejs.dev/guide/ssr.html). Vite proporciona APIs para de manera eficiente, cargar y actualizar código basado en ESM durante el desarrollo (casi como HMR del lado del servidor), y automáticamente externaliza dependencias compatibles con CommonJS para mejorar la velocidad de desarrollo y construcción SSR. El servidor de producción puede ser completamente desacoplado de Vite, y la misma configuración puede ser fácilmente adaptada para realizar pre-renderizado / SSG.
 
-Vite SSR is provided as a low-level feature and we are expecting to see higher level frameworks leveraging it under the hood.
+El SSR de Vite es proporcionado como una caracteristica de bajo nivel y estamos esperando ver marcos de trabajo de alto nivel implementarlo como base.
 
-### Opt-in Legacy Browser Support
+### Soporte para buscadores antiguos opcional
 
-Vite targets modern browsers with native ESM support by default, but you can also opt-in to support legacy browsers via the official [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). The plugin automatically generates dual modern/legacy bundles, and delivers the right bundle based on browser feature detection, ensuring more efficient code in modern browsers that support them.
+Vite apunta a buscadores modernos con el soporte nativo de ESM por defecto, pero también puedes optar por el soporte para buscadores antiguos por medio del plugin oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). El plugin genera automáticamente doble empaquetado para la versión moderna/antigua respectivamente, y entrega el paquete correcto basado en la característica de detección de buscador, asegurando código más eficiente en buscadores modernos que lo soportan.
 
-## Give it a Try!
+## ¡Pruebalo Ya!
 
-That was a lot of features, but getting started with Vite is simple! You can spin up a Vite-powered app literally in a minute, starting with the following command (make sure you have Node.js >=12):
+Esas fueron varias características, pero empezar con Vite es simple. Puedes iniciar una aplicación manejada por Vite en literalmente un minuto, empezando con los siguientes comandos (asegurate de tener Node.js >= 12):
 
 ```bash
 npm init @vitejs/app
 ```
 
-Then, check out [the guide](https://vitejs.dev/guide/) to see what Vite provides out of the box. You can also check out the source code on [GitHub](https://github.com/vitejs/vite), follow updates on [Twitter](https://twitter.com/vite_js), or join discussions with other Vite users on our [Discord chat server](http://chat.vitejs.dev/).
+Después, revisa [la guía](https://vitejs.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unirte a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vitejs.dev/).
