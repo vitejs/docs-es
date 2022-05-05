@@ -132,6 +132,6 @@ Los eventos HMR personalizados también se pueden enviar desde complementos. Dal
 
 ## `hot.send(event, data)`
 
-Send custom events back to Vite's dev server.
-If called before connected, the data will be buffered and sent once the connection is established.
-See [Client-server Communication](/guide/api-plugin.html#client-server-communication) for more details.
+Envía eventos personalizados al servidor de desarrollo de Vite.
+Si se llama antes de conectarse, los datos se almacenarán en búfer y se enviarán una vez que se establezca la conexión.
+Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#client-server-communication) para obtener más detalles.

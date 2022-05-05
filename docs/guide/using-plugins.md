@@ -1,6 +1,6 @@
 # Uso de complementos
 
-Vite se puede extender mediante complementos, que se basan en la interfaz de complementos bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Esto significa que los usuarios de Vite pueden confiar en el ecosistema maduro de complementos de Rollup, al tiempo que pueden èxtender el servidor de desarrollo y la funcionalidad SSR según sea necesario.
+Vite se puede extender mediante complementos, que se basan en la interfaz de complementos bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Esto significa que los usuarios de Vite pueden confiar en el ecosistema maduro de complementos de Rollup, al tiempo que pueden extender el servidor de desarrollo y la funcionalidad SSR según sea necesario.
 
 ## Agregar un complemento
 

@@ -32,9 +32,9 @@ Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de plugin
 
 La [API programable](https://vitejs.dev/guide/api-javascript.html) también fue mejorada para facilitar herramientas de alto nivel / marcos de trabajos construidos con base en Vite.
 
-### Pre-empaquetado de dependencias impulsado por esbuild
+### Preempaquetado de dependencias impulsado por esbuild
 
-Ya que Vite un servidor de desarrollo nativo de ESM, este pre-empaqueta dependencias para reducir el número de llamadas del navegador y manejar la conversión de CommonJS hacia ESM. Previamente, Vite hacia esto usando Rollup, y en la versión 2.0 ahora usa `esbuild` el cual resulta en un pre-empaquetado de dependencias 10-100x veces más rápido. Como referencia, arrancando en frío una aplicación de prueba con dependencias grandes como React Material UI anteriormente tomaba 28 segundos en una MacBook Pro con M1 y ahora toma ~1.5 segundos. Puedes esperar mejoras similares si estás cambiando desde una configuración basada en un empaquetador tradicional.
+Ya que Vite un servidor de desarrollo nativo de ESM, este pre-empaqueta dependencias para reducir el número de llamadas del navegador y manejar la conversión de CommonJS hacia ESM. Previamente, Vite hacia esto usando Rollup, y en la versión 2.0 ahora usa `esbuild` el cual resulta en un preempaquetado de dependencias 10-100x veces más rápido. Como referencia, arrancando en frío una aplicación de prueba con dependencias grandes como React Material UI anteriormente tomaba 28 segundos en una MacBook Pro con M1 y ahora toma ~1.5 segundos. Puedes esperar mejoras similares si estás cambiando desde una configuración basada en un empaquetador tradicional.
 
 ### Soporte de primera clase para CSS
 

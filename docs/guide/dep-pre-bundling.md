@@ -1,4 +1,4 @@
-# Pre-empaquetado de dependencias
+# Preempaquetado de dependencias
 
 Cuando ejecutas `vite` por primera vez, puedes notar este mensaje:
 
@@ -11,7 +11,7 @@ Dependencias preempaquetadas:
 
 ## El por qué
 
-Este es Vite realizando lo que llamamos "pre-empaquetado de dependencias". Este proceso tiene dos propósitos:
+Este es Vite realizando lo que llamamos "preempaquetado de dependencias". Este proceso tiene dos propósitos:
 
 1. **Compatibilidad con CommonJS y UMD:** Durante el desarrollo, el desarrollador de Vite sirve todo el código como ESM nativo. Por lo tanto, Vite primero debe convertir las dependencias que se envían como CommonJS o UMD en ESM.
 
