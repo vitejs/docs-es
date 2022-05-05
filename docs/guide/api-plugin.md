@@ -15,39 +15,6 @@ Al aprender, depurar o crear complementos, sugerimos incluir [vite-plugin-inspec
 ![vite-plugin-inspect](/images/vite-plugin-inspect.png)
 :::
 
-## Conventions
-
-Google
-Visual Studio code traductor
-
-Todos
-ImágenesVideosNoticiasMapsMás
-Herramientas
-Cerca de 333,000 resultados (0.47 segundos)
-Inglés detectado
-Español
-
-## Conventions
-
-If the plugin doesn't use Vite specific hooks and can be implemented as a [Compatible Rollup Plugin](#rollup-plugin-compatibility), then it is recommended to use the [Rollup Plugin naming conventions](https://rollupjs.org/guide/en/#conventions).
-
-- Rollup Plugins should have a clear name with `rollup-plugin-` prefix.
-- Include `rollup-plugin` and `vite-plugin` keywords in package.json.
-
-This exposes the plugin to be also used in pure Rollup or WMR based projects
-
-For Vite only plugins
-
-- Vite Plugins should have a clear name with `vite-plugin-` prefix.
-- Include `vite-plugin` keyword in package.json.
-- Include a section in the plugin docs detailing why it is a Vite only plugin (for example, it uses Vite specific plugin hooks).
-
-If your plugin is only going to work for a particular framework, its name should be included as part of the prefix
-
-- `vite-plugin-vue-` prefix for Vue Plugins
-- `vite-plugin-react-` prefix for React Plugins
-- `vite-plugin-svelte-` prefix for Svelte Plugins
-
 ## Convenciones
 
 Si el complemento no usa hooks específicos de Vite y se puede implementar como un [Complemento de Rollup compatible](#rollup-plugin-compatibility), entonces se recomienda usar las [Convenciones de nomenclatura de complemento de Rollup](https://rollupjs.org/guide/en/#conventions).
