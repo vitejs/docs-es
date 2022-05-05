@@ -2,7 +2,7 @@
 
 ## Cambio de opciones de configuración
 
-- Las siguientes opciones se han eliminado y deben implementarse a través de [complementos] (./api-plugin):
+- Las siguientes opciones se han eliminado y deben implementarse a través de [complementos](./api-plugin):
 
   - `resolvers`
   - `transforms`
@@ -12,7 +12,7 @@
 
 - [Opciones relacionadas con CSS](/config/#css-modules) ahora están anidadas bajo `css`.
 
-- Todas las [opciones específicas de compilación] (/config/#build-options) ahora están anidadas en `compilación`.
+- Todas las [opciones específicas de compilación](/config/#build-options) ahora están anidadas en `compilación`.
 
   - `rollupInputOptions` y `rollupOutputOptions` se reemplazan por [`build.rollupOptions`](/config/#build-rollupoptions).
   - `esbuildTarget` ahora es [`build.target`](/config/#build-target).
@@ -42,10 +42,10 @@
 
 ```diff
 - alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
-+ alias: { '/@foo': path.resolve(__dirname, 'some-special-dir') }
++ alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
 ```
 
-Alternativamente, puedes usar el formato de opción `[{ find: RegExp, replace: string }]` para un control más preciso.
+Alternativamente, puedes usar la opción de formato `[{ find: RegExp, replace: string }]` para un control más preciso.
 
 ## Soporte de Vue
 
@@ -130,4 +130,4 @@ Algunos consejos generales sobre la migración de un complemento v1 a v2:
 - Serving virtual files -> use los hooks [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load)
 - Agregar `alias`, `define` u otras opciones de configuración -> usa el hook [`config`](./api-plugin#config)
 
-Dado que la mayor parte de la lógica debe realizarse a través de enlaces de complementos en lugar de middlewares, la necesidad de middlewares se reduce considerablemente. La aplicación del servidor interno ahora es una buena instancia antigua de [connect] (https://github.com/senchalabs/connect) en lugar de Koa.
+Dado que la mayor parte de la lógica debe realizarse a través de enlaces de complementos en lugar de middlewares, la necesidad de middlewares se reduce considerablemente. La aplicación del servidor interno ahora es una buena instancia antigua de [connect](https://github.com/senchalabs/connect) en lugar de Koa.
