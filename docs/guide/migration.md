@@ -1,23 +1,23 @@
-# Migration from v1
+# Migración desde v1
 
-## Config Options Change
+## Cambio de opciones de configuración
 
-- The following options have been removed and should be implemented via [plugins](./api-plugin):
+- Las siguientes opciones se han eliminado y deben implementarse a través de [complementos] (./api-plugin):
 
   - `resolvers`
   - `transforms`
   - `indexHtmlTransforms`
 
-- `jsx` and `enableEsbuild` have been removed; Use the new [`esbuild`](/config/#esbuild) option instead.
+- Se han eliminado `jsx` y `enableEsbuild`; utiliza la nueva opción [`esbuild`](/config/#esbuild) en su lugar.
 
-- [CSS related options](/config/#css-modules) are now nested under `css`.
+- [Opciones relacionadas con CSS](/config/#css-modules) ahora están anidadas bajo `css`.
 
-- All [build-specific options](/config/#build-options) are now nested under `build`.
+- Todas las [opciones específicas de compilación] (/config/#build-options) ahora están anidadas en `compilación`.
 
-  - `rollupInputOptions` and `rollupOutputOptions` are replaced by [`build.rollupOptions`](/config/#build-rollupoptions).
-  - `esbuildTarget` is now [`build.target`](/config/#build-target).
-  - `emitManifest` is now [`build.manifest`](/config/#build-manifest).
-  - The following build options have been removed since they can be achieved via plugin hooks or other options:
+  - `rollupInputOptions` y `rollupOutputOptions` se reemplazan por [`build.rollupOptions`](/config/#build-rollupoptions).
+  - `esbuildTarget` ahora es [`build.target`](/config/#build-target).
+  - `emitManifest` ahora es [`build.manifest`](/config/#build-manifest).
+  - Se han eliminado las siguientes opciones de compilación, ya que se pueden lograr a través de hooks de complemento u otras opciones:
     - `entry`
     - `rollupDedupe`
     - `emitAssets`
@@ -25,31 +25,31 @@
     - `shouldPreload`
     - `configureBuild`
 
-- All [server-specific options](/config/#server-options) are now nested under
+- Todas las [opciones específicas del servidor](/config/#server-options) ahora están anidadas bajo
   `server`.
 
-  - `hostname` is now [`server.host`](/config/#server-host).
-  - `httpsOptions` has been removed. [`server.https`](/config/#server-https) can directly accept the options object.
-  - `chokidarWatchOptions` is now [`server.watch`](/config/#server-watch).
+  - `hostname` ahora es [`server.host`](/config/#server-host).
+  - Se ha eliminado `httpsOptions`. [`server.https`](/config/#server-https) puede aceptar directamente el objeto de opciones.
+  - `chokidarWatchOptions` ahora es [`server.watch`](/config/#server-watch).
 
-- [`assetsInclude`](/config/#assetsinclude) now expects `string | RegExp | (string | RegExp)[]` instead of a function.
+- [`assetsInclude`](/config/#assetsinclude) ahora espera `string | RegExp | (string | RegExp)[]` en lugar de una función.
 
-- All Vue specific options are removed; Pass options to the Vue plugin instead.
+- Se eliminan todas las opciones específicas de Vue; pasa las opciones al complemento Vue en su lugar.
 
-## Alias Behavior Change
+## Cambio de comportamiento de alias
 
-[`alias`](/config/#resolve-alias) is now being passed to `@rollup/plugin-alias` and no longer require start/ending slashes. The behavior is now a direct replacement, so 1.0-style directory alias key should remove the ending slash:
+[`alias`](/config/#resolve-alias) ahora se pasa a `@rollup/plugin-alias` y ya no requiere barras inclinadas de inicio/final. El comportamiento ahora es un reemplazo directo, por lo que la clave de alias de directorio de estilo 1.0 debería eliminar la barra inclinada final:
 
 ```diff
 - alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
 + alias: { '/@foo': path.resolve(__dirname, 'some-special-dir') }
 ```
 
-Alternatively, you can use the `[{ find: RegExp, replacement: string }]` option format for more precise control.
+Alternativamente, puedes usar el formato de opción `[{ find: RegExp, replace: string }]` para un control más preciso.
 
-## Vue Support
+## Soporte de Vue
 
-Vite 2.0 core is now framework agnostic. Vue support is now provided via [`@vitejs/plugin-vue`](https://github.com/vitejs/vite/tree/main/packages/plugin-vue). Simply install it and add it in the Vite config:
+El núcleo de Vite 2.0 ahora es independiente del marco de trabajo. El soporte de Vue ahora se proporciona a través de [`@vitejs/plugin-vue`](https://github.com/vitejs/vite/tree/main/packages/plugin-vue). Simplemente instálalo y agrégalo en la configuración de Vite:
 
 ```js
 import vue from '@vitejs/plugin-vue'
@@ -60,9 +60,9 @@ export default defineConfig({
 })
 ```
 
-### Custom Blocks Transforms
+### Transformaciones de bloques personalizados
 
-A custom plugin can be used to transform Vue custom blocks like the one below:
+Se puede usar un complemento personalizado para transformar bloques personalizados de Vue como el siguiente:
 
 ```ts
 // vite.config.js
@@ -89,17 +89,17 @@ export default defineConfig({
 })
 ```
 
-## React Support
+## Soporte de React
 
-React Fast Refresh support is now provided via [`@vitejs/plugin-react`](https://github.com/vitejs/vite/tree/main/packages/plugin-react).
+La compatibilidad con React Fast Refresh ahora se proporciona a través de [`@vitejs/plugin-react`](https://github.com/vitejs/vite/tree/main/packages/plugin-react).
 
-## HMR API Change
+## Cambio de API de HMR
 
-`import.meta.hot.acceptDeps()` have been deprecated. [`import.meta.hot.accept()`](./api-hmr#hot-accept-deps-cb) can now accept single or multiple deps.
+`import.meta.hot.acceptDeps()` ha quedado en desuso. [`import.meta.hot.accept()`](./api-hmr#hot-accept-deps-cb) ahora puede aceptar dependencias únicas o múltiples.
 
-## Manifest Format Change
+## Cambio de formato de manifiesto
 
-The build manifest now uses the following format:
+El manifiesto de compilación ahora usa el siguiente formato:
 
 ```json
 {
@@ -116,18 +116,18 @@ The build manifest now uses the following format:
 }
 ```
 
-For entry JS chunks, it also lists its imported chunks which can be used to render preload directives.
+Para los fragmentos JS de entrada, también lista sus fragmentos importados útiles para representar directivas de precarga.
 
-## For Plugin Authors
+## Para autores de complementos
 
-Vite 2 uses a completely redesigned plugin interface which extends Rollup plugins. Please read the new [Plugin Development Guide](./api-plugin).
+Vite 2 utiliza una interfaz de complemento completamente rediseñada que amplía los complementos de Rollup. Lee la nueva [Guía de desarrollo de complementos](./api-plugin).
 
-Some general pointers on migrating a v1 plugin to v2:
+Algunos consejos generales sobre la migración de un complemento v1 a v2:
 
-- `resolvers` -> use the [`resolveId`](https://rollupjs.org/guide/en/#resolveid) hook
-- `transforms` -> use the [`transform`](https://rollupjs.org/guide/en/#transform) hook
-- `indexHtmlTransforms` -> use the [`transformIndexHtml`](./api-plugin#transformindexhtml) hook
-- Serving virtual files -> use [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load) hooks
-- Adding `alias`, `define` or other config options -> use the [`config`](./api-plugin#config) hook
+- `resolvers` -> usa el hook [`resolveId`](https://rollupjs.org/guide/en/#resolveid)
+- `transforms` -> usa el hook [`transform`](https://rollupjs.org/guide/en/#transform)
+- `indexHtmlTransforms` -> usa el hook [`transformIndexHtml`](./api-plugin#transformindexhtml)
+- Serving virtual files -> use los hooks [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load)
+- Agregar `alias`, `define` u otras opciones de configuración -> usa el hook [`config`](./api-plugin#config)
 
-Since most of the logic should be done via plugin hooks instead of middlewares, the need for middlewares is greatly reduced. The internal server app is now a good old [connect](https://github.com/senchalabs/connect) instance instead of Koa.
+Dado que la mayor parte de la lógica debe realizarse a través de enlaces de complementos en lugar de middlewares, la necesidad de middlewares se reduce considerablemente. La aplicación del servidor interno ahora es una buena instancia antigua de [connect] (https://github.com/senchalabs/connect) en lugar de Koa.

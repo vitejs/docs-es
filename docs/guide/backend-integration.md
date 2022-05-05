@@ -2,19 +2,11 @@
 
 # Integración al Backend
 
-<!-- :::tip Note
-If you want to serve the HTML using a traditional backend (e.g. Rails, Laravel) but use Vite for serving assets, check for existing integrations listed in [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
-
-If you need a custom integration, you can follow the steps in this guide to configure it manually
-::: -->
-
 :::tip Nota
 Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
 
 Si necesitas una integración personalizada, puedes seguir los pasos de esta guía para configuración manual.
 :::
-
-<!-- 1. In your Vite config, configure the entry and enable build manifest: -->
 
 1. En tu configuración de Vite, configura el archivo de entrada y habilita el manifest de compilación:
 

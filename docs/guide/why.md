@@ -52,6 +52,4 @@ Si bien `esbuild` es increíblemente rápido y ya es un empaquetador para biblio
 
 ## ¿En qué se diferencia Vite de X?
 
-<!-- You can check out the [Comparisons](./comparisons) section for more details on how Vite differs from other similar tools. -->
-
 Puedes consultar la sección [Comparaciones](./comparisons) para obtener más detalles sobre cómo Vite difiere de otras herramientas similares.

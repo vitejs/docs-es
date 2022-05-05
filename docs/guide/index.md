@@ -4,8 +4,6 @@
   <source src="/vite.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ## Overview -->
-
 ## Descripción General
 
 Vite (palabra en francés para "rápido", pronunciado como `/vit/`<button style="border:none;padding:3px;border-radius:4px" id="play-vite-audio" onclick="document.getElementById('vite-audio').play();"><img src="/voice.svg" height="15"></button>, como "veet") es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
