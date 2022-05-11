@@ -31,14 +31,19 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    import 'vite/modulepreload-polyfill'
    ```
 
-2. Para desarrollo: inyecta lo siguiente en la plantilla de servidor HTML (reemplaza `http://localhost:3000` con la URL local donde Vite se está ejecutando):
+2. Para desarrollo: coloca lo siguiente en la plantilla de servidor HTML (reemplaza `http://localhost:3000` con la URL local donde Vite se está ejecutando):
 
    ```html
    <!-- if development -->
    <script type="module" src="http://localhost:3000/main.js"></script>
    ```
 
-   Asegurate tambien que el servidor está configurado para servir recursos estaticos en la carpeta de trabajo de Vite, de otra forma los recursos tales como imagenes no cargarán correctamente.
+   Para servir correctamente recursos, tienes dos opciones:
+
+   - Asegúrarse de que el servidor esté configurado para enviar solicitudes de recursos estáticos al servidor de Vite.
+   - Configurar [`server.origin`](https://vitejs.dev/config/#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor back-end en lugar de una ruta relativa.
+
+   Esto es necesario para que los recrusos, como imágenes, se carguen correctamente.
 
    Ten en cuenta que si estas usando React con `@vitejs/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo:
 

@@ -295,7 +295,29 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
   }
   ```
 
-  Tenga en cuenta que `configureServer` no se llama cuando se ejecuta la compilación de producción, por lo que sus otros hooks deben protegerse contra su ausencia.
+  Ten en cuenta que `configureServer` no se llama cuando se ejecuta la compilación de producción, por lo que sus otros hooks deben protegerse contra su ausencia.
+
+### `configurePreviewServer`
+
+- **Tipo:** `(server: { middlewares: Connect.Server, httpServer: http.Server }) => (() => void) | void | Promise<(() => void) | void>`
+- **Clase:** `async`, `sequential`
+
+  Tal como [`configureServer`](/guide/api-plugin.html#configureserver) pero para el servidor de vista previa. Provee el servidor [connect](https://github.com/senchalabs/connect) y su [servidor http](https://nodejs.org/api/http.html) relacionado. De manera similar a `configureServer`, el hook `configurePreviewServer` se llama antes de que se instalen otros middlewares. Si deseas inyectar un middleware **después** de otros middlewares, puede devolver una función desde `configurePreviewServer`, que se llamará después de que se instalen los middlewares internos:
+
+  ```js
+  const myPlugin = () => ({
+    name: 'configure-preview-server',
+    configurePreviewServer(server) {
+      // return a post hook that is called after other middlewares are
+      // installed
+      return () => {
+        server.middlewares.use((req, res, next) => {
+          // custom handle request...
+        })
+      }
+    }
+  })
+  ```
 
 ### `transformIndexHtml`
 

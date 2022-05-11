@@ -1,24 +1,4 @@
-<!-- # Server-Side Rendering
-
-:::warning Experimental
-SSR support is still experimental and you may encounter bugs and unsupported use cases. Proceed at your own risk.
-:::
-
-:::tip Note
-SSR specifically refers to front-end frameworks (for example React, Preact, Vue, and Svelte) that support running the same application in Node.js, pre-rendering it to HTML, and finally hydrating it on the client. If you are looking for integration with traditional server-side frameworks, check out the [Backend Integration guide](./backend-integration) instead.
-
-The following guide also assumes prior experience working with SSR in your framework of choice, and will only focus on Vite-specific integration details.
-:::
-
-:::warning Low-level API
-This is a low-level API meant for library and framework authors. If your goal is to create an application, make sure to check out the higher-level SSR plugins and tools at [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) first. That said, many applications are successfully built directly on top of Vite's native low-level API.
-:::
-
-:::tip Help
-If you have questions, the community is usually helpful at [Vite Discord's #ssr channel](https://discord.gg/PkbxgzPhJv).
-::: -->
-
-# Representación del lado del servidor
+# Server Side Rendering
 
 :::warning Experimental
 La compatibilidad con SSR aún es experimental y es posible que encuentre errores y casos de uso no admitidos. Proceda bajo su propio riesgo.
@@ -27,7 +7,7 @@ La compatibilidad con SSR aún es experimental y es posible que encuentre errore
 :::tip Nota
 SSR se refiere específicamente a los marcos front-end (por ejemplo, React, Preact, Vue y Svelte) que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Si estás buscando una integración con marcos tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
 
-La siguiente guía también asume experiencia previa trabajando con SSR en su marco de trabajo elegido, y solo se centrará en los detalles de integración específicos de Vite.
+La siguiente guía también asume experiencia previa trabajando con SSR en tu marco de trabajo preferido, y solo se centrará en los detalles de integración específicos de Vite.
 :::
 
 :::warning API de bajo nivel
@@ -42,8 +22,8 @@ Si tiene preguntas, la comunidad suele ser útil en [el canal #ssr de Vite Disco
 
 Vite proporciona soporte integrado para la representación del lado del servidor (SSR). El área de pruebas de código de Vite contiene configuraciones de SSR de ejemplo para Vue 3 y React, que se pueden usar como referencias para esta guía:
 
-- [Vue 3](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-vue)
-- [React](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-react)
+- [Vue 3](https://github.com/vitejs/vite/tree/main/playground/ssr-vue)
+- [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react)
 
 ## Estructura de origen
 
@@ -198,7 +178,7 @@ Luego, en `server.js` necesitamos agregar algo de lógica específica de producc
 
 - Mueve la creación y todo el uso del servidor de desarrollo `vite` detrás de ramas condicionales solo para desarrollo, luego agrega middlewares de servicio de archivos estáticos para servir archivos desde `dist/client`.
 
-Consulta las demostraciones de [Vue](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-vue) y [React](https://github.com/vitejs/vite/tree/main/packages/playground/ssr-react) para la configuración de trabajo.
+Consulta las demostraciones de [Vue](https://github.com/vitejs/vite/tree/main/playground/ssr-vue) y [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react) para una configuración funcional.
 
 ## Generación de directivas de precargado
 
@@ -222,11 +202,11 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules is now a Set of module IDs that were used during the render
 ```
 
-En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulte [fuente de demostración](https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo.
+En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo.
 
 ## Renderizado previo / SSG
 
-Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipación, podemos renderizar previamente estas rutas en HTML estático usando la misma lógica que SSR de producción. Esto también puede considerarse una forma de generación de sitios estáticos (SSG). Consulta [secuencia de comandos previa a la representación de demostración](https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/prerender.js) para ver un ejemplo práctico.
+Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipación, podemos renderizar previamente estas rutas en HTML estático usando la misma lógica que SSR de producción. Esto también puede considerarse una forma de generación de sitios estáticos (SSG). Consulta el [demo del script de pre-renderizado](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/prerender.js) para ver un ejemplo práctico.
 
 ## SSR Externos
 

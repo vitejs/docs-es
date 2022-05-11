@@ -130,8 +130,8 @@ module.exports = defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/main.js'),
-      name: 'MyLib',
-      fileName: (format) => `my-lib.${format}.js`
+      // Se agregará la extension apropiada.
+      fileName: 'my-lib'
     },
     rollupOptions: {
       // Asegúrate de externalizar las dependencias que no deberían estar empaquetadas
@@ -174,10 +174,10 @@ building for production...
   "name": "my-lib",
   "files": ["dist"],
   "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.js",
+  "module": "./dist/my-lib.es.mjs",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.js",
+      "import": "./dist/my-lib.es.mjs",
       "require": "./dist/my-lib.umd.js"
     }
   }

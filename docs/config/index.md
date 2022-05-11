@@ -28,12 +28,14 @@ vite --config my-config.js
 ```
 
 ::: tip NOTA
-Vite reemplazará `__filename`, `__dirname` y `import.meta.url` en los archivos de configuración y sus dependencias. El uso de estos como nombres de variables dará como resultado un error:
+Vite reemplazará `__filename`, `__dirname` y `import.meta.url` en los archivos de configuración y sus dependencias. El uso de estos como nombres de variables o pasar un string con comillas dobles como parámetro de una función (por ejemplo, `console.log()`) dará como resultado un error:
 
 ```js
 const __filename = "value"
-// will be transformed to
+// será tranformado a
 const "path/vite.config.js" = "value"
+
+console.log("import.meta.url") // ocurre un error en compilación.
 ```
 
 :::
@@ -164,7 +166,7 @@ export default defineConfig(({ command, mode }) => {
 
   - To be consistent with [esbuild behavior](https://esbuild.github.io/api/#define), expressions must either be a JSON object (null, boolean, number, string, array, or object) or a single identifier.
 
-  - Replacements are performed only when the match is surrounded by word boundaries (`\b`).
+  - Replacements are performed only when the match isn't surrounded by other letters, numbers, `_` or `$`
 
   ::: warning
   Because it's implemented as straightforward text replacements without any syntax analysis, we recommend using `define` for CONSTANTS only.
@@ -1016,7 +1018,6 @@ export default defineConfig({
 
   - `external` is also omitted, use Vite's `optimizeDeps.exclude` option
   - `plugins` are merged with Vite's dep plugin
-  - `keepNames` takes precedence over the deprecated `optimizeDeps.keepNames`
 
 ## SSR Options
 
