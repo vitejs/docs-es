@@ -1,54 +1,54 @@
-# Vite Contributing Guide
+# Guía de contribución de Vite
 
-Hi! We are really excited that you are interested in contributing to Vite. Before submitting your contribution, please make sure to take a moment and read through the following guide:
+¡Hola! Estamos muy emocionados de que estés interesado en contribuir con Vite. Antes de enviar tu contribución, tómate un momento para leer la siguiente guía:
 
-## Repo Setup
+## Configuración del repositorio
 
-The Vite repo is a monorepo using pnpm workspaces. The package manager used to install and link dependencies must be [pnpm](https://pnpm.io/).
+El repositorio de Vite es un monorepo que utiliza espacios de trabajo pnpm. El administrador de paquetes utilizado para instalar y vincular las dependencias debe ser [pnpm](https://pnpm.io/).
 
-To develop and test the core `vite` package:
+Para desarrollar y probar el paquete central `vite`:
 
-1. Run `pnpm i` in Vite's root folder
+1. Ejecuta `pnpm i` en la carpeta raíz de Vite
 
-2. Run `pnpm run build` in Vite's root folder.
+2. Ejecuta `pnpm run build` en la carpeta raíz de Vite.
 
-3. If you are developing Vite itself, you can go to `packages/vite` and run `pnpm run dev` to automatically rebuild Vite whenever you change its code.
+3. Si estás desarrollando con Vite mismo, puedes ir a `packages/vite` y ejecutar `pnpm run dev` para recompilar automáticamente Vite siempre que cambie el código.
 
-You can alternatively use [Vite.js Docker Dev](https://github.com/nystudio107/vitejs-docker-dev) for a containerized Docker setup for Vite.js development.
+También puedes usar [Vite.js Docker Dev](https://github.com/nystudio107/vitejs-docker-dev) para una configuración de Docker en contenedores para el desarrollo de Vite.js.
 
-## Debugging
+## Depuración
 
-If you want to use break point and explore code execution you can use the ["Run and debug"](https://code.visualstudio.com/docs/editor/debugging) feature from vscode.
+Si deseas usar el punto de interrupción y explorar la ejecución del código, puede usar la funcionalidad ["Ejecutar y depurar"](https://code.visualstudio.com/docs/editor/debugging) de Visual Studio Code.
 
-1. Add a `debugger` statement where you want to stop the code execution.
+1. Agrega una declaración `debugger` donde desees detener la ejecución del código.
 
-2. Click on the "Run and Debug" icon in the activity bar of the editor.
+2. Has clic en el icono "Ejecutar y depurar" en la barra de actividad del editor.
 
-3. Click on the "JavaScript Debug Terminal" button.
+3. Has clic en el botón "Terminal de depuración de JavaScript".
 
-4. It will open a terminal, then go to `playground/xxx` and run `pnpm run dev`.
+4. Abrirás una terminal, luego irás a `playground/xxx` y ejecutarás `pnpm run dev`.
 
-5. The execution will stop and you'll use the [Debug toolbar](https://code.visualstudio.com/docs/editor/debugging#_debug-actions) to continue, step over, restart the process...
+5. La ejecución se detendrá y usarás la [barra de herramientas de depuración](https://code.visualstudio.com/docs/editor/debugging#_debug-actions) para continuar, pasar por alto, reiniciar el proceso...
 
-### Debugging errors in Jest tests using Playwright (Chromium)
+### Errores de depuración en las pruebas de Jest usando Playwright (Chromium)
 
-Some errors are masked and hidden away because of the layers of abstraction and sandboxed nature added by Jest, Playwright, and Chromium. In order to see what's actually going wrong and the contents of the devtools console in those instances, follow this setup:
+Algunos errores están enmascarados y ocultos debido a las capas de abstracción y la naturaleza de espacio aislado agregadas por Jest, Playwright y Chromium. Para ver lo que realmente está fallando y el contenido de la consola de devtools en esos casos, sigue esta configuración:
 
-1. Add a `debugger` statement to the `scripts/jestPerTestSetup.ts` -> `afterAll` hook. This will pause execution before the tests quit and the Playwright browser instance exits.
+1. Agrega una declaración `debugger` al hook `scripts/jestPerTestSetup.ts` -> `afterAll`. Esto detendrá la ejecución antes de que finalicen las pruebas y se cierre la instancia del navegador Playwright.
 
-1. Run the tests with the `debug-serve` script command which will enable remote debugging: `pnpm run debug-serve -- --runInBand resolve`.
+2. Ejecuta las pruebas con el comando de script `debug-serve` que habilitará la depuración remota: `pnpm run debug-serve -- --runInBand resolve`.
 
-1. Wait for inspector devtools to open in your browser and the debugger to attach.
+3. Espera a que se abran las herramientas de desarrollo del inspector en el navegador y que se adjunte el depurador.
 
-1. In the sources panel in the right column, click the play button to resume execution and allow the tests to run which will open a Chromium instance.
+4. En el panel de fuentes en la columna de la derecha, has clic en el botón de reproducción para reanudar la ejecución y permitir que se ejecuten las pruebas que abrirán una instancia de Chromium.
 
-1. Focusing the Chromium instance, you can open the browser devtools and inspect the console there to find the underlying problems.
+5. Centrándose en la instancia de Chromium, puedes abrir las herramientas de desarrollo del navegador e inspeccionar la consola allí para encontrar los problemas relacionados.
 
-1. To close everything, just stop the test process back in your terminal.
+6. Para cerrar todo, simplemente deten el proceso de prueba en el terminal.
 
-## Testing Vite against external packages
+## Probando Vite contra paquetes externos
 
-You may wish to test your locally-modified copy of Vite against another package that is built with Vite. For pnpm, after building Vite, you can use [`pnpm.overrides`](https://pnpm.io/package_json#pnpmoverrides). Please note that `pnpm.overrides` must be specified in the root `package.json` and you must first list the package as a dependency in the root `package.json`:
+Es posible que desees probar tu copia modificada localmente de Vite con otro paquete creado con Vite. Para pnpm, después de compilar Vite, puede usar [`pnpm.overrides`](https://pnpm.io/package_json#pnpmoverrides). Ten en cuenta que `pnpm.overrides` debe especificarse en la raíz `package.json` y primero debes enumerar el paquete como una dependencia en la raíz `package.json`:
 
 ```json
 {
@@ -63,39 +63,39 @@ You may wish to test your locally-modified copy of Vite against another package 
 }
 ```
 
-And re-run `pnpm install` to link the package.
+Y vuelve a ejecutar `pnpm install` para vincular el paquete.
 
-## Running Tests
+## Ejecución de pruebas
 
-### Integration Tests
+### Pruebas de integración
 
-Each package under `playground/` contains a `__tests__` directory. The tests are run using [Jest](https://jestjs.io/) + [Playwright](https://playwright.dev/) with custom integrations to make writing tests simple. The detailed setup is inside `jest.config.js` and `scripts/jest*` files.
+Cada paquete en `playground/` contiene un directorio `__tests__`. Las pruebas se ejecutan usando [Jest](https://jestjs.io/) + [Playwright](https://playwright.dev/) con integraciones personalizadas para simplificar las pruebas de escritura. La configuración detallada se encuentra dentro de los archivos `jest.config.js` y `scripts/jest*`.
 
-Before running the tests, make sure that [Vite has been built](#repo-setup). On Windows, you may want to [activate Developer Mode](https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development) to solve [issues with symlink creation for non-admins](https://github.com/vitejs/vite/issues/7390). Also you may want to [set git `core.symlinks` to `true` to solve issues with symlinks in git](https://github.com/vitejs/vite/issues/5242).
+Antes de ejecutar las pruebas, asegúrate de que [Vite haya compilado](#repo-setup). En Windows, es posible que desees [activar el modo de desarrollador](https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development) para resolver [problemas con creación de enlaces simbólicos para no administradores](https://github.com/vitejs/vite/issues/7390). También es posible que desees [configurar `core.symlinks` de git en `true` para resolver problemas con enlaces simbólicos](https://github.com/vitejs/vite/issues/5242).
 
-Each integration test can be run under either dev server mode or build mode.
+Cada prueba de integración se puede ejecutar en el modo servidor de desarrollo o en el modo de compilación.
 
-- `pnpm test` by default runs every integration test in both serve and build mode, and also unit tests.
+- `pnpm test` por defecto ejecuta todas las pruebas de integración tanto en modo serve como build, y también pruebas unitarias.
 
-- `pnpm run test-serve` runs tests only under serve mode. This is just calling `jest` so you can pass any Jest flags to this command. Since Jest will attempt to run tests in parallel, if your machine has many cores this may cause flaky test failures with multiple Playwright instances running at the same time. You can force the tests to run in series with `pnpm run test-serve -- --runInBand`.
+- `pnpm run test-serve` ejecuta pruebas solo en modo serve. Esto es simplemente llamar a `jest` para que pueda pasar cualquier bandera de Jest a este comando. Dado que Jest intentará ejecutar pruebas en paralelo, si tu máquina tiene muchos núcleos, esto puede causar fallas de prueba irregulares con varias instancias de Playwright ejecutándose al mismo tiempo. Puedes forzar que las pruebas se ejecuten en serie con `pnpm run test-serve --runInBand`.
 
-- `pnpm run test-build` runs tests only under build mode.
+- `pnpm run test-build` ejecuta pruebas solo en modo build.
 
-- You can also use `pnpm run test-serve -- [match]` or `pnpm run test-build -- [match]` to run tests in a specific playground package, e.g. `pnpm run test-serve -- asset` will run tests for both `playground/asset` and `vite/src/node/__tests__/asset` under serve mode and `vite/src/node/__tests__/**/*` just run in serve mode.
+- También puede usar `pnpm run test-serve -- [match]` o `pnpm run test-build -- [match]` para ejecutar pruebas en un playground específico, por ejemplo, `pnpm run test-serve -- asset` ejecutará pruebas para `playground/asset` y `vite/src/node/__tests__/asset` en modo serve y `vite/src/node/__tests__/**/*` simplemente lo ejecuta en modo serve.
 
-  Note package matching is not available for the `pnpm test` script, which always runs all tests.
+  Ten en cuenta que la coincidencia de paquetes no está disponible para el script `pnpm test`, que siempre ejecuta todas las pruebas.
 
-### Unit Tests
+### Pruebas unitarias
 
-Other than tests under `playground/` for integration tests, packages might contains unit tests under their `__tests__` directory. Unit tests are powered by [Vitest](https://vitest.dev/). The detailed config is inside `vitest.config.ts` files.
+Además de las pruebas en `playground/` para las pruebas de integración, los paquetes pueden contener pruebas unitarias en su directorio `__tests__`. Las pruebas unitarias funcionan con [Vitest](https://vitest.dev/). La configuración detallada está dentro de los archivos `vitest.config.ts`.
 
-- `pnpm run test-unit` runs unit tests under each package.
+- `pnpm run test-unit` ejecuta pruebas unitarias en cada paquete.
 
-- You can also use `pnpm run test-unit -- [match]` to run related tests.
+- También puede usar `pnpm run test-unit -- [match]` para ejecutar pruebas relacionadas.
 
-### Test Env and Helpers
+### Entorno de prueba y helpers
 
-Inside playground tests, a global `page` object is automatically available, which is a Playwright [`Page`](https://playwright.dev/docs/api/class-page) instance that has already navigated to the served page of the current playground. So writing a test is as simple as:
+Dentro de los playground de pruebas, un objeto `page` global está disponible automáticamente, que es una instancia de Playwright [`Page`](https://playwright.dev/docs/api/class-page) que ya ha navegado a la página servida de playground actual. Así que escribir una prueba es tan simple como:
 
 ```js
 test('should work', async () => {
@@ -103,27 +103,27 @@ test('should work', async () => {
 })
 ```
 
-Some common test helpers, e.g. `testDir`, `isBuild` or `editFile` are available in `playground/testUtils.ts`.
+Algunos helpers de prueba comunes, como `testDir`, `isBuild` o `editFile` están disponibles en `playground/testUtils.ts`.
 
-Note: The test build environment uses a [different default set of Vite config](https://github.com/vitejs/vite/blob/9c6501d9c363eaa3c1e7708d531fb2a92b633db6/scripts/jestPerTestSetup.ts#L102-L122) to skip transpilation during tests to make it faster. This may produce a different result compared to the default production build.
+Nota: El entorno de compilación de prueba utiliza un [set predeterminado de configuración de Vite](https://github.com/vitejs/vite/blob/9c6501d9c363eaa3c1e7708d531fb2a92b633db6/scripts/jestPerTestSetup.ts#L102-L122) diferente para omitir la transpilación durante las pruebas para hacerlo más rápido. Esto puede producir un resultado diferente en comparación con la compilación de producción predeterminada.
 
-### Extending the Test Suite
+### Ampliación de la suite de pruebas
 
-To add new tests, you should find a related playground to the fix or feature (or create a new one). As an example, static assets loading are tested in the [assets playground](https://github.com/vitejs/vite/tree/main/playground/assets). In this Vite App, there is a test for `?raw` imports, with [a section is defined in the `index.html` for it](https://github.com/vitejs/vite/blob/71215533ac60e8ff566dc3467feabfc2c71a01e2/playground/assets/index.html#L121):
+Para agregar nuevas pruebas, debes encontrar un playground relacionado con la corrección o función (o crear una nueva). Como ejemplo, la carga de recursos estáticos se prueba en el [playground de recursos](https://github.com/vitejs/vite/tree/main/playground/assets). En esta aplicación de Vite, hay una prueba para las importaciones `?raw`, con [una sección definida en `index.html`](https://github.com/vitejs/vite/blob/71215533ac60e8ff566dc3467feabfc2c71a01e2/playground/assets/index.html#L121) para ello:
 
 ```html
 <h2>?raw import</h2>
 <code class="raw"></code>
 ```
 
-This will be modified [with the result of a file import](https://github.com/vitejs/vite/blob/main/playground/assets/index.html#L151):
+Esto se modificará [con el resultado de la importación de un archivo](https://github.com/vitejs/vite/blob/main/playground/assets/index.html#L151):
 
 ```js
 import rawSvg from './nested/fragment.svg?raw'
 text('.raw', rawSvg)
 ```
 
-Where the `text` util is defined as:
+Donde la utilidad `text` se define como:
 
 ```js
 function text(el, text) {
@@ -131,7 +131,7 @@ function text(el, text) {
 }
 ```
 
-In the [spec tests](https://github.com/vitejs/vite/blob/main/playground/assets/__tests__/assets.spec.ts#L180), the modifications to the DOM listed above are used to test this feature:
+En las [pruebas de especificaciones](https://github.com/vitejs/vite/blob/main/playground/assets/__tests__/assets.spec.ts#L180), las modificaciones al DOM enumeradas anteriormente se usan para probar esta funcionalidad:
 
 ```js
 test('?raw import', async () => {
@@ -139,11 +139,11 @@ test('?raw import', async () => {
 })
 ```
 
-## Note on Test Dependencies
+## Nota sobre las pruebas de dependencias
 
-In many test cases we need to mock dependencies using `link:` and `file:` protocols (which are supported by package managers like `yarn` and `pnpm`). However, `pnpm` treats `link:` and `file:` the same way and always use symlinks. This can be undesirable in cases where we want the dependency to be actually copied into `node_modules`.
+En muchos casos de prueba, necesitamos simular dependencias usando los protocolos `link:` y `file:` (que son compatibles con gestores de paquetes como `yarn` y `pnpm`). Sin embargo, `pnpm` trata `link:` y `file:` de la misma manera y siempre usa enlaces simbólicos. Esto puede no ser deseable en los casos en los que queremos que la dependencia se copie realmente en `node_modules`.
 
-To work around this, playground packages that uses the `file:` protocol should also include the following `postinstall` script:
+Para evitar esto, los playground de paquetes que usan el protocolo `file:` también deben incluir el siguiente script `postinstall`:
 
 ```jsonc
 "scripts": {
@@ -152,83 +152,83 @@ To work around this, playground packages that uses the `file:` protocol should a
 }
 ```
 
-This script patches the dependencies using `file:` protocol to match the copying behavior instead of linking.
+Este script parchea las dependencias usando el protocolo `file:` para que coincida con el comportamiento de copia en lugar de vincularlo.
 
-## Debug Logging
+## Registro de depuración
 
-You can set the `DEBUG` environment variable to turn on debugging logs. E.g. `DEBUG="vite:resolve"`. To see all debug logs you can set `DEBUG="vite:*"`, but be warned that it will be quite noisy. You can run `grep -r "createDebugger('vite:" packages/vite/src/` to see a list of available debug scopes.
+Puedes configurar la variable de entorno `DEBUG` para activar los registros de depuración. Por ejemplo, `DEBUG="invitar:resolver"`. Para ver todos los registros de depuración, puedes configurar `DEBUG="vite:*"`, pero ten en cuenta que será bastante "ruidoso". Puedes ejecutar `grep -r "createDebugger('vite:" packages/vite/src/` para ver una lista de los ámbitos de depuración disponibles.
 
-## Pull Request Guidelines
+## Directrices de Pull Requests
 
-- Checkout a topic branch from a base branch, e.g. `main`, and merge back against that branch.
+- Has checkout de una rama temporal desde una rama base, por ejemplo, `main`, y has merge de nuevo a esa rama.
 
-- If adding a new feature:
+- Si agregas una nueva funcionalidad:
 
-  - Add accompanying test case.
-  - Provide a convincing reason to add this feature. Ideally, you should open a suggestion issue first and have it approved before working on it.
+  - Agrega el caso de prueba adjunto.
+  - Proporciona una razón convincente para agregar esta función. Idealmente, primero debes abrir una sugerencia de problema y haberlo aprobado antes de trabajar en él.
 
-- If fixing bug:
+- Si corriges un error:
 
-  - If you are resolving a special issue, add `(fix #xxxx[,#xxxx])` (#xxxx is the issue id) in your PR title for a better release log, e.g. `fix: update entities encoding/decoding (fix #3899)`.
-  - Provide a detailed description of the bug in the PR. Live demo preferred.
-  - Add appropriate test coverage if applicable.
+  - Si estás resolviendo un problema especial, agrega `(fix #xxxx[,#xxxx])` (#xxxx es la identificación del problema) en el título del PR para obtener un mejor registro de publicación, por ejemplo `fix: update entities encoding/decoding (fix #3899)`.
+  - Proporciona una descripción detallada del error en el PR. Es preferible una demostración en vivo.
+  - Agrega la cobertura de prueba adecuada si corresponde.
 
-- It's OK to have multiple small commits as you work on the PR - GitHub can automatically squash them before merging.
+- Está bien tener varios commits pequeños mientras trabajas en el PR - GitHub puede combinarlos automáticamente antes de fusionarlos.
 
-- Make sure tests pass!
+- ¡Asegúrate de pasar las pruebas!
 
-- Commit messages must follow the [commit message convention](./.github/commit-convention.md) so that changelogs can be automatically generated. Commit messages are automatically validated before commit (by invoking [Git Hooks](https://git-scm.com/docs/githooks) via [yorkie](https://github.com/yyx990803/yorkie)).
+- Los mensajes de confirmación deben seguir la [convención de mensajes de confirmación](./.github/commit-convention.md) para que los registros de cambios se puedan generar automáticamente. Los mensajes de confirmación se validan automáticamente antes de la confirmación (invocando [Git Hooks](https://git-scm.com/docs/githooks) a través de [yorkie](https://github.com/yyx990803/yorkie)).
 
-- No need to worry about code style as long as you have installed the dev dependencies - modified files are automatically formatted with Prettier on commit (by invoking [Git Hooks](https://git-scm.com/docs/githooks) via [yorkie](https://github.com/yyx990803/yorkie)).
+- No es necesario que te preocupes por el estilo del código siempre que hayas instalado las dependencias de desarrollo: los archivos modificados se formatean automáticamente con Prettier al hacer commit (invocando [Git Hooks](https://git-scm.com/docs/githooks) a través de [yorkie](https://github.com/yyx990803/yorkie)).
 
-## Maintenance Guidelines
+## Directrices de mantenimiento
 
-> The following section is mostly for maintainers who have commit access, but it's helpful to go through if you intend to make non-trivial contributions to the codebase.
+> La siguiente sección es principalmente para los mantenedores que tienen acceso de commits, pero es útil revisarla si tienes la intención de hacer contribuciones no triviales al código base.
 
-### Issue Triaging Workflow
+### Flujo de trabajo de evaluación de errores
 
 ![issue-workflow](./.github/issue-workflow.png)
 
-### Pull Request Review Workflow
+### Flujo de trabajo de revisión de pull requests
 
 ![issue-workflow](./.github/pr-workflow.png)
 
-## Notes on Dependencies
+## Notas sobre las dependencias
 
-Vite aims to be lightweight, and this includes being aware of the number of npm dependencies and their size.
+Vite pretende ser ligero, y esto incluye conocer la cantidad de dependencias npm y su tamaño.
 
-We use rollup to pre-bundle most dependencies before publishing! Therefore most dependencies, even used in src code, should be added under `devDependencies` by default. This also creates a number of constraints that we need to be aware of in the codebase:
+¡Usamos rollup para preempaquetar la mayoría de las dependencias antes de publicar! Por lo tanto, la mayoría de las dependencias, incluso las que se usan en el código src, deben agregarse en `devDependencies` de forma predeterminada. Esto también crea una serie de restricciones que debemos tener en cuenta en el código base:
 
-### Usage of `require()`
+### Uso de `require()`
 
-In some cases we intentionally lazy-require some dependencies to improve startup performance. However, note that we cannot use simple `require('somedep')` calls since these are ignored in ESM files so the dependency won't be included in the bundle, and the actual dependency won't even be there when published since they are in `devDependencies`.
+En algunos casos, intencionalmente requerimos algunas dependencias para mejorar el rendimiento de inicio. Sin embargo, ten en cuenta que no podemos usar llamadas `require('somedep')` simples, ya que se ignoran en los archivos ESM, por lo que la dependencia no se incluirá en el paquete, y la dependencia real ni siquiera estará allí cuando se publique, ya que están en `devDependencies`.
 
-Instead, use `(await import('somedep')).default`.
+En su lugar, usa `(await import('somedep')).default`.
 
-### Think before adding a dependency
+### Piensa antes de agregar una dependencia
 
-Most deps should be added to `devDependencies` even if they are needed at runtime. Some exceptions are:
+La mayoría de las dependencias deben agregarse a `devDependencies` incluso si se necesitan en tiempo de ejecución. Algunas excepciones son:
 
-- Type packages. Example: `@types/*`.
-- Deps that cannot be properly bundled due to binary files. Example: `esbuild`.
-- Deps that ships its own types and its type is used in vite's own public types. Example: `rollup`.
+- Paquetes de tipos. Ejemplo: `@types/*`.
+- Dependencias que no se pueden empaquetar correctamente debido a archivos binarios. Ejemplo: `esbuild`.
+- Dependencias que traen sus propios tipos, y su tipo se usa en los tipos públicos propios de vite. Ejemplo: `rollup`.
 
-Avoid deps that has large transitive dependencies that results in bloated size compared to the functionality it provides. For example, `http-proxy` itself plus `@types/http-proxy` is a little over 1MB in size, but `http-proxy-middleware` pulls in a ton of dependencies that makes it 7MB(!) when a minimal custom middleware on top of `http-proxy` only requires a couple lines of code.
+Evita las dependencias que tengan dependencias transitivas grandes que resulten en un tamaño demasiado grande en comparación con la funcionalidad que proporcionas. Por ejemplo, `http-proxy` en sí mismo más `@types/http-proxy` tiene un tamaño de poco más de 1 MB, pero `http-proxy-middleware` trae un montón de dependencias que lo convierte en 7MB (!) El middleware personalizado sobre `http-proxy` solo requiere un par de líneas de código.
 
-### Ensure type support
+### Asegurate del soporte de tipos
 
-Vite aims to be fully usable as a dependency in a TypeScript project (e.g. it should provide proper typings for VitePress), and also in `vite.config.ts`. This means technically a dependency whose types are exposed needs to be part of `dependencies` instead of `devDependencies`. However, these means we won't be able to bundle it.
+Vite tiene como objetivo ser totalmente utilizable como una dependencia en un proyecto de TypeScript (por ejemplo, debe proporcionar tipos adecuados para VitePress), y también en `vite.config.ts`. Esto significa técnicamente que una dependencia cuyos tipos están expuestos debe ser parte de `dependencies` en lugar de `devDependencies`. Sin embargo, esto significa que no podremos empaquetarlo.
 
-To get around this, we inline some of these dependencies' types in `packages/vite/types`. This way we can still expose the typing but bundle the dependency's source code.
+Para evitar esto, integramos algunos de estos tipos de dependencias en `packages/vite/types`. De esta manera, aún podemos exponer el tipo al empaquetar el código fuente de la dependencia.
 
-### Think before adding yet another option
+### Piensa antes de agregar otra opción más
 
-We already have many config options, and we should avoid fixing an issue by adding yet another one. Before adding an option, try to think about:
+Ya tenemos muchas opciones de configuración, y debemos evitar solucionar un problema agregando otro más. Antes de agregar una opción, trata de pensar en:
 
-- Whether the problem is really worth addressing
-- Whether the problem can be fixed with a smarter default
-- Whether the problem has workaround using existing options
-- Whether the problem can be addressed with a plugin instead
+- Si realmente vale la pena abordar el problema
+- Si el problema se puede solucionar con un valor predeterminado más inteligente
+- Si el problema tiene una solución utilizando las opciones existentes
+- Si el problema se puede abordar con un complemento en su lugar
 
 ## Docs translation contribution
 
@@ -236,21 +236,21 @@ If you would like to start a translation in your language, you are welcome to co
 
 The english docs are embedded in the main Vite repo, to allow contributors to work on docs, tests and implementation in the same PR. Translations are done by forking the main repo.
 
-### How to start a translation repo
+### Cómo iniciar un repositorio de traducción
 
-1. In order to get all doc files, you first need to clone this repo in your personal account.
-2. Keep all the files in `docs/` and remove everything else.
+1. Para obtener todos los archivos de documentación, primero debes clonar este repositorio en tu cuenta personal.
+2. Guarda todos los archivos en `docs/` y elimina todo lo demás.
 
-   - You should setup your translation site based on all the files in `docs/` folder as a VitePress project.
-     (that said, `package.json` is need).
+   - Debes configurar tu sitio de traducción en función de todos los archivos en la carpeta `docs/` como un proyecto de VitePress.
+     (Dicho esto, `package.json` es necesario).
 
-   - Refresh git history by removing `.git` and then `git init`
+   - Actualiza el historial de git eliminando `.git` y luego `git init`
 
-3. Translate the docs.
+3. Traduce la documentación.
 
-   - During this stage, you may be translating documents and synchronizing updates at the same time, but don't worry about that, it's very common in translation contribution.
+   - Durante esta etapa, puedes estar traduciendo documentación y sincronizando actualizaciones al mismo tiempo, pero no te preocupe por eso, es muy común en la contribución de traducciones.
 
-4. Push your commits to your GitHub repo. you can setup a netlify preview as well.
-5. Use [Ryu-cho](https://github.com/vuejs-translations/ryu-cho) tool to setup a GitHub Action, automatically track English docs update later.
+4. Envía tus commits a tu repositorio de GitHub. También puedes configurar una vista previa de netlify.
+5. Usa la herramienta [Ryu-cho](https://github.com/vuejs-translations/ryu-cho) para configurar una acción de GitHub, rastrear automáticamente la actualización de documentación en inglés más adelante.
 
-We recommend talking with others in Vite Land so you find more contributors for your language to share the maintenance work. Once the translation is done, communicate it to the Vite team so the repo can be moved to the official vitejs org in GitHub.
+Recomendamos hablar con otros usuarios en Vite Land para que encuentres más colaboradores para tu idioma y así compartir el trabajo de mantenimiento. Una vez que se haya realizado la traducción, comunícalo al equipo de Vite para que el repositorio se pueda mover a la organización oficial de vitejs en GitHub.
