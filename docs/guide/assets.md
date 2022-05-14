@@ -1,4 +1,4 @@
-# Manejo de recursos estáticos
+# Gestión de recursos estáticos
 
 - Relacionado: [Ruta base pública](./build#public-base-path)
 - Relacionado: [Opción de configuración `assetsInclude`](/config/#assetsinclude)
