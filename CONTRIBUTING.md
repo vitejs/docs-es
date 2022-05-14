@@ -187,11 +187,11 @@ Puedes configurar la variable de entorno `DEBUG` para activar los registros de d
 
 ### Flujo de trabajo de evaluación de errores
 
-![issue-workflow](./.github/issue-workflow.png)
+![issue-workflow](https://github.com/vitejs/vite/raw/main/.github/issue-workflow.png)
 
 ### Flujo de trabajo de revisión de pull requests
 
-![issue-workflow](./.github/pr-workflow.png)
+![issue-workflow](https://github.com/vitejs/vite/raw/main/.github/pr-workflow.png)
 
 ## Notas sobre las dependencias
 
