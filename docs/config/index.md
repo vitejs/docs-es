@@ -293,7 +293,7 @@ export default defineConfig(({ command, mode }) => {
 
   Enabling this setting causes vite to determine file identity by the original file path (i.e. the path without following symlinks) instead of the real file path (i.e. the path after following symlinks).
 
-- **Related:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
+- **Relacionado:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
   ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
 ### css.modules
@@ -411,7 +411,7 @@ export default defineConfig(({ command, mode }) => {
 ### assetsInclude
 
 - **Tipo:** `string | RegExp | (string | RegExp)[]`
-- **Related:** [Static Asset Handling](/guide/assets)
+- **Relacionado:** [Static Asset Handling](/guide/assets)
 
   Specify additional [picomatch patterns](https://github.com/micromatch/picomatch#globbing-features) to be treated as static assets so that:
 
@@ -477,7 +477,7 @@ export default defineConfig(({ command, mode }) => {
 ### server.port
 
 - **Tipo:** `number`
-- **Por defecto:** `3000`
+- **Por defecto:** `5173`
 
   Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
 
@@ -548,6 +548,11 @@ export default defineConfig(({ command, mode }) => {
           configure: (proxy, options) => {
             // proxy will be an instance of 'http-proxy'
           }
+        },
+        // Proxying websockets or socket.io
+        '/socket.io': {
+          target: 'ws://localhost:5173',
+          ws: true
         }
       }
     }
@@ -569,7 +574,7 @@ export default defineConfig(({ command, mode }) => {
 ### server.force
 
 - **Tipo:** `boolean`
-- **Related:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
+- **Relacionado:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
 
   Set to `true` to force dependency pre-bundling.
 
@@ -619,7 +624,7 @@ export default defineConfig(({ command, mode }) => {
   - `'ssr'` will disable Vite's own HTML serving logic so that you should serve `index.html` manually.
   - `'html'` will enable Vite's own HTML serving logic.
 
-- **Related:** [SSR - Setting Up the Dev Server](/guide/ssr#setting-up-the-dev-server)
+- **Relacionado:** [SSR - Setting Up the Dev Server](/guide/ssr#setting-up-the-dev-server)
 
 - **Example:**
 
@@ -733,7 +738,7 @@ export default defineConfig({
 
 - **Tipo:** `string | string[]`
 - **Por defecto:** `'modules'`
-- **Related:** [Browser Compatibility](/guide/build#browser-compatibility)
+- **Relacionado:** [Browser Compatibility](/guide/build#browser-compatibility)
 
   Browser compatibility target for the final bundle. The default value is a Vite special value, `'modules'`, which targets [browsers with native ES module support](https://caniuse.com/es6-module).
 
@@ -832,13 +837,14 @@ export default defineConfig({
 ### build.dynamicImportVarsOptions
 
 - **Tipo:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
+- **Relacionado:** [Dynamic Import](/guide/features#dynamic-import)
 
-  Options to pass on to [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
+  Opciones para [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
 
 ### build.lib
 
 - **Tipo:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat) => string) }`
-- **Related:** [Library Mode](/guide/build#library-mode)
+- **Relacionado:** [Library Mode](/guide/build#library-mode)
 
   Build as a library. `entry` is required since the library cannot use HTML as entry. `name` is the exposed global variable and is required when `formats` includes `'umd'` or `'iife'`. Por defecto `formats` are `['es', 'umd']`. `fileName` is the name of the package file output, default `fileName` is the name option of package.json, it can also be defined as function taking the `format` as an argument.
 
@@ -846,7 +852,7 @@ export default defineConfig({
 
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
-- **Related:** [Backend Integration](/guide/backend-integration)
+- **Relacionado:** [Backend Integration](/guide/backend-integration)
 
   When set to `true`, the build will also generate a `manifest.json` file that contains a mapping of non-hashed asset filenames to their hashed versions, which can then be used by a server framework to render the correct asset links.
 
@@ -854,7 +860,7 @@ export default defineConfig({
 
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
-- **Related:** [Server-Side Rendering](/guide/ssr)
+- **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
   When set to `true`, the build will also generate a SSR manifest for determining style links and asset preload directives in production.
 
@@ -862,7 +868,7 @@ export default defineConfig({
 
 - **Tipo:** `boolean | string`
 - **Por defecto:** `undefined`
-- **Related:** [Server-Side Rendering](/guide/ssr)
+- **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
   Produce SSR-oriented build. The value can be a string to directly specify the SSR entry, or `true`, which requires specifying the SSR entry via `rollupOptions.input`.
 
@@ -989,7 +995,7 @@ export default defineConfig({
 
 ## Dep Optimization Options
 
-- **Related:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
+- **Relacionado:** [Dependency Pre-Bundling](/guide/dep-pre-bundling)
 
 ### optimizeDeps.entries
 
@@ -1041,7 +1047,7 @@ export default defineConfig({
 SSR options may be adjusted in minor releases.
 :::
 
-- **Related:** [SSR Externals](/guide/ssr#ssr-externals)
+- **Relacionado:** [SSR Externals](/guide/ssr#ssr-externals)
 
 ### ssr.external
 

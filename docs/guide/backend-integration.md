@@ -31,11 +31,11 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    import 'vite/modulepreload-polyfill'
    ```
 
-2. Para desarrollo: coloca lo siguiente en la plantilla de servidor HTML (reemplaza `http://localhost:3000` con la URL local donde Vite se está ejecutando):
+2. Para desarrollo: coloca lo siguiente en la plantilla de servidor HTML (reemplaza `http://localhost:5173` con la URL local donde Vite se está ejecutando):
 
    ```html
    <!-- if development -->
-   <script type="module" src="http://localhost:3000/main.js"></script>
+   <script type="module" src="http://localhost:5173/main.js"></script>
    ```
 
    Para servir correctamente recursos, tienes dos opciones:
@@ -49,7 +49,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
    ```html
    <script type="module">
-     import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+     import RefreshRuntime from 'http://localhost:5173/@react-refresh'
      RefreshRuntime.injectIntoGlobalHook(window)
      window.$RefreshReg$ = () => {}
      window.$RefreshSig$ = () => (type) => type
