@@ -230,11 +230,11 @@ Ya tenemos muchas opciones de configuración, y debemos evitar solucionar un pro
 - Si el problema tiene una solución utilizando las opciones existentes
 - Si el problema se puede abordar con un complemento en su lugar
 
-## Docs translation contribution
+## Contribución de traducción de documentación
 
-If you would like to start a translation in your language, you are welcome to contribute! Please join [the #translations channel in Vite Land](https://chat.vitejs.dev) to discuss and coordinate with others.
+Si deseas comenzar una traducción en tu idioma, ¡puede contribuir! Únete al [canal de #traducciones en Vite Land](https://chat.vitejs.dev) para discutir y coordinar con otros.
 
-The english docs are embedded in the main Vite repo, to allow contributors to work on docs, tests and implementation in the same PR. Translations are done by forking the main repo.
+Las documentaciones en inglés están integradas en el repositorio principal de Vite, para permitir que los contribuyentes trabajen en documentaciones, pruebas e implementación en el mismo PR. Las traducciones se realizan clonando el repositorio principal.
 
 ### Cómo iniciar un repositorio de traducción
 
