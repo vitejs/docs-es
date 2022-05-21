@@ -10,9 +10,9 @@
 
 - Se han eliminado `jsx` y `enableEsbuild`; utiliza la nueva opción [`esbuild`](/config/#esbuild) en su lugar.
 
-- [Opciones relacionadas con CSS](/config/#css-modules) ahora están anidadas bajo `css`.
+- Las [opciones relacionadas con CSS](/config/#css-modules) ahora están anidadas bajo `css`.
 
-- Todas las [opciones específicas de compilación](/config/#build-options) ahora están anidadas en `compilación`.
+- Todas las [opciones específicas de compilación](/config/#build-options) ahora están anidadas en `build`.
 
   - `rollupInputOptions` y `rollupOutputOptions` se reemplazan por [`build.rollupOptions`](/config/#build-rollupoptions).
   - `esbuildTarget` ahora es [`build.target`](/config/#build-target).

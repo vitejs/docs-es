@@ -1,74 +1,69 @@
-# Features
+# Funcionalidades
 
-At the very basic level, developing using Vite is not that much different from using a static file server. However, Vite provides many enhancements over native ESM imports to support various features that are typically seen in bundler-based setups.
+En un nivel muy básico, desarrollar usando Vite no es muy diferente de usar un servidor de archivos estático. Sin embargo, Vite proporciona muchas mejoras sobre las importaciones de ESM nativas para admitir varias funciones que normalmente se ven en las configuraciones basadas en paquetes.
 
-## NPM Dependency Resolving and Pre-Bundling
+## Resolución de dependencias de NPM y preempaquetado
 
-Native ES imports do not support bare module imports like the following:
+Las importaciones nativas de ES no admiten importaciones de módulos descubiertos como las siguientes:
 
 ```js
 import { someMethod } from 'my-dep'
 ```
 
-The above will throw an error in the browser. Vite will detect such bare module imports in all served source files and perform the following:
+Lo anterior arrojará un error en el navegador. Vite detectará tales importaciones de módulos descubiertos en todos los archivos fuente servidos y realizará lo siguiente:
 
-1. [Pre-bundle](./dep-pre-bundling) them to improve page loading speed and convert CommonJS / UMD modules to ESM. The pre-bundling step is performed with [esbuild](http://esbuild.github.io/) and makes Vite's cold start time significantly faster than any JavaScript-based bundler.
+1. [Preempaquetado](./dep-pre-bundling) para mejorar la velocidad de carga de la página y convertir los módulos CommonJS/UMD a ESM. El paso previo al empaquetado se realiza con [esbuild](http://esbuild.github.io/) y hace que el tiempo de inicio en frío de Vite sea significativamente más rápido que cualquier empaquetador basado en JavaScript.
 
-2. Rewrite the imports to valid URLs like `/node_modules/.vite/my-dep.js?v=f3sf2ebd` so that the browser can import them properly.
+2. Vuelve a escribir las importaciones en direcciones URL válidas como `/node_modules/.vite/my-dep.js?v=f3sf2ebd` para que el navegador pueda importarlas correctamente.
 
-**Dependencies are Strongly Cached**
+**Las dependencias están fuertemente almacenadas en caché**
 
-Vite caches dependency requests via HTTP headers, so if you wish to locally edit/debug a dependency, follow the steps [here](./dep-pre-bundling#browser-cache).
+Vite almacena en caché las solicitudes de dependencia a través de encabezados HTTP, por lo que si deseas editar/depurar localmente una dependencia, sigue los pasos [aquí](./dep-pre-bundling#browser-cache).
 
 ## Hot Module Replacement
 
-Vite provides an [HMR API](./api-hmr) over native ESM. Frameworks with HMR capabilities can leverage the API to provide instant, precise updates without reloading the page or blowing away application state. Vite provides first-party HMR integrations for [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) and [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react). There are also official integrations for Preact via [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite proporciona una [HMR API](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
 
-Note you don't need to manually set these up - when you [create an app via `create-vite`](./), the selected templates would have these pre-configured for you already.
+Ten en cuenta que no necesitas configurarlos manualmente: cuando [creas una aplicación a través de `create-vite`](./), las plantillas seleccionadas ya las tendrán preconfiguradas.
 
 ## TypeScript
 
-Vite supports importing `.ts` files out of the box.
+Vite admite la importación de archivos `.ts` desde su primer uso.
 
-Vite only performs transpilation on `.ts` files and does **NOT** perform type checking. It assumes type checking is taken care of by your IDE and build process (you can run `tsc --noEmit` in the build script or install `vue-tsc` and run `vue-tsc --noEmit` to also type check your `*.vue` files).
+Vite solo realiza la transpilación en archivos `.ts` y **NO** realiza verificación de tipos. Asume que la verificación de tipos está a cargo de tu IDE y el proceso de compilación (puede ejecutar `tsc --noEmit` en el script de compilación o instalar `vue-tsc` y ejecutar `vue-tsc --noEmit` para también verificar el tipo de su archivos `*.vue`).
 
-Vite uses [esbuild](https://github.com/evanw/esbuild) to transpile TypeScript into JavaScript which is about 20~30x faster than vanilla `tsc`, and HMR updates can reflect in the browser in under 50ms.
+Vite usa [esbuild](https://github.com/evanw/esbuild) para transpilar TypeScript en JavaScript, que es entre 20 y 30 veces más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
 
-Use the [Type-Only Imports and Export](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) syntax to avoid potential problems like type-only imports being incorrectly bundled. for example:
+Usa la sintaxis de [importaciones y exportaciones de solo tipo](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) para evitar problemas potenciales como las importaciones de solo tipo que se agrupan incorrectamente. por ejemplo:
 
 ```ts
 import type { T } from 'only/types'
 export type { T }
 ```
 
-### TypeScript Compiler Options
+### Opciones del compilador de TypeScript
 
-Some configuration fields under `compilerOptions` in `tsconfig.json` require special attention.
+Algunos campos de configuración en `compilerOptions` en `tsconfig.json` requieren atención especial.
 
 #### `isolatedModules`
 
-Should be set to `true`.
+Debes configurarse en `true`.
 
-It is because `esbuild` only performs transpilation without type information, it doesn't support certain features like const enum and implicit type-only imports.
+Esto se debe a que `esbuild` solo realiza la transpilación sin información de tipo, no admite ciertas características como const enum e importaciones implícitas de solo tipo.
 
-You must set `"isolatedModules": true` in your `tsconfig.json` under `compilerOptions`, so that TS will warn you against the features that do not work with isolated transpilation.
+Debes configurar `"isolatedModules": true` en el `tsconfig.json` en `compilerOptions`, para que TS te advierta sobre las funcionalidades omitidas con la transpilación aislada.
 
-However, some libraries (e.g. [`vue`](https://github.com/vuejs/core/issues/1228)) don't work well with `"isolatedModules": true`. You can use `"skipLibCheck": true` to temporarily suppress the errors until it is fixed upstream.
+Sin embargo, algunas bibliotecas (por ejemplo, [`vue`](https://github.com/vuejs/core/issues/1228)) no funcionan bien con `"isolatedModules": true`. Puedes usar `"skipLibCheck": true` para suprimir temporalmente los errores hasta que se solucione.
 
 #### `useDefineForClassFields`
 
-Starting from Vite 2.5.0, the default value will be `true` if the TypeScript target is `ESNext`. It is consistent with the [behavior of `tsc` 4.3.2 and later](https://github.com/microsoft/TypeScript/pull/42663). It is also the standard ECMAScript runtime behavior.
+A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es "ESNext". Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript. Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
 
-But it may be counter-intuitive for those coming from other programming languages or older versions of TypeScript.
-You can read more about the transition in the [TypeScript 3.7 release notes](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier).
+Si estás utilizando una biblioteca que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la biblioteca.
 
-If you are using a library that heavily relies on class fields, please be careful about the library's intended usage of it.
+La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [MobX](https://mobx.js.org/installation.html#use-spec-obediente-transpilation-for-class-properties), [Vue Class Components 8.x](https://github.com/vuejs/vue-class-component/issues/465), etc. Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor predeterminado, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
 
-Most libraries expect `"useDefineForClassFields": true`, such as [MobX](https://mobx.js.org/installation.html#use-spec-compliant-transpilation-for-class-properties), [Vue Class Components 8.x](https://github.com/vuejs/vue-class-component/issues/465), etc.
-
-But a few libraries haven't transitioned to this new default yet, including [`lit-element`](https://github.com/lit/lit-element/issues/1030). Please explicitly set `useDefineForClassFields` to `false` in these cases.
-
-#### Other Compiler Options Affecting the Build Result
+#### Otras opciones del compilador que afectan el resultado de la compilación
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
@@ -76,17 +71,17 @@ But a few libraries haven't transitioned to this new default yet, including [`li
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 
-If migrating your codebase to `"isolatedModules": true` is an unsurmountable effort, you may be able to get around it with a third-party plugin such as [rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports). However, this approach is not officially supported by Vite.
+Si migrar el codigo base a `"isolatedModules": true` es un esfuerzo arduo, es posible que puedas facilitar el trabajo con un complemento de terceros como [rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports). Sin embargo, Vite no admite oficialmente este enfoque.
 
-### Client Types
+### Tipos de clientes
 
-Vite's default types are for its Node.js API. To shim the environment of client side code in a Vite application, add a `d.ts` declaration file:
+Los tipos predeterminados de Vite son para su API Node.js. Para ajustar el entorno del código del lado del cliente en una aplicación Vite, agrega un archivo de declaración `d.ts`:
 
 ```typescript
 /// <reference types="vite/client" />
 ```
 
-Also, you can add `vite/client` to `compilerOptions.types` of your `tsconfig`:
+Además, puedes agregar `vite/client` a `compilerOptions.types` de tu `tsconfig`:
 
 ```json
 {
@@ -96,27 +91,27 @@ Also, you can add `vite/client` to `compilerOptions.types` of your `tsconfig`:
 }
 ```
 
-This will provide the following type shims:
+Esto proporcionará los siguientes tipos de librerías:
 
-- Asset imports (e.g. importing an `.svg` file)
-- Types for the Vite-injected [env variables](./env-and-mode#env-variables) on `import.meta.env`
-- Types for the [HMR API](./api-hmr) on `import.meta.hot`
+- Importaciones de recursos (por ejemplo, importar un archivo `.svg`)
+- Tipos para las [variables env](./env-and-mode#env-variables) inyectadas por Vite en `import.meta.env`
+- Tipos para la [HMR API](./api-hmr) en `import.meta.hot`
 
 ## Vue
 
-Vite provides first-class Vue support:
+Vite proporciona soporte Vue de primera clase:
 
-- Vue 3 SFC support via [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
-- Vue 3 JSX support via [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Vue 2 support via [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
+- Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
+- Compatibilidad con Vue 2 a través de [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
 ## JSX
 
-`.jsx` and `.tsx` files are also supported out of the box. JSX transpilation is also handled via [esbuild](https://esbuild.github.io), and defaults to the React 16 flavor. React 17 style JSX support in esbuild is tracked [here](https://github.com/evanw/esbuild/issues/334).
+Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io), y el valor predeterminado es React 16. La compatibilidad con JSX de estilo React 17 en esbuild se puede monitorear [aquí](https://github.com/evanw/esbuild/issues/334).
 
-Vue users should use the official [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) plugin, which provides Vue 3 specific features including HMR, global component resolving, directives and slots.
+Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 
-If not using JSX with React or Vue, custom `jsxFactory` and `jsxFragment` can be configured using the [`esbuild` option](/config/#esbuild). For example for Preact:
+Si no usas JSX con React o Vue, puedes hacer configuraciones personalizadas de `jsxFactory` y `jsxFragment` usando la [opción `esbuild`](/config/#esbuild). Por ejemplo para Preact:
 
 ```js
 // vite.config.js
@@ -130,9 +125,9 @@ export default defineConfig({
 })
 ```
 
-More details in [esbuild docs](https://esbuild.github.io/content-types/#jsx).
+Más detalles en la [documentación de esbuild](https://esbuild.github.io/content-types/#jsx).
 
-You can inject the JSX helpers using `jsxInject` (which is a Vite-only option) to avoid manual imports:
+Puedes inyectar los helpers de JSX usando `jsxInject` (que es una opción exclusiva de Vite) para evitar las importaciones manuales:
 
 ```js
 // vite.config.js
@@ -147,21 +142,21 @@ export default defineConfig({
 
 ## CSS
 
-Importing `.css` files will inject its content to the page via a `<style>` tag with HMR support. You can also retrieve the processed CSS as a string as the module's default export.
+La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR. También puedes obtener el CSS procesado como una cadena o como exportación predeterminada del módulo.
 
-### `@import` Inlining and Rebasing
+### Incrustación y rebase de`@import`
 
-Vite is pre-configured to support CSS `@import` inlining via `postcss-import`. Vite aliases are also respected for CSS `@import`. In addition, all CSS `url()` references, even if the imported files are in different directories, are always automatically rebased to ensure correctness.
+Vite está preconfigurado para admitir incrustaciones CSS de `@import` través de `postcss-import`. Los alias de Vite también se respetan para CSS `@import`. Además, todas las referencias de CSS `url()`, incluso si los archivos importados están en directorios diferentes, siempre se reorganizan automáticamente para garantizar la corrección.
 
-`@import` aliases and URL rebasing are also supported for Sass and Less files (see [CSS Pre-processors](#css-pre-processors)).
+Los alias `@import` y el cambio de base de URL también son compatibles con los archivos Sass y Less (consulta los [preprocesadores CSS](#css-pre-processors)).
 
 ### PostCSS
 
-If the project contains valid PostCSS config (any format supported by [postcss-load-config](https://github.com/postcss/postcss-load-config), e.g. `postcss.config.js`), it will be automatically applied to all imported CSS.
+Si el proyecto contiene una configuración de PostCSS válida (cualquier formato compatible con [postcss-load-config](https://github.com/postcss/postcss-load-config), por ejemplo, `postcss.config.js`), se aplicará automáticamente a todo el CSS importado.
 
-### CSS Modules
+### Módulos CSS
 
-Any CSS file ending with `.module.css` is considered a [CSS modules file](https://github.com/css-modules/css-modules). Importing such a file will return the corresponding module object:
+Cualquier archivo CSS que termine con `.module.css` se considera un [archivo de módulos CSS](https://github.com/css-modules/css-modules). La importación de dicho archivo devolverá el objeto de módulo correspondiente:
 
 ```css
 /* example.module.css */
@@ -175,9 +170,9 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-CSS modules behavior can be configured via the [`css.modules` option](/config/#css-modules).
+El comportamiento de los módulos CSS se puede configurar mediante la [opción `css.modules`](/config/#css-modules).
 
-If `css.modules.localsConvention` is set to enable camelCase locals (e.g. `localsConvention: 'camelCaseOnly'`), you can also use named imports:
+Si `css.modules.localsConvention` está configurado para habilitar camelCase locales (por ejemplo, `localsConvention: 'camelCaseOnly'`), también podrá usar importaciones con nombre:
 
 ```js
 // .apply-color -> applyColor
@@ -185,11 +180,11 @@ import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
 ```
 
-### CSS Pre-processors
+### Preprocesadores CSS
 
-Because Vite targets modern browsers only, it is recommended to use native CSS variables with PostCSS plugins that implement CSSWG drafts (e.g. [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)) and author plain, future-standards-compliant CSS.
+Debido a que Vite solo se dirige a los navegadores modernos, se recomienda usar variables CSS nativas con complementos de PostCSS que implementen borradores de CSSWG (por ejemplo, [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)) y CSS simple y compatible con estándares futuros.
 
-That said, Vite does provide built-in support for `.scss`, `.sass`, `.less`, `.styl` and `.stylus` files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed:
+Dicho esto, Vite proporciona soporte integrado para archivos `.scss`, `.sass`, `.less`, `.styl` y `.stylus`. No es necesario instalar complementos específicos de Vite para ellos, pero se debe instalar el preprocesador correspondiente:
 
 ```bash
 # .scss and .sass
@@ -202,77 +197,77 @@ npm add -D less
 npm add -D stylus
 ```
 
-If using Vue single file components, this also automatically enables `<style lang="sass">` et al.
+Si usas componentes de archivo único de Vue (SFC), esto también habilita automáticamente `<style lang="sass">` et al.
 
-Vite improves `@import` resolving for Sass and Less so that Vite aliases are also respected. In addition, relative `url()` references inside imported Sass/Less files that are in different directories from the root file are also automatically rebased to ensure correctness.
+Vite mejora la resolución de `@import` para Sass y Less para que también se respeten los alias de Vite. Además, las referencias `url()` relativas dentro de los archivos Sass/Less importados que se encuentran en directorios diferentes del archivo raíz también se reorganizan automáticamente para garantizar la corrección.
 
-`@import` alias and url rebasing are not supported for Stylus due to its API constraints.
+El alias `@import` y el cambio de base de URL no son compatibles con Stylus debido a las limitaciones de su API.
 
-You can also use CSS modules combined with pre-processors by prepending `.module` to the file extension, for example `style.module.scss`.
+También puedes usar módulos CSS combinados con preprocesadores anteponiendo `.module` a la extensión del archivo, por ejemplo `style.module.scss`.
 
-## Static Assets
+## Recursos estáticos
 
-Importing a static asset will return the resolved public URL when it is served:
+La importación de un recurso estático devolverá la URL pública resuelta cuando se sirva:
 
 ```js
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-Special queries can modify how assets are loaded:
+Las consultas especiales pueden modificar cómo se cargan los recursos:
 
 ```js
-// Explicitly load assets as URL
+// carga recursos explícitamente como URL
 import assetAsURL from './asset.js?url'
 ```
 
 ```js
-// Load assets as strings
+// carga recursos como string
 import assetAsString from './shader.glsl?raw'
 ```
 
 ```js
-// Load Web Workers
+// cargar Web Workers
 import Worker from './worker.js?worker'
 ```
 
 ```js
-// Web Workers inlined as base64 strings at build time
+// incrustado de Web Workers como cadenas base64 en tiempo de compilado.
 import InlineWorker from './worker.js?worker&inline'
 ```
 
-More details in [Static Asset Handling](./assets).
+Más detalles en [Gestión de recursos estáticos](./assets).
 
 ## JSON
 
-JSON files can be directly imported - named imports are also supported:
+Los archivos JSON se pueden importar directamente; también se admiten las importaciones con nombre:
 
 ```js
-// import the entire object
+// importar todo el objeto
 import json from './example.json'
-// import a root field as named exports - helps with tree-shaking!
+// importe un campo raíz como exportaciones con nombre: ¡ayuda al hacer tree-shaking!
 import { field } from './example.json'
 ```
 
-## Glob Import
+## Importaciones Glob
 
-Vite supports importing multiple modules from the file system via the special `import.meta.glob` function:
+Vite admite la importación de múltiples módulos desde el sistema de archivos a través de la función especial `import.meta.glob`:
 
 ```js
 const modules = import.meta.glob('./dir/*.js')
 ```
 
-The above will be transformed into the following:
+Lo anterior se transformará en lo siguiente:
 
 ```js
-// code produced by vite
+// código producido por vite
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js'),
   './dir/bar.js': () => import('./dir/bar.js')
 }
 ```
 
-You can then iterate over the keys of the `modules` object to access the corresponding modules:
+A continuación, puedes iterar sobre las claves del objeto `modules` para acceder a los módulos correspondientes:
 
 ```js
 for (const path in modules) {
@@ -282,16 +277,16 @@ for (const path in modules) {
 }
 ```
 
-Matched files are by default lazy-loaded via dynamic import and will be split into separate chunks during build. If you'd rather import all the modules directly (e.g. relying on side-effects in these modules to be applied first), you can pass `{ eager: true }` as the second argument:
+Los archivos coincidentes se cargan de forma diferida de forma predeterminada a través de la importación dinámica y se dividirán en partes separadas durante la compilación. Si prefieres importar todos los módulos directamente (por ejemplo, confiando en que los efectos secundarios de estos módulos se apliquen primero), puedes pasar `{ eager: true }` como segundo argumento:
 
 ```js
 const modules = import.meta.glob('./dir/*.js', { eager: true })
 ```
 
-The above will be transformed into the following:
+Lo anterior se transformará en lo siguiente:
 
 ```js
-// code produced by vite
+// código producido por vite
 import * as __glob__0_0 from './dir/foo.js'
 import * as __glob__0_1 from './dir/bar.js'
 const modules = {
@@ -300,73 +295,73 @@ const modules = {
 }
 ```
 
-### Glob Import As
+### Formas de importación Glob
 
-`import.meta.glob` also supports importing files as strings (similar to [Importing Asset as String](https://vitejs.dev/guide/assets.html#importing-asset-as-string)) with the [Import Reflection](https://github.com/tc39/proposal-import-reflection) syntax:
+`import.meta.glob` también admite la importación de archivos como cadenas (similar a la [importación de recursos como cadena](https://vitejs.dev/guide/assets.html#importing-asset-as-string)) con la sintaxis de [importación reflexiva](https://github.com/tc39/proposal-import-reflection):
 
 ```js
 const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
 ```
 
-The above will be transformed into the following:
+Lo anterior se transformará en lo siguiente:
 
 ```js
-// code produced by vite
+// código producido por vite
 const modules = {
   './dir/foo.js': 'export default "foo"\n',
   './dir/bar.js': 'export default "bar"\n'
 }
 ```
 
-`{ as: 'url' }` is also supported for loading assets as URLs.
+`{ as: 'url' }` también se admite para cargar recursos como URL.
 
-### Multiple Patterns
+### Múltiples patrones
 
-The first argument can be an array of globs, for example
+El primer argumento puede ser una array de globs, por ejemplo
 
 ```js
 const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 ```
 
-### Negative Patterns
+### Patrones negativos
 
-Negative glob patterns are also supported (prefixed with `!`). To ignore some files from the result, you can add exclude glob patterns to the first argument:
+También se admiten patrones glob negativos (con el prefijo `!`). Para ignorar algunos archivos del resultado, puedes agregar exclusiones de patrones glob en el primer argumento:
 
 ```js
 const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
 ```
 
 ```js
-// code produced by vite
+// código producido por vite
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js')
 }
 ```
 
-#### Named Imports
+#### Importaciones nombradas
 
-It's possible to only import parts of the modules with the `import` options.
+Es posible importar solo partes de los módulos con las opciones de`import`.
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```
 
 ```ts
-// code produced by vite
+// código producido por vite
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
   './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup)
 }
 ```
 
-When combined with `eager` it's even possible to have tree-shaking enabled for those modules.
+Cuando se combina con `eager`, incluso es posible tener habilitado el tree-shaking para esos módulos.
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', { import: 'setup', eager: true })
 ```
 
 ```ts
-// code produced by vite:
+// código producido por vite:
 import { setup as __glob__0_0 } from './dir/foo.js'
 import { setup as __glob__0_1 } from './dir/bar.js'
 const modules = {
@@ -375,7 +370,7 @@ const modules = {
 }
 ```
 
-Set `import` to `default` to import the default export.
+Configura `import` a `default` para importar la exportación predeterminada.
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', {
@@ -385,7 +380,7 @@ const modules = import.meta.glob('./dir/*.js', {
 ```
 
 ```ts
-// code produced by vite:
+// código producido por vite:
 import __glob__0_0 from './dir/foo.js'
 import __glob__0_1 from './dir/bar.js'
 const modules = {
@@ -394,9 +389,9 @@ const modules = {
 }
 ```
 
-#### Custom Queries
+#### Consultas personalizadas
 
-You can also use the `query` option to provide custom queries to imports for other plugins to consume.
+También puedes usar la opción `query` para proporcionar consultas personalizadas a las importaciones para que las consuman otros complementos.
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', {
@@ -405,7 +400,7 @@ const modules = import.meta.glob('./dir/*.js', {
 ```
 
 ```ts
-// code produced by vite:
+// código producido por vite:
 const modules = {
   './dir/foo.js': () =>
     import('./dir/foo.js?foo=bar&bar=true').then((m) => m.setup),
@@ -414,28 +409,28 @@ const modules = {
 }
 ```
 
-### Glob Import Caveats
+### Advertencias de importación glob
 
-Note that:
+Ten en cuenta que:
 
-- This is a Vite-only feature and is not a web or ES standard.
-- The glob patterns are treated like import specifiers: they must be either relative (start with `./`) or absolute (start with `/`, resolved relative to project root) or an alias path (see [`resolve.alias` option](/config/#resolve-alias)).
-- The glob matching is done via [`fast-glob`](https://github.com/mrmlnc/fast-glob) - check out its documentation for [supported glob patterns](https://github.com/mrmlnc/fast-glob#pattern-syntax).
-- You should also be aware that all the arguments in the `import.meta.glob` must be **passed as literals**. You can NOT use variables or expressions in them.
+- Esta es una característica exclusiva de Vite y no es un estándar web o ES.
+- Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [`resolve.alias` opción](/config/#resolve-alias)).
+- La coincidencia de glob se realiza a través de [`fast-glob`](https://github.com/mrmlnc/fast-glob) - Consulta la documentación de los [patrones de glob compatibles](https://github.com/mrmlnc/fast-glob#patrón-sintaxis).
+- También debes tener en cuenta que todos los argumentos en `import.meta.glob` deben **pasarse como literales**. NO puede usar variables o expresiones en ellos.
 
-## Dynamic Import
+## Importación dinámica
 
-Similar to [glob import](#glob-import), Vite also supports dynamic import with variables.
+Similar a [importación de glob](#glob-import), Vite también admite la importación dinámica con variables.
 
 ```ts
 const module = await import(`./dir/${file}.js`)
 ```
 
-Note that variables only represent file names one level deep. If `file` is `'foo/bar'`, the import would fail. For more advanced usage, you can use the [glob import](#glob-import) feature.
+Ten en cuenta que las variables solo representan nombres de archivo de un nivel de profundidad. Si `file` es `'foo/bar'`, la importación fallaría. Para un uso más avanzado, puede utilizar la función [importación de glob](#glob-import)
 
 ## WebAssembly
 
-Pre-compiled `.wasm` files can be imported with `?init` - the default export will be an initialization function that returns a Promise of the wasm instance:
+Los archivos `.wasm` precompilados se pueden importar con `?init`: la exportación predeterminada será una función de inicialización que devuelve una Promesa de la instancia de wasm:
 
 ```js
 import init from './example.wasm?init'
@@ -444,7 +439,7 @@ init().then((instance) => {
 })
 ```
 
-The init function can also take the `imports` object which is passed along to `WebAssembly.instantiate` as its second argument:
+La función init también puede tomar el objeto `imports` que se pasa a `WebAssembly.instantiate` como su segundo argumento:
 
 ```js
 init({
@@ -458,24 +453,24 @@ init({
 })
 ```
 
-In the production build, `.wasm` files smaller than `assetInlineLimit` will be inlined as base64 strings. Otherwise, they will be copied to the dist directory as an asset and fetched on-demand.
+En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se copiarán en el directorio dist como un recurso y se obtendrán a petición.
 
 ::: warning
-[ES Module Integration Proposal for WebAssembly](https://github.com/WebAssembly/esm-integration) is not currently supported.
-Use [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) or other community plugins to handle this.
+La [propuesta de integración de módulos ES para WebAssembly](https://github.com/WebAssembly/esm-integration) no es compatible actualmente.
+Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros complementos de la comunidad para darle el manejo apropiado.
 :::
 
 ## Web Workers
 
-### Import with Constructors
+### Importar con constructores
 
-A web worker script can be imported using [`new Worker()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) and [`new SharedWorker()`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker). Compared to the worker suffixes, this syntax leans closer to the standards and is the **recommended** way to create workers.
+Se puede importar un script de web worker usando [`new Worker()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) y [`new SharedWorker()`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker). En comparación con los sufijos de worker, esta sintaxis se acerca más a los estándares y es la forma **recomendada** de crear workers.
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url))
 ```
 
-The worker constructor also accepts options, which can be used to create "module" workers:
+El constructor de worker también acepta opciones, que se pueden usar para crear workers de "módulo":
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url), {
@@ -483,9 +478,9 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 })
 ```
 
-### Import with Query Suffixes
+### Importar con sufijos de consulta
 
-A web worker script can be directly imported by appending `?worker` or `?sharedworker` to the import request. The default export will be a custom worker constructor:
+Se puede importar directamente un script de web worker agregando `?worker` o `?sharedworker` a la solicitud de importación. La exportación predeterminada será un constructor de worker personalizado:
 
 ```js
 import MyWorker from './worker?worker'
@@ -493,46 +488,46 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-The worker script can also use `import` statements instead of `importScripts()` - note during dev this relies on browser native support and currently only works in Chrome, but for the production build it is compiled away.
+El script del worker también puede usar sentencias `import` en lugar de `importScripts()`; ten en cuenta que durante el desarrollo esto depende del soporte nativo del navegador y actualmente solo funciona en Chrome, pero para la compilación de producción está compilado.
 
-By default, the worker script will be emitted as a separate chunk in the production build. If you wish to inline the worker as base64 strings, add the `inline` query:
+De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega la consulta `inline`:
 
 ```js
 import MyWorker from './worker?worker&inline'
 ```
 
-See [Worker Options](/config/#worker-options) for details on configuring the bundling of all workers.
+Revisa las [opciones de Worker](/config/#worker-options) para obtener detalles sobre cómo configurar el empaquetado de todos los workers.
 
-## Build Optimizations
+## Optimizaciones de compilación
 
-> Features listed below are automatically applied as part of the build process and there is no need for explicit configuration unless you want to disable them.
+> Las funcionalidades que se enumeran a continuación se aplican automáticamente como parte del proceso de compilación y no hay necesidad de una configuración explícita a menos que desees deshabilitarlas.
 
-### CSS Code Splitting
+### División de código CSS
 
-Vite automatically extracts the CSS used by modules in an async chunk and generates a separate file for it. The CSS file is automatically loaded via a `<link>` tag when the associated async chunk is loaded, and the async chunk is guaranteed to only be evaluated after the CSS is loaded to avoid [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.).
+Vite extrae automáticamente el CSS utilizado por los módulos en un fragmento asíncrono y genera un archivo separado para él. El archivo CSS se carga automáticamente a través de una etiqueta `<link>` cuando se carga el fragmento asíncrono asociado, y se garantiza que el fragmento asíncrono solo se evaluará después de cargar el CSS para evitar [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retriever.).
 
-If you'd rather have all the CSS extracted into a single file, you can disable CSS code splitting by setting [`build.cssCodeSplit`](/config/#build-csscodesplit) to `false`.
+Si prefieres que se extraiga todo el CSS en un solo archivo, puedes desactivar la división del código CSS configurando [`build.cssCodeSplit`](/config/#build-csscodesplit) en `false`.
 
-### Preload Directives Generation
+### Generación de directivas de precarga
 
-Vite automatically generates `<link rel="modulepreload">` directives for entry chunks and their direct imports in the built HTML.
+Vite genera automáticamente directivas `<link rel="modulepreload">` para fragmentos de entrada y sus importaciones directas en el HTML creado.
 
-### Async Chunk Loading Optimization
+### Optimización de carga de fragmentos asíncronos
 
-In real world applications, Rollup often generates "common" chunks - code that is shared between two or more other chunks. Combined with dynamic imports, it is quite common to have the following scenario:
+En las aplicaciones del mundo real, Rollup a menudo genera fragmentos "comunes": código que se comparte entre dos o más fragmentos. Combinado con importaciones dinámicas, es bastante común tener el siguiente escenario:
 
 ![graph](/images/graph.png)
 
-In the non-optimized scenarios, when async chunk `A` is imported, the browser will have to request and parse `A` before it can figure out that it also needs the common chunk `C`. This results in an extra network roundtrip:
+En escenarios no optimizados, cuando se importa el fragmento asíncrono `A`, el navegador tendrá que solicitar y analizar `A` antes de darse cuenta de que también necesita el fragmento común `C`. Esto da como resultado consultas de ida y vuelta adicionales a la red:
 
 ```
-Entry ---> A ---> C
+Entrada ---> A ---> C
 ```
 
-Vite automatically rewrites code-split dynamic import calls with a preload step so that when `A` is requested, `C` is fetched **in parallel**:
+Vite reescribe automáticamente las llamadas de importación dinámicas de código dividido con un paso de precarga para que cuando se solicite `A`, `C` se obtengan **en paralelo**:
 
 ```
-Entry ---> (A + C)
+Entrada ---> (A + C)
 ```
 
-It is possible for `C` to have further imports, which will result in even more roundtrips in the un-optimized scenario. Vite's optimization will trace all the direct imports to completely eliminate the roundtrips regardless of import depth.
+Es posible que `C` tenga más importaciones, lo que dará como resultado aún más consultas de ida y vuelta en el escenario no optimizado. La optimización de Vite rastreará todas las importaciones directas para eliminar por completo esas consultas, independientemente de la profundidad de la importación.

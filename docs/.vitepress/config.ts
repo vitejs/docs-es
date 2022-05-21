@@ -127,7 +127,7 @@ export default defineConfig({
               link: '/guide/build'
             },
             {
-              text: 'Implementación de un sitio estático',
+              text: 'Despliegue de un sitio estático',
               link: '/guide/static-deploy'
             },
             {

@@ -712,7 +712,7 @@ createServer()
 
 - **Tipo:** `string[]`
 
-  Lista de bloqueo para archivos sensibles que están restringidos a ser servidos por el servidor de desarrollo de Vite.
+  Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite.
 
   Por defecto a `['.env', '.env.*', '*.{pem,crt}']`.
 
