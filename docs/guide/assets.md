@@ -116,6 +116,5 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 Este patrón no funciona si estás utilizando Vite para Server-Side Rendering, porque `import.meta.url` tiene una semántica diferente en navegadores con respecto a Node.js. El empaquetado del servidor tampoco puede determinar la URL del host del cliente con anticipación.
 :::
 
-::: warning Esbuild target config is necessary
-This pattern needs esbuild target to be set to `es2020` or higher. `vite@2.x` use `es2019` as default target. Set [build-target](https://vitejs.dev/config/#build-target) and [optimizedeps.esbuildoptions.target](https://vitejs.dev/config/#optimizedeps-esbuildoptions) to `es2020` or higher if you intend to use this partten.
-:::
+::: warning `target` debe ser `es2020` o superior
+Este patrón no funcionará si [build-target](https://vitejs.dev/config/#build-target) o [optimizedeps.esbuildoptions.target](https://vitejs.dev/config/#optimizedeps-esbuildoptions) se configura en un valor inferior a `es2020`.

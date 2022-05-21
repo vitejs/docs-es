@@ -30,7 +30,7 @@ Solo para complementos de Vite
 - Incluye la palabra clave `vite-plugin` en package.json.
 - Incluye una sección en los documentos del complemento que detalle por qué es un complemento exclusivo de Vite (por ejemplo, utiliza hooks de complemento específicos de Vite).
 
-Si tu complemento solo funcionará para un marco en particular, su nombre debe incluirse como parte del prefijo
+Si tu complemento solo funcionará para un marco de trabajo en particular, su nombre debe incluirse como parte del prefijo
 
 - Prefijo `vite-plugin-vue-` para Vue
 - Prefijo `vite-plugin-react-` para React

@@ -710,7 +710,6 @@ createServer()
 
 ### server.fs.deny
 
-- **Experimental**
 - **Tipo:** `string[]`
 
   Lista de bloqueo para archivos sensibles que están restringidos a ser servidos por el servidor de desarrollo de Vite.
@@ -739,11 +738,11 @@ export default defineConfig({
 - **Por defecto:** `'modules'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#browser-compatibility)
 
-  Objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a los [navegadores con soporte de módulo ES nativo](https://caniuse.com/es6-module).
+  El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module) y [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import).
 
-  Otro valor especial es `'esnext'` - que asume el soporte nativo de importaciones dinámicas y transpilará lo menos posible:
+  Otro valor especial es `'esnext'`, el cual asume el soporte nativo de importaciones dinámicas y transpilará lo menos posible:
 
-  - Si la opción [`build.minify`](#build-minify) es `'terser'`, `'esnext'` se verá obligado a bajar a `'es2019'`.
+  - Si la opción [`build.minify`](#build-minify) es `'terser'`, `'esnext'` se verá obligado a bajar a `'es2021'`.
   - En otros casos, no realizará ninguna transpilación.
 
   La transformación se realiza con esbuild y el valor debe ser una [opción de destino de esbuild](https://esbuild.github.io/api/#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.

@@ -18,11 +18,11 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 ## Compatibilidad con navegadores
 
-- La configuración de compilación predeterminada va dirigida a navegadores que admiten tanto [ESM nativo a través de etiquetas script](https://caniuse.com/es6-module) como [importación dinámica de ESM nativo](https://caniuse.com/es6-module-dynamic-import). Los navegadores obsoletos pueden ser sorportados a través del [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial; consulta [Compilar en producción](./build) para más detalles.
+- La configuración de compilación predeterminada va dirigida a navegadores que admiten tanto [modulos ESM nativos](https://caniuse.com/es6-module) como [importación dinámica de ESM nativo](https://caniuse.com/es6-module-dynamic-import). Los navegadores obsoletos pueden ser sorportados a través del [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial; consulta [Compilar en producción](./build) para más detalles.
 
-## Probar Vite en línea
+## Probar Vite online
 
-Puedes probar Vite en línea en [StackBlitz](https://vite.new/). Éste ejecuta la configuración de compilación basada en Vite directamente en el navegador, por lo que es casi idéntica a la configuración local pero con la diferencia que no requiere que instales nada en tu máquina. Puedes navegar a `vite.new/{template}` para seleccionar qué marco de trabajo utilizar.
+Puedes probar Vite online en [StackBlitz](https://vite.new/). Éste ejecuta la configuración de compilación basada en Vite directamente en el navegador, por lo que es casi idéntica a la configuración local pero con la diferencia que no requiere que instales nada en tu máquina. Puedes navegar a `vite.new/{template}` para seleccionar qué marco de trabajo utilizar.
 
 Los ajustes preestablecidos de plantilla admitidos son:
 
@@ -145,4 +145,4 @@ Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link --global vite` (o el 
 
 ## Comunidad
 
-Si tienes preguntas o necesitas ayuda, comunícate con la comunidad en [Discord](https://discord.gg/4cmKdMfpU5) y en [Discusiones de Github](https://github.com/vitejs/vite/discussions).
+Si tienes preguntas o necesitas ayuda, comunícate con la comunidad en [Discord](https://chat.vitejs.dev) y en [Discusiones de Github](https://github.com/vitejs/vite/discussions).

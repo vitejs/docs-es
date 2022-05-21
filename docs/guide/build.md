@@ -4,11 +4,12 @@ Cuando sea el momento de implementar tu aplicación en producción, simplemente 
 
 ## Compatibilidad de navegadores
 
-El empaquetado de producción asume soporte para código JavaScript moderno. De forma predeterminada, Vite apunta a los navegadores que admiten la [etiqueta script de ESM nativo](https://caniuse.com/es6-module) y la [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import). Como referencia, Vite usa esta consulta [browserslist](https://github.com/browserslist/browserslist):
+El empaquetado de producción asume soporte para código JavaScript moderno. De forma predeterminada, Vite apunta a los navegadores que admiten [modulos ES nativo](https://caniuse.com/es6-module), la [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta):
 
-```
-defaults and supports es6-module and supports es6-module-dynamic-import, not opera > 0, not samsung > 0, not and_qq > 0
-```
+- Chrome >=87
+- Firefox >=78
+- Safari >=13
+- Edge >=88
 
 Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/#build-target), donde el objetivo más bajo es `es2015`.
 
@@ -43,11 +44,7 @@ module.exports = defineConfig({
 
 Por ejemplo, puedes especificar varias salidas de Rollup con complementos que solo son aplicados durante la compilación.
 
-<!-- ## Chunking Strategy
-
-You can configure how chunks are split using `build.rollupOptions.output.manualChunks` (see [Rollup docs](https://rollupjs.org/guide/en/#outputmanualchunks)). Until Vite 2.8, the default chunking strategy divided the chunks into `index` and `vendor`. It is a good strategy for some SPAs, but it is hard to provide a general solution for every Vite target use case. From Vite 2.9, `manualChunks` is no longer modified by default. You can continue to use the Split Vendor Chunk strategy by adding the `splitVendorChunkPlugin` in your config file: -->
-
-## Estrategia de fragmentación
+## Estrategia de división
 
 Puedes configurar cómo se dividen los fragmentos utilizando `build.rollupOptions.output.manualChunks` (consulta [Documentos de resumen](https://rollupjs.org/guide/en/#outputmanualchunks)). Hasta Vite 2.8, la estrategia de fragmentación predeterminada dividía los fragmentos en "index" y "vendor". Es una buena estrategia para algunos SPA, pero es difícil proporcionar una solución general para cada caso de uso de destino de Vite. A partir de Vite 2.9, `manualChunks` ya no se modifica de forma predeterminada. Puedes continuar usando la estrategia Split Vendor Chunk agregando `splitVendorChunkPlugin` en el archivo de configuración:
 

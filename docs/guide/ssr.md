@@ -170,7 +170,7 @@ Nuestros scripts en `package.json` se verán así:
 
 Ten en cuenta el indicador `--ssr` que indica que se trata de una compilación SSR. También debe especificar la entrada SSR.
 
-Luego, en `server.js` necesitamos agregar algo de lógica específica de producción al verificar `process.env.NODE_ENV`:
+Luego, en `server.js` necesitamos agregar algo de lógica específica de producción al verificar ``process.env.`<wbr>`NODE_ENV`:
 
 - En lugar de leer la raíz `index.html`, usa `dist/client/index.html` como plantilla, ya que contiene los enlaces de recursos correctos a la compilación del cliente.
 

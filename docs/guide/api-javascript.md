@@ -30,9 +30,13 @@ const { createServer } = require('vite')
 })()
 ```
 
+::tip NOTA
+Al usar `createServer` y `build` en el mismo proceso de Node.js, ambas funciones se basan en `process.env.`<wbr>`NODE_ENV` para funcionar correctamente, lo que también depende de la opción de configuración `mode`. Para evitar un comportamiento conflictivo, configura `process.env.`<wbr>`NODE_ENV` o el `mode` de las dos APIs en `development`. De lo contrario, puedes generar un proceso secundario para ejecutar las APIs por separado.
+:::
+
 ## `InlineConfig`
 
-La interfaz `InlineConfig` extiende `UserConfig` con propiedades adicionales:
+La interfaz `InlineConfig` extiende a `UserConfig` con propiedades adicionales:
 
 - `configFile`: Especifica el archivo de configuración a utilizar. Si no se establece, Vite tratará de resolver automáticamente uno de la raíz del proyecto. Establezca `false` para desactivar la resolución automática.
 - `envFile`: Establece a `false` para desactivar los archivos `.env`.
@@ -147,8 +151,6 @@ const { build } = require('vite')
 ```
 
 ## `preview`
-
-**Experimental**
 
 **Firma de Tipo:**
 

@@ -1,5 +1,3 @@
-<!-- # Backend Integration -->
-
 # Integración al Backend
 
 :::tip Nota
