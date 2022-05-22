@@ -158,7 +158,7 @@ Este script parchea las dependencias usando el protocolo `file:` para que coinci
 
 Puedes configurar la variable de entorno `DEBUG` para activar los registros de depuración. Por ejemplo, `DEBUG="invitar:resolver"`. Para ver todos los registros de depuración, puedes configurar `DEBUG="vite:*"`, pero ten en cuenta que será bastante "ruidoso". Puedes ejecutar `grep -r "createDebugger('vite:" packages/vite/src/` para ver una lista de los ámbitos de depuración disponibles.
 
-## Directrices de Pull Requests
+## Directrices de solicitudes de cambios
 
 - Has checkout de una rama temporal desde una rama base, por ejemplo, `main`, y has merge de nuevo a esa rama.
 
