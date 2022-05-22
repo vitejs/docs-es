@@ -4,7 +4,7 @@
 
 Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Algunas variables integradas están disponibles en todos los casos:
 
-- **`import.meta.env.MODE`**: {string} el [modo](#modes) en el que se ejecuta la aplicación.
+- **`import.meta.env.MODE`**: {string} el [modo](#modos) en el que se ejecuta la aplicación.
 
 - **`import.meta.env.BASE_URL`**: {string} la URL base desde la que se sirve la aplicación. Esto está determinado por la [opción de configuración `base`](/config/#base).
 

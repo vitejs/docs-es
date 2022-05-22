@@ -1039,7 +1039,7 @@ export default defineConfig({
   - También se omite `external`, usa la opción `optimizeDeps.exclude` de Vite
   - `plugins` se fusionan con el complemento de dependencia de Vite
 
-## SSR Options
+## Opciones de SSR
 
 :::warning Experimental
 Las opciones de SSR pueden ajustarse en versiones menores.
