@@ -1,4 +1,4 @@
-# JavaScript API
+# API de JavaScript
 
 Las APIs de JavaScript de Vite están totalmente tipificadas, y se recomienda utilizar TypeScript o habilitar la comprobación de tipos JS en Visual Studio Code para aprovechar el intellisense y la validación.
 
@@ -30,7 +30,7 @@ const { createServer } = require('vite')
 })()
 ```
 
-::tip NOTA
+:::tip NOTA
 Al usar `createServer` y `build` en el mismo proceso de Node.js, ambas funciones se basan en `process.env.`<wbr>`NODE_ENV` para funcionar correctamente, lo que también depende de la opción de configuración `mode`. Para evitar un comportamiento conflictivo, configura `process.env.`<wbr>`NODE_ENV` o el `mode` de las dos APIs en `development`. De lo contrario, puedes generar un proceso secundario para ejecutar las APIs por separado.
 :::
 
@@ -82,7 +82,7 @@ interface ViteDevServer {
    */
   moduleGraph: ModuleGraph
   /**
-   * Resolver, cargar y transformar programáticamente una URL y obtener el resultado
+   * Resuelve, carga y transforma programáticamente una URL y obtiene el resultado
    * sin pasar por el pipeline de peticiones http.
    */
   transformRequest(

@@ -1,7 +1,7 @@
 # Complementos
 
 :::tip NOTA
-Vite está pensado para proveer un soporte listo para usar para los patrones de desarrollo web comunes. Antes de buscar algún complemento para Vite o de Rollup , dale un vistazo a la [Guía de características](../guide/features.md). Muchos de los casos en los que se necesita un complemento de Rollup ya están cubiertos en Vite.
+Vite está pensado para proveer un soporte listo para usar para los patrones de desarrollo web comunes. Antes de buscar algún complemento para Vite o de Rollup , dale un vistazo a la [Guía de funcionalidades](../guide/features.md). Muchos de los casos en los que se necesita un complemento de Rollup ya están cubiertos en Vite.
 :::
 
 Revisa [Uso de complementos](../guide/using-plugins.md) para más información sobre cómo utilizarlos.
@@ -26,8 +26,8 @@ Revisa [Uso de complementos](../guide/using-plugins.md) para más información s
 
 ## Complementos de la Comunidad
 
-Dale un vistazo a [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) - también puedes enviar un PR para enlistar tus complementos ahí.
+Dale un vistazo a [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). También puedes enviar una solicitud de cambio para enlistar tus complementos ahí.
 
 ## Complementos de Rollup
 
-Los [Complementos de Vite](../guide/api-plugin) son una extensión a la interfaz de los Complementos de Rollup. Dale un vistazo a la [Sección de compatibilidad para complementos de Rollup](../guide/api-plugin#rollup-plugin-compatibility) para más información.
+Los [Complementos de Vite](../guide/api-plugin) son una extensión a la interfaz de los Complementos de Rollup. Dale un vistazo a la [Sección de compatibilidad para complementos de Rollup](../guide/api-plugin#compatibilidad-de-complementos-rollup) para más información.

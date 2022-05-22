@@ -1,4 +1,4 @@
-# API HMR
+# API de HMR
 
 :::tip Nota
 Esta es la API cliente de HMR. Para manejar actualizaciones HMR en los complementos, dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate).
@@ -134,4 +134,4 @@ Los eventos HMR personalizados también se pueden enviar desde complementos. Dal
 
 Envía eventos personalizados al servidor de desarrollo de Vite.
 Si se llama antes de conectarse, los datos se almacenarán en búfer y se enviarán una vez que se establezca la conexión.
-Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#client-server-communication) para obtener más detalles.
+Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#comunicacion-cliente-servidor) para obtener más detalles.

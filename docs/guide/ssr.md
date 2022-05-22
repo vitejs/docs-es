@@ -1,7 +1,7 @@
 # Server Side Rendering
 
 :::warning Experimental
-La compatibilidad con SSR aún es experimental y es posible que encuentre errores y casos de uso no admitidos. Proceda bajo su propio riesgo.
+La compatibilidad con SSR aún es experimental y es posible que encuentres errores y casos de uso no admitidos. Procede bajo tu propio riesgo.
 :::
 
 :::tip Nota
@@ -15,7 +15,7 @@ Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de tra
 :::
 
 :::tip Ayuda
-Si tiene preguntas, la comunidad suele ser útil en [el canal #ssr de Vite Discord](https://discord.gg/PkbxgzPhJv).
+Si tienes preguntas, la comunidad suele ser útil en [el canal #ssr del Discord de Vite](https://discord.gg/PkbxgzPhJv).
 :::
 
 ## Proyectos de ejemplo
@@ -25,7 +25,7 @@ Vite proporciona soporte integrado para la representación del lado del servidor
 - [Vue 3](https://github.com/vitejs/vite/tree/main/playground/ssr-vue)
 - [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react)
 
-## Estructura de origen
+## Estructura del código fuente
 
 Una aplicación SSR típica tendrá la siguiente estructura de archivo fuente:
 
@@ -45,7 +45,7 @@ Una aplicación SSR típica tendrá la siguiente estructura de archivo fuente:
 <script type="module" src="/src/entry-client.js"></script>
 ```
 
-Puede usar cualquier placeholder que prefieras en lugar de `<!--ssr-outlet-->`, siempre que se pueda reemplazar con precisión.
+Puedes usar cualquier placeholder que prefieras en lugar de `<!--ssr-outlet-->`, siempre que se pueda reemplazar con precisión.
 
 ## Lógica condicional
 
@@ -53,7 +53,7 @@ Si necesitas realizar una lógica condicional basada en SSR vs cliente, puedes u
 
 ```js
 if (import.meta.env.SSR) {
-  // ... server only logic
+  // ... logica de solo servidor
 }
 ```
 
@@ -82,11 +82,11 @@ async function createServer() {
   const vite = await createViteServer({
     server: { middlewareMode: 'ssr' }
   })
-  // use vite's connect instance as middleware
+  // Usa la instancia de Connect de Vite como middleware
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
-    // serve index.html - we will tackle this next
+    // serve index.html - Se modificará despues
   })
 
   app.listen(5173)
@@ -122,7 +122,7 @@ app.use('*', async (req, res) => {
 
     // 4. renderiza el HTML de la aplicación. Esto asume el `render` exportado de entry-server.js
     // la función llama a las API de SSR del marco apropiado,
-    //    p.ej. ReactDOMServer.renderToString()
+    //    por ejemplo, ReactDOMServer.renderToString()
     const appHtml = await render(url)
 
     // 5. Inyecta el HTML generado por la aplicación en la plantilla.
@@ -168,7 +168,7 @@ Nuestros scripts en `package.json` se verán así:
 }
 ```
 
-Ten en cuenta el indicador `--ssr` que indica que se trata de una compilación SSR. También debe especificar la entrada SSR.
+Ten en cuenta el indicador `--ssr` que indica que se trata de una compilación SSR. También debes especificar la entrada SSR.
 
 Luego, en `server.js` necesitamos agregar algo de lógica específica de producción al verificar ``process.env.`<wbr>`NODE_ENV`:
 
@@ -210,20 +210,20 @@ Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipaci
 
 ## SSR Externos
 
-Muchas dependencias envían archivos ESM y CommonJS. Cuando se ejecuta SSR, una dependencia que proporciona compilaciones CommonJS se puede "externalizar" del sistema de módulo/transformación SSR de Vite para acelerar tanto el desarrollo como la compilación. Por ejemplo, en lugar de incorporar la versión ESM preempaquetada de React y luego transformarla de nuevo para que sea compatible con Node.js, es más eficiente simplemente `require('react')`. También mejora en gran medida la velocidad de creación del paquete SSR.
+Muchas dependencias envían archivos ESM y CommonJS. Cuando se ejecuta SSR, una dependencia que proporciona compilaciones CommonJS se puede "externalizar" del sistema de módulo/transformación SSR de Vite para acelerar tanto el desarrollo como la compilación. Por ejemplo, en lugar de incorporar la versión ESM preempaquetada de React y luego transformarla de nuevo para que sea compatible con Node.js, es más eficiente simplemente escribir `require('react')`. También mejora en gran medida la velocidad de creación del paquete SSR.
 
 Vite realiza una externalización automática de SSR basada en las siguientes heurísticas:
 
-- Si el punto de entrada de ESM resuelto de una dependencia y su punto de entrada de Node predeterminado son diferentes, su entrada de Node predeterminada es probablemente una compilación CommonJS que se puede externalizar. Por ejemplo, `vue` se externalizará automáticamente porque incluye compilaciones de ESM y CommonJS.
+- Si la entrada ESM resuelta de una dependencia y la entrada de Node predeterminado son diferentes, la entrada de Node predeterminada es probablemente una compilación CommonJS que se puede externalizar. Por ejemplo, `vue` se externalizará automáticamente porque incluye compilaciones de ESM y CommonJS.
 
-- De lo contrario, Vite verificará si el punto de entrada del paquete contiene una sintaxis de ESM válida; de lo contrario, es probable que el paquete sea CommonJS y se externalizará. Como ejemplo, `react-dom` se externalizará automáticamente porque solo especifica una sola entrada que está en formato CommonJS.
+- De lo contrario, Vite verificará si la entrada del paquete contiene una sintaxis de ESM válida; de lo contrario, es probable que el paquete sea CommonJS y se externalizará. Como ejemplo, `react-dom` se externalizará automáticamente porque solo especifica una sola entrada que está en formato CommonJS.
 
-Si esta heurística conduce a errores, puede ajustar manualmente los SSR externos usando las opciones de configuración `ssr.external` y `ssr.noExternal`.
+Si esta heurística conduce a errores, puedes ajustar manualmente los SSR externos usando las opciones de configuración `ssr.external` y `ssr.noExternal`.
 
-En el futuro, es probable que esta heurística mejore para detectar si el proyecto tiene `type: "module"` habilitado, de modo que Vite también pueda externalizar las dependencias que envían compilaciones de ESM compatibles con Node al importarlas a través de `import()` dinámica durante SSR .
+En el futuro, es probable que esta heurística mejore para detectar si el proyecto tiene habilitado`type: "module"`, de modo que Vite también pueda externalizar las dependencias que envían compilaciones de ESM compatibles con Node al importarlas a través de un `import()` dinámico durante SSR .
 
 :::warning Trabajando con Alias
-Si has configurado alias que redirige un paquete a otro, es posible que desees crear un alias para los paquetes `node_modules` reales para que funcione para las dependencias externalizadas de SSR. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases) admiten la creación de alias a través del prefijo `npm:`.
+Si has configurado aliases que redirigen un paquete a otro, es posible que desees crear un alias para los paquetes `node_modules` reales para que funcione para las dependencias externalizadas de SSR. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases) admiten la creación de alias a través del prefijo `npm:`.
 :::
 
 ## Lógica de complemento específica de SSR
@@ -242,24 +242,24 @@ export function mySSRPlugin() {
     name: 'my-ssr',
     transform(code, id, options) {
       if (options?.ssr) {
-        // perform ssr-specific transform...
+        // realizar transformaciones especificas a ssr...
       }
     }
   }
 }
 ```
 
-El objeto de opciones en ``load` y `transform` es opcional, el resumen no está usando este objeto actualmente, pero puede ampliar estos hooks con metadatos adicionales en el futuro.
+El objeto de opciones en `load` y `transform` es opcional, Rollup no está usando este objeto actualmente, pero puedes ampliar estos hooks con metadatos adicionales en el futuro.
 
 :::tip Nota
 Antes de Vite 2.7, esto se informaba a complementos con un parámetro posicional `ssr` en lugar de usar el objeto `options`. Todos los marcos y complementos principales están actualizados, pero es posible que encuentre publicaciones obsoletas utilizando la API anterior.
 :::
 
-## Objetivo SSR
+## Destino de SSR
 
-El destino predeterminado para la compilación de SSR es un entorno de node, pero también puede ejecutar el servidor en un Web Worker. La resolución de entrada de paquetes es diferente para cada plataforma. Puede configurar el objetivo para que sea Web Worker utilizando `ssr.target` establecido en `'webworker'`.
+El destino predeterminado para la compilación de SSR es un entorno de node, pero también puedes ejecutar el servidor en un Web Worker. La resolución de entrada de paquetes es diferente para cada plataforma. Puedes configurar el objetivo para que sea Web Worker utilizando `ssr.target` establecido en `'webworker'`.
 
-## Paquete SSR
+## Paquete de SSR
 
 En algunos casos, como los tiempos de ejecución de `webworker`, es posible que desees empaquetar tu compilación SSR en un solo archivo JavaScript. Puedes habilitar este comportamiento configurando `ssr.noExternal` en `true`. Esto hará dos cosas:
 

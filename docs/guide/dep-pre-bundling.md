@@ -65,7 +65,7 @@ Debido a las diferencias en la resolución de dependencias vinculadas, las depen
 
 ## Personalizando el Comportamiento
 
-La heurística de descubrimiento de dependencia predeterminada puede no ser siempre deseable. En los casos en los que desees incluir/excluir dependencias explícitamente de la lista, utiliza las [opciones de configuración de `optimizeDeps`](/config/#dep-optimization-options).
+La heurística de descubrimiento de dependencia predeterminada puede no ser siempre deseable. En los casos en los que desees incluir/excluir dependencias explícitamente de la lista, utiliza las [opciones de configuración de `optimizeDeps`](/config/#opciones-de-optimizedeps).
 
 Un caso de uso típico para `optimizeDeps.include` o `optimizeDeps.exclude` es cuando tienes una importación que no se puede descubrir directamente en el código fuente. Por ejemplo, tal vez la importación se cree como resultado de una transformación de complemento. Esto significa que Vite no podrá descubrir la importación en el escaneo inicial; solo podrá descubrirla después de que el navegador solicite el archivo y lo transforme. Esto hará que el servidor se vuelva a empaquetar inmediatamente después del inicio del servidor.
 

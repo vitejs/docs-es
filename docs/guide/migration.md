@@ -12,7 +12,7 @@
 
 - Las [opciones relacionadas con CSS](/config/#css-modules) ahora están anidadas bajo `css`.
 
-- Todas las [opciones específicas de compilación](/config/#build-options) ahora están anidadas en `build`.
+- Todas las [opciones específicas de compilación](/config/#opciones-de-build) ahora están anidadas en `build`.
 
   - `rollupInputOptions` y `rollupOutputOptions` se reemplazan por [`build.rollupOptions`](/config/#build-rollupoptions).
   - `esbuildTarget` ahora es [`build.target`](/config/#build-target).
@@ -23,9 +23,8 @@
     - `emitAssets`
     - `emitIndex`
     - `shouldPreload`
-    - `configureBuild`
 
-- Todas las [opciones específicas del servidor](/config/#server-options) ahora están anidadas bajo
+- Todas las [opciones específicas del servidor](/config/#opciones-de-server) ahora están anidadas bajo
   `server`.
 
   - `hostname` ahora es [`server.host`](/config/#server-host).

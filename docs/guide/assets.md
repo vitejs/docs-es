@@ -1,6 +1,6 @@
 # Gestión de recursos estáticos
 
-- Relacionado: [Ruta base pública](./build#public-base-path)
+- Relacionado: [Ruta base pública](./build#ruta-base-publica)
 - Relacionado: [Opción de configuración `assetsInclude`](/config/#assetsinclude)
 
 ## Importar recursos como URL

@@ -1,4 +1,4 @@
-# Integración al Backend
+# Integración de Backend
 
 :::tip Nota
 Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
@@ -12,17 +12,17 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    // vite.config.js
    export default defineConfig({
      build: {
-       // generate manifest.json in outDir
+       // genera el archivo manifest.json en outDir
        manifest: true,
        rollupOptions: {
-         // overwrite default .html entry
+         // sobreescribe la entrada por defecto .html
          input: '/path/to/main.js'
        }
      }
    })
    ```
 
-   Si no has desactivado el [polyfill de precarga de modulos](/config/#build-polyfillmodulepreload), tambien necesitarás importar el polyfill en tu entrada.
+   Si no has desactivado el [polyfill de precarga de modulos](/config/#build-polyfillmodulepreload), tambien necesitarás importarlo en tu entrada.
 
    ```js
    // agrega esto en el archivo de entrada de tu app
@@ -39,9 +39,9 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    Para servir correctamente recursos, tienes dos opciones:
 
    - Asegúrarse de que el servidor esté configurado para enviar solicitudes de recursos estáticos al servidor de Vite.
-   - Configurar [`server.origin`](https://vitejs.dev/config/#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor back-end en lugar de una ruta relativa.
+   - Configurar [`server.origin`](https://vitejs.dev/config/#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor backend en lugar de una ruta relativa.
 
-   Esto es necesario para que los recrusos, como imágenes, se carguen correctamente.
+   Esto es necesario para que los recursos, como imágenes, se carguen correctamente.
 
    Ten en cuenta que si estas usando React con `@vitejs/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo:
 
@@ -80,10 +80,10 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    ```
 
    - El manifest tiene una estructura `Record<name, chunk>`.
-   - Para chunks de entrada fija o dinámica, la key es la ruta src relativa de la raíz del proyecto.
-   - Los chunks contendrán información en sus importaciones estaticas y dinamicas (ambos son keys que mapean al correspondiente chunk en el manifest), y tambien su correspondiente css y archivo de recurso estatico (si los hay).
+   - Para fragmentos de entrada fija o dinámica, la key es la ruta src relativa de la raíz del proyecto.
+   - Los fragmentos contendrán información en sus importaciones estaticas y dinamicas (ambos son keys que mapean al correspondiente fragmento en el manifest), y tambien su correspondiente css y archivo de recurso estatico (si los hay).
 
-   Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash (nota: la sintaxis aquí es meramente explicativa, sustituye con el lenguage de plantilla del servidor.)
+   Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash (nota: la sintaxis aquí es meramente explicativa, reemplazalo con el lenguage de plantilla del servidor.)
 
    ```html
    <!-- if production -->

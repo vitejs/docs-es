@@ -18,11 +18,11 @@ Lo anterior arrojará un error en el navegador. Vite detectará tales importacio
 
 **Las dependencias están fuertemente almacenadas en caché**
 
-Vite almacena en caché las solicitudes de dependencia a través de encabezados HTTP, por lo que si deseas editar/depurar localmente una dependencia, sigue los pasos [aquí](./dep-pre-bundling#browser-cache).
+Vite almacena en caché las solicitudes de dependencia a través de encabezados HTTP, por lo que si deseas editar/depurar localmente una dependencia, sigue los pasos [aquí](./dep-pre-bundling#cache-de-navegador).
 
 ## Hot Module Replacement
 
-Vite proporciona una [HMR API](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
 
 Ten en cuenta que no necesitas configurarlos manualmente: cuando [creas una aplicación a través de `create-vite`](./), las plantillas seleccionadas ya las tendrán preconfiguradas.
 
@@ -75,7 +75,7 @@ Si migrar el codigo base a `"isolatedModules": true` es un esfuerzo arduo, es po
 
 ### Tipos de clientes
 
-Los tipos predeterminados de Vite son para su API Node.js. Para ajustar el entorno del código del lado del cliente en una aplicación Vite, agrega un archivo de declaración `d.ts`:
+Los tipos predeterminados de Vite son para su API de Node.js. Para ajustar el entorno del código del lado del cliente en una aplicación Vite, agrega un archivo de declaración `d.ts`:
 
 ```typescript
 /// <reference types="vite/client" />
@@ -94,8 +94,8 @@ Además, puedes agregar `vite/client` a `compilerOptions.types` de tu `tsconfig`
 Esto proporcionará los siguientes tipos de librerías:
 
 - Importaciones de recursos (por ejemplo, importar un archivo `.svg`)
-- Tipos para las [variables env](./env-and-mode#env-variables) inyectadas por Vite en `import.meta.env`
-- Tipos para la [HMR API](./api-hmr) en `import.meta.hot`
+- Tipos para las [variables de entorno](./env-and-mode#variables-de-entorno) inyectadas por Vite en `import.meta.env`
+- Tipos para la [API de HMR](./api-hmr) en `import.meta.hot`
 
 ## Vue
 
@@ -144,11 +144,11 @@ export default defineConfig({
 
 La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR. También puedes obtener el CSS procesado como una cadena o como exportación predeterminada del módulo.
 
-### Incrustación y rebase de`@import`
+### Incrustación y rebase de `@import`
 
 Vite está preconfigurado para admitir incrustaciones CSS de `@import` través de `postcss-import`. Los alias de Vite también se respetan para CSS `@import`. Además, todas las referencias de CSS `url()`, incluso si los archivos importados están en directorios diferentes, siempre se reorganizan automáticamente para garantizar la corrección.
 
-Los alias `@import` y el cambio de base de URL también son compatibles con los archivos Sass y Less (consulta los [preprocesadores CSS](#css-pre-processors)).
+Los alias `@import` y el cambio de base de URL también son compatibles con los archivos Sass y Less (consulta los [preprocesadores CSS](#preprocesadores-css)).
 
 ### PostCSS
 
@@ -297,7 +297,7 @@ const modules = {
 
 ### Formas de importación Glob
 
-`import.meta.glob` también admite la importación de archivos como cadenas (similar a la [importación de recursos como cadena](https://vitejs.dev/guide/assets.html#importing-asset-as-string)) con la sintaxis de [importación reflexiva](https://github.com/tc39/proposal-import-reflection):
+`import.meta.glob` también admite la importación de archivos como cadenas (similar a la [importación de recursos como cadena](./assets#importar-recursos-como-cadenas-de-texto)) con la sintaxis de [importación reflexiva](https://github.com/tc39/proposal-import-reflection):
 
 ```js
 const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
@@ -414,19 +414,19 @@ const modules = {
 Ten en cuenta que:
 
 - Esta es una característica exclusiva de Vite y no es un estándar web o ES.
-- Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [`resolve.alias` opción](/config/#resolve-alias)).
-- La coincidencia de glob se realiza a través de [`fast-glob`](https://github.com/mrmlnc/fast-glob) - Consulta la documentación de los [patrones de glob compatibles](https://github.com/mrmlnc/fast-glob#patrón-sintaxis).
+- Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [opción `resolve.alias`](/config/#resolve-alias)).
+- La coincidencia de glob se realiza a través de [`fast-glob`](https://github.com/mrmlnc/fast-glob) - Consulta la documentación de los [patrones de glob compatibles](https://github.com/mrmlnc/fast-glob#pattern-syntax).
 - También debes tener en cuenta que todos los argumentos en `import.meta.glob` deben **pasarse como literales**. NO puede usar variables o expresiones en ellos.
 
 ## Importación dinámica
 
-Similar a [importación de glob](#glob-import), Vite también admite la importación dinámica con variables.
+Similar a [importación de glob](#importaciones-glob), Vite también admite la importación dinámica con variables.
 
 ```ts
 const module = await import(`./dir/${file}.js`)
 ```
 
-Ten en cuenta que las variables solo representan nombres de archivo de un nivel de profundidad. Si `file` es `'foo/bar'`, la importación fallaría. Para un uso más avanzado, puede utilizar la función [importación de glob](#glob-import)
+Ten en cuenta que las variables solo representan nombres de archivo de un nivel de profundidad. Si `file` es `'foo/bar'`, la importación fallaría. Para un uso más avanzado, puede utilizar la función [importación de glob](#importaciones-glob)
 
 ## WebAssembly
 

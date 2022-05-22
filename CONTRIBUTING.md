@@ -169,11 +169,11 @@ Puedes configurar la variable de entorno `DEBUG` para activar los registros de d
 
 - Si corriges un error:
 
-  - Si estás resolviendo un problema especial, agrega `(fix #xxxx[,#xxxx])` (#xxxx es la identificación del problema) en el título del PR para obtener un mejor registro de publicación, por ejemplo `fix: update entities encoding/decoding (fix #3899)`.
-  - Proporciona una descripción detallada del error en el PR. Es preferible una demostración en vivo.
+  - Si estás resolviendo un problema especial, agrega `(fix #xxxx[,#xxxx])` (#xxxx es la identificación del problema) en el título de la solicitud de cambio para obtener un mejor registro de publicación, por ejemplo `fix: update entities encoding/decoding (fix #3899)`.
+  - Proporciona una descripción detallada del error en la solicitud de cambio. Es preferible una demostración en vivo.
   - Agrega la cobertura de prueba adecuada si corresponde.
 
-- Está bien tener varios commits pequeños mientras trabajas en el PR - GitHub puede combinarlos automáticamente antes de fusionarlos.
+- Está bien tener varios commits pequeños mientras trabajas en la solicitud de cambio - GitHub puede combinarlos automáticamente antes de fusionarlos.
 
 - ¡Asegúrate de pasar las pruebas!
 
@@ -234,7 +234,7 @@ Ya tenemos muchas opciones de configuración, y debemos evitar solucionar un pro
 
 Si deseas comenzar una traducción en tu idioma, ¡puede contribuir! Únete al [canal de #traducciones en Vite Land](https://chat.vitejs.dev) para discutir y coordinar con otros.
 
-Las documentaciones en inglés están integradas en el repositorio principal de Vite, para permitir que los contribuyentes trabajen en documentaciones, pruebas e implementación en el mismo PR. Las traducciones se realizan clonando el repositorio principal.
+Las documentaciones en inglés están integradas en el repositorio principal de Vite, para permitir que los contribuyentes trabajen en documentaciones, pruebas y despliegue en la misma solicitud de cambio. Las traducciones se realizan clonando el repositorio principal.
 
 ### Cómo iniciar un repositorio de traducción
 

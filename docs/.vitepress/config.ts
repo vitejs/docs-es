@@ -11,7 +11,6 @@ export default defineConfig({
     docsBranch: 'main',
     editLinks: true,
     editLinkText: 'Sugiere cambios para esta página',
-
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
       indexName: 'vitejs',
@@ -115,11 +114,11 @@ export default defineConfig({
               link: '/guide/using-plugins'
             },
             {
-              text: 'Preempaquetado de dependencia',
+              text: 'Preempaquetado de dependencias',
               link: '/guide/dep-pre-bundling'
             },
             {
-              text: 'Manejo de recursos estáticos',
+              text: 'Gestión de recursos estáticos',
               link: '/guide/assets'
             },
             {
@@ -156,19 +155,19 @@ export default defineConfig({
           text: 'APIs',
           children: [
             {
-              text: 'Plugin API',
+              text: 'API de complementos',
               link: '/guide/api-plugin'
             },
             {
-              text: 'HMR API',
+              text: 'API de HMR',
               link: '/guide/api-hmr'
             },
             {
-              text: 'JavaScript API',
+              text: 'API de JavaScript',
               link: '/guide/api-javascript'
             },
             {
-              text: 'Config Reference',
+              text: 'Referencia de Configuración',
               link: '/config/'
             }
           ]

@@ -8,14 +8,14 @@ title: Configurando Vite
 
 ### Resolución del archivo de configuración
 
-Al ejecutar `vite` desde la línea de comandos, Vite intentará automáticamente resolver un archivo de configuración llamado `vite.config.js` dentro de la [raíz del proyecto](/guide/#index-html-and-project-root).
+Al ejecutar `vite` desde la línea de comandos, Vite intentará automáticamente resolver un archivo de configuración llamado `vite.config.js` dentro de la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto).
 
 El archivo de configuración más básico se ve así:
 
 ```js
 // vite.config.js
 export default {
-  // config options
+  // opciones de configuración
 }
 ```
 
@@ -145,7 +145,7 @@ export default defineConfig(({ command, mode }) => {
   - URL completa, ejemplo, `https://foo.com/`
   - Cadena vacía o `./` (para implementación incrustada)
 
-  Consulta [Ruta base pública](/guide/build#public-base-path) para obtener más detalles.
+  Consulta [Ruta base pública](/guide/build#ruta-base-publica) para obtener más detalles.
 
 ### mode
 
@@ -215,7 +215,7 @@ export default defineConfig(({ command, mode }) => {
 
   Definir `publicDir` como `false` deshabilita esta característica.
 
-  Consulta [La carpeta `public`](/guide/assets#the-public-directory) para obtener más detalles.
+  Consulta [La carpeta `public`](/guide/assets#la-carpeta-public) para obtener más detalles.
 
 ### cacheDir
 
@@ -448,7 +448,7 @@ export default defineConfig(({ command, mode }) => {
 
   El directorio desde el que se cargan los archivos `.env`. Puede ser una ruta absoluta o una ruta relativa a la raíz del proyecto.
 
-  Entra [aquí](/guide/env-and-mode#env-files) para obtener más información sobre los archivos de entorno.
+  Entra [aquí](/guide/env-and-mode#archivos-env) para obtener más información sobre los archivos de entorno.
 
 ### envPrefix
 
@@ -573,7 +573,7 @@ export default defineConfig(({ command, mode }) => {
 ### server.force
 
 - **Tipo:** `boolean`
-- **Relacionado:** [Preempaquetado de dependencia](/guide/dep-pre-bundling)
+- **Relacionado:** [Preempaquetado de dependencias](/guide/dep-pre-bundling)
 
   Colocalo en `true` para forzar el preempaquetado de dependencias.
 
@@ -623,7 +623,7 @@ export default defineConfig(({ command, mode }) => {
   - `'ssr'` deshabilitará la propia lógica de servicio de HTML de Vite para que sirvas `index.html` manualmente.
   - `'html'` habilitará la propia lógica de servicio HTML de Vite.
 
-- **Relacionado:** [SSR - Configuración del servidor de desarrollo](/guide/ssr#setting-up-the-dev-server)
+- **Relacionado:** [SSR - Configuración del servidor de desarrollo](/guide/ssr#configuracion-del-servidor-de-desarrollo)
 
 - **Ejemplo:**
 
@@ -638,7 +638,7 @@ async function createServer() {
   const vite = await createViteServer({
     server: { middlewareMode: 'ssr' }
   })
-  // Use la instancia de conexión de vite como middleware
+  // Usa la instancia de conexión de vite como middleware
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
@@ -670,13 +670,13 @@ createServer()
 
   Restringe los archivos que podrían servirse a través de `/@fs/`. Cuando `server.fs.strict` se coloca en `true`, el acceso a archivos fuera de esta lista de directorios que no se importaron de un archivo permitido resultará en un 403.
 
-  Vite buscará la raíz del potencial espacio de trabajo y la usará por defecto. Un espacio de trabajo válido cumple con las siguientes condiciones; de lo contrario, se recurrirá a la [raíz del proyecto](/guide/#index-html-and-project-root).
+  Vite buscará la raíz del potencial espacio de trabajo y la usará por defecto. Un espacio de trabajo válido cumple con las siguientes condiciones; de lo contrario, se recurrirá a la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto).
 
   - contiene el campo `workspaces` en `package.json`
   - contiene uno de los siguientes archivos
     - `pnpm-workspace.yaml`
 
-  Acepta una ruta para especificar la raíz del espacio de trabajo personalizado. Podría ser una ruta absoluta o una ruta relativa a la [raíz del proyecto](/guide/#index-html-and-project-root). Por ejemplo:
+  Acepta una ruta para especificar la raíz del espacio de trabajo personalizado. Podría ser una ruta absoluta o una ruta relativa a la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto). Por ejemplo:
 
   ```js
   export default defineConfig({
@@ -736,7 +736,7 @@ export default defineConfig({
 
 - **Tipo:** `string | string[]`
 - **Por defecto:** `'modules'`
-- **Relacionado:** [Compatibilidad de navegadores](/guide/build#browser-compatibility)
+- **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
   El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module) y [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import).
 
@@ -762,14 +762,14 @@ export default defineConfig({
   import 'vite/modulepreload-polyfill'
   ```
 
-  Nota: el polyfill **no** se aplica al [Modo Librería](/guide/build#library-mode). Si necesitas que se soporten navegadores sin importación dinámica nativa, probablemente deberías evitar usarlo en tu librería.
+  Nota: el polyfill **no** se aplica al [Modo Librería](/guide/build#modo-libreria). Si necesitas que se soporten navegadores sin importación dinámica nativa, probablemente deberías evitar usarlo en tu librería.
 
 ### build.outDir
 
 - **Tipo:** `string`
 - **Por defecto:** `dist`
 
-  Especifica el directorio de salida (relativo a [raíz del proyecto](/guide/#index-html-and-project-root)).
+  Especifica el directorio de salida (relativo a [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto)).
 
 ### build.assetsDir
 
@@ -835,14 +835,14 @@ export default defineConfig({
 ### build.dynamicImportVarsOptions
 
 - **Tipo:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
-- **Relacionado:** [Dynamic Import](/guide/features#dynamic-import)
+- **Relacionado:** [Importado dinámico](/guide/features#importacion-dinamica)
 
   Opciones para [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
 
 ### build.lib
 
 - **Tipo:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat) => string) }`
-- **Relacionado:** [Modo Librería](/guide/build#library-mode)
+- **Relacionado:** [Modo Librería](/guide/build#modo-libreria)
 
   Compilar como una librería. Se requiere `entry` ya que la librería no puede usar HTML como entrada. `name` es la variable global expuesta y se requiere cuando `formats` incluye `'umd'` o `'iife'`. Por defecto los `formats` son `['es', 'umd']`. `fileName` es el nombre de la salida del archivo del paquete, por defecto `fileName` es la opción de nombre del package.json, también se puede definir como una función que toma el `format` como argumento.
 
@@ -850,7 +850,7 @@ export default defineConfig({
 
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
-- **Relacionado:** [Integración al backend](/guide/backend-integration)
+- **Relacionado:** [Integración del backend](/guide/backend-integration)
 
   Cuando se coloca en `true`, la compilación también generará un archivo `manifest.json` que contiene una asignación de nombres de archivo de recursos sin hash a sus versiones hash, que luego puede ser utilizado por un marco de trabajo orientado a servidor para representar los enlaces de recursos correctos.
 
@@ -993,7 +993,7 @@ export default defineConfig({
 
 ## Opciones de optimizeDeps
 
-- **Relacionado:** [Preempaquetado de dependencia](/guide/dep-pre-bundling)
+- **Relacionado:** [Preempaquetado de dependencias](/guide/dep-pre-bundling)
 
 ### optimizeDeps.entries
 
@@ -1045,7 +1045,7 @@ export default defineConfig({
 Las opciones de SSR pueden ajustarse en versiones menores.
 :::
 
-- **Relacionado:** [SSR Externos](/guide/ssr#ssr-externals)
+- **Relacionado:** [SSR Externos](/guide/ssr#ssr-externos)
 
 ### ssr.external
 

@@ -42,7 +42,7 @@ Vite trata el CSS como un elemento de primera clase en el gráfico de módulos y
 
 - **Mejora del resolvedor de rutas**: El manejo de rutas con `@import` y `url()` es mejorado con el resolvedor de Vite para respetar los alias y las dependencias de npm.
 - **Rebasado de URL**: Las rutas con `url()` son automáticamente resueltas independientemente de donde sean importadas.
-- **División de código CSS**: Un chunk de cádigo JS dividido, también emite un archivo CSS correspondiente, el cual es automáticamente cargado en paralelo junto al chunk de JS cuando es requerido.
+- **División de código CSS**: Un fragmento de código JS dividido, también emite un archivo CSS correspondiente, el cual es automáticamente cargado en paralelo junto al fragmento de JS cuando es requerido.
 
 ### Soporte para renderizado del lado del servidor (SSR)
 

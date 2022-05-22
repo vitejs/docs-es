@@ -44,7 +44,7 @@ Una vez experimentes lo rápido que es Vite, dudamos mucho que estés dispuesto 
 
 Aunque el ESM nativo ahora es ampliamente compatible, distribuir ESM desempaquetado en producción sigue siendo ineficiente (incluso con HTTP/2) debido a las rondas de peticiones adicionales causadas ​​por importaciones anidadas. Para obtener el rendimiento óptimo de carga en producción, aún sigue siendo mejor empaquetar tu código con tree-shaking, lazy-loading y división de fragmentos comunes (para un mejor almacenamiento en caché).
 
-Garantizar un resultado óptimo y una coherencia de comportamiento entre el servidor de desarrollo y la compilación en producción no es fácil. Esta es la razón por la que Vite tiene disponible un [comando de compilación](./build) preconfigurado que incorpora muchas [optimizaciones de rendimiento](./features#build-optimizations) listas para usar.
+Garantizar un resultado óptimo y una coherencia de comportamiento entre el servidor de desarrollo y la compilación en producción no es fácil. Esta es la razón por la que Vite tiene disponible un [comando de compilación](./build) preconfigurado que incorpora muchas [optimizaciones de rendimiento](./features#optimizaciones-de-compilacion) listas para usar.
 
 ## ¿Por qué no empaquetar con esbuild?
 

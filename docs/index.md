@@ -21,7 +21,7 @@ features:
     details: Interfaz de complemento para superconjuntos de Rollup compartida entre dev y build.
   - title: 🔑 APIs completamente tipadas
     details: APIs programáticas flexibles con tipado completo en TypeScript.
-footer: Licenciado con MIT | Derechos Reservados © 2019 - presente Evan You & colaboradores de Vite
+footer: Licenciado con MIT | Derechos Reservados © 2019 - actualidad Evan You & colaboradores de Vite
 ---
 
 <div class="frontpage sponsors">

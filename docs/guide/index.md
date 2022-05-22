@@ -8,9 +8,9 @@
 
 Vite (palabra en francés para "rápido", pronunciado como `/vit/`<button style="border:none;padding:3px;border-radius:4px" id="play-vite-audio" onclick="document.getElementById('vite-audio').play();"><img src="/voice.svg" height="15"></button>, como "veet") es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
 
-- Un servidor de desarrollo que proporciona [mejoras enriquecidas de funcionalidades](./features) sobre [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), por ejemplo [Hot Module Replacement (HMR)](./features#hot-module-replacement) extremadamente rápido.
+- Un servidor de desarrollo que proporciona [mejoras funcionalidades enriquecidas](./features) sobre [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), por ejemplo [Hot Module Replacement (HMR)](./features#hot-module-replacement) extremadamente rápido.
 
-- Un comando de compilación que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar activos estáticos altamente optimizados para producción.
+- Un comando de compilación que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar recursos estáticos altamente optimizados para producción.
 
 Vite es dogmático y viene con configuraciones predeterminadas listas para usar, pero también es altamente extensible a través de sus [API de complementos](./api-plugin) y [API de JavaScript](./api-javascript) con soporte completo de tipado.
 
@@ -18,7 +18,7 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 ## Compatibilidad con navegadores
 
-- La configuración de compilación predeterminada va dirigida a navegadores que admiten tanto [modulos ESM nativos](https://caniuse.com/es6-module) como [importación dinámica de ESM nativo](https://caniuse.com/es6-module-dynamic-import). Los navegadores obsoletos pueden ser sorportados a través del [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial; consulta [Compilar en producción](./build) para más detalles.
+- La configuración de compilación predeterminada va dirigida a navegadores que admiten tanto [modulos ESM nativos](https://caniuse.com/es6-module) como [importación dinámica de ESM nativo](https://caniuse.com/es6-module-dynamic-import). Los navegadores obsoletos pueden ser sorportados a través del [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial; consulta [Compilación en producción](./build) para más detalles.
 
 ## Probar Vite online
 
@@ -105,7 +105,7 @@ Vite trata a `index.html` como código fuente y como parte del grafo de módulos
 
 Similar a los servidores http estáticos, Vite tiene el concepto de un "directorio raíz" desde el cual se sirven tus archivos. Lo verás referenciado como `<root>` en el resto de la documentación. Las URL absolutas en el código se resolverán utilizando la raíz del proyecto como base, por lo que puedes escribir código como si estuvieras trabajando con un servidor de archivos estático normal (¡excepto que es mucho más poderoso!). Vite también es capaz de manejar dependencias que se resuelven en ubicaciones del sistema de archivos fuera de la raíz, lo que lo hace utilizable incluso en una configuración basada en monorepos.
 
-Vite también admite [aplicaciones de múltiples páginas](./build#multi-page-app) con múltiples puntos de entrada `.html`.
+Vite también admite [aplicaciones de múltiples páginas](./build#aplicacion-multipaginas) con múltiples puntos de entrada `.html`.
 
 #### Especificar una raíz alternativa
 

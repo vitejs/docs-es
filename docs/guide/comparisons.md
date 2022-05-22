@@ -6,16 +6,16 @@
 
 **Compilación en producción**
 
-La salida de compilación predeterminada de Snowpack está desempaquetada: se transforma cada archivo en módulos compilados separados, que luego se pueden alimentar a diferentes "optimizadores" que realizan el empaquetado real. El beneficio de esto es que se puede elegir entre diferentes empaquetadores finales para satisfacer necesidades específicas (por ejemplo, webpack, Rollup o incluso esbuild), la desventaja es que es una experiencia un poco fragmentada; por ejemplo, el optimizador de esbuild aún es inestable, el optimizador de Rollup no se mantiene oficialmente y los diferentes optimizadores tienen diferentes resultados y configuraciones.
+La salida de compilación predeterminada de Snowpack es desempaquetada: se transforma cada archivo en módulos compilados separados, que luego se pueden alimentar a diferentes "optimizadores" que realizan el empaquetado real. El beneficio de esto es que se puede elegir entre diferentes empaquetadores finales para satisfacer necesidades específicas (por ejemplo, webpack, Rollup o incluso esbuild), la desventaja es que es una experiencia un poco fragmentada; por ejemplo, el optimizador de esbuild aún es inestable, el optimizador de Rollup no se mantiene oficialmente y los diferentes optimizadores tienen diferentes resultados y configuraciones.
 
 Vite opta por tener una integración más profunda con un solo empaquetador (Rollup) para brindar una experiencia más optimizada. Esto también permite que Vite admita una [API de complementos universal](./api-plugin) que funciona tanto para desarrollo como para compilación.
 
 Debido a un proceso de compilación más integrado, Vite admite una amplia variedad de funciones que actualmente no están disponibles en los optimizadores de compilación de Snowpack:
 
-- [Soporte multipáginas](./build#multi-page-app)
-- [Modo Librería](./build#library-mode)
-- [División automática de código CSS](./features#css-code-splitting)
-- [Carga optimizada de chunks asíncronos](./features#async-chunk-loading-optimization)
+- [Soporte multipáginas](./build#aplicacion-multipaginas)
+- [Modo Librería](./build#modo-libreria)
+- [División automática de código CSS](./features#division-de-codigo-css)
+- [Carga optimizada de fragmentos asíncronos](./features#optimizacion-de-carga-de-fragmentos-asincronos)
 - [Plugin de modo legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial que genera paquetes duales modernos/heredados y entrega automáticamente el paquete correcto según la compatibilidad del navegador.
 
 **Preempaquetado de dependencias más rápido**
@@ -28,7 +28,7 @@ Vite está diseñado para manejar configuraciones de monorepos y tenemos usuario
 
 **Soporte de preprocesadores CSS**
 
-Vite proporciona un soporte más refinado para Sass y Less, incluida una resolución `@import` mejorada (aliases y dependencias npm) y [reajuste automático `url()` para archivos en línea](./features#import-inlining-and-rebasing).
+Vite proporciona un soporte más refinado para Sass y Less, incluida una resolución `@import` mejorada (aliases y dependencias npm) y [reajuste automático de `url()` para archivos incrustados](./features#incrustacion-y-rebase-de-import).
 
 **Soporte de primera clase Vue**
 

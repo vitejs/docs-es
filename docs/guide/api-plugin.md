@@ -1,4 +1,4 @@
-# API de complemento
+# API de complementos
 
 Los complementos de Vite amplían la interfaz de complementos bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Como resultado, puede escribir un complemento de Vite una vez y hacer que funcione tanto para desarrollo como para compilación.
 
@@ -6,7 +6,7 @@ Los complementos de Vite amplían la interfaz de complementos bien diseñada de 
 
 ## Creación de un complemento
 
-Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo complemento, asegúrate de consultar la [Guía de funciones](https://vitejs.dev/guide/features) para ver si tu necesidad está cubierta. Revisa también los complementos de la comunidad disponibles, tanto en forma de [complemento de Rollup compatible](https://github.com/rollup/awesome) como [complementos específicos de Vite](https://github.com/vitejs/awesome-vite#complementos)
+Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo complemento, asegúrate de consultar la [Guía de funcionalidades](https://vitejs.dev/guide/features) para ver si tu necesidad está cubierta. Revisa también los complementos de la comunidad disponibles, tanto en forma de [complementos de Rollup compatible](https://github.com/rollup/awesome) como [complementos específicos de Vite](https://github.com/vitejs/awesome-vite#complementos)
 
 Al crear un complemento, puedes colocarlo en tu `vite.config.js`. No hay necesidad de crear un nuevo paquete para ello. Una vez que veas que un complemento fue útil en tus proyectos, considera compartirlo para ayudar a otros [en el ecosistema](https://chat.vitejs.dev).
 
@@ -17,7 +17,7 @@ Al aprender, depurar o crear complementos, sugerimos incluir [vite-plugin-inspec
 
 ## Convenciones
 
-Si el complemento no usa hooks específicos de Vite y se puede implementar como un [Complemento de Rollup compatible](#rollup-plugin-compatibility), entonces se recomienda usar las [Convenciones de nomenclatura de complemento de Rollup](https://rollupjs.org/guide/en/#conventions).
+Si el complemento no usa hooks específicos de Vite y se puede implementar como un [Complemento de Rollup compatible](./api-plugin.md#compatibilidad-de-complementos-rollup), entonces se recomienda usar las [Convenciones de nomenclatura de complemento de Rollup](https://rollupjs.org/guide/en/#conventions).
 
 - Los complementos de Rollup deben tener un nombre claro con el prefijo `rollup-plugin-`.
 - Incluye las palabras clave `rollup-plugin` y `vite-plugin` en package.json.
@@ -462,7 +462,7 @@ apply(config, { command }) {
 }
 ```
 
-## Compatibilidad del complementos Rollup
+## Compatibilidad de complementos Rollup
 
 Una buena cantidad de complementos de Rollup funcionarán directamente como un complemento de Vite (por ejemplo, `@rollup/plugin-alias` o `@rollup/plugin-json`), pero no todos, ya que algunos hooks de complemento no tienen sentido en un contexto de servidor de desarrollo desacoplado.
 

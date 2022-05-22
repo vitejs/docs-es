@@ -2,7 +2,7 @@
 
 Las siguientes guías se basan en algunas suposiciones compartidas:
 
-- Estás utilizando la ubicación de salida de compilación predeterminada (`dist`). Esta ubicación [se puede cambiar usando `build.outDir`](https://vitejs.dev/config/#build-outdir), y puedes extrapolar las instrucciones de estas guías en ese caso.
+- Estás utilizando la ubicación de salida de compilación predeterminada (`dist`). Esta ubicación [se puede cambiar usando `build.outDir`](/config/#build-outdir), y puedes extrapolar las instrucciones de estas guías en ese caso.
 - Estás usando npm. Puedes usar comandos equivalentes para ejecutar los scripts si estás usando Yarn u otros gestores de paquetes.
 - Vite está instalado como una dependencia de desarrollo local en tu proyecto y has configurado los siguientes scripts de npm:
 
@@ -93,7 +93,7 @@ Ahora el método `preview` lanzará el servidor en http://localhost:8080.
    ```
 
 ::: tip
-También puedes ejecutar el script anterior en tu configuración de CI para habilitar el despliegue automatico en cada push.
+También puedes ejecutar el script anterior en tu configuración de integración continua para habilitar el despliegue automatico en cada push.
 :::
 
 ### Github Pages y Travis CI
