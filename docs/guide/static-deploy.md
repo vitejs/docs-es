@@ -40,7 +40,7 @@ $ npm run build
 $ npm run preview
 ```
 
-El comando `vite preview` arrancará el servidor web estático local que sirve los archivos desde `dist` en http://localhost:5000. Es una manera fácil de verificar si la compilación de producción se ve bien en el entorno local.
+El comando `vite preview` arrancará el servidor web estático local que sirve los archivos desde `dist` en `http://localhost:5000`. Es una manera fácil de verificar si la compilación de producción se ve bien en el entorno local.
 
 Puedes configurar el puerto del servidor pasando el indicador `--port` como argumento.
 
@@ -52,7 +52,7 @@ Puedes configurar el puerto del servidor pasando el indicador `--port` como argu
 }
 ```
 
-Ahora el método `preview` lanzará el servidor en http://localhost:8080.
+Ahora el método `preview` lanzará el servidor en `http://localhost:8080`.
 
 ## GitHub Pages
 
