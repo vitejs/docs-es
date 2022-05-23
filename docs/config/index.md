@@ -461,6 +461,13 @@ export default defineConfig(({ command, mode }) => {
   `envPrefix` no debe establecerse como `''`, lo que expondrá todas tus variables env y provocará una filtración inesperada de información confidencial. Vite arrojará un error al detectar `''`.
   :::
 
+### spa
+
+- **Tipo:** `boolean`
+- **Por defecto:** `true`
+
+  Si tu aplicación es una aplicación de página única (SPA). Configuralo en `false` para otros tipos de aplicaciones como MPA. Obtén más información en la [guía de SSR](/guide/ssr#vite-cli) de Vite.
+
 ## Opciones de server
 
 ### server.host

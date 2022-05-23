@@ -265,3 +265,13 @@ En algunos casos, como los tiempos de ejecución de `webworker`, es posible que 
 
 - Tratar todas las dependencias como `noExternal`
 - Lanzar un error si se importan elementos integrados de Node.js
+
+## Vite CLI
+
+Los comandos del CLI `$ vite dev` y `$ vite preview` también se pueden usar para aplicaciones SSR:
+
+1. Agrega tu middleware SSR al servidor de desarrollo con [`configureServer`](/guide/api-plugin#configureserver) y al servidor de vista previa con [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
+   :::tip Note
+   Usa un post hook para que tu middleware SSR se ejecute _después_ de los middlewares de Vite.
+   :::
+2. Configura `config.spa` en `false`. Esto cambia el servidor de desarrollo y vista previa del modo SPA al modo SSR/MPA.
