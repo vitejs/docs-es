@@ -16,14 +16,14 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
           # Git user name to use when making issues and PRs. Required.
-          username: mrcego
+          username: vitejs
 
           # Git email address to use when making issues and PRs. Required.
           email: "cesargomezh90@gmail.com"
 
           # The url for the upstream repo. This is the repository that you
           # set up Ryu-Cho. Required.
-          upstream-repo: https://github.com/mrcego/vite-spanish-docs-translation.git
+          upstream-repo: https://github.com/vitejs/docs-es.git
 
           # The branch for the upstream repo. Optional. Defaults to `main`.
           upstream-repo-branch: main
