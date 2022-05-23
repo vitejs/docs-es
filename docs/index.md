@@ -24,21 +24,18 @@ features:
 footer: Licenciado con MIT | Derechos Reservados © 2019 - actualidad Evan You & colaboradores de Vite
 ---
 
-<div class="frontpage sponsors">
-  <h2>Patrocinadores</h2>
-  <div class="platinum-sponsors">
-    <a v-for="{ href, src, name, id } of sponsors.filter(s => s.tier === 'platinum')" :href="href" target="_blank" rel="noopener" aria-label="sponsor-img">
-      <img :src="src" :alt="name" :id="`sponsor-${id}`">
-    </a>
-  </div>
-  <div class="gold-sponsors">
-    <a v-for="{ href, src, name, id } of sponsors.filter(s => s.tier !== 'platinum')" :href="href" target="_blank" rel="noopener" aria-label="sponsor-img">
-      <img :src="src" :alt="name" :id="`sponsor-${id}`">
-    </a>
-  </div>
-  <a href="https://github.com/sponsors/yyx990803" target="_blank" rel="noopener">Conviértete en patrocinador en GitHub</a>
-</div>
+> TODO: Home Page feature is not ready in VitePress Next just yet! So this page looks broken for now.
 
-<script setup>
-import sponsors from './.vitepress/theme/sponsors.json'
-</script>
+  <script setup>
+  import SponsorsGroup from './.vitepress/theme/SponsorsGroup.vue'
+  </script>
+
+<h3 style="text-align:center;color:#999">Sponsors</h3>
+
+<SponsorsGroup tier="platinum" placement="landing" />
+
+<SponsorsGroup tier="gold" placement="landing" />
+
+<p style="text-align:center;margin-bottom:3em">
+  <a style="color: #999;font-size:.9em;" href="https://github.com/sponsors/yyx990803" target="_blank" rel="noopener">Conviertete en patrocinador en Github</a>
+</p>

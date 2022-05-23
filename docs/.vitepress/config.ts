@@ -2,26 +2,58 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'Vite',
-  description: 'Herramientas Frontend de próxima generación',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  description: 'Herramientas frontend de próxima generación',
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+
+    // TODO: This is neeeded to get smooth dark mode appearance on initial
+    // load. And this will be gone when VitePress figures out how to handle
+    // this in core.
+    [
+      'script',
+      {},
+      `
+        ;(() => {
+          const saved = localStorage.getItem('vitepress-theme-appearance')
+          const prefereDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+          if (!saved || saved === 'auto' ? prefereDark : saved === 'dark') {
+            document.documentElement.classList.add('dark')
+          }
+        })()
+      `
+    ]
+  ],
+  vue: {
+    reactivityTransform: true
+  },
   themeConfig: {
-    repo: 'vitejs/vite',
     logo: '/logo.svg',
-    docsDir: 'docs',
-    docsBranch: 'main',
-    editLinks: true,
-    editLinkText: 'Sugiere cambios para esta página',
+    editLink: {
+      repo: 'vitejs/vite',
+      branch: 'main',
+      dir: 'docs',
+      text: 'Sugerir cambios para esta página'
+    },
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
       indexName: 'vitejs',
       searchParameters: {
-        facetFilters: ['tags:es']
+        facetFilters: ['tags:en']
       }
     },
 
     carbonAds: {
       carbon: 'CEBIEK3N',
       placement: 'vitejsdev'
+    },
+
+    localeLinks: {
+      text: 'Español',
+      items: [
+        { text: 'English', link: 'https://vitejs.dev' },
+        { text: '简体中文', link: 'https://cn.vitejs.dev' },
+        { text: '日本語', link: 'https://ja.vitejs.dev' }
+      ]
     },
 
     nav: [
@@ -65,38 +97,14 @@ export default defineConfig({
             link: 'https://v2.vitejs.dev'
           }
         ]
-      },
-      {
-        text: 'Idiomas',
-        items: [
-          {
-            text: 'English',
-            link: 'https://vitejs.dev'
-          },
-          {
-            text: 'Español',
-            link: 'https://es.vitejs.dev'
-          },
-          {
-            text: '简体中文',
-            link: 'https://cn.vitejs.dev'
-          },
-          {
-            text: '日本語',
-            link: 'https://ja.vitejs.dev'
-          }
-        ]
       }
     ],
 
     sidebar: {
-      '/config/': 'auto',
-      '/plugins': 'auto',
-      // catch-all fallback
       '/': [
         {
           text: 'Guía',
-          children: [
+          items: [
             {
               text: 'Por qué Vite',
               link: '/guide/why'
@@ -153,7 +161,7 @@ export default defineConfig({
         },
         {
           text: 'APIs',
-          children: [
+          items: [
             {
               text: 'API de complementos',
               link: '/guide/api-plugin'
