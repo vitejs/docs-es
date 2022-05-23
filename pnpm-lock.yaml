@@ -35,7 +35,7 @@ specifiers:
   ts-node: ^10.7.0
   typescript: ~4.6.4
   vite: latest
-  vitepress: 1.0.0-draft.1
+  vitepress: 1.0.0-draft.3
 
 dependencies:
   '@microsoft/api-extractor': 7.24.1
@@ -72,7 +72,7 @@ dependencies:
   ts-node: 10.8.0_ihi2kx3po6rqbrzdqgpcfvwinm
   typescript: 4.6.4
   vite: 2.9.9
-  vitepress: 1.0.0-draft.1
+  vitepress: 1.0.0-draft.3
 
 packages:
 
@@ -5213,8 +5213,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /vitepress/1.0.0-draft.1:
-    resolution: {integrity: sha512-9tNpUu0dwd5w5DNCBlgsmw4HlEl55o8jdOk/tQIxQ2j//0UkEAPT32TL5KRuro1Bp5OM6njZ37s8Y8g26MnooQ==}
+  /vitepress/1.0.0-draft.3:
+    resolution: {integrity: sha512-DTbej4xFhfYQ0/RPjORibMXu8DC5QY0L9UjsmT6+Bes6pNULNx0k6rCRZnvv/obJD8ClEaY/CkZ7vzBK+lt+zQ==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:

@@ -1,41 +1,39 @@
 ---
-home: true
-heroImage: /logo.svg
 
-actionText: Introducción
-actionLink: /guide/
+layout: home
 
-altActionText: Saber más
-altActionLink: /guide/why
-
-features:
-  - title: 💡 Inicio de servidor al instante
-    details: Servidor de archivo bajo demanda sobre ESM nativo, no se requiere empaquetado!
-  - title: ⚡️ HMR ultra rápido
+hero:
+  name: Vite
+  text: Herramientas frontend de próxima generación
+  tagline: Prepárate para un entorno de desarrollo que finalmente está hecho para tí.
+  actions:
+    - theme: brand
+      text: Introducción
+      link: /guide/why
+    - theme: alt
+      text: Por qué Vite?
+      link: /guide/
+    - theme: alt
+      text: Ver en GitHub
+      link: https://github.com/vitejs/vite
+  
+  features:
+  - icon: 💡
+    title: Inicio de servidor al instante
+    details: Servidor de archivo bajo demanda sobre ESM nativo, no requiere empaquetado!
+  - icon: ⚡️
+    title: HMR ultra rápido
     details: Hot Module Replacement (HMR) que se mantiene rápido sin importar el tamaño de la aplicación.
-  - title: 🛠️ Funcionalidades enriquecidas
+  - icon: 🛠️
+    title: Funcionalidades enriquecidas
     details: Soporte para TypeScript, JSX, CSS y más, listos para usar.
-  - title: 📦 Compilación optimizada
-    details: Compilación de Rollup preconfigurada con soporte de modo multi-página y librería.
-  - title: 🔩 Interfaz universal para complementos
-    details: Interfaz de complemento para superconjuntos de Rollup compartida entre dev y build.
-  - title: 🔑 APIs completamente tipadas
-    details: APIs programáticas flexibles con tipado completo en TypeScript.
-footer: Licenciado con MIT | Derechos Reservados © 2019 - actualidad Evan You & colaboradores de Vite
+  - icon: 📦
+    title: Compilación optimizada
+    details: Compilado de Rollup preconfigurado con soporte de multi-página y modo librería.
+  - icon: 🔩
+    title: Complementos universales
+    details: Interfaz de complementos basados en Rollup compartidos entre desarrollo y compilación.
+  - icon: 🔑
+    title: APIs completamente tipadas
+    details: APIs programáticamente flexibles con tipado completo en TypeScript.
 ---
-
-> TODO: Home Page feature is not ready in VitePress Next just yet! So this page looks broken for now.
-
-  <script setup>
-  import SponsorsGroup from './.vitepress/theme/SponsorsGroup.vue'
-  </script>
-
-<h3 style="text-align:center;color:#999">Sponsors</h3>
-
-<SponsorsGroup tier="platinum" placement="landing" />
-
-<SponsorsGroup tier="gold" placement="landing" />
-
-<p style="text-align:center;margin-bottom:3em">
-  <a style="color: #999;font-size:.9em;" href="https://github.com/sponsors/yyx990803" target="_blank" rel="noopener">Conviertete en patrocinador en Github</a>
-</p>
