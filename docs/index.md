@@ -9,10 +9,10 @@ hero:
   actions:
     - theme: brand
       text: Introducción
-      link: /guide/why
+      link: /guide/
     - theme: alt
       text: Por qué Vite?
-      link: /guide/
+      link: /guide/why
     - theme: alt
       text: Ver en GitHub
       link: https://github.com/vitejs/vite
