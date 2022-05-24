@@ -43,8 +43,8 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2019-present Evan You & Vite Contributors'
+      message: 'Publicado bajo licencia MIT',
+      copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite'
     },
 
     nav: [

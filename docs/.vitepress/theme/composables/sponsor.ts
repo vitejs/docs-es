@@ -41,12 +41,12 @@ export function useSponsor() {
 function mapSponsors(sponsors: Sponsors) {
   return [
     {
-      tier: 'Platinum Sponsor',
+      tier: 'Patrocinadores Platinum',
       size: 'big',
       items: mapImgPath(sponsors['platinum'])
     },
     {
-      tier: 'Gold Sponsors',
+      tier: 'Patrocinadores Oro',
       size: 'medium',
       items: mapImgPath(sponsors['gold'])
     }
