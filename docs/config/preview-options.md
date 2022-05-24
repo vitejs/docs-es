@@ -1,0 +1,70 @@
+# Opciones de preview
+
+## preview.host
+
+- **Tipo:** `string | boolean`
+- **Por defecto:** [`server.host`](#server_host)
+
+  Especifica en qué direcciones IP debe escuchar el servidor.
+  Configurar en `0.0.0.0` o `true` para escuchar en todas las direcciones, incluidas las LAN y las direcciones públicas.
+
+  Esto se puede configurar a través de la CLI usando `--host 0.0.0.0` o `--host`.
+
+## preview.port
+
+- **Tipo:** `number`
+- **Por defecto:** `4173`
+
+  Especifica el puerto del servidor. Ten en cuenta que si el puerto ya se está utilizando, Vite probará automáticamente el siguiente puerto disponible, por lo que es posible que este no sea el puerto real en el que el servidor termina escuchando.
+
+**Ejemplo:**
+
+```js
+export default defineConfig({
+  server: {
+    port: 3030
+  },
+  preview: {
+    port: 8080
+  }
+})
+```
+
+## preview.strictPort
+
+- **Tipo:** `boolean`
+- **Por defecto:** [`server.strictPort`](#server_strictport)
+
+  Configurar en `true` para salir si el puerto ya está en uso, en lugar de probar automáticamente el siguiente puerto disponible.
+
+## preview.https
+
+- **Tipo:** `boolean | https.ServerOptions`
+- **Por defecto:** [`server.https`](#server_https)
+
+  Habilita TLS + HTTP/2. Ten en cuenta que esto cambia a TLS solo cuando también se usa la opción [`server.proxy`](#server-proxy).
+
+  El valor también puede ser un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
+
+## preview.open
+
+- **Tipo:** `boolean | string`
+- **Por defecto:** [`server.open`](#server_open)
+
+  Abre automáticamente la aplicación en el navegador al iniciar el servidor. Cuando el valor es una cadena, se utilizará como nombre de ruta de la URL. Si deseas abrir el servidor en un navegador específico, puedes configurar `process.env.BROWSER` (por ejemplo, `firefox`). Consulta [el paquete `open`](https://github.com/sindresorhus/open#app) para obtener más detalles.
+
+## preview.proxy
+
+- **Tipo:** `Record<string, string | ProxyOptions>`
+- **Por defecto:** [`server.proxy`](#server_proxy)
+
+  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de `{ key: options }` pares. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy.
+
+  Usa [`http-proxy`](https://github.com/http-party/node-http-proxy). Todas las opciones [aquí](https://github.com/http-party/node-http-proxy#options).
+
+## preview.cors
+
+- **Tipo:** `boolean | CorsOptions`
+- **Por defecto:** [`server.cors`](#server_proxy)
+
+  Configura las CORS para el servidor de desarrollo. Esto está habilitado por defecto y permite cualquier origen. Pase un [objeto de opciones](https://github.com/expressjs/cors) para ajustar el comportamiento o `false` para deshabilitarlo.

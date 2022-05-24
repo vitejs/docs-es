@@ -171,6 +171,45 @@ export default defineConfig({
             }
           ]
         }
+      ],
+      '/config/': [
+        {
+          text: 'Configuración',
+          items: [
+            {
+              text: 'Configurando Vite',
+              link: '/config/'
+            },
+            {
+              text: 'Opciones compartidas',
+              link: '/config/shared-options'
+            },
+            {
+              text: 'Opciones de servidor',
+              link: '/config/server-options'
+            },
+            {
+              text: 'Opciones de compilación',
+              link: '/config/build-options'
+            },
+            {
+              text: 'Opciones de vista previa',
+              link: '/config/preview-options'
+            },
+            {
+              text: 'Opciones de optimización de dependencias',
+              link: '/config/dep-optimization-options'
+            },
+            {
+              text: 'Opciones SSR',
+              link: '/config/ssr-options'
+            },
+            {
+              text: 'Opciones de Worker',
+              link: '/config/worker-options'
+            }
+          ]
+        }
       ]
     }
   }
