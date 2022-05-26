@@ -36,7 +36,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    <script type="module" src="http://localhost:5173/main.js"></script>
    ```
 
-   Para servir correctamente recursos, tienes dos opciones:
+   Para servir correctamente los recursos, tienes dos opciones:
 
    - Asegúrarse de que el servidor esté configurado para enviar solicitudes de recursos estáticos al servidor de Vite.
    - Configurar [`server.origin`](https://vitejs.dev/config/#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor backend en lugar de una ruta relativa.
