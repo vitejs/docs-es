@@ -2,10 +2,16 @@
 
 layout: home
 
+title: Vite
+titleTemplate: Herramientas frontend de próxima generación
+
 hero:
   name: Vite
   text: Herramientas frontend de próxima generación
   tagline: Prepárate para un entorno de desarrollo que finalmente está hecho para tí.
+  image:
+    light: /vite-splash-light.jpg
+    dark: /vite-splash-dark.jpg
   actions:
     - theme: brand
       text: Introducción

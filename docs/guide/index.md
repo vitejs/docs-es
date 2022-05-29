@@ -116,7 +116,7 @@ Ejecutar `vite` inicia el servidor de desarrollo utilizando el directorio de tra
 En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus scripts npm, o ejecutarlo directamente con `npx vite`. Estos son los scripts npm predeterminados en un proyecto de Vite ya montado:
 
 <!-- prettier-ignore -->
-```json5
+```json
 {
   "scripts": {
     "dev": "vite", // inicia el servidor de desarrollo, alias: `vite dev`, `vite serve`
