@@ -8,6 +8,7 @@ const { data } = useSponsor()
   <VPHomeSponsors
     v-if="data"
     message="Vite es gratuito y de código abierto, hecho posible gracias a nuestros maravillosos patrocinadores."
+    action-text="Conviertete en un patrocinador"
     action-link="https://github.com/sponsors/yyx990803"
     :data="data"
   />
