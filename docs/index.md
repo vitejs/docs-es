@@ -10,8 +10,8 @@ hero:
   text: Herramientas frontend de próxima generación
   tagline: Prepárate para un entorno de desarrollo que finalmente está hecho para tí.
   image:
-    light: /vite-splash-light.jpg
-    dark: /vite-splash-dark.jpg
+    src: /logo-with-shadow.png
+    alt: Vite
   actions:
     - theme: brand
       text: Introducción
