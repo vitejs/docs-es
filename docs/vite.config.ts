@@ -4,4 +4,4 @@ export default defineConfig({
   ssr: {
     format: 'cjs'
   }
-}
+})
