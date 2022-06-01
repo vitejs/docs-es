@@ -1,132 +1,88 @@
-# Migración desde v1
+# Migración desde v2
 
-## Cambio de opciones de configuración
+## Compatibilidad de Node
 
-- Las siguientes opciones se han eliminado y deben implementarse a través de [complementos](./api-plugin):
+Vite ya no es compatible con Node v12, el cual ya se finalizó su soporte oficial. Ahora se requiere Node 14.6+.
 
-  - `resolvers`
-  - `transforms`
-  - `indexHtmlTransforms`
+## Cambios principales basados en navegadores modernos
 
-- Se han eliminado `jsx` y `enableEsbuild`; utiliza la nueva opción [`esbuild`](/config/#esbuild) en su lugar.
+El paquete de producción asume soporte para JavaScript moderno. De forma predeterminada, Vite apunta a navegadores que admiten los [módulos ES nativos](https://caniuse.com/es6-module) e [importación dinámica nativa de ESM](https://caniuse.com/es6-module-dynamic-import ) e [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta):
 
-- Las [opciones relacionadas con CSS](/config/#css-modules) ahora están anidadas bajo `css`.
+- Chrome >=87
+- Firefox >=78
+- Safari >=13
+- Edge >=88
 
-- Todas las [opciones específicas de compilación](/config/#opciones-de-build) ahora están anidadas en `build`.
+Una pequeña fracción de usuarios ahora requerirán el uso de [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos heredados y el correspondiente polyfills de características de lenguaje ES.
 
-  - `rollupInputOptions` y `rollupOutputOptions` se reemplazan por [`build.rollupOptions`](/config/#build-rollupoptions).
-  - `esbuildTarget` ahora es [`build.target`](/config/#build-target).
-  - `emitManifest` ahora es [`build.manifest`](/config/#build-manifest).
-  - Se han eliminado las siguientes opciones de compilación, ya que se pueden lograr a través de hooks de complemento u otras opciones:
-    - `entry`
-    - `rollupDedupe`
-    - `emitAssets`
-    - `emitIndex`
-    - `shouldPreload`
+## Cambios en las opciones de configuración
 
-- Todas las [opciones específicas del servidor](/config/#opciones-de-server) ahora están anidadas bajo
-  `server`.
+- Se han eliminado las siguientes opciones que ya estaban en desuso en v2:
+  
+  - `alias` (cambialo por [`resolve.alias`](../config/shared-options.md#resolvealias))
+  - `dedupe` (cambialo por [`resolve.dedupe`](../config/shared-options.md#resolvededupe))
+  - `build.base` (cambialo por [`base`](../config/shared-options.md#base))
+  - `build.brotliSize` (cambialo por [`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize))
+  - `build.cleanCssOptions` (Vite ahora usa esbuild para la minificación de CSS)
+  - `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
+  - `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedepsesbuildoptions))
 
-  - `hostname` ahora es [`server.host`](/config/#server-host).
-  - Se ha eliminado `httpsOptions`. [`server.https`](/config/#server-https) puede aceptar directamente el objeto de opciones.
-  - `chokidarWatchOptions` ahora es [`server.watch`](/config/#server-watch).
+## Cambios en el servidor de desarrollo
 
-- [`assetsInclude`](/config/#assetsinclude) ahora espera `string | RegExp | (string | RegExp)[]` en lugar de una función.
+El puerto del servidor de desarrollo predeterminado de Vite ahora es 5173. Puedes usar [`server.port`](../config/server-options.md#server-port) para configurarlo en 3000.
 
-- Se eliminan todas las opciones específicas de Vue; pasa las opciones al complemento Vue en su lugar.
+Vite optimiza las dependencias con esbuild para convertir dependencias solo de CJS a ESM y para reducir la cantidad de módulos que el navegador necesita pedir. En v3, la estrategia predeterminada para descubrir y procesar por lotes ha cambiado. Vite ya no escanea previamente el código de usuario con esbuild para obtener una lista inicial de dependencias en el arranque inicial. En su lugar, retrasa la ejecución de la primera optimización de dependencias hasta que se procesan todos los módulos de usuario importados que se están cargando.
 
-## Cambio de comportamiento de alias
+Para recuperar la estrategia de la v2, puedes usar [`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan).
 
-[`alias`](/config/#resolve-alias) ahora se pasa a `@rollup/plugin-alias` y ya no requiere barras inclinadas de inicio/final. El comportamiento ahora es un reemplazo directo, por lo que la clave de alias de directorio de estilo 1.0 debería eliminar la barra inclinada final:
+## Cambios en compilación
+
+En v3, Vite usa esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en v2. Debido a que esbuild convierte las dependencias solo de CJS a ESM, [`@rollupjs/plugin-commonjs`] ya no se usa.
+
+Si necesitas volver a la estrategia de la v2, puedes usar [`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled).
+
+## Cambios en SSR
+
+Vite v3 usa ESM para la compilación de SSR de manera predeterminada. Cuando se usa ESM, ya no se necesitan las [heurísticas de externalización de SSR](https://vitejs.dev/guide/ssr.html#ssr-externals). De forma predeterminada, todas las dependencias se externalizan. Puedes usar [`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) para controlar qué dependencias incluir en el paquete SSR.
+
+Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `ssr.format: 'cjs'` para generar un paquete CJS. En este caso, se utilizará la misma estrategia de externalización de Vite v2.
+
+## Cambios generales
+
+- Las extensiones de archivo JS en modo SSR y lib ahora usan una extensión válida (`js`, `mjs` o `cjs`) para generar archivos y fragmentos JS según su formato y el tipo de paquete.
+
+### `import.meta.glob`
+
+- [Raw `import.meta.glob`](features.md#glob-import-as) cambió de `{afirm: { type: 'raw' }}` a `{ as: 'raw' }`
+
+- Las claves de `import.meta.glob` ahora son relativas al módulo actual.
 
 ```diff
-- alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
-+ alias: { '/@foo/': path.resolve(__dirname, 'some-special-dir') }
+  // archivo: /foo/index.js
+  const modules = import.meta.glob('../foo/*.js')
+  // transformado:
+  const modules = {
+  -  '../foo/bar.js': () => {}
+  +  './bar.js': () => {}
+  }
 ```
 
-Alternativamente, puedes usar la opción de formato `[{ find: RegExp, replace: string }]` para un control más preciso.
+- Al usar un alias con `import.meta.glob`, las claves siempre son absolutas.
+- `import.meta.globEager` ahora está en desuso. Utiliza `import.meta.glob('*', { eager: true })` en su lugar.
 
-## Soporte de Vue
+### Compatibilidad de WebAssembly
 
-El núcleo de Vite 2.0 ahora es independiente del marco de trabajo. El soporte de Vue ahora se proporciona a través de [`@vitejs/plugin-vue`](https://github.com/vitejs/vite/tree/main/packages/plugin-vue). Simplemente instálalo y agrégalo en la configuración de Vite:
+La sintaxis `import init from 'example.wasm'` se descarta para evitar futuras colisiones con ["Integración ESM para Wasm"](https://github.com/WebAssembly/esm-integration).
+Puedes usar `?init`, que es similar al comportamiento anterior.
 
-```js
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-
-export default defineConfig({
-  plugins: [vue()]
+```diff
+-import init from 'example.wasm'
++import init from 'example.wasm?init'
+-init().then((instance) => {
++init().then(({ exports }) => {
+  exports.test()
 })
 ```
+## Migración desde v1
 
-### Transformaciones de bloques personalizados
-
-Se puede usar un complemento personalizado para transformar bloques personalizados de Vue como el siguiente:
-
-```ts
-// vite.config.js
-import vue from '@vitejs/plugin-vue'
-import { defineConfig } from 'vite'
-
-const vueI18nPlugin = {
-  name: 'vue-i18n',
-  transform(code, id) {
-    if (!/vue&type=i18n/.test(id)) {
-      return
-    }
-    if (/\.ya?ml$/.test(id)) {
-      code = JSON.stringify(require('js-yaml').load(code.trim()))
-    }
-    return `export default Comp => {
-      Comp.i18n = ${code}
-    }`
-  }
-}
-
-export default defineConfig({
-  plugins: [vue(), vueI18nPlugin]
-})
-```
-
-## Soporte de React
-
-La compatibilidad con React Fast Refresh ahora se proporciona a través de [`@vitejs/plugin-react`](https://github.com/vitejs/vite/tree/main/packages/plugin-react).
-
-## Cambio de API de HMR
-
-`import.meta.hot.acceptDeps()` ha quedado en desuso. [`import.meta.hot.accept()`](./api-hmr#hot-accept-deps-cb) ahora puede aceptar dependencias únicas o múltiples.
-
-## Cambio de formato de manifiesto
-
-El manifiesto de compilación ahora usa el siguiente formato:
-
-```json
-{
-  "index.js": {
-    "file": "assets/index.acaf2b48.js",
-    "imports": [...]
-  },
-  "index.css": {
-    "file": "assets/index.7b7dbd85.css"
-  }
-  "asset.png": {
-    "file": "assets/asset.0ab0f9cd.png"
-  }
-}
-```
-
-Para los fragmentos JS de entrada, también lista sus fragmentos importados útiles para representar directivas de precarga.
-
-## Para autores de complementos
-
-Vite 2 utiliza una interfaz de complemento completamente rediseñada que amplía los complementos de Rollup. Lee la nueva [Guía de desarrollo de complementos](./api-plugin).
-
-Algunos consejos generales sobre la migración de un complemento v1 a v2:
-
-- `resolvers` -> usa el hook [`resolveId`](https://rollupjs.org/guide/en/#resolveid)
-- `transforms` -> usa el hook [`transform`](https://rollupjs.org/guide/en/#transform)
-- `indexHtmlTransforms` -> usa el hook [`transformIndexHtml`](./api-plugin#transformindexhtml)
-- Serving virtual files -> use los hooks [`resolveId`](https://rollupjs.org/guide/en/#resolveid) + [`load`](https://rollupjs.org/guide/en/#load)
-- Agregar `alias`, `define` u otras opciones de configuración -> usa el hook [`config`](./api-plugin#config)
-
-Dado que la mayor parte de la lógica debe realizarse a través de enlaces de complementos en lugar de middlewares, la necesidad de middlewares se reduce considerablemente. La aplicación del servidor interno ahora es una buena instancia antigua de [connect](https://github.com/senchalabs/connect) en lugar de Koa.
+Consulta la [Guía de migración desde v1](https://v2.vitejs.dev/guide/migration.html) en la dcoumentación de Vite v2 primero para ver los cambios necesarios para migrar tu aplicación a Vite v2 y luego continuar con los cambios descritos en esta página.

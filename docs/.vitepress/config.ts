@@ -145,7 +145,7 @@ export default defineConfig({
               link: '/guide/comparisons'
             },
             {
-              text: 'Migración desde v1',
+              text: 'Migración desde v2',
               link: '/guide/migration'
             }
           ]
