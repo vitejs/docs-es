@@ -1,6 +1,6 @@
 # API de complementos
 
-Los complementos de Vite amplían la interfaz de complementos bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Como resultado, puede escribir un complemento de Vite una vez y hacer que funcione tanto para desarrollo como para compilación.
+Los complementos de Vite amplían la interfaz de complementos bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Como resultado, puedes escribir un complemento de Vite una vez y hacer que funcione tanto para desarrollo como para compilación.
 
 **Se recomienda revisar primero la [documentación de complementos de Rollup](https://rollupjs.org/guide/en/#plugin-development) antes de leer las secciones a continuación.**
 
@@ -38,7 +38,7 @@ Si tu complemento solo funcionará para un marco de trabajo en particular, su no
 
 La convención de Vite para módulos virtuales es prefijar la ruta orientada al usuario con `virtual:`. Si es posible, el nombre del complemento debe usarse como espacio de nombres para evitar colisiones con otros complementos en el ecosistema. Por ejemplo, `vite-plugin-posts` podría pedir a los usuarios que importen módulos virtuales `virtual:posts` o `virtual:posts/helpers` para obtener información sobre el tiempo de compilación. Internamente, los complementos que usan módulos virtuales deben prefijar la ID del módulo con `\0` mientras resuelven la identificación, una convención del ecosistema acumulativo. Esto evita que otros complementos intenten procesar la identificación (como la resolución de nodos), y las funciones principales, como los mapas de origen, pueden usar esta información para diferenciar entre módulos virtuales y archivos normales. `\0` no es un carácter permitido en las URL de importación, por lo que debemos reemplazarlo durante el análisis de importación. Una identificación virtual `\0{id}` termina codificada como `/@id/__x00__{id}` durante el desarrollo en el navegador. La identificación se decodificará antes de ingresar a la canalización de complementos, por lo que el código de hooks de complementos no lo ve.
 
-Tenga en cuenta que los módulos derivados directamente de un archivo real, como en el caso de un módulo de secuencia de comandos en un componente de archivo único (como .vue o .svelte SFC) no necesitan seguir esta convención. Los SFC generalmente generan un conjunto de submódulos cuando se procesan, pero el código en estos se puede mapear de nuevo al sistema de archivos. El uso de `\0` para estos submódulos evitaría que los mapas fuente funcionen correctamente.
+Ten en cuenta que los módulos derivados directamente de un archivo real, como en el caso de un módulo de secuencia de comandos en un componente de archivo único (como .vue o .svelte SFC) no necesitan seguir esta convención. Los SFC generalmente generan un conjunto de submódulos cuando se procesan, pero el código en estos se puede mapear de nuevo al sistema de archivos. El uso de `\0` para estos submódulos evitaría que los mapas fuente funcionen correctamente.
 
 ## Configuración de complementos
 
@@ -156,9 +156,9 @@ Los siguientes hooks se llaman cuando el servidor está cerrado:
 - [`buildEnd`](https://rollupjs.org/guide/en/#buildend)
 - [`closeBundle`](https://rollupjs.org/guide/en/#closebundle)
 
-Tenga en cuenta que el hook [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) **no** se llama durante el desarrollo, porque Vite evita los análisis AST completos para un mejor rendimiento.
+Ten en cuenta que el hook [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) **no** se llama durante el desarrollo, porque Vite evita los análisis AST completos para un mejor rendimiento.
 
-[Los hooks de generación de salida](https://rollupjs.org/guide/en/#output-generation-hooks) (excepto `closeBundle`) **no** se llaman durante el desarrollo. Puedes pensar que el servidor de desarrollo de Vite solo llama a `rollup.rollup()` sin llamar a `bundle.generate()`.
+[Los hooks de generación de salida](https://rollupjs.org/guide/en/#output-generation-hooks) (excepto `closeBundle`) **no** se llaman durante el desarrollo. Puedes pensar esto como que el servidor de desarrollo de Vite solo llama a `rollup.rollup()` sin llamar a `bundle.generate()`.
 
 ## Hooks específicos de Vite
 
