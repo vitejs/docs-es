@@ -24,20 +24,20 @@ Una pequeña fracción de usuarios ahora requerirán el uso de [@vitejs/plugin-l
   - `build.base` (cambialo por [`base`](../config/shared-options.md#base))
   - `build.brotliSize` (cambialo por [`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize))
   - `build.cleanCssOptions` (Vite ahora usa esbuild para la minificación de CSS)
-  - `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
+  - `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
   - `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedepsesbuildoptions))
 
 ## Cambios en el servidor de desarrollo
 
 El puerto del servidor de desarrollo predeterminado de Vite ahora es 5173. Puedes usar [`server.port`](../config/server-options.md#server-port) para configurarlo en 3000.
 
-Vite optimiza las dependencias con esbuild para convertir dependencias solo de CJS a ESM y para reducir la cantidad de módulos que el navegador necesita pedir. En v3, la estrategia predeterminada para descubrir y procesar por lotes ha cambiado. Vite ya no escanea previamente el código de usuario con esbuild para obtener una lista inicial de dependencias en el arranque inicial. En su lugar, retrasa la ejecución de la primera optimización de dependencias hasta que se procesan todos los módulos de usuario importados que se están cargando.
+Vite optimiza las dependencias con esbuild para convertir dependencias de solo CJS a ESM y para reducir la cantidad de módulos que el navegador necesita pedir. En v3, la estrategia predeterminada para descubrir y procesar por lotes ha cambiado. Vite ya no escanea previamente el código de usuario con esbuild para obtener una lista inicial de dependencias en el arranque inicial. En su lugar, retrasa la ejecución de la primera optimización de dependencias hasta que se procesan todos los módulos de usuario importados que se están cargando.
 
 Para recuperar la estrategia de la v2, puedes usar [`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan).
 
 ## Cambios en compilación
 
-En v3, Vite usa esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en v2. Debido a que esbuild convierte las dependencias solo de CJS a ESM, [`@rollupjs/plugin-commonjs`] ya no se usa.
+En v3, Vite usa esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en v2. Debido a que esbuild convierte las dependencias de solo CJS a ESM, [`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no se usa.
 
 Si necesitas volver a la estrategia de la v2, puedes usar [`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled).
 
@@ -83,6 +83,29 @@ Puedes usar `?init`, que es similar al comportamiento anterior.
   exports.test()
 })
 ```
+## Avanzado
+
+Hay algunos cambios que solo afectan a los creadores de complementos/herramientas.
+
+- [[#5868] refactor: eliminada API en desuso para 3.0](https://github.com/vitejs/vite/pull/5868)
+  - Se elimina `printHttpServerUrls`
+  - Se eliminan `server.app`, `server.transformWithEsbuild`
+  - Se elimina `import.meta.hot.acceptDeps`
+- [[#7995] chore: no fixStacktrace](https://github.com/vitejs/vite/pull/7995)
+  - El valor predeterminado de la opción `fixStacktrace` de `ssrLoadModule` ahora es `false`
+- [[#8178] feat!: migración a ESM](https://github.com/vitejs/vite/pull/8178)
+  - `formatPostcssSourceMap` ahora es asíncrono
+  - `resolvePackageEntry`, `resolvePackageData` ya no están disponibles desde la compilación de CJS (se necesita una importación dinámica para usar en CJS)
+
+También hay otros cambios importantes que solo afectan a unos pocos usuarios.
+
+- [[#5018] feat: habilita `generatedCode: 'es2015'` para compilación de Rollup](https://github.com/vitejs/vite/pull/5018)
+  - Transpilar a ES5 ahora es necesario incluso si el código de usuario solo incluye ES5.
+- [[#7877] fix: tipos de clientes vite](https://github.com/vitejs/vite/pull/7877)
+  - `/// <reference lib="dom" />` se elimina de `vite/client.d.ts`. `{ "lib": ["dom"] }` o `{ "lib": ["webworker"] }` es necesario en el `tsconfig.json`.
+- [[#8280] feat: optimización de esbuild sin bloqueos en el momento de la compilación](https://github.com/vitejs/vite/pull/8280)
+  - La opción `server.force` se eliminó en favor de la opción `force`.
+
 ## Migración desde v1
 
 Consulta la [Guía de migración desde v1](https://v2.vitejs.dev/guide/migration.html) en la dcoumentación de Vite v2 primero para ver los cambios necesarios para migrar tu aplicación a Vite v2 y luego continuar con los cambios descritos en esta página.

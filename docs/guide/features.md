@@ -205,6 +205,15 @@ El alias `@import` y el cambio de base de URL no son compatibles con Stylus debi
 
 También puedes usar módulos CSS combinados con preprocesadores anteponiendo `.module` a la extensión del archivo, por ejemplo `style.module.scss`.
 
+### Deshabilitando la inyección de CSS en la página
+
+La inyección automática de contenido CSS se puede desactivar a través del parámetro de consulta `?inline`. En este caso, la cadena CSS procesada se devuelve como la exportación predeterminada del módulo como de costumbre, pero los estilos no se inyectan en la página.
+
+```js
+import styles from './foo.css' // se inyectará en la página
+import otherStyles from './bar.css?inline' // no se inyectará en la página
+```
+
 ## Recursos estáticos
 
 La importación de un recurso estático devolverá la URL pública resuelta cuando se sirva:
