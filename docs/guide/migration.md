@@ -108,4 +108,4 @@ También hay otros cambios importantes que solo afectan a unos pocos usuarios.
 
 ## Migración desde v1
 
-Consulta la [Guía de migración desde v1](https://v2.vitejs.dev/guide/migration.html) en la dcoumentación de Vite v2 primero para ver los cambios necesarios para migrar tu aplicación a Vite v2 y luego continuar con los cambios descritos en esta página.
+Consulta la [Guía de migración desde v1](https://v2.vitejs.dev/guide/migration.html) en la documentación de Vite v2 primero para ver los cambios necesarios para migrar tu aplicación a Vite v2 y luego continuar con los cambios descritos en esta página.
