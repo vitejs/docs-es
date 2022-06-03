@@ -250,12 +250,17 @@ Esta es la configuración de tu sitio; lee más en [heroku-buildpack-static](htt
 
    # crea una nueva aplicación con un nombre específico
    $ heroku apps:create example
-
-   # configura buildpack para sitios estático
-   $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-static.git
    ```
 
-6. Despliega tu sitio:
+6. Configura los buildpacks. Usamos `heroku/nodejs` para construir el proyecto y `heroku-buildpack-static` para servirlo.
+
+   ```bash
+   # configurando los buildpacks
+   $ heroku buildpacks:set heroku/nodejs
+   $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static.git
+   ```
+
+7. Despliega tu sitio:
 
    ```bash
    # publica el sitio
