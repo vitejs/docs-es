@@ -25,14 +25,13 @@ vite --config my-config.js
 ```
 
 ::: tip NOTA
-Vite reemplazará `__filename`, `__dirname` y `import.meta.url` en los archivos de configuración y sus dependencias. El uso de estos como nombres de variables o pasar un string con comillas dobles como parámetro de una función (por ejemplo, `console.log()`) dará como resultado un error:
+Vite inyectará `__filename`, `__dirname` en los archivos de configuración y sus dependencias. Declarar estas variables en un nivel superior dará como resultado un error:
 
 ```js
-const __filename = "value"
-// será tranformado a
-const "path/vite.config.js" = "value"
-
-console.log("import.meta.url") // ocurre un error en compilación.
+const __filename = 'value' // SyntaxError: Identifier '__filename' has already been declared
+const func = () => {
+  const __filename = 'value' // no error
+}
 ```
 
 :::

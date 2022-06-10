@@ -147,6 +147,12 @@
 
   Ten en cuenta que la opción `build.minify` no está disponible cuando se usa el formato `'es'` en modo lib.
 
+  Se debe instalar Terser cuando se configura como `'terser'`.
+
+  ```sh
+  npm add -D terser
+  ```
+
 ## build.terserOptions
 
 - **Tipo:** `TerserOptions`
