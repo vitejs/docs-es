@@ -31,6 +31,8 @@ Una pequeña fracción de usuarios ahora requerirán el uso de [@vitejs/plugin-l
 
 El puerto del servidor de desarrollo predeterminado de Vite ahora es 5173. Puedes usar [`server.port`](../config/server-options.md#server-port) para configurarlo en 3000.
 
+El host del servidor de desarrollo predeterminado de Vite ahora es `localhost`. Puedes usar [`server.host`](../config/server-options.md#server-host) para configurarlo en `127.0.0.1`.
+
 Vite optimiza las dependencias con esbuild para convertir dependencias de solo CJS a ESM y para reducir la cantidad de módulos que el navegador necesita pedir. En v3, la estrategia predeterminada para descubrir y procesar por lotes ha cambiado. Vite ya no escanea previamente el código de usuario con esbuild para obtener una lista inicial de dependencias en el arranque inicial. En su lugar, retrasa la ejecución de la primera optimización de dependencias hasta que se procesan todos los módulos de usuario importados que se están cargando.
 
 Para recuperar la estrategia de la v2, puedes usar [`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan).

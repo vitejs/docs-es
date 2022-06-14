@@ -3,7 +3,7 @@
 ## server.host
 
 - **Tipo:** `string | boolean`
-- **Por defecto:** `'127.0.0.1'`
+- **Por defecto:** `'localhost'`
 
   Especifica en qué direcciones IP debe escuchar el servidor.
   Configuralo en `0.0.0.0` o `true` para escuchar en todas las direcciones, incluidas las LAN y las direcciones públicas.

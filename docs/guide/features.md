@@ -34,7 +34,7 @@ Vite solo realiza la transpilación en archivos `.ts` y **NO** realiza verificac
 
 Vite usa [esbuild](https://github.com/evanw/esbuild) para transpilar TypeScript en JavaScript, que es entre 20 y 30 veces más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
 
-Usa la sintaxis de [importaciones y exportaciones de solo tipo](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) para evitar problemas potenciales como las importaciones de solo tipo que se agrupan incorrectamente. por ejemplo:
+Usa la sintaxis de [importaciones y exportaciones de solo tipo](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) para evitar problemas potenciales como las importaciones de solo tipo que se agrupan incorrectamente, por ejemplo:
 
 ```ts
 import type { T } from 'only/types'
@@ -499,10 +499,16 @@ const worker = new MyWorker()
 
 El script del worker también puede usar sentencias `import` en lugar de `importScripts()`; ten en cuenta que durante el desarrollo esto depende del soporte nativo del navegador y actualmente solo funciona en Chrome, pero para la compilación de producción está compilado.
 
-De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega la consulta `inline`:
+De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega el parámetro `inline`:
 
 ```js
 import MyWorker from './worker?worker&inline'
+```
+
+Si deseas listar el worker como una URL, agrega el parámetro `url`:
+
+```js
+import MyWorker from './worker?worker&url'
 ```
 
 Revisa las [opciones de Worker](/config/#worker-options) para obtener detalles sobre cómo configurar el empaquetado de todos los workers.
