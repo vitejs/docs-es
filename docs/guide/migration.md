@@ -53,6 +53,10 @@ Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `ssr.format
 
 - Las extensiones de archivo JS en modo SSR y lib ahora usan una extensión válida (`js`, `mjs` o `cjs`) para generar archivos y fragmentos JS según su formato y el tipo de paquete.
 
+- Terser ahora es una dependencia opcional. Si estás utilizando `build.minify: 'terser'`, debes instalarlo.
+  ```shell
+  npm add -D terser
+  ```
 ### `import.meta.glob`
 
 - [Raw `import.meta.glob`](features.md#glob-import-as) cambió de `{afirm: { type: 'raw' }}` a `{ as: 'raw' }`
@@ -93,6 +97,8 @@ Hay algunos cambios que solo afectan a los creadores de complementos/herramienta
   - Se elimina `printHttpServerUrls`
   - Se eliminan `server.app`, `server.transformWithEsbuild`
   - Se elimina `import.meta.hot.acceptDeps`
+- [[#6901] fix: inyección secuencial de etiquetas en transformIndexHtml](https://github.com/vitejs/vite/pull/6901)
+  - `transformIndexHtml` ahora obtiene el contenido correcto modificado por complementos anteriores, por lo que el orden de las etiquetas inyectadas ahora funciona como se esperaba.
 - [[#7995] chore: no fixStacktrace](https://github.com/vitejs/vite/pull/7995)
   - El valor predeterminado de la opción `fixStacktrace` de `ssrLoadModule` ahora es `false`
 - [[#8178] feat!: migración a ESM](https://github.com/vitejs/vite/pull/8178)
@@ -105,8 +111,12 @@ También hay otros cambios importantes que solo afectan a unos pocos usuarios.
   - Transpilar a ES5 ahora es necesario incluso si el código de usuario solo incluye ES5.
 - [[#7877] fix: tipos de clientes vite](https://github.com/vitejs/vite/pull/7877)
   - `/// <reference lib="dom" />` se elimina de `vite/client.d.ts`. `{ "lib": ["dom"] }` o `{ "lib": ["webworker"] }` es necesario en el `tsconfig.json`.
+- [[#8090] feat: conservar variables de entorno en el proceso de compilación de librería](https://github.com/vitejs/vite/pull/8090)
+  - `process.env.*` ahora se conserva en modo biblioteca
 - [[#8280] feat: optimización de esbuild sin bloqueos en el momento de la compilación](https://github.com/vitejs/vite/pull/8280)
   - La opción `server.force` se eliminó en favor de la opción `force`.
+- [[#8550] fix: no manejar sigterm en modo middleware](https://github.com/vitejs/vite/pull/8550)
+  - Cuando se ejecuta en modo middleware, Vite ya no elimina el proceso en `SIGTERM`.
 
 ## Migración desde v1
 
