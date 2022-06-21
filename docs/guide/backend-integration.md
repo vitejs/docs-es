@@ -22,7 +22,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    })
    ```
 
-   Si no has desactivado el [polyfill de precarga de modulos](/config/#build-polyfillmodulepreload), tambien necesitarás importarlo en tu entrada.
+   Si no has desactivado el [polyfill de precarga de modulos](/config/build-options#build-polyfillmodulepreload), tambien necesitarás importarlo en tu entrada.
 
    ```js
    // agrega esto en el archivo de entrada de tu app
@@ -39,7 +39,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    Para servir correctamente los recursos, tienes dos opciones:
 
    - Asegúrarse de que el servidor esté configurado para enviar solicitudes de recursos estáticos al servidor de Vite.
-   - Configurar [`server.origin`](https://vitejs.dev/config/#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor backend en lugar de una ruta relativa.
+   - Configurar [`server.origin`](/config/server-options#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor backend en lugar de una ruta relativa.
 
    Esto es necesario para que los recursos, como imágenes, se carguen correctamente.
 

@@ -111,7 +111,7 @@ Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilac
 
 Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 
-Si no usas JSX con React o Vue, puedes hacer configuraciones personalizadas de `jsxFactory` y `jsxFragment` usando la [opción `esbuild`](/config/#esbuild). Por ejemplo para Preact:
+Si no usas JSX con React o Vue, puedes hacer configuraciones personalizadas de `jsxFactory` y `jsxFragment` usando la [opción `esbuild`](/config/shared-options#esbuild). Por ejemplo para Preact:
 
 ```js
 // vite.config.js
@@ -170,7 +170,7 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-El comportamiento de los módulos CSS se puede configurar mediante la [opción `css.modules`](/config/#css-modules).
+El comportamiento de los módulos CSS se puede configurar mediante la [opción `css.modules`](/config/shared-options#css-modules).
 
 Si `css.modules.localsConvention` está configurado para habilitar camelCase locales (por ejemplo, `localsConvention: 'camelCaseOnly'`), también podrá usar importaciones con nombre:
 
@@ -423,7 +423,7 @@ const modules = {
 Ten en cuenta que:
 
 - Esta es una característica exclusiva de Vite y no es un estándar web o ES.
-- Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [opción `resolve.alias`](/config/#resolve-alias)).
+- Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [opción `resolve.alias`](/config/shared-options#resolve-alias)).
 - La coincidencia de glob se realiza a través de [`fast-glob`](https://github.com/mrmlnc/fast-glob) - Consulta la documentación de los [patrones de glob compatibles](https://github.com/mrmlnc/fast-glob#pattern-syntax).
 - También debes tener en cuenta que todos los argumentos en `import.meta.glob` deben **pasarse como literales**. NO puede usar variables o expresiones en ellos.
 
@@ -511,7 +511,7 @@ Si deseas listar el worker como una URL, agrega el parámetro `url`:
 import MyWorker from './worker?worker&url'
 ```
 
-Revisa las [opciones de Worker](/config/#worker-options) para obtener detalles sobre cómo configurar el empaquetado de todos los workers.
+Revisa las [opciones de Worker](/config/worker-options) para obtener detalles sobre cómo configurar el empaquetado de todos los workers.
 
 ## Optimizaciones de compilación
 
@@ -521,7 +521,7 @@ Revisa las [opciones de Worker](/config/#worker-options) para obtener detalles s
 
 Vite extrae automáticamente el CSS utilizado por los módulos en un fragmento asíncrono y genera un archivo separado para él. El archivo CSS se carga automáticamente a través de una etiqueta `<link>` cuando se carga el fragmento asíncrono asociado, y se garantiza que el fragmento asíncrono solo se evaluará después de cargar el CSS para evitar [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retriever.).
 
-Si prefieres que se extraiga todo el CSS en un solo archivo, puedes desactivar la división del código CSS configurando [`build.cssCodeSplit`](/config/#build-csscodesplit) en `false`.
+Si prefieres que se extraiga todo el CSS en un solo archivo, puedes desactivar la división del código CSS configurando [`build.cssCodeSplit`](/config/build-options#build-csscodesplit) en `false`.
 
 ### Generación de directivas de precarga
 

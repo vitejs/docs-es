@@ -1,7 +1,7 @@
 # Gestión de recursos estáticos
 
 - Relacionado: [Ruta base pública](./build#ruta-base-publica)
-- Relacionado: [Opción de configuración `assetsInclude`](/config/#assetsinclude)
+- Relacionado: [Opción de configuración `assetsInclude`](/config/shared-options#assetsinclude)
 
 ## Importar recursos como URL
 
@@ -20,11 +20,11 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 
 - Si usa el complemento de Vue, las referencias de recursos en las plantillas de Vue SFC se convierten automáticamente en importaciones.
 
-- Los tipos de archivos comunes de imágenes, medios y fuentes se detectan como recursos automáticamente. Puedes ampliar la lista interna utilizando la opción [`assetsInclude`](/config/#assetsinclude).
+- Los tipos de archivos comunes de imágenes, medios y fuentes se detectan como recursos automáticamente. Puedes ampliar la lista interna utilizando la opción [`assetsInclude`](/config/shared-options#assetsinclude).
 
 - Los recursos referenciados se incluyen como parte del gráfico de compilación de recursos, obtendrán nombres de archivo con hash y los complementos pueden procesarlos para su optimización.
 
-- Los recursos más pequeños en bytes que la opción [`assetsInlineLimit`](/config/#build-assetsinlinelimit) se insertarán como URL de datos en base64.
+- Los recursos más pequeños en bytes que la opción [`assetsInlineLimit`](/config/build-options#build-assetsinlinelimit) se insertarán como URL de datos en base64.
 
 ### Importaciones de URL explícita
 
@@ -64,9 +64,7 @@ const sharedWorker = new SharedWorker()
 import InlineWorker from './shader.js?worker&inline'
 ```
 
-<!-- Check out the [Web Worker section](./features.md#web-workers) for more details. -->
-
-Consulta la [sección Web Worker](./features.md#web-workers) para obtener más detalles.
+Consulta la [sección Web Worker](./features#web-workers) para obtener más detalles.
 
 ## La carpeta `public`
 
@@ -78,7 +76,7 @@ Si tienes recursos que:
 
 Entonces puedes colocar el recurso en una carpeta `public` especial en la raíz de tu proyecto. Los recursos en ella se servirán en la ruta raíz `/` durante el desarrollo y se copiarán en la raíz de la carpeta dist tal como están.
 
-El directorio predeterminado es `<root>/public`, pero esto se puede configurar a través de la opción [`publicDir`](/config/#publicdir).
+El directorio predeterminado es `<root>/public`, pero esto se puede configurar a través de la opción [`publicDir`](/config/shared-options#publicdir).
 
 Ten en cuenta que:
 
@@ -117,4 +115,4 @@ Este patrón no funciona si estás utilizando Vite para Server-Side Rendering, p
 :::
 
 ::: warning `target` debe ser `es2020` o superior
-Este patrón no funcionará si [build-target](https://vitejs.dev/config/#build-target) o [optimizedeps.esbuildoptions.target](https://vitejs.dev/config/#optimizedeps-esbuildoptions) se configura en un valor inferior a `es2020`.
+Este patrón no funcionará si [build-target](/config/build-options#build-target) o [optimizedeps.esbuildoptions.target](/config/dep-optimization-options#optimizedeps-esbuildoptions) se configura en un valor inferior a `es2020`.

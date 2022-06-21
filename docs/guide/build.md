@@ -11,7 +11,7 @@ El empaquetado de producción asume soporte para código JavaScript moderno. De 
 - Safari >=13
 - Edge >=88
 
-Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/#build-target), donde el objetivo más bajo es `es2015`.
+Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options#build-target), donde el objetivo más bajo es `es2015`.
 
 Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills de forma predeterminada**. Puedes consultar [Polyfill.io](https://polyfill.io/v3/), que es un servicio que genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
 
@@ -21,7 +21,7 @@ Los navegadores obsoletos pueden ser soportados a través de [@vitejs/plugin-leg
 
 - Relacionado: [Gestión de recursos estáticos](./assets)
 
-Si estás implementando tu proyecto bajo una ruta pública anidada, simplemente especifica la [opción de configuración `base`](/config/#base) y todas las rutas de recursos se reescribirán en consecuencia. Esta opción también se puede especificar como un indicador de línea de comando, por ejemplo, `vite build --base=/my/public/path/`.
+Si estás implementando tu proyecto bajo una ruta pública anidada, simplemente especifica la [opción de configuración `base`](/config/shared-options#base) y todas las rutas de recursos se reescribirán en consecuencia. Esta opción también se puede especificar como un indicador de línea de comando, por ejemplo, `vite build --base=/my/public/path/`.
 
 Las URL de recursos importados por JS, las referencias de CSS `url()` y las referencias de recursos en sus archivos `.html` se ajustan automáticamente para respetar esta opción durante la compilación.
 
@@ -29,7 +29,7 @@ La excepción es cuando se necesita concatenar dinámicamente URL sobre la march
 
 ## Personalizando la compilación
 
-La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/#opciones-de-build). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/guide/en/#big-list-of-options) fundamentales a través de `build.rollupOptions`:
+La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/guide/en/#big-list-of-options) fundamentales a través de `build.rollupOptions`:
 
 ```js
 // vite.config.js
@@ -116,7 +116,7 @@ Si especificas una raíz diferente, recuerda que `__dirname` seguirá siendo la 
 
 Cuando estás desarrollando una librería orientada al navegador, es probable que pases la mayor parte del tiempo en una página de prueba/demostración que importa tu librería actual. Con Vite, puedes usar tu `index.html` para ese propósito y así obtener una experiencia de desarrollo fluida.
 
-Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la [opción de configuración `build.lib`](/config/#build-lib). Asegúrate de externalizar también cualquier dependencia que no desees incluir en tu librería, por ejemplo, `vue` o `react`:
+Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la [opción de configuración `build.lib`](/config/build-options#build-lib). Asegúrate de externalizar también cualquier dependencia que no desees incluir en tu librería, por ejemplo, `vue` o `react`:
 
 ```js
 // vite.config.js

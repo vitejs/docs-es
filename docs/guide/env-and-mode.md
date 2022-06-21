@@ -6,7 +6,7 @@ Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Al
 
 - **`import.meta.env.MODE`**: {string} el [modo](#modos) en el que se ejecuta la aplicación.
 
-- **`import.meta.env.BASE_URL`**: {string} la URL base desde la que se sirve la aplicación. Esto está determinado por la [opción de configuración `base`](/config/#base).
+- **`import.meta.env.BASE_URL`**: {string} la URL base desde la que se sirve la aplicación. Esto está determinado por la [opción de configuración `base`](/config/shared-options#base).
 
 - **`import.meta.env.PROD`**: {boolean} si la aplicación se ejecuta en producción.
 
@@ -24,7 +24,7 @@ También reemplazará estas cadenas que aparecen en las cadenas de JavaScript y 
 
 ## Archivos `.env`
 
-Vite usa [dotenv](https://github.com/motdotla/dotenv) para cargar variables de entorno adicionales desde los siguientes archivos en su [directorio de entorno](/config/#envdir):
+Vite usa [dotenv](https://github.com/motdotla/dotenv) para cargar variables de entorno adicionales desde los siguientes archivos en su [directorio de entorno](/config/shared-options#envdir):
 
 ```
 .env                # cargado en todos los casos

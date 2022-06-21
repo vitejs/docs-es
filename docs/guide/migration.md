@@ -19,13 +19,26 @@ Una pequeña fracción de usuarios ahora requerirán el uso de [@vitejs/plugin-l
 
 - Se han eliminado las siguientes opciones que ya estaban en desuso en v2:
   
-  - `alias` (cambialo por [`resolve.alias`](../config/shared-options.md#resolvealias))
-  - `dedupe` (cambialo por [`resolve.dedupe`](../config/shared-options.md#resolvededupe))
+  - `alias` (cambialo por [`resolve.alias`](../config/shared-options.md#resolve-alias))
+  - `dedupe` (cambialo por [`resolve.dedupe`](../config/shared-options.md#resolve-dedupe))
   - `build.base` (cambialo por [`base`](../config/shared-options.md#base))
   - `build.brotliSize` (cambialo por [`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize))
   - `build.cleanCssOptions` (Vite ahora usa esbuild para la minificación de CSS)
   - `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
-  - `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedepsesbuildoptions))
+  - `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions))
+
+## Cambios de arquitectura y opciones heredadas
+
+Esta sección describe los mayores cambios de arquitectura en Vite v3. Para permitir que los proyectos migren desde v2 en caso de un problema de compatibilidad, se agregaron opciones heredadas para volver a las estrategias de Vite v2.
+
+:::warning
+Estas opciones están marcadas como experimentales y obsoletas. Es posible que se eliminen en una futura versión de la v3 sin previo aviso. Fija la versión de Vite cuando los uses.
+
+- `legacy.devDepsScanner`
+- `legacy.buildRollupPluginCommonjs`
+- `legacy.buildSsrCjsExternalHeuristics`
+
+:::
 
 ## Cambios en el servidor de desarrollo
 
@@ -35,19 +48,21 @@ El host del servidor de desarrollo predeterminado de Vite ahora es `localhost`. 
 
 Vite optimiza las dependencias con esbuild para convertir dependencias de solo CJS a ESM y para reducir la cantidad de módulos que el navegador necesita pedir. En v3, la estrategia predeterminada para descubrir y procesar por lotes ha cambiado. Vite ya no escanea previamente el código de usuario con esbuild para obtener una lista inicial de dependencias en el arranque inicial. En su lugar, retrasa la ejecución de la primera optimización de dependencias hasta que se procesan todos los módulos de usuario importados que se están cargando.
 
-Para recuperar la estrategia de la v2, puedes usar [`optimizeDeps.devScan`](../config/dep-optimization-options.md#optimizedepsdevscan).
+Para regresar a la estrategia de la v2, puedes usar `legacy.devDepsScanner`.
 
 ## Cambios en compilación
 
 En v3, Vite usa esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en v2. Debido a que esbuild convierte las dependencias de solo CJS a ESM, [`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no se usa.
 
-Si necesitas volver a la estrategia de la v2, puedes usar [`optimizeDeps.disabled: 'build'`](../config/dep-optimization-options.md#optimizedepsdisabled).
+Si necesitas volver a la estrategia de la v2, puedes usar `legacy.buildRollupPluginCommonjs`.
 
 ## Cambios en SSR
 
-Vite v3 usa ESM para la compilación de SSR de manera predeterminada. Cuando se usa ESM, ya no se necesitan las [heurísticas de externalización de SSR](https://vitejs.dev/guide/ssr.html#ssr-externals). De forma predeterminada, todas las dependencias se externalizan. Puedes usar [`ssr.noExternal`](../config/ssr-options.md#ssrnoexternal) para controlar qué dependencias incluir en el paquete SSR.
+Vite v3 usa ESM para la compilación de SSR de manera predeterminada. Cuando se usa ESM, ya no se necesitan las [heurísticas de externalización de SSR](https://vitejs.dev/guide/ssr.html#ssr-externals). De forma predeterminada, todas las dependencias se externalizan. Puedes usar [`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) para controlar qué dependencias incluir en el paquete SSR.
 
-Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `ssr.format: 'cjs'` para generar un paquete CJS. En este caso, se utilizará la misma estrategia de externalización de Vite v2.
+Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `legacy.buildSsrCjsExternalHeuristics` para generar un paquete CJS utilizando la misma estrategia de externalización de Vite v2.
+
+Además, [`build.rollupOptions.output.inlineDynamicImports`](https://rollupjs.org/guide/en/#outputinlinedynamicimports) ahora tiene el valor predeterminado `false` cuando `ssr.target` es `'node'`. `inlineDynamicImports` cambia el orden de ejecución y no es necesario empaquetar en un solo archivo para compilaciones de node.
 
 ## Cambios generales
 
@@ -114,7 +129,7 @@ También hay otros cambios importantes que solo afectan a unos pocos usuarios.
 - [[#8090] feat: conservar variables de entorno en el proceso de compilación de librería](https://github.com/vitejs/vite/pull/8090)
   - `process.env.*` ahora se conserva en modo biblioteca
 - [[#8280] feat: optimización de esbuild sin bloqueos en el momento de la compilación](https://github.com/vitejs/vite/pull/8280)
-  - La opción `server.force` se eliminó en favor de la opción `force`.
+  - La opción `server.force` se eliminó en favor de la opción `optimizeDeps.force`.
 - [[#8550] fix: no manejar sigterm en modo middleware](https://github.com/vitejs/vite/pull/8550)
   - Cuando se ejecuta en modo middleware, Vite ya no elimina el proceso en `SIGTERM`.
 

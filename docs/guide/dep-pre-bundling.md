@@ -42,7 +42,7 @@ Después de que el servidor ya se haya iniciado, si se encuentra una nueva impor
 
 En una configuración monorepo, una dependencia puede ser un paquete vinculado desde el mismo repositorio. Vite detecta automáticamente las dependencias que no se resuelven desde `node_modules` y trata la dependencia vinculada como código fuente. Este no intentará empaquetar la dependencia vinculada y, en su lugar, analizará la lista de dependencias de la dependencia vinculada.
 
-Sin embargo, esto requiere que la dependencia vinculada se exporte como ESM. De lo contrario, puede agregar la dependencia a [`optimizeDeps.include`](/config/#optimizedeps-include) y [`build.commonjsOptions.include`](/config/#build-commonjsoptions) en tus configuraciones.
+Sin embargo, esto requiere que la dependencia vinculada se exporte como ESM. De lo contrario, puede agregar la dependencia a [`optimizeDeps.include`](/config/dep-optimization-options#optimizedeps-include) y [`build.commonjsOptions.include`](/config/build-options#build-commonjsoptions) en tus configuraciones.
 
 ```js
 export default defineConfig({
@@ -65,7 +65,7 @@ Debido a las diferencias en la resolución de dependencias vinculadas, las depen
 
 ## Personalizando el Comportamiento
 
-La heurística de descubrimiento de dependencia predeterminada puede no ser siempre deseable. En los casos en los que desees incluir/excluir dependencias explícitamente de la lista, utiliza las [opciones de configuración de `optimizeDeps`](/config/#opciones-de-optimizedeps).
+La heurística de descubrimiento de dependencia predeterminada puede no ser siempre deseable. En los casos en los que desees incluir/excluir dependencias explícitamente de la lista, utiliza las [opciones de configuración de `optimizeDeps`](/config/dep-optimization-options).
 
 Un caso de uso típico para `optimizeDeps.include` o `optimizeDeps.exclude` es cuando tienes una importación que no se puede descubrir directamente en el código fuente. Por ejemplo, tal vez la importación se cree como resultado de una transformación de complemento. Esto significa que Vite no podrá descubrir la importación en el escaneo inicial; solo podrá descubrirla después de que el navegador solicite el archivo y lo transforme. Esto hará que el servidor se vuelva a empaquetar inmediatamente después del inicio del servidor.
 

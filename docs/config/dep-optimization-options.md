@@ -1,4 +1,4 @@
-# Opciones de optimización de dependencias
+# Opciones para optimización de dependencias
 
 - **Relacionado:** [Preempaquetado de dependencias](/guide/dep-pre-bundling)
 
@@ -45,3 +45,9 @@
 
   - También se omite `external`, usa la opción `optimizeDeps.exclude` de Vite
   - `plugins` se fusionan con el complemento de dependencia de Vite
+
+## optimizeDeps.force
+
+- **Tipo:** `boolea`
+
+  Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.

@@ -1,4 +1,4 @@
-# Opciones de build
+# Opciones para build
 
 ## build.target
 
@@ -73,7 +73,7 @@
 ## build.cssTarget
 
 - **Tipo:** `string | string[]`
-- **Por defecto:** Igual que [`build.target`](/config/#build-target)
+- **Por defecto:** Igual que [`build.target`](#build-target)
 
   Esta opción permite a los usuarios configurar un destino de navegador diferente para la minificación de CSS del que se usa normalmente para la transpilación de JavaScript.
 

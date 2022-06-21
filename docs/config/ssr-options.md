@@ -1,4 +1,4 @@
-# Opciones de SSR
+# Opciones para SSR
 
 - **Relacionado:** [SSR Externos](/guide/ssr#ssr-externos)
 

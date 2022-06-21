@@ -74,13 +74,12 @@ const { createServer: createViteServer } = require('vite')
 async function createServer() {
   const app = express()
 
-  // Crea un servidor Vite en modo middleware. Esto deshabilita el propio HTML de Vite
-  // sirviendo la lógica y dejando que el servidor principal tome el control.
-  //
-  // En modo middleware, si deseas utilizar la lógica de servicio HTML propia de Vite
-  // usa `'html'` como `middlewareMode` (ref https://vitejs.dev/config/#server-middlewaremode)
+  // Crea servidor Vite en modo middleware y configura el tipo de aplicación como
+  // 'custom', deshabilitando la propia lógica de servicio HTML de Vite para que el servidor principal
+  // puede tomar el control
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
+    server: { middlewareMode: true },
+    appType: 'custom'
   })
   // Usa la instancia de Connect de Vite como middleware
   app.use(vite.middlewares)
@@ -268,10 +267,8 @@ En algunos casos, como los tiempos de ejecución de `webworker`, es posible que 
 
 ## Vite CLI
 
-Los comandos del CLI `$ vite dev` y `$ vite preview` también se pueden usar para aplicaciones SSR:
+Los comandos del CLI `$ vite dev` y `$ vite preview` también se pueden usar para aplicaciones SSR. Puedes agregar tu middleware SSR al servidor de desarrollo con [`configureServer`](/guide/api-plugin#configureserver) y al servidor de vista previa con [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
 
-1. Agrega tu middleware SSR al servidor de desarrollo con [`configureServer`](/guide/api-plugin#configureserver) y al servidor de vista previa con [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
-   :::tip Note
-   Usa un post hook para que tu middleware SSR se ejecute _después_ de los middlewares de Vite.
-   :::
-2. Configura `config.spa` en `false`. Esto cambia el servidor de desarrollo y vista previa del modo SPA al modo SSR/MPA.
+:::tip Nota
+Usa un post hook para que tu middleware SSR se ejecute _después_ de los middlewares de Vite.
+:::

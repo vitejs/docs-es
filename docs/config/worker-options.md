@@ -1,4 +1,4 @@
-# Opciones de Worker
+# Opciones para Worker
 
 ## worker.format
 

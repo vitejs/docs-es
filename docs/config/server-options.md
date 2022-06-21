@@ -1,4 +1,4 @@
-# Opciones de servidor
+# Opciones para server
 
 ## server.host
 
@@ -9,6 +9,27 @@
   Configuralo en `0.0.0.0` o `true` para escuchar en todas las direcciones, incluidas las LAN y las direcciones públicas.
 
   Esto se puede configurar a través de la CLI usando `--host 0.0.0.0` o `--host`.
+
+  :::tip NOTA
+
+  Hay casos en los que otros servidores pueden responder en lugar de Vite.
+
+  El primer caso es cuando se usa `localhost`. Node.js por debajo de v17 reordena el resultado de la dirección resuelta por DNS de forma predeterminada. Al acceder a `localhost`, los navegadores usan DNS para resolver la dirección y esa dirección puede diferir de la dirección que está escuchando Vite.
+
+  Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para deshabilitar el comportamiento de reordenación. O podrías configurar `server.host` a `127.0.0.1` explícitamente.
+
+  ```js
+  // vite.config.js
+  import { defineConfig } from 'vite'
+  import dns from 'dns'
+  dns.setDefaultResultOrder('verbatim')
+  export default defineConfig({
+    // omitido
+  })
+  ```
+  El segundo caso es cuando se utilizan hosts comodín (por ejemplo, `0.0.0.0`). Esto se debe a que los servidores que escuchan en hosts que no son comodín tienen prioridad sobre los que escuchan en hosts comodín.
+
+  :::
 
 ## server.port
 
@@ -107,13 +128,6 @@
 
   Especifica los encabezados de respuesta del servidor.
 
-## server.force
-
-- **Tipo:** `boolean`
-- **Relacionado:** [Preempaquetado de dependencias](/guide/dep-pre-bundling)
-
-  Colocalo en `true` para forzar el preempaquetado de dependencias.
-
 ## server.hmr
 
 - **Tipo:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
@@ -153,14 +167,12 @@
 
 ## server.middlewareMode
 
-- **Tipo:** `'ssr' | 'html'`
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
 
-  Crea un servidor Vite en modo middleware (sin un servidor HTTP)
+  Crea un servidor Vite en modo middleware.
 
-  - `'ssr'` deshabilitará la propia lógica de servicio de HTML de Vite para que sirvas `index.html` manualmente.
-  - `'html'` habilitará la propia lógica de servicio HTML de Vite.
-
-- **Relacionado:** [SSR - Configuración del servidor de desarrollo](/guide/ssr#configuracion-del-servidor-de-desarrollo)
+- **Relacionado:** [appType](./shared-options#apptype), [SSR - Configuración del servidor de desarrollo](/guide/ssr#configuracion-del-servidor-de-desarrollo)
 
 - **Ejemplo:**
 
@@ -173,15 +185,16 @@ async function createServer() {
 
   // Crea servidor Vite en modo middleware
   const vite = await createViteServer({
-    server: { middlewareMode: 'ssr' }
-  })
+    server: { middlewareMode: true },
+    appType: 'custom' // no incluir middlewares de manejo de HTML predeterminado de Vite
   // Usa la instancia de conexión de vite como middleware
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
-    // Si `middlewareMode` es `'ssr'`, debería servir `index.html` aquí.
-    // Si `middlewareMode` es `'html'`, no hay necesidad de servir `index.html`
-    // porque Vite lo hará.
+    // Dado que `appType` es `'custom'`, debería servir la respuesta aquí.
+    // Nota: si `appType` es `'spa'` o `'mpa'`, Vite incluye middlewares para manejar
+    // Solicitudes HTML y 404, por lo que se deben agregar middlewares de usuario
+    // antes de que los middlewares de Vite surtan efecto en su lugar
   })
 }
 

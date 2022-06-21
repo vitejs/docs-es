@@ -5,7 +5,7 @@
 - **Tipo:** `string`
 - **Por defecto:** `process.cwd()`
 
-  Directorio raíz del proyecto (donde se encuentra `index.html`). Puede ser una ruta absoluta o una ruta relativa a la ubicación del propio archivo de configuración.
+  Directorio raíz del proyecto (donde se encuentra `index.html`). Puede ser una ruta absoluta o una ruta relativa a la ubicación al directorio de trabajo actual.
 
   Consulta [Raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto) para obtener más detalles.
 
@@ -77,9 +77,10 @@
 
 ## plugins
 
-- **Tipo:** `(Plugin | Plugin[])[]`
+- **Tipo:** `(Plugin | Plugin[] | Promise<Plugin | Plugin[]>)[]`
 
-  Array de complementos a usar. Los complementos falsos se ignoran y los arrays de complementos se simplifican. Consulta la [API de complementos](/guide/api-plugin) para obtener más detalles sobre los complementos de Vite.
+  Array de complementos a usar. Los complementos falsos se ignoran y los arrays de complementos se simplifican. 
+  Si se devuelve una promesa, se resolvería antes de ejecutarse. Consulta la [API de complementos](/guide/api-plugin) para obtener más detalles sobre los complementos de Vite.
 
 ## publicDir
 
@@ -333,12 +334,19 @@
   Las variables de entorno que comienzan con `envPrefix` se expondrán al código fuente de tu cliente a través de import.meta.env.
 
   :::warning NOTAS DE SEGURIDAD
-  `envPrefix` no debe establecerse como `''`, lo que expondrá todas tus variables env y provocará una filtración inesperada de información confidencial. Vite arrojará un error al detectar `''`.
+  `envPrefix` no debe configurarse como `''`, esto expondrá todas tus variables env y provocará una filtración inesperada de información confidencial. De todas formas, Vite arrojará un error al detectar `''`.
   :::
 
-## spa
+## appType
 
-- **Tipo:** `boolean`
-- **Por defecto:** `true`
+- **Tipo:** `'spa' | 'mpa' | 'custom'`
+- **Por defecto:** `'spa'`
 
-  Si tu aplicación es una aplicación de página única (SPA). Configuralo en `false` para otros tipos de aplicaciones como MPA. Obtén más información en la [guía de SSR](/guide/ssr#vite-cli) de Vite.
+  Si tu aplicación es una aplicación de página única (SPA), una [aplicación multipáginas (MPA)](../guide/build#multi-page-app) o una aplicación personalizada (SSR y marcos con manejo de HTML personalizado):
+
+  - `'spa'`: incluye el middleware alternativo de SPA y configura [sirv](https://github.com/lukeed/sirv) con `single: true` en la vista previa
+  - `'mpa'`: solo incluye middleware HTML no SPA
+  - `'custom'`: no incluye middleware HTML
+
+  
+Obtén más información en la [guía SSR](/guide/ssr#vite-cli) de Vite. Relacionado: [`server.middlewareMode`](./server-options#server-middlewaremode).

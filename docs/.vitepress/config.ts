@@ -183,27 +183,27 @@ export default defineConfig({
               link: '/config/shared-options'
             },
             {
-              text: 'Opciones de servidor',
+              text: 'Opciones para server',
               link: '/config/server-options'
             },
             {
-              text: 'Opciones de compilación',
+              text: 'Opciones para build',
               link: '/config/build-options'
             },
             {
-              text: 'Opciones de vista previa',
+              text: 'Opciones para preview',
               link: '/config/preview-options'
             },
             {
-              text: 'Opciones de optimización de dependencias',
+              text: 'Opciones para optimización de dependencias',
               link: '/config/dep-optimization-options'
             },
             {
-              text: 'Opciones SSR',
+              text: 'Opciones para SSR',
               link: '/config/ssr-options'
             },
             {
-              text: 'Opciones de Worker',
+              text: 'Opciones para Worker',
               link: '/config/worker-options'
             }
           ]

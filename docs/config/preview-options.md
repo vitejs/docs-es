@@ -1,4 +1,4 @@
-# Opciones de preview
+# Opciones para preview
 
 ## preview.host
 
@@ -9,6 +9,13 @@
   Configurar en `0.0.0.0` o `true` para escuchar en todas las direcciones, incluidas las LAN y las direcciones públicas.
 
   Esto se puede configurar a través de la CLI usando `--host 0.0.0.0` o `--host`.
+
+  :::tip NOTA
+
+  Hay casos en los que otros servidores pueden responder en lugar de Vite.
+  Consulta [`server.host`](./server-options#server-host) para obtener más detalles.
+
+  :::
 
 ## preview.port
 
@@ -49,14 +56,14 @@ export default defineConfig({
 ## preview.open
 
 - **Tipo:** `boolean | string`
-- **Por defecto:** [`server.open`](#server_open)
+- **Por defecto:** [`server.open`](#server-open)
 
   Abre automáticamente la aplicación en el navegador al iniciar el servidor. Cuando el valor es una cadena, se utilizará como nombre de ruta de la URL. Si deseas abrir el servidor en un navegador específico, puedes configurar `process.env.BROWSER` (por ejemplo, `firefox`). Consulta [el paquete `open`](https://github.com/sindresorhus/open#app) para obtener más detalles.
 
 ## preview.proxy
 
 - **Tipo:** `Record<string, string | ProxyOptions>`
-- **Por defecto:** [`server.proxy`](#server_proxy)
+- **Por defecto:** [`server.proxy`](#server-proxy)
 
   Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de `{ key: options }` pares. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy.
 
@@ -65,6 +72,6 @@ export default defineConfig({
 ## preview.cors
 
 - **Tipo:** `boolean | CorsOptions`
-- **Por defecto:** [`server.cors`](#server_proxy)
+- **Por defecto:** [`server.cors`](#server-proxy)
 
   Configura las CORS para el servidor de desarrollo. Esto está habilitado por defecto y permite cualquier origen. Pase un [objeto de opciones](https://github.com/expressjs/cors) para ajustar el comportamiento o `false` para deshabilitarlo.
