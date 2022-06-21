@@ -48,6 +48,6 @@
 
 ## optimizeDeps.force
 
-- **Tipo:** `boolea`
+- **Tipo:** `boolean`
 
   Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.

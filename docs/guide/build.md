@@ -27,6 +27,9 @@ Las URL de recursos importados por JS, las referencias de CSS `url()` y las refe
 
 La excepción es cuando se necesita concatenar dinámicamente URL sobre la marcha. En este caso, puedes usar la variable `import.meta.env.BASE_URL` inyectada globalmente, que será la ruta base pública. Ten en cuenta que esta variable se reemplaza estáticamente durante la compilación, por lo que debe aparecer exactamente como está (es decir, `import.meta.env['BASE_URL']` no funcionará).
 
+
+Para obtener un control avanzado de la ruta base, consulta [Opciones avanzadas de base](#opciones-avanzadas-para-base).
+
 ## Personalizando la compilación
 
 La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/guide/en/#big-list-of-options) fundamentales a través de `build.rollupOptions`:
@@ -180,3 +183,58 @@ building for production...
   }
 }
 ```
+## Opciones avanzadas para Base
+
+::: warning
+Esta característica es experimental, la API puede cambiar en una futura actualización sin previo aviso. Corrige la versión secundaria de Vite cuando la uses.
+:::
+
+Para casos de uso avanzado, los recursos estaticos y los archivos públicos desplegados pueden estar en diferentes rutas, por ejemplo, para usar diferentes estrategias de caché.
+Un usuario puede elegir desplegar en tres rutas diferentes:
+
+- Los archivos HTML de entrada generados (que pueden procesarse durante SSR).
+- Los hash de recursos generados (JS, CSS y otros tipos de archivos como imágenes).
+- Los [archivos públicos](./assets#la-carpeta-public) copiados.
+
+Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenarios. Vite brinda soporte experimental para opciones avanzadas para Base durante la compilación, usando `experimental.buildAdvancedBaseOptions`.
+
+```js
+  experimental: {
+    buildAdvancedBaseOptions: {
+      // Igual que base: './'
+      // tipo: boolean, por defecto: false
+      relative: true
+      // Static base
+      // tipo: string, por defecto: undefined
+      url: 'https:/cdn.domain.com/'
+      // la base dinámica que se usará para rutas dentro de JS
+      // tipo: (url: string) => string, por defecto: undefined
+      runtime: (url: string) => `window.__toCdnUrl(${url})`
+    },
+  }
+```
+
+Cuando se defina `runtime`, se usará para recursos marcado via hash y rutas de archivos públicos dentro de recursos JavaScript. Dentro de los archivos generados por CSS y HTML, las rutas usarán `url` si están definidas o recurrirán a `config.base`.
+
+Si `relative` es true y se define `url`, se preferirán las rutas relativas para los recursos dentro del mismo grupo (por ejemplo, una imagen cifrada a la que se hace referencia desde un archivo JS). Y `url` se usará para las rutas en las entradas HTML y para las rutas entre diferentes grupos (un archivo público al que se hace referencia desde un archivo CSS).
+
+Si los recursos firmados via hash y los archivos públicos no se implementan juntos, las opciones para cada grupo se pueden definir de forma independiente:
+
+```js
+  experimental: {
+    buildAdvancedBaseOptions: {
+      assets: {
+        relative: true
+        url: 'https:/cdn.domain.com/assets',
+        runtime: (url: string) => `window.__assetsPath(${url})`
+      },
+      public: {
+        relative: false
+        url: 'https:/www.domain.com/',
+        runtime: (url: string) => `window.__publicPath + ${url}`
+      }
+    }
+  }
+```
+
+Cualquier opción que no esté definida en la entrada `public` o `assets` se heredará de la configuración principal `buildAdvancedBaseOptions`.

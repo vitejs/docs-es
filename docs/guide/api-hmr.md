@@ -17,9 +17,12 @@ interface ViteHotContext {
   readonly data: any
 
   accept(): void
-  accept(cb: (mod: any) => void): void
-  accept(dep: string, cb: (mod: any) => void): void
-  accept(deps: readonly string[], cb: (mods: any[]) => void): void
+  accept(cb: (mod: ModuleNamespace | undefined) => void): void
+  accept(dep: string, cb: (mod: ModuleNamespace | undefined) => void): void
+  accept(
+    deps: readonly string[],
+    cb: (mods: Array<ModuleNamespace | undefined>) => void
+  ): void
 
   dispose(cb: (data: any) => void): void
   decline(): void
@@ -53,7 +56,10 @@ export const count = 1
 
 if (import.meta.hot) {
   import.meta.hot.accept((newModule) => {
-    console.log('actualizado: count ahora es ', newModule.count)
+    if (newModule) {
+      // newModule no está definido cuando ocurrió el SyntaxError
+      console.log('actualizado: count ahora es ', newModule.count)
+    }
   })
 }
 ```
@@ -76,7 +82,7 @@ foo()
 if (import.meta.hot) {
   import.meta.hot.accept('./foo.js', (newFoo) => {
     // el callback recibe el módulo './foo.js' actualizado
-    newFoo.foo()
+    newFoo?.foo()
   })
 
   // Puede aceptar un array de módulos de dependencia:

@@ -2,9 +2,9 @@
 
 ## Compatibilidad de Node
 
-Vite ya no es compatible con Node v12, el cual ya se finalizó su soporte oficial. Ahora se requiere Node 14.6+.
+Vite ya no es compatible con Node v12, el cual ya se finalizó su soporte oficial. Ahora se requiere Node 14.18+.
 
-## Cambios principales basados en navegadores modernos
+## Principales cambios para navegadores modernos
 
 El paquete de producción asume soporte para JavaScript moderno. De forma predeterminada, Vite apunta a navegadores que admiten los [módulos ES nativos](https://caniuse.com/es6-module) e [importación dinámica nativa de ESM](https://caniuse.com/es6-module-dynamic-import ) e [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta):
 
@@ -132,6 +132,8 @@ También hay otros cambios importantes que solo afectan a unos pocos usuarios.
   - La opción `server.force` se eliminó en favor de la opción `optimizeDeps.force`.
 - [[#8550] fix: no manejar sigterm en modo middleware](https://github.com/vitejs/vite/pull/8550)
   - Cuando se ejecuta en modo middleware, Vite ya no elimina el proceso en `SIGTERM`.
+- [[#8647] feat: imprimir dirección resuelta para localhost](https://github.com/vitejs/vite/pull/8647)
+  - `server.printUrls` y `previewServer.printUrls` ahora son asíncronos
 
 ## Migración desde v1
 

@@ -14,7 +14,7 @@
 
   Hay casos en los que otros servidores pueden responder en lugar de Vite.
 
-  El primer caso es cuando se usa `localhost`. Node.js por debajo de v17 reordena el resultado de la dirección resuelta por DNS de forma predeterminada. Al acceder a `localhost`, los navegadores usan DNS para resolver la dirección y esa dirección puede diferir de la dirección que está escuchando Vite.
+  El primer caso es cuando se usa `localhost`. Node.js por debajo de v17 reordena el resultado de la dirección resuelta por DNS de forma predeterminada. Al acceder a `localhost`, los navegadores usan DNS para resolver la dirección y esa dirección puede diferir de la dirección que está escuchando Vite. Vite imprime en consola la dirección resuelta cuando difiere.
 
   Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para deshabilitar el comportamiento de reordenación. O podrías configurar `server.host` a `127.0.0.1` explícitamente.
 
@@ -136,9 +136,22 @@
 
   Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
 
-  `clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente. Es útil si estás utilizando un proxy SSL frente a tu servidor de desarrollo.
+  `clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
 
-  Si configuras `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando deseas exponer Vite a través de una red en un solo puerto.
+  Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
+
+  :::tip NOTA
+
+  Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
+
+  ```
+  Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+  ```
+  Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, puedes:
+
+  - Configurar `server.strictPort = true` y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
+  - Configurar `server.hmr.port` con un valor diferente de `server.port`
+  :::
 
 ## server.watch
 
