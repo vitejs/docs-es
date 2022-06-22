@@ -14,7 +14,7 @@
 
 # Vite ⚡
 
-> Herramientas frontend de próxima generación
+> Herramienta frontend de próxima generación
 
 - 💡 Inicio de servidor al instante
 - ⚡️ HMR ultra rápido
