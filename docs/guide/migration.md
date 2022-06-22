@@ -119,6 +119,8 @@ Hay algunos cambios que solo afectan a los creadores de complementos/herramienta
 - [[#8178] feat!: migración a ESM](https://github.com/vitejs/vite/pull/8178)
   - `formatPostcssSourceMap` ahora es asíncrono
   - `resolvePackageEntry`, `resolvePackageData` ya no están disponibles desde la compilación de CJS (se necesita una importación dinámica para usar en CJS)
+- [[#8626] refactor: mapeo de tipo client](https://github.com/vitejs/vite/pull/8626)
+  - El tipo del callback para `import.meta.hot.accept` ahora es más estricto. Ahora es `(mod: (Record<string, any> & { [Symbol.toStringTag]: 'Module' }) | undefined) => void` (antes `(mod: any) => void`).
 
 También hay otros cambios importantes que solo afectan a unos pocos usuarios.
 

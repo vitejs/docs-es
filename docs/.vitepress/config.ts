@@ -1,9 +1,25 @@
 import { defineConfig } from 'vitepress'
 
+const ogDescription = 'Herramienta frontend de próxima generación'
+const ogImage = 'https://es.vitejs.dev/og-image.png'
+const ogTitle = 'Vite'
+const ogUrl = 'https://es.vitejs.dev'
+
 export default defineConfig({
   title: 'Vite',
-  description: 'Herramientas frontend de próxima generación',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  description: 'Herramienta frontend de próxima generación',
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: ogTitle }],
+    ['meta', { property: 'og:image', content: ogImage }],
+    ['meta', { property: 'og:url', content: ogUrl }],
+    ['meta', { property: 'twitter:description', content: ogDescription }],
+    ['meta', { property: 'twitter:title', content: ogTitle }],
+    ['meta', { property: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { property: 'twitter:image', content: ogImage }],
+    ['meta', { property: 'twitter:url', content: ogUrl }]
+  ],
   vue: {
     reactivityTransform: true
   },
@@ -34,7 +50,7 @@ export default defineConfig({
     localeLinks: {
       text: 'Español',
       items: [
-        { text: 'English', link: 'https://vitejs.dev' },
+        { text: 'English', link: 'https://main.vitejs.dev' },
         { text: '简体中文', link: 'https://cn.vitejs.dev' },
         { text: '日本語', link: 'https://ja.vitejs.dev' }
       ]

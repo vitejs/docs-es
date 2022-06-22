@@ -147,10 +147,11 @@
   ```
   Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
   ```
-  Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, puedes:
+  Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
 
-  - Configurar `server.strictPort = true` y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
-  - Configurar `server.hmr.port` con un valor diferente de `server.port`
+  - configurar el proxy inverso para el proxy de WebSocket también
+  - configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
+  - configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
   :::
 
 ## server.watch

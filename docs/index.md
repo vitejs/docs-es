@@ -3,11 +3,11 @@
 layout: home
 
 title: Vite
-titleTemplate: Herramientas frontend de próxima generación
+titleTemplate: Herramienta frontend de próxima generación
 
 hero:
   name: Vite
-  text: Herramientas frontend de próxima generación
+  text: Herramienta frontend de próxima generación
   tagline: Prepárate para un entorno de desarrollo que finalmente está hecho para tí.
   image:
     src: /logo-with-shadow.png

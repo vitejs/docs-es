@@ -206,7 +206,7 @@ Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenari
       relative: true
       // Static base
       // tipo: string, por defecto: undefined
-      url: 'https:/cdn.domain.com/'
+      url: 'https://cdn.domain.com/'
       // la base dinámica que se usará para rutas dentro de JS
       // tipo: (url: string) => string, por defecto: undefined
       runtime: (url: string) => `window.__toCdnUrl(${url})`
@@ -225,12 +225,12 @@ Si los recursos firmados via hash y los archivos públicos no se implementan jun
     buildAdvancedBaseOptions: {
       assets: {
         relative: true
-        url: 'https:/cdn.domain.com/assets',
+        url: 'https://cdn.domain.com/assets',
         runtime: (url: string) => `window.__assetsPath(${url})`
       },
       public: {
         relative: false
-        url: 'https:/www.domain.com/',
+        url: 'https://www.domain.com/',
         runtime: (url: string) => `window.__publicPath + ${url}`
       }
     }
