@@ -74,7 +74,7 @@ npm create vite@latest my-vue-app -- --template vue
 yarn create vite my-vue-app --template vue
 
 # pnpm
-pnpm create vite my-vue-app -- --template vue
+pnpm create vite my-vue-app --template vue
 ```
 
 Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`.

@@ -145,7 +145,7 @@
 
   Configurar en `false` para deshabilitar la minificación, o especificar el minificador que se usará. El valor predeterminado es [esbuild](https://github.com/evanw/esbuild), que es 20 ~ 40 veces más rápido que terser y solo 1 ~ 2 % peor en compresión. [Pruebas de rendimiento](https://github.com/privatenumber/minification-benchmarks)
 
-  Ten en cuenta que la opción `build.minify` no está disponible cuando se usa el formato `'es'` en modo lib.
+  Ten en cuenta que la opción `build.minify` no minimiza los espacios en blanco cuando se usa el formato `'es'` en el modo librería, ya que elimina las anotaciones puras y rompe el tree-shaking.
 
   Se debe instalar Terser cuando se configura como `'terser'`.
 

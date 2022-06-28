@@ -199,7 +199,7 @@
 
 ## css.postcss
 
-- **Tipo:** `string | (postcss.ProcessOptions & { plugins?: postcss.Plugin[] })`
+- **Tipo:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
 
   Configuración de PostCSS inline o un directorio personalizado para buscar la configuración de PostCSS (el valor predeterminado es la raíz del proyecto).
 
@@ -280,6 +280,7 @@
     }
   })
   ```
+  Cuando [`build.minify`](./build-options.md#build-minify) es `true`, todas las optimizaciones de minify se aplican de manera predeterminada. Para deshabilitar [ciertos aspectos](https://esbuild.github.io/api/#minify), configura cualquiera de las opciones `esbuild.minifyIdentifiers`, `esbuild.minifySyntax` o `esbuild.minifyWhitespace` en `false `. Ten en cuenta que la opción `esbuild.minify` no se puede usar para anular `build.minify`.
 
   Colocarlo en `false` deshabilita las transformaciones de esbuild.
 

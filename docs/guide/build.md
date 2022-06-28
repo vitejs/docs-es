@@ -196,42 +196,33 @@ Un usuario puede elegir desplegar en tres rutas diferentes:
 - Los hash de recursos generados (JS, CSS y otros tipos de archivos como imágenes).
 - Los [archivos públicos](./assets#la-carpeta-public) copiados.
 
-Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenarios. Vite brinda soporte experimental para opciones avanzadas para Base durante la compilación, usando `experimental.buildAdvancedBaseOptions`.
+Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenarios. Vite brinda soporte experimental para opciones avanzadas para Base durante la compilación, usando `experimental.renderBuiltUrl`.
 
 ```js
   experimental: {
-    buildAdvancedBaseOptions: {
-      // Igual que base: './'
-      // tipo: boolean, por defecto: false
-      relative: true
-      // Static base
-      // tipo: string, por defecto: undefined
-      url: 'https://cdn.domain.com/'
-      // la base dinámica que se usará para rutas dentro de JS
-      // tipo: (url: string) => string, por defecto: undefined
-      runtime: (url: string) => `window.__toCdnUrl(${url})`
-    },
+    renderBuiltUrl: (filename: string, { hostType: 'js' | 'css' | 'html' }) => {
+      if (hostType === 'js') {
+        return { runtime: `window.__toCdnUrl(${JSON.stringify(filename)})` }
+      } else {
+        return { relative: true }
+      }
+    }
   }
 ```
 
-Cuando se defina `runtime`, se usará para recursos marcado via hash y rutas de archivos públicos dentro de recursos JavaScript. Dentro de los archivos generados por CSS y HTML, las rutas usarán `url` si están definidas o recurrirán a `config.base`.
-
-Si `relative` es true y se define `url`, se preferirán las rutas relativas para los recursos dentro del mismo grupo (por ejemplo, una imagen cifrada a la que se hace referencia desde un archivo JS). Y `url` se usará para las rutas en las entradas HTML y para las rutas entre diferentes grupos (un archivo público al que se hace referencia desde un archivo CSS).
-
-Si los recursos firmados via hash y los archivos públicos no se implementan juntos, las opciones para cada grupo se pueden definir de forma independiente:
+Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el tercer parámetro de `context` proporcionado a la función.
 
 ```js
   experimental: {
-    buildAdvancedBaseOptions: {
-      assets: {
-        relative: true
-        url: 'https://cdn.domain.com/assets',
-        runtime: (url: string) => `window.__assetsPath(${url})`
-      },
-      public: {
-        relative: false
-        url: 'https://www.domain.com/',
-        runtime: (url: string) => `window.__publicPath + ${url}`
+    renderBuiltUrl(filename: string, { hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
+      if (type === 'public') {
+        return 'https://www.domain.com/' + filename
+      }
+      else if (path.extname(importer) === '.js') {
+        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+      }
+      else {
+        return 'https://cdn.domain.com/assets/' + filename
       }
     }
   }
