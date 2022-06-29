@@ -99,7 +99,7 @@ Puedes usar `?init`, que es similar al comportamiento anterior.
 ```diff
 -import init from 'example.wasm'
 +import init from 'example.wasm?init'
--init().then((instance) => {
+-init().then((exports) => {
 +init().then(({ exports }) => {
   exports.test()
 })
