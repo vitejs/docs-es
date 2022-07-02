@@ -6,6 +6,7 @@ const ogTitle = 'Vite'
 const ogUrl = 'https://es.vitejs.dev'
 
 export default defineConfig({
+  lang: 'es',
   title: 'Vite',
   description: 'Herramienta frontend de próxima generación',
   head: [
