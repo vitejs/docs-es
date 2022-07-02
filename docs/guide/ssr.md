@@ -130,7 +130,7 @@ app.use('*', async (req, res) => {
     // 6. Devuelve el HTML renderizado.
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    // Si se detecta un error, permite que Vite corrija el stracktrace para que se asigne de nuevo a
+    // Si se detecta un error, permite que Vite corrija el trazado de pila para que se asigne de nuevo a
     // su código fuente real.
     vite.ssrFixStacktrace(e)
     console.error(e)
