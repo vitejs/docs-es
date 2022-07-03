@@ -61,7 +61,7 @@ Vite también es compatible directamente con los archivos de configuración de T
 
 ## Configuración condicional
 
-Si la configuración necesita determinar condicionalmente las opciones según el comando (`dev`/`serve` o `build`) o el [modo](/guide/env-and-mode) que se está utilizando, puedes exportar una función en su lugar:
+Si la configuración necesita determinar condicionalmente las opciones basadas en el comando (`dev`/`serve` o `build`), el [modo](/guide/env-and-mode) que se está utilizando, o si es una compilación SSR (`ssrBuild`), puedes exportar una función en su lugar:
 
 ```js
 export default defineConfig(({ command, mode }) => {
@@ -79,6 +79,8 @@ export default defineConfig(({ command, mode }) => {
 ```
 
 Es importante tener en cuenta que en la API de Vite, el valor de `command` es `serve` durante el desarrollo (en el cli `vite`, `vite dev` y `vite serve` son alias) y `build` cuando se compila para producción (`vite build`).
+
+Solo se incluye `ssrBuild` en lugar de un indicador `ssr` más general porque, durante el desarrollo, la configuración es compartida por el servidor único que maneja las solicitudes SSR y no SSR.
 
 ## Configuración de funciones asíncronas
 
