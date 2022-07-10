@@ -44,19 +44,19 @@ Vite requiere [Node.js](https://nodejs.org/en/) versión >=14.18.0 o superior. S
 Con NPM:
 
 ```bash
-$ npm create vite@latest
+npm create vite@latest
 ```
 
 Con Yarn:
 
 ```bash
-$ yarn create vite
+yarn create vite
 ```
 
 Con PNPM:
 
 ```bash
-$ pnpm create vite
+pnpm create vite
 ```
 
 ¡Entonces sigue las instrucciones!

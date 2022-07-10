@@ -215,40 +215,40 @@ Obtén más información sobre [Integración Git](https://vercel.com/docs/concep
 
 ### Cloudflare Pages via Wrangler
 
-1. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/).
-2. Authenticate Wrangler with your Cloudflare account using `wrangler login`.
-3. Run your build command.
-4. Deploy using `npx wrangler pages publish dist`.
+1. Instala la [CLI de Wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/).
+2. Autenticate a Wrangler con tu cuenta de Cloudflare usando `wrangler login`.
+3. Ejecuta tu comando de compilación.
+4. Despliega usando `npx wrangler pages publish dist`.
 
 ```bash
-# Install Wrangler CLI
+# Instala la CLI de Wrangler
 $ npm install -g wrangler
 
-# Login to Cloudflare account from CLI
+# Inicia sesión en la cuenta de Cloudflare desde la CLI
 $ wrangler login
 
-# Run your build command
+# Ejecuta tu comando de compilación.
 $ npm run build
 
-# Create new deployment
+# Crea un nuevo despliegue
 $ npx wrangler pages publish dist
 ```
 
-After your assets are uploaded, Wrangler will give you a preview URL to inspect your site. When you log into the Cloudflare Pages dashboard, you will see your new project.
+Después de cargar tus recursos, Wrangler le dará una URL de vista previa para inspeccionar el sitio. Cuando inicies sesión en el panel de control de Cloudflare Pages, verás tu nuevo proyecto.
 
-### Cloudflare Pages with Git
+### Cloudflare Pages con Git
 
-1. Push your code to your git repository (GitHub, GitLab).
-2. Log in to the Cloudflare dashboard and select your account in **Account Home** > **Pages**.
-3. Select **Create a new Project** and the **Connect Git** option.
-4. Select the git project you want to deploy and click **Begin setup**
-5. Select the corresponding framework preset in the build setting depending on the Vite framework you have selected.
-6. Then save and deploy!
-7. Your application is deployed! (e.g `https://<PROJECTNAME>.pages.dev/`)
+1. Haz push del código a tu repositorio git (GitHub, GitLab).
+2. Inicia sesión en el panel de control de Cloudflare y selecciona tu cuenta en **Inicio de cuenta** > **Páginas**.
+3. Selecciona **Crear un nuevo proyecto** y la opción **Conectar Git**.
+4. Selecciona el proyecto de git que deseas desplegar y has clic en **Comenzar configuración**
+5. Selecciona el marco preestablecido correspondiente en la configuración de compilación según el marco Vite que hayas escogido.
+6. ¡Luego guarda y despliega!
+7. ¡Tu aplicación está desplegada! (por ejemplo, `https://<NOMBRE DEL PROYECTO>.pages.dev/`)
 
-After your project has been imported and deployed, all subsequent pushes to branches will generate [Preview Deployments](https://developers.cloudflare.com/pages/platform/preview-deployments/) unless specified not to in your [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/). All changes to the Production Branch (commonly “main”) will result in a Production Deployment.
+Después de que tu proyecto haya sido importado y desplegado, todos los push subsiguientes a las ramas generarán [Vistas previas de despliegues](https://developers.cloudflare.com/pages/platform/preview-deployments/) a menos que se especifique lo contrario en los [controles de compilación de ramas](https://developers.cloudflare.com/pages/platform/branch-build-controls/). Todos los cambios en la rama de producción (comúnmente "main") darán como resultado un despliegue de producción.
 
-You can also add custom domains and handle custom build settings on Pages. Learn more about [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site).
+También puedes agregar dominios personalizados y manejar la configuración de compilación personalizada en las páginas. Obtén más información sobre la [Integración de Cloudflare Pages con Git](https://developers.cloudflare.com/pages/get-started/#manage-your-site).
 
 ## Google Firebase
 
