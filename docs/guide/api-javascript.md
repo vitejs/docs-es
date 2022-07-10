@@ -228,7 +228,7 @@ function searchForWorkspaceRoot(
 
 **Relacionado:** [server.fs.allow](/config/server-options.md#server-fs-allow)
 
-Busca la raíz del espacio de trabajo potencial si cumple las siguientes condiciones; de lo contrario, recurriría a `root`:
+Busca la raíz del espacio de trabajo potencial si cumple las siguientes condiciones; de lo contrario, recurriría a `root` si:
 
 - contiene el campo `workspaces` en `package.json`
 - contiene uno de los siguientes archivos
