@@ -66,10 +66,10 @@ Al crear una aplicación SSR, es probable que desees tener control total sobre t
 **server.js**
 
 ```js{17-19}
-const fs = require('fs')
-const path = require('path')
-const express = require('express')
-const { createServer: createViteServer } = require('vite')
+import fs from 'fs'
+import path from 'path'
+import express from 'express'
+import {createServer as createViteServer} from 'vite'
 
 async function createServer() {
   const app = express()
@@ -81,7 +81,9 @@ async function createServer() {
     server: { middlewareMode: true },
     appType: 'custom'
   })
+  
   // Usa la instancia de Connect de Vite como middleware
+  // Si usas tu propio router de Express (express.Router()), debe usar router.use
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
@@ -153,7 +155,7 @@ El script `dev` en `package.json` también debe cambiarse para usar el script de
 Para enviar un proyecto de SSR a producción, necesitamos:
 
 1. Producir una compilación de cliente como de costumbre;
-2. Producir una compilación SSR, que se puede cargar directamente a través de `require()` para que no tengamos que pasar por `ssrLoadModule` de Vite;
+2. Producir una compilación SSR, que se puede cargar directamente a través de `import()` para que no tengamos que pasar por `ssrLoadModule` de Vite;
 
 Nuestros scripts en `package.json` se verán así:
 
@@ -173,7 +175,7 @@ Luego, en `server.js` necesitamos agregar algo de lógica específica de producc
 
 - En lugar de leer la raíz `index.html`, usa `dist/client/index.html` como plantilla, ya que contiene los enlaces de recursos correctos a la compilación del cliente.
 
-- En lugar de `await vite.ssrLoadModule('/src/entry-server.js')`, usa `require('./dist/server/entry-server.js')` (este archivo es el resultado de la compilación SSR).
+- En lugar de `await vite.ssrLoadModule('/src/entry-server.js')`, usa `import('./dist/server/entry-server.js')` (este archivo es el resultado de la compilación SSR).
 
 - Mueve la creación y todo el uso del servidor de desarrollo `vite` detrás de ramas condicionales solo para desarrollo, luego agrega middlewares de servicio de archivos estáticos para servir archivos desde `dist/client`.
 

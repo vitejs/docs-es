@@ -17,44 +17,25 @@ Una pequeña fracción de usuarios ahora requerirán el uso de [@vitejs/plugin-l
 
 ## Cambios en las opciones de configuración
 
-- Se han eliminado las siguientes opciones que ya estaban en desuso en v2:
+Se han eliminado las siguientes opciones que ya estaban en desuso en v2:
   
-  - `alias` (cambialo por [`resolve.alias`](../config/shared-options.md#resolve-alias))
-  - `dedupe` (cambialo por [`resolve.dedupe`](../config/shared-options.md#resolve-dedupe))
-  - `build.base` (cambialo por [`base`](../config/shared-options.md#base))
-  - `build.brotliSize` (cambialo por [`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize))
-  - `build.cleanCssOptions` (Vite ahora usa esbuild para la minificación de CSS)
-  - `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
-  - `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions))
+- `alias` (cambialo por [`resolve.alias`](../config/shared-options.md#resolve-alias))
+- `dedupe` (cambialo por [`resolve.dedupe`](../config/shared-options.md#resolve-dedupe))
+- `build.base` (cambialo por [`base`](../config/shared-options.md#base))
+- `build.brotliSize` (cambialo por [`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize))
+- `build.cleanCssOptions` (Vite ahora usa esbuild para la minificación de CSS)
+- `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
+- `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions))
 
-## Cambios de arquitectura y opciones heredadas
+## Cambios de Arquitectura y Opciones Heredadas
 
 Esta sección describe los mayores cambios de arquitectura en Vite v3. Para permitir que los proyectos migren desde v2 en caso de un problema de compatibilidad, se agregaron opciones heredadas para volver a las estrategias de Vite v2.
-
-:::warning
-Estas opciones están marcadas como experimentales y obsoletas. Es posible que se eliminen en una futura versión de la v3 sin previo aviso. Fija la versión de Vite cuando los uses.
-
-- `legacy.devDepsScanner`
-- `legacy.buildRollupPluginCommonjs`
-- `legacy.buildSsrCjsExternalHeuristics`
-
-:::
 
 ## Cambios en el servidor de desarrollo
 
 El puerto del servidor de desarrollo predeterminado de Vite ahora es 5173. Puedes usar [`server.port`](../config/server-options.md#server-port) para configurarlo en 3000.
 
 El host del servidor de desarrollo predeterminado de Vite ahora es `localhost`. Puedes usar [`server.host`](../config/server-options.md#server-host) para configurarlo en `127.0.0.1`.
-
-Vite optimiza las dependencias con esbuild para convertir dependencias de solo CJS a ESM y para reducir la cantidad de módulos que el navegador necesita pedir. En v3, la estrategia predeterminada para descubrir y procesar por lotes ha cambiado. Vite ya no escanea previamente el código de usuario con esbuild para obtener una lista inicial de dependencias en el arranque inicial. En su lugar, retrasa la ejecución de la primera optimización de dependencias hasta que se procesan todos los módulos de usuario importados que se están cargando.
-
-Para regresar a la estrategia de la v2, puedes usar `legacy.devDepsScanner`.
-
-## Cambios en compilación
-
-En v3, Vite usa esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en v2. Debido a que esbuild convierte las dependencias de solo CJS a ESM, [`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no se usa.
-
-Si necesitas volver a la estrategia de la v2, puedes usar `legacy.buildRollupPluginCommonjs`.
 
 ## Cambios en SSR
 
@@ -69,9 +50,11 @@ Además, [`build.rollupOptions.output.inlineDynamicImports`](https://rollupjs.or
 - Las extensiones de archivo JS en modo SSR y lib ahora usan una extensión válida (`js`, `mjs` o `cjs`) para generar archivos y fragmentos JS según su formato y el tipo de paquete.
 
 - Terser ahora es una dependencia opcional. Si estás utilizando `build.minify: 'terser'`, debes instalarlo.
+
   ```shell
   npm add -D terser
   ```
+
 ### `import.meta.glob`
 
 - [Raw `import.meta.glob`](features.md#glob-import-as) cambió de `{afirm: { type: 'raw' }}` a `{ as: 'raw' }`
@@ -104,6 +87,27 @@ Puedes usar `?init`, que es similar al comportamiento anterior.
   exports.test()
 })
 ```
+
+### Generación Automática de Certificados https
+
+Se necesita un certificado válido cuando se usa `https`. En Vite v2, si no se configuraba ningún certificado, se creaba y almacenaba automáticamente un certificado autofirmado.
+Desde Vite v3, recomendamos crear manualmente tus certificados. Si aún deseas utilizar la generación automática de la v2, esta función se puede volver a habilitar agregando [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los complementos del proyecto.
+
+```js
+import basicSsl from '@vitejs/plugin-basic-ssl'
+export default {
+  plugins: [basicSsl()]
+}
+```
+
+## Experimental
+
+### Uso de la optimización de dependencias de esbuild en la compilación
+
+En la v3, Vite permite el uso de esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en la v2. Debido a que esbuild convierte las dependencias de solo CJS a ESM, [`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no se usa.
+
+Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disabled: false` (el valor predeterminado en la v3 es `disabled: 'build'`). `@rollup/plugin-commonjs` se puede eliminar pasando `build.commonjsOptions: { include: [] }`
+
 ## Avanzado
 
 Hay algunos cambios que solo afectan a los creadores de complementos/herramientas.

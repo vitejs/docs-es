@@ -18,7 +18,7 @@ Las siguientes guías se basan en algunas suposiciones compartidas:
 Es importante tener en cuenta que `vite preview` está diseñada para obtener una vista previa de la compilación localmente y no como un servidor de producción.
 
 :::tip NOTA
-Estas guías brindan instrucciones para realizar un despliegue de tu sitio estatico con Vite. Vite también tiene soporte experimental para Server Side Rendering. SSR se refiere a marcos front-end que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Consulta la [Guía de SSR](./ssr) para obtener información sobre esta función. Por otro lado, si estás buscando una integración con marcos de trabajo tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
+Estas guías brindan instrucciones para realizar un despliegue de tu sitio estatico con Vite. Vite también tiene soporte para Server Side Rendering. SSR se refiere a marcos front-end que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Consulta la [Guía de SSR](./ssr) para obtener información sobre esta función. Por otro lado, si estás buscando una integración con marcos de trabajo tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
 :::
 
 ## Compilación de la aplicación
@@ -26,7 +26,7 @@ Estas guías brindan instrucciones para realizar un despliegue de tu sitio estat
 Puedes ejecutar el comando `npm run build` para compilar la aplicación.
 
 ```bash
-$ npm run build
+npm run build
 ```
 
 De forma predeterminada, la salida de compilación se colocará en `dist`. Puedes desplegar esta carpeta `dist` en cualquiera de tus plataformas preferidas.
@@ -36,8 +36,8 @@ De forma predeterminada, la salida de compilación se colocará en `dist`. Puede
 Una vez que hayas creado la aplicación, puedes probarla localmente ejecutando el comando `npm run preview`.
 
 ```bash
-$ npm run build
-$ npm run preview
+npm run build
+npm run preview
 ```
 
 El comando `vite preview` arrancará el servidor web estático local que sirve los archivos desde `dist` en `http://localhost:5000`. Es una manera fácil de verificar si la compilación de producción se ve bien en el entorno local.
@@ -52,7 +52,7 @@ Puedes configurar el puerto del servidor pasando el indicador `--port` como argu
 }
 ```
 
-Ahora el método `preview` lanzará el servidor en `http://localhost:8080`.
+Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 ## GitHub Pages
 
@@ -96,7 +96,7 @@ Ahora el método `preview` lanzará el servidor en `http://localhost:8080`.
 También puedes ejecutar el script anterior en tu configuración de integración continua para habilitar el despliegue automatico en cada push.
 :::
 
-### Github Pages y Travis CI
+<!-- ### Github Pages y Travis CI
 
 1. Configura la `base` correcta en `vite.config.js`.
 
@@ -128,7 +128,7 @@ También puedes ejecutar el script anterior en tu configuración de integración
      keep_history: true
      on:
        branch: main
-   ```
+   ``` -->
 
 ## GitLab Pages y GitLab CI
 
@@ -164,12 +164,52 @@ También puedes ejecutar el script anterior en tu configuración de integración
 
 ## Netlify
 
-1. En [Netlify](https://netlify.com), configura un nuevo proyecto desde GitHub con la siguiente configuración:
+1. Instala la [CLI de Netlify](https://cli.netlify.com/).
+2. Crea un nuevo sitio usando `ntl init`.
+3. Despliega usando `ntl deployment`.
 
-   - **Build Command:** `vite build` or `npm run build`
-   - **Publish directory:** `dist`
+```bash
+# Instala el CLI de Netlify
+$ npm install -g netlify-cli
+# Crea un nuevo sitio en Netlify
+$ ntl init
+# Despliega en una URL de vista previa única
+$ ntl deploy
+```
 
-2. Pulsa el botón de despliegue.
+La CLI de Netlify te compartirá una URL de vista previa para inspeccionar. Cuando esté listo para entrar a producción, usa el indicador `prod`:
+
+```bash
+# Despliega el sitio en producción
+$ ntl deploy --prod
+```
+
+## Vercel
+
+### CLI de Vercel
+
+1. Instala el [CLI de Vercel](https://vercel.com/cli) y ejecuta `vercel` para desplegar.
+2. Vercel detectará que estás utilizando Vite y habilitará la configuración correcta para su despliegue.
+3. ¡Tu aplicación está desplegada! (por ejemplo, [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+
+```bash
+$ npm i -g vercel
+$ vercel init vite
+Vercel CLI
+> Success! Initialized "vite" example in ~/your-folder.
+- To deploy, `cd vite` and run `vercel`.
+```
+
+### Vercel para Git
+
+1. Haz un push de tu código en tu repositorio de git (GitHub, GitLab, Bitbucket).
+2. [Importa tu proyecto Vite](https://vercel.com/new) a Vercel.
+3. Vercel detectará que estás utilizando Vite y habilitará la configuración correcta para su despliegue.
+4. ¡Tu aplicación está desplegada! (por ejemplo, [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+
+Después de que tu proyecto haya sido importado y desplegado, todos los push subsiguientes a las ramas generarán [Vistas previas de despliegues](https://vercel.com/docs/concepts/deployments/environments#preview), y todos los cambios realizados en la rama de producción (comúnmente "main") dará como resultado un [Despliegue en producción](https://vercel.com/docs/concepts/deployments/environments#production).
+
+Obtén más información sobre [Integración Git](https://vercel.com/docs/concepts/git) de Vercel.
 
 ## Cloudflare Pages
 
@@ -264,7 +304,7 @@ También puedes desplegar en un [dominio personalizado](http://surge.sh/help/add
 3. Ejecuta `heroku login` y completa con tus credenciales de Heroku:
 
    ```bash
-   $ heroku login
+   heroku login
    ```
 
 4. Crea un archivo llamado `static.json` en la raíz de tu proyecto con el siguiente contenido:
@@ -308,18 +348,6 @@ Esta es la configuración de tu sitio; lee más en [heroku-buildpack-static](htt
    # abre un navegador para ver la versión Dashboard de Heroku CI
    $ heroku open
    ```
-
-## Vercel
-
-Para desplegar tu aplicación Vite con [Vercel para Git](https://vercel.com/docs/git), asegúrate de que se haya enviado a un repositorio de Git.
-
-Ve a https://vercel.com/import/git e importa el proyecto a Vercel usando tu Git de elección (GitHub, GitLab o Bitbucket). Sigue las instrucciones del asistente para seleccionar la raíz del proyecto con el `package.json` del proyecto y sobreescribe el paso de compilación usando `npm run build` y el directorio de salida para que sea `./dist`
-
-![Configuración de Vercel personalizada](../images/vercel-configuration.png)
-
-Una vez que se haya importado el proyecto, todos los push subsiguientes a las ramas generarán despliegues de prueba, y todos los cambios realizados en la rama de producción (comúnmente "main") darán como resultado un despliegue de producción.
-
-Una vez desplegada, obtendrás una URL para ver la aplicación en vivo, como la siguiente: https://vite.vercel.app
 
 ## Azure Static Web Apps
 

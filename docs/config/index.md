@@ -80,7 +80,7 @@ export default defineConfig(({ command, mode }) => {
 
 Es importante tener en cuenta que en la API de Vite, el valor de `command` es `serve` durante el desarrollo (en el cli `vite`, `vite dev` y `vite serve` son alias) y `build` cuando se compila para producción (`vite build`).
 
-Solo se incluye `ssrBuild` en lugar de un indicador `ssr` más general porque, durante el desarrollo, la configuración es compartida por el servidor único que maneja las solicitudes SSR y no SSR.
+`ssrBuild` es experimental. Solo está disponible durante la compilación en lugar de un indicador `ssr` más general porque, durante el desarrollo, la configuración es compartida por el servidor único que maneja las solicitudes SSR y no SSR. El valor podría ser `undefined` para las herramientas que no tienen comandos separados para el navegador y la compilación de SSR, así que usa una comparación explícita con `true` y `false`.
 
 ## Configuración de funciones asíncronas
 

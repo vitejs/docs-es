@@ -12,6 +12,8 @@ Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Al
 
 - **`import.meta.env.DEV`**: {boolean} si la aplicación se está ejecutando en desarrollo (siempre lo contrario de `import.meta.env.PROD`)
 
+- **`import.meta.env.SSR`**: {boolean} si la aplicación se ejecuta en el [servidor](./ssr.md#conditional-logic).
+
 ### Reemplazo de producción
 
 Durante producción, estas variables de entorno se **reemplazan estáticamente**. Por lo tanto, es necesario referenciarlos siempre utilizando la cadena estática completa. Por ejemplo, el acceso a claves dinámicas como `import.meta.env[key]` no funcionará.
@@ -47,11 +49,16 @@ Las variables de entorno cargadas también se exponen al código fuente del clie
 Para evitar la filtración accidental de variables de entorno al cliente, solo las variables con el prefijo `VITE_` se exponen a su código procesado por Vite, por ejemplo, el siguiente archivo:
 
 ```
-DB_PASSWORD=foobar
 VITE_SOME_KEY=123
+DB_PASSWORD=foobar
 ```
 
 Solo `VITE_SOME_KEY` se expondrá como `import.meta.env.VITE_SOME_KEY` en el código fuente del cliente, pero `DB_PASSWORD` no.
+
+```js
+console.log(import.meta.env.VITE_SOME_KEY) // 123
+console.log(import.meta.env.DB_PASSWORD) // undefined
+```
 
 Si deseas personalizar el prefijo de las variables env, consulta la opción [envPrefix](/config/index#envprefix).
 
@@ -60,7 +67,7 @@ Si deseas personalizar el prefijo de las variables env, consulta la opción [env
 - Los archivos `.env.*.local` son solo locales y pueden contener variables confidenciales. Debes agregar `*.local` al `.gitignore` para evitar que se registren en git.
 
 - Dado que cualquier variable expuesta al código fuente de Vite terminará en el paquete de cliente, las variables `VITE_*` _no_ deberían contener información confidencial.
-  :::
+:::
 
 ### IntelliSense para TypeScript
 

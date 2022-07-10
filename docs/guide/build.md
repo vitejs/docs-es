@@ -36,7 +36,7 @@ La compilación se puede personalizar a través de varias [opciones de configura
 
 ```js
 // vite.config.js
-module.exports = defineConfig({
+export default defineConfig({
   build: {
     rollupOptions: {
       // https://rollupjs.org/guide/en/#big-list-of-options
@@ -54,7 +54,7 @@ Puedes configurar cómo se dividen los fragmentos utilizando `build.rollupOption
 ```js
 // vite.config.js
 import { splitVendorChunkPlugin } from 'vite'
-module.exports = defineConfig({
+export default defineConfig({
   plugins: [splitVendorChunkPlugin()]
 })
 ```
@@ -67,7 +67,7 @@ Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puede
 
 ```js
 // vite.config.js
-module.exports = defineConfig({
+export default defineConfig({
   build: {
     watch: {
       // https://rollupjs.org/guide/en/#watch-options
@@ -98,10 +98,10 @@ Durante la compilación, todo lo que necesitas hacer es especificar varios archi
 
 ```js
 // vite.config.js
-const { resolve } = require('path')
-const { defineConfig } = require('vite')
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
 
-module.exports = defineConfig({
+export default defineConfig({
   build: {
     rollupOptions: {
       input: {
@@ -123,10 +123,10 @@ Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la 
 
 ```js
 // vite.config.js
-const path = require('path')
-const { defineConfig } = require('vite')
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
 
-module.exports = defineConfig({
+export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'lib/main.js'),
@@ -213,19 +213,19 @@ Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenari
 Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el tercer parámetro de `context` proporcionado a la función.
 
 ```js
-  experimental: {
-    renderBuiltUrl(filename: string, { hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
-      if (type === 'public') {
-        return 'https://www.domain.com/' + filename
-      }
-      else if (path.extname(importer) === '.js') {
-        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
-      }
-      else {
-        return 'https://cdn.domain.com/assets/' + filename
-      }
+experimental: {
+  renderBuiltUrl(filename: string, { hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
+    if (type === 'public') {
+      return 'https://www.domain.com/' + filename
+    }
+    else if (path.extname(importer) === '.js') {
+      return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+    }
+    else {
+      return 'https://cdn.domain.com/assets/' + filename
     }
   }
+}
 ```
 
 Cualquier opción que no esté definida en la entrada `public` o `assets` se heredará de la configuración principal `buildAdvancedBaseOptions`.

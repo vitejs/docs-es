@@ -113,6 +113,3 @@ const imgUrl = new URL(imagePath, import.meta.url).href
 ::: warning Nota: No funciona con SSR
 Este patrón no funciona si estás utilizando Vite para Server-Side Rendering, porque `import.meta.url` tiene una semántica diferente en navegadores con respecto a Node.js. El empaquetado del servidor tampoco puede determinar la URL del host del cliente con anticipación.
 :::
-
-::: warning `target` debe ser `es2020` o superior
-Este patrón no funcionará si [build-target](/config/build-options#build-target) o [optimizedeps.esbuildoptions.target](/config/dep-optimization-options#optimizedeps-esbuildoptions) se configura en un valor inferior a `es2020`.

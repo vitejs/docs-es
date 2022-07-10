@@ -27,6 +27,7 @@
     // omitido
   })
   ```
+
   El segundo caso es cuando se utilizan hosts comodín (por ejemplo, `0.0.0.0`). Esto se debe a que los servidores que escuchan en hosts que no son comodín tienen prioridad sobre los que escuchan en hosts comodín.
 
   :::
@@ -51,6 +52,8 @@
   Habilita TLS + HTTP/2. Ten en cuenta que esto cambia a TLS solo cuando también se usa la opción [`server.proxy`](#server-proxy).
 
   El valor también puede ser un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
+
+  Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los complementos del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
 
 ## server.open
 
@@ -147,6 +150,7 @@
   ```
   Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
   ```
+
   Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
 
   - configurar el proxy inverso para el proxy de WebSocket también
@@ -191,8 +195,8 @@
 - **Ejemplo:**
 
 ```js
-const express = require('express')
-const { createServer: createViteServer } = require('vite')
+import express from 'express'
+import { createServer as createViteServer } from 'vite'
 
 async function createServer() {
   const app = express()

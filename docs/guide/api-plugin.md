@@ -191,7 +191,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
     name: 'mutate-config',
     config(config, { command }) {
       if (command === 'build') {
-        config.root = __dirname
+        config.root = 'foo'
       }
     }
   })

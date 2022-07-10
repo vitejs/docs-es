@@ -103,11 +103,12 @@ Vite proporciona soporte Vue de primera clase:
 
 - Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 - Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Compatibilidad con Vue 2 a través de [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Compatibilidad con Vue 2.7 a través de [vitejs/vite-plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+- Compatibilidad con Vue <2.7 a través de [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
 ## JSX
 
-Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io), y el valor predeterminado es React 16. La compatibilidad con JSX de estilo React 17 en esbuild se puede monitorear [aquí](https://github.com/evanw/esbuild/issues/334).
+Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io).
 
 Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 

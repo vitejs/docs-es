@@ -13,7 +13,9 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 **Ejemplo de Uso:**
 
 ```js
-const { createServer } = require('vite')
+import { fileURLToPath } from 'url'
+import { createServer } from 'vite'
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 ;(async () => {
   const server = await createServer({
@@ -40,6 +42,13 @@ La interfaz `InlineConfig` extiende a `UserConfig` con propiedades adicionales:
 
 - `configFile`: Especifica el archivo de configuración a utilizar. Si no se establece, Vite tratará de resolver automáticamente uno de la raíz del proyecto. Establezca `false` para desactivar la resolución automática.
 - `envFile`: Establece a `false` para desactivar los archivos `.env`.
+
+## `ResolvedConfig`
+
+La interfaz `ResolvedConfig` tiene todas las mismas propiedades que `UserConfig`, excepto que la mayoría de las propiedades están resueltas y no indefinidas. También contiene utilidades como:
+
+- `config.assetsInclude`: una función para comprobar si un `id` se considera un recurso.
+- `config.logger`: objeto registrador interno de Vite.
 
 ## `ViteDevServer`
 
@@ -134,8 +143,10 @@ async function build(
 **Ejemplo de Uso:**
 
 ```js
-const path = require('path')
-const { build } = require('vite')
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { build } from 'vite'
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 ;(async () => {
   await build({
@@ -161,7 +172,7 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 **Ejemplo de Uso:**
 
 ```js
-const { preview } = require('vite')
+import { preview } from 'vite'
 
 ;(async () => {
   const previewServer = await preview({
@@ -184,11 +195,73 @@ const { preview } = require('vite')
 async function resolveConfig(
   inlineConfig: InlineConfig,
   command: 'build' | 'serve',
-  defaultMode?: string
+  defaultMode = 'development'
 ): Promise<ResolvedConfig>
 ```
 
 El valor de `command` es `serve` en dev (en el cli `vite`, `vite dev`, y `vite serve` son alias).
+
+## `mergeConfig`
+
+**Firma de Tipo:**
+
+```ts
+function mergeConfig(
+  defaults: Record<string, any>,
+  overrides: Record<string, any>,
+  isRoot = true
+): Record<string, any>
+```
+
+Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel dentro de la configuración de Vite que se está fusionando. Por ejemplo, configura `false` si estás fusionando dos opciones de `build`.
+
+## `searchForWorkspaceRoot`
+
+**Firma de Tipo:**
+
+```ts
+function searchForWorkspaceRoot(
+  current: string,
+  root = searchForPackageRoot(current)
+): string
+```
+
+**Relacionado:** [server.fs.allow](/config/server-options.md#server-fs-allow)
+
+Busca la raíz del espacio de trabajo potencial si cumple las siguientes condiciones; de lo contrario, recurriría a `root`:
+
+- contiene el campo `workspaces` en `package.json`
+- contiene uno de los siguientes archivos
+  - `lerna.json`
+  - `pnpm-workspace.yaml`
+
+## `loadEnv`
+
+**Firma de Tipo:**
+
+```ts
+function loadEnv(
+  mode: string,
+  envDir: string,
+  prefixes: string | string[] = 'VITE_'
+): Record<string, string>
+```
+
+**Relacionado:** [Archivos `.env`](./env-and-mode.md#archivos-env)
+
+Carga archivos `.env` dentro de `envDir`. De forma predeterminada, solo se cargan las variables env con el prefijo `VITE_`, a menos que se cambie `prefixes`.
+
+## `normalizePath`
+
+**Firma de Tipo:**
+
+```ts
+function normalizePath(id: string): string
+```
+
+**Relacionado:** [Normalización de rutas](./api-plugin.md#normalizacion-de-rutas)
+
+Normaliza una ruta para interoperar entre complementos de Vite.
 
 ## `transformWithEsbuild`
 
@@ -202,3 +275,24 @@ async function transformWithEsbuild(
   inMap?: object
 ): Promise<ESBuildTransformResult>
 ```
+
+Transforma JavaScript o TypeScript con esbuild. Útil para complementos que prefieren hacer coincidir la transformación interna de esbuild de Vite.
+
+## `loadConfigFromFile`
+
+**Firma de Tipo:**
+
+```ts
+async function loadConfigFromFile(
+  configEnv: ConfigEnv,
+  configFile?: string,
+  configRoot: string = process.cwd(),
+  logLevel?: LogLevel
+): Promise<{
+  path: string
+  config: UserConfig
+  dependencies: string[]
+} | null>
+```
+
+Carga un archivo de configuración de Vite manualmente con esbuild.
