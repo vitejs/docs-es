@@ -1,8 +1,8 @@
 # Migración desde v2
 
-## Compatibilidad de Node
+## Compatibilidad de Node.js
 
-Vite ya no es compatible con Node v12, el cual ya se finalizó su soporte oficial. Ahora se requiere Node 14.18+.
+Vite ya no es compatible con Node.js v12, el cual ya se finalizó su soporte oficial. Ahora se requiere Node.js 14.18+.
 
 ## Principales cambios para navegadores modernos
 
@@ -35,11 +35,13 @@ Esta sección describe los mayores cambios de arquitectura en Vite v3. Para perm
 
 El puerto del servidor de desarrollo predeterminado de Vite ahora es 5173. Puedes usar [`server.port`](../config/server-options.md#server-port) para configurarlo en 3000.
 
-El host del servidor de desarrollo predeterminado de Vite ahora es `localhost`. Puedes usar [`server.host`](../config/server-options.md#server-host) para configurarlo en `127.0.0.1`.
+El host del servidor de desarrollo predeterminado de Vite ahora es `localhost`. En Vite v2, Vite escuchaba `127.0.0.1` de forma predeterminada. Node.js bajo v17 normalmente resuelve `localhost` como `127.0.0.1`, por lo que para esas versiones, el host no cambiará. Para Node.js 17+, puedes usar [`server.host`](../config/server-options.md#server-host) para configurarlo en `127.0.0.1` y mantener el mismo host que Vite v2 .
+
+Ten en cuenta que Vite v3 ahora imprime el host correcto. Esto significa que Vite puede imprimir `127.0.0.1` como host de escucha cuando se usa `localhost`. Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para evitar esto. Consulta [`server.host`](../config/server-options.md#server-host) para obtener más detalles.
 
 ## Cambios en SSR
 
-Vite v3 usa ESM para la compilación de SSR de manera predeterminada. Cuando se usa ESM, ya no se necesitan las [heurísticas de externalización de SSR](https://vitejs.dev/guide/ssr.html#ssr-externals). De forma predeterminada, todas las dependencias se externalizan. Puedes usar [`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) para controlar qué dependencias incluir en el paquete SSR.
+Vite v3 usa ESM para la compilación de SSR de manera predeterminada. Cuando se usa ESM, ya no se necesitan las [heurísticas de externalización de SSR](../guide/ssr.html#ssr-externos). De forma predeterminada, todas las dependencias se externalizan. Puedes usar [`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) para controlar qué dependencias incluir en el paquete SSR.
 
 Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `legacy.buildSsrCjsExternalHeuristics` para generar un paquete CJS utilizando la misma estrategia de externalización de Vite v2.
 
@@ -138,8 +140,6 @@ También hay otros cambios importantes que solo afectan a unos pocos usuarios.
   - La opción `server.force` se eliminó en favor de la opción `optimizeDeps.force`.
 - [[#8550] fix: no manejar sigterm en modo middleware](https://github.com/vitejs/vite/pull/8550)
   - Cuando se ejecuta en modo middleware, Vite ya no elimina el proceso en `SIGTERM`.
-- [[#8647] feat: imprimir dirección resuelta para localhost](https://github.com/vitejs/vite/pull/8647)
-  - `server.printUrls` y `previewServer.printUrls` ahora son asíncronos
 
 ## Migración desde v1
 

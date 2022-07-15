@@ -129,7 +129,8 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'lib/main.js'),
+      entry: resolve(__dirname, 'lib/main.js'),
+      name: 'MyLib',
       // Se agregará la extension apropiada.
       fileName: 'my-lib'
     },
@@ -163,8 +164,8 @@ Ejecutar `vite build` con esta configuración utiliza un ajuste preestablecido d
 ```
 $ vite build
 building for production...
-[write] my-lib.es.js 0.08kb, brotli: 0.07kb
-[write] my-lib.umd.js 0.30kb, brotli: 0.16kb
+dist/my-lib.js      0.08 KiB / gzip: 0.07 KiB
+dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
 ```
 
 `package.json` recomendado para tu librería
@@ -172,17 +173,23 @@ building for production...
 ```json
 {
   "name": "my-lib",
+  "type": "module",
   "files": ["dist"],
-  "main": "./dist/my-lib.umd.js",
-  "module": "./dist/my-lib.es.mjs",
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.es.mjs",
-      "require": "./dist/my-lib.umd.js"
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
     }
   }
 }
 ```
+
+:::tip Nota
+Si `package.json` no contiene `"type": "module"`, Vite generará diferentes extensiones de archivo para compatibilidad con Node.js. `.js` se convertirá en `.mjs` y `.cjs` se convertirá en `.js`.
+:::
+
 ## Opciones avanzadas para Base
 
 ::: warning

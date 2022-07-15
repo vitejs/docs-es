@@ -1,9 +1,5 @@
 # Server Side Rendering
 
-:::warning Experimental
-La compatibilidad con SSR aún es experimental y es posible que encuentres errores y casos de uso no admitidos. Procede bajo tu propio riesgo.
-:::
-
 :::tip Nota
 SSR se refiere específicamente a los marcos front-end (por ejemplo, React, Preact, Vue y Svelte) que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Si estás buscando una integración con marcos tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
 
@@ -211,17 +207,8 @@ Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipaci
 
 ## SSR Externos
 
-Muchas dependencias envían archivos ESM y CommonJS. Cuando se ejecuta SSR, una dependencia que proporciona compilaciones CommonJS se puede "externalizar" del sistema de módulo/transformación SSR de Vite para acelerar tanto el desarrollo como la compilación. Por ejemplo, en lugar de incorporar la versión ESM preempaquetada de React y luego transformarla de nuevo para que sea compatible con Node.js, es más eficiente simplemente escribir `require('react')`. También mejora en gran medida la velocidad de creación del paquete SSR.
-
-Vite realiza una externalización automática de SSR basada en las siguientes heurísticas:
-
-- Si la entrada ESM resuelta de una dependencia y la entrada de Node predeterminado son diferentes, la entrada de Node predeterminada es probablemente una compilación CommonJS que se puede externalizar. Por ejemplo, `vue` se externalizará automáticamente porque incluye compilaciones de ESM y CommonJS.
-
-- De lo contrario, Vite verificará si la entrada del paquete contiene una sintaxis de ESM válida; de lo contrario, es probable que el paquete sea CommonJS y se externalizará. Como ejemplo, `react-dom` se externalizará automáticamente porque solo especifica una sola entrada que está en formato CommonJS.
-
-Si esta heurística conduce a errores, puedes ajustar manualmente los SSR externos usando las opciones de configuración `ssr.external` y `ssr.noExternal`.
-
-En el futuro, es probable que esta heurística mejore para detectar si el proyecto tiene habilitado`type: "module"`, de modo que Vite también pueda externalizar las dependencias que envían compilaciones de ESM compatibles con Node al importarlas a través de un `import()` dinámico durante SSR .
+Las dependencias se "externalizan" del sistema del módulo de transformación SSR de Vite de forma predeterminada cuando se ejecuta SSR. Esto acelera tanto el desarrollo como la compilación.
+Si una dependencia necesita ser transformada por la canalización de Vite, por ejemplo, porque las características de Vite se usan sin transpilar en ellas, se pueden agregar a [`ssr.noExternal`](../config/ssr-options.html#ssr-noexternal).
 
 :::warning Trabajando con Alias
 Si has configurado aliases que redirigen un paquete a otro, es posible que desees crear un alias para los paquetes `node_modules` reales para que funcione para las dependencias externalizadas de SSR. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases) admiten la creación de alias a través del prefijo `npm:`.
@@ -274,3 +261,7 @@ Los comandos del CLI `$ vite dev` y `$ vite preview` también se pueden usar par
 :::tip Nota
 Usa un post hook para que tu middleware SSR se ejecute _después_ de los middlewares de Vite.
 :::
+
+## Formato SSR
+
+De forma predeterminada, Vite genera el paquete SSR en ESM. Hay soporte experimental para configurar `ssr.format`, pero no se recomienda. Los esfuerzos futuros en torno al desarrollo de SSR se basarán en ESM, y commonjs permanecerá disponible para la compatibilidad con versiones anteriores. Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `legacy.buildSsrCjsExternalHeuristics: true` para generar un paquete CJS usando las mismas [heurísticas de externalización de Vite v2](https://v2.vitejs.dev/guide/ssr.html#ssr-externals).

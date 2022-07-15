@@ -15,11 +15,9 @@ export default defineConfig({
     ['meta', { property: 'og:title', content: ogTitle }],
     ['meta', { property: 'og:image', content: ogImage }],
     ['meta', { property: 'og:url', content: ogUrl }],
-    ['meta', { property: 'twitter:description', content: ogDescription }],
-    ['meta', { property: 'twitter:title', content: ogTitle }],
-    ['meta', { property: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { property: 'twitter:image', content: ogImage }],
-    ['meta', { property: 'twitter:url', content: ogUrl }]
+    ['meta', { property: 'og:description', content: ogDescription }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:site', content: '@vite_js' }]
   ],
   vue: {
     reactivityTransform: true
@@ -53,7 +51,7 @@ export default defineConfig({
       items: [
         { text: 'English', link: 'https://main.vitejs.dev' },
         { text: '简体中文', link: 'https://cn.vitejs.dev' },
-        { text: '日本語', link: 'https://ja.vitejs.dev' },
+        { text: '日本語', link: 'https://ja.vitejs.dev' }
       ]
     },
 
@@ -67,39 +65,44 @@ export default defineConfig({
       { text: 'Configuración', link: '/config/', activeMatch: '/config/' },
       { text: 'Complementos', link: '/plugins/', activeMatch: '/plugins/' },
       {
-        text: 'Enlaces',
+        text: 'Recursos',
         items: [
+          { text: 'Equipo', link: '/team' },
           {
-            text: 'Twitter',
-            link: 'https://twitter.com/vite_js'
-          },
-          {
-            text: 'Chat de Discord',
-            link: 'https://chat.vitejs.dev'
-          },
-          {
-            text: 'Awesome Vite',
-            link: 'https://github.com/vitejs/awesome-vite'
-          },
-          {
-            text: 'DEV Community',
-            link: 'https://dev.to/t/vite'
-          },
-          {
-            text: 'Complementos de Rollup compatibles',
-            link: 'https://vite-rollup-plugins.patak.dev/'
-          },
-          {
-            text: 'Lista de Cambios',
-            link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
+            items: [
+              {
+                text: 'Twitter',
+                link: 'https://twitter.com/vite_js'
+              },
+              {
+                text: 'Chat de Discord',
+                link: 'https://chat.vitejs.dev'
+              },
+              {
+                text: 'Awesome Vite',
+                link: 'https://github.com/vitejs/awesome-vite'
+              },
+              {
+                text: 'DEV Community',
+                link: 'https://dev.to/t/vite'
+              },
+              {
+                text: 'Complementos de Rollup compatibles',
+                link: 'https://vite-rollup-plugins.patak.dev/'
+              },
+              {
+                text: 'Lista de Cambios',
+                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
+              }
+            ]
           }
         ]
       },
       {
-        text: 'v3 (desarrollo)',
+        text: 'Versión',
         items: [
           {
-            text: 'v2.x (estable)',
+            text: 'Documentación de Vite v2',
             link: 'https://v2.vitejs.dev'
           }
         ]
