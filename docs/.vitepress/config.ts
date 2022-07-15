@@ -34,6 +34,7 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/vitejs/vite' }
     ],
     algolia: {
+      appId: 'BH4D9OD16A',
       apiKey: 'b573aa848fd57fb47d693b531297403c',
       indexName: 'vitejs',
       searchParameters: {
