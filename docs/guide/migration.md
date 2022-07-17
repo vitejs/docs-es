@@ -2,7 +2,7 @@
 
 ## Compatibilidad de Node.js
 
-Vite ya no es compatible con Node.js v12, el cual ya se finalizó su soporte oficial. Ahora se requiere Node.js 14.18+.
+Vite ya no es compatible con Node.js 12 / 13 / 15, los cuales ya se finalizó sus soportes oficiales. Ahora se requiere Node.js 14.18+ / 16+.
 
 ## Principales cambios para navegadores modernos
 

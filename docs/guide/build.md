@@ -190,6 +190,10 @@ dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
 Si `package.json` no contiene `"type": "module"`, Vite generará diferentes extensiones de archivo para compatibilidad con Node.js. `.js` se convertirá en `.mjs` y `.cjs` se convertirá en `.js`.
 :::
 
+:::tip Variables de entorno
+En el modo librería, todo uso de `import.meta.env.*` se reemplaza estáticamente cuando se compila para producción. Sin embargo, esto no ocurre para `process.env.*`, por lo que los usuarios que usan la librería pueden cambiarlo dinámicamente. Si esto no es lo que deseas, puedes usar `define: { 'process.env.`<wbr>`NODE_ENV': '"production"' }` por ejemplo para reemplazarlos estáticamente.
+:::
+
 ## Opciones avanzadas para Base
 
 ::: warning

@@ -24,18 +24,6 @@ También puedes especificar explícitamente un archivo de configuración para us
 vite --config my-config.js
 ```
 
-::: tip NOTA
-Vite inyectará `__filename`, `__dirname` en los archivos de configuración y sus dependencias. Declarar estas variables en un nivel superior dará como resultado un error:
-
-```js
-const __filename = 'value' // SyntaxError: Identifier '__filename' has already been declared
-const func = () => {
-  const __filename = 'value' // no error
-}
-```
-
-:::
-
 ## Configuración de Intellisense
 
 Dado que Vite se distribuye con tipados de TypeScript, puedes aprovechar el intellisense de tu IDE con sugerencias de tipo jsdoc:
