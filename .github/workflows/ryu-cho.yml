@@ -16,7 +16,7 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
           # Git user name to use when making issues and PRs. Required.
-          username: vitejs
+          username: vite/vitejs
 
           # Git email address to use when making issues and PRs. Required.
           email: "cesargomezh90@gmail.com"

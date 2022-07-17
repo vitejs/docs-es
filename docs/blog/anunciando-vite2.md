@@ -16,13 +16,13 @@ Para tener una idea de cuan rápido es Vite, revisa este [video de comparaciones
 
 Si nunca antes habías escuchado de Vite y quieres aprender más sobre este, revisa la [razón detrás del proyecto](https://vitejs.dev/guide/why.html). Si estás interesado en como Vite se diferencia de otras herramientas similares, revisa las [comparaciones](https://vitejs.dev/guide/comparisons.html).
 
-## Que hay de nuevo en la versioó 2.0
+## Que hay de nuevo en la versión 2.0
 
 Desde que decidimos refactorizar completamente los archivos internos antes que la versión 1.0 salga de RC, esta es la primera publicación estable de Vite. Dicho esto, Vite 2.0 viene con muchas grandes mejoras sobre su versión anterior.
 
-### Nucleo independiente del marco de trabajo
+### Núcleo independiente del marco de trabajo
 
-La idea original de Vite comenzo como un [prototipo trucado que entragaba componentes de una pagina de Vue sobre ESM nativo](https://github.com/vuejs/vue-dev-server). Vite 1 fue la continuación de esa idea con HMR implementado en base a esta.
+La idea original de Vite comenzó como un [prototipo trucado que entregaba componentes de una pagina de Vue sobre ESM nativo](https://github.com/vuejs/vue-dev-server). Vite 1 fue la continuación de esa idea con HMR implementado en base a esta.
 
 Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
 
@@ -62,4 +62,4 @@ Esas fueron varias características, pero empezar con Vite es simple. Puedes ini
 npm init @vitejs/app
 ```
 
-Después, revisa [la guía](https://vitejs.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unirte a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vitejs.dev/).
+Después, revisa [la guía](https://vitejs.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unete a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vitejs.dev/).

@@ -68,7 +68,7 @@ export default defineConfig({
       {
         text: 'Recursos',
         items: [
-          { text: 'Equipo', link: '/team' },
+          { text: 'Equipo', link: '/equipo' },
           {
             items: [
               {

@@ -325,7 +325,7 @@ const modules = {
 
 `{ as: 'url' }` también se admite para cargar recursos como URL.
 
-### Múltiples patrones
+### Patrones múltiples
 
 El primer argumento puede ser una array de globs, por ejemplo
 
@@ -472,7 +472,7 @@ Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros comp
 
 ## Web Workers
 
-### Importar con constructores
+### Importar con Worker
 
 Se puede importar un script de web worker usando [`new Worker()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) y [`new SharedWorker()`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker). En comparación con los sufijos de worker, esta sintaxis se acerca más a los estándares y es la forma **recomendada** de crear workers.
 
