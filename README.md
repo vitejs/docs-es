@@ -33,17 +33,6 @@ Además, Vite es altamente extensible a través de sus [API de complementos](./a
 
 [Lee la documentación para saber más](https://vitejs.dev).
 
-## v3.0
-
-Estado actual: **Alpha** (para pruebas internas, no se recomienda para producción)
-
-La rama `main` ahora será para la v3.0, si necesitas las versiones estables, revisa la [rama `v2`](https://github.com/vitejs/vite/tree/v2).
-
-Estaremos creando borradores de las notas de versión y guías de migración para v3.0 cuando nos encontremos en la etapa beta. Mientras, puedes revisar estos links:
-
-- [Meta v3.0](https://github.com/vitejs/vite/milestone/5)
-- [Lista de Cambios Críticos](https://github.com/vitejs/vite/issues?q=label%3A%22breaking+change%22+is%3Aclosed+milestone%3A3.0)
-
 ## Paquetes
 
 | Paquete                                           | Version (click para lista de cambios)                                                                                                |
@@ -62,3 +51,11 @@ Ver la [Guía de Contribución](./CONTRIBUTING.md).
 ## Licencia
 
 MIT
+
+## Patrocinadores
+
+<p align="center">
+  <a target="_blank" href="https://github.com/sponsors/yyx990803">
+    <img alt="sponsors" src="https://sponsors.vuejs.org/vite.svg">
+  </a>
+</p>
