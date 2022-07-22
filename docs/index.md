@@ -17,7 +17,7 @@ hero:
       text: Introducción
       link: /guide/
     - theme: alt
-      text: Por qué Vite?
+      text: ¿Por qué Vite?
       link: /guide/why
     - theme: alt
       text: Ver en GitHub
