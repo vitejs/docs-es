@@ -31,7 +31,7 @@ Se han eliminado las siguientes opciones que ya estaban en desuso en v2:
 
 Esta sección describe los mayores cambios de arquitectura en Vite v3. Para permitir que los proyectos migren desde v2 en caso de un problema de compatibilidad, se agregaron opciones heredadas para volver a las estrategias de Vite v2.
 
-## Cambios en el servidor de desarrollo
+### Cambios en el servidor de desarrollo
 
 El puerto del servidor de desarrollo predeterminado de Vite ahora es 5173. Puedes usar [`server.port`](../config/server-options.md#server-port) para configurarlo en 3000.
 
@@ -39,7 +39,7 @@ El host del servidor de desarrollo predeterminado de Vite ahora es `localhost`. 
 
 Ten en cuenta que Vite v3 ahora imprime el host correcto. Esto significa que Vite puede imprimir `127.0.0.1` como host de escucha cuando se usa `localhost`. Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para evitar esto. Consulta [`server.host`](../config/server-options.md#server-host) para obtener más detalles.
 
-## Cambios en SSR
+### Cambios en SSR
 
 Vite v3 usa ESM para la compilación de SSR de manera predeterminada. Cuando se usa ESM, ya no se necesitan las [heurísticas de externalización de SSR](../guide/ssr.html#ssr-externos). De forma predeterminada, todas las dependencias se externalizan. Puedes usar [`ssr.noExternal`](../config/ssr-options.md#ssr-noexternal) para controlar qué dependencias incluir en el paquete SSR.
 

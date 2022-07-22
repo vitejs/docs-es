@@ -32,7 +32,8 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 2. Para desarrollo: coloca lo siguiente en la plantilla de servidor HTML (reemplaza `http://localhost:5173` con la URL local donde Vite se está ejecutando):
 
    ```html
-   <!-- if development -->
+   <!-- si es desarrollo -->
+   <script type="module" src="http://localhost:5173/@vite/client"></script>
    <script type="module" src="http://localhost:5173/main.js"></script>
    ```
 
@@ -55,7 +56,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    </script>
    ```
 
-3. Para producción: despues de correr `vite build`, se generará un archivo `manifest.json` junto a otros archivos de recurso. Un ejemplo de un archivo manifest sería algo como esto:
+3. Para producción: despues de ejecutar `vite build`, se generará un archivo `manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
 
    ```json
    {

@@ -532,7 +532,10 @@ Vite genera automáticamente directivas `<link rel="modulepreload">` para fragme
 
 En las aplicaciones del mundo real, Rollup a menudo genera fragmentos "comunes": código que se comparte entre dos o más fragmentos. Combinado con importaciones dinámicas, es bastante común tener el siguiente escenario:
 
-![graph](/images/graph.png)
+<script setup>
+import graphSvg from '../images/graph.svg?raw'
+</script>
+<svg-image :svg="graphSvg" />
 
 En escenarios no optimizados, cuando se importa el fragmento asíncrono `A`, el navegador tendrá que solicitar y analizar `A` antes de darse cuenta de que también necesita el fragmento común `C`. Esto da como resultado consultas de ida y vuelta adicionales a la red:
 
