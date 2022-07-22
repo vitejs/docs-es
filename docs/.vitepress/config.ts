@@ -116,7 +116,7 @@ export default defineConfig({
           text: 'Guía',
           items: [
             {
-              text: 'Por qué Vite',
+              text: '¿Por qué Vite',
               link: '/guide/why'
             },
             {
