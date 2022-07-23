@@ -267,7 +267,7 @@ Queremos agradecer a todos los que han implementado funciones y correcciones, ha
 
 También queremos agradecer a las personas y empresas que patrocinan el equipo de Vite, y a las empresas que invierten en el desarrollo de Vite: parte del trabajo de [@antfu7](https://twitter.com/antfu7) en Vite y el ecosistema es parte de su trabajo en [Nuxt Labs](https://nuxtlabs.com/), y [StackBlitz](https://stackblitz.com/) contrató a [@patak_dev](https://twitter.com/patak_dev) para trabajar a tiempo completo en Vite.
 
-## Que se viene?
+## ¿Qué se viene?
 
 Nos tomaremos los siguientes meses para asegurar una transición fluida para todos los proyectos construidos sobre Vite. Por lo tanto, las primeras versiones menores se centrarán en continuar con nuestros esfuerzos de clasificación con un enfoque en los problemas recién abiertos.
 
