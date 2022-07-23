@@ -12,11 +12,11 @@ const commitRef = process.env.COMMIT_REF?.slice(0, 8) || 'dev'
 const deployType = (() => {
   switch (deployURL) {
     case 'https://main--vite-docs-es.netlify.app':
-      return 'main'
+      return 'release'
     case '':
       return 'local'
     default:
-      return 'release'
+      return 'main'
   }
 })()
 const additionalTitle = ((): string => {
