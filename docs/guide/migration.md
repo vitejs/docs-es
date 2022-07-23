@@ -106,7 +106,7 @@ export default {
 
 ### Uso de la optimización de dependencias de esbuild en la compilación
 
-En la v3, Vite permite el uso de esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en la v2. Debido a que esbuild convierte las dependencias de solo CJS a ESM, [`@rollupjs/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no se usa.
+En la v3, Vite permite el uso de esbuild para optimizar las dependencias de forma predeterminada. Al hacerlo, elimina una de las diferencias más significativas entre desarrollo y producción presentes en la v2. Debido a que esbuild convierte las dependencias de solo CJS a ESM, [`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no se usa.
 
 Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disabled: false` (el valor predeterminado en la v3 es `disabled: 'build'`). `@rollup/plugin-commonjs` se puede eliminar pasando `build.commonjsOptions: { include: [] }`
 

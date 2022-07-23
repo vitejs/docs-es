@@ -6,7 +6,7 @@
 - **Por defecto:** `'modules'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
-El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module) y [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import).
+El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module), [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import) y soporte para [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta).
 
 Otro valor especial es `'esnext'`, el cual asume el soporte nativo de importaciones dinámicas y transpilará lo menos posible:
 
