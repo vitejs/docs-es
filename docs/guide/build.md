@@ -197,7 +197,7 @@ En el modo librería, todo uso de `import.meta.env.*` se reemplaza estáticament
 ## Opciones avanzadas para Base
 
 ::: warning
-Esta característica es experimental, la API puede cambiar en una futura actualización sin previo aviso. Corrige la versión secundaria de Vite cuando la uses.
+Esta característica es experimental, la API puede cambiar en una futura actualización sin previo aviso. Por favor, fija siempre a la versión menor de Vite cuando la uses.
 :::
 
 Para casos de uso avanzado, los recursos estaticos y los archivos públicos desplegados pueden estar en diferentes rutas, por ejemplo, para usar diferentes estrategias de caché.

@@ -1,13 +1,61 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, DefaultTheme } from 'vitepress'
 
 const ogDescription = 'Herramienta frontend de próxima generación'
 const ogImage = 'https://es.vitejs.dev/og-image.png'
 const ogTitle = 'Vite'
 const ogUrl = 'https://es.vitejs.dev'
 
+// netlify envs
+const deployURL = process.env.DEPLOY_PRIME_URL || ''
+const commitRef = process.env.COMMIT_REF?.slice(0, 8) || 'dev'
+
+const deployType = (() => {
+  switch (deployURL) {
+    case 'https://main--vite-docs-es.netlify.app':
+      return 'main'
+    case '':
+      return 'local'
+    default:
+      return 'release'
+  }
+})()
+const additionalTitle = ((): string => {
+  switch (deployType) {
+    case 'main':
+      return ' (rama principal)'
+    case 'local':
+      return ' (local)'
+    case 'release':
+      return ''
+  }
+})()
+const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
+  switch (deployType) {
+    case 'main':
+    case 'local':
+      return [
+        {
+          text: 'Documentación de Vite 3 (producción)',
+          link: 'https://es.vitejs.dev'
+        },
+        {
+          text: 'Documentación de Vite 2',
+          link: 'https://v2.vitejs.dev'
+        }
+      ]
+    case 'release':
+      return [
+        {
+          text: 'Documentación de Vite 2',
+          link: 'https://v2.vitejs.dev'
+        }
+      ]
+  }
+})()
+
 export default defineConfig({
   lang: 'es',
-  title: 'Vite',
+  title: `Vite${additionalTitle}`,
   description: 'Herramienta frontend de próxima generación',
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
@@ -57,7 +105,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: 'Publicado bajo licencia MIT',
+      message: `Publicado bajo licencia MIT. (${commitRef})`,
       copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite'
     },
 
@@ -101,12 +149,7 @@ export default defineConfig({
       },
       {
         text: 'Versión',
-        items: [
-          {
-            text: 'Documentación de Vite v2',
-            link: 'https://v2.vitejs.dev'
-          }
-        ]
+        items: versionLinks
       }
     ],
 
@@ -116,7 +159,7 @@ export default defineConfig({
           text: 'Guía',
           items: [
             {
-              text: 'Por qué Vite',
+              text: '¿Por qué Vite?',
               link: '/guide/why'
             },
             {
