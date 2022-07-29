@@ -111,6 +111,9 @@
 
   Se puede lograr una resolución personalizada más avanzada a través de [complementos](/guide/api-plugin).
 
+  :::warning Uso con SSR
+  Si has configurado alias para [dependencias externalizadas de SSR](/guide/ssr.md#ssr-externals), es posible que desees crear un alias para los paquetes `node_modules` reales. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases ) admiten la creación de alias a través del prefijo `npm:`.
+
 ## resolve.dedupe
 
 - **Tipo:** `string[]`

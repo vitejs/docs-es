@@ -64,7 +64,7 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 2. Dentro de tu proyecto, crea un `deploy.sh` con el siguiente contenido (con las líneas resaltadas sin comentar adecuadamente) y ejecútalo para desplegar:
 
-   ```bash{13,20,23}
+   ```bash{13,21,24}
    #!/usr/bin/envsh
 
    # abortar en caso de errores

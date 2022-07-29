@@ -6,7 +6,7 @@ Vite ya no es compatible con Node.js 12 / 13 / 15, los cuales ya se finalizó su
 
 ## Principales cambios para navegadores modernos
 
-El paquete de producción asume soporte para JavaScript moderno. De forma predeterminada, Vite apunta a navegadores que admiten los [módulos ES nativos](https://caniuse.com/es6-module) e [importación dinámica nativa de ESM](https://caniuse.com/es6-module-dynamic-import ) e [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta):
+El paquete de producción asume soporte para JavaScript moderno. De forma predeterminada, Vite apunta a navegadores que admiten los [módulos ES nativos](https://caniuse.com/es6-module) e [importación dinámica nativa de ESM](https://caniuse.com/es6-module-dynamic-import ) e [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
 
 - Chrome >=87
 - Firefox >=78

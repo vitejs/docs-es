@@ -108,7 +108,7 @@ El tema ahora es compartido por todas las plantillas. Esto debería ayudar a tra
 
 ### Vite CLI
 
-<pre style="background-color: var(--vp-code-block-bg);padding:2em;border-radius:8px;max-width: 100%">
+<pre style="background-color: var(--vp-code-block-bg);padding:2em;border-radius:8px;max-width: 100%;overflow-x:auto;">
   <span style="color:lightgreen"><b>VITE</b></span> <span style="color:lightgreen">v3.0.0</span>  <span style="color:gray">ready in <b>320</b> ms</span>
 
   <span style="color:lightgreen"><b>➜</b></span>  <span style="color:white"><b>Local</b>:</span>   <span style="color:cyan">http://127.0.0.1:5173/</span>
@@ -231,7 +231,7 @@ Un maratón de selección de incidencias fue encabezado por [@bluwyoo](https://t
 
 - Vite ya no es compatible con Node.js 12/13/15, que alcanzaron su final de soporte. Ahora se requiere Node.js 14.18+/16+.
 - Vite ahora se publica como ESM, con un proxy CJS a la entrada de ESM para compatibilidad.
-- Los lineamientos básicos para navegadores modernos ahora está dirigido a navegadores que admiten los [módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) e [`import.meta`](https://caniuse.com/mdn-javascript_statements_import_meta).
+- Los lineamientos básicos para navegadores modernos ahora está dirigido a navegadores que admiten los [módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) e [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta).
 - Las extensiones de archivo JS en modo SSR y librería ahora usan una extensión válida (`js`, `mjs` o `cjs`) para generar entradas y fragmentos JS en función de su formato y el tipo de paquete.
 
 Obtén más información en la [Guía de migración](/guide/migration).
