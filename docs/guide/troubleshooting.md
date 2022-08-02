@@ -78,4 +78,4 @@ Por ejemplo, es posible que veas estos errores.
 
 > TypeError: no se puede crear la propiedad 'foo' en booleano 'false'
 
-Si este código se usa dentro de las dependencias, podrías usar [`patch-package`](https://github.com/ds300/patch-package) (o [`yarn patch`](https://yarnpkg.com/ cli/patch) o [`pnpm patch`](https://pnpm.io/cli/patch)) para una trampilla de escape.
+Si este código se usa dentro de las dependencias, podrías usar [`patch-package`](https://github.com/ds300/patch-package) (o [`yarn patch`](https://yarnpkg.com/cli/patch) o [`pnpm patch`](https://pnpm.io/cli/patch)) para una trampilla de escape.
