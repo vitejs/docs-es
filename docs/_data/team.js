@@ -5,7 +5,7 @@ export const core = [
       title: 'Creador',
       org: 'Vue.js',
       orgLink: 'https://vuejs.org/',
-      desc: 'Esposo, padre de dos hijos, desarrollador independiente de código abierto.',
+      desc: 'Desarrollador independiente de código abierto, creador de Vue.js y Vite.',
       links: [
         { icon: 'github', link: 'https://github.com/yyx990803' },
         { icon: 'twitter', link: 'https://twitter.com/youyuxi' }

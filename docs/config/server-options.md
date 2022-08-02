@@ -143,6 +143,8 @@
 
   Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
 
+  Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) para ver algunos ejemplos.
+
   :::tip NOTA
 
   Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
