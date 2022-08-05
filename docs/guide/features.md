@@ -97,6 +97,20 @@ Esto proporcionará los siguientes tipos de librerías:
 - Tipos para las [variables de entorno](./env-and-mode#variables-de-entorno) inyectadas por Vite en `import.meta.env`
 - Tipos para la [API de HMR](./api-hmr) en `import.meta.hot`
 
+:::tip
+Para anular la escritura predeterminada, declárala antes de la referencia de triple slash. Por ejemplo, para hacer que la importación predeterminada de `*.svg` sea un componente de React:
+
+```ts
+declare module '*.svg' {
+  const content: React.FC<React.SVGProps<SVGElement>>
+  export default content
+}
+/// <reference types="vite/client" />
+```
+
+:::
+
+
 ## Vue
 
 Vite proporciona soporte Vue de primera clase:
