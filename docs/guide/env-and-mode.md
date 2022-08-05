@@ -46,7 +46,7 @@ Los archivos `.env` se cargan al inicio de Vite. Reinicia el servidor después d
 
 Las variables de entorno cargadas también se exponen al código fuente del cliente a través de `import.meta.env` como cadenas.
 
-Para evitar la filtración accidental de variables de entorno al cliente, solo las variables con el prefijo `VITE_` se exponen a su código procesado por Vite, por ejemplo, el siguiente archivo:
+Para evitar la filtración accidental de variables de entorno al cliente, solo las variables con el prefijo `VITE_` se exponen a su código procesado por Vite, por ejemplo, las siguientes variables de entorno:
 
 ```
 VITE_SOME_KEY=123
@@ -71,9 +71,9 @@ Si deseas personalizar el prefijo de las variables env, consulta la opción [env
 
 ### IntelliSense para TypeScript
 
-De forma predeterminada, Vite proporciona una definición de tipo para `import.meta.env` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Si bien puedes definir más variables de entorno personalizadas en los archivos `.env.[mode]`, es posible que desees obtener IntelliSense para las variables de entorno definidas por el usuario que tienen el prefijo `VITE_`.
+De forma predeterminada, Vite proporciona definiciones de tipo para `import.meta.env` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Si bien puedes definir más variables de entorno personalizadas en los archivos `.env.[mode]`, es posible que desees que IntelliSense funcione para las variables de entorno definidas por el usuario que tienen el prefijo `VITE_`.
 
-Para lograrlo, puedes crear un `env.d.ts` en el directorio `src`, luego aumentar `ImportMetaEnv` de esta manera:
+Para hacerlo, puedes crear un `env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
 
 ```typescript
 /// <reference types="vite/client" />

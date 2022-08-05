@@ -107,10 +107,7 @@ declare module '*.svg' {
 }
 /// <reference types="vite/client" />
 ```
-
 :::
-
-
 ## Vue
 
 Vite proporciona soporte Vue de primera clase:
