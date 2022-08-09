@@ -114,8 +114,8 @@ Vite proporciona soporte Vue de primera clase:
 
 - Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
 - Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Compatibilidad con Vue 2.7 a través de [vitejs/vite-plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Compatibilidad con Vue <2.7 a través de [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Compatibilidad con Vue 2.7 a través de [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+- Compatibilidad con Vue <2.7 a través de [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
 ## JSX
 

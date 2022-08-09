@@ -105,6 +105,12 @@ export default defineConfig({
       ]
     },
 
+    outlineTitle: 'En esta página',
+    docFooter: {
+      prev: 'Página anterior',
+      next: 'Próxima página'
+    },
+
     footer: {
       message: `Publicado bajo licencia MIT. (${commitRef})`,
       copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite'

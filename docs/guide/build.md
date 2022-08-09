@@ -209,7 +209,7 @@ Un usuario puede elegir desplegar en tres rutas diferentes:
 
 Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenarios. Vite brinda soporte experimental para opciones avanzadas para Base durante la compilación, usando `experimental.renderBuiltUrl`.
 
-```js
+```ts
   experimental: {
     renderBuiltUrl: (filename: string, { hostType: 'js' | 'css' | 'html' }) => {
       if (hostType === 'js') {
@@ -221,9 +221,9 @@ Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenari
   }
 ```
 
-Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el tercer parámetro de `context` proporcionado a la función.
+Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el segundo parámetro de `context` proporcionado a la función.
 
-```js
+```ts
 experimental: {
   renderBuiltUrl(filename: string, { hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
     if (type === 'public') {

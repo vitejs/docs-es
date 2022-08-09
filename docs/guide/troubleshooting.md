@@ -8,12 +8,12 @@ Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discus
 
 ### `Error: No se puede encontrar el módulo 'C:\foo\bar&baz\vite\bin\vite.js'`
 
-La ruta a la carpeta de tu proyecto puede incluir `?`, que no funciona con `npm` en Windows ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45)).
+La ruta a la carpeta de tu proyecto puede incluir `&`, que no funciona con `npm` en Windows ([npm/cmd-shim#45](https://github.com/npm/cmd-shim/issues/45)).
 
 Necesitarás:
 
 - Cambiar a otro gestor de paquetes (por ejemplo, `pnpm`, `yarn`)
-- Eliminar `?` de la ruta a tu proyecto
+- Eliminar `&` de la ruta a tu proyecto
 
 ## Servidor de desarrollo
 

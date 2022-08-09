@@ -95,41 +95,6 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 ::: tip
 También puedes ejecutar el script anterior en tu configuración de integración continua para habilitar el despliegue automatico en cada push.
 :::
-
-<!-- ### Github Pages y Travis CI
-
-1. Configura la `base` correcta en `vite.config.js`.
-
-   Si estás desplegando en `https://<NOMBRE DE USUARIO o GRUPO>.github.io/`, puedes omitir `base` ya que el valor predeterminado es `'/'`.
-
-   Si estás desplegando en `https://<NOMBRE DE USUARIO o GRUPO>.github.io/<REPO>/`, por ejemplo, tu repositorio está en `https://github.com/<NOMBRE DE USUARIO>/<REPO>`, configura `base` en `'/<REPO>/'`.
-
-2. Crea un archivo llamado `.travis.yml` en la raíz de tu proyecto.
-
-3. Ejecuta `npm install` y confirma el archivo de bloqueo generado (`package-lock.json`).
-
-4. Usa la plantilla de proveedor de despliegue de Github Pages y sigue la [documentación de Travis CI](https://docs.travis-ci.com/user/deployment/pages/).
-
-   ```yaml
-   language: node_js
-   node_js:
-     - lts/*
-   install:
-     - npm ci
-   script:
-     - npm run build
-   deploy:
-     provider: pages
-     skip_cleanup: true
-     local_dir: dist
-     # Un token generado en GitHub que le permite a Travis insertar código en tu repositorio.
-     # Configurar en la página de configuración de Travis de tu repositorio, como una variable segura.
-     github_token: $GITHUB_TOKEN
-     keep_history: true
-     on:
-       branch: main
-   ``` -->
-
 ## GitLab Pages y GitLab CI
 
 1. Configura la `base` correcta en `vite.config.js`.
@@ -164,6 +129,8 @@ También puedes ejecutar el script anterior en tu configuración de integración
 
 ## Netlify
 
+### CLI de Netlify
+
 1. Instala la [CLI de Netlify](https://cli.netlify.com/).
 2. Crea un nuevo sitio usando `ntl init`.
 3. Despliega usando `ntl deployment`.
@@ -183,6 +150,16 @@ La CLI de Netlify te compartirá una URL de vista previa para inspeccionar. Cuan
 # Despliega el sitio en producción
 $ ntl deploy --prod
 ```
+
+### Netlify con Git
+
+1. Haz un push de tu código en tu repositorio de git (GitHub, GitLab, BitBucket, Azure DevOps).
+2. [Importa el proyecto](https://app.netlify.com/start) a Netlify.
+3. Elige la rama, el directorio de salida y configura las variables de entorno, si es necesario.
+4. Haz clic en **Deploy**.
+5. ¡Tu aplicación Vite estará desplegada!
+
+Después de que tu proyecto haya sido importado y desplegado, todos los pushs subsiguientes a ramas que no sean la de producción junto con las solicitudes de cambios generarán una [vista previa de despliegue](https://docs.netlify.com/site-deploys/deploy-previews/), y todos los cambios realizados en la rama de producción (comúnmente "main") darán como resultado un [despliegue en producción](https://docs.netlify.com/site-deploys/overview/#definitions).
 
 ## Vercel
 
@@ -362,3 +339,26 @@ Instala la extensión en Visual Studio Code y navega hasta la raíz de la aplica
 Sigue el asistente iniciado por la extensión para darle un nombre a la aplicación, elige uno de los marco de trabajo preestablecidos y designa la raíz de la aplicación (generalmente `/`) y la ubicación del archivo creado `/dist`. El asistente se ejecutará y creará una acción de GitHub en el repositorio en una carpeta `.github`.
 
 La acción funcionará para desplegar tu aplicación (ve el progreso en la pestaña Acciones del repositorio) y, cuando se complete con éxito, puedes ver tu aplicación en la dirección provista en la ventana de progreso de la extensión haciendo clic en el botón 'Examinar sitio web' que aparece cuando la acción de GitHub se haya ejecutado.
+
+## Render
+
+Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https://render.com/).
+
+1. Crea una [cuenta de Render](https://dashboard.render.com/register).
+
+2. En el [Panel](https://dashboard.render.com/), has clic en el botón **Nuevo** y selecciona **Sitio estático**.
+
+3. Conecta tu cuenta de GitHub/GitLab o usa un repositorio público.
+
+4. Especifica un nombre para el proyecto y una rama.
+
+    - **Comando de compilación**: `npm run build`
+    - **Directorio público**: `dist`
+
+5. Has clic en **Crear sitio estático**.
+
+    Tu aplicación debe desplegarse en `https://<PROJECTNAME>.onrender.com/`.
+
+De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
+
+También puedes agregar un [dominio personalizado](https://render.com/docs/custom-domains) a tu proyecto.
