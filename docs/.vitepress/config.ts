@@ -74,7 +74,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.svg',
     editLink: {
-      pattern: 'https://github.com/vitejs/vite/edit/main/docs/:path',
+      pattern: 'https://github.com/vitejs/docs-es/edit/main/:path',
       text: 'Sugerir cambios para esta página'
     },
     socialLinks: [
