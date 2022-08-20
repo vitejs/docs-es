@@ -166,8 +166,6 @@
 
   Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
 
-  Al ejecutar Vite en el subsistema de Windows para Linux (WSL) 2, si la carpeta del proyecto reside en un sistema de archivos de Windows, deberá configurar esta opción en `{ usePolling: true }`. Esto se debe a [una limitación de WSL2](https://github.com/microsoft/WSL/issues/4739) con el sistema de archivos de Windows.
-
   El observador del servidor Vite omite los directorios `.git/` y `node_modules/` de forma predeterminada. Si deseas ver un paquete dentro de `node_modules/`, puede pasar un patrón global negado a `server.watch.ignored`. Es decir:
 
   ```js
@@ -184,6 +182,19 @@
     }
   })
   ```
+
+::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
+
+Al ejecutar Vite en WSL2, la observación del sistema archivos no funciona cuando un archivo es editado por aplicaciones de Windows (procesos no-WSL2). Esto se debe a [una limitación de WSL2](https://github.com/microsoft/WSL/issues/4739). Esto también se aplica a la ejecución en Docker con un backend de WSL2.
+
+Para solucionarlo, podrías:
+
+- **Recomendado**: Utilizar las aplicaciones WSL2 para editar tus archivos.
+  - También se recomienda mover la carpeta del proyecto fuera del sistema de archivos de Windows. El acceso al sistema de archivos de Windows desde WSL2 es lento. Eliminar esa sobrecarga mejorará el rendimiento.
+- Establezca `{ usePolling: true }`.
+  - Tenga en cuenta que [`usePolling` conduce a un uso elevado de la CPU](https://github.com/paulmillr/chokidar#performance).
+
+:::
 
 ## server.middlewareMode
 

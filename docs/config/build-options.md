@@ -193,3 +193,10 @@ Límite para advertencias de tamaño de fragmento (en kbs).
 - **Por defecto:** `null`
 
 Configurar en `{}` para habilitar el observador de Rollup. Esto se usa principalmente en casos que involucran complementos de solo compilación o procesos de integración.
+
+::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
+
+Hay casos en los que la observación del sistema de archivos no funciona con WSL2.
+Ver [`server.watch`](./server-options.md#server-watch) para más detalles.
+
+:::
