@@ -191,8 +191,8 @@ Para solucionarlo, podrías:
 
 - **Recomendado**: Utilizar las aplicaciones WSL2 para editar tus archivos.
   - También se recomienda mover la carpeta del proyecto fuera del sistema de archivos de Windows. El acceso al sistema de archivos de Windows desde WSL2 es lento. Eliminar esa sobrecarga mejorará el rendimiento.
-- Establezca `{ usePolling: true }`.
-  - Tenga en cuenta que [`usePolling` conduce a un uso elevado de la CPU](https://github.com/paulmillr/chokidar#performance).
+- Establece `{ usePolling: true }`.
+  - Ten en cuenta que [`usePolling` conduce a un uso elevado de la CPU](https://github.com/paulmillr/chokidar#performance).
 
 :::
 
