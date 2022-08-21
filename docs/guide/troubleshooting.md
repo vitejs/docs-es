@@ -48,7 +48,7 @@ Para resolver esto:
 
 Cuando el servidor / el servidor WebSocket recibe una cabecera HTTP grande, la petición será descartada y se mostrará la siguiente advertencia.
 
-> El servidor ha respondido con el código de estado 431. Ver https://es.vitejs.dev/guide/troubleshooting.html#431-campos-de-la-cabecera-de-la-petición-demasiado-grandes.
+> El servidor ha respondido con el código de estado 431. Ver https://es.vitejs.dev/guide/troubleshooting.html#_431-campos-de-la-cabecera-de-la-peticion-demasiado-grandes.
 
 Esto se debe a que Node.js limita el tamaño del encabezado de la solicitud para mitigar [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121).
 
