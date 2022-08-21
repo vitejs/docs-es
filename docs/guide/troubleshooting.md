@@ -44,6 +44,16 @@ Para resolver esto:
   $ sudo sysctl fs.inotify.max_user_watches=524288
   ```
 
+### 431 Campos de la Cabecera de la Petición Demasiado Grandes
+
+Cuando el servidor / el servidor WebSocket recibe una cabecera HTTP grande, la petición será descartada y se mostrará la siguiente advertencia.
+
+> El servidor ha respondido con el código de estado 431. Ver https://es.vitejs.dev/guide/troubleshooting.html#_431-campos-de-la-cabecera-de-la-peticion-demasiado-grandes.
+
+Esto se debe a que Node.js limita el tamaño del encabezado de la solicitud para mitigar [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121).
+
+Para evitar esto, intenta reducir el tamaño del encabezado de la solicitud. Por ejemplo, si la cookie es larga, elimínala. O puedes usar [`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) para cambiar el tamaño máximo de la cabecera.
+
 ## HMR
 
 ### Vite detecta un cambio de archivo pero el HMR no funciona
