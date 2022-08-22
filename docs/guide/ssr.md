@@ -213,6 +213,8 @@ Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipaci
 Las dependencias se "externalizan" del sistema del módulo de transformación SSR de Vite de forma predeterminada cuando se ejecuta SSR. Esto acelera tanto el desarrollo como la compilación.
 Si una dependencia necesita ser transformada por la canalización de Vite, por ejemplo, porque las características de Vite se usan sin transpilar en ellas, se pueden agregar a [`ssr.noExternal`](../config/ssr-options.html#ssr-noexternal).
 
+En el caso de las dependencias vinculadas, no se externalizan por defecto para aprovechar el HMR de Vite. Si no se desea esto, por ejemplo, para probar las dependencias como si no estuvieran vinculadas, se puede añadir a [`ssr.external`](../config/ssr-options.md#ssr-external).
+
 :::warning Trabajando con Alias
 Si has configurado aliases que redirigen un paquete a otro, es posible que desees crear un alias para los paquetes `node_modules` reales para que funcione para las dependencias externalizadas de SSR. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases) admiten la creación de alias a través del prefijo `npm:`.
 :::
