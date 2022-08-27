@@ -91,6 +91,11 @@ interface ViteDevServer {
    */
   moduleGraph: ModuleGraph
   /**
+   * Las urls resueltas que Vite imprime en la CLI. null en modo middleware o
+   * antes de llamar a `server.listen`.
+   */
+  resolvedUrls: ResolvedServerUrls | null
+  /**
    * Resuelve, carga y transforma programáticamente una URL y obtiene el resultado
    * sin pasar por el pipeline de peticiones http.
    */
