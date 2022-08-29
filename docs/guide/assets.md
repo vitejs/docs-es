@@ -26,7 +26,7 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 
 - Los recursos más pequeños en bytes que la opción [`assetsInlineLimit`](/config/build-options#build-assetsinlinelimit) se insertarán como URL de datos en base64.
 
-- Los marcadores de posición de Git LFS se excluyen automáticamente de la inserción porque no contienen el contenido del archivo que representan. Para obtener la inserción, asegúrate de descargar el contenido del archivo a través de Git LFS antes de construir.
+- Los marcadores de posición de Git LFS se excluyen automáticamente de la inserción porque no contienen el contenido del archivo que representan. Para obtener la inserción, asegúrate de descargar el contenido del archivo a través de Git LFS antes de compilar.
 
 ### Importaciones de URL explícita
 

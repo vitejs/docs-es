@@ -185,13 +185,13 @@
 
 ::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
 
-Al ejecutar Vite en WSL2, la observación del sistema archivos no funciona cuando un archivo es editado por aplicaciones de Windows (procesos no-WSL2). Esto se debe a [una limitación de WSL2](https://github.com/microsoft/WSL/issues/4739). Esto también se aplica a la ejecución en Docker con un backend de WSL2.
+Al ejecutar Vite en WSL2, la observación del sistema de archivos no funciona cuando un archivo es editado por aplicaciones de Windows (procesos no-WSL2). Esto se debe a [una limitación de WSL2](https://github.com/microsoft/WSL/issues/4739). Esto también se aplica a la ejecución en Docker con un backend de WSL2.
 
 Para solucionarlo, podrías:
 
 - **Recomendado**: Utilizar las aplicaciones WSL2 para editar tus archivos.
   - También se recomienda mover la carpeta del proyecto fuera del sistema de archivos de Windows. El acceso al sistema de archivos de Windows desde WSL2 es lento. Eliminar esa sobrecarga mejorará el rendimiento.
-- Establece `{ usePolling: true }`.
+- Configura `{ usePolling: true }`.
   - Ten en cuenta que [`usePolling` conduce a un uso elevado de la CPU](https://github.com/paulmillr/chokidar#performance).
 
 :::
