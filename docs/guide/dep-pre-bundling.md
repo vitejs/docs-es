@@ -60,7 +60,7 @@ export default defineConfig({
 Al realizar cambios en la dependencia vinculada, reinicia el servidor de desarrollo con la opción de línea de comando `--force` para que los cambios surtan efecto.
 
 ::: warning Deduplicación
-Debido a las diferencias en la resolución de dependencias vinculadas, las dependencias transitivas pueden desduplicarse incorrectamente, lo que genera problemas cuando se usa en tiempo de ejecución. Si te topas con este problema, usa `npm pack` en la dependencia vinculada para solucionarlo.
+Debido a las diferencias en la resolución de dependencias vinculadas, las dependencias transitivas pueden deduplicarse incorrectamente, lo que genera problemas cuando se usa en tiempo de ejecución. Si te topas con este problema, usa `npm pack` en la dependencia vinculada para solucionarlo.
 :::
 
 ## Personalizando el Comportamiento

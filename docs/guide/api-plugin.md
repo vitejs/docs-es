@@ -56,7 +56,7 @@ export default defineConfig({
 
 Se ignorarán los complementos falsos, que se pueden usar para activar o desactivar complementos fácilmente.
 
-`plugins` también acepta ajustes preestablecidos que incluyen varios complementos como un solo elemento. Esto es útil para funciones complejas (como la integración de marcos) que se implementan mediante varios complementos. El array se aplanará internamente.
+`plugins` también acepta ajustes predefinidos que incluyen varios complementos como un solo elemento. Esto es útil para funciones complejas (como la integración de marcos) que se implementan mediante varios complementos. El array se aplanará internamente.
 
 ```js
 // framework-plugin
