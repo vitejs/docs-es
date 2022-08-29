@@ -54,7 +54,7 @@ Especifica el directorio en el que se alojarán los recursos generados (en relac
 Los recursos importados o a los que se hace referencia que son más pequeños que este umbral se insertarán como URL base64 para evitar solicitudes http adicionales. Configurar en `0` para deshabilitar la inserción por completo.
 
 ::: tip Nota
-Si especificas `build.lib`, `build.assetsInlineLimit` se ignorará y los recursos siempre serán insertados, independientemente del tamaño del archivo.
+Si especificas `build.lib`, `build.assetsInlineLimit` se ignorará y los recursos siempre serán insertados, independientemente del tamaño del archivo o de ser un marcador de posición Git LFS.
 :::
 
 ## build.cssCodeSplit
