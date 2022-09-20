@@ -87,7 +87,7 @@ export default defineConfig({
       apiKey: 'deaab78bcdfe96b599497d25acc6460e',
       indexName: 'vitejs',
       searchParameters: {
-        facetFilters: ['tags:es']
+        facetFilters: ['tags:en']
       }
     },
 

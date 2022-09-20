@@ -272,60 +272,6 @@ También puedes agregar dominios personalizados y manejar la configuración de c
 
 También puedes desplegar en un [dominio personalizado](http://surge.sh/help/adding-a-custom-domain) agregando `surge dist yourdomain.com`.
 
-## Heroku
-
-1. Instala el [CLI de Heroku](https://devcenter.heroku.com/articles/heroku-cli).
-
-2. Crea una cuenta de Heroku [registrándote](https://signup.heroku.com).
-
-3. Ejecuta `heroku login` y completa con tus credenciales de Heroku:
-
-   ```bash
-   heroku login
-   ```
-
-4. Crea un archivo llamado `static.json` en la raíz de tu proyecto con el siguiente contenido:
-
-   `static.json`:
-
-   ```json
-   {
-     "root": "./dist"
-   }
-   ```
-
-Esta es la configuración de tu sitio; lee más en [heroku-buildpack-static](https://github.com/heroku/heroku-buildpack-static).
-
-5. Configura tu control de git remoto para Heroku:
-
-   ```bash
-   # cambio de versión
-   $ git init
-   $ git add .
-   $ git commit -m "Mi sitio listo para su despliegue"
-
-   # crea una nueva aplicación con un nombre específico
-   $ heroku apps:create example
-   ```
-
-6. Configura los buildpacks. Usamos `heroku/nodejs` para construir el proyecto y `heroku-buildpack-static` para servirlo.
-
-   ```bash
-   # configurando los buildpacks
-   $ heroku buildpacks:set heroku/nodejs
-   $ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static.git
-   ```
-
-7. Despliega tu sitio:
-
-   ```bash
-   # publica el sitio
-   $ git push heroku main
-
-   # abre un navegador para ver la versión Dashboard de Heroku CI
-   $ heroku open
-   ```
-
 ## Azure Static Web Apps
 
 Puedes desplegar rápidamente una aplicación Vite con el servicio Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps). Necesitas:
