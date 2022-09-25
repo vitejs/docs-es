@@ -158,6 +158,16 @@
 
   Lista de campos en `package.json` para probar al resolver el punto de entrada de un paquete. Ten en cuenta que esto tiene menos prioridad que las exportaciones condicionales resueltas desde el campo `exports`: si un punto de entrada se resuelve con éxito desde `exports`, el campo principal se ignorará.
 
+## resolve.browserField
+
+- **Tipo:** `boolean`
+- **Por defecto:** `true`
+- **Obsoleto**
+
+  Permite habilitar la resolución en el campo `browser`.
+
+  En el futuro, el valor predeterminado de `resolve.mainFields` será `['browser', 'module', 'jsnext:main', 'jsnext']` y esta opción se eliminará.
+
 ## resolve.extensions
 
 - **Tipo:** `string[]`

@@ -64,33 +64,36 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 2. Dentro de tu proyecto, crea un `deploy.sh` con el siguiente contenido (con las líneas resaltadas sin comentar adecuadamente) y ejecútalo para desplegar:
 
-   ```bash{13,21,24}
-   #!/usr/bin/envsh
+  ```bash{16,24,27}
+  #!/usr/bin/envsh
 
-   # abortar en caso de errores
-   set -e
+  # abortar en caso de errores
+  set -e
 
-   # compilado
-   npm run build
+  # compilado
+  npm run build
 
-   # navega al directorio de salida de compilación
-   dist cd
+  # navega al directorio de salida de compilación
+  cd dist
 
-   # si estás desplegando en un dominio personalizado
-   # echo 'www.ejemplo.com' > CNAME
+  # coloca .nojekyll para forzar el procesamiento de Jekyll
+  echo > .nojekyll
 
-   git init
-   git add -A
-   git commit -m 'deploy'
+  # si estás desplegando en un dominio personalizado
+  # echo 'www.ejemplo.com' > CNAME
 
-   # si estás desplegando en https://<NOMBRE DE USUARIO>.github.io
-   # git push -f git@github.com:<NOMBRE DE USUARIO>/<NOMBRE DE USUARIO>.github.io.git main
+  git init
+  git add -A
+  git commit -m 'deploy'
 
-   # si estás desplegando en https://<NOMBRE DE USUARIO>.github.io/<REPO>
-   # git push -f git@github.com:<NOMBRE DE USUARIO>/<REPO>.git main:gh-pages
+  # si estás desplegando en https://<NOMBRE DE USUARIO>.github.io
+  # git push -f git@github.com:<NOMBRE DE USUARIO>/<NOMBRE DE USUARIO>.github.io.git main
 
-   cd -
-   ```
+  # si estás desplegando en https://<NOMBRE DE USUARIO>.github.io/<REPO>
+  # git push -f git@github.com:<NOMBRE DE USUARIO>/<REPO>.git main:gh-pages
+
+  cd -
+  ```
 
 ::: tip
 También puedes ejecutar el script anterior en tu configuración de integración continua para habilitar el despliegue automatico en cada push.

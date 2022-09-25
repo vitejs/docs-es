@@ -76,6 +76,20 @@ Si Vite o un complemento no maneja HMR, se producirá un refresco completo.
 
 Además, si hay un bucle de dependencia, se producirá un refresco completo. Para resolver esto, intenta eliminar el bucle.
 
+## Compilación
+
+### El archivo integrado no funciona debido a un error de CORS
+
+Si la salida del archivo HTML se abrió con el protocolo `file`, los scripts no se ejecutarán con el siguiente error.
+
+> El acceso a la secuencia de comandos en 'file:///foo/bar.js' desde el origen 'null' ha sido bloqueado por la política de CORS: las solicitudes de origen cruzado solo se admiten para esquemas de protocolo: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted.
+
+> Solicitud de origen cruzado bloqueada: la política del mismo origen no permite leer el recurso remoto en file:///foo/bar.js. (Razón: solicitud CORS no http).
+
+Consulta [Motivo: la solicitud CORS no es HTTP - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSRequestNotHttp) para obtener más información sobre por qué sucede esto.
+
+Debes acceder al archivo con el protocolo `http`. La forma más fácil de lograr esto es ejecutar `npx vite preview`.
+
 ## Otros
 
 ### Se produce un error de sintaxis/error de tipo

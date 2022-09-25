@@ -292,21 +292,20 @@ createServer()
 ## server.fs.deny
 
 - **Tipo:** `string[]`
+- **Por defecto:** `['.env', '.env.*', '*.{pem,crt}']`
 
-  Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite.
-
-  Por defecto a `['.env', '.env.*', '*.{pem,crt}']`.
+  Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
 ## server.origin
 
 - **Tipo:** `string`
 
-Define el origen de las URL de recursos generadas durante el desarrollo.
+  Define el origen de las URL de recursos generadas durante el desarrollo.
 
-```js
-export default defineConfig({
-  server: {
-    origin: 'http://127.0.0.1:8080'
-  }
-})
-```
+  ```js
+  export default defineConfig({
+    server: {
+      origin: 'http://127.0.0.1:8080'
+    }
+  })
+  ```

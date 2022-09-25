@@ -17,20 +17,53 @@ La transformación se realiza con esbuild y el valor debe ser una [opción de de
 
 Ten en cuenta que la compilación fallará si el código contiene funciones que esbuild no puede transpilar de manera segura. Consulta la [documentación de esbuild](https://esbuild.github.io/content-types/#javascript) para obtener más detalles.
 
-## build.polyfillModulePreload
+## build.modulePreload
 
-- **Tipo:** `boolean`
+- **Tipo:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
 - **Por defecto:** `true`
 
-Inyecta automáticamente el [polyfill de precarga del módulo](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill).
-
-Si se coloca en `true`, el polyfill se inyecta automáticamente en el módulo proxy de cada entrada `index.html`. Si la compilación está configurada para usar una entrada personalizada que no sea html a través de `build.rollupOptions.input`, entonces es necesario importar manualmente el polyfill en su entrada personalizada:
+Por defecto, se inyecta automáticamente un [polyfill de precarga de módulo](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill). El polyfill se inyecta automáticamente en el módulo proxy de cada archivo de entrada `index.html`. Si la compilación está configurada para usar una entrada personalizada que no sea HTML a través de `build.rollupOptions.input`, entonces es necesario importar manualmente el polyfill en la entrada personalizada:
 
 ```js
 import 'vite/modulepreload-polyfill'
 ```
 
 Nota: el polyfill **no** se aplica al [Modo Librería](/guide/build#modo-libreria). Si necesitas que se soporten navegadores sin importación dinámica nativa, probablemente deberías evitar usarlo en tu librería.
+
+El polyfill se puede deshabilitar usando `{ polyfill: false }`.
+
+Vite calcula la lista de fragmentos a precargar para cada importación dinámica. De forma predeterminada, se utilizará una ruta absoluta que incluya la `base` al cargar estas dependencias. Si la `base` es relativa (`''` o `'./''`), se usa `import.meta.url` en tiempo de ejecución para evitar rutas absolutas que dependen de la base final implementada.
+
+Existe soporte experimental para un control detallado sobre la lista de dependencias y sus rutas usando la función `resolveDependencies`. Esto espera una función de tipo `ResolveModulePreloadDependenciesFn`:
+
+```ts
+type ResolveModulePreloadDependenciesFn = (
+  url: string,
+  deps: string[],
+  context: {
+    importer: string
+  }
+) => (string | { runtime?: string })[]
+```
+
+Se llamará a la función `resolveDependencies` para cada importación dinámica con una lista de los fragmentos de los que depende, y también se llamará para cada fragmento importado en los archivos de entrada HTML. Se puede devolver un nuevo array de dependencias con estas dependencias filtradas, u otras más inyectadas, y sus rutas modificadas. Las rutas de `deps` son relativas a `build.outDir`. Se permite tambien retornar una ruta relativa al `hostId` para `hostType === 'js'`, en cuyo caso se usa `new URL(dep, import.meta.url)` para obtener una ruta absoluta al inyectar la precarga de este módulo en el encabezado HTML.
+
+```js
+modulePreload: {
+  resolveDependencies: (filename, deps, { hostId, hostType }) => {
+    return deps.filter(condition)
+  }
+}
+```
+
+Las rutas de dependencia resueltas se pueden modificar aún más usando [`experimental.renderBuiltUrl`](../guide/build.md#advanced-base-options)
+
+## build.polyfillModulePreload
+- **Tipo:** `boolean`
+- **Por defecto:** `true`
+- **Obsoleto** usa `build.modulePreload.polyfill` en su lugar
+
+Permite inyectar automáticamente un [polyfill de precarga de módulo](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill).
 
 ## build.outDir
 
