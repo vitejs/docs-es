@@ -142,10 +142,10 @@ Opciones para [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plu
 
 ## build.lib
 
-- **Tipo:** `{ entry: string, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat) => string) }`
+- **Tipo:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
 - **Relacionado:** [Modo Librería](/guide/build#modo-libreria)
 
-Compilar como una librería. Se requiere `entry` ya que la librería no puede usar HTML como entrada. `name` es la variable global expuesta y se requiere cuando `formats` incluye `'umd'` o `'iife'`. Por defecto los `formats` son `['es', 'umd']`. `fileName` es el nombre de la salida del archivo del paquete, por defecto `fileName` es la opción de nombre del package.json, también se puede definir como una función que toma el `format` como argumento.
+Compilar como una librería. Se requiere `entry` ya que la librería no puede usar HTML como entrada. `name` es la variable global expuesta y se requiere cuando `formats` incluye `'umd'` o `'iife'`. Por defecto los `formats` son `['es', 'umd']`. `fileName` es el nombre de la salida del archivo del paquete, por defecto `fileName` es la opción de nombre del package.json, también se puede definir como una función que toma el `format` y `entryAlias` como argumentos.
 
 ## build.manifest
 

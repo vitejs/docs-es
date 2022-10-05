@@ -128,6 +128,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
+    // También podría ser un diccionario o un array de múltiples puntos de entrada
     lib: {
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
@@ -181,6 +182,28 @@ dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
     ".": {
       "import": "./dist/my-lib.js",
       "require": "./dist/my-lib.umd.cjs"
+    }
+  }
+}
+```
+
+O, si expones múltiples puntos de entrada:
+
+```json
+{
+  "name": "my-lib",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/my-lib.cjs",
+  "module": "./dist/my-lib.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.mjs",
+      "require": "./dist/my-lib.cjs"
+    },
+    "./secondary": {
+      "import": "./dist/secondary.mjs",
+      "require": "./dist/secondary.cjs"
     }
   }
 }

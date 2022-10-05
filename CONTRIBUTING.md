@@ -219,7 +219,11 @@ Evita las dependencias que tengan dependencias transitivas grandes que resulten 
 
 Vite tiene como objetivo ser totalmente utilizable como una dependencia en un proyecto de TypeScript (por ejemplo, debe proporcionar tipos adecuados para VitePress), y también en `vite.config.ts`. Esto significa técnicamente que una dependencia cuyos tipos están expuestos debe ser parte de `dependencies` en lugar de `devDependencies`. Sin embargo, esto significa que no podremos empaquetarlo.
 
-Para evitar esto, integramos algunos de estos tipos de dependencias en `packages/vite/src/dep-types`. De esta manera, aún podemos exponer el tipo al empaquetar el código fuente de la dependencia.
+Para evitar esto, integramos algunos de estos tipos de dependencias en `packages/vite/src/types`. De esta manera, aún podemos exponer el tipo al empaquetar el código fuente de la dependencia.
+
+Utiliza `pnpm run check-dist-types` para verificar que los tipos empaquetados no dependan de los tipos en `devDependencies`. Si agregas `dependencies`, asegúrate de configurar `tsconfig.check.json`.
+
+Para los tipos compartidos entre el cliente y node, estos deben agregarse en `packages/vite/types`. Estos tipos no están empaquetados y se publican tal cual (aunque todavía se consideran internos). Los tipos de dependencia dentro de este directorio (por ejemplo, `packages/vite/types/chokidar.d.ts`) están en desuso y deben agregarse a `packages/vite/src/types` en su lugar.
 
 ### Piensa antes de agregar otra opción más
 

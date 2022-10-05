@@ -582,18 +582,11 @@ Es posible escribir eventos personalizados ampliando la interfaz `CustomEventMap
 
 ```ts
 // events.d.ts
-import 'vite'
-import 'vite/client/types'
-interface MyCustomEventMap {
-  'custom:foo': { msg: string }
-  // 'event-key': payload
-}
-// extendiendo interfaz por el lado del servidor
-declare module 'vite' {
-  interface CustomEventMap extends MyCustomEventMap {}
-}
-// extendiendo interfaz por el lado del cliente
-declare module 'vite/client/types' {
-  interface CustomEventMap extends MyCustomEventMap {}
+import 'vite/types/customEvent'
+declare module 'vite/types/customEvent' {
+  interface CustomEventMap {
+    'custom:foo': { msg: string }
+    // 'event-key': payload
+  }
 }
 ```
