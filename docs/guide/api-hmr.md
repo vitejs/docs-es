@@ -124,8 +124,8 @@ Llamar a `import.meta.hot.decline()` indica que este módulo no se puede actuali
 Un módulo de autoaceptación puede detectar durante el tiempo de ejecución de que no puede manejar una actualización de HMR y, por lo tanto, la actualización debe propagarse forzosamente a los importadores. Al llamar a `import.meta.hot.invalidate()`, el servidor HMR invalidará los importadores del invocador, como si no se aceptara a sí misma.
 Ten en cuenta que siempre debes llamar a `import.meta.hot.accept` incluso si planeas invocar a `invalidate` inmediatamente después, o de lo contrario, el cliente HMR no escuchará los cambios futuros en el módulo de autoaceptación. Para comunicar la intención claramente, recomendamos llamar a `invalidate` dentro de la devolución de llamada `accept` así:
 
-```ts
-import.meta.hot.accept(module => {
+```js
+import.meta.hot.accept((module) => {
   // Puedes usar la nueva instancia del módulo para decidir si invalidar.
   if (cannotHandleUpdate(module)) {
     import.meta.hot.invalidate()
