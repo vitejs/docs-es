@@ -57,7 +57,7 @@ Sin embargo, algunas bibliotecas (por ejemplo, [`vue`](https://github.com/vuejs/
 
 #### `useDefineForClassFields`
 
-A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es "ESNext". Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript. Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
+A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es `ES2022` o superior incluyendo `ESNext`. Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript. Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
 
 Si estás utilizando una biblioteca que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la biblioteca.
 
@@ -66,10 +66,13 @@ La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [
 #### Otras opciones del compilador que afectan el resultado de la compilación
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
+- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
-- [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
+- [`jsx`](https://www.typescriptlang.org/tsconfig#jsx)
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
+- [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
+- [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
 
 Si migrar el codigo base a `"isolatedModules": true` es un esfuerzo arduo, es posible que puedas facilitar el trabajo con un complemento de terceros como [rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports). Sin embargo, Vite no admite oficialmente este enfoque.
 
