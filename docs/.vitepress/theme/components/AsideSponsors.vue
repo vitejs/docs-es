@@ -16,14 +16,14 @@ const sponsors = computed(() => {
 </script>
 
 <template>
-  <a class="viteconf" href="https://viteconf.org" target="_blank">
+  <!-- <a class="viteconf" href="https://viteconf.org" target="_blank">
     <img width="22" height="22" src="/viteconf.svg" />
     <span>
       <p class="extra-info">Conferencia Online Gratis</p>
       <p class="heading">ViteConf - Oct 11</p>
       <p class="extra-info">¡Adquiere tu entrada!</p>
     </span>
-  </a>
+  </a> -->
   <VPDocAsideSponsors v-if="data" :data="sponsors" />
 </template>
 
