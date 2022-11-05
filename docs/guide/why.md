@@ -51,7 +51,7 @@ Garantizar un resultado óptimo y una coherencia de comportamiento entre el serv
 
 ## ¿Por qué no empaquetar con esbuild?
 
-Si bien `esbuild` es increíblemente rápido y ya es un empaquetador para bibliotecas muy optimizado, algunas de las características importantes necesarias para agrupar _aplicaciones_ aún están en constante desarrollo, en particular, la división de código y el manejo de CSS. Por el momento, Rollup es más maduro y flexible en estos aspectos. Dicho esto, no descartaremos la posibilidad de usar `esbuild` para la compilación en producción cuando estabilice estas funcionalidades en el futuro.
+Si bien `esbuild` es extremadamente rápido y ya es un empaquetador para bibliotecas muy optimizado, algunas de las características importantes necesarias para agrupar _aplicaciones_ aún están en constante desarrollo, en particular, la división de código y el manejo de CSS. Por el momento, Rollup es más maduro y flexible en estos aspectos. Dicho esto, no descartaremos la posibilidad de usar `esbuild` para la compilación en producción cuando estabilice estas funcionalidades en el futuro.
 
 ## ¿En qué se diferencia Vite de X?
 

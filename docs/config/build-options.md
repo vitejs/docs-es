@@ -206,6 +206,13 @@ Configurar en `false` para deshabilitar la escritura del paquete en el disco. Es
 
 De forma predeterminada, Vite vaciará `outDir` en la compilación si está dentro de la raíz del proyecto. Emitirá una advertencia si `outDir` está fuera de la raíz para evitar la eliminación accidental de archivos importantes. Puedes establecer explícitamente esta opción para suprimir la advertencia. Esto también está disponible a través de la línea de comandos como `--emptyOutDir`.
 
+## build.copyPublicDir
+- **Experimental**
+- **Tipo:** `boolean`
+- **Por defecto:** `true`
+
+Por defecto, Vite copiará los archivos que están en `publicDir` dentro de `outDir` en la compilación. Configurar `false` para deshabilitar este comportamiento.
+
 ## build.reportCompressedSize
 
 - **Tipo:** `boolean`

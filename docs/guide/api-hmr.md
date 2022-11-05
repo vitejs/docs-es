@@ -139,6 +139,7 @@ Escucha un evento HMR.
 Los siguientes eventos HMR son enviados por Vite automáticamente:
 
 - `'vite:beforeUpdate'` cuando se va a aplicar una actualización (por ejemplo, se reemplazará un módulo).
+- `'vite:afterUpdate'` cuando se aplicó una actualización (por ejemplo, se reemplazó un módulo).
 - `'vite:beforeFullReload'` cuando una recarga completa está a punto de ser ejecutada.
 - `'vite:beforePrune'` cuando los módulos que ya no se necesitan están a punto de ser eliminados.
 - `'vite:invalidate'` cuando un módulo es invalidado con `import.meta.hot.invalidate()`
