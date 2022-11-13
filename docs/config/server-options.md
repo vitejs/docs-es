@@ -75,7 +75,9 @@
 
 - **Tipo:** `Record<string, string | ProxyOptions>`
 
-  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de `{ key: options }` pares. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy.
+  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de pares `{ key: options }`. Cualquier solicitud cuya ruta de solicitud comience con esa clave se enviará a ese destino especificado. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy.
+
+  Ten en cuenta que si estás utilizando una [`base`](/config/shared-options.md#base) no relativa, debes prefijar cada clave con esa `base`.
 
   Usa [`http-proxy`](https://github.com/http-party/node-http-proxy). Todas las opciones [aquí](https://github.com/http-party/node-http-proxy#options).
 
@@ -158,7 +160,7 @@
   - configurar el proxy inverso para el proxy de WebSocket también
   - configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
   - configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
-  :::
+    :::
 
 ## server.watch
 
@@ -236,7 +238,7 @@ createServer()
 
 - **Tipo:** `string | undefined`
 
-  Antepone esta carpeta a las solicitudes http, para usar cuando se haga proxy de vite como una subcarpeta. Debe comenzar y terminar con el carácter `/`.
+  Antepone esta carpeta a las solicitudes http, para usar cuando se haga proxy de vite como una subcarpeta. Debe comenzar con el carácter `/`.
 
 ## server.fs.strict
 

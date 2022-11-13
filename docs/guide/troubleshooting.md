@@ -44,6 +44,13 @@ Para resolver esto:
   $ sudo sysctl fs.inotify.max_user_watches=524288
   ```
 
+  Si los pasos anteriores no funcionan, puedes intentar agregar `DefaultLimitNOFILE=65536` como una configuración sin comentarios a los siguientes archivos:
+
+- /etc/systemd/system.conf
+- /etc/systemd/user.conf
+
+Ten en cuenta que estas configuraciones persisten pero **se requiere un reinicio**.
+
 ### 431 Campos de la Cabecera de la Petición Demasiado Grandes
 
 Cuando el servidor / el servidor WebSocket recibe una cabecera HTTP grande, la petición será descartada y se mostrará la siguiente advertencia.

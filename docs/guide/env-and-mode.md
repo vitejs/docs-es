@@ -60,6 +60,17 @@ console.log(import.meta.env.VITE_SOME_KEY) // 123
 console.log(import.meta.env.DB_PASSWORD) // undefined
 ```
 
+Además, Vite usa [dotenv-expand](https://github.com/motdotla/dotenv-expand) para expandir variables listas para usar. Para obtener más información sobre la sintaxis, consulta [su documentación](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow).
+
+Ten en cuenta que si deseas usar `$` dentro del valor de la variable de entorno, debe escapar con `\`.
+
+```
+KEY=123
+NEW_KEY1=test$foo   # test
+NEW_KEY2=test\$foo  # test$foo
+NEW_KEY3=test$KEY   # test123
+```
+
 Si deseas personalizar el prefijo de las variables env, consulta la opción [envPrefix](/config/shared-options#envprefix).
 
 :::warning NOTAS DE SEGURIDAD
@@ -67,7 +78,7 @@ Si deseas personalizar el prefijo de las variables env, consulta la opción [env
 - Los archivos `.env.*.local` son solo locales y pueden contener variables confidenciales. Debes agregar `*.local` al `.gitignore` para evitar que se registren en git.
 
 - Dado que cualquier variable expuesta al código fuente de Vite terminará en el paquete de cliente, las variables `VITE_*` _no_ deberían contener información confidencial.
-:::
+  :::
 
 ### IntelliSense para TypeScript
 

@@ -108,7 +108,9 @@ declare module '*.svg' {
 }
 /// <reference types="vite/client" />
 ```
+
 :::
+
 ## Vue
 
 Vite proporciona soporte Vue de primera clase:
@@ -166,6 +168,8 @@ Los alias `@import` y el cambio de base de URL también son compatibles con los 
 ### PostCSS
 
 Si el proyecto contiene una configuración de PostCSS válida (cualquier formato compatible con [postcss-load-config](https://github.com/postcss/postcss-load-config), por ejemplo, `postcss.config.js`), se aplicará automáticamente a todo el CSS importado.
+
+Ten en cuenta que la minificación de CSS se ejecutará después de PostCSS y utilizará la opción [`build.cssTarget`](/config/build-options.md#build-csstarget).
 
 ### Módulos CSS
 
