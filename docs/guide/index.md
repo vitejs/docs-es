@@ -128,6 +128,8 @@ En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus 
 
 Puedes especificar opciones CLI adicionales como `--port` o `--https`. Para obtener una lista completa de las opciones de la CLI, ejecuta `npx vite --help` en tu proyecto.
 
+Aprende más sobre la [interfaz de línea de comnando](./cli.md)
+
 ## Uso de confirmaciones no publicadas
 
 Si no puedes esperar a una nueva versión para probar las funciones más recientes, deberás clonar el [repo de vite](https://github.com/vitejs/vite) en tu máquina local y luego compilarlo y vincularlo tu mismo. ([pnpm](https://pnpm.io/) es obligatorio):

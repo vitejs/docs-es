@@ -187,6 +187,10 @@ export default defineConfig({
               link: '/guide/features'
             },
             {
+              text: 'Interfaz de línea de comandos',
+              link: '/guide/cli'
+            },
+            {
               text: 'Uso de complementos',
               link: '/guide/using-plugins'
             },

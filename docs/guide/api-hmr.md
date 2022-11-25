@@ -25,8 +25,9 @@ interface ViteHotContext {
   ): void
 
   dispose(cb: (data: any) => void): void
+  prune(cb: (data: any) => void): void
   decline(): void
-  invalidate(): void
+  invalidate(message?: string): void
 
   // `InferCustomEventPayload` provides types for built-in Vite events
   on<T extends string>(
@@ -89,7 +90,8 @@ if (import.meta.hot) {
   import.meta.hot.accept(
     ['./foo.js', './bar.js'],
     ([newFooModule, newBarModule]) => {
-      // el callback recibe los módulos actualizados en un Array.
+      // El callback recibe un array donde solo el módulo actualizado no es nulo
+      // Si la actualización no fue exitosa (por ejemplo, error de sintaxis), el array estará vacío
     }
   )
 }
@@ -106,7 +108,23 @@ setupSideEffect()
 
 if (import.meta.hot) {
   import.meta.hot.dispose((data) => {
-    // eliminar el efecto secundario
+    // eliminar los efectos secundarios
+  })
+}
+```
+
+## `hot.prune(cb)`
+
+Registra una callback que se invoca cuando el módulo ya no se importe en la página. En comparación con `hot.dispose`, esto se puede usar si el código fuente limpia los efectos secundarios por sí mismo en las actualizaciones y solo necesitas limpiar cuando se elimina de la página. Vite actualmente usa esto para importaciones `.css`.
+
+```js
+function setupOrReuseSideEffect() {}
+
+setupOrReuseSideEffect()
+
+if (import.meta.hot) {
+  import.meta.hot.prune((data) => {
+    // eliminar los efectos secundarios
   })
 }
 ```
@@ -119,9 +137,10 @@ El objeto `import.meta.hot.data` se mantiene en diferentes instancias del mismo 
 
 Llamar a `import.meta.hot.decline()` indica que este módulo no se puede actualizar en instantáneo, y el navegador debe realizar una recarga completa si se encuentra este módulo mientras se propagan las actualizaciones de HMR.
 
-## `hot.invalidate()`
+## `hot.invalidate(message?: string)`
 
-Un módulo de autoaceptación puede detectar durante el tiempo de ejecución de que no puede manejar una actualización de HMR y, por lo tanto, la actualización debe propagarse forzosamente a los importadores. Al llamar a `import.meta.hot.invalidate()`, el servidor HMR invalidará los importadores del invocador, como si no se aceptara a sí misma.
+Un módulo de autoaceptación puede detectar durante el tiempo de ejecución de que no puede manejar una actualización de HMR y, por lo tanto, la actualización debe propagarse forzosamente a los importadores. Al llamar a `import.meta.hot.invalidate()`, el servidor HMR invalidará los importadores del invocador, como si no se aceptara a sí misma. Esto registrará un mensaje tanto en la consola del navegador como en la terminal. Puede pasar un mensaje para dar algo de contexto sobre por qué ocurrió la invalidación.
+
 Ten en cuenta que siempre debes llamar a `import.meta.hot.accept` incluso si planeas invocar a `invalidate` inmediatamente después, o de lo contrario, el cliente HMR no escuchará los cambios futuros en el módulo de autoaceptación. Para comunicar la intención claramente, recomendamos llamar a `invalidate` dentro de la devolución de llamada `accept` así:
 
 ```js

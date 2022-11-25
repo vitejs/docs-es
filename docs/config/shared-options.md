@@ -358,7 +358,7 @@
 
   Si tu aplicación es una aplicación de página única (SPA), una [aplicación multipáginas (MPA)](../guide/build#multi-page-app) o una aplicación personalizada (SSR y marcos con manejo de HTML personalizado):
 
-  - `'spa'`: incluye el middleware alternativo de SPA y configura [sirv](https://github.com/lukeed/sirv) con `single: true` en la vista previa
+  - `'spa'`: incluye el middleware de reserva de SPA y configura [sirv](https://github.com/lukeed/sirv) con `single: true` en la vista previa
   - `'mpa'`: solo incluye middleware HTML no SPA
   - `'custom'`: no incluye middleware HTML
 
