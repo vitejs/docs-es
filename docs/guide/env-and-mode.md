@@ -121,15 +121,13 @@ VITE_APP_TITLE=My App
 
 En tu aplicación, puedes representar el título usando `import.meta.env.VITE_APP_TITLE`.
 
-Sin embargo, es importante comprender que **mode** es un concepto más amplio que solo desarrollo frente a producción. Un ejemplo típico es que puedes querer tener un modo "staging" en el que se debería tener un comportamiento similar al de producción, pero con variables de entorno ligeramente diferentes a las de producción.
-
-Puedes sobrescribir el modo predeterminado utilizado para un comando pasando el indicador de opción `--mode`. Por ejemplo, si deseas crear tu aplicación para nuestro modo staging hipotético:
+En algunos casos, es posible que desees ejecutar `vite build` con un modo distinto para renderizar un título diferente. Puedes sobrescribir el modo predeterminado utilizado para un comando pasando el indicador de opción `--mode`. Por ejemplo, si deseas crear una aplicación para un modo staging:
 
 ```bash
 vite build --mode staging
 ```
 
-Y para obtener el comportamiento que queremos, necesitamos un archivo `.env.staging`:
+Y luego crea un archivo `.env.staging`:
 
 ```
 # .env.staging
@@ -137,4 +135,9 @@ NODE_ENV=production
 VITE_APP_TITLE=My App (staging)
 ```
 
-Ahora tu aplicación de pruebas debería tener un comportamiento similar al de producción, pero mostrando un título diferente al de producción.
+Como `vite build` ejecuta una compilación en producción de forma predeterminada, también puedes modificar y ejecutar una compilación en desarrollo usando un modo diferente y un archivo de configuración `.env`:
+
+```
+# .env.testing
+NODE_ENV=development
+```

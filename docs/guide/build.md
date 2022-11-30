@@ -8,7 +8,7 @@ El empaquetado de producción asume soporte para código JavaScript moderno. De 
 
 - Chrome >=87
 - Firefox >=78
-- Safari >=13
+- Safari >=14
 - Edge >=88
 
 Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options#build-target), donde el objetivo más bajo es `es2015`.
