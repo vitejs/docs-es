@@ -321,7 +321,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
 
 ### `transformIndexHtml`
 
-- **Tipo:** `IndexHtmlTransformHook | { enforce?: 'pre' | 'post', transform: IndexHtmlTransformHook }`
+- **Tipo:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
 - **Clase:** `async`, `sequential`
 
 Hook dedicado para transformar archivos de punto de entrada HTML como `index.html`. El hook recibe la cadena HTML actual y un contexto de transformación. El contexto expone la instancia de [`ViteDevServer`](./api-javascript#vitedevserver) durante el desarrollo y expone el paquete de salida de Rollup durante la compilación.
