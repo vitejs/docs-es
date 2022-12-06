@@ -8,15 +8,15 @@ Revisa [Uso de complementos](../guide/using-plugins.md) para más información s
 
 ## Complementos Oficiales
 
-### [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
+### [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
 - Provee soporte para Componentes de un único (o simple) archivo en Vue3.
 
-### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
+### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 
 - Provee soporte de JSX en Vue 3 (por medio de la [transformación dedicada de Babel](https://github.com/vuejs/jsx-next)).
 
-### [@vitejs/plugin-react](https://github.com/vitejs/vite/tree/main/packages/plugin-react)
+### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
 - Provee soporte todo en uno para React.
 

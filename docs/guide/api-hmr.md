@@ -26,7 +26,6 @@ interface ViteHotContext {
 
   dispose(cb: (data: any) => void): void
   prune(cb: (data: any) => void): void
-  decline(): void
   invalidate(message?: string): void
 
   // `InferCustomEventPayload` provides types for built-in Vite events
@@ -135,7 +134,7 @@ El objeto `import.meta.hot.data` se mantiene en diferentes instancias del mismo 
 
 ## `hot.decline()`
 
-Llamar a `import.meta.hot.decline()` indica que este módulo no se puede actualizar en instantáneo, y el navegador debe realizar una recarga completa si se encuentra este módulo mientras se propagan las actualizaciones de HMR.
+Esto es actualmente un noop y está ahí para compatibilidad con versiones anteriores. Esto podría cambiar en el futuro si hay un nuevo uso para él. Para indicar que el módulo no se puede actualizar en caliente, utiliza `hot.invalidate()`.
 
 ## `hot.invalidate(message?: string)`
 

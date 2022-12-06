@@ -24,10 +24,6 @@ head:
       content: summary_large_image
 ---
 
-<!-- # Vite 3.0 is out!
-
-In February last year, [Evan You](https://twitter.com/youyuxi) released Vite 2. Since then, its adoption has grown non-stop, reaching more than 1 million npm downloads per week. A sprawling ecosystem rapidly formed after the release. Vite is powering a renewed innovation race in Web frameworks. [Nuxt 3](https://v3.nuxtjs.org/) uses Vite by default. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/), and [SolidStart](https://docs.solidjs.com/start) are all built with Vite. [Laravel has now decided to use Vite by default](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) shows how Vite can improve Rails DX. [Vitest](https://vitest.dev) is making strides as a Vite-native alternative to Jest. Vite is behind [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) and [Playwright](https://playwright.dev/docs/test-components)'s new Component Testing features, Storybook has [Vite as an official builder](https://github.com/storybookjs/builder-vite). And [the list goes on](https://patak.dev/vite/ecosystem). Maintainers from most of these projects got involved in improving the Vite core itself, working closely with the Vite [team](https://vitejs.dev/team) and other contributors. -->
-
 # ¡Vite 3.0 ya está disponible!
 
 En febrero del año pasado, [Evan You](https://twitter.com/youyuxi) lanzó Vite 2. Desde entonces, su adopción ha crecido sin parar, alcanzando más de 1 millón de descargas vía npm por semana. Un ecosistema en expansión se formó rápidamente después de la liberación. Vite está impulsando una renovada carrera de innovación en marcos de desarrollo web. [Nuxt 3](https://v3.nuxtjs.org/) usa Vite de forma predeterminada. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) y [SolidStart](https://docs.solidjs.com/start) están construidos con Vite. [Laravel ahora ha decidido usar Vite de forma predeterminada](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) muestra cómo Vite puede mejorar la experiencia de desarrollo en Rails. [Vitest](https://vitest.dev) está avanzando como una alternativa nativa de Vite a Jest. Vite está detrás de [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) y [Playwright](https://playwright.dev/docs/est-components), Storybook tiene [Vite como el builder oficial](https://github.com/storybookjs/builder-vite). Y [la lista continúa](https://patak.dev/vite/ecosystem). Los mantenedores de la mayoría de estos proyectos se involucraron en la mejora del núcleo de Vite, trabajando en estrecha colaboración con el [equipo de Vite](https://es.vitejs.dev/team) y otros colaboradores.
@@ -245,7 +241,7 @@ Mientras trabajábamos en Vite 3, también mejoramos la experiencia de contribuc
 - Vite se ha actualizado a [pnpm 7](https://pnpm.io/), siguiendo al resto del ecosistema.
 - Playgrounds se ha movido a [`/playgrounds`](https://github.com/vitejs/vite/tree/main/playground) fuera del directorio de paquetes.
 - Los paquetes y playgrounds ahora son `"type": "module"`,
-- Los complementos ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
+- Los complementos ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
 
 ## El ecosistema está listo para v3
 

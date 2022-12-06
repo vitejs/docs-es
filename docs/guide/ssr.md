@@ -18,8 +18,8 @@ Si tienes preguntas, la comunidad suele ser útil en [el canal #ssr del Discord 
 
 Vite proporciona soporte integrado para la representación del lado del servidor (SSR). El área de pruebas de código de Vite contiene configuraciones de SSR de ejemplo para Vue 3 y React, que se pueden usar como referencias para esta guía:
 
-- [Vue 3](https://github.com/vitejs/vite/tree/main/playground/ssr-vue)
-- [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react)
+- [Vue 3](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue)
+- [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react)
 
 ## Estructura del código fuente
 
@@ -178,7 +178,7 @@ Luego, en `server.js` necesitamos agregar algo de lógica específica de producc
 
 - Mueve la creación y todo el uso del servidor de desarrollo `vite` detrás de ramas condicionales solo para desarrollo, luego agrega middlewares de servicio de archivos estáticos para servir archivos desde `dist/client`.
 
-Consulta las demostraciones de [Vue](https://github.com/vitejs/vite/tree/main/playground/ssr-vue) y [React](https://github.com/vitejs/vite/tree/main/playground/ssr-react) para una configuración funcional.
+Consulta las demos de [Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue) y [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react) para una configuración funcional.
 
 ## Generación de directivas de precargado
 
@@ -202,11 +202,11 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules is now a Set of module IDs that were used during the render
 ```
 
-En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo.
+En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo.
 
 ## Renderizado previo / SSG
 
-Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipación, podemos renderizar previamente estas rutas en HTML estático usando la misma lógica que SSR de producción. Esto también puede considerarse una forma de generación de sitios estáticos (SSG). Consulta el [demo del script de pre-renderizado](https://github.com/vitejs/vite/blob/main/playground/ssr-vue/prerender.js) para ver un ejemplo práctico.
+Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipación, podemos renderizar previamente estas rutas en HTML estático usando la misma lógica que SSR de producción. Esto también puede considerarse una forma de generación de sitios estáticos (SSG). Consulta el [demo del script de pre-renderizado](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js) para ver un ejemplo práctico.
 
 ## SSR Externos
 

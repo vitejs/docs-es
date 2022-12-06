@@ -22,7 +22,7 @@ Vite almacena en caché las solicitudes de dependencias a través de encabezados
 
 ## Hot Module Replacement
 
-Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Componentes de único archivo de Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
 
 Ten en cuenta que no necesitas configurarlos manualmente: cuando [creas una aplicación a través de `create-vite`](./), las plantillas seleccionadas ya las tendrán preconfiguradas.
 
@@ -115,8 +115,8 @@ declare module '*.svg' {
 
 Vite proporciona soporte Vue de primera clase:
 
-- Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
-- Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
+- Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Compatibilidad con Vue 2.7 a través de [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
 - Compatibilidad con Vue <2.7 a través de [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
@@ -124,7 +124,7 @@ Vite proporciona soporte Vue de primera clase:
 
 Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io).
 
-Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
+Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 
 Si no usas JSX con React o Vue, puedes hacer configuraciones personalizadas de `jsxFactory` y `jsxFragment` usando la [opción `esbuild`](/config/shared-options#esbuild). Por ejemplo para Preact:
 
