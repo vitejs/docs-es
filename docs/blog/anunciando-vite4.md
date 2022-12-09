@@ -29,7 +29,7 @@ Vite 3 [fue lanzado](./anunciando-vite3.md) hace 5 meses. Las descargas de npm p
 
 Como muestra del crecimiento que han experimentado Vite y los proyectos relacionados, el ecosistema de Vite se reunió el 11 de octubre en el [ViteConf 2022](https://viteconf.org/2022/replay). Vimos a representantes del principal marco web y herramientas contar historias de innovación y colaboración. Y en un movimiento simbólico, el equipo de Rollup elige ese día exacto para lanzar [Rollup 3](https://rollupjs.org).
 
-Hoy, el [equipo de desarrollo principal de Vite](https://vitejs.dev/team) con la ayuda de nuestros socios del ecosistema, se complace en anunciar el lanzamiento de Vite 4, impulsado durante el tiempo de compilación por Rollup 3. Hemos trabajado con el ecosistema para garantizar una ruta de actualización sin problemas para esta nueva especialidad. Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
+Hoy, el [equipo de desarrollo principal de Vite](https://es.vitejs.dev/team) con la ayuda de nuestros socios del ecosistema, se complace en anunciar el lanzamiento de Vite 4, impulsado durante el tiempo de compilación por Rollup 3. Hemos trabajado con el ecosistema para garantizar una ruta de actualización sin problemas para esta nueva especialidad. Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
 ![Imagen de portada del anuncio de Vite 4](/og-image-announcing-vite4.png)
 
@@ -71,7 +71,7 @@ Ten en cuenta que las plantillas de inicio de Vite están diseñadas para usarse
 
 La compilación para navegadores modernos ahora apunta a `safari14` de forma predeterminada para una mayor compatibilidad con ES2020. Esto significa que las compilaciones para navegadores modernos ahora pueden usar [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) y que el [operador coalescente nulo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing) ya no se transpile. Si necesitas soportar navegadores más antiguos, puedes agregar [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) como de costumbre.
 
-## Importando CSS como un String
+## Importando CSS como String
 
 En Vite 3, importar la exportación predeterminada de un archivo `.css` podría generar una doble carga de CSS.
 

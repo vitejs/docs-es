@@ -16,7 +16,7 @@ La compilación para navegadores modernos ahora apunta a `safari14` de forma pre
 
 El juego de caracteres predeterminado de compilación ahora es utf8 (consulta [#10753](https://github.com/vitejs/vite/issues/10753) para obtener más detalles).
 
-## Importando CSS como un String
+## Importando CSS como String
 
 En Vite 3, importar la exportación predeterminada de un archivo `.css` podría generar una doble carga de CSS.
 
