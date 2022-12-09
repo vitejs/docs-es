@@ -60,6 +60,6 @@ También hay otros cambios importantes que solo afectan a unos pocos usuarios.
   - Consulta esta solicitud para obtener una explicación sobre este cambio.
 - [[#10903] refactor(types)!: remove facade type files](https://github.com/vitejs/vite/pull/10903)
 
-## Migration desde v2
+## Migración desde v2
 
 Consulta la [Guía de migración desde v2](./migration-v2) en la documentación de Vite v3 primero para ver los cambios necesarios para migrar tu aplicación a Vite v3 y luego continuar con los cambios descritos en esta página.

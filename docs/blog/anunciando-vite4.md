@@ -96,7 +96,7 @@ Vite ahora usa `dotenv` 16 y `dotenv-expand` 9 (anteriormente `dotenv` 14 y `dot
 +VITE_APP="ab#cd`ef"
 ```
 
-Para obtener más detalles, consulta [`dotenv`](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md) y [`dotenv-expand` changelog](https://github.com/motdotla/dotenv-expand/blob/master/CHANGELOG.md).
+Para obtener más detalles, consulta [`dotenv`](https://github.com/motdotla/dotenv/blob/master/CHANGELOG.md) y [la lista de cambios de `dotenv-expand`](https://github.com/motdotla/dotenv-expand/blob/master/CHANGELOG.md).
 
 ## Otras funcionalidades
 
