@@ -239,7 +239,7 @@ export default defineConfig({
               link: '/guide/troubleshooting',
             },
             {
-              text: 'Migración desde v2',
+              text: 'Migración desde v3',
               link: '/guide/migration',
             },
           ],

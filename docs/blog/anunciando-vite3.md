@@ -12,7 +12,7 @@ head:
       content: https://es.vitejs.dev/og-image-announcing-vite3.png
   - - meta
     - property: og:url
-      content: https://es.vitejs.dev/blog/announcing-vite3
+      content: https://es.vitejs.dev/blog/anunciando-vite3
   - - meta
     - property: og:description
       content: Anuncio de lanzamiento de Vite 3
@@ -208,10 +208,10 @@ Hay soporte opcional para [Aceptación parcial de HMR](https://github.com/vitejs
 Vite se preocupa por su huella de publicación e instalación; una instalación rápida de una nueva aplicación es una funcionalidad. Vite empaqueta la mayoría de sus dependencias e intenta utilizar alternativas ligeras y modernas siempre que sea posible. Continuando con este objetivo, el tamaño de publicación de Vite 3 es un 30% más pequeño que el de v2.
 
 |             | Tamaño de publicación | Tamaño de instalación |
-| ----------- | :----------: | :----------: |
-| Vite 2.9.14 |    4.38MB    |    19.1MB    |
-| Vite 3.0.0  |    3.05MB    |    17.8MB    |
-| Reducción   |     -30%     |     -7%      |
+| ----------- | :-------------------: | :-------------------: |
+| Vite 2.9.14 |        4.38MB         |        19.1MB         |
+| Vite 3.0.0  |        3.05MB         |        17.8MB         |
+| Reducción   |         -30%          |          -7%          |
 
 En parte, esta reducción fue posible al hacer que algunas dependencias que la mayoría de los usuarios no necesitaban fueran opcionales. Primero, [Terser](https://github.com/terser/terser) ya no está instalado de manera predeterminada. Esta dependencia ya no era necesaria porque ya hicimos que esbuild fuera el minificador predeterminado para JS y CSS en Vite 2. Si usas `build.minify: 'terser'`, deberás instalarlo (`npm add -D terser `). También sacamos [node-forge](https://github.com/digitalbazaar/forge) del monorepo, implementando soporte para la generación automática de certificados https como nuevo complemento: [`@vitejs/plugin-basic-ssl`](/guide/migration#generacion-automatica-de-certificados-https). Dado que esta función solo crea certificados que no son de confianza y que no se agregan al almacén local, no justificaba el tamaño agregado.
 
