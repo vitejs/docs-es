@@ -28,6 +28,8 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 
 - Los marcadores de posición de Git LFS se excluyen automáticamente de la inserción porque no contienen el contenido del archivo que representan. Para obtener la inserción, asegúrate de descargar el contenido del archivo a través de Git LFS antes de compilar.
 
+- TypeScript, de forma predeterminada, no reconoce las importaciones de recursos estáticos como módulos válidos. Para solucionar esto, incluye [`vite/client`](./features#client-types).
+
 ### Importaciones de URL explícita
 
 Los recursos que no están incluidos en la lista interna o en `assetsInclude`, se pueden importar explícitamente como una URL usando el sufijo `?url`. Esto es útil, por ejemplo, para importar los [Houdini Paint Worklets](https://houdini.how/usage).

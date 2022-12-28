@@ -27,7 +27,6 @@ Las URL de recursos importados por JS, las referencias de CSS `url()` y las refe
 
 La excepción es cuando se necesita concatenar dinámicamente URL sobre la marcha. En este caso, puedes usar la variable `import.meta.env.BASE_URL` inyectada globalmente, que será la ruta base pública. Ten en cuenta que esta variable se reemplaza estáticamente durante la compilación, por lo que debe aparecer exactamente como está (es decir, `import.meta.env['BASE_URL']` no funcionará).
 
-
 Para obtener un control avanzado de la ruta base, consulta [Opciones avanzadas de base](#opciones-avanzadas-para-base).
 
 ## Personalizando la compilación
@@ -40,8 +39,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       // https://rollupjs.org/guide/en/#big-list-of-options
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -55,7 +54,7 @@ Puedes configurar cómo se dividen los fragmentos utilizando `build.rollupOption
 // vite.config.js
 import { splitVendorChunkPlugin } from 'vite'
 export default defineConfig({
-  plugins: [splitVendorChunkPlugin()]
+  plugins: [splitVendorChunkPlugin()],
 })
 ```
 
@@ -71,8 +70,8 @@ export default defineConfig({
   build: {
     watch: {
       // https://rollupjs.org/guide/en/#watch-options
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -106,10 +105,10 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'nested/index.html')
-      }
-    }
-  }
+        nested: resolve(__dirname, 'nested/index.html'),
+      },
+    },
+  },
 })
 ```
 
@@ -133,7 +132,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
       // Se agregará la extension apropiada.
-      fileName: 'my-lib'
+      fileName: 'my-lib',
     },
     rollupOptions: {
       // Asegúrate de externalizar las dependencias que no deberían estar empaquetadas
@@ -143,11 +142,11 @@ export default defineConfig({
         // Proporciona variables globales para usar en la compilación UMD
         // para dependencias externalizadas
         globals: {
-          vue: 'Vue'
-        }
-      }
-    }
-  }
+          vue: 'Vue',
+        },
+      },
+    },
+  },
 })
 ```
 
@@ -195,14 +194,14 @@ O, si expones múltiples puntos de entrada:
   "type": "module",
   "files": ["dist"],
   "main": "./dist/my-lib.cjs",
-  "module": "./dist/my-lib.mjs",
+  "module": "./dist/my-lib.js",
   "exports": {
     ".": {
-      "import": "./dist/my-lib.mjs",
+      "import": "./dist/my-lib.js",
       "require": "./dist/my-lib.cjs"
     },
     "./secondary": {
-      "import": "./dist/secondary.mjs",
+      "import": "./dist/secondary.js",
       "require": "./dist/secondary.cjs"
     }
   }

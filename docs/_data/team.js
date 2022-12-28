@@ -115,6 +115,13 @@ export const core = [
     desc: 'Apasionado por las herramientas en torno a TypeScript y React.',
     links: [{ icon: 'github', link: 'https://github.com/ArnaudBarre' }],
   },
+  {
+    avatar: 'https://github.com/dominikg.png',
+    name: 'Dominik G.',
+    title: 'Resident CI Expert',
+    desc: 'Miembro del equipo de Vite y Svelte',
+    links: [{ icon: 'github', link: 'https://github.com/dominikg' }],
+  },
 ]
 
 export const emeriti = [

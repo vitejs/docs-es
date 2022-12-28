@@ -51,6 +51,24 @@ Para resolver esto:
 
 Ten en cuenta que estas configuraciones persisten pero **se requiere un reinicio**.
 
+### Las solicitudes de red dejan de cargarse
+
+Al usar un certificado SSL autofirmado, Chrome ignora todas las directivas de almacenamiento en caché y vuelve a cargar el contenido. Vite se basa en estas directivas de almacenamiento en caché.
+
+Para resolver el problema, utiliza un certificado SSL de confianza.
+
+Consulta: [Problemas de caché](https://helpx.adobe.com/mt/experience-manager/kb/cache-problems-on-chrome-with-SSL-certificate-errors.html), [Problemas de Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
+
+#### MacOS
+
+Puedes instalar un certificado de confianza a través de la CLI con este comando:
+
+```
+security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-db your-cert.cer
+```
+
+O importándolo a la aplicación Acceso a Llaveros y actualizando la configuración de confianza del certificado a "Confiar siempre".
+
 ### 431 Campos de la Cabecera de la Petición Demasiado Grandes
 
 Cuando el servidor / el servidor WebSocket recibe una cabecera HTTP grande, la petición será descartada y se mostrará la siguiente advertencia.
@@ -82,6 +100,10 @@ Si estás ejecutando Vite con WSL2, Vite no puede ver los cambios de archivos en
 Si Vite o un complemento no maneja HMR, se producirá un refresco completo.
 
 Además, si hay un bucle de dependencia, se producirá un refresco completo. Para resolver esto, intenta eliminar el bucle.
+
+### Gran cantidad de actualizaciones de HMR en la consola
+
+Esto puede deberse a una dependencia circular. Para resolver esto, intenta romper el bucle.
 
 ## Compilación
 

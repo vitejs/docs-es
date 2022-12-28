@@ -30,6 +30,14 @@ Esta carga doble podría ocurrir ya que se emitirá un archivo `.css` y es proba
 import stuff from './global.css?inline'
 ```
 
+### Compilaciones para producción por defecto
+
+`vite build` ahora siempre compilará para producción independientemente del `--mode` invocado. Anteriormente, cambiar el `mode` a otro que no sea `production` daría como resultado una compilación de desarrollo. Si aún deseas compilar para desarrollo, puedes configurar `NODE_ENV=development` en el archivo `.env.{mode}`.
+
+Como parte de este cambio, `vite dev` y `vite build` ya no se sobrepondrán a `process.env.`<wbr>`NODE_ENV` si ya está definido. Luego, si se configuró `process.env.`<wbr>`NODE_ENV = 'development'` antes de compilar, también compilará para desarrollo. Esto brinda más control cuando se ejecutan múltiples compilaciones o servidores de desarrollo en paralelo.
+
+Consulta la [documentación actualizada de `mode`](https://vitejs.dev/guide/env-and-mode.html#modes) para obtener más detalles.
+
 ### Variables de entorno
 
 Vite ahora usa `dotenv` 16 y `dotenv-expand` 9 (anteriormente `dotenv` 14 y `dotenv-expand` 5). Si tienes un valor que incluye `#` o `` ` ``, deberás incluirlos entre comillas.

@@ -1,5 +1,7 @@
 # Opciones para Worker
 
+Opciones relacionadas con Web Workers.
+
 ## worker.format
 
 - **Tipo:** `'es' | 'iife'`
