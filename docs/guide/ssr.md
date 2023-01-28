@@ -80,7 +80,7 @@ async function createServer() {
     server: { middlewareMode: true },
     appType: 'custom'
   })
-  
+
   // Usa la instancia de Connect de Vite como middleware
   // Si usas tu propio router de Express (express.Router()), debe usar router.use
   app.use(vite.middlewares)
@@ -107,7 +107,7 @@ app.use('*', async (req, res) => {
     // 1. Lee index.html
     let template = fs.readFileSync(
       path.resolve(__dirname, 'index.html'),
-      'utf-8'
+      'utf-8',
     )
 
     // 2. Aplica transformaciones Vite HTML. Esto inyecta el cliente Vite HMR y
@@ -202,7 +202,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules is now a Set of module IDs that were used during the render
 ```
 
-En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo.
+En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo. También puedes utilizar esta información para [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103).
 
 ## Renderizado previo / SSG
 
@@ -237,7 +237,7 @@ export function mySSRPlugin() {
       if (options?.ssr) {
         // realizar transformaciones especificas a ssr...
       }
-    }
+    },
   }
 }
 ```

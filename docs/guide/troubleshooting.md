@@ -1,6 +1,6 @@
 # Solución de problemas
 
-Consulta la [guía de solución de problemas de Rollup](https://rollupjs.org/guide/en/#troubleshooting) para obtener más información también.
+Consulta la [guía de solución de problemas de Rollup](https://rollupjs.org/troubleshooting/) para obtener más información también.
 
 Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vitejs/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vitejs.dev).
 

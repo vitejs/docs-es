@@ -6,7 +6,7 @@
 - **Por defecto:** `'modules'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
-El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module), [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import) y soporte para [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta).
+El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module), [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import) y soporte para [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Vite reemplazará `'modules'` con `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']`
 
 Otro valor especial es `'esnext'`, el cual asume el soporte nativo de importaciones dinámicas y transpilará lo menos posible:
 
@@ -20,7 +20,7 @@ Ten en cuenta que la compilación fallará si el código contiene funciones que 
 ## build.modulePreload
 
 - **Tipo:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
-- **Por defecto:** `true`
+- **Por defecto:** `{ polyfill: true }`
 
 Por defecto, se inyecta automáticamente un [polyfill de precarga de módulo](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill). El polyfill se inyecta automáticamente en el módulo proxy de cada archivo de entrada `index.html`. Si la compilación está configurada para usar una entrada personalizada que no sea HTML a través de `build.rollupOptions.input`, entonces es necesario importar manualmente el polyfill en la entrada personalizada:
 
@@ -42,7 +42,7 @@ type ResolveModulePreloadDependenciesFn = (
   deps: string[],
   context: {
     importer: string
-  }
+  },
 ) => (string | { runtime?: string })[]
 ```
 
@@ -59,6 +59,7 @@ modulePreload: {
 Las rutas de dependencia resueltas se pueden modificar aún más usando [`experimental.renderBuiltUrl`](../guide/build.md#advanced-base-options)
 
 ## build.polyfillModulePreload
+
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
 - **Obsoleto** usa `build.modulePreload.polyfill` en su lugar
@@ -123,9 +124,9 @@ Genera mapas de fuentes de producción. Si es `true`, se creará un archivo de m
 
 ## build.rollupOptions
 
-- **Tipo:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
+- **Tipo:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
 
-Personaliza directamente el paquete Rollup relacionado. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rollup y se fusionarán con las opciones de Rollup internas de Vite. Consulta la [documentación de opciones de Rollup](https://rollupjs.org/guide/en/#big-list-of-options) para obtener más detalles.
+Personaliza directamente el paquete Rollup relacionado. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rollup y se fusionarán con las opciones de Rollup internas de Vite. Consulta la [documentación de opciones de Rollup](https://rollupjs.org/configuration-options/) para obtener más detalles.
 
 ## build.commonjsOptions
 
@@ -166,7 +167,7 @@ Cuando se coloca en `true`, la compilación también generará un manifiesto SSR
 ## build.ssr
 
 - **Tipo:** `boolean | string`
-- **Por defecto:** `undefined`
+- **Por defecto:** `false`
 - **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
 Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rollupOptions.input`.
@@ -207,6 +208,7 @@ Configurar en `false` para deshabilitar la escritura del paquete en el disco. Es
 De forma predeterminada, Vite vaciará `outDir` en la compilación si está dentro de la raíz del proyecto. Emitirá una advertencia si `outDir` está fuera de la raíz para evitar la eliminación accidental de archivos importantes. Puedes establecer explícitamente esta opción para suprimir la advertencia. Esto también está disponible a través de la línea de comandos como `--emptyOutDir`.
 
 ## build.copyPublicDir
+
 - **Experimental**
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
@@ -229,7 +231,7 @@ Límite para advertencias de tamaño de fragmento (en kbs).
 
 ## build.watch
 
-- **Tipo:** [`WatcherOptions`](https://rollupjs.org/guide/en/#watch-options)`| null`
+- **Tipo:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
 - **Por defecto:** `null`
 
 Configurar en `{}` para habilitar el observador de Rollup. Esto se usa principalmente en casos que involucran complementos de solo compilación o procesos de integración.

@@ -33,7 +33,7 @@
 
 ## define
 
-- **Tipo:** `Record<string, string>`
+- **Tipo:** `Record<string, any>`
 
   Define constantes globales de reemplazo. Las entradas se definirán como globales durante el desarrollo y se reemplazarán estáticamente durante la compilación.
 
@@ -69,7 +69,7 @@
   ```js
   const obj = {
     __NAME__, // No definir nombres de propiedades de objetos abreviadas
-    __KEY__: value // No definir clave de objeto
+    __KEY__: value, // No definir clave de objeto
   }
   ```
 
@@ -79,7 +79,7 @@
 
 - **Tipo:** `(Plugin | Plugin[] | Promise<Plugin | Plugin[]>)[]`
 
-  Array de complementos a usar. Los complementos falsos se ignoran y los arrays de complementos se simplifican. 
+  Array de complementos a usar. Los complementos falsos se ignoran y los arrays de complementos se simplifican.
   Si se devuelve una promesa, se resolvería antes de ejecutarse. Consulta la [API de complementos](/guide/api-plugin) para obtener más detalles sobre los complementos de Vite.
 
 ## publicDir
@@ -112,7 +112,7 @@
   Se puede lograr una resolución personalizada más avanzada a través de [complementos](/guide/api-plugin).
 
   :::warning Uso con SSR
-  Si has configurado alias para [dependencias externalizadas de SSR](/guide/ssr.md#ssr-externals), es posible que desees crear un alias para los paquetes `node_modules` reales. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases ) admiten la creación de alias a través del prefijo `npm:`.
+  Si has configurado alias para [dependencias externalizadas de SSR](/guide/ssr.md#ssr-externals), es posible que desees crear un alias para los paquetes `node_modules` reales. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.js.org/en/aliases) admiten la creación de alias a través del prefijo `npm:`.
 
 ## resolve.dedupe
 
@@ -171,7 +171,7 @@
 ## resolve.extensions
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']`
+- **Por defecto:** `['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']`
 
   Lista de extensiones de archivo para probar las importaciones que omiten extensiones. Ten en cuenta que **NO** se recomienda omitir extensiones para tipos de importación personalizados (p. ej., `.vue`), ya que puede interferir con el IDE y la compatibilidad de tipos.
 
@@ -233,13 +233,13 @@
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `$injectedColor: orange;`
+          additionalData: `$injectedColor: orange;`,
         },
         styl: {
-          additionalData: `$injectedColor ?= orange`
-        }
-      }
-    }
+          additionalData: `$injectedColor ?= orange`,
+        },
+      },
+    },
   })
   ```
 
@@ -277,8 +277,8 @@
   export default defineConfig({
     esbuild: {
       jsxFactory: 'h',
-      jsxFragment: 'Fragment'
-    }
+      jsxFragment: 'Fragment',
+    },
   })
   ```
 
@@ -289,10 +289,11 @@
   ```js
   export default defineConfig({
     esbuild: {
-      jsxInject: `import React from 'react'`
-    }
+      jsxInject: `import React from 'react'`,
+    },
   })
   ```
+
   Cuando [`build.minify`](./build-options.md#build-minify) es `true`, todas las optimizaciones de minify se aplican de manera predeterminada. Para deshabilitar [ciertos aspectos](https://esbuild.github.io/api/#minify), configura cualquiera de las opciones `esbuild.minifyIdentifiers`, `esbuild.minifySyntax` o `esbuild.minifyWhitespace` en `false `. Ten en cuenta que la opción `esbuild.minify` no se puede usar para anular `build.minify`.
 
   Colocarlo en `false` deshabilita las transformaciones de esbuild.
@@ -314,7 +315,7 @@
 
   ```js
   export default defineConfig({
-    assetsInclude: ['**/*.gltf']
+    assetsInclude: ['**/*.gltf'],
   })
   ```
 
@@ -362,5 +363,4 @@
   - `'mpa'`: solo incluye middleware HTML no SPA
   - `'custom'`: no incluye middleware HTML
 
-  
 Obtén más información en la [guía SSR](/guide/ssr#vite-cli) de Vite. Relacionado: [`server.middlewareMode`](./server-options#server-middlewaremode).

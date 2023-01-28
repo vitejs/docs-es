@@ -29,11 +29,11 @@
 ```js
 export default defineConfig({
   server: {
-    port: 3030
+    port: 3030,
   },
   preview: {
-    port: 8080
-  }
+    port: 8080,
+  },
 })
 ```
 
@@ -58,7 +58,9 @@ export default defineConfig({
 - **Tipo:** `boolean | string`
 - **Por defecto:** [`server.open`](#server-open)
 
-  Abre automáticamente la aplicación en el navegador al iniciar el servidor. Cuando el valor es una cadena, se utilizará como nombre de ruta de la URL. Si deseas abrir el servidor en un navegador específico, puedes configurar `process.env.BROWSER` (por ejemplo, `firefox`). Consulta [el paquete `open`](https://github.com/sindresorhus/open#app) para obtener más detalles.
+  Abre automáticamente la aplicación en el navegador al iniciar el servidor. Cuando el valor es una cadena, se utilizará como nombre de ruta de la URL. Si deseas abrir el servidor en un navegador específico, puedes configurar `process.env.BROWSER` (por ejemplo, `firefox`). También puedes configurar `process.env.BROWSER_ARGS` para pasar argumentos adicionales (por ejemplo, `--incognito`).
+
+  `BROWSER` y `BROWSER_ARGS` también son variables de entorno especiales que puedes colocar en el archivo `.env` para configurarlo. Consulta [el paquete `open`](https://github.com/sindresorhus/open#app) para obtener más detalles.
 
 ## preview.proxy
 
@@ -74,7 +76,7 @@ export default defineConfig({
 - **Tipo:** `boolean | CorsOptions`
 - **Por defecto:** [`server.cors`](#server-proxy)
 
-  Configura las CORS para el servidor de vista previa. Esto está habilitado por defecto y permite cualquier origen. Pasa un [objeto de opciones](https://github.com/expressjs/cors) para ajustar el comportamiento o `false` para deshabilitarlo.
+  Configura las CORS para el servidor de vista previa. Esto está habilitado por defecto y permite cualquier origen. Pasa un [objeto de opciones](https://github.com/expressjs/cors#configuration-options) para ajustar el comportamiento o `false` para deshabilitarlo.
 
 ## preview.headers
 

@@ -10,11 +10,15 @@ Revisa [Uso de complementos](../guide/using-plugins.md) para más información s
 
 ### [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
-- Provee soporte para Componentes de un único (o simple) archivo en Vue3.
+- Provee soporte para componentes de un único (o simple) archivo en Vue 3.
 
 ### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 
 - Provee soporte de JSX en Vue 3 (por medio de la [transformación dedicada de Babel](https://github.com/vuejs/jsx-next)).
+
+### [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+
+- Provee soporte para componentes de un único (o simple) archivo en Vue 2.
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 

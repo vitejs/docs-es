@@ -114,6 +114,7 @@ export const core = [
     title: 'Desarrollador Frontend',
     desc: 'Apasionado por las herramientas en torno a TypeScript y React.',
     links: [{ icon: 'github', link: 'https://github.com/ArnaudBarre' }],
+    sponsor: 'https://github.com/sponsors/ArnaudBarre',
   },
   {
     avatar: 'https://github.com/dominikg.png',

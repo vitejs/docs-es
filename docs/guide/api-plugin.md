@@ -2,7 +2,7 @@
 
 Los complementos de Vite amplían la interfaz de complementos bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Como resultado, puedes escribir un complemento de Vite una vez y hacer que funcione tanto para desarrollo como para compilación.
 
-**Se recomienda revisar primero la [documentación de complementos de Rollup](https://rollupjs.org/guide/en/#plugin-development) antes de leer las secciones a continuación.**
+**Se recomienda revisar primero la [documentación de complementos de Rollup](https://rollupjs.org/plugin-development/) antes de leer las secciones a continuación.**
 
 ## Creación de un complemento
 
@@ -17,7 +17,7 @@ Al aprender, depurar o crear complementos, sugerimos incluir [vite-plugin-inspec
 
 ## Convenciones
 
-Si el complemento no usa hooks específicos de Vite y se puede implementar como un [Complemento de Rollup compatible](./api-plugin.md#compatibilidad-de-complementos-rollup), entonces se recomienda usar las [Convenciones de nomenclatura de complemento de Rollup](https://rollupjs.org/guide/en/#conventions).
+Si el complemento no usa hooks específicos de Vite y se puede implementar como un [Complemento de Rollup compatible](./api-plugin.md#compatibilidad-de-complementos-rollup), entonces se recomienda usar las [Convenciones de nomenclatura de complemento de Rollup](https://rollupjs.org/plugin-development/#conventions).
 
 - Los complementos de Rollup deben tener un nombre claro con el prefijo `rollup-plugin-`.
 - Incluye las palabras clave `rollup-plugin` y `vite-plugin` en package.json.
@@ -50,7 +50,7 @@ import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
 
 export default defineConfig({
-  plugins: [vitePlugin(), rollupPlugin()]
+  plugins: [vitePlugin(), rollupPlugin()],
 })
 ```
 
@@ -74,7 +74,7 @@ import { defineConfig } from 'vite'
 import framework from 'vite-plugin-framework'
 
 export default defineConfig({
-  plugins: [framework()]
+  plugins: [framework()],
 })
 ```
 
@@ -102,7 +102,7 @@ export default function myPlugin() {
       if (id === resolvedVirtualModuleId) {
         return `export const msg = "from virtual module"`
       }
-    }
+    },
   }
 }
 ```
@@ -128,37 +128,37 @@ export default function myPlugin() {
       if (fileRegex.test(id)) {
         return {
           code: compileFileToJS(src),
-          map: null // proporciona el mapa de origen si está disponible
+          map: null, // proporciona el mapa de origen si está disponible
         }
       }
-    }
+    },
   }
 }
 ```
 
 ## Hooks universales
 
-Durante el desarrollo, el servidor de desarrollo de Vite crea un contenedor de complementos que invoca [Hooks de compilación de Rollup](https://rollupjs.org/guide/en/#build-hooks) de la misma manera que lo hace Rollup.
+Durante el desarrollo, el servidor de desarrollo de Vite crea un contenedor de complementos que invoca [Hooks de compilación de Rollup](https://rollupjs.org/plugin-development/#build-hooks) de la misma manera que lo hace Rollup.
 
 Los siguientes hooks se llaman una vez en el inicio del servidor:
 
-- [`options`](https://rollupjs.org/guide/en/#options)
-- [`buildStart`](https://rollupjs.org/guide/en/#buildstart)
+- [`options`](https://rollupjs.org/plugin-development/#options)
+- [`buildStart`](https://rollupjs.org/plugin-development/#buildstart)
 
 Los siguientes hooks se llaman en cada solicitud de módulo entrante:
 
-- [`resolveId`](https://rollupjs.org/guide/en/#resolveid)
-- [`load`](https://rollupjs.org/guide/en/#load)
-- [`transform`](https://rollupjs.org/guide/en/#transform)
+- [`resolveId`](https://rollupjs.org/plugin-development/#resolveid)
+- [`load`](https://rollupjs.org/plugin-development/#load)
+- [`transform`](https://rollupjs.org/plugin-development/#transform)
 
 Los siguientes hooks se llaman cuando el servidor está cerrado:
 
-- [`buildEnd`](https://rollupjs.org/guide/en/#buildend)
-- [`closeBundle`](https://rollupjs.org/guide/en/#closebundle)
+- [`buildEnd`](https://rollupjs.org/plugin-development/#buildend)
+- [`closeBundle`](https://rollupjs.org/plugin-development/#closebundle)
 
-Ten en cuenta que el hook [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed) **no** se llama durante el desarrollo, porque Vite evita los análisis AST completos para un mejor rendimiento.
+Ten en cuenta que el hook [`moduleParsed`](https://rollupjs.org/plugin-development/#moduleparsed) **no** se llama durante el desarrollo, porque Vite evita los análisis AST completos para un mejor rendimiento.
 
-[Los hooks de generación de salida](https://rollupjs.org/guide/en/#output-generation-hooks) (excepto `closeBundle`) **no** se llaman durante el desarrollo. Puedes pensar esto como que el servidor de desarrollo de Vite solo llama a `rollup.rollup()` sin llamar a `bundle.generate()`.
+[Los hooks de generación de salida](https://rollupjs.org/plugin-development/#output-generation-hooks) (excepto `closeBundle`) **no** se llaman durante el desarrollo. Puedes pensar esto como que el servidor de desarrollo de Vite solo llama a `rollup.rollup()` sin llamar a `bundle.generate()`.
 
 ## Hooks específicos de Vite
 
@@ -180,10 +180,10 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
     config: () => ({
       resolve: {
         alias: {
-          foo: 'bar'
-        }
-      }
-    })
+          foo: 'bar',
+        },
+      },
+    }),
   })
 
   // muta la configuración directamente (usar solo cuando la fusión no funciona)
@@ -193,7 +193,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
       if (command === 'build') {
         config.root = 'foo'
       }
-    }
+    },
   })
   ```
 
@@ -229,7 +229,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
         } else {
           // build: plugin invoked by Rollup
         }
-      }
+      },
     }
   }
   ```
@@ -251,7 +251,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
       server.middlewares.use((req, res, next) => {
         // custom handle request...
       })
-    }
+    },
   })
   ```
 
@@ -270,7 +270,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
           // custom handle request...
         })
       }
-    }
+    },
   })
   ```
 
@@ -290,7 +290,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
         if (server) {
           // use server...
         }
-      }
+      },
     }
   }
   ```
@@ -315,7 +315,7 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
           // custom handle request...
         })
       }
-    }
+    },
   })
   ```
 
@@ -341,9 +341,9 @@ const htmlPlugin = () => {
     transformIndexHtml(html) {
       return html.replace(
         /<title>(.*?)<\/title>/,
-        `<title>Title replaced!</title>`
+        `<title>Title replaced!</title>`,
       )
-    }
+    },
   }
 }
 ```
@@ -359,7 +359,7 @@ type IndexHtmlTransformHook = (
     server?: ViteDevServer
     bundle?: import('rollup').OutputBundle
     chunk?: import('rollup').OutputChunk
-  }
+  },
 ) => IndexHtmlTransformResult | void | Promise<IndexHtmlTransformResult | void>
 
 type IndexHtmlTransformResult =
@@ -448,7 +448,7 @@ Por defecto, los complementos se invocan tanto para servir como para compilar. E
 function myPlugin() {
   return {
     name: 'build-only',
-    apply: 'build' // or 'serve'
+    apply: 'build', // or 'serve'
   }
 }
 ```
@@ -468,7 +468,7 @@ Una buena cantidad de complementos de Rollup funcionarán directamente como un c
 
 En general, siempre que un complemento de Rollup cumpla con los siguientes criterios, debería funcionar como un complemento de Vite:
 
-- No utiliza el hook [`moduleParsed`](https://rollupjs.org/guide/en/#moduleparsed).
+- No utiliza el hook [`moduleParsed`](https://rollupjs.org/plugin-development/#moduleparsed).
 - No tiene un fuerte acoplamiento entre los hooks de fase de entrada y los hooks de fase de salida.
 
 Si un complemento de Rollup solo tiene sentido para la fase de compilación, entonces se puede especificar en `build.rollupOptions.plugins`. Funcionará igual que un complemento de Vite con `enforce: 'post'` y `apply: 'build'`.
@@ -485,9 +485,9 @@ export default defineConfig({
     {
       ...example(),
       enforce: 'post',
-      apply: 'build'
-    }
-  ]
+      apply: 'build',
+    },
+  ],
 })
 ```
 
@@ -507,6 +507,7 @@ normalizePath('foo/bar') // 'foo/bar'
 ```
 
 ## Filtrado, patrón include/exclude
+
 Vite expone la función `createFilter` de [`@rollup/pluginutils`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) para alentar a los complementos e integraciones específicos de Vite a usar el patrón de filtrado estándar include/exclude, que también se utiliza en el propio núcleo de Vite.
 
 ## Comunicación cliente-servidor
@@ -525,9 +526,9 @@ export default defineConfig({
       // ...
       configureServer(server) {
         server.ws.send('my:greetings', { msg: 'hello' })
-      }
-    }
-  ]
+      },
+    },
+  ],
 })
 ```
 
@@ -570,9 +571,9 @@ export default defineConfig({
           // reply only to the client (if needed)
           client.send('my:ack', { msg: 'Hi! I got your message!' })
         })
-      }
-    }
-  ]
+      },
+    },
+  ],
 })
 ```
 

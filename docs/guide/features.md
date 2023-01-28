@@ -30,7 +30,17 @@ Ten en cuenta que no necesitas configurarlos manualmente: cuando [creas una apli
 
 Vite admite la importación de archivos `.ts` desde su primer uso.
 
-Vite solo realiza la transpilación en archivos `.ts` y **NO** realiza verificación de tipos. Asume que la verificación de tipos está a cargo de tu IDE y el proceso de compilación (puede ejecutar `tsc --noEmit` en el script de compilación o instalar `vue-tsc` y ejecutar `vue-tsc --noEmit` para también verificar el tipo de su archivos `*.vue`).
+### Solo transpilado
+
+Ten en cuenta que Vite solo realiza transpilaciones en archivos `.ts` y **NO** realiza verificación de tipos. Supone que el IDE y el proceso de compilación se encargan de la verificación de tipos.
+
+La razón por la que Vite no realiza la verificación de tipos como parte del proceso de transformación es porque los dos trabajos funcionan de manera fundamentalmente diferente. La transpilación puede funcionar por archivo y se alinea perfectamente con el modelo de compilación bajo demanda de Vite. En comparación, la verificación de tipos requiere el conocimiento de todo el gráfico del módulo. La verificación de tipo en la canalización de transformación de Vite comprometerá inevitablemente los beneficios de velocidad de Vite.
+
+El trabajo de Vite es hacer que tus módulos fuentes tengan un formato que pueda ejecutarse en el navegador lo más rápido posible. Con ese fin, recomendamos separar las comprobaciones de análisis estático de la canalización de transformación de Vite. Este principio se aplica a otras comprobaciones de análisis estático como ESLint.
+
+- Para compilaciones de producción, puedes ejecutar `tsc --noEmit` además del comando de compilación de Vite.
+
+- Durante el desarrollo, si necesitas más sugerencias de IDE, te recomendamos ejecutar `tsc --noEmit --watch` en un proceso separado o usar [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker) si prefieres que los errores tipográficos se notifiquen directamente en el navegador.
 
 Vite usa [esbuild](https://github.com/evanw/esbuild) para transpilar TypeScript en JavaScript, que es entre 20 y 30 veces más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
 

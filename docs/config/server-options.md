@@ -59,15 +59,17 @@
 
 - **Tipo:** `boolean | string`
 
-  Abre automáticamente la aplicación en el navegador al iniciar el servidor. Cuando el valor es una cadena, se utilizará como nombre de ruta de la URL. Si deseas abrir el servidor en un navegador específico, puedes configurar `process.env.BROWSER` (por ejemplo, `firefox`). Consulta [el paquete `open`](https://github.com/sindresorhus/open#app) para obtener más detalles.
+  Abre automáticamente la aplicación en el navegador al iniciar el servidor. Cuando el valor es una cadena, se utilizará como nombre de ruta de la URL. Si deseas abrir el servidor en un navegador específico, puedes configurar `process.env.BROWSER` (por ejemplo, `firefox`). También puedes configurar `process.env.BROWSER_ARGS` para pasar argumentos adicionales (por ejemplo, `--incognito`).
+
+  `BROWSER` y `BROWSER_ARGS` también son variables de entorno especiales que puedes colocar en el archivo `.env` para configurarlo. Consulta [el paquete `open`](https://github.com/sindresorhus/open#app) para obtener más detalles.
 
   **Ejemplo:**
 
   ```js
   export default defineConfig({
     server: {
-      open: '/docs/index.html'
-    }
+      open: '/docs/index.html',
+    },
   })
   ```
 
@@ -95,13 +97,13 @@
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
+          rewrite: (path) => path.replace(/^\/api/, ''),
         },
         // con RegEx
         '^/fallback/.*': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/fallback/, '')
+          rewrite: (path) => path.replace(/^\/fallback/, ''),
         },
         // Usando la instancia de proxy
         '/api': {
@@ -109,15 +111,15 @@
           changeOrigin: true,
           configure: (proxy, options) => {
             // proxy será una instancia de 'http-proxy'
-          }
+          },
         },
         // Haciendo proxy de websockets o socket.io
         '/socket.io': {
           target: 'ws://localhost:5173',
-          ws: true
-        }
-      }
-    }
+          ws: true,
+        },
+      },
+    },
   })
   ```
 
@@ -125,7 +127,7 @@
 
 - **Tipo:** `boolean | CorsOptions`
 
-  Configura las CORS para el servidor de desarrollo. Esto está habilitado por defecto y permite cualquier origen. Pase un [objeto de opciones](https://github.com/expressjs/cors) para ajustar el comportamiento o `false` para deshabilitarlo.
+  Configura las CORS para el servidor de desarrollo. Esto está habilitado por defecto y permite cualquier origen. Pase un [objeto de opciones](https://github.com/expressjs/cors#configuration-options) para ajustar el comportamiento o `false` para deshabilitarlo.
 
 ## server.headers
 
@@ -174,14 +176,14 @@
   export default defineConfig({
     server: {
       watch: {
-        ignored: ['!**/node_modules/your-package-name/**']
-      }
+        ignored: ['!**/node_modules/your-package-name/**'],
+      },
     },
     // El paquete observado debe excluirse de la optimización,
     // para que pueda aparecer en el gráfico de dependencia y activar hot reload.
     optimizeDeps: {
-      exclude: ['your-package-name']
-    }
+      exclude: ['your-package-name'],
+    },
   })
   ```
 
@@ -266,9 +268,9 @@ createServer()
     server: {
       fs: {
         // Permitir servir archivos desde un nivel hasta la raíz del proyecto
-        allow: ['..']
-      }
-    }
+        allow: ['..'],
+      },
+    },
   })
   ```
 
@@ -284,17 +286,17 @@ createServer()
           // busca la raíz del espacio de trabajo
           searchForWorkspaceRoot(process.cwd()),
           // tus reglas personalizadas
-          '/path/to/custom/allow'
-        ]
-      }
-    }
+          '/path/to/custom/allow',
+        ],
+      },
+    },
   })
   ```
 
 ## server.fs.deny
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['.env', '.env.*', '*.{pem,crt}']`
+- **Por defecto:** `['.env', '.env.*', '*.{crt,pem}']`
 
   Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
@@ -307,7 +309,7 @@ createServer()
   ```js
   export default defineConfig({
     server: {
-      origin: 'http://127.0.0.1:8080'
-    }
+      origin: 'http://127.0.0.1:8080',
+    },
   })
   ```

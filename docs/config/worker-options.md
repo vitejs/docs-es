@@ -17,6 +17,6 @@ Opciones relacionadas con Web Workers.
 
 ## worker.rollupOptions
 
-- **Tipo:** [`RollupOptions`](https://rollupjs.org/guide/en/#big-list-of-options)
+- **Tipo:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
 
   Opciones de Rollup para crear un paquete de worker de compilación.
