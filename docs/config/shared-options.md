@@ -37,7 +37,7 @@
 
   Define constantes globales de reemplazo. Las entradas se definirán como globales durante el desarrollo y se reemplazarán estáticamente durante la compilación.
 
-  - A partir de `2.0.0-beta.70`, los valores de cadena se utilizarán como expresiones sin procesar, por lo que si se define una constante de cadena, debe citarse explícitamente (por ejemplo, con `JSON.stringify`).
+  - Los valores de cadena de caracteres se utilizarán como expresiones sin procesar, por lo que si se define una constante de cadena, **debe citarse explícitamente** (por ejemplo, con `JSON.stringify`).
 
   - Para ser coherente con el [comportamiento de esbuild](https://esbuild.github.io/api/#define), las expresiones deben ser un objeto JSON (nulo, booleano, número, cadena, array u object) o un solo identificador.
 

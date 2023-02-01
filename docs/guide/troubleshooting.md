@@ -121,6 +121,16 @@ Debes acceder al archivo con el protocolo `http`. La forma más fácil de lograr
 
 ## Otros
 
+### Módulo externalizado para compatibilidad con navegadores
+
+Cuando usas un módulo de Node.js en el navegador, Vite mostrará la siguiente advertencia.
+
+> El módulo "fs" se ha externalizado para compatibilidad con el navegador. No se puede acceder a "fs.readFile" en el código del cliente.
+
+Esto se debe a que Vite no reinserta automáticamente los módulos de Node.js.
+
+Recomendamos evitar el uso de módulos de Node.js para código del navegador para reducir el tamaño del paquete, aunque puedes agregar polyfills manualmente. Si el módulo se importa desde una biblioteca de terceros (que está destinado a ser utilizado en el navegador), se recomienda informar el problema a la biblioteca respectiva.
+
 ### Se produce un error de sintaxis/error de tipo
 
 Vite no puede manejar y no admite código que solo se ejecuta en modo no estricto (modo desapercibido). Esto se debe a que Vite usa ESM y siempre está en [modo estricto](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) dentro de ESM.

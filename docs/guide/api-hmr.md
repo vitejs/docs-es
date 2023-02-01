@@ -21,7 +21,7 @@ interface ViteHotContext {
   accept(dep: string, cb: (mod: ModuleNamespace | undefined) => void): void
   accept(
     deps: readonly string[],
-    cb: (mods: Array<ModuleNamespace | undefined>) => void
+    cb: (mods: Array<ModuleNamespace | undefined>) => void,
   ): void
 
   dispose(cb: (data: any) => void): void
@@ -31,7 +31,7 @@ interface ViteHotContext {
   // `InferCustomEventPayload` provides types for built-in Vite events
   on<T extends string>(
     event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void
+    cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
   send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
 }
@@ -66,9 +66,9 @@ if (import.meta.hot) {
 
 Un módulo que "acepta" actualizaciones instantáneas es considerado un **Límite HMR**.
 
-Ten en cuenta que el HMR de Vite en realidad no intercambia el módulo importado originalmente: si los límites de un módulo HMR reexportan las importaciones desde un dep, entonces es responsable de actualizar esas reexportaciones (y estas exportaciones deben usar `let`). Además, los importadores relacionados con los límites del modulo no serán notificados de este cambio.
+Ten en cuenta que el HMR de Vite en realidad no intercambia el módulo importado originalmente: si los límites de un módulo HMR reexportan las importaciones desde un dep, entonces es responsable de actualizar esas reexportaciones (y estas exportaciones deben usar `let`). Además, los importadores relacionados con los límites del modulo no serán notificados de este cambio. Esta implementación simplificada de HMR es suficiente para la mayoría de los casos de uso de desarrollo, al tiempo que nos permite omitir el costoso trabajo de generar módulos proxy.
 
-Esta implementación simplificada de HMR es suficiente para la mayoría de casos de uso de desarrollo, ya que nos permiten evitar el costoso trabajo de generar módulos proxy.
+Vite requiere que la llamada a esta función aparezca como `import.meta.hot.accept(` (sensible a los espacios en blanco) en el código fuente para que el módulo acepte la actualización. Este es un requisito del análisis estático que hace Vite para habilitar el soporte de HMR para un módulo.
 
 ## `hot.accept(deps, cb)`
 
@@ -91,7 +91,7 @@ if (import.meta.hot) {
     ([newFooModule, newBarModule]) => {
       // El callback recibe un array donde solo el módulo actualizado no es nulo
       // Si la actualización no fue exitosa (por ejemplo, error de sintaxis), el array estará vacío
-    }
+    },
   )
 }
 ```
@@ -150,6 +150,7 @@ import.meta.hot.accept((module) => {
   }
 })
 ```
+
 ## `hot.on(event, cb)`
 
 Escucha un evento HMR.

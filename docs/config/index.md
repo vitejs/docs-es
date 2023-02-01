@@ -4,7 +4,6 @@ title: Configurando Vite
 
 # Configurando Vite
 
-
 Al ejecutar `vite` desde la línea de comandos, Vite intentará automáticamente resolver un archivo de configuración llamado `vite.config.js` dentro de la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto).
 
 El archivo de configuración más básico se ve así:
@@ -83,7 +82,7 @@ export default defineConfig(async ({ command, mode }) => {
 })
 ```
 
-## Variables de entorno
+## Utilizando variables de entorno en Configuración
 
 Las variables de ambiente se pueden obtener de `process.env` como de costumbre.
 
@@ -99,8 +98,8 @@ export default defineConfig(({ command, mode }) => {
   return {
     // configuración de vite
     define: {
-      __APP_ENV__: env.APP_ENV
-    }
+      __APP_ENV__: env.APP_ENV,
+    },
   }
 })
 ```

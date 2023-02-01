@@ -4,7 +4,7 @@
 
 ### `vite`
 
-Inicia el servidor de desarrollo de Vite en el directorio actual. Ingresará al modo watch en el entorno de desarrollo y al modo de ejecución en CI automáticamente.
+Inicia el servidor de desarrollo de Vite en el directorio actual.
 
 #### Uso
 

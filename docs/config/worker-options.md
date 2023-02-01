@@ -13,7 +13,7 @@ Opciones relacionadas con Web Workers.
 
 - **Tipo:** [`(Plugin | Plugin[])[]`](#plugins)
 
-  Complementos de Vite que se aplican al paquete de worker. Ten en cuenta que [config.plugins](./shared-options#plugins) no se aplica a los workers, debe configurarse aquí en su lugar.
+  Complementos de Vite que se aplican al paquete de worker. Ten en cuenta que [config.plugins](./shared-options#plugins) sólo aplica a los workers en desarrollo, debe configurarse aquí para compilación en su lugar.
 
 ## worker.rollupOptions
 
