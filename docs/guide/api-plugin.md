@@ -84,7 +84,32 @@ export default defineConfig({
 Es una convención común crear un complemento Vite/Rollup como una función de factoría que devuelve el objeto del complemento real. La función puede aceptar opciones que permiten a los usuarios personalizar el comportamiento del complemento.
 :::
 
+### Transformación de tipos de archivos personalizados
+
+```js
+export default function myPlugin() {
+  return {
+    name: 'transform-file',
+
+    transform(src, id) {
+      if (fileRegex.test(id)) {
+        return {
+          code: compileFileToJS(src),
+          map: null, // provee un mapa de fuentes si es necesario
+        }
+      }
+    },
+  }
+}
+```
+
 ### Importación de un archivo virtual
+
+Mira el ejemplo en [la siguente sección](./api-plugin.md#convencion-de-modulos-virtuales).
+
+## Convención de módulos virtuales
+
+Los módulos virtuales son un esquema útil que le permite pasar información de tiempo de compilación a los archivos de origen utilizando la sintaxis de importación de ESM normal.
 
 ```js
 export default function myPlugin() {
@@ -115,26 +140,9 @@ import { msg } from 'virtual:my-module'
 console.log(msg)
 ```
 
-### Transformando tipos de archivos personalizados
+Los módulos virtuales en Vite (y Rollup) tienen el prefijo `virtual:` para la ruta orientada al usuario por convención. Si es posible, el nombre del complemento debe usarse como un espacio de nombre para evitar colisiones con otros complementos en el ecosistema. Por ejemplo, `vite-plugin-posts` podría pedirles a los usuarios que importe módulo virtuales `virtual:posts` o `virtual:posts/helpers` para obtener información sobre el tiempo de compilación. Internamente, los complementos que usan módulos virtuales deben prefijar la ID del módulo con `\0` mientras resuelven la ID, una convención del ecosistema de Rollup. Esto evita que otros complementos intenten procesar el id (como la resolución de node), y las funciones principales, como los mapas de origen, puedan usar esta información para diferenciar entre módulos virtuales y archivos normales. `\0` no es un carácter permitido en las URL de importación, por lo que debemos reemplazarlo durante el análisis de importación. Una identificación virtual `\0{id}` termina codificada como `/@id/__x00__{id}` durante el desarrollo en el navegador. El id se decodificará antes de ingresar a la canalización de complementos, por lo que el código de hooks de complementos no lo ve.
 
-```js
-const fileRegex = /\.(my-file-ext)$/
-
-export default function myPlugin() {
-  return {
-    name: 'transform-file',
-
-    transform(src, id) {
-      if (fileRegex.test(id)) {
-        return {
-          code: compileFileToJS(src),
-          map: null, // proporciona el mapa de origen si está disponible
-        }
-      }
-    },
-  }
-}
-```
+Ten en cuenta que los módulos derivados directamente de un archivo real, como en el caso de un módulo de secuencia de comandos en un componente de archivo único (como .vue o .svelte SFC) no necesitan seguir esta convención. Los SFC generalmente generan un conjunto de submódulos cuando se procesan, pero el código en estos se puede mapear de nuevo al sistema de archivos. El uso de `\0` para estos submódulos evitaría que los mapas de origen funcionen correctamente.
 
 ## Hooks universales
 

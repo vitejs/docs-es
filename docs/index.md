@@ -1,5 +1,4 @@
 ---
-
 layout: home
 
 title: Vite
@@ -22,8 +21,8 @@ hero:
     - theme: alt
       text: Ver en GitHub
       link: https://github.com/vitejs/vite
-  
-  features:
+
+features:
   - icon: 💡
     title: Inicio de servidor al instante
     details: Servidor de archivo bajo demanda sobre ESM nativo, no requiere empaquetado!

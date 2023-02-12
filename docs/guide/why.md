@@ -33,7 +33,7 @@ import esmSvg from '../images/esm.svg?raw'
 
 ### Actualizaciones lentas
 
-Cuando se edita un archivo con una configuración de compilación basada en empaquetadores, es ineficiente recompilar todo el paquete por razones obvias: la velocidad de actualización se degradará linealmente con el tamaño de la aplicación.
+Cuando se edita un archivo con una configuración de compilación basada en empaquetadores, es ineficiente recompilar todo el paquete por una razón obvia: la velocidad de actualización se degradará linealmente con el tamaño de la aplicación.
 
 En algunos empaquetadores, el servidor de desarrollo ejecuta el empaquetado en memoria, por lo que solo necesita invalidar parte de su gráfico de módulo cuando cambia un archivo, pero aún así necesita recompilar todo el paquete y recargar la página web. Recompilar el paquete puede ser costoso y recargar la página arruina el estado actual de la aplicación. Esta es la razón por la que algunos empaquetadores tienen soporte para Hot Module Replacement (HMR): permite que un módulo se "reemplace en caliente" a sí mismo sin afectar el resto de la página. Esto mejora enormemente la experiencia de desarrollo; sin embargo, en la práctica hemos descubierto que incluso con la actualización vía HMR la velocidad se deteriora significativamente a medida que crece el tamaño de la aplicación.
 
