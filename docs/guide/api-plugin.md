@@ -36,9 +36,7 @@ Si tu complemento solo funcionará para un marco de trabajo en particular, su no
 - Prefijo `vite-plugin-react-` para React
 - Prefijo `vite-plugin-svelte-` para complementos Svelte
 
-La convención de Vite para módulos virtuales es prefijar la ruta orientada al usuario con `virtual:`. Si es posible, el nombre del complemento debe usarse como espacio de nombres para evitar colisiones con otros complementos en el ecosistema. Por ejemplo, `vite-plugin-posts` podría pedir a los usuarios que importen módulos virtuales `virtual:posts` o `virtual:posts/helpers` para obtener información sobre el tiempo de compilación. Internamente, los complementos que usan módulos virtuales deben prefijar la ID del módulo con `\0` mientras resuelven la identificación, una convención del ecosistema acumulativo. Esto evita que otros complementos intenten procesar la identificación (como la resolución de nodos), y las funciones principales, como los mapas de origen, pueden usar esta información para diferenciar entre módulos virtuales y archivos normales. `\0` no es un carácter permitido en las URL de importación, por lo que debemos reemplazarlo durante el análisis de importación. Una identificación virtual `\0{id}` termina codificada como `/@id/__x00__{id}` durante el desarrollo en el navegador. La identificación se decodificará antes de ingresar a la canalización de complementos, por lo que el código de hooks de complementos no lo ve.
-
-Ten en cuenta que los módulos derivados directamente de un archivo real, como en el caso de un módulo de secuencia de comandos en un componente de archivo único (como .vue o .svelte SFC) no necesitan seguir esta convención. Los SFC generalmente generan un conjunto de submódulos cuando se procesan, pero el código en estos se puede mapear de nuevo al sistema de archivos. El uso de `\0` para estos submódulos evitaría que los mapas fuente funcionen correctamente.
+Puedes ver también la [Convención de Módulos Virtuales](./api-plugin.md#convencion-de-modulos-virtuales).
 
 ## Configuración de complementos
 
