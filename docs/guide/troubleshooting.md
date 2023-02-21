@@ -49,6 +49,8 @@ Para resolver esto:
 - /etc/systemd/system.conf
 - /etc/systemd/user.conf
 
+Para Linux Ubuntu, es posible que debas agregar la línea `* - nofile 65536` al archivo `/etc/security/limits.conf` en lugar de actualizar los archivos de configuración de systemd.
+
 Ten en cuenta que estas configuraciones persisten pero **se requiere un reinicio**.
 
 ### Las solicitudes de red dejan de cargarse

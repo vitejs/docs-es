@@ -109,15 +109,22 @@ Esto proporcionará los siguientes tipos de librerías:
 - Tipos para la [API de HMR](./api-hmr) en `import.meta.hot`
 
 :::tip
-Para anular la escritura predeterminada, declárala antes de la referencia de triple slash. Por ejemplo, para hacer que la importación predeterminada de `*.svg` sea un componente de React:
+Para anular la escritura predeterminada, agrega un archivo de definición de tipo que contenga sus tipos. Luego, agrega la referencia de tipo antes de `vite/client`.
 
-```ts
-declare module '*.svg' {
-  const content: React.FC<React.SVGProps<SVGElement>>
-  export default content
-}
-/// <reference types="vite/client" />
-```
+Por ejemplo, para hacer que la importación predeterminada de `*.svg` a un componente de React:
+
+- `vite-env-override.d.ts` (el archivo que contiene tus tipos):
+  ```ts
+  declare module '*.svg' {
+    const content: React.FC<React.SVGProps<SVGElement>>
+    export default content
+  }
+  ```
+- El archivo que contiene la referencia a `vite/client`:
+  ```ts
+  /// <reference types="./vite-env-override.d.ts" />
+  /// <reference types="vite/client" />
+  ```
 
 :::
 

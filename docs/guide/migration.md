@@ -2,7 +2,7 @@
 
 ## Rollup 3
 
-Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases).
+Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
 Rollup 3 es mayormente compatible con Rollup 2. Si usas opciones de [`rollupOptions`](../config/build-options.md#rollup-options) personalizadas en tu proyecto y encuentras problemas, consulta la [guía de migración de Rollup](https://rollupjs.org/guide/en/#migration) para actualizar la configuración.
 

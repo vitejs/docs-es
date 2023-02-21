@@ -62,43 +62,62 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
    Si está desplegando en `https://<NOMBRE DE USUARIO>.github.io/<REPO>/`, por ejemplo, tu repositorio está en `https://github.com/<NOMBRE DE USUARIO>/<REPO>`, configura `base` a `'/<REPO>/'`.
 
-2. Dentro de tu proyecto, crea un `deploy.sh` con el siguiente contenido (con las líneas resaltadas sin comentar adecuadamente) y ejecútalo para desplegar:
+2. Ve a la configuración de GitHub Pages en la página de configuración del repositorio y elige la fuente de implementación como "Acciones de GitHub", esto te llevará a crear un flujo de trabajo que compila e implementa el proyecto, se provee un flujo de trabajo de muestra que instala dependencias y compila usando npm:
 
-  ```bash{16,24,27}
-  #!/usr/bin/envsh
+```yml
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
 
-  # abortar en caso de errores
-  set -e
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ['main']
 
-  # compilado
-  npm run build
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
-  # navega al directorio de salida de compilación
-  cd dist
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-  # coloca .nojekyll para forzar el procesamiento de Jekyll
-  echo > .nojekyll
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
-  # si estás desplegando en un dominio personalizado
-  # echo 'www.ejemplo.com' > CNAME
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload dist repository
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+```
 
-  git init
-  git checkout -B main
-  git add -A
-  git commit -m 'deploy'
-
-  # si estás desplegando en https://<NOMBRE DE USUARIO>.github.io
-  # git push -f git@github.com:<NOMBRE DE USUARIO>/<NOMBRE DE USUARIO>.github.io.git main
-
-  # si estás desplegando en https://<NOMBRE DE USUARIO>.github.io/<REPO>
-  # git push -f git@github.com:<NOMBRE DE USUARIO>/<REPO>.git main:gh-pages
-
-  cd -
-  ```
-
-::: tip
-También puedes ejecutar el script anterior en tu configuración de integración continua para habilitar el despliegue automatico en cada push.
-:::
 ## GitLab Pages y GitLab CI
 
 1. Configura la `base` correcta en `vite.config.js`.
@@ -302,12 +321,12 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 
 4. Especifica un nombre para el proyecto y una rama.
 
-    - **Comando de compilación**: `npm run build`
-    - **Directorio público**: `dist`
+   - **Comando de compilación**: `npm run build`
+   - **Directorio público**: `dist`
 
 5. Has clic en **Crear sitio estático**.
 
-    Tu aplicación debe desplegarse en `https://<PROJECTNAME>.onrender.com/`.
+   Tu aplicación debe desplegarse en `https://<PROJECTNAME>.onrender.com/`.
 
 De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
 
