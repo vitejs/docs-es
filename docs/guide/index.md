@@ -140,7 +140,7 @@ cd vite
 pnpm install
 cd packages/vite
 pnpm run build
-pnpm link --global # podrás utilizar el gestor de paquetes de tu preferencia
+pnpm link --global # utiliza el gestor de paquetes de tu preferencia para este paso
 ```
 
 Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link --global vite` (o el gestor de paquetes que usaste para vincular `vite` globalmente). ¡Ahora reinicia el servidor de desarrollo para hacerlo funcionar!

@@ -226,7 +226,15 @@
 
 - **Tipo:** `Record<string, object>`
 
-  Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de archivo se utilizan como claves para las opciones. Ejemplo:
+  Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de archivo se utilizan como claves para las opciones. Las opciones admitidas para cada preprocesador se pueden encontrar en su documentación respectiva:
+
+  - `sass`/`scss` - [Opciones](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+  - `less` - [Opciones](https://lesscss.org/usage/#less-options).
+  - `styl`/`stylus`: solo se admite [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual se puede pasar como un objeto.
+
+  Todas las opciones de preprocesadores también soportan la opción `additionalData`, el cual se puede usar para inyectar código adicional para cada contenido de estilo.
+
+  Ejemplo:
 
   ```js
   export default defineConfig({
@@ -235,8 +243,13 @@
         scss: {
           additionalData: `$injectedColor: orange;`,
         },
+        less: {
+          math: 'parens-division',
+        },
         styl: {
-          additionalData: `$injectedColor ?= orange`,
+          define: {
+            $specialColor: new stylus.nodes.RGBA(51, 197, 255, 1),
+          },
         },
       },
     },
@@ -325,6 +338,37 @@
 
   Ajusta la verbosidad de salida de la consola. Por defecto es `'info'`.
 
+## customLogger
+
+- **Tipo:**
+  ```ts
+  interface Logger {
+    info(msg: string, options?: LogOptions): void
+    warn(msg: string, options?: LogOptions): void
+    warnOnce(msg: string, options?: LogOptions): void
+    error(msg: string, options?: LogErrorOptions): void
+    clearScreen(type: LogType): void
+    hasErrorLogged(error: Error | RollupError): boolean
+    hasWarned: boolean
+  }
+  ```
+
+Usa un registrador personalizado para registrar mensajes. Puedes usar la API `createLogger` de Vite para obtener el registrador predeterminado y personalizarlo para, por ejemplo, cambiar el mensaje o filtrar ciertas advertencias.
+
+```js
+import { createLogger, defineConfig } from 'vite'
+const logger = createLogger()
+const loggerWarn = logger.warn
+logger.warn = (msg, options) => {
+  // Ignorar la advertencia de archivos CSS vacíos
+  if (msg.includes('vite:css') && msg.includes(' is empty')) return
+  loggerWarn(msg, options)
+}
+export default defineConfig({
+  customLogger: logger,
+})
+```
+
 ## clearScreen
 
 - **Tipo:** `boolean`
@@ -351,6 +395,14 @@
   :::warning NOTAS DE SEGURIDAD
   `envPrefix` no debe configurarse como `''`, esto expondrá todas tus variables env y provocará una filtración inesperada de información confidencial. De todas formas, Vite arrojará un error al detectar `''`.
   :::
+
+  Si deseas exponer una variable sin prefijo, puede usar [define](#define):
+
+  ```js
+  define: {
+    'import.meta.env.ENV_VARIABLE': JSON.stringify(process.env.ENV_VARIABLE)
+  }
+  ```
 
 ## appType
 

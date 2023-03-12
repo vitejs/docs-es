@@ -26,6 +26,8 @@ head:
 
 # ¡Vite 3.0 ya está disponible!
 
+_23 de julio de 2022_: mira el [anuncio de Vite 4.0](./anunciando-vite4.md)
+
 En febrero del año pasado, [Evan You](https://twitter.com/youyuxi) lanzó Vite 2. Desde entonces, su adopción ha crecido sin parar, alcanzando más de 1 millón de descargas vía npm por semana. Un ecosistema en expansión se formó rápidamente después de la liberación. Vite está impulsando una renovada carrera de innovación en marcos de desarrollo web. [Nuxt 3](https://v3.nuxtjs.org/) usa Vite de forma predeterminada. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) y [SolidStart](https://docs.solidjs.com/start) están construidos con Vite. [Laravel ahora ha decidido usar Vite de forma predeterminada](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) muestra cómo Vite puede mejorar la experiencia de desarrollo en Rails. [Vitest](https://vitest.dev) está avanzando como una alternativa nativa de Vite a Jest. Vite está detrás de [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) y [Playwright](https://playwright.dev/docs/est-components), Storybook tiene [Vite como el builder oficial](https://github.com/storybookjs/builder-vite). Y [la lista continúa](https://patak.dev/vite/ecosystem). Los mantenedores de la mayoría de estos proyectos se involucraron en la mejora del núcleo de Vite, trabajando en estrecha colaboración con el [equipo de Vite](https://es.vitejs.dev/team) y otros colaboradores.
 
 ![Vite 3 Announcement Cover Image](./../public/og-image-announcing-vite3.png)

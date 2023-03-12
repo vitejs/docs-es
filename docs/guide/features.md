@@ -245,7 +245,7 @@ La inyección automática de contenido CSS se puede desactivar a través del par
 
 ```js
 import styles from './foo.css' // se inyectará en la página
-import otherStyles from './bar.css?inline' // no se inyectará en la página
+import otherStyles from './bar.css?inline' // no se inyectará
 ```
 
 ## Recursos estáticos
@@ -400,7 +400,10 @@ const modules = {
 Cuando se combina con `eager`, incluso es posible tener habilitado el tree-shaking para esos módulos.
 
 ```ts
-const modules = import.meta.glob('./dir/*.js', { import: 'setup', eager: true })
+const modules = import.meta.glob('./dir/*.js', {
+  import: 'setup',
+  eager: true,
+})
 ```
 
 ```ts

@@ -47,6 +47,14 @@ if (import.meta.hot) {
 }
 ```
 
+## IntelliSense para TypeScript
+
+Vite proporciona definiciones de tipos para `import.meta.hot` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Puedes crear un `env.d.ts` en el directorio `src` para que TypeScript tome las definiciones de tipo:
+
+```ts
+/// <reference types="vite/client" />
+```
+
 ## `hot.accept(cb)`
 
 Para que un módulo pueda ser actualizado, debes utilizar `import.meta.hot.accept()` con un callback que recibe el módulo actualizado:
@@ -89,8 +97,9 @@ if (import.meta.hot) {
   import.meta.hot.accept(
     ['./foo.js', './bar.js'],
     ([newFooModule, newBarModule]) => {
-      // El callback recibe un array donde solo el módulo actualizado no es nulo
-      // Si la actualización no fue exitosa (por ejemplo, error de sintaxis), el array estará vacío
+      // El callback recibe un array donde solo el módulo actualizado
+      // no es nulo. Si la actualización no fue exitosa
+      // (por ejemplo, error de sintaxis), el array estará vacío
     },
   )
 }

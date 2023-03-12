@@ -23,8 +23,8 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
     configFile: false,
     root: __dirname,
     server: {
-      port: 1337
-    }
+      port: 1337,
+    },
   })
   await server.listen()
 
@@ -33,7 +33,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 ```
 
 :::tip NOTA
-Al usar `createServer` y `build` en el mismo proceso de Node.js, ambas funciones se basan en `process.env.`<wbr>`NODE_ENV` para funcionar correctamente, lo que también depende de la opción de configuración `mode`. Para evitar un comportamiento conflictivo, configura `process.env.`<wbr>`NODE_ENV` o el `mode` de las dos APIs en `development`. De lo contrario, puedes generar un proceso secundario para ejecutar las APIs por separado.
+Al usar `createServer` y `build` en el mismo proceso de Node.js, ambas funciones se basan en `process.env.NODE_ENV` para funcionar correctamente, lo que también depende de la opción de configuración `mode`. Para evitar un comportamiento conflictivo, configura `process.env.NODE_ENV` o el `mode` de las dos APIs en `development`. De lo contrario, puedes generar un proceso secundario para ejecutar las APIs por separado.
 :::
 
 ## `InlineConfig`
@@ -101,7 +101,7 @@ interface ViteDevServer {
    */
   transformRequest(
     url: string,
-    options?: TransformOptions
+    options?: TransformOptions,
   ): Promise<TransformResult | null>
   /**
    * Aplica las transformaciones HTML integradas en Vite y las transformaciones HTML de cualquier plugin.
@@ -112,7 +112,7 @@ interface ViteDevServer {
    */
   ssrLoadModule(
     url: string,
-    options?: { fixStacktrace?: boolean }
+    options?: { fixStacktrace?: boolean },
   ): Promise<Record<string, any>>
   /**
    * Corrige la pila de seguimiento de errores de ssr.
@@ -146,7 +146,7 @@ interface ViteDevServer {
 
 ```ts
 async function build(
-  inlineConfig?: InlineConfig
+  inlineConfig?: InlineConfig,
 ): Promise<RollupOutput | RollupOutput[]>
 ```
 
@@ -165,8 +165,8 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
     build: {
       rollupOptions: {
         // ...
-      }
-    }
+      },
+    },
   })
 })()
 ```
@@ -183,14 +183,13 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 
 ```js
 import { preview } from 'vite'
-
 ;(async () => {
   const previewServer = await preview({
     // cualquier opción válida de configuración del usuario, además de `mode` y `configFile`.
     preview: {
       port: 8080,
-      open: true
-    }
+      open: true,
+    },
   })
 
   previewServer.printUrls()
@@ -205,7 +204,7 @@ import { preview } from 'vite'
 async function resolveConfig(
   inlineConfig: InlineConfig,
   command: 'build' | 'serve',
-  defaultMode = 'development'
+  defaultMode = 'development',
 ): Promise<ResolvedConfig>
 ```
 
@@ -219,7 +218,7 @@ El valor de `command` es `serve` en dev (en el cli `vite`, `vite dev`, y `vite s
 function mergeConfig(
   defaults: Record<string, any>,
   overrides: Record<string, any>,
-  isRoot = true
+  isRoot = true,
 ): Record<string, any>
 ```
 
@@ -232,7 +231,7 @@ Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel 
 ```ts
 function searchForWorkspaceRoot(
   current: string,
-  root = searchForPackageRoot(current)
+  root = searchForPackageRoot(current),
 ): string
 ```
 
@@ -253,7 +252,7 @@ Busca la raíz del espacio de trabajo potencial si cumple las siguientes condici
 function loadEnv(
   mode: string,
   envDir: string,
-  prefixes: string | string[] = 'VITE_'
+  prefixes: string | string[] = 'VITE_',
 ): Record<string, string>
 ```
 
@@ -282,7 +281,7 @@ async function transformWithEsbuild(
   code: string,
   filename: string,
   options?: EsbuildTransformOptions,
-  inMap?: object
+  inMap?: object,
 ): Promise<ESBuildTransformResult>
 ```
 
@@ -297,7 +296,7 @@ async function loadConfigFromFile(
   configEnv: ConfigEnv,
   configFile?: string,
   configRoot: string = process.cwd(),
-  logLevel?: LogLevel
+  logLevel?: LogLevel,
 ): Promise<{
   path: string
   config: UserConfig

@@ -78,7 +78,7 @@ Especifica el directorio de salida (relativo a [raíz del proyecto](/guide/#inde
 - **Tipo:** `string`
 - **Por defecto:** `assets`
 
-Especifica el directorio en el que se alojarán los recursos generados (en relación con `build.outDir`).
+Especifica el directorio en el que se alojarán los recursos generados (en relación con `build.outDir`). Esto no se usa en el [modo librería](/guide/build#modo-libreria).
 
 ## build.assetsInlineLimit
 
@@ -114,6 +114,13 @@ Esta opción permite a los usuarios configurar un destino de navegador diferente
 Solo debe usarse cuando se dirige a un navegador no convencional.
 Un ejemplo es WeChat WebView de Android, que es compatible con la mayoría de las funciones modernas de JavaScript, pero no con la [notación de color hexadecimal `#RGBA` en CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#colores_rgb).
 En este caso, debes configurar `build.cssTarget` en `chrome61` para evitar que vite transforme los colores `rgba()` en notaciones hexadecimales `#RGBA`.
+
+## build.cssMinify
+
+- **Tipo:** `boolean`
+- **Por defecto:** lo mismo que [`build.minify`](#build-minify)
+
+Esta opción permite a los usuarios configurar la minificación de CSS específicamente en vez de usar por defecto `build.minify`, así se podrá trabajar la minificación para JS y CSS por separado. Vite usa `esbuild` para minimizar CSS.
 
 ## build.sourcemap
 
@@ -227,7 +234,7 @@ Habilita/deshabilita los informes de tamaño comprimido con gzip. La compresión
 - **Tipo:** `number`
 - **Por defecto:** `500`
 
-Límite para advertencias de tamaño de fragmento (en kbs).
+Límite para advertencias de tamaño de fragmento (en kbs). Se compara con el tamaño del fragmento sin comprimir, ya que [el tamaño de JavaScript en sí está relacionado con el tiempo de ejecución](https://v8.dev/blog/cost-of-javascript-2019).
 
 ## build.watch
 

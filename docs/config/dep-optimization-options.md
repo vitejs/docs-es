@@ -22,8 +22,8 @@
   ```js
   export default defineConfig({
     optimizeDeps: {
-      include: ['esm-dep > cjs-dep']
-    }
+      include: ['esm-dep > cjs-dep'],
+    },
   })
   ```
 
@@ -51,3 +51,17 @@
 - **Tipo:** `boolean`
 
   Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.
+
+## optimizeDeps.disabled
+
+- **Experimental**
+- **Tipo:** `boolean | 'build' | 'dev'`
+- **Por defecto:** `'build'`
+
+Deshabilita las optimizaciones de dependencias, `true` deshabilita el optimizador durante la compilación y el desarrollo. Pasa `'build'` o `'dev'` para deshabilitar el optimizador solo en uno de los modos. La optimización de dependencias está habilitada de forma predeterminada solo en desarrollo.
+
+:::warning
+La optimización de las dependencias en el modo de compilación es **experimental**. Si está habilitado, elimina una de las diferencias más significativas entre desarrollo y producción. [`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no es necesario en este caso, ya que esbuild convierte las dependencias solo de CJS en ESM.
+
+Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disabled: false`. `@rollup/plugin-commonjs` se puede eliminar pasando `build.commonjsOptions: { include: [] }`.
+:::

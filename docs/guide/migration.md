@@ -4,7 +4,7 @@
 
 Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
-Rollup 3 es mayormente compatible con Rollup 2. Si usas opciones de [`rollupOptions`](../config/build-options.md#rollup-options) personalizadas en tu proyecto y encuentras problemas, consulta la [guía de migración de Rollup](https://rollupjs.org/guide/en/#migration) para actualizar la configuración.
+Rollup 3 es mayormente compatible con Rollup 2. Si usas opciones de [`rollupOptions`](../config/build-options.md#rollup-options) personalizadas en tu proyecto y encuentras problemas, consulta la [guía de migración de Rollup](https://rollupjs.org/migration/) para actualizar la configuración.
 
 ## Cambio de línea de base en navegadores modernos
 
@@ -34,7 +34,7 @@ import stuff from './global.css?inline'
 
 `vite build` ahora siempre compilará para producción independientemente del `--mode` invocado. Anteriormente, cambiar el `mode` a otro que no sea `production` daría como resultado una compilación de desarrollo. Si aún deseas compilar para desarrollo, puedes configurar `NODE_ENV=development` en el archivo `.env.{mode}`.
 
-Como parte de este cambio, `vite dev` y `vite build` ya no se sobrepondrán a `process.env.`<wbr>`NODE_ENV` si ya está definido. Luego, si se configuró `process.env.`<wbr>`NODE_ENV = 'development'` antes de compilar, también compilará para desarrollo. Esto brinda más control cuando se ejecutan múltiples compilaciones o servidores de desarrollo en paralelo.
+Como parte de este cambio, `vite dev` y `vite build` ya no se sobrepondrán a `process.env.NODE_ENV` si ya está definido. Luego, si se configuró `process.env.NODE_ENV = 'development'` antes de compilar, también compilará para desarrollo. Esto brinda más control cuando se ejecutan múltiples compilaciones o servidores de desarrollo en paralelo.
 
 Consulta la [documentación actualizada de `mode`](https://vitejs.dev/guide/env-and-mode.html#modes) para obtener más detalles.
 

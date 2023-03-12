@@ -18,11 +18,11 @@ Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Al
 
 En producción, estas variables de entorno se **reemplazan estáticamente**. Por lo tanto, es necesario referenciarlas siempre utilizando la cadena estática completa. Por ejemplo, el acceso a claves dinámicas como `import.meta.env[key]` no funcionará.
 
-También se reemplazará estas cadenas que aparecen en las cadenas de JavaScript y las plantillas de Vue. Este debería ser un caso raro, pero puede ser involuntario. Es posible que veas errores como `Missing Semicolon` o `Unexpected token` en este caso, por ejemplo, cuando `"process.env.`<wbr>`NODE_ENV"` se transforma en `""development": "`. Hay formas de evitar este comportamiento:
+También se reemplazará estas cadenas que aparecen en las cadenas de JavaScript y las plantillas de Vue. Este debería ser un caso raro, pero puede ser involuntario. Es posible que veas errores como `Missing Semicolon` o `Unexpected token` en este caso, por ejemplo, cuando `"process.env.NODE_ENV"` se transforma en `""development": "`. Hay formas de evitar este comportamiento:
 
 - Para las cadenas de JavaScript, puedes dividir la cadena con un espacio Unicode de ancho cero, p. `'import.meta\u200b.env.MODE'`.
 
-- Para las plantillas de Vue u otro HTML que se compila en cadenas de JavaScript, puedes usar la etiqueta [`<wbr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr), por ejemplo, `import.meta.<wbr>env.MODE`.
+- Para las plantillas de Vue u otro HTML que se compila en cadenas de JavaScript, puedes usar la etiqueta [](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr), por ejemplo, `import.meta.<wbr>env.MODE`.
 
 ## Archivos `.env`
 
@@ -107,6 +107,17 @@ Si tu código se basa en tipos de entornos de navegador como [DOM](https://githu
   "lib": ["WebWorker"]
 }
 ```
+
+## Sustitución de variables de entorno en archivos HTML
+
+Vite también admite la sustitución de variables de entorno en archivos HTML. Cualquier propiedad en `import.meta.env` se puede usar en archivos HTML con una sintaxis especial `%ENV_NAME%`:
+
+```html
+<h1>Vite se está ejecutando en %MODE%</h1>
+<p>Usando datos desde %VITE_API_URL%</p>
+```
+
+Si el entorno no existe en `import.meta.env`, por ejemplo, `%NON_EXISTENT%`, se ignorará y no se reemplazará, a diferencia de `import.meta.env.NON_EXISTENT` en JS, donde se reemplaza como `undefined`.
 
 ## Modos
 

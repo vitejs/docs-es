@@ -81,8 +81,8 @@ async function createServer() {
     appType: 'custom'
   })
 
-  // Usa la instancia de Connect de Vite como middleware
-  // Si usas tu propio router de Express (express.Router()), debe usar router.use
+  // Usa la instancia de Connect de Vite como middleware. Si usas tu propio
+  // router de Express (express.Router()), debes usar router.use
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
@@ -110,9 +110,9 @@ app.use('*', async (req, res) => {
       'utf-8',
     )
 
-    // 2. Aplica transformaciones Vite HTML. Esto inyecta el cliente Vite HMR y
-    // también aplica transformaciones HTML de los complementos de Vite, por ejemplo, preámbulos globales
-    // de @vitejs/plugin-react
+    // 2. Aplica transformaciones Vite HTML. Esto inyecta el cliente Vite HMR
+    // y también aplica transformaciones HTML de los complementos de Vite, por ejemplo,
+    // preámbulos globales de @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
     // 3. Carga la entrada del servidor. vite.ssrLoadModule se transforma automáticamente
@@ -120,9 +120,9 @@ app.use('*', async (req, res) => {
     // requerido, y proporciona una invalidación eficiente similar a HMR.
     const { render } = await vite.ssrLoadModule('/src/entry-server.js')
 
-    // 4. renderiza el HTML de la aplicación. Esto asume el `render` exportado de entry-server.js
-    // la función llama a las API de SSR del marco apropiado,
-    //    por ejemplo, ReactDOMServer.renderToString()
+    // 4. renderiza el HTML de la aplicación. Esto asume que la función `render`
+    // exportada desde entry-server.js llama a las API de SSR del marco apropiado,
+    // por ejemplo, ReactDOMServer.renderToString()
     const appHtml = await render(url)
 
     // 5. Inyecta el HTML generado por la aplicación en la plantilla.
@@ -131,8 +131,8 @@ app.use('*', async (req, res) => {
     // 6. Devuelve el HTML renderizado.
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
-    // Si se detecta un error, permite que Vite corrija el trazado de pila para que se asigne de nuevo a
-    // su código fuente real.
+    // Si se detecta un error, permite que Vite fije el trazado de pila
+    // para que se asigne de nuevo a tu código fuente real.
     vite.ssrFixStacktrace(e)
     console.error(e)
     res.status(500).end(e.message)
@@ -170,7 +170,7 @@ Nuestros scripts en `package.json` se verán así:
 
 Ten en cuenta el indicador `--ssr` que indica que se trata de una compilación SSR. También debes especificar la entrada SSR.
 
-Luego, en `server.js` necesitamos agregar algo de lógica específica de producción al verificar ``process.env.`<wbr>`NODE_ENV`:
+Luego, en `server.js` necesitamos agregar algo de lógica específica de producción al verificar ``process.env.NODE_ENV`:
 
 - En lugar de leer la raíz `index.html`, usa `dist/client/index.html` como plantilla, ya que contiene los enlaces de recursos correctos a la compilación del cliente.
 

@@ -213,7 +213,7 @@ Si `package.json` no contiene `"type": "module"`, Vite generará diferentes exte
 :::
 
 :::tip Variables de entorno
-En el modo librería, todo uso de `import.meta.env.*` se reemplaza estáticamente cuando se compila para producción. Sin embargo, esto no ocurre para `process.env.*`, por lo que los usuarios que usan la librería pueden cambiarlo dinámicamente. Si esto no es lo que deseas, puedes usar `define: { 'process.env.`<wbr>`NODE_ENV': '"production"' }` por ejemplo para reemplazarlos estáticamente.
+En el modo librería, todo uso de `import.meta.env.*` se reemplaza estáticamente cuando se compila para producción. Sin embargo, esto no ocurre para `process.env.*`, por lo que los usuarios que usan la librería pueden cambiarlo dinámicamente. Si esto no es lo que deseas, puedes usar `define: { 'process.env.NODE_ENV': '"production"' }` por ejemplo para reemplazarlos estáticamente.
 :::
 
 ## Opciones avanzadas para Base

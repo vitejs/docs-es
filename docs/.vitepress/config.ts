@@ -90,6 +90,7 @@ export default defineConfig({
     en: { label: 'English', link: 'https://vitejs.dev' },
     zh: { label: '简体中文', link: 'https://cn.vitejs.dev' },
     ja: { label: '日本語', link: 'https://ja.vitejs.dev' },
+    pt: { label: 'Português', link: 'https://pt.vitejs.dev' },
   },
   vue: {
     reactivityTransform: true,

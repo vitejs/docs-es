@@ -1,13 +1,6 @@
 # Preempaquetado de dependencias
 
-Cuando ejecutas `vite` por primera vez, puedes notar este mensaje:
-
-```
-Dependencias preempaquetadas:
-  react
-  react-dom
-(esto se ejecutará solo cuando sus dependencias o configuración hayan cambiado)
-```
+Cuando ejecutas `vite` por primera vez, Vite preempaqueta las dependencias de tu proyecto antes de cargar tu sitio localmente. Se realiza de forma automática y transparente por defecto.
 
 ## El por qué
 
@@ -36,7 +29,7 @@ El preempaquetado de dependencias solo se aplica en el modo de desarrollo y util
 
 Si no se encuentra un caché existente, Vite rastreará su código fuente y descubrirá automáticamente las importaciones de dependencia (es decir, "importaciones básicas" que esperan ser resueltas desde `node_modules`) y usará estas importaciones encontradas como puntos de entrada para el preempaquetado. Este se realiza con `esbuild`, por lo que suele ser muy rápido.
 
-Después de que el servidor ya se haya iniciado, si se encuentra una nueva importación de dependencia que aún no está en el caché, Vite volverá a ejecutar el proceso de preempaquetado y recargará la página.
+Después de que el servidor ya se haya iniciado, si se encuentra una nueva importación de dependencia que aún no está en el caché, Vite volverá a ejecutar el proceso de preempaquetado y recargará la página si es necesario.
 
 ## Monorepos y Dependencias Vinculadas
 
@@ -47,13 +40,13 @@ Sin embargo, esto requiere que la dependencia vinculada se exporte como ESM. De 
 ```js
 export default defineConfig({
   optimizeDeps: {
-    include: ['linked-dep']
+    include: ['linked-dep'],
   },
   build: {
     commonjsOptions: {
-      include: [/linked-dep/, /node_modules/]
-    }
-  }
+      include: [/linked-dep/, /node_modules/],
+    },
+  },
 })
 ```
 
@@ -70,6 +63,8 @@ La heurística de descubrimiento de dependencia predeterminada puede no ser siem
 Un caso de uso típico para `optimizeDeps.include` o `optimizeDeps.exclude` es cuando tienes una importación que no se puede descubrir directamente en el código fuente. Por ejemplo, tal vez la importación se cree como resultado de una transformación de complemento. Esto significa que Vite no podrá descubrir la importación en el escaneo inicial; solo podrá descubrirla después de que el navegador solicite el archivo y lo transforme. Esto hará que el servidor se vuelva a empaquetar inmediatamente después del inicio del servidor.
 
 Tanto `include` como `exclude` se pueden utilizar para solucionar este problema. Si la dependencia es grande (con muchos módulos internos) o es CommonJS, debes incluirla; Si la dependencia es pequeña y ya es un ESM válido, puedes excluirla y dejar que el navegador la cargue directamente.
+
+También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esbuildOptions`](/config/dep-optimization-options.md#optimizedeps-esbuildoptions). Por ejemplo, agregar un complemento esbuild para manejar archivos especiales en dependencias.
 
 ## Almacenamiento en caché
 

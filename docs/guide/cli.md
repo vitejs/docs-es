@@ -54,7 +54,7 @@ vite build [root]
 | `--assetsDir <dir>`            | Directorio bajo outDir para colocar recursos dentro (por defecto: `"assets"`) (`string`)                                                 |
 | `--assetsInlineLimit <number>` | Umbral en línea base64 de recursos estáticos en bytes (por defecto: `4096`) (`number`)                                                   |
 | `--ssr [entry]`                | Compila la entrada específicada para server-side rendering (`string`)                                                                    |
-| `--sourcemap`                  | Mapas de origen de salida para compilación (por defecto: `false`) (`boolean`)                                                            |
+| `--sourcemap [output]`         | Mapas de origen de salida para compilación (por defecto: `false`) (`boolean \| "inline" \| "hidden"`)                                    |
 | `--minify [minifier]`          | Habilita/deshabilita la minificación, o especifica el minificador a usar (por defecto: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`) |
 | `--manifest [name]`            | Emite el json de manifiesto de compilación (`boolean \| string`)                                                                         |
 | `--ssrManifest [name]`         | Emite el json de manifiesto ssr (`boolean \| string`)                                                                                    |

@@ -65,30 +65,30 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 2. Ve a la configuración de GitHub Pages en la página de configuración del repositorio y elige la fuente de implementación como "Acciones de GitHub", esto te llevará a crear un flujo de trabajo que compila e implementa el proyecto, se provee un flujo de trabajo de muestra que instala dependencias y compila usando npm:
 
 ```yml
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Flujo de trabajo simple para implementar contenido estático en Github Pages
+name: Implementar contenido estático a Pages
 
 on:
-  # Runs on pushes targeting the default branch
+  # Se ejecuta en anotaciones dirigidas a la rama predeterminada
   push:
     branches: ['main']
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Te permite ejecutar este flujo de trabajo manualmente desde la pestaña Acciones
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Establece los permisos de GITHUB_TOKEN para permitir la implementación en GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
+# Permite una implementación simultánea
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
+  # Trabajo de implementación único ya que solo estamos implementando
   deploy:
     environment:
       name: github-pages
@@ -111,7 +111,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload dist repository
+          # Subir repositorio dist
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
