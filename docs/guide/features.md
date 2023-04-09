@@ -92,7 +92,7 @@ Los tipos predeterminados de Vite son para su API de Node.js. Para ajustar el en
 /// <reference types="vite/client" />
 ```
 
-Además, puedes agregar `vite/client` a `compilerOptions.types` de tu `tsconfig`:
+Como altenativa, puedes agregar `vite/client` a `compilerOptions.types` en tu `tsconfig.json`:
 
 ```json
 {
@@ -244,9 +244,13 @@ También puedes usar módulos CSS combinados con preprocesadores anteponiendo `.
 La inyección automática de contenido CSS se puede desactivar a través del parámetro de consulta `?inline`. En este caso, la cadena CSS procesada se devuelve como la exportación predeterminada del módulo como de costumbre, pero los estilos no se inyectan en la página.
 
 ```js
-import styles from './foo.css' // se inyectará en la página
+import './foo.css' // se inyectará en la página
 import otherStyles from './bar.css?inline' // no se inyectará
 ```
+
+::: tip NOTA
+Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) están en desuso desde Vite 4. Utiliza la línea `?inline` en su lugar.
+:::
 
 ## Recursos estáticos
 

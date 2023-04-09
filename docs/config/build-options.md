@@ -10,7 +10,7 @@ El objetivo de compatibilidad del navegador para el paquete final. El valor pred
 
 Otro valor especial es `'esnext'`, el cual asume el soporte nativo de importaciones dinámicas y transpilará lo menos posible:
 
-- Si la opción [`build.minify`](#build-minify) es `'terser'`, `'esnext'` se verá obligado a bajar a `'es2021'`.
+- Si la opción [`build.minify`](#build-minify) es `'terser'` y la versión de Terser instalada es inferior a la 5.16.0, `'esnext'` se verá obligado a bajar a `'es2021'`.
 - En otros casos, no realizará ninguna transpilación.
 
 La transformación se realiza con esbuild y el valor debe ser una [opción de destino de esbuild](https://esbuild.github.io/api/#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.

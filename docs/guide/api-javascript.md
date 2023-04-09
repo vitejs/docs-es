@@ -196,6 +196,46 @@ import { preview } from 'vite'
 })()
 ```
 
+## `PreviewServer`
+
+```ts
+interface PreviewServer extends PreviewServerForHook {
+  resolvedUrls: ResolvedServerUrls
+}
+```
+
+## `PreviewServerForHook`
+
+```ts
+interface PreviewServerForHook {
+  /**
+   * El objeto de configuración de vite resuelto
+   */
+  config: ResolvedConfig
+  /**
+   * Una instancia de aplicación de conexión.
+   * - Se puede usar para adjuntar middleware personalizado al servidor de vista previa.
+   * - También se puede utilizar como función de controlador de un servidor http personalizado
+   *   o como un middleware en cualquier marco Node.js de estilo de conexión
+   *
+   * https://github.com/senchalabs/connect#use-middleware
+   */
+  middlewares: Connect.Server
+  /**
+   * instancia de servidor http de Node nativo
+   */
+  httpServer: http.Server
+  /**
+   * Las URL resueltas que Vite imprime en la CLI
+   */
+  resolvedUrls: ResolvedServerUrls | null
+  /**
+   * Imprime las URL del servidor
+   */
+  printUrls(): void
+}
+```
+
 ## `resolveConfig`
 
 **Firma de Tipo:**

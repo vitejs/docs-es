@@ -232,7 +232,7 @@
   - `less` - [Opciones](https://lesscss.org/usage/#less-options).
   - `styl`/`stylus`: solo se admite [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual se puede pasar como un objeto.
 
-  Todas las opciones de preprocesadores también soportan la opción `additionalData`, el cual se puede usar para inyectar código adicional para cada contenido de estilo.
+  Todas las opciones de preprocesadores también soportan la opción `additionalData`, el cual se puede usar para inyectar código adicional para cada contenido de estilo. Ten en cuenta que si incluyes estilos reales y no solo variables, estos podrían duplicarse en el paquete final.
 
   Ejemplo:
 

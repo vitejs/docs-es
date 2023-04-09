@@ -92,9 +92,7 @@ export default defineConfig({
     ja: { label: '日本語', link: 'https://ja.vitejs.dev' },
     pt: { label: 'Português', link: 'https://pt.vitejs.dev' },
   },
-  vue: {
-    reactivityTransform: true,
-  },
+
   themeConfig: {
     logo: '/logo.svg',
     editLink: {

@@ -319,7 +319,7 @@ createServer()
 - **Tipo:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
 - **Por defecto:** `(sourcePath) => sourcePath.includes('node_modules')`
 
-Permite configurar si se ignoran o no los archivos de origen en el mapa de origen del servidor, que se usan para completar la [extensión del mapa de origen de `x_google_ignoreList`](https://developer.chrome.com/blog/devtools-better-angular-debugging/#the-x_google_ignorelist-source-map-extension).
+Permite configurar si se ignoran o no los archivos de origen en el mapa de origen del servidor, que se usan para completar la [extensión del mapa de origen de `x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/).
 
 `server.sourcemapIgnoreList` es el equivalente de [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) para el servidor de desarrollo. Una diferencia entre las dos opciones de configuración es que la función de Rollup se invoca con una ruta relativa para `sourcePath` mientras que `server.sourcemapIgnoreList` lo hace con una ruta absoluta. Durante el desarrollo, la mayoría de los módulos tienen el mapa y la fuente en la misma carpeta, por lo que la ruta relativa para `sourcePath` es el nombre del archivo en sí. En estos casos, las rutas absolutas se hacen convenientes para su uso.
 

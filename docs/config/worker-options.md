@@ -5,7 +5,7 @@ Opciones relacionadas con Web Workers.
 ## worker.format
 
 - **Tipo:** `'es' | 'iife'`
-- **Por defecto:** `iife`
+- **Por defecto:** `'iife'`
 
   Formato de salida para el paquete de worker.
 
