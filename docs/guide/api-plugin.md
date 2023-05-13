@@ -157,7 +157,9 @@ Los siguientes hooks se llaman en cada solicitud de módulo entrante:
 - [`load`](https://rollupjs.org/plugin-development/#load)
 - [`transform`](https://rollupjs.org/plugin-development/#transform)
 
-También tienen un parámetro `options` extendido con propiedades adicionales específicas de Vite. Puedes leer más en la [documentación de SSR](/guide/ssr#logica-de-complemento-especifica-de-ssr).
+Estos hooks también tienen un parámetro `options` extendido con propiedades adicionales específicas de Vite. Puedes leer más en la [documentación de SSR](/guide/ssr.html#logica-de-complemento-especifica-de-ssr).
+
+Algunas llamadas `resolveId` al valor `importer` pueden ser una ruta absoluta para un `index.html` genérico en la raíz, ya que no siempre es posible derivar el importador real debido al patrón de servidor de desarrollo desagregado de Vite. Para las importaciones manejadas dentro de la canalización de resolución de Vite, se puede rastrear al importador durante la fase de análisis de importación, proporcionando el valor `importer` correcto.
 
 Los siguientes hooks se llaman cuando el servidor está cerrado:
 

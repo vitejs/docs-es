@@ -71,7 +71,9 @@ A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de Ty
 
 Si estás utilizando una biblioteca que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la biblioteca.
 
-La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [MobX](https://mobx.js.org/installation.html#use-spec-obediente-transpilation-for-class-properties), [Vue Class Components 8.x](https://github.com/vuejs/vue-class-component/issues/465), etc. Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor predeterminado, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
+La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [MobX](https://mobx.js.org/installation.html#use-spec-obediente-transpilation-for-class-properties).
+
+Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor predeterminado, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
 
 #### Otras opciones del compilador que afectan el resultado de la compilación
 
@@ -134,8 +136,8 @@ Vite proporciona soporte Vue de primera clase:
 
 - Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- Compatibilidad con Vue 2.7 a través de [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Compatibilidad con Vue <2.7 a través de [vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Compatibilidad con Vue 2.7 SFC a través de [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
+- Compatibilidad con Vue 2.7 JSX a través de [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
 
 ## JSX
 
@@ -347,7 +349,7 @@ const modules = {
 `import.meta.glob` también admite la importación de archivos como cadenas (similar a la [importación de recursos como cadena](./assets#importar-recursos-como-cadenas-de-texto)) con la sintaxis de [importación reflexiva](https://github.com/tc39/proposal-import-reflection):
 
 ```js
-const modules = import.meta.glob('./dir/*.js', { as: 'raw' })
+const modules = import.meta.glob('./dir/*.js', { as: 'raw', eager: true })
 ```
 
 Lo anterior se transformará en lo siguiente:

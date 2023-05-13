@@ -18,7 +18,15 @@ Revisa [Uso de complementos](../guide/using-plugins.md) para más información s
 
 ### [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
 
-- Provee soporte para componentes de un único (o simple) archivo en Vue 2.
+- Proporciona compatibilidad con componentes de archivo único de Vue 2.7.
+
+### [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
+
+- Brinda compatibilidad con Vue 2.7 JSX (a través de la [transformación de Babel dedicada](https://github.com/vuejs/jsx-vue2/)).
+
+### [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
+
+- Provides Vue 2.7 JSX support (via [dedicated Babel transform](https://github.com/vuejs/jsx-vue2/)).
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
