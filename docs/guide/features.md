@@ -22,7 +22,7 @@ Vite almacena en caché las solicitudes de dependencias a través de encabezados
 
 ## Hot Module Replacement
 
-Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Componentes de único archivo de Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Componentes de único archivo de Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
 
 Ten en cuenta que no necesitas configurarlos manualmente: cuando [creas una aplicación a través de `create-vite`](./), las plantillas seleccionadas ya las tendrán preconfiguradas.
 

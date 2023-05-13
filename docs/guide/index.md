@@ -22,7 +22,7 @@ La configuración de compilación predeterminada va dirigida a navegadores que a
 
 ## Probar Vite online
 
-Puedes probar Vite online en [StackBlitz](https://vite.new/). Éste ejecuta la configuración de compilación basada en Vite directamente en el navegador, por lo que es casi idéntica a la configuración local pero con la diferencia que no requiere que instales nada en tu máquina. Puedes navegar a `vite.new/{template}` para seleccionar qué marco de trabajo utilizar.
+Puedes probar Vite online en [StackBlitz](https://vite.new/). Este ejecuta la configuración de compilación basada en Vite directamente en el navegador, por lo que es casi idéntica a la configuración local pero con la diferencia que no requiere que instales nada en tu máquina. Puedes navegar a `vite.new/{template}` para seleccionar qué marco de trabajo utilizar.
 
 Los ajustes preestablecidos de plantilla admitidos son:
 
