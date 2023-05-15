@@ -53,9 +53,3 @@ Periódicamente descartamos características que han sido reemplazadas por mejor
 ## Características experimentales
 
 Algunas funciones se marcan como experimentales cuando se lanzan en una versión estable de Vite. Las características experimentales nos permiten recopilar experiencias del mundo real para influir en su diseño final. El objetivo es permitir que los usuarios proporcionen comentarios probándolos en producción. Las características experimentales en sí mismas se consideran inestables y solo deben usarse de manera controlada. Estas funciones pueden cambiar entre versiones menores, por lo que los usuarios deben anclar su versión de Vite cuando se confían en ellas.
-
-## RFC
-
-Muchos cambios, incluidas funciones, correcciones de errores y mejoras en la documentación, se analizan, implementan y revisan a través del flujo de trabajo de discusiones, problemas y solicitudes de incorporación de cambios de GitHub. Para cambios sustanciales que afectarían varios proyectos posteriores, ofrecemos un proceso de solicitud de comentarios (RFC) para ayudar a obtener consenso entre el equipo central de Vite, el ecosistema y la comunidad.
-
-Puedes leer sobre el proceso de RFC en el repositorio [vitejs/rfcs](https://github.com/vitejs/rfcs) en GitHub.

@@ -96,7 +96,7 @@ Si especificas `build.lib`, `build.assetsInlineLimit` se ignorará y los recurso
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
 
-Habilita/deshabilita la división de código CSS. Cuando está habilitado, el CSS importado en fragmentos asíncronos se insertará en el propio fragmento asíncrono y cuando se cargue el fragmento.
+Habilita/deshabilita la división de código CSS. Cuando está habilitado, el CSS importado en fragmentos de Javascript asíncronos se incluirá en el fragmento asíncrono mismo y se insertará cuando se haya cargado.
 
 Si está deshabilitado, todo el CSS de todo el proyecto se extraerá en un único archivo CSS.
 
