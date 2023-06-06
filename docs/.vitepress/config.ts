@@ -141,14 +141,14 @@ export default defineConfig({
             selectText: 'Seleccionar',
             navigateText: 'Cambiar',
             closeText: 'Cerrar',
-            searchByText: 'Buscar proveedor',
+            searchByText: 'Buscado por',
           },
           noResultsScreen: {
             noResultsText: 'No se encontraron resultados relacionados',
             suggestedQueryText: 'Puedes intentar buscar',
             reportMissingResultsText:
               '¿Crees que esta búsqueda debería tener resultados?',
-            reportMissingResultsLinkText: 'Informa un problema',
+            reportMissingResultsLinkText: 'Informar de un problema',
           },
         },
       },
