@@ -110,7 +110,47 @@ export default defineConfig({
       apiKey: 'deaab78bcdfe96b599497d25acc6460e',
       indexName: 'vitejs',
       searchParameters: {
-        facetFilters: ['tags:en'],
+        facetFilters: ['tags:es'],
+      },
+      placeholder: 'Buscar',
+      translations: {
+        button: {
+          buttonText: 'Buscar',
+        },
+
+        modal: {
+          searchBox: {
+            resetButtonTitle: 'Limpiar criterios de búsqueda',
+            resetButtonAriaLabel: 'Limpiar criterios de búsqueda',
+            cancelButtonText: 'Cancelar',
+            cancelButtonAriaLabel: 'Cancelar',
+          },
+          startScreen: {
+            recentSearchesTitle: 'Búsquedas recientes',
+            noRecentSearchesText: 'No hay búsquedas recientes',
+            saveRecentSearchButtonTitle: 'Guardar en búsquedas recientes',
+            removeRecentSearchButtonTitle: 'Eliminar de búsquedas recientes',
+            favoriteSearchesTitle: 'Favoritos',
+            removeFavoriteSearchButtonTitle: 'Eliminar de favoritos',
+          },
+          errorScreen: {
+            titleText: 'No se pueden obtener resultados',
+            helpText: 'Es posible que debas revisar tu conexión de red',
+          },
+          footer: {
+            selectText: 'Seleccionar',
+            navigateText: 'Cambiar',
+            closeText: 'Cerrar',
+            searchByText: 'Buscar proveedor',
+          },
+          noResultsScreen: {
+            noResultsText: 'No se encontraron resultados relacionados',
+            suggestedQueryText: 'Puedes intentar buscar',
+            reportMissingResultsText:
+              '¿Crees que esta búsqueda debería tener resultados?',
+            reportMissingResultsLinkText: 'Informa un problema',
+          },
+        },
       },
     },
 
