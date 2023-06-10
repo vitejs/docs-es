@@ -343,7 +343,7 @@ El hook puede ser asíncrono y puede devolver uno de los siguientes:
 - Un array de objetos de descriptores de etiquetas (`{ tag, attrs, children }`) para inyectarlos en el HTML existente. Cada etiqueta también puede especificar dónde debe inyectarse (por defecto se antepone a `<head>`)
 - Un objeto que contiene ambos como `{ html, tags }`
 
-De forma predeterminada, `order` es `undefined`, con este hook aplicado después de que el html haya sido transformado. Para inyectar un script que debe pasar por el pipeline de los plugins de Vite, `order: 'pre'` aplicará el hook antes de procesar el HTML.
+De forma predeterminada, `order` es `undefined`, con este hook aplicado después de que el html haya sido transformado. Para inyectar un script que debe pasar por el pipeline de los plugins de Vite, `order: 'pre'` aplicará el hook antes de procesar el HTML. `order: 'post'` Aplica el hook después de que se hayan aplicado todos los hooks con `order` sin definir.
 
 **Ejemplo básico:**
 
