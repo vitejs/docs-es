@@ -540,7 +540,7 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-El script del worker también puede usar sentencias `import` en lugar de `importScripts()`; ten en cuenta que durante el desarrollo esto depende del soporte nativo del navegador y actualmente solo funciona en Chrome, pero para la compilación de producción está compilado.
+El script del worker también puede usar sentencias ESM `import` en lugar de `importScripts()`; **Nota**: ten en cuenta que durante el desarrollo esto depende del [soporte nativo del navegador](https://caniuse.com/?search=module%20worker) (actualmente no compatible con Firefox), pero para la compilación de producción está compilado.
 
 De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega el parámetro `inline`:
 
