@@ -110,6 +110,7 @@ Vite también admite [aplicaciones de múltiples páginas](./build#aplicacion-mu
 #### Especificar una raíz alternativa
 
 Ejecutar `vite` inicia el servidor de desarrollo utilizando el directorio de trabajo actual como raíz. Puedes especificar una raíz alternativa con `vite serve some/sub/dir`.
+Ten en cuenta que Vite también resolverá [su archivo de configuración (`vite.config.js`)](/config/#configuring-vite) dentro de la raíz del proyecto, por lo que tendrás que moverlo si se cambia la raíz.
 
 ## Interfaz de línea de comandos
 
