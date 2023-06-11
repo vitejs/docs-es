@@ -98,7 +98,7 @@ vite optimize [root]
 
 ### `vite preview`
 
-Vista previa local de una compilación en producción. No utilices esto como un servidor de producción, ya que no está diseñado para ello.
+Vista previa local de la compilación en producción. No utilices esto como un servidor de producción, ya que no está diseñado para ello.
 
 #### Uso
 
