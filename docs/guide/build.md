@@ -114,7 +114,7 @@ export default defineConfig({
 
 Si especificas una raíz diferente, recuerda que `__dirname` seguirá siendo la carpeta de tu archivo vite.config.js cuando resuelva las rutas de entrada. Por lo tanto, debes agregar tu entrada `raíz` a los argumentos para `resolve`.
 
-Ten en cuenta que para los archivos HTML, Vite ignora el nombre dado a la entrada en el objeto `rollupOptions.input` y en su lugar respeta el id resuelto del archivo al generar el activo HTML en la carpeta dist. Esto asegura una estructura coherente con la forma en que funciona el servidor dev.
+Ten en cuenta que para los archivos HTML, Vite ignora el nombre dado a la entrada en el objeto `rollupOptions.input` y en su lugar respeta el id resuelto del archivo al generar el recurso HTML en la carpeta dist. Esto asegura una estructura coherente con la forma en que funciona el servidor dev.
 
 ## Modo Librería
 
