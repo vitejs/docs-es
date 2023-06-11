@@ -71,7 +71,7 @@ Es importante tener en cuenta que en la API de Vite, el valor de `command` es `s
 
 ## Configuración de funciones asíncronas
 
-Si la configuración necesita llamar a una función asíncrona, puedes exportar una función asíncrona en su lugar:
+Si la configuración necesita llamar a funciones asíncronas, puedes exportar una función asíncrona en su lugar. Y esta función asíncrona puede ser pasada como `defineConfig` para mejorar el soporte intellisense.
 
 ```js
 export default defineConfig(async ({ command, mode }) => {
