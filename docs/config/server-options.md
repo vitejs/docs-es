@@ -236,12 +236,6 @@ async function createServer() {
 createServer()
 ```
 
-## server.base
-
-- **Tipo:** `string | undefined`
-
-  Antepone esta carpeta a las solicitudes http, para usar cuando se haga proxy de vite como una subcarpeta. Debe comenzar con el carácter `/`.
-
 ## server.fs.strict
 
 - **Tipo:** `boolean`
