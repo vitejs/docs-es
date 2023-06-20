@@ -12,7 +12,9 @@ Vite (palabra en francés para "rápido", pronunciado como `/vit/`<button style=
 
 - Un comando de compilación que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar recursos estáticos altamente optimizados para producción.
 
-Vite es dogmático y viene con configuraciones predeterminadas listas para usar, pero también es altamente extensible a través de sus [API de complementos](./api-plugin) y [API de JavaScript](./api-javascript) con soporte completo de tipado.
+Vite es dogmático y viene con configuraciones predeterminadas listas para usar. Lee sobre lo que es posible en la [Guía de características](./features). El soporte para frameworks o la integración con otras herramientas es posible a través de [Plugins](./using-plugins). La [Sección de Configuración](../config/) explica cómo adaptar Vite a tu proyecto si es necesario.
+
+Vite también es altamente extensible a través de su [API de Plugin](./api-plugin) y [API de JavaScript](./api-javascript) con soporte completo de tipos.
 
 Puedes obtener más información sobre la razón de ser del proyecto en la sección [¿Por qué Vite?](./why).
 
