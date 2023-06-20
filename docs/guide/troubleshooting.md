@@ -154,3 +154,14 @@ Si este código se usa dentro de las dependencias, podrías usar [`patch-package
 ### Extensiones del navegador
 
 Algunas extensiones del navegador (como los bloqueadores de anuncios) pueden evitar que el cliente de Vite envíe solicitudes al servidor de desarrollo de Vite. Es posible que veas una pantalla blanca sin errores en este caso. Intenta deshabilitar las extensiones si tienes este problema.
+
+### Enlaces cruzados entre unidades en Windows
+
+Si hay enlaces cruzados entre unidades en tu proyecto en Windows, es posible que Vite no funcione.
+
+Un ejemplo de enlaces cruzados entre unidades son:
+
+- una unidad virtual enlazada a una carpeta mediante el comando `subst`
+- un enlace simbólico/junción a una unidad diferente mediante el comando `mklink` (por ejemplo, la caché global de Yarn)
+
+Issue relacionada: [#10802](https://github.com/vitejs/vite/issues/10802)
