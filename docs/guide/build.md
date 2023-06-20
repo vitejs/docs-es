@@ -60,6 +60,10 @@ export default defineConfig({
 
 Esta estrategia también se proporciona como una factoría `splitVendorChunk({cache: SplitVendorChunkCache})`, en caso de que se necesite una composición con lógica personalizada. Es necesario llamar a `cache.reset()` en `buildStart` para que el modo de visualización de compilación funcione correctamente en este caso.
 
+::: advertencia
+Debes utilizar la función `build.rollupOptions.output.manualChunks` cuando utilices este plugin. Si se utiliza la forma de objeto, el plugin no tendrá ningún efecto.
+:::
+
 ## Recompilar en cambios de archivos
 
 Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch-options) a través de `build.watch`:
