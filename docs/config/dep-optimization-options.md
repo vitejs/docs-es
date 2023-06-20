@@ -65,3 +65,10 @@ La optimización de las dependencias en el modo de compilación es **experimenta
 
 Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disabled: false`. `@rollup/plugin-commonjs` se puede eliminar pasando `build.commonjsOptions: { include: [] }`.
 :::
+
+## optimizeDeps.needsInterop
+
+- **Experimental**
+- **Tipo:** `string[]`
+
+Obliga a la interoperabilidad de ESM al importar estas dependencias. Vite es capaz de detectar correctamente cuándo se necesita la interoperabilidad de una dependencia, por lo que esta opción generalmente no es necesaria. Sin embargo, diferentes combinaciones de dependencias podrían hacer que algunas de ellas se preempaqueten de manera diferente. Agregar estos paquetes a `needsInterop` puede acelerar el inicio en frío evitando recargas completas de página. Recibirás una advertencia si este es el caso para una de tus dependencias, sugiriendo agregar el nombre del paquete a este array en tu configuración.
