@@ -4,7 +4,7 @@ title: Configurando Vite
 
 # Configurando Vite
 
-Al ejecutar `vite` desde la línea de comandos, Vite intentará automáticamente resolver un archivo de configuración llamado `vite.config.js` dentro de la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto).
+Al ejecutar `vite` desde la línea de comandos, Vite intentará automáticamente resolver un archivo de configuración llamado `vite.config.js` dentro de la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto) (también se admiten otras extensiones de JS y TS).
 
 El archivo de configuración más básico se ve así:
 
