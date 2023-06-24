@@ -35,6 +35,16 @@
 
   De forma predeterminada, los paquetes vinculados que no están dentro de `node_modules` no están preempaquetados. Usa esta opción para forzar que un paquete vinculado se empaquete previamente.
 
+**Experimental:** Si utilizas una biblioteca con muchas importaciones profundas, también puede especificar un patrón glob para preagrupar todas las importaciones profundas a la vez. De este modo, se evitará la precarga constante cada vez que se utilice una nueva importación profunda. Por ejemplo:
+
+```js
+export default defineConfig({
+  optimizeDeps: {
+    include: ['my-lib/components/**/*.vue'],
+  },
+})
+```
+
 ## optimizeDeps.esbuildOptions
 
 - **Tipo:** [`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)
