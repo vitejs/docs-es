@@ -289,7 +289,6 @@ createServer()
           // busca la raíz del espacio de trabajo
           searchForWorkspaceRoot(process.cwd()),
           // tus reglas personalizadas
-          '/path/to/custom/allow',
           '/path/to/custom/allow_directory',
           '/path/to/custom/allow_file.demo',
         ],
