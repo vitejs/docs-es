@@ -264,6 +264,10 @@ function mergeConfig(
 
 Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel dentro de la configuración de Vite que se está fusionando. Por ejemplo, configura `false` si estás fusionando dos opciones de `build`.
 
+::: Nota
+`mergeConfig` solo acepta configuraciones en forma de objeto. Si tiene una configuración en forma de callback, deberías de llamarla antes de pasarla a `mergeConfig`.
+:::
+
 ## `searchForWorkspaceRoot`
 
 **Firma de Tipo:**
