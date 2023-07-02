@@ -254,6 +254,24 @@ import otherStyles from './bar.css?inline' // no se inyectará
 Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) están en desuso desde Vite 4. Utiliza la línea `?inline` en su lugar.
 :::
 
+### Lightning CSS
+
+A partir de la versión 4.4 de Vite, existe soporte experimental para [Lightning CSS](https://lightningcss.dev/). Puedes utilizarlo añadiendo [`css.transformer: 'lightningcss'`](../config/shared-options.md#css-transformer) a tu archivo de configuración y luego instalando la dependencia opcional [`lightningcss`](https://www.npmjs.com/package/lightningcss):
+
+```bash
+npm add -D lightningcss
+```
+
+Si se habilita, los archivos CSS se procesarán con Lightning CSS en lugar de PostCSS. Para configurarlo, puedes pasar las opciones Lightning CSS a la opción de configuración [`css.lightningcss`](../config/shared-options.md#css-lightningcss).
+
+Para configurar CSS Modules, debes utilizar [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) en lugar de [`css.modules`](../config/shared-options.md#css-modules) (que configura la forma en que PostCSS maneja los módulos de CSS).
+
+Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#css-minify).
+
+::: tip NOTA
+Los [preprocesadores de CSS](#css-pre-processors) no son compatibles cuando se utiliza Lightning CSS.
+:::
+
 ## Recursos estáticos
 
 La importación de un recurso estático devolverá la URL pública resuelta cuando se sirva:

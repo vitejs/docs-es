@@ -210,6 +210,8 @@
 
   Configura el comportamiento de los módulos CSS. Las opciones se pasan a [postcss-modules](https://github.com/css-modules/postcss-modules).
 
+Esta opción no tiene ningún efecto cuando se utiliza [Lightning CSS](../guide/features.md#lightning-css). Si está habilitada, se debe usar [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) en su lugar.
+
 ## css.postcss
 
 - **Tipo:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
@@ -263,6 +265,46 @@
 - **Por defecto:** `false`
 
   Habilita los mapas de origen durante el desarrollo.
+
+## css.transformer
+
+- **Experimental**
+- **Type:** `'postcss' | 'lightningcss'`
+- **Default:** `'postcss'`
+
+Selecciona el motor utilizado para el procesamiento de CSS. Consulta [Lightning CSS](../guide/features.md#lightning-css) para obtener más información.
+
+## css.lightningcss
+
+- **Experimental**
+- **Type:**
+
+```js
+import type {
+  CSSModulesConfig,
+  Drafts,
+  Features,
+  NonStandard,
+  PseudoClasses,
+  Targets,
+} from 'lightningcss'
+```
+
+```js
+{
+  targets?: Targets
+  include?: Features
+  exclude?: Features
+  drafts?: Drafts
+  nonStandard?: NonStandard
+  pseudoClasses?: PseudoClasses
+  unusedSymbols?: string[]
+  cssModules?: CSSModulesConfig,
+  // ...
+}
+```
+
+Configura Lightning CSS. Todas las opciones de transformación completas se pueden encontrar en [el repositorio de Lightning CSS](https://github.com/parcel-bundler/lightningcss/blob/master/node/index.d.ts).
 
 ## json.namedExports
 
