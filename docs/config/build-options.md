@@ -117,10 +117,10 @@ En este caso, debes configurar `build.cssTarget` en `chrome61` para evitar que v
 
 ## build.cssMinify
 
-- **Tipo:** `boolean`
+- **Tipo:** `boolean | 'esbuild' | 'lightningcss'`
 - **Por defecto:** lo mismo que [`build.minify`](#build-minify)
 
-Esta opción permite a los usuarios configurar la minificación de CSS específicamente en vez de usar por defecto `build.minify`, así se podrá trabajar la minificación para JS y CSS por separado. Vite usa `esbuild` para minimizar CSS.
+Esta opción permite a los usuarios configurar la minificación de CSS específicamente en vez de usar por defecto `build.minify`, así se podrá trabajar la minificación para JS y CSS por separado. Vite usa `esbuild` por defecto para minimizar CSS. Establece la opción ' `'lightningcss'` para usar [Lightning CSS](https://lightningcss.dev/minification.html) en su lugar. Si se selecciona, se puede configurar utilizando [`css.lightningcss`](./shared-options.md#css-lightningcss).
 
 ## build.sourcemap
 
