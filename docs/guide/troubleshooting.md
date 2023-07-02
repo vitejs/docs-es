@@ -15,6 +15,23 @@ Necesitarás:
 - Cambiar a otro gestor de paquetes (por ejemplo, `pnpm`, `yarn`)
 - Eliminar `&` de la ruta a tu proyecto
 
+## Configuración
+
+### Este paquete es solo ESM
+
+Cuando se importa un paquete solo ESM con `require`, ocurre el siguiente error:
+
+> No se pudo resolver "foo". Este paquete es solo ESM pero se intentó cargar con `require`.
+
+> "foo" se resolvió como un archivo ESM. Los archivos ESM no se pueden cargar con require.
+
+Los archivos ESM no se pueden cargar mediante [`require`](<https://nodejs.org/docs/latest-v18.x/api/esm.html#require:~:text=Using%20require%20to%20load%20an%20ES%20module%20is%20not%20supported%20because%20ES%20modules%20have%20asynchronous%20execution.%20Instead%2C%20use%20import()%20to%20load%20an%20ES%20module%20from%20a%20CommonJS%20module.>).
+
+Recomendamos convertir tu configuración a ESM siguiendo una de estas opciones:
+
+- Añade `"type": "module"` al archivo `package.json` más cercano.
+- Renombra `vite.config.js`/`vite.config.ts` a `vite.config.mjs`/`vite.config.mts`
+
 ## Servidor de desarrollo
 
 ### Las solicitudes se congelan para siempre
