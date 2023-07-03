@@ -36,6 +36,7 @@ Los ajustes preestablecidos de plantilla admitidos son:
 |  [preact](https://vite.new/preact)  |  [preact-ts](https://vite.new/preact-ts)  |
 |     [lit](https://vite.new/lit)     |     [lit-ts](https://vite.new/lit-ts)     |
 |  [svelte](https://vite.new/svelte)  |  [svelte-ts](https://vite.new/svelte-ts)  |
+|   [solid](https://vite.new/solid)   |   [solid-ts](https://vite.new/solid-ts)   |
 
 ## Monta tu primer proyecto Vite
 
@@ -79,7 +80,7 @@ yarn create vite my-vue-app --template vue
 pnpm create vite my-vue-app --template vue
 ```
 
-Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`.
+Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`.
 
 ## Plantillas de la comunidad
 
