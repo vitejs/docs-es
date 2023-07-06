@@ -1,6 +1,6 @@
 # Guía de contribución de Vite
 
-¡Hola! Estamos muy emocionados de que estés interesado en contribuir con Vite. Antes de enviar tu contribución, tómate un momento para leer la siguiente guía:
+¡Hola! Estamos muy emocionados de que estés interesado en contribuir con Vite. Antes de enviar tu contribución, tómate un momento para leer la siguiente guía. También te sugerimos que leas la [Filosofía del Proyecto](https://vitejs.dev/guide/philosophy) en nuestra documentación.
 
 ## Configuración del repositorio
 
