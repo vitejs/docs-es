@@ -64,7 +64,7 @@ export default defineConfig({
 
 ## optimizeDeps.disabled
 
-- **Experimental**
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13839)
 - **Tipo:** `boolean | 'build' | 'dev'`
 - **Por defecto:** `'build'`
 
