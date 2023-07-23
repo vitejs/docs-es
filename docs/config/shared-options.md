@@ -260,7 +260,7 @@ Esta opción no tiene ningún efecto cuando se utiliza [Lightning CSS](../guide/
 
 ## css.devSourcemap
 
-- **Experimental**
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13845)
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
 
@@ -268,7 +268,7 @@ Esta opción no tiene ningún efecto cuando se utiliza [Lightning CSS](../guide/
 
 ## css.transformer
 
-- **Experimental**
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)
 - **Type:** `'postcss' | 'lightningcss'`
 - **Default:** `'postcss'`
 
@@ -276,7 +276,7 @@ Selecciona el motor utilizado para el procesamiento de CSS. Consulta [Lightning 
 
 ## css.lightningcss
 
-- **Experimental**
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)
 - **Type:**
 
 ```js

@@ -23,7 +23,7 @@
 
 ## ssr.format
 
-- **Experimental**
+- **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vitejs/vite/discussions/13816)
 - **Tipo:** `'esm' | 'cjs'`
 - **Por defecto:** `esm`
 
