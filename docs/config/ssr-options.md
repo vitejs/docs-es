@@ -23,7 +23,8 @@
 
 ## ssr.format
 
-- **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vitejs/vite/discussions/13816)
+- **Experimental**
+- **Obsoleto** Solo se admitirá salidas en ESM a partir de Vite 5.
 - **Tipo:** `'esm' | 'cjs'`
 - **Por defecto:** `esm`
 
