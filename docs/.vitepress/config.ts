@@ -168,7 +168,8 @@ export default defineConfig({
 
     footer: {
       message: `Publicado bajo licencia MIT. (${commitRef})`,
-      copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
+      copyright:
+        'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
     },
 
     nav: [
@@ -205,6 +206,10 @@ export default defineConfig({
               {
                 text: 'Lista de Cambios',
                 link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+              },
+              {
+                text: 'Contribución',
+                link: 'https://github.com/vitejs/docs-es/blob/main/CONTRIBUTING.md',
               },
             ],
           },

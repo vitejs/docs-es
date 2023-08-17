@@ -42,26 +42,24 @@ Los ajustes preestablecidos de plantilla admitidos son:
 ## Monta tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) versión 14.18+, y 16+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+Vite requiere [Node.js](https://nodejs.org/en/) version 18+. 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
 :::
 
-Con NPM:
+::: code-group
 
-```bash
+```bash [NPM]
 $ npm create vite@latest
 ```
 
-Con Yarn:
-
-```bash
+```bash [Yarn]
 $ yarn create vite
 ```
 
-Con PNPM:
-
-```bash
+```bash [PNPM]
 $ pnpm create vite
 ```
+
+:::
 
 ¡Entonces sigue las instrucciones!
 

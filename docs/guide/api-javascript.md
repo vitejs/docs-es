@@ -199,15 +199,7 @@ import { preview } from 'vite'
 ## `PreviewServer`
 
 ```ts
-interface PreviewServer extends PreviewServerForHook {
-  resolvedUrls: ResolvedServerUrls
-}
-```
-
-## `PreviewServerForHook`
-
-```ts
-interface PreviewServerForHook {
+interface PreviewServer
   /**
    * El objeto de configuración de vite resuelto
    */
@@ -226,7 +218,8 @@ interface PreviewServerForHook {
    */
   httpServer: http.Server
   /**
-   * Las URL resueltas que Vite imprime en la CLI
+   * Las URL resueltas que Vite imprime en la CLI.
+   * null antes de que el servidor esté escuchando.
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
