@@ -82,7 +82,7 @@ interface ViteDevServer {
    */
   ws: WebSocketServer
   /**
-   * Contenedor de plugins de Rollup que puede ejecutar hooks de plugins en un archivo dado.
+   * Contenedor de complementos de Rollup que puede ejecutar hooks de complementos en un archivo dado.
    */
   pluginContainer: PluginContainer
   /**
