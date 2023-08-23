@@ -29,7 +29,7 @@ vite [root]
 | `--force`                | Fuerza al optimizador a ignorar el caché y vuelve a empaquetar (`boolean`)                                                                               |
 | `-c, --config <file>`    | Usa el archivo de configuración especificado (`string`)                                                                                                  |
 | `--base <path>`          | Ruta base pública (por defecto: `/`) (`string`)                                                                                                          |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)                                                                                                               |
+| `-l, --logLevel <level>` | info \| warn \| error \| silent (`string`)                                                                                                               |
 | `--clearScreen`          | Habilita/deshabilita limpiar pantalla al registrar nuevos logs (`boolean`)                                                                               |
 | `--profile`              | Inicia el inspector de Node.js incorporado (ver los [cuellos de botella en el rendimiento](/guide/troubleshooting#cuellos-de-botella-en-el-rendimiento)) |
 | `-d, --debug [feat]`     | Muestra registros de depuración (`string \| boolean`)                                                                                                    |
@@ -68,7 +68,7 @@ vite build [root]
 | `-w, --watch`                  | Recompila cuando los módulos han cambiado en el disco(`boolean`)                                                                                         |
 | `-c, --config <file>`          | Usa el archivo de configuración especificado(`string`)                                                                                                   |
 | `--base <path>`                | Ruta base pública (por defecto: `/`) (`string`)                                                                                                          |
-| `-l, --logLevel <level>`       | Info \| warn \| error \| silent (`string`)                                                                                                               |
+| `-l, --logLevel <level>`       | info \| warn \| error \| silent (`string`)                                                                                                               |
 | `--clearScreen`                | Habilita/deshabilita limpiar pantalla al registrar nuevos logs (`boolean`)                                                                               |
 | `--profile`                    | Inicia el inspector de Node.js incorporado (ver los [cuellos de botella en el rendimiento](/guide/troubleshooting#cuellos-de-botella-en-el-rendimiento)) |
 | `-d, --debug [feat]`           | Muestra registros de depuración (`string \| boolean`)                                                                                                    |
@@ -95,7 +95,7 @@ vite optimize [root]
 | `--force`                | Fuerza al optimizador a ignorar el caché y vuelve a empaquetar (`boolean`) |
 | `-c, --config <file>`    | Usa el archivo de configuración especificado (`string`)                    |
 | `--base <path>`          | Ruta base pública (por defecto: `/`) (`string`)                            |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)                                 |
+| `-l, --logLevel <level>` | info \| warn \| error \| silent (`string`)                                 |
 | `--clearScreen`          | Habilita/deshabilita limpiar pantalla al registrar nuevos logs (`boolean`) |
 | `-d, --debug [feat]`     | Muestra registros de depuración (`string \| boolean`)                      |
 | `-f, --filter <filter>`  | Filtra registros de depuración (`string`)                                  |
@@ -124,7 +124,7 @@ vite preview [root]
 | `--outDir <dir>`         | Directorio de salida (por defecto: `dist`)(`string`)                       |
 | `-c, --config <file>`    | Usa el archivo de configuración especificado (`string`)                    |
 | `--base <path>`          | Ruta base pública (por defecto: `/`) (`string`)                            |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)                                 |
+| `-l, --logLevel <level>` | info \| warn \| error \| silent (`string`)                                 |
 | `--clearScreen`          | Habilita/deshabilita limpiar pantalla al registrar nuevos logs (`boolean`) |
 | `-d, --debug [feat]`     | Muestra registros de depuración (`string \| boolean`)                      |
 | `-f, --filter <filter>`  | Filtra registros de depuración (`string`)                                  |

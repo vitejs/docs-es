@@ -259,6 +259,15 @@ Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel 
 
 ::: Nota
 `mergeConfig` solo acepta configuraciones en forma de objeto. Si tiene una configuración en forma de callback, deberías de llamarla antes de pasarla a `mergeConfig`.
+
+Puedes utilizar el helper `defineConfig` para juntar una configuración en forma de callback con otra configuración:
+
+```ts
+export default defineConfig((configEnv) =>
+  mergeConfig(configAsCallback(configEnv), configAsObject),
+)
+```
+
 :::
 
 ## `searchForWorkspaceRoot`

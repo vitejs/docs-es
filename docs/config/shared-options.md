@@ -326,7 +326,7 @@ Configura Lightning CSS. Todas las opciones de transformación completas se pued
 
 - **Tipo:** `ESBuildOptions | false`
 
-  `ESBuildOptions` amplía [las opciones de transformación propias de esbuild](https://esbuild.github.io/api/#transform-api). El caso de uso más común es personalizar JSX:
+  `ESBuildOptions` amplía [las opciones de transformación propias de esbuild](https://esbuild.github.io/api/#transform). El caso de uso más común es personalizar JSX:
 
   ```js
   export default defineConfig({
