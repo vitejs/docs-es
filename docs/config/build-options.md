@@ -216,6 +216,8 @@ De forma predeterminada, Vite vaciará `outDir` en la compilación si está dent
 
 ## build.copyPublicDir
 
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13807)
+
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
 
