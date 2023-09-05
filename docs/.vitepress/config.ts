@@ -106,6 +106,7 @@ export default defineConfig({
       { icon: 'discord', link: 'https://chat.vitejs.dev' },
       { icon: 'github', link: 'https://github.com/vitejs/vite' },
     ],
+    darkModeSwitchLabel: 'Apariencia',
     algolia: {
       appId: '7H67QR5P0A',
       apiKey: 'deaab78bcdfe96b599497d25acc6460e',
@@ -168,7 +169,8 @@ export default defineConfig({
 
     footer: {
       message: `Publicado bajo licencia MIT. (${commitRef})`,
-      copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
+      copyright:
+        'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
     },
 
     nav: [
@@ -205,6 +207,10 @@ export default defineConfig({
               {
                 text: 'Lista de Cambios',
                 link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+              },
+              {
+                text: 'Contribución',
+                link: 'https://github.com/vitejs/docs-es/blob/main/CONTRIBUTING.md',
               },
             ],
           },

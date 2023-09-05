@@ -331,3 +331,11 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
 
 También puedes agregar un [dominio personalizado](https://render.com/docs/custom-domains) a tu proyecto.
+
+## Flightcontrol
+
+Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
+
+## AWS Amplify Hosting
+
+Despliega tu sitio estático mediante [AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/), siguiendo estas [instrucciones](https://docs.amplify.aws/guides/hosting/vite/q/plataforma/js/).

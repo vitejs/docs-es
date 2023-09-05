@@ -144,6 +144,30 @@ Debes acceder al archivo con el protocolo `http`. La forma más fácil de lograr
 
 La clave hash utilizada para invalidar las dependencias optimizadas depende del contenido del package lock, los parches aplicados a las dependencias y las opciones en el archivo de configuración de Vite que afecta el empaquetado de módulos de Node. Esto significa que Vite detectará cuándo se invalida una dependencia mediante una característica como [invalidaciones de npm](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides), y volverá a empaquetar las dependencias en el próximo inicio del servidor. Vite no invalidará las dependencias cuando utilices una función como [npm link](https://docs.npmjs.com/cli/v9/commands/npm-link). En caso de que vincules o desvincules una dependencia, deberás forzar la reoptimización en el próximo inicio del servidor usando `vite --force`. En su lugar, recomendamos usar invalidaciones, que ahora son compatibles con todos los gestores de paquetes (consulta también [invalidaciones de pnpm](https://pnpm.io/package_json#pnpmoverrides) y [resoluciones de yarn](https://yarnpkg.com/configuration/manifest/#resolutions)).
 
+## Cuellos de botella en el rendimiento
+
+Si sufres cuellos de botella en el rendimiento de la aplicación que resultan en tiempos de carga lentos, puedes iniciar el inspector integrado de Node.js con tu servidor de desarrollo de Vite o al compilar tu aplicación para crear el perfil de la CPU:
+
+::: code-group
+
+```bash [dev server]
+vite --profile --open
+```
+
+```bash [build]
+vite build --profile
+```
+
+:::
+
+::: tip Servidor de desarrollo de Vite
+Una vez que la aplicación se abra en el navegador, simplemente espera a que termine de cargar y luego regresa a la terminal y presiona la tecla `p` (detendrá el inspector de Node.js), luego presiona la tecla `q` para detener el servidor de desarrollo.
+:::
+
+El inspector de Node.js generará `vite-profile-0.cpuprofile` en la carpeta raíz, ve a https://www.speedscope.app/ y sube el perfil de la CPU usando el botón `BROWSE` para inspeccionar el resultado.
+
+Puedes instalar [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect), que te permite inspeccionar el estado intermedio de los complementos de Vite y también puede ayudarte a identificar qué complementos o middlewares están generando el cuello de botella en tus aplicaciones. El complemento se puede usar tanto en modo de desarrollo como compilado. Consulta el archivo readme para obtener más detalles.
+
 ## Otros
 
 ### Módulo externalizado para compatibilidad con navegadores

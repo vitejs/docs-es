@@ -1,3 +1,7 @@
+---
+outline: [2, 3]
+---
+
 # Gestión de recursos estáticos
 
 - Relacionado: [Ruta base pública](./build#ruta-base-publica)

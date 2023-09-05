@@ -309,9 +309,9 @@ Los complementos de Vite también pueden proporcionar hooks que sirven para prop
 
 ### `configurePreviewServer`
 
-- **Tipo:** `(server: PreviewServerForHook) => (() => void) | void | Promise<(() => void) | void>`
+- **Tipo:** `(server: PreviewServer) => (() => void) | void | Promise<(() => void) | void>`
 - **Clase:** `async`, `sequential`
-- **Ver también:** [PreviewServerForHook](./api-javascript#previewserverforhook)
+- **Ver también:** [PreviewServer](./api-javascript#previewserver)
 
   Tal como [`configureServer`](/guide/api-plugin.html#configureserver) pero para el servidor de vista previa. De manera similar a `configureServer`, el hook `configurePreviewServer` se llama antes de que se instalen otros middlewares. Si deseas inyectar un middleware **después** de otros middlewares, puede devolver una función desde `configurePreviewServer`, que se llamará después de que se instalen los middlewares internos:
 

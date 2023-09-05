@@ -82,7 +82,7 @@ interface ViteDevServer {
    */
   ws: WebSocketServer
   /**
-   * Contenedor de plugins de Rollup que puede ejecutar hooks de plugins en un archivo dado.
+   * Contenedor de complementos de Rollup que puede ejecutar hooks de complementos en un archivo dado.
    */
   pluginContainer: PluginContainer
   /**
@@ -199,15 +199,7 @@ import { preview } from 'vite'
 ## `PreviewServer`
 
 ```ts
-interface PreviewServer extends PreviewServerForHook {
-  resolvedUrls: ResolvedServerUrls
-}
-```
-
-## `PreviewServerForHook`
-
-```ts
-interface PreviewServerForHook {
+interface PreviewServer
   /**
    * El objeto de configuración de vite resuelto
    */
@@ -226,7 +218,8 @@ interface PreviewServerForHook {
    */
   httpServer: http.Server
   /**
-   * Las URL resueltas que Vite imprime en la CLI
+   * Las URL resueltas que Vite imprime en la CLI.
+   * null antes de que el servidor esté escuchando.
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
@@ -266,6 +259,15 @@ Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel 
 
 ::: Nota
 `mergeConfig` solo acepta configuraciones en forma de objeto. Si tiene una configuración en forma de callback, deberías de llamarla antes de pasarla a `mergeConfig`.
+
+Puedes utilizar el helper `defineConfig` para juntar una configuración en forma de callback con otra configuración:
+
+```ts
+export default defineConfig((configEnv) =>
+  mergeConfig(configAsCallback(configEnv), configAsObject),
+)
+```
+
 :::
 
 ## `searchForWorkspaceRoot`
