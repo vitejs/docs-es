@@ -170,8 +170,8 @@ Ejecutar `vite build` con esta configuración utiliza un ajuste preestablecido d
 ```
 $ vite build
 building for production...
-dist/my-lib.js      0.08 KiB / gzip: 0.07 KiB
-dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
+dist/my-lib.js      0.08 kB / gzip: 0.07 kB
+dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 ```
 
 `package.json` recomendado para tu librería

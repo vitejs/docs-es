@@ -83,7 +83,7 @@ Especifica el directorio en el que se alojarán los recursos generados (en relac
 ## build.assetsInlineLimit
 
 - **Tipo:** `number`
-- **Por defecto:** `4096` (4kb)
+- **Por defecto:** `4096` (4KiB)
 
 Los recursos importados o a los que se hace referencia que son más pequeños que este umbral se insertarán como URL base64 para evitar solicitudes http adicionales. Configurar en `0` para deshabilitar la inserción por completo.
 
@@ -234,7 +234,7 @@ Habilita/deshabilita los informes de tamaño comprimido con gzip. La compresión
 - **Tipo:** `number`
 - **Por defecto:** `500`
 
-Límite para advertencias de tamaño de fragmento (en kbs). Se compara con el tamaño del fragmento sin comprimir, ya que [el tamaño de JavaScript en sí está relacionado con el tiempo de ejecución](https://v8.dev/blog/cost-of-javascript-2019).
+Límite para advertencias de tamaño de fragmento (en kB). Se compara con el tamaño del fragmento sin comprimir, ya que [el tamaño de JavaScript en sí está relacionado con el tiempo de ejecución](https://v8.dev/blog/cost-of-javascript-2019).
 
 ## build.watch
 
