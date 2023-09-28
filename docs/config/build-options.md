@@ -161,7 +161,7 @@ Compilar como una librería. Se requiere `entry` ya que la librería no puede us
 - **Por defecto:** `false`
 - **Relacionado:** [Integración del backend](/guide/backend-integration)
 
-Cuando se coloca en `true`, la compilación también generará un archivo `manifest.json` que contiene una asignación de nombres de archivo de recursos sin hash a sus versiones hash, que luego puede ser utilizado por un marco de trabajo orientado a servidor para representar los enlaces de recursos correctos.
+Cuando se coloca en `true`, la compilación también generará un archivo `.vite/manifest.json` que contiene una asignación de nombres de archivo de recursos sin hash a sus versiones hash, que luego puede ser utilizado por un marco de trabajo orientado a servidor para representar los enlaces de recursos correctos.
 
 ## build.ssrManifest
 
@@ -178,6 +178,13 @@ Cuando se coloca en `true`, la compilación también generará un manifiesto SSR
 - **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
 Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rollupOptions.input`.
+
+## build.ssrEmitAssets
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+
+Durante la compilación de SSR, los recursos estáticos no se emiten, ya que se supone que se emitirán como parte de la compilación del cliente. Esta opción permite que los frameworks fuercen su emisión tanto en el cliente como en la compilación SSR. Es responsabilidad del framework fusionar los recursos con un paso posterior a la compilación.
 
 ## build.minify
 

@@ -214,7 +214,7 @@ O, si expones múltiples puntos de entrada:
 }
 ```
 
-:::tip Nota
+:::tip Extensiones de archivo
 Si `package.json` no contiene `"type": "module"`, Vite generará diferentes extensiones de archivo para compatibilidad con Node.js. `.js` se convertirá en `.mjs` y `.cjs` se convertirá en `.js`.
 :::
 
@@ -222,9 +222,13 @@ Si `package.json` no contiene `"type": "module"`, Vite generará diferentes exte
 En el modo librería, todo uso de `import.meta.env.*` se reemplaza estáticamente cuando se compila para producción. Sin embargo, esto no ocurre para `process.env.*`, por lo que los usuarios que usan la librería pueden cambiarlo dinámicamente. Si esto no es lo que deseas, puedes usar `define: { 'process.env.NODE_ENV': '"production"' }` por ejemplo para reemplazarlos estáticamente.
 :::
 
+:::warning Uso avanzado
+El modo librería incluye una configuración simple y pragmática para librerías de frameworks Javascript y orientadas al navegador. Si estás creando librerías que no son de navegador o necesitas flujos de compilación avanzados, puedes usar [Rollup](https://rollupjs.org) o [esbuild](https://esbuild.github.io) directamente.
+:::
+
 ## Opciones avanzadas para Base
 
-::: warning
+:::warning Nota
 Esta característica es experimental. [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13834).
 :::
 

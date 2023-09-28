@@ -173,26 +173,17 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 ## server.watch
 
-- **Tipo:** `object`
+- **Tipo:** `object | null`
 
-  Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
+Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
 
-  El observador del servidor Vite omite los directorios `.git/` y `node_modules/` de forma predeterminada. Si deseas ver un paquete dentro de `node_modules/`, puede pasar un patrón global negado a `server.watch.ignored`. Es decir:
+El observador del servidor Vite observa el `root` y omite los directorios `.git/` y `node_modules/` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
-  ```js
-  export default defineConfig({
-    server: {
-      watch: {
-        ignored: ['!**/node_modules/your-package-name/**'],
-      },
-    },
-    // El paquete observado debe excluirse de la optimización,
-    // para que pueda aparecer en el gráfico de dependencia y activar hot reload.
-    optimizeDeps: {
-      exclude: ['your-package-name'],
-    },
-  })
-  ```
+Si se configura en `null`, no se observará ningún archivo. `server.watcher` proporcionará un emisor de eventos compatible, pero invocar a `add` o `unwatch` no tendrá ningún efecto.
+
+::: warning Observando archivos en `node_modules`
+Actualmente no es posible ver archivos y paquetes en `node_modules`. Para obtener más avances y soluciones alternativas, puede seguir la [propuesta #8619](https://github.com/vitejs/vite/issues/8619).
+:::
 
 ::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
 

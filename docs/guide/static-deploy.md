@@ -218,7 +218,7 @@ Obtén más información sobre [Integración Git](https://vercel.com/docs/concep
 1. Instala la [CLI de Wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/).
 2. Autenticate a Wrangler con tu cuenta de Cloudflare usando `wrangler login`.
 3. Ejecuta tu comando de compilación.
-4. Despliega usando `npx wrangler pages publish dist`.
+4. Despliega usando `npx wrangler pages deploy dist`.
 
 ```bash
 # Instala la CLI de Wrangler

@@ -1,7 +1,3 @@
----
-outline: [2, 3]
----
-
 # Preempaquetado de dependencias
 
 Cuando ejecutas `vite` por primera vez, Vite preempaqueta las dependencias de tu proyecto antes de cargar tu sitio localmente. Se realiza de forma automática y transparente por defecto.

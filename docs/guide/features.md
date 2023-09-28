@@ -176,7 +176,7 @@ export default defineConfig({
 
 ## CSS
 
-La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR. También puedes obtener el CSS procesado como una cadena o como exportación predeterminada del módulo.
+La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR.
 
 ### Incrustación y rebase de `@import`
 
@@ -251,7 +251,7 @@ import otherStyles from './bar.css?inline' // no se inyectará
 ```
 
 ::: tip NOTA
-Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) están en desuso desde Vite 4. Utiliza la línea `?inline` en su lugar.
+Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) se eliminaron desde Vite 5. Utiliza la línea `?inline` en su lugar.
 :::
 
 ### Lightning CSS

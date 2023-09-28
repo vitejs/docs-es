@@ -1,7 +1,3 @@
----
-outline: [2, 3]
----
-
 # Interfaz de línea de comando
 
 ## Servidor de desarrollo

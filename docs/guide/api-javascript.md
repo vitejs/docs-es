@@ -29,6 +29,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
   await server.listen()
 
   server.printUrls()
+  server.bindCLIShortcuts({ print: true })
 })()
 ```
 
@@ -73,8 +74,8 @@ interface ViteDevServer {
    */
   httpServer: http.Server | null
   /**
-   * Instancia de observador Chokidar.
-   * https://github.com/paulmillr/chokidar#api
+   * Instancia de observador de Chokidar. Si `config.server.watch` está configurado como `null`,
+   * devuelve un emisor de eventos sin referencia.
    */
   watcher: FSWatcher
   /**
@@ -137,6 +138,10 @@ interface ViteDevServer {
    * Detiene el servidor.
    */
   close(): Promise<void>
+  /**
+   * Vincula atajos de línea de comando
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<ViteDevServer>): void
 }
 ```
 
@@ -193,6 +198,7 @@ import { preview } from 'vite'
   })
 
   previewServer.printUrls()
+  previewServer.bindCLIShortcuts({ print: true })
 })()
 ```
 
@@ -226,6 +232,10 @@ interface PreviewServer
    * Imprime las URL del servidor
    */
   printUrls(): void
+  /**
+   * Vincula atajos de línea de comando
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<PreviewServer>): void
 }
 ```
 

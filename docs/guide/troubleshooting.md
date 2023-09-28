@@ -4,6 +4,36 @@ Consulta la [guía de solución de problemas de Rollup](https://rollupjs.org/tro
 
 Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vitejs/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vitejs.dev).
 
+## CJS
+
+### API de Node para la compilación CJS de Vite, ahora obsoleto
+
+La compilación CJS de la API de Node de Vite está obsoleta y se eliminará en Vite 6. Consulta la [discusión de GitHub](https://github.com/vitejs/vite/discussions/13928) correspondiente para obtener más contexto. En su lugar, debes actualizar tus archivos o frameworks para importar la compilación ESM de Vite.
+
+En un proyecto básico de Vite, asegúrate que:
+
+1. El contenido del archivo `vite.config.js` utiliza la sintaxis ESM.
+2. El archivo `package.json` más cercano tiene `"type": "module"`, o usa la extensión `.mjs`, por ejemplo, `vite.config.mjs`.
+
+Para otros proyectos, existen algunos enfoques generales:
+
+- **Configura ESM como predeterminado, optar por CJS si es necesario:** Agrega `"type": "module"` en el
+  `package.json` del proyecto. Todos los archivos `*.js` ahora se interpretan como ESM y deben utilizar la sintaxis de ESM. Puedes cambiar el nombre de un archivo con la extensión `.cjs` para seguir usando CJS.
+- **Mantén CJS como predeterminado, optar por ESM si es necesario:** Si el `package.json` del proyecto no tiene `"type": "module"`, todos los archivos `*.js` se interpretan como CJS. Puedes cambiar el nombre de un archivo con la extensión `.mjs` para usar ESM en su lugar.
+- **Importar Vite dinámicamente:** Si necesitas seguir usando CJS, puedes importar Vite dinámicamente usando `import('vite')` en su lugar. Esto requiere que tu código esté escrito en un contexto "asíncrono", pero aún así debería ser manejable ya que la API de Vite es en su mayoría asíncrona.
+
+Si no estás seguro de dónde proviene la advertencia, puedes ejecutar el script con el indicador `VITE_CJS_TRACE=true` para registrar el seguimiento de la pila:
+
+```bash
+VITE_CJS_TRACE=true vite dev
+```
+
+Si deseas ignorar temporalmente la advertencia, puedes ejecutar el script con el indicador `VITE_CJS_IGNORE_WARNING=true`:
+
+```bash
+VITE_CJS_IGNORE_WARNING=true vite dev
+```
+
 ## CLI
 
 ### `Error: No se puede encontrar el módulo 'C:\foo\bar&baz\vite\bin\vite.js'`
