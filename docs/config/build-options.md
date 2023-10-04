@@ -207,6 +207,8 @@ npm add -D terser
 
 [Opciones de minimización](https://terser.org/docs/api-reference#minify-options) adicionales para pasar a Terser.
 
+Además, también puedes pasar una opción `maxWorkers: number` para especificar el número máximo de workers que se generarán. El valor predeterminado es el número de CPU menos 1.
+
 ## build.write
 
 - **Tipo:** `boolean`

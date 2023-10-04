@@ -288,7 +288,15 @@ export default defineConfig({
               link: '/guide/philosophy',
             },
             {
+              text: 'Migración desde v2',
+              link: '/guide/migration-v2-to-v3',
+            },
+            {
               text: 'Migración desde v3',
+              link: '/guide/migration-v3-to-v4',
+            },
+            {
+              text: 'Migración desde v4',
               link: '/guide/migration',
             },
           ],
