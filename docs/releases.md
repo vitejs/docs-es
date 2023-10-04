@@ -48,7 +48,7 @@ Los lanzamientos preliminares permiten a los primeros usuarios y mantenedores de
 
 ## Obsolencias
 
-Periódicamente descartamos características que han sido reemplazadas por mejores alternativas en versiones menores. Las funciones obsoletas seguirán funcionando con un advertencia de tipo o registrada. Se eliminarán en la próxima versión principal después de entrar en estado obsoleto. La [Guía de migración](https://vitejs.dev/guide/migration.html) para cada versión principal enumerará estas eliminaciones y documentará una ruta de actualización para ellas.
+Periódicamente descartamos características que han sido reemplazadas por mejores alternativas en versiones menores. Las funciones obsoletas seguirán funcionando con un advertencia de tipo o registrada. Se eliminarán en la próxima versión principal después de entrar en estado obsoleto. La [Guía de migración](/guide/migration.html) para cada versión principal enumerará estas eliminaciones y documentará una ruta de actualización para ellas.
 
 ## Características experimentales
 
