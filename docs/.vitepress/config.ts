@@ -49,10 +49,10 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
       ]
     case 'release':
       return [
-        {
-          text: 'Documentación de Vite 3',
-          link: 'https://es.vitejs.dev',
-        },
+        // {
+        //   text: 'Documentación de Vite 3',
+        //   link: 'https://es.vitejs.dev',
+        // },
         {
           text: 'Documentación de Vite 2',
           link: 'https://v2.vitejs.dev',
