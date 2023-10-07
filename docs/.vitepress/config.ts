@@ -33,26 +33,8 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   switch (deployType) {
     case 'main':
     case 'local':
-      return [
-        {
-          text: 'Documentación de Vite 4 (Producción)',
-          link: 'https://es.vitejs.dev',
-        },
-        {
-          text: 'Documentación de Vite 3',
-          link: 'https://es.vitejs.dev',
-        },
-        {
-          text: 'Documentación de Vite 2',
-          link: 'https://v2.vitejs.dev',
-        },
-      ]
     case 'release':
       return [
-        // {
-        //   text: 'Documentación de Vite 3',
-        //   link: 'https://es.vitejs.dev',
-        // },
         {
           text: 'Documentación de Vite 2',
           link: 'https://v2.vitejs.dev',
@@ -287,14 +269,14 @@ export default defineConfig({
               text: 'Filosofía',
               link: '/guide/philosophy',
             },
-            {
-              text: 'Migración desde v2',
-              link: '/guide/migration-v2-to-v3',
-            },
-            {
-              text: 'Migración desde v3',
-              link: '/guide/migration-v3-to-v4',
-            },
+            // {
+            //   text: 'Migración desde v2',
+            //   link: '/guide/migration-v2-to-v3',
+            // },
+            // {
+            //   text: 'Migración desde v3',
+            //   link: '/guide/migration-v3-to-v4',
+            // },
             {
               text: 'Migración desde v4',
               link: '/guide/migration',
