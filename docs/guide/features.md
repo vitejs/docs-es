@@ -176,7 +176,7 @@ export default defineConfig({
 
 ## CSS
 
-La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR. También puedes obtener el CSS procesado como una cadena o como exportación predeterminada del módulo.
+La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR.
 
 ### Incrustación y rebase de `@import`
 
@@ -251,7 +251,7 @@ import otherStyles from './bar.css?inline' // no se inyectará
 ```
 
 ::: tip NOTA
-Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) están en desuso desde Vite 4. Utiliza la línea `?inline` en su lugar.
+Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) se eliminaron desde Vite 5. Utiliza la línea `?inline` en su lugar.
 :::
 
 ### Lightning CSS
@@ -266,7 +266,7 @@ Si se habilita, los archivos CSS se procesarán con Lightning CSS en lugar de Po
 
 Para configurar CSS Modules, debes utilizar [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) en lugar de [`css.modules`](../config/shared-options.md#css-modules) (que configura la forma en que PostCSS maneja los módulos de CSS).
 
-Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#css-minify).
+Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify).
 
 ::: tip NOTA
 Los [preprocesadores de CSS](#css-pre-processors) no son compatibles cuando se utiliza Lightning CSS.
@@ -500,7 +500,9 @@ Ten en cuenta que las variables solo representan nombres de archivo de un nivel 
 
 ## WebAssembly
 
-Los archivos `.wasm` precompilados se pueden importar con `?init`: la exportación predeterminada será una función de inicialización que devuelve una Promesa de la instancia de wasm:
+Los archivos `.wasm` precompilados se pueden importar con `?init`.
+
+La exportación por defecto será una función de inicialización que devuelve una Promesa de [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
 
 ```js
 import init from './example.wasm?init'
@@ -509,7 +511,7 @@ init().then((instance) => {
 })
 ```
 
-La función init también puede tomar el objeto `imports` que se pasa a `WebAssembly.instantiate` como su segundo argumento:
+La función init también puede tomar un importObject que se pasa a [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate) como su segundo argumento:
 
 ```js
 init({
@@ -523,12 +525,53 @@ init({
 })
 ```
 
-En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se copiarán en el directorio dist como un recurso y se obtendrán a petición.
+En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se tratarán como un [recurso estático](./assets) y se obtendrán a pedido.
 
-::: warning
+::: tip NOTA
 La [propuesta de integración de módulos ES para WebAssembly](https://github.com/WebAssembly/esm-integration) no es compatible actualmente.
 Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros complementos de la comunidad para darle el manejo apropiado.
 :::
+
+### Acceso al módulo en WebAssembly
+
+Si necesitas acceder al objeto `Module`, por ejemplo, para instanciarlo varias veces, utiliza una [importación de URL explícita](./assets#importar-recursos-como-url) para resolver el recurso y luego realice la instanciación:
+
+```js
+import wasmUrl from 'foo.wasm?url'
+
+const main = async () => {
+  const responsePromise = fetch(wasmUrl)
+  const { module, instance } = await WebAssembly.instantiateStreaming(
+    responsePromise,
+  )
+  /* ... */
+}
+
+main()
+```
+
+### Obteniendo el módulo en Node.js
+
+En SSR, el `fetch()` que ocurre como parte de la importación `?init`, puede fallar con `TypeError: URL no válida`.
+Consulta el problema en el debate de [Soporte wasm en SSR](https://github.com/vitejs/vite/issues/8882).
+
+Aquí hay una alternativa, asumiendo que la base del proyecto es el directorio actual:
+
+```js
+import wasmUrl from 'foo.wasm?url'
+import { readFile } from 'node:fs/promises'
+
+const main = async () => {
+  const resolvedUrl = (await import('./test/boot.test.wasm?url')).default
+  const buffer = await readFile('.' + resolvedUrl)
+  const { instance } = await WebAssembly.instantiate(buffer, {
+    /* ... */
+  })
+  /* ... */
+}
+
+main()
+```
 
 ## Web Workers
 
@@ -558,7 +601,7 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-El script del worker también puede usar sentencias ESM `import` en lugar de `importScripts()`; **Nota**: ten en cuenta que durante el desarrollo esto depende del [soporte nativo del navegador](https://caniuse.com/?search=module%20worker) (actualmente no compatible con Firefox), pero para la compilación de producción está compilado.
+El script del worker también puede usar sentencias ESM `import` en lugar de `importScripts()`; **Nota**: ten en cuenta que durante el desarrollo esto depende del [soporte nativo del navegador](https://caniuse.com/?search=module%20worker), pero para la compilación de producción está compilado.
 
 De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega el parámetro `inline`:
 

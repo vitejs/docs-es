@@ -42,34 +42,34 @@ Los ajustes preestablecidos de plantilla admitidos son:
 ## Monta tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) versión 14.18+, y 16+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+Vite requiere [Node.js](https://nodejs.org/en/) version 18+. 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
 :::
 
-Con NPM:
+::: code-group
 
-```bash
+```bash [NPM]
 $ npm create vite@latest
 ```
 
-Con Yarn:
-
-```bash
+```bash [Yarn]
 $ yarn create vite
 ```
 
-Con PNPM:
-
-```bash
+```bash [PNPM]
 $ pnpm create vite
 ```
+
+```bash [Bun]
+$ bunx create-vite
+```
+
+:::
 
 ¡Entonces sigue las instrucciones!
 
 También puedes especificar directamente el nombre del proyecto y la plantilla que deseas usar a través de las opciones de línea de comandos adicionales. Por ejemplo, para montar un proyecto de Vite + Vue, ejecuta:
 
 ```bash
-# npm 6.x
-npm create vite@latest my-vue-app --template vue
 
 # npm 7+, se requiere guión doble extra:
 npm create vite@latest my-vue-app -- --template vue
@@ -79,6 +79,9 @@ yarn create vite my-vue-app --template vue
 
 # pnpm
 pnpm create vite my-vue-app --template vue
+
+# bun
+bunx create-vite my-vue-app --template vue
 ```
 
 Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.

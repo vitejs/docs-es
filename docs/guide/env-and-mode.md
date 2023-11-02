@@ -8,7 +8,7 @@ Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Al
 
 - **`import.meta.env.BASE_URL`**: {string} la URL base desde la que se sirve la aplicación. Esto está determinado por la [opción de configuración `base`](/config/shared-options#base).
 
-- **`import.meta.env.PROD`**: {boolean} si la aplicación se ejecuta en producción.
+- **`import.meta.env.PROD`**: {boolean} si la aplicación se ejecuta en producción (ejecutando el servidor de desarrollo con `NODE_ENV='production'` o ejecutando una aplicación compilada con `NODE_ENV='production'`).
 
 - **`import.meta.env.DEV`**: {boolean} si la aplicación se está ejecutando en desarrollo (siempre lo contrario de `import.meta.env.PROD`)
 

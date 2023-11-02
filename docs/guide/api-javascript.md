@@ -29,6 +29,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
   await server.listen()
 
   server.printUrls()
+  server.bindCLIShortcuts({ print: true })
 })()
 ```
 
@@ -73,8 +74,8 @@ interface ViteDevServer {
    */
   httpServer: http.Server | null
   /**
-   * Instancia de observador Chokidar.
-   * https://github.com/paulmillr/chokidar#api
+   * Instancia de observador de Chokidar. Si `config.server.watch` está configurado como `null`,
+   * devuelve un emisor de eventos sin referencia.
    */
   watcher: FSWatcher
   /**
@@ -82,7 +83,7 @@ interface ViteDevServer {
    */
   ws: WebSocketServer
   /**
-   * Contenedor de plugins de Rollup que puede ejecutar hooks de plugins en un archivo dado.
+   * Contenedor de complementos de Rollup que puede ejecutar hooks de complementos en un archivo dado.
    */
   pluginContainer: PluginContainer
   /**
@@ -137,6 +138,10 @@ interface ViteDevServer {
    * Detiene el servidor.
    */
   close(): Promise<void>
+  /**
+   * Vincula atajos de línea de comando
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<ViteDevServer>): void
 }
 ```
 
@@ -193,21 +198,14 @@ import { preview } from 'vite'
   })
 
   previewServer.printUrls()
+  previewServer.bindCLIShortcuts({ print: true })
 })()
 ```
 
 ## `PreviewServer`
 
 ```ts
-interface PreviewServer extends PreviewServerForHook {
-  resolvedUrls: ResolvedServerUrls
-}
-```
-
-## `PreviewServerForHook`
-
-```ts
-interface PreviewServerForHook {
+interface PreviewServer
   /**
    * El objeto de configuración de vite resuelto
    */
@@ -226,13 +224,18 @@ interface PreviewServerForHook {
    */
   httpServer: http.Server
   /**
-   * Las URL resueltas que Vite imprime en la CLI
+   * Las URL resueltas que Vite imprime en la CLI.
+   * null antes de que el servidor esté escuchando.
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
    * Imprime las URL del servidor
    */
   printUrls(): void
+  /**
+   * Vincula atajos de línea de comando
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<PreviewServer>): void
 }
 ```
 
@@ -266,6 +269,15 @@ Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel 
 
 ::: Nota
 `mergeConfig` solo acepta configuraciones en forma de objeto. Si tiene una configuración en forma de callback, deberías de llamarla antes de pasarla a `mergeConfig`.
+
+Puedes utilizar el helper `defineConfig` para juntar una configuración en forma de callback con otra configuración:
+
+```ts
+export default defineConfig((configEnv) =>
+  mergeConfig(configAsCallback(configEnv), configAsObject),
+)
+```
+
 :::
 
 ## `searchForWorkspaceRoot`

@@ -21,10 +21,21 @@
 
   Destino de compilación para el servidor SSR.
 
-## ssr.format
+## ssr.resolve.conditions
 
 - **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vitejs/vite/discussions/13816)
 - **Tipo:** `'esm' | 'cjs'`
 - **Por defecto:** `esm`
+- **Tipo:** `string[]`
+- **Relacionado:** [resolve.conditions](./shared-options.md#resolve-conditions)
 
-Formato de compilación para el servidor SSR. Desde Vite v3, la compilación SSR genera ESM de forma predeterminada. Se puede seleccionar `'cjs'` para generar una compilación CJS, pero no se recomienda. La opción se deja marcada como experimental para dar a los usuarios más tiempo para actualizar a ESM. Las compilaciones de CJS requieren heurísticas de externalización complejas que no están presentes en el formato ESM.
+  El valor predeterminado es la raíz [`resolve.conditions`](./shared-options.md#resolve-conditions).
+
+  Estas condiciones se utilizan en la canalización del complemento y solo afectan a las dependencias no externalizadas durante la compilación de SSR. Utiliza `ssr.resolve.externalConditions` para afectar las importaciones externalizadas.
+
+## ssr.resolve.externalConditions
+
+- **Tipo:** `string[]`
+- **Por defecto:** `[]`
+
+  Condiciones que se utilizan durante la importación ssr (incluido `ssrLoadModule`) de dependencias externalizadas.

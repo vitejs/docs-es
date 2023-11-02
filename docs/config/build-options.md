@@ -83,7 +83,7 @@ Especifica el directorio en el que se alojarán los recursos generados (en relac
 ## build.assetsInlineLimit
 
 - **Tipo:** `number`
-- **Por defecto:** `4096` (4kb)
+- **Por defecto:** `4096` (4KiB)
 
 Los recursos importados o a los que se hace referencia que son más pequeños que este umbral se insertarán como URL base64 para evitar solicitudes http adicionales. Configurar en `0` para deshabilitar la inserción por completo.
 
@@ -161,7 +161,7 @@ Compilar como una librería. Se requiere `entry` ya que la librería no puede us
 - **Por defecto:** `false`
 - **Relacionado:** [Integración del backend](/guide/backend-integration)
 
-Cuando se coloca en `true`, la compilación también generará un archivo `manifest.json` que contiene una asignación de nombres de archivo de recursos sin hash a sus versiones hash, que luego puede ser utilizado por un marco de trabajo orientado a servidor para representar los enlaces de recursos correctos.
+Cuando se coloca en `true`, la compilación también generará un archivo `.vite/manifest.json` que contiene una asignación de nombres de archivo de recursos sin hash a sus versiones hash, que luego puede ser utilizado por un marco de trabajo orientado a servidor para representar los enlaces de recursos correctos.
 
 ## build.ssrManifest
 
@@ -178,6 +178,13 @@ Cuando se coloca en `true`, la compilación también generará un manifiesto SSR
 - **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
 Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rollupOptions.input`.
+
+## build.ssrEmitAssets
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+
+Durante la compilación de SSR, los recursos estáticos no se emiten, ya que se supone que se emitirán como parte de la compilación del cliente. Esta opción permite que los frameworks fuercen su emisión tanto en el cliente como en la compilación SSR. Es responsabilidad del framework fusionar los recursos con un paso posterior a la compilación.
 
 ## build.minify
 
@@ -199,6 +206,8 @@ npm add -D terser
 - **Tipo:** `TerserOptions`
 
 [Opciones de minimización](https://terser.org/docs/api-reference#minify-options) adicionales para pasar a Terser.
+
+Además, también puedes pasar una opción `maxWorkers: number` para especificar el número máximo de workers que se generarán. El valor predeterminado es el número de CPU menos 1.
 
 ## build.write
 
@@ -234,7 +243,7 @@ Habilita/deshabilita los informes de tamaño comprimido con gzip. La compresión
 - **Tipo:** `number`
 - **Por defecto:** `500`
 
-Límite para advertencias de tamaño de fragmento (en kbs). Se compara con el tamaño del fragmento sin comprimir, ya que [el tamaño de JavaScript en sí está relacionado con el tiempo de ejecución](https://v8.dev/blog/cost-of-javascript-2019).
+Límite para advertencias de tamaño de fragmento (en kB). Se compara con el tamaño del fragmento sin comprimir, ya que [el tamaño de JavaScript en sí está relacionado con el tiempo de ejecución](https://v8.dev/blog/cost-of-javascript-2019).
 
 ## build.watch
 
