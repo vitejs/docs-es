@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
@@ -109,7 +109,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           # Subir repositorio dist
           path: './dist'
