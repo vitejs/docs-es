@@ -13,7 +13,7 @@ El empaquetado de producción asume soporte para código JavaScript moderno. De 
 
 Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options#build-target), donde el objetivo más bajo es `es2015`.
 
-Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar [Polyfill.io](https://polyfill.io/v3/), que es un servicio que genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
+Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar [Polyfill.io](https://polyfill.io/), que es un servicio que genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
 
 Los navegadores obsoletos pueden ser soportados a través de [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos y las correspondientes polyfills con características en lenguaje ES. Los fragmentos se cargan condicionalmente solo en navegadores que no tienen soporte ESM nativo.
 

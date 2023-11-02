@@ -33,6 +33,10 @@ interface ViteHotContext {
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
+  off<T extends string>(
+    event: T,
+    cb: (payload: InferCustomEventPayload<T>) => void,
+  ): void
   send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
 }
 ```
@@ -160,6 +164,10 @@ import.meta.hot.accept((module) => {
 })
 ```
 
+## `hot.off(event, cb)`
+
+Elimina el callback de los listeners de eventos.
+
 ## `hot.on(event, cb)`
 
 Escucha un evento HMR.
@@ -180,5 +188,7 @@ Los eventos HMR personalizados también se pueden enviar desde complementos. Dal
 ## `hot.send(event, data)`
 
 Envía eventos personalizados al servidor de desarrollo de Vite.
+
 Si se llama antes de conectarse, los datos se almacenarán en búfer y se enviarán una vez que se establezca la conexión.
+
 Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#comunicacion-cliente-servidor) para obtener más detalles.

@@ -39,7 +39,7 @@ Los ajustes preestablecidos de plantilla admitidos son:
 |   [solid](https://vite.new/solid)   |   [solid-ts](https://vite.new/solid-ts)   |
 |    [qwik](https://vite.new/qwik)    |    [qwik-ts](https://vite.new/qwik-ts)    |
 
-## Monta tu primer proyecto Vite
+## Inicia tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
 Vite requiere [Node.js](https://nodejs.org/en/) version 18+. 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
@@ -134,7 +134,7 @@ En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus 
 }
 ```
 
-Puedes especificar opciones CLI adicionales como `--port` o `--https`. Para obtener una lista completa de las opciones de la CLI, ejecuta `npx vite --help` en tu proyecto.
+Puedes especificar opciones CLI adicionales como `--port` o `--open`. Para obtener una lista completa de las opciones de la CLI, ejecuta `npx vite --help` en tu proyecto.
 
 Aprende más sobre la [interfaz de línea de comnando](./cli.md)
 

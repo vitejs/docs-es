@@ -146,30 +146,58 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 - **Tipo:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
-  Deshabilita o configura la conexión HMR (en los casos en que el websocket HMR deba usar una dirección diferente del servidor http).
+Deshabilita o configura la conexión HMR (en los casos en que el websocket HMR deba usar una dirección diferente del servidor http).
 
-  Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
+Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
 
-  `clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
+`clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
 
-  Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
+Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
 
-  Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) para ver algunos ejemplos.
+Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) para ver algunos ejemplos.
 
-  :::tip NOTA
+:::tip NOTA
 
-  Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
+Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
 
-  ```
-  Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
-  ```
+```
+Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+```
 
-  Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
+Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
 
-  - configurar el proxy inverso para el proxy de WebSocket también
-  - configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
-  - configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
-    :::
+- configurar el proxy inverso para el proxy de WebSocket también
+- configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
+- configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
+  :::
+
+## servidor.warmup
+
+- **Tipo:** `{ clientFiles?: string[], ssrFiles?: string[] }`
+
+Prepara archivos para transformarlos y almacenar en caché los resultados por adelantado. Esto mejora la carga de la página inicial durante el inicio del servidor y evita transformaciones en cascada.
+
+Las opciones `clientFiles` y `ssrFiles` aceptan una serie de rutas de archivos o patrones globales relativos a `root`. Asegúrate de agregar solo los archivos que tengan código preparado; de lo contrario, agregar demasiados puede ralentizar el proceso de transformación.
+
+Para entender por qué la preparación puede ser útil, aquí hay un ejemplo. Dado este gráfico de módulo donde el archivo de la izquierda importa el archivo de la derecha:
+
+```
+main.js -> Component.vue -> big-file.js -> big-data.json
+```
+
+Los ids importados solo se pueden conocer después de que se transforma el archivo, por lo que si `Component.vue` tarda algún tiempo en transformarse, `big-file.js` tiene que esperar su turno, y así sucesivamente. Esto provoca una cascada interna.
+
+Al preparar `big-file.js`, o cualquier archivo que sepas es una ruta activa en tu aplicación, se almacenarán en caché y se podrán servir de inmediato.
+
+```js
+export defineConfig default ({
+   server: {
+     warmup: {
+       clientFiles: ['./src/big-file.js', './src/components/*.vue'],
+     },
+   },
+})
+```
 
 ## server.watch
 

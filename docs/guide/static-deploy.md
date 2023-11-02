@@ -231,7 +231,7 @@ $ wrangler login
 $ npm run build
 
 # Crea un nuevo despliegue
-$ npx wrangler pages publish dist
+$ npx wrangler pages deploy dist
 ```
 
 Después de cargar tus recursos, Wrangler le dará una URL de vista previa para inspeccionar el sitio. Cuando inicies sesión en el panel de control de Cloudflare Pages, verás tu nuevo proyecto.

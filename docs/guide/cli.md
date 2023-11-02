@@ -18,7 +18,6 @@ vite [root]
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--host [host]`          | Especifica un nombre de host (`string`)                                                                                                                  |
 | `--port <port>`          | Especifica puerto (`number`)                                                                                                                             |
-| `--https`                | Usa TLS + HTTP/2 (`boolean`)                                                                                                                             |
 | `--open [path]`          | Abre el navegador al iniciar (`boolean \| string`)                                                                                                       |
 | `--cors`                 | Habilita CORS (`boolean`)                                                                                                                                |
 | `--strictPort`           | Finaliza si el puerto configurado ya está en uso (`boolean`)                                                                                             |
@@ -115,7 +114,6 @@ vite preview [root]
 | `--host [host]`          | Especifica un nombre de host (`string`)                                    |
 | `--port <port>`          | Especifica puerto (`number`)                                               |
 | `--strictPort`           | Finaliza si el puerto configurado ya está en uso (`boolean`)               |
-| `--https`                | Usa TLS + HTTP/2 (`boolean`)                                               |
 | `--open [path]`          | Abre el navegador al iniciar (`boolean \| string`)                         |
 | `--outDir <dir>`         | Directorio de salida (por defecto: `dist`)(`string`)                       |
 | `-c, --config <file>`    | Usa el archivo de configuración especificado (`string`)                    |

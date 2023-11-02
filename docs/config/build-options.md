@@ -43,7 +43,7 @@ type ResolveModulePreloadDependenciesFn = (
   context: {
     importer: string
   },
-) => (string | { runtime?: string })[]
+) => string[]
 ```
 
 Se llamará a la función `resolveDependencies` para cada importación dinámica con una lista de los fragmentos de los que depende, y también se llamará para cada fragmento importado en los archivos de entrada HTML. Se puede devolver un nuevo array de dependencias con estas dependencias filtradas, u otras más inyectadas, y sus rutas modificadas. Las rutas de `deps` son relativas a `build.outDir`. Se permite tambien retornar una ruta relativa al `hostId` para `hostType === 'js'`, en cuyo caso se usa `new URL(dep, import.meta.url)` para obtener una ruta absoluta al inyectar la precarga de este módulo en el encabezado HTML.

@@ -16,10 +16,16 @@ Si tienes preguntas, la comunidad suele ser útil en [el canal #ssr del Discord 
 
 ## Proyectos de ejemplo
 
-Vite proporciona soporte integrado para la representación del lado del servidor (SSR). El área de pruebas de código de Vite contiene configuraciones de SSR de ejemplo para Vue 3 y React, que se pueden usar como referencias para esta guía:
+Vite proporciona soporte integrado para la representación del lado del servidor (SSR). [`create-vite-extra`](https://github.com/bluwy/create-vite-extra) contiene configuraciones de ejemplo para SSR que puedes utilizar como referencias para esta guía:
 
-- [Vue 3](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue)
-- [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react)
+- [Vanilla](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-vanilla)
+- [Vue](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-vue)
+- [React](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
+- [Preact](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-preact)
+- [Svelte](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-svelte)
+- [Solid](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-solid)
+
+También puedes generar proyectos nuevos localmente [ejecutando `create-vite`](./index.md#inicia-tu-primer-proyecto-vite) y seleccionando `Otros > create-vite-extra` en la opciones del framework.
 
 ## Estructura del código fuente
 
@@ -178,7 +184,7 @@ Luego, en `server.js` necesitamos agregar algo de lógica específica de producc
 
 - Mueve la creación y todo el uso del servidor de desarrollo `vite` detrás de ramas condicionales solo para desarrollo, luego agrega middlewares de servicio de archivos estáticos para servir archivos desde `dist/client`.
 
-Consulta las demos de [Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue) y [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react) para una configuración funcional.
+Consulta los [proyectos de ejemplo](#proyectos-de-ejemplo) para una configuración funcional.
 
 ## Generación de directivas de precargado
 

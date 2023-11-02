@@ -34,6 +34,8 @@ Si deseas ignorar temporalmente la advertencia, puedes ejecutar el script con el
 VITE_CJS_IGNORE_WARNING=true vite dev
 ```
 
+Ten en cuenta que los archivos de configuración postcss aún no soportan ESM + TypeScript (`.mts` o `.ts` en `"type": "module"`). Si tienes configuraciones postcss con `.ts` y agregaste `"type": "module"` al `package.json`, también debes cambiar el nombre de la configuración postcss para usar `.cts`.
+
 ## CLI
 
 ### `Error: No se puede encontrar el módulo 'C:\foo\bar&baz\vite\bin\vite.js'`

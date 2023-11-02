@@ -21,9 +21,9 @@ hero:
     - theme: alt
       text: Ver en GitHub
       link: https://github.com/vitejs/vite
-    - theme: brand
-      text: 🎉 ViteConf 23!
-      link: https://viteconf.org/23
+    # - theme: brand
+    #   text: 🎉 ViteConf 23!
+    #   link: https://viteconf.org/23
 
 features:
   - icon: 💡
