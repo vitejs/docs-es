@@ -57,6 +57,8 @@ Algunos campos de configuración en `compilerOptions` en `tsconfig.json` requier
 
 #### `isolatedModules`
 
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#isolatedModules)
+
 Debes configurarse en `true`.
 
 Esto se debe a que `esbuild` solo realiza la transpilación sin información de tipo, no admite ciertas características como const enum e importaciones implícitas de solo tipo.
@@ -67,13 +69,33 @@ Sin embargo, algunas bibliotecas (por ejemplo, [`vue`](https://github.com/vuejs/
 
 #### `useDefineForClassFields`
 
-A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es `ESNext` o `ES2022` o superiores. Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript. Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
+
+A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es `ESNext` o `ES2022` o superiores. Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript.
+
+Otros destinos de TypeScript tendrán el valor predeterminado `false`.
+
+Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
 
 Si estás utilizando una biblioteca que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la biblioteca.
 
 La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [MobX](https://mobx.js.org/installation.html#use-spec-obediente-transpilation-for-class-properties).
 
-Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor predeterminado, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
+Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor por defecto, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
+
+#### `target`
+
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#target)
+
+Vite no transpila TypeScript con el valor `target` configurado por defecto, siguiendo el mismo comportamiento que `esbuild`.
+
+En su lugar, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), cuyo valor por defecto es `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad y también se puede configurar si es necesario.
+
+::: warning `useDefineForClassFields`
+Si `target` no es `ESNext` o `ES2022` o más reciente, o si no hay un archivo `tsconfig.json`, `useDefineForClassFields` por defecto será `false`, lo que puede ser problemático con el valor por defecto de `esbuild.target` de `es siguiente`. Puede transpilarse a [bloques de inicialización estáticos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility) que pueden no ser compatibles con tu navegador.
+
+Como tal, se recomienda configurar `target` en `ESNext` o `ES2022` o más reciente, o configurar `useDefineForClassFields` en `true` explícitamente en el `tsconfig.json`.
+:::
 
 #### Otras opciones del compilador que afectan el resultado de la compilación
 
@@ -81,8 +103,13 @@ Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor pre
 - [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
 - [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
+- [`verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax)
+- [`jsx`](https://www.typescriptlang.org/tsconfig#jsx)
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
+- [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
+- [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
+- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
 Si migrar el codigo base a `"isolatedModules": true` es un esfuerzo arduo, es posible que puedas facilitar el trabajo con un complemento de terceros como [rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports). Sin embargo, Vite no admite oficialmente este enfoque.
 
@@ -541,9 +568,8 @@ import wasmUrl from 'foo.wasm?url'
 
 const main = async () => {
   const responsePromise = fetch(wasmUrl)
-  const { module, instance } = await WebAssembly.instantiateStreaming(
-    responsePromise,
-  )
+  const { module, instance } =
+    await WebAssembly.instantiateStreaming(responsePromise)
   /* ... */
 }
 

@@ -270,6 +270,10 @@ export default defineConfig({
               link: '/guide/troubleshooting',
             },
             {
+              text: 'Rendimiento',
+              link: '/guide/performance',
+            },
+            {
               text: 'Filosofía',
               link: '/guide/philosophy',
             },

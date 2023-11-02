@@ -145,6 +145,16 @@ if (import.meta.hot) {
 
 El objeto `import.meta.hot.data` se mantiene en diferentes instancias del mismo módulo actualizado. Se puede utilizar para pasar información de una versión anterior del módulo a la siguiente.
 
+Ten en cuenta que no se soporta la reasignación de `data` en sí. En su lugar, debes mutar las propiedades del objeto `data` para que se preserve la información agregada por otros manejadores.
+
+```js
+// ok
+import.meta.hot.data.someValue = 'hello'
+
+// no soportado
+import.meta.hot.data = { someValue: 'hello' }
+```
+
 ## `hot.decline()`
 
 Esto es actualmente un noop y está ahí para compatibilidad con versiones anteriores. Esto podría cambiar en el futuro si hay un nuevo uso para él. Para indicar que el módulo no se puede actualizar en caliente, utiliza `hot.invalidate()`.

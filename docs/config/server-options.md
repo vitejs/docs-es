@@ -54,7 +54,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 ## server.https
 
-- **Tipo:** `boolean | https.ServerOptions`
+- **Tipo:** `https.ServerOptions`
 
   Habilita TLS + HTTP/2. Ten en cuenta que esto cambia a TLS solo cuando también se usa la opción [`server.proxy`](#server-proxy).
 
@@ -171,31 +171,25 @@ Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback.
 - configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
   :::
 
-## servidor.warmup
+## server.warmup
 
 - **Tipo:** `{ clientFiles?: string[], ssrFiles?: string[] }`
+- **Relacionado:** [Preparación de archivos de uso frecuente](/guide/performance.html#preparacion-de-archivos-de-uso-frecuente)
 
 Prepara archivos para transformarlos y almacenar en caché los resultados por adelantado. Esto mejora la carga de la página inicial durante el inicio del servidor y evita transformaciones en cascada.
 
-Las opciones `clientFiles` y `ssrFiles` aceptan una serie de rutas de archivos o patrones globales relativos a `root`. Asegúrate de agregar solo los archivos que tengan código preparado; de lo contrario, agregar demasiados puede ralentizar el proceso de transformación.
+`clientFiles` son archivos que se usan solo en el cliente, mientras que `ssrFiles` son archivos que se usan solo en SSR. Aceptan una variedad de rutas de archivos o patrones [`fast-glob`](https://github.com/mrmlnc/fast-glob) relativos a `root`.
 
-Para entender por qué la preparación puede ser útil, aquí hay un ejemplo. Dado este gráfico de módulo donde el archivo de la izquierda importa el archivo de la derecha:
-
-```
-main.js -> Component.vue -> big-file.js -> big-data.json
-```
-
-Los ids importados solo se pueden conocer después de que se transforma el archivo, por lo que si `Component.vue` tarda algún tiempo en transformarse, `big-file.js` tiene que esperar su turno, y así sucesivamente. Esto provoca una cascada interna.
-
-Al preparar `big-file.js`, o cualquier archivo que sepas es una ruta activa en tu aplicación, se almacenarán en caché y se podrán servir de inmediato.
+Asegúrate de agregar solo archivos que se usan con frecuencia para no sobrecargar el servidor de desarrollo de Vite al iniciar.
 
 ```js
 export defineConfig default ({
-   server: {
-     warmup: {
-       clientFiles: ['./src/big-file.js', './src/components/*.vue'],
-     },
-   },
+  server: {
+    warmup: {
+      clientFiles: ['./src/components/*.vue', './src/utils/big-utils.js'],
+      ssrFiles: ['./src/server/modules/*.js'],
+    },
+  },
 })
 ```
 
