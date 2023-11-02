@@ -23,6 +23,9 @@
 
 ## ssr.resolve.conditions
 
+- **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vitejs/vite/discussions/13816)
+- **Tipo:** `'esm' | 'cjs'`
+- **Por defecto:** `esm`
 - **Tipo:** `string[]`
 - **Relacionado:** [resolve.conditions](./shared-options.md#resolve-conditions)
 
