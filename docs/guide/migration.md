@@ -121,15 +121,17 @@ En Vite 4, los servidores de desarrollo y vista previa sirven HTML según su est
 | Solicitud         | Antes (desarrollo)              | Después (vista previa) | Después (desarrollo y vista previa) |
 | ----------------- | ------------------------------- | ---------------------- | ----------------------------------- |
 | `/dir/index.html` | `/dir/index.html`               | `/dir/index.html`      | `/dir/index.html`                   |
-| `/dir`            | `/index.html` (redirección SPA) | `/dir/index.html`      | `/dir.html` (redirección SPA)       |
+| `/dir`            | `/index.html` (redirección SPA) | `/dir/index.html`      | `/index.html` (redirección SPA)     |
 | `/dir/`           | `/dir/index.html`               | `/dir/index.html`      | `/dir/index.html`                   |
 | `/file.html`      | `/file.html`                    | `/file.html`           | `/file.html`                        |
 | `/file`           | `/index.html` (redirección SPA) | `/file.html`           | `/file.html`                        |
 | `/file/`          | `/index.html` (redirección SPA) | `/file.html`           | `/index.html` (redirección SPA)     |
 
-### Los archivos de manifiesto ahora se generan en el directorio `.vite` de forma predeterminada
+### Los archivos de manifiesto ahora se generan en el directorio `.vite` por defecto
 
-En Vite 4, los archivos de manifiesto ([`build.manifest`](/config/build-options.md#build-manifest), [`build.ssrManifest`](/config/build-options.md#build-ssrmanifest)) se generaban en la raíz de [`build.outDir`](/config/build-options.md#build-outdir) de forma predeterminada. A partir de Vite 5, se generarán en el directorio `.vite` en `build.outDir` de forma predeterminada.
+En Vite 4, los archivos de manifiesto ([`build.manifest`](/config/build-options.md#build-manifest) y [`build.ssrManifest`](/config/build-options.md#build-ssrmanifest)) se generaban en la raíz de [`build.outDir`](/config/build-options.md#build-outdir) por defecto.
+
+A partir de Vite 5, se generarán en el directorio `.vite` en `build.outDir` por defecto. Este cambio ayuda a eliminar el conflicto de archivos públicos con los mismos nombres de los archivos de manifiesto cuando se copian en `build.outDir`.
 
 ### Los accesos directos de CLI requieren una pulsación adicional de "Intro"
 
@@ -162,11 +164,11 @@ Vite 5 usa esbuild 0.19 y elimina la capa de compatibilidad para esbuild 0.18, l
 }
 ```
 
-### Eliminada la bandera `--https` y `https: true`
+### Eliminada los indicadores `--https` y `https: true`
 
-La bandera `--https` configura `https: true`. Esta opción estaba destinada a usarse junto con la función de generación automática de certificación https que [se eliminó en Vite 3](/guide/migration-v2-to-v3.html#generacion-automatica-de-certificados-https). Esta configuración ya no tiene sentido ya que hará que Vite inicie un servidor HTTPS sin un certificado.
+El indicador `--https` configura `server.https: true` y `preview.https: true` internamente. Esta configuración estaba destinada a usarse junto con la función de generación automática de certificación https que [se eliminó en Vite 3](/guide/migration-v2-to-v3.html#generacion-automatica-de-certificados-https). Esto indica que dicha configuración ya no es útil, ya que iniciará un servidor HTTPS de Vite sin un certificado.
 
-Tanto [`@vitejs/plugin-basic-ssl`](https://github.com/vitejs/vite-plugin-basic-ssl) como [`vite-plugin-mkcert`](https://github.com/liuweiGL/vite-plugin-mkcert) establece la configuración `https` independientemente del valor `https`, por lo que puedes simplemente eliminar `--https` y `https: true`.
+Si usas [`@vitejs/plugin-basic-ssl`](https://github.com/vitejs/vite-plugin-basic-ssl) o [`vite-plugin-mkcert`](https://github.com/liuweiGL/vite-plugin-mkcert), estas configurarán `https` internamente, por lo que puedes eliminar `--https`, `server.https: true` y `preview.https: true`.
 
 ### Eliminadas las APIs `resolvePackageEntry` y `resolvePackageData`
 
@@ -206,6 +208,8 @@ Hay algunos cambios que solo afectan a los creadores de complementos/herramienta
   - El hook `configurePreviewServer` ahora acepta el tipo `PreviewServer` en lugar del tipo `PreviewServerForHook`.
 - [[#14818] refactor(preview)!: usa middleware base](https://github.com/vitejs/vite/pull/14818)
   - Los middlewares agregados desde la función devuelta en `configurePreviewServer` ahora no tienen acceso a `base` al comparar el valor `req.url`. Esto alinea el comportamiento con el del servidor de desarrollo. Puedes verificar `base` desde el hook `configResolved` si es necesario.
+- [[#14834] fix(types)!: expone httpServer con la unión Http2SecureServer](https://github.com/vitejs/vite/pull/14834)
+  - Ahora se utiliza `http.Server | http2.Http2SecureServer` en lugar de `http.Server` cuando sea apropiado.
 
 También hay otros cambios importantes que sólo afectan a unos pocos usuarios.
 
@@ -223,6 +227,9 @@ También hay otros cambios importantes que sólo afectan a unos pocos usuarios.
   - En el pasado, cuando un campo`"export"` de librería se asignaba a un archivo `.mjs`, Vite aún intentaba hacer coincidir los campos `"browser"` y `"module"` para corregir la compatibilidad con ciertas librerías. Este comportamiento ahora se elimina para alinearse con el algoritmo de resolución de exportaciones.
 - [[#14733] feat(resolve)!: elimina `resolve.browserField`](https://github.com/vitejs/vite/pull/14733)
   - `resolve.browserField` ha sido marcado como obsoleto desde Vite 3 en favor de una actualización de valores por defecto de `['browser', 'module', 'jsnext:main', 'jsnext']` para [`resolve.mainFields`](/config/shared-options.md#resolve-mainfields).
+- [[#14855] feat!: agrega isPreview a ConfigEnv y resolveConfig](https://github.com/vitejs/vite/pull/14855)
+  - Se cambió el nombre de `ssrBuild` a `isSsrBuild` en el objeto `ConfigEnv`.
+    ​
 
 ## Migración desde v3
 

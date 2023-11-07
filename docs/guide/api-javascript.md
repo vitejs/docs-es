@@ -248,10 +248,12 @@ async function resolveConfig(
   inlineConfig: InlineConfig,
   command: 'build' | 'serve',
   defaultMode = 'development',
+  defaultNodeEnv = 'development',
+  isPreview = false,
 ): Promise<ResolvedConfig>
 ```
 
-El valor de `command` es `serve` en dev (en el cli `vite`, `vite dev`, y `vite serve` son alias).
+El valor de `command` es `serve` en desarrollo y vista previa, y `build` en compilación.
 
 ## `mergeConfig`
 

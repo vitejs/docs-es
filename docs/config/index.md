@@ -48,10 +48,10 @@ Vite también es compatible directamente con los archivos de configuración de T
 
 ## Configuración condicional
 
-Si la configuración necesita determinar condicionalmente las opciones basadas en el comando (`dev`/`serve` o `build`), el [modo](/guide/env-and-mode) que se está utilizando, o si es una compilación SSR (`ssrBuild`), puedes exportar una función en su lugar:
+Si la configuración necesita determinar condicionalmente las opciones basadas en el comando (`dev`/`serve` o `build`), el [modo](/guide/env-and-mode) que se está utilizando, si es una compilación SSR (`isSsrBuild`), o está previsualizando una compilación (`isPreview`), puedes exportar una función en su lugar:
 
 ```js
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
   if (command === 'serve') {
     return {
       // configuración de desarrollo específico
@@ -67,7 +67,7 @@ export default defineConfig(({ command, mode }) => {
 
 Es importante tener en cuenta que en la API de Vite, el valor de `command` es `serve` durante el desarrollo (en el cli `vite`, `vite dev` y `vite serve` son alias) y `build` cuando se compila para producción (`vite build`).
 
-`ssrBuild` es experimental. Solo está disponible durante la compilación en lugar de un indicador `ssr` más general porque, durante el desarrollo, la configuración es compartida por el servidor único que maneja las solicitudes SSR y no SSR. El valor podría ser `undefined` para las herramientas que no tienen comandos separados para el navegador y la compilación de SSR, así que usa una comparación explícita con `true` y `false`.
+`isSsrBuild` y `isPreview` son indicadores opcionales adicionales para diferenciar el tipo de comandos `build` y `serve` respectivamente. Es posible que algunas herramientas que cargan la configuración de Vite no admitan estos indicadores y en su lugar pasen `undefined`. Por lo tanto, se recomienda utilizar una comparación explícita con `true` o `false`.
 
 ## Configuración de funciones asíncronas
 

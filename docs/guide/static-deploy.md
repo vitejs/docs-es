@@ -336,6 +336,10 @@ También puedes agregar un [dominio personalizado](https://render.com/docs/custo
 
 Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
 
-## AWS Amplify Hosting
+## Alojamiento en AWS Amplify
 
 Despliega tu sitio estático mediante [AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/), siguiendo estas [instrucciones](https://docs.amplify.aws/guides/hosting/vite/q/plataforma/js/).
+
+## Alojamiento de sitios estáticos en Kinsta
+
+Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https://kinsta.com/static-site-hosting/) siguiendo estas [instrucciones](https://kinsta.com/docs/react-vite-ejemplo/).
