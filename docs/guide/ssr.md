@@ -89,7 +89,13 @@ async function createServer() {
 
   // Usa la instancia de Connect de Vite como middleware. Si usas tu propio
   // router de Express (express.Router()), debes usar router.use
-  app.use(vite.middlewares)
+  app.use((req, res, next) => {
+    // Cuando el servidor se reinicia (por ejemplo, después de que el usuario modifica
+    // vite.config.js), `vite.middlewares` se reasignará. Llamar a
+    // `vite.middlewares.handle` dentro de un controlador contenedor garantiza que los
+    // últimos middlewares de Vite siempre se utilicen.
+    vite.middlewares.handle(req, res, next);
+  });
 
   app.use('*', async (req, res) => {
     // serve index.html - Se modificará despues

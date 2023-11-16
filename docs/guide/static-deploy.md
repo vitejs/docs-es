@@ -58,9 +58,9 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 1. Configura la `base` correcta en `vite.config.js`.
 
-   Si estás desplegando en `https://<USERNAME>.github.io/`, puedes omitir `base` ya que el valor predeterminado es `'/'`.
+Si estás desplegando en `https://<USERNAME>.github.io/` o en un dominio personalizado a través de GitHub Pages (por ejemplo, `www.example.com`), configura `base` como `'/'`. Alternativamente, puedes eliminar `base` de la configuración, ya que por defecto es `'/'`.
 
-   Si está desplegando en `https://<NOMBRE DE USUARIO>.github.io/<REPO>/`, por ejemplo, tu repositorio está en `https://github.com/<NOMBRE DE USUARIO>/<REPO>`, configura `base` a `'/<REPO>/'`.
+Si estás desplegando en `https://<USERNAME>.github.io/<REPO>/` (por ejemplo, tu repositorio está en `https://github.com/<USERNAME>/<REPO>`), entonces configura `base` como `'/<REPO>/'`.
 
 2. Ve a la configuración de GitHub Pages en la página de configuración del repositorio y elige la fuente de implementación como "Acciones de GitHub", esto te llevará a crear un flujo de trabajo que compila e implementa el proyecto, se provee un flujo de trabajo de muestra que instala dependencias y compila usando npm:
 

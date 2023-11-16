@@ -13,11 +13,12 @@ Consulta [Raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto) para obten
 
 - **Tipo:** `string`
 - **Por defecto:** `/`
+- **Relacionado:** [`server.origin`](/config/server-options.md#server-origin)
 
 Ruta pública base cuando se sirve en desarrollo o producción. Los valores válidos incluyen:
 
 - Nombre de ruta absoluta URL, ejemplo, `/foo/`
-- URL completa, ejemplo, `https://foo.com/`
+- URL completa, por ejemplo, `https://foo.com/` (La parte del origen no se utilizará en el desarrollo)
 - Cadena vacía o `./` (para implementación incrustada)
 
 Consulta [Ruta base pública](/guide/build#ruta-base-publica) para obtener más detalles.

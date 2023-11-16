@@ -37,6 +37,38 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 Al usar `createServer` y `build` en el mismo proceso de Node.js, ambas funciones se basan en `process.env.NODE_ENV` para funcionar correctamente, lo que también depende de la opción de configuración `mode`. Para evitar un comportamiento conflictivo, configura `process.env.NODE_ENV` o el `mode` de las dos APIs en `development`. De lo contrario, puedes generar un proceso secundario para ejecutar las APIs por separado.
 :::
 
+::: tip NOTA
+Al utilizar el [modo de middleware](/config/server-options.html#server-middlewaremode) combinado con [configuración de proxy para WebSocket](/config/server-options.html#server-proxy), el servidor HTTP principal debe proporcionarse en `middlewareMode` para vincular correctamente el proxy.
+
+<details>
+<summary>Ejemplo</summary>
+
+```ts
+import http from 'http'
+import { createServer } from 'vite'
+const parentServer = http.createServer() // o express, koa, etc.
+const vite = await createServer({
+  server: {
+    // Habilita el modo middleware
+    middlewareMode: {
+      // Proporciona el servidor HTTP principal para el proxy WebSocket
+      server: parentServer,
+    },
+  },
+  proxy: {
+    '/ws': {
+      target: 'ws://localhost:3000',
+      // Proxying WebSocket
+      ws: true,
+    },
+  },
+})
+server.use(vite.middlewares)
+```
+
+</details>
+:::
+
 ## `InlineConfig`
 
 La interfaz `InlineConfig` extiende a `UserConfig` con propiedades adicionales:

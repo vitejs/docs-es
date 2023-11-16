@@ -60,7 +60,7 @@ Un caso de uso típico para `optimizeDeps.include` o `optimizeDeps.exclude` es c
 
 Tanto `include` como `exclude` se pueden utilizar para solucionar este problema. Si la dependencia es grande (con muchos módulos internos) o es CommonJS, debes incluirla; Si la dependencia es pequeña y ya es un ESM válido, puedes excluirla y dejar que el navegador la cargue directamente.
 
-También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esbuildOptions`](/config/dep-optimization-options.md#optimizedeps-esbuildoptions). Por ejemplo, agregar un complemento esbuild para manejar archivos especiales en dependencias.
+También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esbuildOptions`](/config/dep-optimization-options.md#optimizedeps-esbuildoptions). Por ejemplo, agregar un complemento esbuild para manejar archivos especiales en dependencias o cambiando el [objetivo de construcción (`target`)](https://esbuild.github.io/api/#target).
 
 ## Almacenamiento en caché
 

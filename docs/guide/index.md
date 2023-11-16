@@ -20,7 +20,9 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 ## Compatibilidad con navegadores
 
-La configuración de compilación predeterminada va dirigida a navegadores que admiten [modulos ESM nativos](https://caniuse.com/es6-module), [importación dinámica de ESM nativo](https://caniuse.com/es6-module-dynamic-import) e [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Los navegadores obsoletos pueden ser soportados a través del [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial; consulta [Compilación en producción](./build) para más detalles.
+Durante el desarrollo, Vite configura [`esnext` como el objetivo de transformación](https://esbuild.github.io/api/#target), porque asumimos que se está utilizando un navegador moderno que admite todas las características más recientes de JavaScript y CSS. Esto evita la reducción de sintaxis, permitiendo que Vite sirva módulos lo más cercanos posible al código fuente original.
+
+Para la compilación de producción, de forma predeterminada Vite apunta a navegadores que admiten [Módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Los navegadores legacy pueden ser compatibles a través del complemento oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). Consulta la sección [Compilación en Producción](./build) para obtener más detalles.
 
 ## Probar Vite online
 

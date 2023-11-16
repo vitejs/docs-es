@@ -144,3 +144,33 @@ Como `vite build` ejecuta una compilación en producción de forma predeterminad
 # .env.testing
 NODE_ENV=development
 ```
+
+## NODE_ENV y Modos
+
+Es importante tener en cuenta que `NODE_ENV` (`process.env.NODE_ENV`) y los modos son dos conceptos diferentes. Así es cómo afectan a `NODE_ENV` y al modo diferentes comandos:
+
+| Comando                                              | NODE_ENV        | Modo            |
+| ---------------------------------------------------- | --------------- | --------------- |
+| `vite build`                                         | `"production"`  | `"production"`  |
+| `vite build --mode development`                      | `"production"`  | `"development"` |
+| `NODE_ENV=development vite build`                    | `"development"` | `"production"`  |
+| `NODE_ENV=development vite build --mode development` | `"development"` | `"development"` |
+
+Los diferentes valores de `NODE_ENV` y modo también se reflejan en sus propiedades correspondientes de `import.meta.env`:
+
+| Comando                | `import.meta.env.PROD` | `import.meta.env.DEV` |
+| ---------------------- | ---------------------- | --------------------- |
+| `NODE_ENV=production`  | `true`                 | `false`               |
+| `NODE_ENV=development` | `false`                | `true`                |
+| `NODE_ENV=other`       | `false`                | `true`                |
+
+| Comando              | `import.meta.env.MODE` |
+| -------------------- | ---------------------- |
+| `--mode production`  | `"production"`         |
+| `--mode development` | `"development"`        |
+| `--mode staging`     | `"staging"`            |
+
+:::tip `NODE_ENV` en archivos `.env`
+`NODE_ENV=...` se puede configurar en el comando y también en tu archivo `.env`. Si `NODE_ENV` está especificado en un archivo `.env.[modo]`, el modo se puede utilizar para controlar su valor. Sin embargo, tanto `NODE_ENV` como los modos siguen siendo dos conceptos diferentes.
+El principal beneficio con `NODE_ENV=...` en el comando es que permite que Vite detecte el valor temprano. También te permite leer `process.env.NODE_ENV` en tu configuración de Vite, ya que Vite solo puede cargar los archivos env una vez que se evalúa la configuración.
+:::

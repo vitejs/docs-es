@@ -146,11 +146,11 @@ Problema relacionado: [#964](https://github.com/vitejs/vite/issues/964)
 
 Si estás ejecutando Vite con WSL2, Vite no puede ver los cambios de archivos en algunas condiciones. Ver [opción `server.watch`](/config/server-options.md#server-watch).
 
-### Ocurre un refresco completo en lugar de HMR
+### Ocurre una recarga completa en lugar de HMR
 
-Si Vite o un complemento no maneja HMR, se producirá un refresco completo.
+Si Vite o un complemento no manejan HMR, se producirá una recarga completa, ya que es la única forma de actualizar el estado.
 
-Además, si hay un bucle de dependencia, se producirá un refresco completo. Para resolver esto, intenta eliminar el bucle.
+Si se maneja HMR pero está dentro de una dependencia circular, también se realizará una recarga completa para recuperar la orden de ejecución. Para resolver esto, intenta romper el ciclo. Puedes ejecutar `vite --debug hmr` para registrar la ruta de dependencia circular si un cambio de archivo la activó.
 
 ### Gran cantidad de actualizaciones de HMR en la consola
 

@@ -55,14 +55,14 @@ Los archivos Barril son archivos que reexportan las API de otros archivos en el 
 
 ```js
 // src/utils/index.js
-export * from './color'
-export * from './dom'
-export * from './cadena'
+export * from './color.js'
+export * from './dom.js'
+export * from './slash.js'
 ```
 
 Cuando solo importas una API individual, por ejemplo, `import { slash } from './utils'`, todos los archivos en ese archivo barril deben recuperarse y transformarse, ya que pueden contener la API `slash` y también pueden contener efectos secundarios que se ejecutan durante la inicialización. Esto significa que está cargando más archivos de los necesarios en la carga inicial de la página, lo que resulta en una carga de página más lenta.
 
-Si es posible, evita los archivos barril e importa las API individuales directamente, ejemplo, `import { slash } from './utils/slash'`. Puedes leer el [issue #8237](https://github.com/vitejs/vite/issues/8237) para más información.
+Si es posible, evita los archivos barril e importa las API individuales directamente, ejemplo, `import { slash } from './utils/slash.js'`. Puedes leer el [issue #8237](https://github.com/vitejs/vite/issues/8237) para más información.
 
 ## Preparación de archivos de uso frecuente
 
@@ -102,3 +102,20 @@ export default defineConfig({
 Ten en cuenta que solo debes preparar los archivos que se utilizan con frecuencia para no sobrecargar el servidor de desarrollo de Vite al iniciar. Revisa la opción [`server.warmup`](/config/server-options.md#server-warmup) para obtener más información.
 
 El uso de [`--open` o `server.open`](/config/server-options.html#server-open) también proporciona un aumento de rendimiento, ya que Vite preparará automáticamente el punto de entrada de tu aplicación o la URL proporcionada a abrir.
+
+## Utilizar herramientas nativas o menos potentes
+
+Mantener Vite rápido con un código en crecimiento se trata de reducir la cantidad de trabajo para los archivos fuente (JS/TS/CSS).
+
+Ejemplos de hacer menos trabajo:
+
+- Usa CSS en lugar de Sass/Less/Stylus cuando sea posible (el anidamiento puede ser manejado por PostCSS).
+- No transformes los SVG en componentes de frameworks visuales (React, Vue, etc.). Impórtalos como cadenas o URL en su lugar.
+- Al usar `@vitejs/plugin-react`, evita configurar las opciones de Babel, para que omita la transformación durante la construcción (solo se utilizará esbuild).
+
+Ejemplos de utilizar herramientas nativas:
+
+El uso de herramientas nativas a menudo implica un mayor tamaño de instalación y, por lo tanto, no es la configuración predeterminada al iniciar un nuevo proyecto Vite. Pero puede valer la pena el costo para aplicaciones más grandes.
+
+- Prueba el soporte experimental para [LightningCSS](https://github.com/vitejs/vite/discussions/13835)
+- Utiliza [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) en lugar de `@vitejs/plugin-react`.

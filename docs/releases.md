@@ -4,12 +4,6 @@ Los lanzamientos de Vite siguen el [versionamiento semántico](https://semver.or
 
 Existe un registro de cambios completo de versiones anteriores en [disponible en GitHub](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md).
 
-::: tip Nota
-El próximo lanzamiento principal de Vite ocurrirá después del final del soporte para Node 16 en septiembre.
-
-Consulta la [discusión de Vite 5](https://github.com/vitejs/vite/discussions/12466) para obtener más información.
-:::
-
 ## Ciclo de lanzamientos
 
 Vite no tiene un ciclo de liberación fijo.
