@@ -25,9 +25,9 @@ const sponsors = computed(() => {
   >
     <img width="22" height="22" src="/viteconf.svg" />
     <span>
-      <p class="extra-info">Beyond Fast</p>
+      <p class="extra-info">Más allá de la velocidad</p>
       <p class="heading">ViteConf 2023</p>
-      <p class="extra-info">Watch the replay!</p>
+      <p class="extra-info">¡Mira la repetición!</p>
     </span>
   </a>
   <VPDocAsideSponsors v-if="data" :data="sponsors" />
