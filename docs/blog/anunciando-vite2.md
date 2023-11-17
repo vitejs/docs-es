@@ -1,5 +1,19 @@
 ---
 sidebar: false
+date: 2021-02-16
+head:
+  - - meta
+    - property: og:type
+      content: website
+  - - meta
+    - property: og:title
+      content: Anunciando Vite 2.0
+  - - meta
+    - property: og:url
+      content: https://es.vitejs.dev/blog/anunciando-vite2
+  - - meta
+    - property: og:description
+      content: Anuncio de lanzamiento de Vite 2
 ---
 
 # Anunciando Vite 2.0
