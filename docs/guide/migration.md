@@ -15,6 +15,8 @@ Vite ahora está usando Rollup 4, que también trae consigo sus cambios importan
 
 Lee los cambios importantes completos en las [notas de la versión de Rollup](https://github.com/rollup/rollup/releases/tag/v4.0.0) para conocer los cambios relacionados con la compilación en [`build.rollupOptions`](/config/build-options.md#build-rollupoptions).
 
+Si estás utilizando TypeScript, asegúrate de configurar `moduleResolution: 'bundler'` (o `node16`/`nodenext`) ya que Rollup 4 lo requiere. O puedes configurar `skipLibCheck: true` en su lugar.
+
 ## API de Node para la compilación CJS de Vite, ahora obsoleta
 
 La API de Node para la compilación CJS de Vite ahora está en desuso. Al llamar a `require('vite')`, ahora se registra una advertencia de obsolescencia. En su lugar, debes actualizar tus archivos o frameworks para importar la compilación ESM de Vite.
@@ -22,7 +24,7 @@ La API de Node para la compilación CJS de Vite ahora está en desuso. Al llamar
 En un proyecto básico de Vite, asegúrate que:
 
 1. El contenido del archivo `vite.config.js` utiliza la sintaxis ESM.
-2. El archivo `package.json` más cercano tiene `"type": "module"`, o usa la extensión `.mjs`, por ejemplo, `vite.config.mjs`.
+2. El archivo `package.json` más cercano tiene `"type": "module"`, o usa la extensión `.mjs`/`.mts`, por ejemplo, `vite.config.mjs` o `vite.config.mts`.
 
 Para otros proyectos, existen algunos enfoques generales:
 

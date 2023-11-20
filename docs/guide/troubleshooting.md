@@ -13,7 +13,7 @@ La compilación CJS de la API de Node de Vite está obsoleta y se eliminará en 
 En un proyecto básico de Vite, asegúrate que:
 
 1. El contenido del archivo `vite.config.js` utiliza la sintaxis ESM.
-2. El archivo `package.json` más cercano tiene `"type": "module"`, o usa la extensión `.mjs`, por ejemplo, `vite.config.mjs`.
+2. El archivo `package.json` más cercano tiene `"type": "module"`, o usa la extensión `.mjs`/`.mts`, por ejemplo, `vite.config.mjs` o `vite.config.mts`.
 
 Para otros proyectos, existen algunos enfoques generales:
 
