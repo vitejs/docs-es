@@ -1,6 +1,9 @@
 ---
-sidebar: false
+title: ¡Vite 5.0 ya está disponible!
+author:
+  - name: El equipo de Vite
 date: 2023-11-16
+sidebar: false
 head:
   - - meta
     - property: og:type
@@ -46,9 +49,9 @@ Enlaces rápidos:
 
 Documentación en otros idiomas:
 
+- [English](https://vitejs.dev/)
 - [简体中文](https://cn.vitejs.dev/)
 - [日本語](https://ja.vitejs.dev/)
-- [Español](https://es.vitejs.dev/)
 - [Português](https://pt.vitejs.dev/)
 - [한국어](https://ko.vitejs.dev/)
 - [Deutsch](https://de.vitejs.dev/) (nueva traducción)

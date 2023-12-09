@@ -90,20 +90,18 @@ Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-
 
 ## Plantillas de la comunidad
 
-create-vite es una herramienta para crear rápidamente un proyecto a partir de una plantilla básica para marcos de trabajo populares. Consulta Awesome Vite para [plantillas mantenidas por la comunidad](https://github.com/vitejs/awesome-vite#templates) que incluyen otras herramientas o apuntan a diferentes marcos de trabajo. Puedes usar una herramienta como [degit](https://github.com/Rich-Harris/degit) para montar tu proyecto con una de las plantillas.
+`create-vite` es una herramienta para iniciar rápidamente un proyecto desde una plantilla básica para frameworks populares. Echa un vistazo a Awesome Vite para [plantillas soportadas por la comunidad](https://github.com/vitejs/awesome-vite#templates) que incluyen otras herramientas o se dirigen a diferentes frameworks.
+
+Para una plantilla en `https://github.com/user/project`, puedes probarla en línea usando `https://github.stackblitz.com/user/project` (agregando `.stackblitz` después de `github` en la URL del proyecto).
+
+También puedes usar una herramienta como [degit](https://github.com/Rich-Harris/degit) para estructurar tu proyecto con una de las plantillas. Suponiendo que el proyecto está en GitHub y usa `main` como rama predeterminada, puedes crear una copia local usando:
 
 ```bash
-npx degit user/project my-project
+npx degit user/project#main my-project
 cd my-project
 
 npm install
 npm run dev
-```
-
-Si el proyecto usa `main` como la rama por defecto, agrega el sufijo `#main` al repositorio del proyecto.
-
-```bash
-npx degit user/project#main my-project
 ```
 
 ## `index.html` y raíz del proyecto

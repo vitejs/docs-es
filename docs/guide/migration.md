@@ -135,6 +135,14 @@ En Vite 4, los archivos de manifiesto ([`build.manifest`](/config/build-options.
 
 A partir de Vite 5, se generarán en el directorio `.vite` en `build.outDir` por defecto. Este cambio ayuda a eliminar el conflicto de archivos públicos con los mismos nombres de los archivos de manifiesto cuando se copian en `build.outDir`.
 
+### Los archivos CSS correspondientes no se listan como entrada de nivel superior en el archivo manifest.json
+
+En Vite 4, el archivo CSS correspondiente a un punto de entrada de JavaScript también se listaba como una entrada de nivel superior en el archivo de manifiesto ([`build.manifest`](/config/build-options.md#build-manifest)). Estas entradas se agregaban involuntariamente y solo funcionaban para casos simples.
+
+En Vite 5, los archivos CSS correspondientes solo se pueden encontrar dentro de la sección del archivo JavaScript de entrada.
+Cuando se inyecta el archivo JS, los archivos CSS correspondientes [deben ser inyectados](/guide/backend-integration.md#:~:text=%3C!%2D%2D%20if%20production%20%2D%2D%3E%0A%3Clink%20rel%3D%22stylesheet%22%20href%3D%22/assets/%7B%7B%20manifest%5B%27main.js%27%5D.css%20%7D%7D%22%20/%3E%0A%3Cscript%20type%3D%22module%22%20src%3D%22/assets/%7B%7B%20manifest%5B%27main.js%27%5D.file%20%7D%7D%22%3E%3C/script%3E).
+Cuando el CSS debe ser inyectado por separado, debe agregarse como una entrada separada.
+
 ### Los accesos directos de CLI requieren una pulsación adicional de "Intro"
 
 Los atajos del CLI, como `r` para reiniciar el servidor de desarrollo, ahora requieren presionar un `Enter` adicional para activar el atajo. Por ejemplo, `r + Enter` para reiniciar el servidor de desarrollo.
@@ -231,6 +239,8 @@ También hay otros cambios importantes que sólo afectan a unos pocos usuarios.
   - `resolve.browserField` ha sido marcado como obsoleto desde Vite 3 en favor de una actualización de valores por defecto de `['browser', 'module', 'jsnext:main', 'jsnext']` para [`resolve.mainFields`](/config/shared-options.md#resolve-mainfields).
 - [[#14855] feat!: agrega isPreview a ConfigEnv y resolveConfig](https://github.com/vitejs/vite/pull/14855)
   - Se cambió el nombre de `ssrBuild` a `isSsrBuild` en el objeto `ConfigEnv`.
+- [[#14945] fix(css): Configura correctamente el nombre fuente del manifiesto y emite el archivo CSS](https://github.com/vitejs/vite/pull/14945)
+  - Los nombres de los archivos CSS ahora se generan en función del nombre del fragmento (chunk).
     ​
 
 ## Migración desde v3

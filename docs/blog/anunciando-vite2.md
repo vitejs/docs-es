@@ -1,4 +1,7 @@
 ---
+title: Anunciando Vite 2.0
+author:
+  - name: El equipo de Vite
 sidebar: false
 date: 2021-02-16
 head:

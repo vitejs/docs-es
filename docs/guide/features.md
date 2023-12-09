@@ -1,6 +1,6 @@
 # Funcionalidades
 
-En un nivel muy básico, desarrollar usando Vite no es muy diferente de usar un servidor de archivos estático. Sin embargo, Vite proporciona muchas mejoras sobre las importaciones de ESM nativas para admitir varias funciones que normalmente se ven en las configuraciones basadas en paquetes.
+En el nivel más básico, desarrollar con Vite no es muy diferente de usar un servidor de archivos estáticos. Sin embargo, Vite ofrece muchas mejoras sobre las importaciones nativas de ESM para soportar diversas funcionalidades que se suelen ver en configuraciones basadas en empaquetadores.
 
 ## Resolución de dependencias de NPM y preempaquetado
 

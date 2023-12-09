@@ -60,9 +60,21 @@ export default defineConfig({
 
 Esta estrategia también se proporciona como una factoría `splitVendorChunk({cache: SplitVendorChunkCache})`, en caso de que se necesite una composición con lógica personalizada. Es necesario llamar a `cache.reset()` en `buildStart` para que el modo de visualización de compilación funcione correctamente en este caso.
 
-::: advertencia
+::: warning
 Debes utilizar la función `build.rollupOptions.output.manualChunks` cuando utilices este plugin. Si se utiliza la forma de objeto, el plugin no tendrá ningún efecto.
 :::
+
+## Manejo de Errores de Carga
+
+Vite emite el evento `vite:preloadError` cuando no puede cargar importaciones dinámicas. `event.payload` contiene el error de importación original. Si llamas a `event.preventDefault()`, el error no se lanzará.
+
+```js
+window.addEventListener('vite:preloadError', (event) => {
+  window.reload() // por ejemplo, refrescar la página
+})
+```
+
+Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los recursos de despliegues anteriores. Como resultado, un usuario que visitó tu sitio antes del nuevo despliegue podría encontrarse con un error de importación. Este error ocurre porque los recursos que se ejecutan en el dispositivo de ese usuario están desactualizados e intenta importar el fragmento antiguo correspondiente, que se ha eliminado. Este evento es útil para abordar esta situación.
 
 ## Recompilar en cambios de archivos
 

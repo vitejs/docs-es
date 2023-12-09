@@ -1,6 +1,9 @@
 ---
-sidebar: false
+title: ¡Vite 3.0 ya está disponible!
+author:
+  - name: El equipo de Vite
 date: 2022-07-23
+sidebar: false
 head:
   - - meta
     - property: og:type

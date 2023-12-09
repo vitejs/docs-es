@@ -1,6 +1,9 @@
 ---
-sidebar: false
+title: ¡Vite 4.0 ya está disponible!
+author:
+  - name: El equipo de Vite
 date: 2022-12-09
+sidebar: false
 head:
   - - meta
     - property: og:type

@@ -46,9 +46,13 @@ DB_PASSWORD=foobar
 Solo `VITE_SOME_KEY` se expondrá como `import.meta.env.VITE_SOME_KEY` en el código fuente del cliente, pero `DB_PASSWORD` no.
 
 ```js
-console.log(import.meta.env.VITE_SOME_KEY) // 123
+console.log(import.meta.env.VITE_SOME_KEY) // "123"
 console.log(import.meta.env.DB_PASSWORD) // undefined
 ```
+
+:::tip Análisis de Env
+Como se muestra anteriormente, `VITE_SOME_KEY` es un número pero devuelve una cadena cuando se analiza. Lo mismo ocurriría también para variables de entorno booleanas. Asegúrate de convertir al tipo deseado al usarlo en tu código.
+:::
 
 Además, Vite usa [dotenv-expand](https://github.com/motdotla/dotenv-expand) para expandir variables listas para usar. Para obtener más información sobre la sintaxis, consulta [su documentación](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow).
 
@@ -74,7 +78,7 @@ Si deseas personalizar el prefijo de las variables env, consulta la opción [env
 
 De forma predeterminada, Vite proporciona definiciones de tipo para `import.meta.env` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Si bien puedes definir más variables de entorno personalizadas en los archivos `.env.[mode]`, es posible que desees que IntelliSense funcione para las variables de entorno definidas por el usuario que tienen el prefijo `VITE_`.
 
-Para hacerlo, puedes crear un `env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
+Para hacerlo, puedes crear un `vite-env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
 
 ```typescript
 /// <reference types="vite/client" />
@@ -97,6 +101,10 @@ Si tu código se basa en tipos de entornos de navegador como [DOM](https://githu
   "lib": ["WebWorker"]
 }
 ```
+
+:::warning Las importaciones romperán la augmentación de tipo
+Si la augmentación de `ImportMetaEnv` no funciona, asegúrate de que no haya ninguna declaración de `import` en `vite-env.d.ts`. Consulta la [documentación de TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html#how-javascript-modules-are-defined) para obtener más información.
+:::
 
 ## Sustitución de variables de entorno en archivos HTML
 

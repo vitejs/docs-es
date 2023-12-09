@@ -1,6 +1,9 @@
 ---
-sidebar: false
+title: ¡Vite 4.3 ya está disponible!
+author:
+  - name: El equipo de Vite
 date: 2023-04-20
+sidebar: false
 head:
   - - meta
     - property: og:type

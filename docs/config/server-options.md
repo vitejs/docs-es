@@ -243,9 +243,7 @@ async function createServer() {
     server: { middlewareMode: true },
     appType: 'custom' // no incluir middlewares de manejo de HTML predeterminado de Vite
   // Usa la instancia de conexión de vite como middleware
-  app.use((req, res, next) => {
-    vite.middlewares.handle(req, res, next)
-  })
+  app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
     // Dado que `appType` es `'custom'`, debería servir la respuesta aquí.
