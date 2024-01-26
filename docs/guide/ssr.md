@@ -91,7 +91,7 @@ async function createServer() {
   // router de Express (express.Router()), debes usar router.use
   // Cuando el servidor se reinicia (por ejemplo, después de que el usuario modifica
   // vite.config.js), `vite.middlewares` seguirá siendo la misma
-  // referencia (con una nueva cola interna de middlewares de Vite e inyectados por complementos.
+  // referencia (con una nueva cola interna de middlewares de Vite e inyectados por complementos).
   // Lo siguiente es válido incluso después de reinicios.
   app.use(vite.middlewares)
 

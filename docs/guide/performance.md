@@ -6,6 +6,10 @@ Si bien Vite es rápido por defecto, los problemas de rendimiento pueden aparece
 - Cargas de página lentas
 - compilaciones lentas
 
+## Evita las extensiones del navegador
+
+Algunas extensiones del navegador pueden interferir con las solicitudes y ralentizar los tiempos de inicio y recarga de aplicaciones grandes, especialmente cuando se utilizan herramientas de desarrollo del navegador. Recomendamos crear un perfil solo para desarrolladores sin extensiones, o cambiar al modo incógnito, mientras usa el servidor de desarrollo de Vite en estos casos. El modo incógnito también debería ser más rápido que un perfil normal sin extensiones.
+
 ## Auditar complementos de Vite configurados
 
 Los complementos internos y oficiales de Vite están optimizados para realizar la menor cantidad de trabajo posible y al mismo tiempo brindar compatibilidad con el ecosistema más amplio. Por ejemplo, las transformaciones de código usan expresiones regulares en desarrollo, pero realizan un análisis completo en compilación para garantizar exactitud.

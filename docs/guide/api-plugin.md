@@ -418,11 +418,11 @@ interface HtmlTagDescriptor {
 
   - Filtrar y reducir la lista de módulos afectados para que el HMR sea más preciso.
 
-  - Devuelva un array vacío y realiza un manejo completo de HMR personalizado enviando eventos personalizados al cliente:
+  - Devuelva un array vacío y realiza un manejo completo de HMR personalizado enviando eventos personalizados al cliente (el ejemplo usa `server.hot` que se introdujo en Vite 5.1, se recomienda usar también `server.ws` si se quiere soportar versiones inferiores)::
 
     ```js
     handleHotUpdate({ server }) {
-      server.ws.send({
+      server.hot.send({
         type: 'custom',
         event: 'special-update',
         data: {}
@@ -529,7 +529,7 @@ Desde Vite 2.9, proporcionamos algunas utilidades para complementos que ayudan a
 
 ### Servidor a Cliente
 
-En el lado del complemento, podríamos usar `server.ws.send` para transmitir eventos a todos los clientes:
+En el lado del complemento, podríamos usar `server.hot.send` (a partir de Vite 5.1) o `server.ws.send` para transmitir eventos a todos los clientes:
 
 ```js
 // vite.config.js
@@ -539,8 +539,8 @@ export default defineConfig({
       // ...
       configureServer(server) {
         // Ejemplo: espera a que un cliente se conecte antes de enviar un mensaje
-        server.ws.on('connection', () => {
-          server.ws.send('my:greetings', { msg: 'hello' })
+        server.hot.on('connection', () => {
+          server.hot.send('my:greetings', { msg: 'hello' })
         })
       },
     },
@@ -551,6 +551,7 @@ export default defineConfig({
 ::: tip NOTA
 Recomendamos **siempre prefijar** los nombres de tus eventos para evitar colisiones con otros complementos.
 :::
+
 En el lado del cliente, usa [`hot.on`](/guide/api-hmr.html#hot-on-event-cb) para escuchar los eventos:
 
 ```ts
@@ -573,7 +574,7 @@ if (import.meta.hot) {
 }
 ```
 
-Luego usar `server.ws.on` y escuchar los eventos en el lado del servidor:
+Luego usar `server.hot.on` (a partir de Vite 5.1) o `server.ws.on` y escuchar los eventos en el lado del servidor:
 
 ```js
 // vite.config.js
@@ -582,7 +583,7 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        server.ws.on('my:from-client', (data, client) => {
+        server.hot.on('my:from-client', (data, client) => {
           console.log('Message from client:', data.msg) // Hey!
           // reply only to the client (if needed)
           client.send('my:ack', { msg: 'Hi! I got your message!' })

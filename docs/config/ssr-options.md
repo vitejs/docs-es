@@ -2,17 +2,25 @@
 
 ## ssr.external
 
-- **Tipo:** `string[]`
+- **Tipo:** `string[] | true`
 - **Relacionado:** [SSR Externos](/guide/ssr#ssr-externos)
 
-  Fuerza la externalización de dependencias para SSR.
+Externaliza las dependencias dadas y sus dependencias transitivas para SSR. Por defecto, todas las dependencias se externalizan excepto las dependencias vinculadas (para HMR). Si prefieres externalizar la dependencia vinculada, puedes pasar su nombre a esta opción.
+
+Si es `true`, todas las dependencias, incluidas las vinculadas, se externalizan.
+
+Ten en cuenta que las dependencias enumeradas explícitamente (que usan el tipo `string[]`) siempre tendrán prioridad si también se enumeran en `ssr.noExternal` (usando cualquier tipo).
 
 ## ssr.noExternal
 
 - **Tipo:** `string | RegExp | (string | RegExp)[] | true`
 - **Relacionado:** [SSR Externos](/guide/ssr#ssr-externos)
 
-  Evita que las dependencias enumeradas se externalicen para SSR. Si es `true`, no se externalizan dependencias.
+Previene que las dependencias enumeradas se externalicen para SSR, las cuales se incluirán después en la compilación. Por defecto, sólo las dependencias vinculadas no se externalizan (para HMR). Si prefieres externalizar la dependencia vinculada, puede pasar su nombre a la opción `ssr.external`.
+
+Si es `true`, no se externalizan dependencias. Sin embargo, las dependencias enumeradas explícitamente en `ssr.external` (usando el tipo `string[]`) pueden tener prioridad y aún así externalizarse.
+
+Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` están configurados, `ssr.noExternal` tiene prioridad y no se externalizan dependencias.
 
 ## ssr.target
 

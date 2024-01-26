@@ -199,7 +199,7 @@ export defineConfig default ({
 
 Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
 
-El observador del servidor Vite observa el `root` y omite los directorios `.git/` y `node_modules/` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
+El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
 Si se configura en `null`, no se observará ningún archivo. `server.watcher` proporcionará un emisor de eventos compatible, pero invocar a `add` o `unwatch` no tendrá ningún efecto.
 

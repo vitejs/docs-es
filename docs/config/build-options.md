@@ -82,10 +82,14 @@ Especifica el directorio en el que se alojarán los recursos generados (en relac
 
 ## build.assetsInlineLimit
 
-- **Tipo:** `number`
+- **Tipo:** `number` | `((filePath: string, content: Buffer) => boolean | undefined)`
 - **Por defecto:** `4096` (4KiB)
 
 Los recursos importados o a los que se hace referencia que son más pequeños que este umbral se insertarán como URL base64 para evitar solicitudes http adicionales. Configurar en `0` para deshabilitar la inserción por completo.
+
+Si se pasa un callback, se puede devolver un valor booleano para optar por usarlo o no. Si no se devuelve nada, se aplica la lógica predeterminada.
+
+Los marcadores de posición de Git LFS se excluyen automáticamente de la inserción porque no contienen el contenido del archivo que representan.
 
 ::: tip Nota
 Si especificas `build.lib`, `build.assetsInlineLimit` se ignorará y los recursos siempre serán insertados, independientemente del tamaño del archivo o de ser un marcador de posición Git LFS.
@@ -189,7 +193,7 @@ Durante la compilación de SSR, los recursos estáticos no se emiten, ya que se 
 ## build.minify
 
 - **Tipo:** `boolean | 'terser' | 'esbuild'`
-- **Por defecto:** `'esbuild'`
+- **Por defecto:** `'esbuild'` para la compilación del cliente, `false` para el servidor de compilación SSR.
 
 Configurar en `false` para deshabilitar la minificación, o especificar el minificador que se usará. El valor predeterminado es [esbuild](https://github.com/evanw/esbuild), que es 20 ~ 40 veces más rápido que terser y solo 1 ~ 2 % peor en compresión. [Pruebas de rendimiento](https://github.com/privatenumber/minification-benchmarks)
 

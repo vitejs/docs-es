@@ -391,26 +391,6 @@ const modules = {
 }
 ```
 
-### Formas de importación Glob
-
-`import.meta.glob` también admite la importación de archivos como cadenas (similar a la [importación de recursos como cadena](./assets#importar-recursos-como-cadenas-de-texto)) con la sintaxis de [importación reflexiva](https://github.com/tc39/proposal-import-reflection):
-
-```js
-const modules = import.meta.glob('./dir/*.js', { as: 'raw', eager: true })
-```
-
-Lo anterior se transformará en lo siguiente:
-
-```js
-// código producido por vite
-const modules = {
-  './dir/foo.js': 'export default "foo"\n',
-  './dir/bar.js': 'export default "bar"\n',
-}
-```
-
-`{ as: 'url' }` también se admite para cargar recursos como URL.
-
 ### Patrones múltiples
 
 El primer argumento puede ser una array de globs, por ejemplo
@@ -436,7 +416,7 @@ const modules = {
 
 #### Importaciones nombradas
 
-Es posible importar solo partes de los módulos con las opciones de`import`.
+Es posible importar solo partes de los módulos con las opciones de `import`.
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
@@ -490,22 +470,37 @@ const modules = {
 
 #### Consultas personalizadas
 
-También puedes usar la opción `query` para proporcionar consultas personalizadas a las importaciones para que las consuman otros complementos.
+También puedes utilizar la opción `query` para realizar consultas sobre importaciones, por ejemplo, para importar recursos [como una cadena](./assets.html#importar-recursos-como-cadenas-de-texto) o [como URL](./assets.html#importar-recursos-como-url):
 
 ```ts
-const modules = import.meta.glob('./dir/*.js', {
-  query: { foo: 'bar', bar: true },
+const moduleStrings = import.meta.glob('./dir/*.svg', {
+  query: '?raw',
+  import: 'default',
+})
+const moduleUrls = import.meta.glob('./dir/*.svg', {
+  query: '?url',
+  import: 'default',
 })
 ```
 
 ```ts
 // código producido por vite:
-const modules = {
-  './dir/foo.js': () =>
-    import('./dir/foo.js?foo=bar&bar=true').then((m) => m.setup),
-  './dir/bar.js': () =>
-    import('./dir/bar.js?foo=bar&bar=true').then((m) => m.setup),
+const moduleStrings = {
+  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
 }
+const moduleUrls = {
+  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
+}
+```
+
+También puedes proporcionar consultas personalizadas para que las consuman otros complementos:
+
+```ts
+const modules = import.meta.glob('./dir/*.js', {
+  query: { foo: 'bar', bar: true },
+})
 ```
 
 ### Advertencias de importación glob
@@ -618,6 +613,8 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
   type: 'module',
 })
 ```
+
+La detección de workers solo funcionará si el constructor `new URL()` se usa directamente dentro de la declaración `new Worker()`. Además, todos los parámetros de opciones deben ser valores estáticos (es decir, cadenas literales).
 
 ### Importar con sufijos de consulta
 

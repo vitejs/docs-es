@@ -214,17 +214,12 @@ Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de
 - `less` - [Opciones](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: solo se admite [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual se puede pasar como un objeto.
 
-Todas las opciones de preprocesadores también soportan la opción `additionalData`, el cual se puede usar para inyectar código adicional para cada contenido de estilo. Ten en cuenta que si incluyes estilos reales y no solo variables, estos podrían duplicarse en el paquete final.
-
-Ejemplo:
+**Ejemplo**:
 
 ```js
 export default defineConfig({
   css: {
     preprocessorOptions: {
-      scss: {
-        additionalData: `$injectedColor: orange;`,
-      },
       less: {
         math: 'parens-division',
       },
@@ -238,9 +233,37 @@ export default defineConfig({
 })
 ```
 
+### css.preprocessorOptions[extension].additionalData
+
+- **Tipo:** `string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))`
+
+Esta opción se puede utilizar para inyectar código adicional para cada contenido de estilo. Ten en cuenta que si incluyes estilos reales y no solo variables, esos estilos se duplicarán en el paquete final.
+
+**Ejemplo:**
+
+```js
+export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `$injectedColor: orange;`,
+      },
+    },
+  },
+})
+```
+
+## css.preprocessorMaxWorkers
+
+- **Experimental:** [Hacer comentarios](TODO: update)
+- **Tipo:** `number | true`
+- **Por defecto:** `0` (no crea ningún worker y se ejecuta en el hilo principal)
+
+Si se configura esta opción, los preprocesadores CSS se ejecutarán en los workers cuando sea posible. `true` significa el número de CPU menos 1.
+
 ## css.devSourcemap
 
-- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13845)
+- **Experimental** [Hacer comentarios](https://github.com/vitejs/vite/discussions/13845)
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
 
@@ -249,8 +272,8 @@ Habilita los mapas de origen durante el desarrollo.
 ## css.transformer
 
 - **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)
-- **Type:** `'postcss' | 'lightningcss'`
-- **Default:** `'postcss'`
+- **Tipo:** `'postcss' | 'lightningcss'`
+- **Por defecto:** `'postcss'`
 
 Selecciona el motor utilizado para el procesamiento de CSS. Consulta [Lightning CSS](../guide/features.md#lightning-css) para obtener más información.
 
