@@ -20,7 +20,9 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 ## Compatibilidad con navegadores
 
-La configuración de compilación predeterminada va dirigida a navegadores que admiten [modulos ESM nativos](https://caniuse.com/es6-module), [importación dinámica de ESM nativo](https://caniuse.com/es6-module-dynamic-import) e [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Los navegadores obsoletos pueden ser soportados a través del [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial; consulta [Compilación en producción](./build) para más detalles.
+Durante el desarrollo, Vite configura [`esnext` como el objetivo de transformación](https://esbuild.github.io/api/#target), porque asumimos que se está utilizando un navegador moderno que admite todas las características más recientes de JavaScript y CSS. Esto evita la reducción de sintaxis, permitiendo que Vite sirva módulos lo más cercanos posible al código fuente original.
+
+Para la compilación de producción, de forma predeterminada Vite apunta a navegadores que admiten [Módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Los navegadores legacy pueden ser compatibles a través del complemento oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). Consulta la sección [Compilación en Producción](./build) para obtener más detalles.
 
 ## Probar Vite online
 
@@ -39,37 +41,37 @@ Los ajustes preestablecidos de plantilla admitidos son:
 |   [solid](https://vite.new/solid)   |   [solid-ts](https://vite.new/solid-ts)   |
 |    [qwik](https://vite.new/qwik)    |    [qwik-ts](https://vite.new/qwik-ts)    |
 
-## Monta tu primer proyecto Vite
+## Inicia tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) versión 14.18+, y 16+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+Vite requiere [Node.js](https://nodejs.org/en/) version 18+. 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
 :::
 
-Con NPM:
+::: code-group
 
-```bash
+```bash [NPM]
 $ npm create vite@latest
 ```
 
-Con Yarn:
-
-```bash
+```bash [Yarn]
 $ yarn create vite
 ```
 
-Con PNPM:
-
-```bash
+```bash [PNPM]
 $ pnpm create vite
 ```
+
+```bash [Bun]
+$ bun create vite
+```
+
+:::
 
 ¡Entonces sigue las instrucciones!
 
 También puedes especificar directamente el nombre del proyecto y la plantilla que deseas usar a través de las opciones de línea de comandos adicionales. Por ejemplo, para montar un proyecto de Vite + Vue, ejecuta:
 
 ```bash
-# npm 6.x
-npm create vite@latest my-vue-app --template vue
 
 # npm 7+, se requiere guión doble extra:
 npm create vite@latest my-vue-app -- --template vue
@@ -79,26 +81,27 @@ yarn create vite my-vue-app --template vue
 
 # pnpm
 pnpm create vite my-vue-app --template vue
+
+# bun
+bun create vite my-vue-app --template vue
 ```
 
 Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 ## Plantillas de la comunidad
 
-create-vite es una herramienta para crear rápidamente un proyecto a partir de una plantilla básica para marcos de trabajo populares. Consulta Awesome Vite para [plantillas mantenidas por la comunidad](https://github.com/vitejs/awesome-vite#templates) que incluyen otras herramientas o apuntan a diferentes marcos de trabajo. Puedes usar una herramienta como [degit](https://github.com/Rich-Harris/degit) para montar tu proyecto con una de las plantillas.
+`create-vite` es una herramienta para iniciar rápidamente un proyecto desde una plantilla básica para frameworks populares. Echa un vistazo a Awesome Vite para [plantillas soportadas por la comunidad](https://github.com/vitejs/awesome-vite#templates) que incluyen otras herramientas o se dirigen a diferentes frameworks.
+
+Para una plantilla en `https://github.com/user/project`, puedes probarla en línea usando `https://github.stackblitz.com/user/project` (agregando `.stackblitz` después de `github` en la URL del proyecto).
+
+También puedes usar una herramienta como [degit](https://github.com/Rich-Harris/degit) para estructurar tu proyecto con una de las plantillas. Suponiendo que el proyecto está en GitHub y usa `main` como rama predeterminada, puedes crear una copia local usando:
 
 ```bash
-npx degit user/project my-project
+npx degit user/project#main my-project
 cd my-project
 
 npm install
 npm run dev
-```
-
-Si el proyecto usa `main` como la rama por defecto, agrega el sufijo `#main` al repositorio del proyecto.
-
-```bash
-npx degit user/project#main my-project
 ```
 
 ## `index.html` y raíz del proyecto
@@ -131,7 +134,7 @@ En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus 
 }
 ```
 
-Puedes especificar opciones CLI adicionales como `--port` o `--https`. Para obtener una lista completa de las opciones de la CLI, ejecuta `npx vite --help` en tu proyecto.
+Puedes especificar opciones CLI adicionales como `--port` o `--open`. Para obtener una lista completa de las opciones de la CLI, ejecuta `npx vite --help` en tu proyecto.
 
 Aprende más sobre la [interfaz de línea de comnando](./cli.md)
 

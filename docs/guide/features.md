@@ -1,6 +1,6 @@
 # Funcionalidades
 
-En un nivel muy básico, desarrollar usando Vite no es muy diferente de usar un servidor de archivos estático. Sin embargo, Vite proporciona muchas mejoras sobre las importaciones de ESM nativas para admitir varias funciones que normalmente se ven en las configuraciones basadas en paquetes.
+En el nivel más básico, desarrollar con Vite no es muy diferente de usar un servidor de archivos estáticos. Sin embargo, Vite ofrece muchas mejoras sobre las importaciones nativas de ESM para soportar diversas funcionalidades que se suelen ver en configuraciones basadas en empaquetadores.
 
 ## Resolución de dependencias de NPM y preempaquetado
 
@@ -57,6 +57,8 @@ Algunos campos de configuración en `compilerOptions` en `tsconfig.json` requier
 
 #### `isolatedModules`
 
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#isolatedModules)
+
 Debes configurarse en `true`.
 
 Esto se debe a que `esbuild` solo realiza la transpilación sin información de tipo, no admite ciertas características como const enum e importaciones implícitas de solo tipo.
@@ -67,13 +69,33 @@ Sin embargo, algunas bibliotecas (por ejemplo, [`vue`](https://github.com/vuejs/
 
 #### `useDefineForClassFields`
 
-A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es `ESNext` o `ES2022` o superiores. Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript. Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
+
+A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es `ESNext` o `ES2022` o superiores. Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript.
+
+Otros destinos de TypeScript tendrán el valor predeterminado `false`.
+
+Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
 
 Si estás utilizando una biblioteca que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la biblioteca.
 
 La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [MobX](https://mobx.js.org/installation.html#use-spec-obediente-transpilation-for-class-properties).
 
-Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor predeterminado, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
+Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor por defecto, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
+
+#### `target`
+
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#target)
+
+Vite no transpila TypeScript con el valor `target` configurado por defecto, siguiendo el mismo comportamiento que `esbuild`.
+
+En su lugar, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), cuyo valor por defecto es `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad y también se puede configurar si es necesario.
+
+::: warning `useDefineForClassFields`
+Si `target` no es `ESNext` o `ES2022` o más reciente, o si no hay un archivo `tsconfig.json`, `useDefineForClassFields` por defecto será `false`, lo que puede ser problemático con el valor por defecto de `esbuild.target` de `es siguiente`. Puede transpilarse a [bloques de inicialización estáticos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility) que pueden no ser compatibles con tu navegador.
+
+Como tal, se recomienda configurar `target` en `ESNext` o `ES2022` o más reciente, o configurar `useDefineForClassFields` en `true` explícitamente en el `tsconfig.json`.
+:::
 
 #### Otras opciones del compilador que afectan el resultado de la compilación
 
@@ -81,10 +103,17 @@ Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor pre
 - [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
 - [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
+- [`verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax)
+- [`jsx`](https://www.typescriptlang.org/tsconfig#jsx)
 - [`jsxFactory`](https://www.typescriptlang.org/tsconfig#jsxFactory)
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
+- [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
+- [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
+- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
-Si migrar el codigo base a `"isolatedModules": true` es un esfuerzo arduo, es posible que puedas facilitar el trabajo con un complemento de terceros como [rollup-plugin-friendly-type-imports](https://www.npmjs.com/package/rollup-plugin-friendly-type-imports). Sin embargo, Vite no admite oficialmente este enfoque.
+::: tip `skipLibCheck`
+Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
+:::
 
 ### Tipos de clientes
 
@@ -176,7 +205,7 @@ export default defineConfig({
 
 ## CSS
 
-La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR. También puedes obtener el CSS procesado como una cadena o como exportación predeterminada del módulo.
+La importación de archivos `.css` inyectará su contenido en la página a través de una etiqueta `<style>` con soporte HMR.
 
 ### Incrustación y rebase de `@import`
 
@@ -251,7 +280,7 @@ import otherStyles from './bar.css?inline' // no se inyectará
 ```
 
 ::: tip NOTA
-Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) están en desuso desde Vite 4. Utiliza la línea `?inline` en su lugar.
+Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `import style from './foo.css'`) se eliminaron desde Vite 5. Utiliza la línea `?inline` en su lugar.
 :::
 
 ### Lightning CSS
@@ -266,7 +295,7 @@ Si se habilita, los archivos CSS se procesarán con Lightning CSS en lugar de Po
 
 Para configurar CSS Modules, debes utilizar [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) en lugar de [`css.modules`](../config/shared-options.md#css-modules) (que configura la forma en que PostCSS maneja los módulos de CSS).
 
-Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#css-minify).
+Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify).
 
 ::: tip NOTA
 Los [preprocesadores de CSS](#css-pre-processors) no son compatibles cuando se utiliza Lightning CSS.
@@ -362,26 +391,6 @@ const modules = {
 }
 ```
 
-### Formas de importación Glob
-
-`import.meta.glob` también admite la importación de archivos como cadenas (similar a la [importación de recursos como cadena](./assets#importar-recursos-como-cadenas-de-texto)) con la sintaxis de [importación reflexiva](https://github.com/tc39/proposal-import-reflection):
-
-```js
-const modules = import.meta.glob('./dir/*.js', { as: 'raw', eager: true })
-```
-
-Lo anterior se transformará en lo siguiente:
-
-```js
-// código producido por vite
-const modules = {
-  './dir/foo.js': 'export default "foo"\n',
-  './dir/bar.js': 'export default "bar"\n',
-}
-```
-
-`{ as: 'url' }` también se admite para cargar recursos como URL.
-
 ### Patrones múltiples
 
 El primer argumento puede ser una array de globs, por ejemplo
@@ -407,7 +416,7 @@ const modules = {
 
 #### Importaciones nombradas
 
-Es posible importar solo partes de los módulos con las opciones de`import`.
+Es posible importar solo partes de los módulos con las opciones de `import`.
 
 ```ts
 const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
@@ -461,22 +470,37 @@ const modules = {
 
 #### Consultas personalizadas
 
-También puedes usar la opción `query` para proporcionar consultas personalizadas a las importaciones para que las consuman otros complementos.
+También puedes utilizar la opción `query` para realizar consultas sobre importaciones, por ejemplo, para importar recursos [como una cadena](./assets.html#importar-recursos-como-cadenas-de-texto) o [como URL](./assets.html#importar-recursos-como-url):
 
 ```ts
-const modules = import.meta.glob('./dir/*.js', {
-  query: { foo: 'bar', bar: true },
+const moduleStrings = import.meta.glob('./dir/*.svg', {
+  query: '?raw',
+  import: 'default',
+})
+const moduleUrls = import.meta.glob('./dir/*.svg', {
+  query: '?url',
+  import: 'default',
 })
 ```
 
 ```ts
 // código producido por vite:
-const modules = {
-  './dir/foo.js': () =>
-    import('./dir/foo.js?foo=bar&bar=true').then((m) => m.setup),
-  './dir/bar.js': () =>
-    import('./dir/bar.js?foo=bar&bar=true').then((m) => m.setup),
+const moduleStrings = {
+  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
 }
+const moduleUrls = {
+  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
+}
+```
+
+También puedes proporcionar consultas personalizadas para que las consuman otros complementos:
+
+```ts
+const modules = import.meta.glob('./dir/*.js', {
+  query: { foo: 'bar', bar: true },
+})
 ```
 
 ### Advertencias de importación glob
@@ -500,7 +524,9 @@ Ten en cuenta que las variables solo representan nombres de archivo de un nivel 
 
 ## WebAssembly
 
-Los archivos `.wasm` precompilados se pueden importar con `?init`: la exportación predeterminada será una función de inicialización que devuelve una Promesa de la instancia de wasm:
+Los archivos `.wasm` precompilados se pueden importar con `?init`.
+
+La exportación por defecto será una función de inicialización que devuelve una Promesa de [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
 
 ```js
 import init from './example.wasm?init'
@@ -509,7 +535,7 @@ init().then((instance) => {
 })
 ```
 
-La función init también puede tomar el objeto `imports` que se pasa a `WebAssembly.instantiate` como su segundo argumento:
+La función init también puede tomar un importObject que se pasa a [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate) como su segundo argumento:
 
 ```js
 init({
@@ -523,12 +549,52 @@ init({
 })
 ```
 
-En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se copiarán en el directorio dist como un recurso y se obtendrán a petición.
+En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se tratarán como un [recurso estático](./assets) y se obtendrán a pedido.
 
-::: warning
+::: tip NOTA
 La [propuesta de integración de módulos ES para WebAssembly](https://github.com/WebAssembly/esm-integration) no es compatible actualmente.
 Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros complementos de la comunidad para darle el manejo apropiado.
 :::
+
+### Acceso al módulo en WebAssembly
+
+Si necesitas acceder al objeto `Module`, por ejemplo, para instanciarlo varias veces, utiliza una [importación de URL explícita](./assets#importar-recursos-como-url) para resolver el recurso y luego realice la instanciación:
+
+```js
+import wasmUrl from 'foo.wasm?url'
+
+const main = async () => {
+  const responsePromise = fetch(wasmUrl)
+  const { module, instance } =
+    await WebAssembly.instantiateStreaming(responsePromise)
+  /* ... */
+}
+
+main()
+```
+
+### Obteniendo el módulo en Node.js
+
+En SSR, el `fetch()` que ocurre como parte de la importación `?init`, puede fallar con `TypeError: URL no válida`.
+Consulta el problema en el debate de [Soporte wasm en SSR](https://github.com/vitejs/vite/issues/8882).
+
+Aquí hay una alternativa, asumiendo que la base del proyecto es el directorio actual:
+
+```js
+import wasmUrl from 'foo.wasm?url'
+import { readFile } from 'node:fs/promises'
+
+const main = async () => {
+  const resolvedUrl = (await import('./test/boot.test.wasm?url')).default
+  const buffer = await readFile('.' + resolvedUrl)
+  const { instance } = await WebAssembly.instantiate(buffer, {
+    /* ... */
+  })
+  /* ... */
+}
+
+main()
+```
 
 ## Web Workers
 
@@ -548,6 +614,8 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 })
 ```
 
+La detección de workers solo funcionará si el constructor `new URL()` se usa directamente dentro de la declaración `new Worker()`. Además, todos los parámetros de opciones deben ser valores estáticos (es decir, cadenas literales).
+
 ### Importar con sufijos de consulta
 
 Se puede importar directamente un script de web worker agregando `?worker` o `?sharedworker` a la solicitud de importación. La exportación predeterminada será un constructor de worker personalizado:
@@ -558,7 +626,7 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-El script del worker también puede usar sentencias ESM `import` en lugar de `importScripts()`; **Nota**: ten en cuenta que durante el desarrollo esto depende del [soporte nativo del navegador](https://caniuse.com/?search=module%20worker) (actualmente no compatible con Firefox), pero para la compilación de producción está compilado.
+El script del worker también puede usar sentencias ESM `import` en lugar de `importScripts()`; **Nota**: ten en cuenta que durante el desarrollo esto depende del [soporte nativo del navegador](https://caniuse.com/?search=module%20worker), pero para la compilación de producción está compilado.
 
 De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega el parámetro `inline`:
 

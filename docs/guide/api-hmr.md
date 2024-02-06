@@ -33,6 +33,10 @@ interface ViteHotContext {
     event: T,
     cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
+  off<T extends string>(
+    event: T,
+    cb: (payload: InferCustomEventPayload<T>) => void,
+  ): void
   send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
 }
 ```
@@ -141,6 +145,16 @@ if (import.meta.hot) {
 
 El objeto `import.meta.hot.data` se mantiene en diferentes instancias del mismo módulo actualizado. Se puede utilizar para pasar información de una versión anterior del módulo a la siguiente.
 
+Ten en cuenta que no se soporta la reasignación de `data` en sí. En su lugar, debes mutar las propiedades del objeto `data` para que se preserve la información agregada por otros manejadores.
+
+```js
+// ok
+import.meta.hot.data.someValue = 'hello'
+
+// no soportado
+import.meta.hot.data = { someValue: 'hello' }
+```
+
 ## `hot.decline()`
 
 Esto es actualmente un noop y está ahí para compatibilidad con versiones anteriores. Esto podría cambiar en el futuro si hay un nuevo uso para él. Para indicar que el módulo no se puede actualizar en caliente, utiliza `hot.invalidate()`.
@@ -159,6 +173,10 @@ import.meta.hot.accept((module) => {
   }
 })
 ```
+
+## `hot.off(event, cb)`
+
+Elimina el callback de los listeners de eventos.
 
 ## `hot.on(event, cb)`
 
@@ -180,5 +198,7 @@ Los eventos HMR personalizados también se pueden enviar desde complementos. Dal
 ## `hot.send(event, data)`
 
 Envía eventos personalizados al servidor de desarrollo de Vite.
+
 Si se llama antes de conectarse, los datos se almacenarán en búfer y se enviarán una vez que se establezca la conexión.
+
 Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#comunicacion-cliente-servidor) para obtener más detalles.

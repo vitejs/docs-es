@@ -29,11 +29,44 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
   await server.listen()
 
   server.printUrls()
+  server.bindCLIShortcuts({ print: true })
 })()
 ```
 
 :::tip NOTA
 Al usar `createServer` y `build` en el mismo proceso de Node.js, ambas funciones se basan en `process.env.NODE_ENV` para funcionar correctamente, lo que también depende de la opción de configuración `mode`. Para evitar un comportamiento conflictivo, configura `process.env.NODE_ENV` o el `mode` de las dos APIs en `development`. De lo contrario, puedes generar un proceso secundario para ejecutar las APIs por separado.
+:::
+
+::: tip NOTA
+Al utilizar el [modo de middleware](/config/server-options.html#server-middlewaremode) combinado con [configuración de proxy para WebSocket](/config/server-options.html#server-proxy), el servidor HTTP principal debe proporcionarse en `middlewareMode` para vincular correctamente el proxy.
+
+<details>
+<summary>Ejemplo</summary>
+
+```ts
+import http from 'http'
+import { createServer } from 'vite'
+const parentServer = http.createServer() // o express, koa, etc.
+const vite = await createServer({
+  server: {
+    // Habilita el modo middleware
+    middlewareMode: {
+      // Proporciona el servidor HTTP principal para el proxy WebSocket
+      server: parentServer,
+    },
+  },
+  proxy: {
+    '/ws': {
+      target: 'ws://localhost:3000',
+      // Proxying WebSocket
+      ws: true,
+    },
+  },
+})
+parentServer.use(vite.middlewares)
+```
+
+</details>
 :::
 
 ## `InlineConfig`
@@ -73,8 +106,8 @@ interface ViteDevServer {
    */
   httpServer: http.Server | null
   /**
-   * Instancia de observador Chokidar.
-   * https://github.com/paulmillr/chokidar#api
+   * Instancia de observador de Chokidar. Si `config.server.watch` está configurado como `null`,
+   * devuelve un emisor de eventos sin referencia.
    */
   watcher: FSWatcher
   /**
@@ -82,7 +115,7 @@ interface ViteDevServer {
    */
   ws: WebSocketServer
   /**
-   * Contenedor de plugins de Rollup que puede ejecutar hooks de plugins en un archivo dado.
+   * Contenedor de complementos de Rollup que puede ejecutar hooks de complementos en un archivo dado.
    */
   pluginContainer: PluginContainer
   /**
@@ -141,6 +174,10 @@ interface ViteDevServer {
    * Detiene el servidor.
    */
   close(): Promise<void>
+  /**
+   * Vincula atajos de línea de comando
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<ViteDevServer>): void
 }
 ```
 
@@ -197,21 +234,14 @@ import { preview } from 'vite'
   })
 
   previewServer.printUrls()
+  previewServer.bindCLIShortcuts({ print: true })
 })()
 ```
 
 ## `PreviewServer`
 
 ```ts
-interface PreviewServer extends PreviewServerForHook {
-  resolvedUrls: ResolvedServerUrls
-}
-```
-
-## `PreviewServerForHook`
-
-```ts
-interface PreviewServerForHook {
+interface PreviewServer
   /**
    * El objeto de configuración de vite resuelto
    */
@@ -230,13 +260,18 @@ interface PreviewServerForHook {
    */
   httpServer: http.Server
   /**
-   * Las URL resueltas que Vite imprime en la CLI
+   * Las URL resueltas que Vite imprime en la CLI.
+   * null antes de que el servidor esté escuchando.
    */
   resolvedUrls: ResolvedServerUrls | null
   /**
    * Imprime las URL del servidor
    */
   printUrls(): void
+  /**
+   * Vincula atajos de línea de comando
+   */
+  bindCLIShortcuts(options?: BindCLIShortcutsOptions<PreviewServer>): void
 }
 ```
 
@@ -249,10 +284,12 @@ async function resolveConfig(
   inlineConfig: InlineConfig,
   command: 'build' | 'serve',
   defaultMode = 'development',
+  defaultNodeEnv = 'development',
+  isPreview = false,
 ): Promise<ResolvedConfig>
 ```
 
-El valor de `command` es `serve` en dev (en el cli `vite`, `vite dev`, y `vite serve` son alias).
+El valor de `command` es `serve` en desarrollo y vista previa, y `build` en compilación.
 
 ## `mergeConfig`
 
@@ -270,6 +307,15 @@ Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel 
 
 ::: Nota
 `mergeConfig` solo acepta configuraciones en forma de objeto. Si tiene una configuración en forma de callback, deberías de llamarla antes de pasarla a `mergeConfig`.
+
+Puedes utilizar el helper `defineConfig` para juntar una configuración en forma de callback con otra configuración:
+
+```ts
+export default defineConfig((configEnv) =>
+  mergeConfig(configAsCallback(configEnv), configAsObject),
+)
+```
+
 :::
 
 ## `searchForWorkspaceRoot`

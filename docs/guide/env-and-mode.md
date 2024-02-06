@@ -8,21 +8,11 @@ Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Al
 
 - **`import.meta.env.BASE_URL`**: {string} la URL base desde la que se sirve la aplicación. Esto está determinado por la [opción de configuración `base`](/config/shared-options#base).
 
-- **`import.meta.env.PROD`**: {boolean} si la aplicación se ejecuta en producción.
+- **`import.meta.env.PROD`**: {boolean} si la aplicación se ejecuta en producción (ejecutando el servidor de desarrollo con `NODE_ENV='production'` o ejecutando una aplicación compilada con `NODE_ENV='production'`).
 
 - **`import.meta.env.DEV`**: {boolean} si la aplicación se está ejecutando en desarrollo (siempre lo contrario de `import.meta.env.PROD`)
 
 - **`import.meta.env.SSR`**: {boolean} si la aplicación se ejecuta en el [servidor](./ssr.md#conditional-logic).
-
-### Reemplazo en producción
-
-En producción, estas variables de entorno se **reemplazan estáticamente**. Por lo tanto, es necesario referenciarlas siempre utilizando la cadena estática completa. Por ejemplo, el acceso a claves dinámicas como `import.meta.env[key]` no funcionará.
-
-También se reemplazará estas cadenas que aparecen en las cadenas de JavaScript y las plantillas de Vue. Este debería ser un caso raro, pero puede ser involuntario. Es posible que veas errores como `Missing Semicolon` o `Unexpected token` en este caso, por ejemplo, cuando `"process.env.NODE_ENV"` se transforma en `""development": "`. Hay formas de evitar este comportamiento:
-
-- Para las cadenas de JavaScript, puedes dividir la cadena con un espacio Unicode de ancho cero, p. `'import.meta\u200b.env.MODE'`.
-
-- Para las plantillas de Vue u otro HTML que se compila en cadenas de JavaScript, puedes usar la etiqueta [](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr), por ejemplo, `import.meta.<wbr>env.MODE`.
 
 ## Archivos `.env`
 
@@ -56,9 +46,13 @@ DB_PASSWORD=foobar
 Solo `VITE_SOME_KEY` se expondrá como `import.meta.env.VITE_SOME_KEY` en el código fuente del cliente, pero `DB_PASSWORD` no.
 
 ```js
-console.log(import.meta.env.VITE_SOME_KEY) // 123
+console.log(import.meta.env.VITE_SOME_KEY) // "123"
 console.log(import.meta.env.DB_PASSWORD) // undefined
 ```
+
+:::tip Análisis de Env
+Como se muestra anteriormente, `VITE_SOME_KEY` es un número pero devuelve una cadena cuando se analiza. Lo mismo ocurriría también para variables de entorno booleanas. Asegúrate de convertir al tipo deseado al usarlo en tu código.
+:::
 
 Además, Vite usa [dotenv-expand](https://github.com/motdotla/dotenv-expand) para expandir variables listas para usar. Para obtener más información sobre la sintaxis, consulta [su documentación](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow).
 
@@ -84,7 +78,7 @@ Si deseas personalizar el prefijo de las variables env, consulta la opción [env
 
 De forma predeterminada, Vite proporciona definiciones de tipo para `import.meta.env` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Si bien puedes definir más variables de entorno personalizadas en los archivos `.env.[mode]`, es posible que desees que IntelliSense funcione para las variables de entorno definidas por el usuario que tienen el prefijo `VITE_`.
 
-Para hacerlo, puedes crear un `env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
+Para hacerlo, puedes crear un `vite-env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
 
 ```typescript
 /// <reference types="vite/client" />
@@ -108,6 +102,10 @@ Si tu código se basa en tipos de entornos de navegador como [DOM](https://githu
 }
 ```
 
+:::warning Las importaciones romperán la augmentación de tipo
+Si la augmentación de `ImportMetaEnv` no funciona, asegúrate de que no haya ninguna declaración de `import` en `vite-env.d.ts`. Consulta la [documentación de TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html#how-javascript-modules-are-defined) para obtener más información.
+:::
+
 ## Sustitución de variables de entorno en archivos HTML
 
 Vite también admite la sustitución de variables de entorno en archivos HTML. Cualquier propiedad en `import.meta.env` se puede usar en archivos HTML con una sintaxis especial `%ENV_NAME%`:
@@ -118,6 +116,8 @@ Vite también admite la sustitución de variables de entorno en archivos HTML. C
 ```
 
 Si el entorno no existe en `import.meta.env`, por ejemplo, `%NON_EXISTENT%`, se ignorará y no se reemplazará, a diferencia de `import.meta.env.NON_EXISTENT` en JS, donde se reemplaza como `undefined`.
+
+Dado que Vite es utilizado por muchos frameworks, está intencionalmente diseñado sin preferencias establecidad sobre reemplazos complejos como, por ejemplo, los condicionales. Vite puede ser extendido utilizando [un complemento existente en el ámbito de usuario](https://github.com/vitejs/awesome-vite#transformers) o un complemento personalizado que implemente el hook [`transformIndexHtml`](./api-plugin#transformindexhtml).
 
 ## Modos
 
@@ -152,3 +152,33 @@ Como `vite build` ejecuta una compilación en producción de forma predeterminad
 # .env.testing
 NODE_ENV=development
 ```
+
+## NODE_ENV y Modos
+
+Es importante tener en cuenta que `NODE_ENV` (`process.env.NODE_ENV`) y los modos son dos conceptos diferentes. Así es cómo afectan a `NODE_ENV` y al modo diferentes comandos:
+
+| Comando                                              | NODE_ENV        | Modo            |
+| ---------------------------------------------------- | --------------- | --------------- |
+| `vite build`                                         | `"production"`  | `"production"`  |
+| `vite build --mode development`                      | `"production"`  | `"development"` |
+| `NODE_ENV=development vite build`                    | `"development"` | `"production"`  |
+| `NODE_ENV=development vite build --mode development` | `"development"` | `"development"` |
+
+Los diferentes valores de `NODE_ENV` y modo también se reflejan en sus propiedades correspondientes de `import.meta.env`:
+
+| Comando                | `import.meta.env.PROD` | `import.meta.env.DEV` |
+| ---------------------- | ---------------------- | --------------------- |
+| `NODE_ENV=production`  | `true`                 | `false`               |
+| `NODE_ENV=development` | `false`                | `true`                |
+| `NODE_ENV=other`       | `false`                | `true`                |
+
+| Comando              | `import.meta.env.MODE` |
+| -------------------- | ---------------------- |
+| `--mode production`  | `"production"`         |
+| `--mode development` | `"development"`        |
+| `--mode staging`     | `"staging"`            |
+
+:::tip `NODE_ENV` en archivos `.env`
+`NODE_ENV=...` se puede configurar en el comando y también en tu archivo `.env`. Si `NODE_ENV` está especificado en un archivo `.env.[modo]`, el modo se puede utilizar para controlar su valor. Sin embargo, tanto `NODE_ENV` como los modos siguen siendo dos conceptos diferentes.
+El principal beneficio con `NODE_ENV=...` en el comando es que permite que Vite detecte el valor temprano. También te permite leer `process.env.NODE_ENV` en tu configuración de Vite, ya que Vite solo puede cargar los archivos env una vez que se evalúa la configuración.
+:::

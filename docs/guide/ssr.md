@@ -16,10 +16,16 @@ Si tienes preguntas, la comunidad suele ser útil en [el canal #ssr del Discord 
 
 ## Proyectos de ejemplo
 
-Vite proporciona soporte integrado para la representación del lado del servidor (SSR). El área de pruebas de código de Vite contiene configuraciones de SSR de ejemplo para Vue 3 y React, que se pueden usar como referencias para esta guía:
+Vite proporciona soporte integrado para la representación del lado del servidor (SSR). [`create-vite-extra`](https://github.com/bluwy/create-vite-extra) contiene configuraciones de ejemplo para SSR que puedes utilizar como referencias para esta guía:
 
-- [Vue 3](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue)
-- [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react)
+- [Vanilla](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-vanilla)
+- [Vue](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-vue)
+- [React](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
+- [Preact](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-preact)
+- [Svelte](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-svelte)
+- [Solid](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-solid)
+
+También puedes generar proyectos nuevos localmente [ejecutando `create-vite`](./index.md#inicia-tu-primer-proyecto-vite) y seleccionando `Otros > create-vite-extra` en la opciones del framework.
 
 ## Estructura del código fuente
 
@@ -83,6 +89,10 @@ async function createServer() {
 
   // Usa la instancia de Connect de Vite como middleware. Si usas tu propio
   // router de Express (express.Router()), debes usar router.use
+  // Cuando el servidor se reinicia (por ejemplo, después de que el usuario modifica
+  // vite.config.js), `vite.middlewares` seguirá siendo la misma
+  // referencia (con una nueva cola interna de middlewares de Vite e inyectados por complementos).
+  // Lo siguiente es válido incluso después de reinicios.
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
@@ -178,18 +188,18 @@ Luego, en `server.js` necesitamos agregar algo de lógica específica de producc
 
 - Mueve la creación y todo el uso del servidor de desarrollo `vite` detrás de ramas condicionales solo para desarrollo, luego agrega middlewares de servicio de archivos estáticos para servir archivos desde `dist/client`.
 
-Consulta las demos de [Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/playground/ssr-vue) y [React](https://github.com/vitejs/vite-plugin-react/tree/main/playground/ssr-react) para una configuración funcional.
+Consulta los [proyectos de ejemplo](#proyectos-de-ejemplo) para una configuración funcional.
 
 ## Generación de directivas de precargado
 
-`vite build` admite el indicador `--ssrManifest` que generará `ssr-manifest.json` en el directorio de salida de compilación:
+`vite build` admite el indicador `--ssrManifest` que generará `.vite/ssr-manifest.json` en el directorio de salida de compilación:
 
 ```diff
 - "build:client": "vite build --outDir dist/client",
 + "build:client": "vite build --outDir dist/client --ssrManifest",
 ```
 
-La secuencia de comandos anterior ahora generará `dist/client/ssr-manifest.json` para la compilación del cliente (Sí, el manifiesto SSR se genera a partir de la compilación del cliente porque queremos asignar ID de módulo a los archivos del cliente. El manifiesto contiene asignaciones de ID de módulos a sus fragmentos y archivos de recursos asociados.
+La secuencia de comandos anterior ahora generará `dist/client/.vite/ssr-manifest.json` para la compilación del cliente (Sí, el manifiesto SSR se genera a partir de la compilación del cliente porque queremos asignar ID de módulo a los archivos del cliente. El manifiesto contiene asignaciones de ID de módulos a sus fragmentos y archivos de recursos asociados.
 
 Para aprovechar el manifiesto, los marcos de trabajo deben proporcionar una forma de recopilar los ID de módulo de los componentes que se usaron durante una llamada de procesamiento del servidor.
 
@@ -259,6 +269,10 @@ En algunos casos, como los tiempos de ejecución de `webworker`, es posible que 
 - Tratar todas las dependencias como `noExternal`
 - Lanzar un error si se importan elementos integrados de Node.js
 
+## Condiciones de resolución de SSR
+
+De forma predeterminada, la resolución de entrada de paquetes utilizará las condiciones establecidas en [`resolve.conditions`](/config/shared-options.md#resolve-conditions) para la compilación SSR. Puedes utilizar [`ssr.resolve.conditions`](/config/ssr-options.md#ssr-resolve-conditions) y [`ssr.resolve.externalConditions`](/config/ssr-options.md#ssr-resolve-externalconditions) para personalizar este comportamiento.
+
 ## Vite CLI
 
 Los comandos del CLI `$ vite dev` y `$ vite preview` también se pueden usar para aplicaciones SSR. Puedes agregar tu middleware SSR al servidor de desarrollo con [`configureServer`](/guide/api-plugin#configureserver) y al servidor de vista previa con [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
@@ -266,7 +280,3 @@ Los comandos del CLI `$ vite dev` y `$ vite preview` también se pueden usar par
 :::tip Nota
 Usa un post hook para que tu middleware SSR se ejecute _después_ de los middlewares de Vite.
 :::
-
-## Formato SSR
-
-De forma predeterminada, Vite genera el paquete SSR en ESM. Hay soporte experimental para configurar `ssr.format`, pero no se recomienda. Los esfuerzos futuros en torno al desarrollo de SSR se basarán en ESM, y CommonJS permanecerá disponible para la compatibilidad con versiones anteriores. Si no es posible usar ESM para SSR en tu proyecto, puedes configurar `legacy.buildSsrCjsExternalHeuristics: true` para generar un paquete CJS usando las mismas [heurísticas de externalización de Vite v2](https://v2.vitejs.dev/guide/ssr.html#ssr-externals).

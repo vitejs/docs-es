@@ -58,9 +58,9 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 1. Configura la `base` correcta en `vite.config.js`.
 
-   Si estás desplegando en `https://<USERNAME>.github.io/`, puedes omitir `base` ya que el valor predeterminado es `'/'`.
+Si estás desplegando en `https://<USERNAME>.github.io/` o en un dominio personalizado a través de GitHub Pages (por ejemplo, `www.example.com`), configura `base` como `'/'`. Alternativamente, puedes eliminar `base` de la configuración, ya que por defecto es `'/'`.
 
-   Si está desplegando en `https://<NOMBRE DE USUARIO>.github.io/<REPO>/`, por ejemplo, tu repositorio está en `https://github.com/<NOMBRE DE USUARIO>/<REPO>`, configura `base` a `'/<REPO>/'`.
+Si estás desplegando en `https://<USERNAME>.github.io/<REPO>/` (por ejemplo, tu repositorio está en `https://github.com/<USERNAME>/<REPO>`), entonces configura `base` como `'/<REPO>/'`.
 
 2. Ve a la configuración de GitHub Pages en la página de configuración del repositorio y elige la fuente de implementación como "Acciones de GitHub", esto te llevará a crear un flujo de trabajo que compila e implementa el proyecto, se provee un flujo de trabajo de muestra que instala dependencias y compila usando npm:
 
@@ -115,7 +115,7 @@ jobs:
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
 ```
 
 ## GitLab Pages y GitLab CI
@@ -218,7 +218,7 @@ Obtén más información sobre [Integración Git](https://vercel.com/docs/concep
 1. Instala la [CLI de Wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/).
 2. Autenticate a Wrangler con tu cuenta de Cloudflare usando `wrangler login`.
 3. Ejecuta tu comando de compilación.
-4. Despliega usando `npx wrangler pages publish dist`.
+4. Despliega usando `npx wrangler pages deploy dist`.
 
 ```bash
 # Instala la CLI de Wrangler
@@ -231,7 +231,7 @@ $ wrangler login
 $ npm run build
 
 # Crea un nuevo despliegue
-$ npx wrangler pages publish dist
+$ npx wrangler pages deploy dist
 ```
 
 Después de cargar tus recursos, Wrangler le dará una URL de vista previa para inspeccionar el sitio. Cuando inicies sesión en el panel de control de Cloudflare Pages, verás tu nuevo proyecto.
@@ -331,3 +331,15 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
 
 También puedes agregar un [dominio personalizado](https://render.com/docs/custom-domains) a tu proyecto.
+
+## Flightcontrol
+
+Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
+
+## Alojamiento en AWS Amplify
+
+Despliega tu sitio estático mediante [AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/), siguiendo estas [instrucciones](https://docs.amplify.aws/guides/hosting/vite/q/plataforma/js/).
+
+## Alojamiento de sitios estáticos en Kinsta
+
+Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https://kinsta.com/static-site-hosting/) siguiendo estas [instrucciones](https://kinsta.com/docs/react-vite-ejemplo/).

@@ -13,7 +13,7 @@ El empaquetado de producción asume soporte para código JavaScript moderno. De 
 
 Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options#build-target), donde el objetivo más bajo es `es2015`.
 
-Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar [Polyfill.io](https://polyfill.io/v3/), que es un servicio que genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
+Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar [Polyfill.io](https://polyfill.io/), que es un servicio que genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
 
 Los navegadores obsoletos pueden ser soportados a través de [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos y las correspondientes polyfills con características en lenguaje ES. Los fragmentos se cargan condicionalmente solo en navegadores que no tienen soporte ESM nativo.
 
@@ -60,9 +60,21 @@ export default defineConfig({
 
 Esta estrategia también se proporciona como una factoría `splitVendorChunk({cache: SplitVendorChunkCache})`, en caso de que se necesite una composición con lógica personalizada. Es necesario llamar a `cache.reset()` en `buildStart` para que el modo de visualización de compilación funcione correctamente en este caso.
 
-::: advertencia
+::: warning
 Debes utilizar la función `build.rollupOptions.output.manualChunks` cuando utilices este plugin. Si se utiliza la forma de objeto, el plugin no tendrá ningún efecto.
 :::
+
+## Manejo de Errores de Carga
+
+Vite emite el evento `vite:preloadError` cuando no puede cargar importaciones dinámicas. `event.payload` contiene el error de importación original. Si llamas a `event.preventDefault()`, el error no se lanzará.
+
+```js
+window.addEventListener('vite:preloadError', (event) => {
+  window.reload() // por ejemplo, refrescar la página
+})
+```
+
+Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los recursos de despliegues anteriores. Como resultado, un usuario que visitó tu sitio antes del nuevo despliegue podría encontrarse con un error de importación. Este error ocurre porque los recursos que se ejecutan en el dispositivo de ese usuario están desactualizados e intenta importar el fragmento antiguo correspondiente, que se ha eliminado. Este evento es útil para abordar esta situación.
 
 ## Recompilar en cambios de archivos
 
@@ -170,8 +182,8 @@ Ejecutar `vite build` con esta configuración utiliza un ajuste preestablecido d
 ```
 $ vite build
 building for production...
-dist/my-lib.js      0.08 KiB / gzip: 0.07 KiB
-dist/my-lib.umd.cjs 0.30 KiB / gzip: 0.16 KiB
+dist/my-lib.js      0.08 kB / gzip: 0.07 kB
+dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 ```
 
 `package.json` recomendado para tu librería
@@ -214,17 +226,23 @@ O, si expones múltiples puntos de entrada:
 }
 ```
 
-:::tip Nota
+:::tip Extensiones de archivo
 Si `package.json` no contiene `"type": "module"`, Vite generará diferentes extensiones de archivo para compatibilidad con Node.js. `.js` se convertirá en `.mjs` y `.cjs` se convertirá en `.js`.
 :::
 
 :::tip Variables de entorno
-En el modo librería, todo uso de `import.meta.env.*` se reemplaza estáticamente cuando se compila para producción. Sin embargo, esto no ocurre para `process.env.*`, por lo que los usuarios que usan la librería pueden cambiarlo dinámicamente. Si esto no es lo que deseas, puedes usar `define: { 'process.env.NODE_ENV': '"production"' }` por ejemplo para reemplazarlos estáticamente.
+En el modo librería, todo uso de [`import.meta.env.*`](./env-and-mode.md) se reemplaza estáticamente cuando se compila para producción. Sin embargo, esto no ocurre para `process.env.*`, por lo que los usuarios que usan la librería pueden cambiarlo dinámicamente. Si esto no es lo que deseas, puedes usar `define: { 'process.env.NODE_ENV': '"production"' }` por ejemplo para reemplazarlos estáticamente, o utiliza [`esm-env`](https://github.com/benmccann/esm-env) para una mejor compatibilidad con empaquetadores y entornos de ejecución.
+:::
+
+:::warning Uso avanzado
+El modo librería incluye una configuración simple y pragmática para librerías de frameworks Javascript y orientadas al navegador. Si estás creando librerías que no son de navegador o necesitas flujos de compilación avanzados, puedes usar [Rollup](https://rollupjs.org) o [esbuild](https://esbuild.github.io) directamente.
 :::
 
 ## Opciones avanzadas para Base
 
 ::: warning
+=======
+:::warning Nota
 Esta característica es experimental. [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13834).
 :::
 

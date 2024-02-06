@@ -54,7 +54,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 ## server.https
 
-- **Tipo:** `boolean | https.ServerOptions`
+- **Tipo:** `https.ServerOptions`
 
   Habilita TLS + HTTP/2. Ten en cuenta que esto cambia a TLS solo cuando también se usa la opción [`server.proxy`](#server-proxy).
 
@@ -146,53 +146,66 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 - **Tipo:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
-  Deshabilita o configura la conexión HMR (en los casos en que el websocket HMR deba usar una dirección diferente del servidor http).
+Deshabilita o configura la conexión HMR (en los casos en que el websocket HMR deba usar una dirección diferente del servidor http).
 
-  Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
+Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
 
-  `clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
+`clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
 
-  Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
+Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
 
-  Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) para ver algunos ejemplos.
+Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) para ver algunos ejemplos.
 
-  :::tip NOTA
+:::tip NOTA
 
-  Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
+Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
 
-  ```
-  Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
-  ```
+```
+Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+```
 
-  Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
+Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
 
-  - configurar el proxy inverso para el proxy de WebSocket también
-  - configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
-  - configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
-    :::
+- configurar el proxy inverso para el proxy de WebSocket también
+- configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
+- configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
+  :::
+
+## server.warmup
+
+- **Tipo:** `{ clientFiles?: string[], ssrFiles?: string[] }`
+- **Relacionado:** [Preparación de archivos de uso frecuente](/guide/performance.html#preparacion-de-archivos-de-uso-frecuente)
+
+Prepara archivos para transformarlos y almacenar en caché los resultados por adelantado. Esto mejora la carga de la página inicial durante el inicio del servidor y evita transformaciones en cascada.
+
+`clientFiles` son archivos que se usan solo en el cliente, mientras que `ssrFiles` son archivos que se usan solo en SSR. Aceptan una variedad de rutas de archivos o patrones [`fast-glob`](https://github.com/mrmlnc/fast-glob) relativos a `root`.
+
+Asegúrate de agregar solo archivos que se usan con frecuencia para no sobrecargar el servidor de desarrollo de Vite al iniciar.
+
+```js
+export defineConfig default ({
+  server: {
+    warmup: {
+      clientFiles: ['./src/components/*.vue', './src/utils/big-utils.js'],
+      ssrFiles: ['./src/server/modules/*.js'],
+    },
+  },
+})
+```
 
 ## server.watch
 
-- **Tipo:** `object`
+- **Tipo:** `object | null`
 
-  Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
+Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
 
-  El observador del servidor Vite omite los directorios `.git/` y `node_modules/` de forma predeterminada. Si deseas ver un paquete dentro de `node_modules/`, puede pasar un patrón global negado a `server.watch.ignored`. Es decir:
+El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
-  ```js
-  export default defineConfig({
-    server: {
-      watch: {
-        ignored: ['!**/node_modules/your-package-name/**'],
-      },
-    },
-    // El paquete observado debe excluirse de la optimización,
-    // para que pueda aparecer en el gráfico de dependencia y activar hot reload.
-    optimizeDeps: {
-      exclude: ['your-package-name'],
-    },
-  })
-  ```
+Si se configura en `null`, no se observará ningún archivo. `server.watcher` proporcionará un emisor de eventos compatible, pero invocar a `add` o `unwatch` no tendrá ningún efecto.
+
+::: warning Observando archivos en `node_modules`
+Actualmente no es posible ver archivos y paquetes en `node_modules`. Para obtener más avances y soluciones alternativas, puede seguir la [propuesta #8619](https://github.com/vitejs/vite/issues/8619).
+:::
 
 ::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
 

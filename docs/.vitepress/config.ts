@@ -1,4 +1,5 @@
 import { defineConfig, DefaultTheme } from 'vitepress'
+import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Herramienta frontend de próxima generación'
 const ogImage = 'https://es.vitejs.dev/og-image.png'
@@ -33,26 +34,8 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   switch (deployType) {
     case 'main':
     case 'local':
-      return [
-        {
-          text: 'Documentación de Vite 4 (Producción)',
-          link: 'https://es.vitejs.dev',
-        },
-        {
-          text: 'Documentación de Vite 3',
-          link: 'https://es.vitejs.dev',
-        },
-        {
-          text: 'Documentación de Vite 2',
-          link: 'https://v2.vitejs.dev',
-        },
-      ]
     case 'release':
       return [
-        {
-          text: 'Documentación de Vite 3',
-          link: 'https://es.vitejs.dev',
-        },
         {
           text: 'Documentación de Vite 2',
           link: 'https://v2.vitejs.dev',
@@ -67,6 +50,11 @@ export default defineConfig({
   description: 'Herramienta frontend de próxima generación',
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    [
+      'link',
+      { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
+    ],
+    ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: ogTitle }],
     ['meta', { property: 'og:image', content: ogImage }],
@@ -92,6 +80,7 @@ export default defineConfig({
     ja: { label: '日本語', link: 'https://ja.vitejs.dev' },
     pt: { label: 'Português', link: 'https://pt.vitejs.dev' },
     ko: { label: '한국어', link: 'https://ko.vitejs.dev' },
+    de: { label: 'Deutsch', link: 'https://de.vitejs.dev' },
   },
 
   themeConfig: {
@@ -106,6 +95,7 @@ export default defineConfig({
       { icon: 'discord', link: 'https://chat.vitejs.dev' },
       { icon: 'github', link: 'https://github.com/vitejs/vite' },
     ],
+    darkModeSwitchLabel: 'Apariencia',
     algolia: {
       appId: '7H67QR5P0A',
       apiKey: 'deaab78bcdfe96b599497d25acc6460e',
@@ -168,7 +158,8 @@ export default defineConfig({
 
     footer: {
       message: `Publicado bajo licencia MIT. (${commitRef})`,
-      copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
+      copyright:
+        'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
     },
 
     nav: [
@@ -179,6 +170,7 @@ export default defineConfig({
         text: 'Recursos',
         items: [
           { text: 'Equipo', link: '/team' },
+          { text: 'Blog', link: '/blog' },
           { text: 'Lanzamientos', link: '/releases' },
           {
             items: [
@@ -195,6 +187,10 @@ export default defineConfig({
                 link: 'https://github.com/vitejs/awesome-vite',
               },
               {
+                text: 'ViteConf',
+                link: 'https://viteconf.org',
+              },
+              {
                 text: 'DEV Community',
                 link: 'https://dev.to/t/vite',
               },
@@ -205,6 +201,10 @@ export default defineConfig({
               {
                 text: 'Lista de Cambios',
                 link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+              },
+              {
+                text: 'Contribución',
+                link: 'https://github.com/vitejs/docs-es/blob/main/CONTRIBUTING.md',
               },
             ],
           },
@@ -278,11 +278,23 @@ export default defineConfig({
               link: '/guide/troubleshooting',
             },
             {
+              text: 'Rendimiento',
+              link: '/guide/performance',
+            },
+            {
               text: 'Filosofía',
               link: '/guide/philosophy',
             },
+            // {
+            //   text: 'Migración desde v2',
+            //   link: '/guide/migration-v2-to-v3',
+            // },
+            // {
+            //   text: 'Migración desde v3',
+            //   link: '/guide/migration-v3-to-v4',
+            // },
             {
-              text: 'Migración desde v3',
+              text: 'Migración desde v4',
               link: '/guide/migration',
             },
           ],
@@ -349,5 +361,9 @@ export default defineConfig({
         },
       ],
     },
+    outline: {
+      level: [2, 3],
+    },
   },
+  buildEnd,
 })

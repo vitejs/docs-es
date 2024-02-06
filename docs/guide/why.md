@@ -53,7 +53,7 @@ Garantizar un resultado óptimo y una coherencia de comportamiento entre el serv
 
 La API de complementos actual de Vite no es compatible con el uso de `esbuild` como paquete. A pesar de que `esbuild` es más rápido, la adopción por parte de Vite de la infraestructura y API de complementos flexible de Rollup contribuyó en gran medida a su éxito en el ecosistema. Por el momento, creemos que Rollup ofrece una mejor compensación entre rendimiento y flexibilidad.
 
-Dicho esto, `esbuild` ha progresado mucho en los últimos años, y no descartaremos la posibilidad de usar `esbuild` para compilaciones de producción en el futuro. Seguiremos aprovechando las nuevas capacidades a medida que se publiquen, como lo hemos hecho con la minificación de JS y CSS donde `esbuild` permitió a Vite obtener un aumento en el rendimiento y evitar la interrupción de su ecosistema.
+Rollup también ha estado trabajando en mejoras de rendimiento, [cambiando su analizador a SWC en la versión 4](https://github.com/rollup/rollup/pull/5073). Además, hay un esfuerzo en curso para construir una versión en Rust de Rollup llamada Rolldown. Una vez que Rolldown esté listo, podría reemplazar tanto a Rollup como a esbuild en Vite, mejorando significativamente el rendimiento de la compilación y eliminando las inconsistencias entre el desarrollo y la compilación. Puedes ver [la presentación principal de Evan You en ViteConf 2023 para obtener más detalles](https://youtu.be/hrdwQHoAp0M).
 
 ## ¿En qué se diferencia Vite de X?
 

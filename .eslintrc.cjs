@@ -1,6 +1,7 @@
 // @ts-check
 const { builtinModules } = require('node:module')
 const { defineConfig } = require('eslint-define-config')
+const pkg = require('./package.json')
 
 module.exports = defineConfig({
   root: true,
@@ -14,7 +15,7 @@ module.exports = defineConfig({
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
-    ecmaVersion: 2021,
+    ecmaVersion: 2022,
   },
   rules: {
     eqeqeq: ['warn', 'always', { null: 'never' }],
@@ -163,13 +164,13 @@ module.exports = defineConfig({
         'node/no-unsupported-features/es-builtins': [
           'error',
           {
-            version: '^14.18.0 || >=16.0.0',
+            version: pkg.engines.node,
           },
         ],
         'node/no-unsupported-features/node-builtins': [
           'error',
           {
-            version: '^14.18.0 || >=16.0.0',
+            version: pkg.engines.node,
           },
         ],
         '@typescript-eslint/explicit-module-boundary-types': 'off',

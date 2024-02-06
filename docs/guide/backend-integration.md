@@ -12,13 +12,13 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    // vite.config.js
    export default defineConfig({
      build: {
-       // genera el archivo manifest.json en outDir
+       // genera el archivo .vite/manifest.json en outDir
        manifest: true,
        rollupOptions: {
          // sobreescribe la entrada por defecto .html
-         input: '/path/to/main.js'
-       }
-     }
+         input: '/path/to/main.js',
+       },
+     },
    })
    ```
 
@@ -44,7 +44,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
    Esto es necesario para que los recursos, como imágenes, se carguen correctamente.
 
-   Ten en cuenta que si estas usando React con `@vitejs/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo:
+   Ten en cuenta que si estas usando React con `@vitejs/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo (reemplaza `http://localhost:5173` con la URL local donde Vite se está ejecutando):
 
    ```html
    <script type="module">
@@ -56,7 +56,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    </script>
    ```
 
-3. Para producción: despues de ejecutar `vite build`, se generará un archivo `manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
+3. Para producción: despues de ejecutar `vite build`, se generará un archivo `.vite/manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
 
    ```json
    {

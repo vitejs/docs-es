@@ -4,6 +4,38 @@ Consulta la [guía de solución de problemas de Rollup](https://rollupjs.org/tro
 
 Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vitejs/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vitejs.dev).
 
+## CJS
+
+### API de Node para la compilación CJS de Vite, ahora obsoleto
+
+La compilación CJS de la API de Node de Vite está obsoleta y se eliminará en Vite 6. Consulta la [discusión de GitHub](https://github.com/vitejs/vite/discussions/13928) correspondiente para obtener más contexto. En su lugar, debes actualizar tus archivos o frameworks para importar la compilación ESM de Vite.
+
+En un proyecto básico de Vite, asegúrate que:
+
+1. El contenido del archivo `vite.config.js` utiliza la sintaxis ESM.
+2. El archivo `package.json` más cercano tiene `"type": "module"`, o usa la extensión `.mjs`/`.mts`, por ejemplo, `vite.config.mjs` o `vite.config.mts`.
+
+Para otros proyectos, existen algunos enfoques generales:
+
+- **Configura ESM como predeterminado, optar por CJS si es necesario:** Agrega `"type": "module"` en el
+  `package.json` del proyecto. Todos los archivos `*.js` ahora se interpretan como ESM y deben utilizar la sintaxis de ESM. Puedes cambiar el nombre de un archivo con la extensión `.cjs` para seguir usando CJS.
+- **Mantén CJS como predeterminado, optar por ESM si es necesario:** Si el `package.json` del proyecto no tiene `"type": "module"`, todos los archivos `*.js` se interpretan como CJS. Puedes cambiar el nombre de un archivo con la extensión `.mjs` para usar ESM en su lugar.
+- **Importar Vite dinámicamente:** Si necesitas seguir usando CJS, puedes importar Vite dinámicamente usando `import('vite')` en su lugar. Esto requiere que tu código esté escrito en un contexto "asíncrono", pero aún así debería ser manejable ya que la API de Vite es en su mayoría asíncrona.
+
+Si no estás seguro de dónde proviene la advertencia, puedes ejecutar el script con el indicador `VITE_CJS_TRACE=true` para registrar el seguimiento de la pila:
+
+```bash
+VITE_CJS_TRACE=true vite dev
+```
+
+Si deseas ignorar temporalmente la advertencia, puedes ejecutar el script con el indicador `VITE_CJS_IGNORE_WARNING=true`:
+
+```bash
+VITE_CJS_IGNORE_WARNING=true vite dev
+```
+
+Ten en cuenta que los archivos de configuración postcss aún no soportan ESM + TypeScript (`.mts` o `.ts` en `"type": "module"`). Si tienes configuraciones postcss con `.ts` y agregaste `"type": "module"` al `package.json`, también debes cambiar el nombre de la configuración postcss para usar `.cts`.
+
 ## CLI
 
 ### `Error: No se puede encontrar el módulo 'C:\foo\bar&baz\vite\bin\vite.js'`
@@ -114,11 +146,11 @@ Problema relacionado: [#964](https://github.com/vitejs/vite/issues/964)
 
 Si estás ejecutando Vite con WSL2, Vite no puede ver los cambios de archivos en algunas condiciones. Ver [opción `server.watch`](/config/server-options.md#server-watch).
 
-### Ocurre un refresco completo en lugar de HMR
+### Ocurre una recarga completa en lugar de HMR
 
-Si Vite o un complemento no maneja HMR, se producirá un refresco completo.
+Si Vite o un complemento no manejan HMR, se producirá una recarga completa, ya que es la única forma de actualizar el estado.
 
-Además, si hay un bucle de dependencia, se producirá un refresco completo. Para resolver esto, intenta eliminar el bucle.
+Si se maneja HMR pero está dentro de una dependencia circular, también se realizará una recarga completa para recuperar la orden de ejecución. Para resolver esto, intenta romper el ciclo. Puedes ejecutar `vite --debug hmr` para registrar la ruta de dependencia circular si un cambio de archivo la activó.
 
 ### Gran cantidad de actualizaciones de HMR en la consola
 
@@ -143,6 +175,30 @@ Debes acceder al archivo con el protocolo `http`. La forma más fácil de lograr
 ### Dependencias preempaquetadas desactualizadas al vincularlas a un paquete local
 
 La clave hash utilizada para invalidar las dependencias optimizadas depende del contenido del package lock, los parches aplicados a las dependencias y las opciones en el archivo de configuración de Vite que afecta el empaquetado de módulos de Node. Esto significa que Vite detectará cuándo se invalida una dependencia mediante una característica como [invalidaciones de npm](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides), y volverá a empaquetar las dependencias en el próximo inicio del servidor. Vite no invalidará las dependencias cuando utilices una función como [npm link](https://docs.npmjs.com/cli/v9/commands/npm-link). En caso de que vincules o desvincules una dependencia, deberás forzar la reoptimización en el próximo inicio del servidor usando `vite --force`. En su lugar, recomendamos usar invalidaciones, que ahora son compatibles con todos los gestores de paquetes (consulta también [invalidaciones de pnpm](https://pnpm.io/package_json#pnpmoverrides) y [resoluciones de yarn](https://yarnpkg.com/configuration/manifest/#resolutions)).
+
+## Cuellos de botella en el rendimiento
+
+Si sufres cuellos de botella en el rendimiento de la aplicación que resultan en tiempos de carga lentos, puedes iniciar el inspector integrado de Node.js con tu servidor de desarrollo de Vite o al compilar tu aplicación para crear el perfil de la CPU:
+
+::: code-group
+
+```bash [dev server]
+vite --profile --open
+```
+
+```bash [build]
+vite build --profile
+```
+
+:::
+
+::: tip Servidor de desarrollo de Vite
+Una vez que la aplicación se abra en el navegador, simplemente espera a que termine de cargar y luego regresa a la terminal y presiona la tecla `p` (detendrá el inspector de Node.js), luego presiona la tecla `q` para detener el servidor de desarrollo.
+:::
+
+El inspector de Node.js generará `vite-profile-0.cpuprofile` en la carpeta raíz, ve a https://www.speedscope.app/ y sube el perfil de la CPU usando el botón `BROWSE` para inspeccionar el resultado.
+
+Puedes instalar [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect), que te permite inspeccionar el estado intermedio de los complementos de Vite y también puede ayudarte a identificar qué complementos o middlewares están generando el cuello de botella en tus aplicaciones. El complemento se puede usar tanto en modo de desarrollo como compilado. Consulta el archivo readme para obtener más detalles.
 
 ## Otros
 

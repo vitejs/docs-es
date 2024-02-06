@@ -60,20 +60,30 @@ export default defineConfig({
 
 - **Tipo:** `boolean`
 
-  Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.
+Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.
+
+## optimizeDeps.holdUntilCrawlEnd
+
+=======
+- **Experimental**
+- **Tipo:** `boolean`
+- **Por defecto:** `true`
+
+Cuando está habilitado, retendrá los primeros resultados de las dependencias optimizadas hasta que todas las importaciones estáticas se rastreen en el arranque en frío. Esto evita la necesidad de recargar la página completa cuando se descubren nuevas dependencias y desencadenan la generación de nuevos fragmentos comunes. Si el escáner encuentra todas las dependencias más las definidas explícitamente en `include`, es mejor deshabilitar esta opción para permitir que el navegador procese más solicitudes en paralelo.
 
 ## optimizeDeps.disabled
 
+- **Obsoleto**
 - **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13839)
 - **Tipo:** `boolean | 'build' | 'dev'`
 - **Por defecto:** `'build'`
 
-Deshabilita las optimizaciones de dependencias, `true` deshabilita el optimizador durante la compilación y el desarrollo. Pasa `'build'` o `'dev'` para deshabilitar el optimizador solo en uno de los modos. La optimización de dependencias está habilitada de forma predeterminada solo en desarrollo.
+Esta opción está en desuso. A partir de Vite 5.1, se eliminó el paquete previo de dependencias durante la compilación. Configurar `optimizeDeps.disabled` en `true` o `'dev'` deshabilita el optimizador, y configurarlo en `false` o `'build'` deja el optimizador habilitado durante el desarrollo.
+
+Para deshabilitar el optimizador por completo, usa `optimizeDeps.noDiscovery: true` para no permitir el descubrimiento automático de dependencias y deja `optimizeDeps.include` sin definir o vacío.
 
 :::warning
-La optimización de las dependencias en el modo de compilación es **experimental**. Si está habilitado, elimina una de las diferencias más significativas entre desarrollo y producción. [`@rollup/plugin-commonjs`](https://github.com/rollup/plugins/tree/master/packages/commonjs) ya no es necesario en este caso, ya que esbuild convierte las dependencias solo de CJS en ESM.
-
-Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disabled: false`. `@rollup/plugin-commonjs` se puede eliminar pasando `build.commonjsOptions: { include: [] }`.
+La optimización de las dependencias durante el tiempo de compilación fue una característica **experimental**. Los proyectos que probaron esta estrategia también eliminaron `@rollup/plugin-commonjs` usando `build.commonjsOptions: { include: [] }`. Si lo hiciste en algún momento, una advertencia te guiará a volver a habilitarlo y así darle soporte a paquetes CJS únicamente mientras se realiza el empaquetado.
 :::
 
 ## optimizeDeps.needsInterop

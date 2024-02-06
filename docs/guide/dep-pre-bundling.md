@@ -52,10 +52,6 @@ export default defineConfig({
 
 Al realizar cambios en la dependencia vinculada, reinicia el servidor de desarrollo con la opción de línea de comando `--force` para que los cambios surtan efecto.
 
-::: warning Deduplicación
-Debido a las diferencias en la resolución de dependencias vinculadas, las dependencias transitivas pueden deduplicarse incorrectamente, lo que genera problemas cuando se usa en tiempo de ejecución. Si te topas con este problema, usa `npm pack` en la dependencia vinculada para solucionarlo.
-:::
-
 ## Personalizando el Comportamiento
 
 La heurística de descubrimiento de dependencia predeterminada puede no ser siempre deseable. En los casos en los que desees incluir/excluir dependencias explícitamente de la lista, utiliza las [opciones de configuración de `optimizeDeps`](/config/dep-optimization-options).
@@ -64,7 +60,7 @@ Un caso de uso típico para `optimizeDeps.include` o `optimizeDeps.exclude` es c
 
 Tanto `include` como `exclude` se pueden utilizar para solucionar este problema. Si la dependencia es grande (con muchos módulos internos) o es CommonJS, debes incluirla; Si la dependencia es pequeña y ya es un ESM válido, puedes excluirla y dejar que el navegador la cargue directamente.
 
-También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esbuildOptions`](/config/dep-optimization-options.md#optimizedeps-esbuildoptions). Por ejemplo, agregar un complemento esbuild para manejar archivos especiales en dependencias.
+También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esbuildOptions`](/config/dep-optimization-options.md#optimizedeps-esbuildoptions). Por ejemplo, agregar un complemento esbuild para manejar archivos especiales en dependencias o cambiando el [objetivo de construcción (`target`)](https://esbuild.github.io/api/#target).
 
 ## Almacenamiento en caché
 

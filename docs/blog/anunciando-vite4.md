@@ -1,4 +1,8 @@
 ---
+title: ¡Vite 4.0 ya está disponible!
+author:
+  - name: El equipo de Vite
+date: 2022-12-09
 sidebar: false
 head:
   - - meta
@@ -23,7 +27,7 @@ head:
 
 # ¡Vite 4.0 ya está disponible!
 
-_9 de diciembre de 2022_
+_9 de diciembre de 2022_ - Echa un vistazo al [anuncio de Vite 5.0](./anunciando-vite5.md)
 
 Vite 3 [fue lanzado](./anunciando-vite3.md) hace 5 meses. Las descargas de npm por semana han pasado de 1 millón a 2.5 millones desde entonces. El ecosistema también ha madurado y sigue creciendo. En la [encuesta Jamstack Conf de este año](https://twitter.com/vite_js/status/1589665610119585793), el uso entre la comunidad saltó del 14% al 32%, manteniendo un alto puntaje de satisfacción de 9.7. Vimos los lanzamientos estables de [Astro 1.0](https://astro.build/), [Nuxt 3](https://v3.nuxtjs.org/) y otros marcos impulsados ​​por Vite que están innovando y colaborando: [SvelteKit](https://kit.svelte.dev/), [Solid Start](https://www.solidjs.com/blog/introducing-solidstart), [Qwik City](https://qwik.builder.io/qwikcity/overview/). Storybook anunció soporte de primera clase para Vite como una de sus características principales para [Storybook 7.0](https://storybook.js.org/blog/first-class-vite-support-in-storybook/). Deno ahora [ofrece soporte para Vite](https://www.youtube.com/watch?v=Zjojo9wdvmY). La adopción de [Vitest](https://vitest.dev) se está disparando, pronto representará la mitad de las descargas de Vite en npm. Nx también está invirtiendo en el ecosistema y [oficialmente es compatible con Vite](https://nx.dev/packages/vite).
 

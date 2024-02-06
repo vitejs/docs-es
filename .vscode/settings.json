@@ -1,4 +1,3 @@
 {
-  "rpc.enabled": true,
-  "eslint.packageManager": "pnpm"
+  "rpc.enabled": true
 }
