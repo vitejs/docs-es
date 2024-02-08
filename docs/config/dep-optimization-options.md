@@ -64,7 +64,6 @@ Configurar en `true` para forzar el empaquetado previo de dependencias, ignorand
 
 ## optimizeDeps.holdUntilCrawlEnd
 
-=======
 - **Experimental**
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
