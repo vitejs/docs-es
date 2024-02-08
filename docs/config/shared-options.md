@@ -264,7 +264,6 @@ Si se configura esta opción, los preprocesadores CSS se ejecutarán en los work
 ## css.devSourcemap
 
 - **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13845)
-=======
 - **Experimental** [Hacer comentarios](https://github.com/vitejs/vite/discussions/13845)
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
@@ -276,7 +275,6 @@ Habilita los mapas de origen durante el desarrollo.
 - **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)
 - **Type:** `'postcss' | 'lightningcss'`
 - **Default:** `'postcss'`
-=======
 - **Tipo:** `'postcss' | 'lightningcss'`
 - **Por defecto:** `'postcss'`
 
