@@ -240,8 +240,6 @@ El modo librería incluye una configuración simple y pragmática para librería
 
 ## Opciones avanzadas para Base
 
-::: warning
-=======
 :::warning Nota
 Esta característica es experimental. [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13834).
 :::
