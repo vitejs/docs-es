@@ -6,9 +6,11 @@ Si bien Vite es rápido por defecto, los problemas de rendimiento pueden aparece
 - Cargas de página lentas
 - compilaciones lentas
 
-## Evita las extensiones del navegador
+## Revisa las configuraciones en tu navegador
 
 Algunas extensiones del navegador pueden interferir con las solicitudes y ralentizar los tiempos de inicio y recarga de aplicaciones grandes, especialmente cuando se utilizan herramientas de desarrollo del navegador. Recomendamos crear un perfil solo para desarrolladores sin extensiones, o cambiar al modo incógnito, mientras usa el servidor de desarrollo de Vite en estos casos. El modo incógnito también debería ser más rápido que un perfil normal sin extensiones.
+
+El servidor de desarrollo de Vite realiza un almacenamiento en caché de las dependencias preempaquetadas e implementa respuestas 304 rápidas para el código fuente. Deshabilitar la caché mientras las Herramientas de desarrollo del navegador están abiertas puede tener un gran impacto en los tiempos de inicio y recarga de la página completa. Asegúrate de que "Desactivar caché" no esté habilitado mientras trabajas con el servidor de Vite.
 
 ## Auditar complementos de Vite configurados
 
