@@ -125,10 +125,15 @@ app.use('*', async (req, res) => {
     // preámbulos globales de @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
-    // 3. Carga la entrada del servidor. vite.ssrLoadModule se transforma automáticamente
-    // ¡tu código fuente de ESM se puede usar en Node.js! No hay empaquetado
-    // requerido, y proporciona una invalidación eficiente similar a HMR.
-    const { render } = await vite.ssrLoadModule('/src/entry-server.js')
+    // 3a. Carga la entrada del servidor. vite.ssrLoadModule se transforma automáticamente
+    //    ¡tu código fuente de ESM se puede usar en Node.js! No hay empaquetado
+    //    requerido, y proporciona una invalidación eficiente similar a HMR.
+    // 3b. Desde Vite 5.1, puedes utilizar la API createViteRuntime en su lugar.
+    //    Soporta completamente HMR y funciona de manera similar a ssrLoadModule
+    //    Un caso de uso más avanzado sería crear un tiempo de ejecución en un hilo separado
+    //    o incluso en una máquina diferente utilizando la clase ViteRuntime
+    const runtime = await vite.createViteRuntime(server)
+    const { render } = await runtime.executeEntrypoint('/src/entry-server.js')
 
     // 4. renderiza el HTML de la aplicación. Esto asume que la función `render`
     // exportada desde entry-server.js llama a las API de SSR del marco apropiado,
@@ -164,7 +169,7 @@ El script `dev` en `package.json` también debe cambiarse para usar el script de
 Para enviar un proyecto de SSR a producción, necesitamos:
 
 1. Producir una compilación de cliente como de costumbre;
-2. Producir una compilación SSR, que se puede cargar directamente a través de `import()` para que no tengamos que pasar por `ssrLoadModule` de Vite;
+2. Producir una compilación SSR, que se puede cargar directamente a través de `import()` para que no tengamos que pasar por `ssrLoadModule` de Vite o `runtime.executeEntrypoint`;
 
 Nuestros scripts en `package.json` se verán así:
 
@@ -184,7 +189,7 @@ Luego, en `server.js` necesitamos agregar algo de lógica específica de producc
 
 - En lugar de leer la raíz `index.html`, usa `dist/client/index.html` como plantilla, ya que contiene los enlaces de recursos correctos a la compilación del cliente.
 
-- En lugar de `await vite.ssrLoadModule('/src/entry-server.js')`, usa `import('./dist/server/entry-server.js')` (este archivo es el resultado de la compilación SSR).
+- En lugar de `await vite.ssrLoadModule('/src/entry-server.js')` o `await runtime.executeEntrypoint('/src/entry-server.js')`, usa `import('./dist/server/entry-server.js')` (este archivo es el resultado de la compilación SSR).
 
 - Mueve la creación y todo el uso del servidor de desarrollo `vite` detrás de ramas condicionales solo para desarrollo, luego agrega middlewares de servicio de archivos estáticos para servir archivos desde `dist/client`.
 

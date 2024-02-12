@@ -315,6 +315,10 @@ export default defineConfig({
               link: '/guide/api-javascript',
             },
             {
+              text: 'API de tiempo de ejecución de Vite',
+              link: '/guide/api-vite-runtime',
+            },
+            {
               text: 'Referencia de Configuración',
               link: '/config/',
             },
