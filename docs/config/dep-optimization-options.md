@@ -47,14 +47,24 @@ export default defineConfig({
 
 ## optimizeDeps.esbuildOptions
 
-- **Tipo:** [`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)
+- **Tipo:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)`,
+| 'bundle'
+| 'entryPoints'
+| 'external'
+| 'write'
+| 'watch'
+| 'outdir'
+| 'outfile'
+| 'outbase'
+| 'outExtension'
+| 'metafile'>`
 
-  Opciones para pasar a esbuild durante el escaneo y optimización de la dependencia.
+Opciones para pasar a esbuild durante el escaneo y optimización de la dependencia.
 
-  Se omiten ciertas opciones ya que cambiarlas no sería compatible con la optimización de la dependencia de Vite.
+Se omiten ciertas opciones ya que cambiarlas no sería compatible con la optimización de la dependencia de Vite.
 
-  - También se omite `external`, usa la opción `optimizeDeps.exclude` de Vite
-  - `plugins` se fusionan con el complemento de dependencia de Vite
+- También se omite `external`, usa la opción `optimizeDeps.exclude` de Vite
+- `plugins` se fusionan con el complemento de dependencia de Vite
 
 ## optimizeDeps.force
 

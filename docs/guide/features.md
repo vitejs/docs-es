@@ -174,7 +174,7 @@ Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilac
 
 Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 
-Si no usas JSX con React o Vue, puedes hacer configuraciones personalizadas de `jsxFactory` y `jsxFragment` usando la [opción `esbuild`](/config/shared-options#esbuild). Por ejemplo para Preact:
+Si estás utilizando JSX sin React o Vue, puedes configurar las opciones `jsxFactory` y `jsxFragment` personalizadas utilizando la opción [`esbuild`](/config/shared-options.md#esbuild). Por ejemplo, para Preact:
 
 ```js
 // vite.config.js
