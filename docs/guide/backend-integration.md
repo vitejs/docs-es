@@ -112,9 +112,9 @@ Aquí tienes un ejemplo de plantilla HTML para renderizar los enlaces adecuados.
 Específicamente, un backend que genera HTML debería incluir las siguientes etiquetas dado un archivo de manifiesto y un punto de entrada:
 
 - Una etiqueta `<link rel="stylesheet">` para cada archivo en la lista `css` del fragmento del punto de entrada.
-- Seguir recursivamente todos los fragmentos en la lista `imports` del punto de entrada e incluir una etiqueta `<link rel="stylesheet">` para cada archivo css de cada fragmento importado.
-- Una etiqueta para la clave `file` del fragmento del punto de entrada (`<script type="module">` para Javascript,
-  o `<link rel="stylesheet">` para css)
+- Seguir recursivamente todos los fragmentos en la lista `imports` del punto de entrada e incluir una etiqueta `<link rel="stylesheet">` para cada archivo CSS de cada fragmento importado.
+- Una etiqueta para la clave `file` del fragmento del punto de entrada (`<script type="module">` para JavaScript,
+  o `<link rel="stylesheet">` para CSS)
 - Opcionalmente, una etiqueta `<link rel="modulepreload">` para el `file` de cada fragmento de JavaScript importado, nuevamente siguiendo recursivamente las importaciones a partir del fragmento del punto de entrada.
 
 Siguiendo el ejemplo de manifiesto anterior, para el punto de entrada `main.js` deberían incluirse las siguientes etiquetas en producción:

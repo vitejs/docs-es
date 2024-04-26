@@ -47,21 +47,7 @@ Por ejemplo, puedes especificar varias salidas de Rollup con complementos que so
 
 ## Estrategia de división
 
-Puedes configurar cómo se dividen los fragmentos utilizando `build.rollupOptions.output.manualChunks` (consulta la [documentación de Rollup](https://rollupjs.org/configuration-options/#outputmanualchunks)). Hasta Vite 2.8, la estrategia de fragmentación predeterminada dividía los fragmentos en "index" y "vendor". Es una buena estrategia para algunos SPA, pero es difícil proporcionar una solución general para cada caso de uso de destino de Vite. A partir de Vite 2.9, `manualChunks` ya no se modifica de forma predeterminada. Puedes continuar usando la estrategia Split Vendor Chunk agregando `splitVendorChunkPlugin` en el archivo de configuración:
-
-```js
-// vite.config.js
-import { splitVendorChunkPlugin } from 'vite'
-export default defineConfig({
-  plugins: [splitVendorChunkPlugin()],
-})
-```
-
-Esta estrategia también se proporciona como una factoría `splitVendorChunk({cache: SplitVendorChunkCache})`, en caso de que se necesite una composición con lógica personalizada. Es necesario llamar a `cache.reset()` en `buildStart` para que el modo de visualización de compilación funcione correctamente en este caso.
-
-::: warning
-Debes utilizar la función `build.rollupOptions.output.manualChunks` cuando utilices este plugin. Si se utiliza la forma de objeto, el plugin no tendrá ningún efecto.
-:::
+Puedes configurar cómo se dividen los fragmentos utilizando `build.rollupOptions.output.manualChunks` (consulta la [documentación de Rollup](https://rollupjs.org/configuration-options/#outputmanualchunks)). Si usas un framework, consulta su documentación para configurar cómo se dividen los fragmentos.
 
 ## Manejo de Errores de Carga
 
@@ -273,24 +259,26 @@ experimental: {
 
 Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el segundo parámetro de `context` proporcionado a la función.
 
+<!-- prettier-ignore-start -->
 ```ts twoslash
 import type { UserConfig } from 'vite'
 import path from 'node:path'
 const config: UserConfig = {
-  // ---cut-before---
-  experimental: {
-    renderBuiltUrl(filename, { hostId, hostType, type }) {
-      if (type === 'public') {
-        return 'https://www.domain.com/' + filename
-      } else if (path.extname(hostId) === '.js') {
-        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
-      } else {
-        return 'https://cdn.domain.com/assets/' + filename
-      }
-    },
+// ---cut-before---
+experimental: {
+  renderBuiltUrl(filename, { hostId, hostType, type }) {
+    if (type === 'public') {
+      return 'https://www.domain.com/' + filename
+    } else if (path.extname(hostId) === '.js') {
+      return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+    } else {
+      return 'https://cdn.domain.com/assets/' + filename
+    }
   },
-  // ---cut-after---
+},
+// ---cut-after---
 }
 ```
+<!-- prettier-ignore-end -->
 
 Ten en cuenta que el `filename` que se pasa es una URL decodificada, y si la función devuelve una cadena de URL, también debería estar decodificada. Vite manejará automáticamente la codificación al renderizar las URLs. Si se devuelve un objeto con `runtime`, debes manejar la codificación tú mismo donde sea necesario, ya que el código de ejecución se renderizará tal como está.

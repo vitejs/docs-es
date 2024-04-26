@@ -475,6 +475,8 @@ Un complemento de Vite también puede especificar una propiedad `enforce` (simil
 - Complementos de usuario con `enforce: 'post'`
 - Complementos de compilación de publicaciones de Vite (minify, manifest, reporting)
 
+Es importante tener en cuenta que esto es independiente del ordenamiento de los hooks, los cuales siguen estando sujetos por separado a su atributo `order` [como es habitual en los hooks de Rollup](https://rollupjs.org/plugin-development/#build-hooks).
+
 ## Solicitud condicional
 
 Por defecto, los complementos se invocan tanto para servir como para compilar. En los casos en que un complemento deba aplicarse condicionalmente solo durante el servicio o la construcción, use la propiedad `apply` para invocarlos solo durante la `'build'` o `'serve'`:

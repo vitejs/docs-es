@@ -284,6 +284,10 @@ Habilita los mapas de origen durante el desarrollo.
 
 Selecciona el motor utilizado para el procesamiento de CSS. Consulta [Lightning CSS](../guide/features.md#lightning-css) para obtener más información.
 
+:::info Duplicados de `@import`
+Ten en cuenta que postcss (postcss-import) tiene un comportamiento diferente con los `@import` duplicados en comparación con los navegadores. Consulta [postcss/postcss-import#462](https://github.com/postcss/postcss-import/issues/462).
+:::
+
 ## css.lightningcss
 
 - **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)

@@ -699,9 +699,7 @@ Para implementar CSP, se deben establecer ciertas directivas o configuraciones d
 
 ### [`'nonce-{RANDOM}'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#nonce-base64-value)
 
-Cuando se establece [`html.cspNonce`](/config/shared-options#html-cspnonce), Vite agrega un atributo nonce con el valor especificado a la etiqueta de script de salida y la etiqueta de enlace para hojas de estilo. Ten en cuenta que Vite no agregará un atributo nonce a otras etiquetas, como `<style>`. Además, cuando se establece esta opción, Vite inyectará una etiqueta meta (`
-
-<meta property="csp-nonce" nonce="PLACEHOLDER" />`) con un valor de nonce.
+Cuando se establece [`html.cspNonce`](/config/shared-options#html-cspnonce), Vite agrega un atributo nonce con el valor especificado a cualquier etiqueta `<script>` y `<style>`, así como a las etiquetas `<link>` para hojas de estilo y precarga de módulos. Además, cuando se establece esta opción, Vite inyectará una etiqueta meta (`<meta property="csp-nonce" nonce="PLACEHOLDER" />`).
 
 El valor de nonce de una etiqueta meta con `property="csp-nonce"` será utilizado por Vite cuando sea necesario tanto durante el desarrollo como después de la compilación.
 
