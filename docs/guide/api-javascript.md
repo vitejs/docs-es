@@ -12,25 +12,23 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 
 **Ejemplo de Uso:**
 
-```js
-import { fileURLToPath } from 'url'
+```ts twoslash
+import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
+
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-;(async () => {
-  const server = await createServer({
-    // cualquier opción válida de configuración del usuario, además de `mode` y `configFile`.
-    configFile: false,
-    root: __dirname,
-    server: {
-      port: 1337,
-    },
-  })
-  await server.listen()
+const server = await createServer({
+  // cualquier opción válida de configuración del usuario, además de `mode` y `configFile`.
+  configFile: false,
+  root: __dirname,
+  server: {
+    port: 1337,
+  },
+})
 
-  server.printUrls()
-  server.bindCLIShortcuts({ print: true })
-})()
+server.printUrls()
+server.bindCLIShortcuts({ print: true })
 ```
 
 :::tip NOTA
@@ -43,7 +41,7 @@ Al utilizar el [modo de middleware](/config/server-options.html#server-middlewar
 <details>
 <summary>Ejemplo</summary>
 
-```ts
+```ts twoslash
 import http from 'http'
 import { createServer } from 'vite'
 const parentServer = http.createServer() // o express, koa, etc.
@@ -54,15 +52,17 @@ const vite = await createServer({
       // Proporciona el servidor HTTP principal para el proxy WebSocket
       server: parentServer,
     },
-  },
-  proxy: {
-    '/ws': {
-      target: 'ws://localhost:3000',
-      // Proxying WebSocket
-      ws: true,
+    proxy: {
+      '/ws': {
+        target: 'ws://localhost:3000',
+        // Proxying WebSocket
+        ws: true,
+      },
     },
   },
 })
+
+// @noErrors: 2339
 parentServer.use(vite.middlewares)
 ```
 
@@ -178,8 +178,20 @@ interface ViteDevServer {
    * Vincula atajos de línea de comando
    */
   bindCLIShortcuts(options?: BindCLIShortcutsOptions<ViteDevServer>): void
+  /**
+   * Llamar a `await server.waitForRequestsIdle(id)` esperará hasta que todas las importaciones estáticas
+   * sean procesadas. Si se llama desde un hook de plugin de carga o transformación, el id debe ser
+   * pasado como parámetro para evitar bloqueos. Llamar a esta función después de la primera
+   * sección de importaciones estáticas del grafo de módulos ha sido procesada resolverá inmediatamente.
+   * @experimental
+   */
+  waitForRequestsIdle: (ignoredId?: string) => Promise<void>
 }
 ```
+
+:::info
+`waitForRequestsIdle` está destinado a ser utilizado como una vía de escape para mejorar la experiencia de desarrollo para características que no pueden ser implementadas siguiendo la naturaleza bajo demanda del servidor de desarrollo de Vite. Puede ser utilizado durante el inicio por herramientas como Tailwind para retrasar la generación de las clases CSS de la aplicación hasta que el código de la aplicación haya sido visto, evitando "destellos" de cambios de estilo. Cuando esta función se utiliza en un hook de carga o transformación, y se utiliza el servidor HTTP1 por defecto, uno de los seis canales HTTP será bloqueado hasta que el servidor procese todas las importaciones estáticas. El optimizador de dependencias de Vite actualmente utiliza esta función para evitar recargas completas de la página en caso de dependencias faltantes, retrasando la carga de dependencias precompiladas hasta que todas las dependencias importadas hayan sido recolectadas de fuentes importadas estáticamente. Vite puede cambiar a una estrategia diferente en una versión principal futura, estableciendo `optimizeDeps.crawlUntilStaticImports: false` por defecto para evitar el impacto en el rendimiento en aplicaciones grandes durante el inicio en frío.
+:::
 
 ## `build`
 
@@ -193,23 +205,22 @@ async function build(
 
 **Ejemplo de Uso:**
 
-```js
-import path from 'path'
-import { fileURLToPath } from 'url'
+```js twoslash
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
+
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
-;(async () => {
-  await build({
-    root: path.resolve(__dirname, './project'),
-    base: '/foo/',
-    build: {
-      rollupOptions: {
-        // ...
-      },
+await build({
+  root: path.resolve(__dirname, './project'),
+  base: '/foo/',
+  build: {
+    rollupOptions: {
+      // ...
     },
-  })
-})()
+  },
+})
 ```
 
 ## `preview`
@@ -222,20 +233,18 @@ async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 
 **Ejemplo de Uso:**
 
-```js
+```js twoslash
 import { preview } from 'vite'
-;(async () => {
-  const previewServer = await preview({
-    // cualquier opción válida de configuración del usuario, además de `mode` y `configFile`.
-    preview: {
-      port: 8080,
-      open: true,
-    },
-  })
+const previewServer = await preview({
+  // cualquier opción válida de configuración del usuario, además de `mode` y `configFile`.
+  preview: {
+    port: 8080,
+    open: true,
+  },
+})
 
-  previewServer.printUrls()
-  previewServer.bindCLIShortcuts({ print: true })
-})()
+previewServer.printUrls()
+previewServer.bindCLIShortcuts({ print: true })
 ```
 
 ## `PreviewServer`
@@ -310,7 +319,17 @@ Fusiona profundamente dos configuraciones de Vite. `isRoot` representa el nivel 
 
 Puedes utilizar el helper `defineConfig` para juntar una configuración en forma de callback con otra configuración:
 
-```ts
+```ts twoslash
+import {
+  defineConfig,
+  mergeConfig,
+  type UserConfigFnObject,
+  type UserConfig,
+} from 'vite'
+declare const configAsCallback: UserConfigFnObject
+declare const configAsObject: UserConfig
+
+// ---cut---
 export default defineConfig((configEnv) =>
   mergeConfig(configAsCallback(configEnv), configAsObject),
 )

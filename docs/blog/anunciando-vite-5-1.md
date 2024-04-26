@@ -16,7 +16,7 @@ head:
       content: https://es.vitejs.dev/og-image-announcing-vite5-1.png
   - - meta
     - property: og:url
-      content: https://es.vitejs.dev/blog/announcing-vite5-1
+      content: https://es.vitejs.dev/blog/anunciando-vite-5-1
   - - meta
     - property: og:description
       content: Anuncio de lanzamiento de Vite 5.1
@@ -31,7 +31,7 @@ _8 de febrero de 2024_
 
 ![Imagen de Portada del Anuncio de Vite 5.1](/og-image-announcing-vite5-1.png)
 
-Vite 5 [fue lanzado](./announcing-vite5.md) en noviembre pasado, y representó otro gran avance para Vite y el ecosistema. Hace unas semanas celebramos 10 millones de descargas semanales de npm y 900 colaboradores en el repositorio de Vite. Hoy, nos complace anunciar el lanzamiento de Vite 5.1.
+Vite 5 [fue lanzado](./anunciando-vite5.md) en noviembre pasado, y representó otro gran avance para Vite y el ecosistema. Hace unas semanas celebramos 10 millones de descargas semanales de npm y 900 colaboradores en el repositorio de Vite. Hoy, nos complace anunciar el lanzamiento de Vite 5.1.
 
 Enlaces rápidos: [Documentación](/), [Registro de cambios](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
 

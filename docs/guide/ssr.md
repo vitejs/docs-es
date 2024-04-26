@@ -53,7 +53,9 @@ Puedes usar cualquier placeholder que prefieras en lugar de `<!--ssr-outlet-->`,
 
 Si necesitas realizar una lógica condicional basada en SSR vs cliente, puedes usar
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 if (import.meta.env.SSR) {
   // ... logica de solo servidor
 }
@@ -67,10 +69,10 @@ Al crear una aplicación SSR, es probable que desees tener control total sobre t
 
 **server.js**
 
-```js{15-18}
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+```js{15-18} twoslash
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
 
@@ -109,7 +111,18 @@ Aquí `vite` es una instancia de [ViteDevServer](./api-javascript#vitedevserver)
 
 El siguiente paso es implementar el controlador `*` para servir el HTML generado por el servidor:
 
-```js
+```js twoslash
+// @noErrors
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+/** @type {import('express').Express} */
+var app
+/** @type {import('vite').ViteDevServer}  */
+var vite
+
+// ---cut---
 app.use('*', async (req, res) => {
   const url = req.originalUrl
 
@@ -245,7 +258,9 @@ Algunos marcos, como Vue o Svelte, compilan componentes en diferentes formatos e
 
 **Ejemplo:**
 
-```js
+```js twoslash
+/** @type {() => import('vite').Plugin} */
+// ---cut---
 export function mySSRPlugin() {
   return {
     name: 'my-ssr',

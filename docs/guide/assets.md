@@ -7,7 +7,9 @@
 
 Importar un recurso estático retornará la URL pública que es resuelta al servirla:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
@@ -33,7 +35,9 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 ::: tip Incrustación de SVG a través de `url()`
 Cuando se pasa una URL de SVG a una construcción manual de `url()` mediante JS, la variable debe estar colocada entre comillas dobles.
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import imgUrl from './img.svg'
 document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 ```
@@ -44,7 +48,9 @@ document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 
 Los recursos que no están incluidos en la lista interna o en `assetsInclude`, se pueden importar explícitamente como una URL usando el sufijo `?url`. Esto es útil, por ejemplo, para importar los [Houdini Paint Worklets](https://houdini.how/usage).
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
@@ -53,7 +59,9 @@ CSS.paintWorklet.addModule(workletURL)
 
 Los recursos pueden ser importados como cadenas de texto usando el sufijo `?raw`.
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import shaderString from './shader.glsl?raw'
 ```
 
@@ -61,19 +69,25 @@ import shaderString from './shader.glsl?raw'
 
 Los scripts pueden ser importados como workers web con los sufijos `?worker` o `?sharedworker`.
 
-```js
+```ts twoslash
+import 'vite/client'
+// ---cut---
 // Fragmento separado en la compilación de producción
 import Worker from './shader.js?worker'
 const worker = new Worker()
 ```
 
-```js
+```ts twoslash
+import 'vite/client'
+// ---cut---
 // sharedworker
 import SharedWorker from './shader.js?sharedworker'
 const sharedWorker = new SharedWorker()
 ```
 
-```js
+```ts twoslash
+import 'vite/client'
+// ---cut---
 // En línea como cadena base64
 import InlineWorker from './shader.js?worker&inline'
 ```

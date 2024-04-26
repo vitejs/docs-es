@@ -10,7 +10,7 @@ Para usar un complemento, este debe agregarse a `devDependencies` del proyecto e
 $ npm add -D @vitejs/plugin-legacy
 ```
 
-```js
+```js twoslash
 // vite.config.js
 import legacy from '@vitejs/plugin-legacy'
 import { defineConfig } from 'vite'
@@ -46,7 +46,7 @@ Para la compatibilidad con algunos complementos de Rollup, es posible que sea ne
 - predeterminado: invocar el complemento después de los complementos principales de Vite
 - `post`: invocar el complemento después de los complementos de compilación de Vite
 
-```js
+```js twoslash
 // vite.config.js
 import image from '@rollup/plugin-image'
 import { defineConfig } from 'vite'
@@ -67,7 +67,7 @@ Consulta la [Guía de API de complementos](./api-plugin.md#orden-de-complementos
 
 De forma predeterminada, los complementos se invocan tanto para servir como para compilar. En los casos en que un complemento deba aplicarse condicionalmente solo durante el servicio o la compilación, usa la propiedad `apply` para invocarlos solo durante `'build'` o `'serve'`:
 
-```js
+```js twoslash
 // vite.config.js
 import typescript2 from 'rollup-plugin-typescript2'
 import { defineConfig } from 'vite'

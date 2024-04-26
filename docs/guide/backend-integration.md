@@ -8,7 +8,9 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
 1. En tu configuración de Vite, configura el archivo de entrada y habilita el manifest de compilación:
 
-   ```js
+   ```js twoslash
+   import { defineConfig } from 'vite'
+   // ---cut---
    // vite.config.js
    export default defineConfig({
      build: {
@@ -66,7 +68,8 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
        "isEntry": true,
        "dynamicImports": ["views/foo.js"],
        "css": ["assets/main.b82dbe22.css"],
-       "assets": ["assets/asset.0ab0f9cd.png"]
+       "assets": ["assets/asset.0ab0f9cd.png"],
+       "imports": ["_shared.83069a53.js"]
      },
      "views/foo.js": {
        "file": "assets/foo.869aea0d.js",
@@ -75,7 +78,8 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
        "imports": ["_shared.83069a53.js"]
      },
      "_shared.83069a53.js": {
-       "file": "assets/shared.83069a53.js"
+       "file": "assets/shared.83069a53.js",
+       "css": ["assets/shared.a834bfc3.css"]
      }
    }
    ```
@@ -84,10 +88,50 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    - Para fragmentos de entrada fija o dinámica, la key es la ruta src relativa de la raíz del proyecto.
    - Los fragmentos contendrán información en sus importaciones estaticas y dinamicas (ambos son keys que mapean al correspondiente fragmento en el manifest), y tambien su correspondiente css y archivo de recurso estatico (si los hay).
 
-   Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash (nota: la sintaxis aquí es meramente explicativa, reemplazalo con el lenguage de plantilla del servidor.)
+4. Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash.
 
-   ```html
-   <!-- if production -->
-   <link rel="stylesheet" href="/assets/{{ manifest['main.js'].css }}" />
-   <script type="module" src="/assets/{{ manifest['main.js'].file }}"></script>
-   ```
+Aquí tienes un ejemplo de plantilla HTML para renderizar los enlaces adecuados. La sintaxis aquí es solo para explicación, sustitúyela con tu lenguaje de plantillas de servidor. La función `importedChunks` es solo para fines ilustrativos y no es proporcionada por Vite.
+
+````html
+<!-- si es producción -->
+
+```html
+<!-- para cssFile de manifest[name].css -->
+<link rel="stylesheet" href="/{{ cssFile }}" />
+
+<!-- para fragmentos de importedChunks(manifest, name) -->
+<!-- para cssFile de chunk.css -->
+<link rel="stylesheet" href="/{{ cssFile }}" />
+
+<script type="module" src="/{{ manifest[name].file }}"></script>
+
+<!-- para fragmentos de importedChunks(manifest, name) -->
+<link rel="modulepreload" href="/{{ chunk.file }}" />
+````
+
+Específicamente, un backend que genera HTML debería incluir las siguientes etiquetas dado un archivo de manifiesto y un punto de entrada:
+
+- Una etiqueta `<link rel="stylesheet">` para cada archivo en la lista `css` del fragmento del punto de entrada.
+- Seguir recursivamente todos los fragmentos en la lista `imports` del punto de entrada e incluir una etiqueta `<link rel="stylesheet">` para cada archivo css de cada fragmento importado.
+- Una etiqueta para la clave `file` del fragmento del punto de entrada (`<script type="module">` para Javascript,
+  o `<link rel="stylesheet">` para css)
+- Opcionalmente, una etiqueta `<link rel="modulepreload">` para el `file` de cada fragmento de JavaScript importado, nuevamente siguiendo recursivamente las importaciones a partir del fragmento del punto de entrada.
+
+Siguiendo el ejemplo de manifiesto anterior, para el punto de entrada `main.js` deberían incluirse las siguientes etiquetas en producción:
+
+```html
+<link rel="stylesheet" href="assets/main.b82dbe22.css" />
+<link rel="stylesheet" href="assets/shared.a834bfc3.css" />
+<script type="module" src="assets/main.4889e940.js"></script>
+<!-- opcional -->
+<link rel="modulepreload" href="assets/shared.83069a53.js" />
+```
+
+Mientras que para el punto de entrada `views/foo.js` deberían incluirse las siguientes:
+
+```html
+<link rel="stylesheet" href="assets/shared.a834bfc3.css" />
+<script type="module" src="assets/foo.869aea0d.js"></script>
+<!-- opcional -->
+<link rel="modulepreload" href="assets/shared.83069a53.js" />
+```

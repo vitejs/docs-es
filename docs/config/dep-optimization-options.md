@@ -19,7 +19,9 @@
   :::warning CommonJS
   Las dependencias CommonJS no deben excluirse de la optimización. Si una dependencia de ESM se excluye de la optimización, pero tiene una dependencia CommonJS anidada, la dependencia CommonJS debe agregarse a `optimizeDeps.include`. Ejemplo:
 
-  ```js
+  ```js twoslash
+  import { defineConfig } from 'vite'
+  // ---cut---
   export default defineConfig({
     optimizeDeps: {
       include: ['esm-dep > cjs-dep'],
@@ -37,7 +39,9 @@
 
 **Experimental:** Si utilizas una biblioteca con muchas importaciones profundas, también puede especificar un patrón glob para preagrupar todas las importaciones profundas a la vez. De este modo, se evitará la precarga constante cada vez que se utilice una nueva importación profunda. [Hacer c](https://github.com/vitejs/vite/discussions/15833) Por ejemplo:
 
-```js
+```js twoslash
+import { defineConfig } from 'vite'
+// ---cut---
 export default defineConfig({
   optimizeDeps: {
     include: ['my-lib/components/**/*.vue'],

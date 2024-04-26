@@ -65,7 +65,7 @@ Esto se debe a que `esbuild` solo realiza la transpilación sin información de 
 
 Debes configurar `"isolatedModules": true` en el `tsconfig.json` en `compilerOptions`, para que TS te advierta sobre las funcionalidades omitidas con la transpilación aislada.
 
-Sin embargo, algunas bibliotecas (por ejemplo, [`vue`](https://github.com/vuejs/core/issues/1228)) no funcionan bien con `"isolatedModules": true`. Puedes usar `"skipLibCheck": true` para suprimir temporalmente los errores hasta que se solucione.
+Si una dependencia no funciona bien con `"isolatedModules": true`, puedes usar `"skipLibCheck": true` para suprimir temporalmente los errores hasta que se solucione.
 
 #### `useDefineForClassFields`
 
@@ -176,7 +176,7 @@ Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](h
 
 Si estás utilizando JSX sin React o Vue, puedes configurar las opciones `jsxFactory` y `jsxFragment` personalizadas utilizando la opción [`esbuild`](/config/shared-options.md#esbuild). Por ejemplo, para Preact:
 
-```js
+```js twoslash
 // vite.config.js
 import { defineConfig } from 'vite'
 
@@ -192,7 +192,7 @@ Más detalles en la [documentación de esbuild](https://esbuild.github.io/conten
 
 Puedes inyectar los helpers de JSX usando `jsxInject` (que es una opción exclusiva de Vite) para evitar las importaciones manuales:
 
-```js
+```js twoslash
 // vite.config.js
 import { defineConfig } from 'vite'
 
@@ -230,7 +230,9 @@ Cualquier archivo CSS que termine con `.module.css` se considera un [archivo de 
 }
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
@@ -239,7 +241,9 @@ El comportamiento de los módulos CSS se puede configurar mediante la [opción `
 
 Si `css.modules.localsConvention` está configurado para habilitar camelCase locales (por ejemplo, `localsConvention: 'camelCaseOnly'`), también podrá usar importaciones con nombre:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 // .apply-color -> applyColor
 import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
@@ -274,7 +278,9 @@ También puedes usar módulos CSS combinados con preprocesadores anteponiendo `.
 
 La inyección automática de contenido CSS se puede desactivar a través del parámetro de consulta `?inline`. En este caso, la cadena CSS procesada se devuelve como la exportación predeterminada del módulo como de costumbre, pero los estilos no se inyectan en la página.
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 import './foo.css' // se inyectará en la página
 import otherStyles from './bar.css?inline' // no se inyectará
 ```
@@ -305,29 +311,39 @@ Los [preprocesadores de CSS](#css-pre-processors) no son compatibles cuando se u
 
 La importación de un recurso estático devolverá la URL pública resuelta cuando se sirva:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
 Las consultas especiales pueden modificar cómo se cargan los recursos:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 // carga recursos explícitamente como URL
 import assetAsURL from './asset.js?url'
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 // carga recursos como string
 import assetAsString from './shader.glsl?raw'
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 // cargar Web Workers
 import Worker from './worker.js?worker'
 ```
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 // incrustado de Web Workers como cadenas base64 en tiempo de compilado.
 import InlineWorker from './worker.js?worker&inline'
 ```
@@ -338,7 +354,9 @@ Más detalles en [Gestión de recursos estáticos](./assets).
 
 Los archivos JSON se pueden importar directamente; también se admiten las importaciones con nombre:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 // importar todo el objeto
 import json from './example.json'
 // importe un campo raíz como exportaciones con nombre: ¡ayuda al hacer tree-shaking!
@@ -349,7 +367,9 @@ import { field } from './example.json'
 
 Vite admite la importación de múltiples módulos desde el sistema de archivos a través de la función especial `import.meta.glob`:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 const modules = import.meta.glob('./dir/*.js')
 ```
 
@@ -375,7 +395,9 @@ for (const path in modules) {
 
 Los archivos coincidentes se cargan de forma diferida de forma predeterminada a través de la importación dinámica y se dividirán en partes separadas durante la compilación. Si prefieres importar todos los módulos directamente (por ejemplo, confiando en que los efectos secundarios de estos módulos se apliquen primero), puedes pasar `{ eager: true }` como segundo argumento:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 const modules = import.meta.glob('./dir/*.js', { eager: true })
 ```
 
@@ -395,7 +417,9 @@ const modules = {
 
 El primer argumento puede ser una array de globs, por ejemplo
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 ```
 
@@ -403,7 +427,9 @@ const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 
 También se admiten patrones glob negativos (con el prefijo `!`). Para ignorar algunos archivos del resultado, puedes agregar exclusiones de patrones glob en el primer argumento:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut--
 const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
 ```
 
@@ -418,7 +444,9 @@ const modules = {
 
 Es posible importar solo partes de los módulos con las opciones de `import`.
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```
 
@@ -432,7 +460,9 @@ const modules = {
 
 Cuando se combina con `eager`, incluso es posible tener habilitado el tree-shaking para esos módulos.
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   import: 'setup',
   eager: true,
@@ -451,7 +481,9 @@ const modules = {
 
 Configura `import` a `default` para importar la exportación predeterminada.
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   import: 'default',
   eager: true,
@@ -472,7 +504,9 @@ const modules = {
 
 También puedes utilizar la opción `query` para realizar consultas sobre importaciones, por ejemplo, para importar recursos [como una cadena](./assets.html#importar-recursos-como-cadenas-de-texto) o [como URL](./assets.html#importar-recursos-como-url):
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const moduleStrings = import.meta.glob('./dir/*.svg', {
   query: '?raw',
   import: 'default',
@@ -497,7 +531,9 @@ const moduleUrls = {
 
 También puedes proporcionar consultas personalizadas para que las consuman otros complementos:
 
-```ts
+```ts twoslash
+import 'vite/client'
+// ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true },
 })
@@ -528,7 +564,9 @@ Los archivos `.wasm` precompilados se pueden importar con `?init`.
 
 La exportación por defecto será una función de inicialización que devuelve una Promesa de [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import init from './example.wasm?init'
 init().then((instance) => {
   instance.exports.test()
@@ -537,7 +575,10 @@ init().then((instance) => {
 
 La función init también puede tomar un importObject que se pasa a [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate) como su segundo argumento:
 
-```js
+```js twoslash
+import 'vite/client'
+import init from './example.wasm?init'
+// ---cut---
 init({
   imports: {
     someFunc: () => {
@@ -560,7 +601,9 @@ Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros comp
 
 Si necesitas acceder al objeto `Module`, por ejemplo, para instanciarlo varias veces, utiliza una [importación de URL explícita](./assets#importar-recursos-como-url) para resolver el recurso y luego realice la instanciación:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import wasmUrl from 'foo.wasm?url'
 
 const main = async () => {
@@ -580,7 +623,9 @@ Consulta el problema en el debate de [Soporte wasm en SSR](https://github.com/vi
 
 Aquí hay una alternativa, asumiendo que la base del proyecto es el directorio actual:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import wasmUrl from 'foo.wasm?url'
 import { readFile } from 'node:fs/promises'
 
@@ -620,7 +665,9 @@ La detección de workers solo funcionará si el constructor `new URL()` se usa d
 
 Se puede importar directamente un script de web worker agregando `?worker` o `?sharedworker` a la solicitud de importación. La exportación predeterminada será un constructor de worker personalizado:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import MyWorker from './worker?worker'
 
 const worker = new MyWorker()
@@ -630,17 +677,45 @@ El script del worker también puede usar sentencias ESM `import` en lugar de `im
 
 De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega el parámetro `inline`:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import MyWorker from './worker?worker&inline'
 ```
 
 Si deseas listar el worker como una URL, agrega el parámetro `url`:
 
-```js
+```js twoslash
+import 'vite/client'
+// ---cut---
 import MyWorker from './worker?worker&url'
 ```
 
 Revisa las [opciones de Worker](/config/worker-options) para obtener detalles sobre cómo configurar el empaquetado de todos los workers.
+
+## Política de Seguridad de Contenido (CSP)
+
+Para implementar CSP, se deben establecer ciertas directivas o configuraciones debido a las partes internas de Vite.
+
+### [`'nonce-{RANDOM}'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#nonce-base64-value)
+
+Cuando se establece [`html.cspNonce`](/config/shared-options#html-cspnonce), Vite agrega un atributo nonce con el valor especificado a la etiqueta de script de salida y la etiqueta de enlace para hojas de estilo. Ten en cuenta que Vite no agregará un atributo nonce a otras etiquetas, como `<style>`. Además, cuando se establece esta opción, Vite inyectará una etiqueta meta (`
+
+<meta property="csp-nonce" nonce="PLACEHOLDER" />`) con un valor de nonce.
+
+El valor de nonce de una etiqueta meta con `property="csp-nonce"` será utilizado por Vite cuando sea necesario tanto durante el desarrollo como después de la compilación.
+
+:::warning
+Asegúrate de reemplazar el placeholder con un valor único para cada solicitud. Esto es importante para evitar eludir la política de recursos, lo cual de lo contrario podría hacerse fácilmente.
+:::
+
+### [`data:`](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#scheme-source:~:text=schemes%20(not%20recommended).-,data%3A,-Allows%20data%3A>)
+
+Por defecto, durante la compilación, Vite incrusta activos pequeños como URIs de datos. Es necesario permitir `data:` para directivas relacionadas (por ejemplo, [`img-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src), [`font-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src)), o deshabilitarlo estableciendo [`build.assetsInlineLimit: 0`](/config/build-options#build-assetsinlinelimit).
+
+:::warning
+No le des permisos a `data:` para [`script-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src). Esto permitirá la inyección de scripts arbitrarios.
+:::
 
 ## Optimizaciones de compilación
 

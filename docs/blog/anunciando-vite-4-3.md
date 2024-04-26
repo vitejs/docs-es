@@ -16,7 +16,7 @@ head:
       content: https://vitejs.dev/og-image-announcing-vite4-3.png
   - - meta
     - property: og:url
-      content: https://vitejs.dev/blog/announcing-vite4-3
+      content: https://es.vitejs.dev/blog/anunciando-vite-4-3
   - - meta
     - property: og:description
       content: Vite 4.3 Release Announcement

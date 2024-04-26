@@ -34,7 +34,6 @@ Para obtener un control avanzado de la ruta base, consulta [Opciones avanzadas d
 La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/configuration-options/) fundamentales a través de `build.rollupOptions`:
 
 ```js
-// vite.config.js
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -68,9 +67,9 @@ Debes utilizar la función `build.rollupOptions.output.manualChunks` cuando util
 
 Vite emite el evento `vite:preloadError` cuando no puede cargar importaciones dinámicas. `event.payload` contiene el error de importación original. Si llamas a `event.preventDefault()`, el error no se lanzará.
 
-```js
+```js twoslash
 window.addEventListener('vite:preloadError', (event) => {
-  window.reload() // por ejemplo, refrescar la página
+  window.location.reload() // por ejemplo, refrescar la página
 })
 ```
 
@@ -111,7 +110,7 @@ Durante el desarrollo, simplemente navega o enlaza a `/nested/` - funcionará co
 
 Durante la compilación, todo lo que necesitas hacer es especificar varios archivos `.html` como puntos de entrada:
 
-```js
+```js twoslash
 // vite.config.js
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -138,7 +137,7 @@ Cuando estás desarrollando una librería orientada al navegador, es probable qu
 
 Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la [opción de configuración `build.lib`](/config/build-options#build-lib). Asegúrate de externalizar también cualquier dependencia que no desees incluir en tu librería, por ejemplo, `vue` o `react`:
 
-```js
+```js twoslash
 // vite.config.js
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -253,34 +252,45 @@ Un usuario puede elegir desplegar en tres rutas diferentes:
 
 Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenarios. Vite brinda soporte experimental para opciones avanzadas para Base durante la compilación, usando `experimental.renderBuiltUrl`.
 
-```ts
-  experimental: {
-    renderBuiltUrl(filename: string, { hostType }: { hostType: 'js' | 'css' | 'html' })
-      if (hostType === 'js') {
-        return { runtime: `window.__toCdnUrl(${JSON.stringify(filename)})` }
-      } else {
-        return { relative: true }
-      }
+<!-- prettier-ignore-start -->
+```ts twoslash
+import type { UserConfig } from 'vite'
+const config: UserConfig = {
+// ---cut-before---
+experimental: {
+  renderBuiltUrl(filename, { hostType }) {
+    if (hostType === 'js') {
+      return { runtime: `window.__toCdnUrl(${JSON.stringify(filename)})` }
+    } else {
+      return { relative: true }
     }
-  }
+  },
+},
+// ---cut-after---
+}
 ```
+<!-- prettier-ignore-end -->
 
 Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el segundo parámetro de `context` proporcionado a la función.
 
-```ts
-experimental: {
-  renderBuiltUrl(filename: string, { hostId, hostType, type }: { hostId: string, hostType: 'js' | 'css' | 'html', type: 'public' | 'asset' }) {
-    if (type === 'public') {
-      return 'https://www.domain.com/' + filename
-    }
-    else if (path.extname(hostId) === '.js') {
-      return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
-    }
-    else {
-      return 'https://cdn.domain.com/assets/' + filename
-    }
-  }
+```ts twoslash
+import type { UserConfig } from 'vite'
+import path from 'node:path'
+const config: UserConfig = {
+  // ---cut-before---
+  experimental: {
+    renderBuiltUrl(filename, { hostId, hostType, type }) {
+      if (type === 'public') {
+        return 'https://www.domain.com/' + filename
+      } else if (path.extname(hostId) === '.js') {
+        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+      } else {
+        return 'https://cdn.domain.com/assets/' + filename
+      }
+    },
+  },
+  // ---cut-after---
 }
 ```
 
-Cualquier opción que no esté definida en la entrada `public` o `assets` se heredará de la configuración principal `buildAdvancedBaseOptions`.
+Ten en cuenta que el `filename` que se pasa es una URL decodificada, y si la función devuelve una cadena de URL, también debería estar decodificada. Vite manejará automáticamente la codificación al renderizar las URLs. Si se devuelve un objeto con `runtime`, debes manejar la codificación tú mismo donde sea necesario, ya que el código de ejecución se renderizará tal como está.

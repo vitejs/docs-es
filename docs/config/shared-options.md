@@ -154,6 +154,13 @@ Habilitar esta configuración hace que vite determine la identidad del archivo p
 
 - **Relacionado:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
+## html.cspNonce
+
+- **Tipo:** `string`
+- **Relacionado:** [Política de seguridad de contenido (CSP)](/guide/features#content-security-policy-csp)
+
+Un placeholder de valor de nonce que se utilizará al generar etiquetas de script/style. Establecer este valor también generará una etiqueta meta con el valor de nonce.
+
 ## css.modules
 
 - **Tipo:**

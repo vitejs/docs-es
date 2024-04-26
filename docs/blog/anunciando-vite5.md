@@ -16,7 +16,7 @@ head:
       content: https://es.vitejs.dev/og-image-announcing-vite5.png
   - - meta
     - property: og:url
-      content: https://es.vitejs.dev/blog/announcing-vite5
+      content: https://es.vitejs.dev/blog/anunciando-vite5
   - - meta
     - property: og:description
       content: Anuncio de lanzamiento de Vite 5
@@ -35,7 +35,7 @@ Vite 4 [fue lanzado](./anunciando-vite4.md) hace casi un año, y sirvió como un
 
 Tuvimos la segunda edición de [ViteConf](https://viteconf.org/23/replay) hace un mes, organizada por [StackBlitz](https://stackblitz.com). Como el año pasado, la mayoría de los proyectos en el ecosistema se unieron para compartir ideas y conectarse para seguir expandiendo lo común. También estamos viendo nuevas piezas complementar la caja de herramientas de la meta-framework como [Volar](https://volarjs.dev/) y [Nitro](https://nitro.unjs.io/). El equipo de Rollup lanzó [Rollup 4](https://rollupjs.org) ese mismo día, una tradición que Lukas comenzó el año pasado.
 
-Hace seis meses, se [lanzó Vite 4.3](./anunciado-vite-4-3.md). Esta versión mejoró significativamente el rendimiento del servidor de desarrollo. Sin embargo, todavía hay mucho espacio para mejoras. En ViteConf, [Evan You reveló el plan a largo plazo de Vite para trabajar en Rolldown](https://www.youtube.com/watch?v=hrdwQHoAp0M), un port en Rust de Rollup con APIs compatibles. Una vez que esté listo, planeamos usarlo en el core de Vite para asumir las tareas tanto de Rollup como de esbuild. Esto significará un impulso en el rendimiento de la compilación (y más adelante en el rendimiento de desarrollo también a medida que traslademos partes sensibles al rendimiento de Vite mismo a Rust) y una gran reducción de las inconsistencias entre el desarrollo y la compilación. Rolldown está actualmente en las primeras etapas y el equipo se está preparando para abrir el código fuente antes de fin de año. ¡Estén atentos!
+Hace seis meses, se [lanzó Vite 4.3](./anunciando-vite-4-3.md). Esta versión mejoró significativamente el rendimiento del servidor de desarrollo. Sin embargo, todavía hay mucho espacio para mejoras. En ViteConf, [Evan You reveló el plan a largo plazo de Vite para trabajar en Rolldown](https://www.youtube.com/watch?v=hrdwQHoAp0M), un port en Rust de Rollup con APIs compatibles. Una vez que esté listo, planeamos usarlo en el core de Vite para asumir las tareas tanto de Rollup como de esbuild. Esto significará un impulso en el rendimiento de la compilación (y más adelante en el rendimiento de desarrollo también a medida que traslademos partes sensibles al rendimiento de Vite mismo a Rust) y una gran reducción de las inconsistencias entre el desarrollo y la compilación. Rolldown está actualmente en las primeras etapas y el equipo se está preparando para abrir el código fuente antes de fin de año. ¡Estén atentos!
 
 Hoy, marcamos otro hito importante en el camino de Vite. El equipo de Vite, los [contribuyentes](https://github.com/vitejs/vite/graphs/contributors) y los socios del ecosistema, se complacen en anunciar el lanzamiento de Vite 5. Vite ahora utiliza [Rollup 4](https://github.com/vitejs/vite/pull/14508), lo que ya representa un gran impulso en el rendimiento de compilación. Y también hay nuevas opciones para mejorar el perfil de rendimiento de su servidor de desarrollo.
 

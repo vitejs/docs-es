@@ -18,7 +18,7 @@ Ten en cuenta que las dependencias enumeradas explícitamente (que usan el tipo 
 
 Previene que las dependencias enumeradas se externalicen para SSR, las cuales se incluirán después en la compilación. Por defecto, sólo las dependencias vinculadas no se externalizan (para HMR). Si prefieres externalizar la dependencia vinculada, puede pasar su nombre a la opción `ssr.external`.
 
-Si es `true`, no se externalizan dependencias. Sin embargo, las dependencias enumeradas explícitamente en `ssr.external` (usando el tipo `string[]`) pueden tener prioridad y aún así externalizarse.
+Si es `true`, no se externalizan dependencias. Sin embargo, las dependencias enumeradas explícitamente en `ssr.external` (usando el tipo `string[]`) pueden tener prioridad y aún así externalizarse. Si se configura `ssr.target: 'node'`, los módulos integrados de Node.js también se externalizarán de forma predeterminada.
 
 Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` están configurados, `ssr.noExternal` tiene prioridad y no se externalizan dependencias.
 

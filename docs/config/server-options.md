@@ -18,10 +18,10 @@
 
   Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para deshabilitar el comportamiento de reordenación. Vite luego imprimirá la dirección como `localhost`.
 
-  ```js
+  ```js twoslash
   // vite.config.js
   import { defineConfig } from 'vite'
-  import dns from 'dns'
+  import dns from 'node:dns'
   dns.setDefaultResultOrder('verbatim')
   export default defineConfig({
     // omitido
@@ -344,16 +344,16 @@ Permite configurar si se ignoran o no los archivos de origen en el mapa de orige
 
 Por defecto, se excluyen todas las rutas que contienen `node_modules`. Puedes pasar `false` para deshabilitar este comportamiento o, para un control total, una función que toma la ruta de origen y la ruta del mapa de origen y devuelve si se ignora la ruta de origen.
 
-```js
+```js twoslash
 export default defineConfig({
   server: {
     // Este es el valor predeterminado y agregará todos los archivos
     // con node_modules en sus rutas a la lista de ignorados.
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
       return sourcePath.includes('node_modules')
-    }
-  }
-};
+    },
+  },
+})
 ```
 
 ::: tip Nota
