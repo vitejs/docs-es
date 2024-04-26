@@ -202,3 +202,9 @@ Envía eventos personalizados al servidor de desarrollo de Vite.
 Si se llama antes de conectarse, los datos se almacenarán en búfer y se enviarán una vez que se establezca la conexión.
 
 Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#comunicacion-cliente-servidor) para obtener más detalles.
+
+## Lecturas adicionales
+
+Si deseas aprender más sobre cómo utilizar la API de HMR y cómo funciona internamente, consulta estos recursos:
+
+- [Hot Module Replacement es fácil](https://bjornlu.com/blog/hot-module-replacement-is-easy)

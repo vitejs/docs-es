@@ -4,7 +4,7 @@
 
 ### `vite`
 
-Inicia el servidor de desarrollo de Vite en el directorio actual.
+Inicia el servidor de desarrollo de Vite en el directorio actual. `vite dev` y `vite serve` son alias `vite`.
 
 #### Uso
 

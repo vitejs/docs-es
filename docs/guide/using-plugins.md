@@ -18,9 +18,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [
     legacy({
-      targets: ['defaults', 'not IE 11']
-    })
-  ]
+      targets: ['defaults', 'not IE 11'],
+    }),
+  ],
 })
 ```
 
@@ -34,7 +34,7 @@ Se ignorarán los complementos falsos, los cuales pueden ser usar para activar o
 Vite tiene como objetivo proporcionar soporte listo para usar para patrones comunes de desarrollo web. Antes de buscar un complemento de Vite o Rollup compatible, consulta la [Guía de funcionalidades](../guide/features.md). Muchos de los casos en los que se necesitaría un complemento en un proyecto de Rollup ya están cubiertos en Vite.
 :::
 
-Consulta la [sección Complementos](../plugins/) para obtener información sobre los complementos oficiales. Los complementos de la comunidad se enumeran en [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). Para conocer los complementos de Rollup compatibles, consulta [Complementos de Vite Rollup](https://vite-rollup-plugins.patak.dev) para obtener una lista de complementos oficiales de Rollup compatibles con instrucciones de uso o la [sección Compatibilidad de complementos de Rollup](../guide/api-plugin#compatibilidad-del-complementos-rollup) en caso de que no aparezcan en la lista.
+Consulta la [sección Complementos](../plugins/) para obtener información sobre los complementos oficiales. Los complementos de la comunidad se enumeran en [awesome-vite](https://github.com/vitejs/awesome-vite#plugins).
 
 También puedes encontrar complementos que sigan las [convenciones recomendadas](./api-plugin.md#convenciones) mediante una [búsqueda de npm](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) para complementos de Vite o una [búsqueda de npm](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) para complementos de Rollup.
 
@@ -55,13 +55,13 @@ export default defineConfig({
   plugins: [
     {
       ...image(),
-      enforce: 'pre'
-    }
-  ]
+      enforce: 'pre',
+    },
+  ],
 })
 ```
 
-Consulta la [Guía de API de complementos](./api-plugin.md#orden-de-complementos) para obtener información detallada, y tener en cuenta la etiqueta `enforce` y las instrucciones de uso para complementos populares en lista de compatibilidad de [Complementos Vite Rollup](https://vite-rollup-plugins.patak.dev).
+Consulta la [Guía de API de complementos](./api-plugin.md#orden-de-complementos) para obtener información detallada.
 
 ## Aplicación condicional
 
@@ -76,9 +76,9 @@ export default defineConfig({
   plugins: [
     {
       ...typescript2(),
-      apply: 'build'
-    }
-  ]
+      apply: 'build',
+    },
+  ],
 })
 ```
 

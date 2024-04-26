@@ -397,6 +397,7 @@ interface HtmlTagDescriptor {
 ### `handleHotUpdate`
 
 - **Tipo:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
+  **Ver tambien:** [HMR API](./api-hmr)
 
   Realiza el manejo personalizado de actualizaciones de HMR. El hook recibe un objeto de contexto con la siguiente firma:
 
@@ -418,28 +419,49 @@ interface HtmlTagDescriptor {
 
   - Filtrar y reducir la lista de módulos afectados para que el HMR sea más preciso.
 
-  - Devuelva un array vacío y realiza un manejo completo de HMR personalizado enviando eventos personalizados al cliente (el ejemplo usa `server.hot` que se introdujo en Vite 5.1, se recomienda usar también `server.ws` si se quiere soportar versiones inferiores)::
+  - Devuelva un array vacío y realiza una recarga completa:
 
-    ```js
-    handleHotUpdate({ server }) {
-      server.hot.send({
-        type: 'custom',
-        event: 'special-update',
-        data: {}
-      })
+  ```js
+    handleHotUpdate({ server, modules, timestamp }) {
+      // También usar `server.ws.send` para admitir Vite <5.1 si es necesario
+      server.hot.send({ type: 'full-reload' })
+      // Invalidar módulos manualmente
+      const invalidatedModules = new Set()
+      for (const mod of modules) {
+        server.moduleGraph.invalidateModule(
+          mod,
+          invalidatedModules,
+          timestamp,
+          true
+        )
+      }
       return []
     }
-    ```
+  ```
 
-    El código del cliente debe registrar el controlador correspondiente utilizando la [APi HMR](./api-hmr) (esto podría inyectarse mediante el hook `transform` del mismo complemento):
+  - Devuelve un array vacío y realiza un manejo personalizado completo de HMR enviando eventos personalizados al cliente:
 
-    ```js
-    if (import.meta.hot) {
-      import.meta.hot.on('special-update', (data) => {
-        // perform custom update
-      })
-    }
-    ```
+  ```js
+  handleHotUpdate({ server }) {
+    // También usar `server.ws.send` para admitir Vite <5.1 si es necesario
+    server.hot.send({
+      type: 'custom',
+      event: 'special-update',
+      data: {}
+    })
+    return []
+  }
+  ```
+
+  El código del cliente debe registrar el controlador correspondiente utilizando la [APi HMR](./api-hmr) (esto podría inyectarse mediante el hook `transform` del mismo complemento):
+
+  ```js
+  if (import.meta.hot) {
+    import.meta.hot.on('special-update', (data) => {
+      // perform custom update
+    })
+  }
+  ```
 
 ## Orden de complementos
 
@@ -503,8 +525,6 @@ export default defineConfig({
   ],
 })
 ```
-
-Consulta [Complementos de Rollup de Vite](https://vite-rollup-plugins.patak.dev) para obtener una lista de complementos de Rollup oficiales compatibles con instrucciones de uso.
 
 ## Normalización de rutas
 

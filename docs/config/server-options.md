@@ -150,6 +150,8 @@ Deshabilita o configura la conexión HMR (en los casos en que el websocket HMR d
 
 Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
 
+`protocol` establece el protocolo WebSocket utilizado para la conexión HMR: `ws` (WebSocket) o `wss` (WebSocket Seguro).
+
 `clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
 
 Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.

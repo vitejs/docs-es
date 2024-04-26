@@ -30,6 +30,16 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 
 - TypeScript, de forma predeterminada, no reconoce las importaciones de recursos estáticos como módulos válidos. Para solucionar esto, incluye [`vite/client`](./features#tipos-de-clientes).
 
+::: tip Incrustación de SVG a través de `url()`
+Cuando se pasa una URL de SVG a una construcción manual de `url()` mediante JS, la variable debe estar colocada entre comillas dobles.
+
+```js
+import imgUrl from './img.svg'
+document.getElementById('hero-img').style.background = `url("${imgUrl}")`
+```
+
+:::
+
 ### Importaciones de URL explícita
 
 Los recursos que no están incluidos en la lista interna o en `assetsInclude`, se pueden importar explícitamente como una URL usando el sufijo `?url`. Esto es útil, por ejemplo, para importar los [Houdini Paint Worklets](https://houdini.how/usage).

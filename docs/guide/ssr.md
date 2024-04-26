@@ -128,7 +128,8 @@ app.use('*', async (req, res) => {
     // 3a. Carga la entrada del servidor. vite.ssrLoadModule se transforma automáticamente
     //    ¡tu código fuente de ESM se puede usar en Node.js! No hay empaquetado
     //    requerido, y proporciona una invalidación eficiente similar a HMR.
-    // 3b. Desde Vite 5.1, puedes utilizar la API createViteRuntime en su lugar.
+    // 3b. Desde Vite 5.1, puedes utilizar la API createViteRuntime
+    //    en su lugar.
     //    Soporta completamente HMR y funciona de manera similar a ssrLoadModule
     //    Un caso de uso más avanzado sería crear un tiempo de ejecución en un hilo separado
     //    o incluso en una máquina diferente utilizando la clase ViteRuntime

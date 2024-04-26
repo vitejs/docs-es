@@ -22,6 +22,7 @@ export const core = [
     links: [
       { icon: 'github', link: 'https://github.com/patak-dev' },
       { icon: 'twitter', link: 'https://twitter.com/patak_dev' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@patak' },
     ],
     sponsor: 'https://github.com/sponsors/patak-dev',
   },
@@ -35,6 +36,7 @@ export const core = [
     links: [
       { icon: 'github', link: 'https://github.com/antfu' },
       { icon: 'twitter', link: 'https://twitter.com/antfu7' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@antfu' },
     ],
     sponsor: 'https://github.com/sponsors/antfu',
   },
@@ -46,6 +48,7 @@ export const core = [
     links: [
       { icon: 'github', link: 'https://github.com/bluwy' },
       { icon: 'twitter', link: 'https://twitter.com/bluwyoo' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@bluwy' },
     ],
     sponsor: 'https://bjornlu.com/sponsor',
   },
@@ -62,59 +65,15 @@ export const core = [
     sponsor: 'https://github.com/sponsors/sapphi-red',
   },
   {
-    avatar: 'https://github.com/sodatea.png',
-    name: 'Haoqun Jiang',
-    title: 'Desarrollador',
-    org: 'Vue.js',
-    orgLink: 'https://vuejs.org/',
-    desc: 'Miembro del equipo principal de Vue/Vite. Contribuyente del codigo abierto a tiempo completo.',
-    links: [
-      { icon: 'github', link: 'https://github.com/sodatea' },
-      { icon: 'twitter', link: 'https://twitter.com/haoqunjiang' },
-    ],
-    sponsor: 'https://github.com/sponsors/sodatea',
-  },
-  {
-    avatar: 'https://github.com/Shinigami92.png',
-    name: 'Shinigami',
-    title: 'Mantenedor',
-    org: 'Faker',
-    orgLink: 'https://fakerjs.dev',
-    desc: 'Entusiasta apasionado de TypeScript que trabaja extensamente con Vue SPA y pug.',
-    links: [
-      { icon: 'github', link: 'https://github.com/Shinigami92' },
-      { icon: 'mastodon', link: 'https://elk.zone/mas.to/@Shini92' },
-    ],
-    sponsor: 'https://github.com/sponsors/Shinigami92',
-  },
-  {
-    avatar: 'https://i.imgur.com/KMed6rQ.jpeg',
-    name: 'Alec Larson',
-    title: 'Emprendedor',
-    desc: 'Incursionando en el comercio electrónico social, meta frameworks y juegos de mesa',
-    links: [
-      { icon: 'github', link: 'https://github.com/aleclarson' },
-      { icon: 'twitter', link: 'https://twitter.com/retropragma' },
-    ],
-    sponsor: 'https://github.com/sponsors/aleclarson',
-  },
-
-  {
-    avatar: 'https://github.com/poyoho.png',
-    name: 'yoho',
-    title: 'Desarrollador Frontend',
-    desc: 'Frontend. Miembro del equipo de Vite.',
-    links: [
-      { icon: 'github', link: 'https://github.com/poyoho' },
-      { icon: 'twitter', link: 'https://twitter.com/yoho_po' },
-    ],
-  },
-  {
     avatar: 'https://github.com/ArnaudBarre.png',
     name: 'Arnaud Barré',
     title: 'Desarrollador Frontend',
     desc: 'Apasionado por las herramientas en torno a TypeScript y React.',
-    links: [{ icon: 'github', link: 'https://github.com/ArnaudBarre' }],
+    links: [
+      { icon: 'github', link: 'https://github.com/ArnaudBarre' },
+      { icon: 'twitter', link: 'https://twitter.com/_ArnaudBarre' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@ArnaudBarre' },
+    ],
     sponsor: 'https://github.com/sponsors/ArnaudBarre',
   },
   {
@@ -140,9 +99,58 @@ export const core = [
     ],
     sponsor: 'https://github.com/sponsors/sheremet-va',
   },
+  {
+    avatar: 'https://github.com/Shinigami92.png',
+    name: 'Shinigami',
+    title: 'Mantenedor',
+    org: 'Faker',
+    orgLink: 'https://fakerjs.dev',
+    desc: 'Entusiasta apasionado de TypeScript que trabaja extensamente con Vue SPA y pug.',
+    links: [
+      { icon: 'github', link: 'https://github.com/Shinigami92' },
+      { icon: 'mastodon', link: 'https://elk.zone/mas.to/@Shini92' },
+    ],
+    sponsor: 'https://github.com/sponsors/Shinigami92',
+  },
+  {
+    avatar: 'https://github.com/sodatea.png',
+    name: 'Haoqun Jiang',
+    title: 'Desarrollador',
+    org: 'Vue.js',
+    orgLink: 'https://vuejs.org/',
+    desc: 'Miembro del equipo principal de Vue/Vite. Contribuyente del codigo abierto a tiempo completo.',
+    links: [
+      { icon: 'github', link: 'https://github.com/sodatea' },
+      { icon: 'twitter', link: 'https://twitter.com/haoqunjiang' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' },
+    ],
+    sponsor: 'https://github.com/sponsors/sodatea',
+  },
 ]
 
 export const emeriti = [
+  {
+    avatar: 'https://i.imgur.com/KMed6rQ.jpeg',
+    name: 'Alec Larson',
+    title: 'Emprendedor',
+    desc: 'Incursionando en el comercio electrónico social, meta frameworks y juegos de mesa',
+    links: [
+      { icon: 'github', link: 'https://github.com/aleclarson' },
+      { icon: 'twitter', link: 'https://twitter.com/retropragma' },
+    ],
+    sponsor: 'https://github.com/sponsors/aleclarson',
+  },
+
+  {
+    avatar: 'https://github.com/poyoho.png',
+    name: 'yoho',
+    title: 'Desarrollador Frontend',
+    desc: 'Frontend. Miembro del equipo de Vite.',
+    links: [
+      { icon: 'github', link: 'https://github.com/poyoho' },
+      { icon: 'twitter', link: 'https://twitter.com/yoho_po' },
+    ],
+  },
   {
     avatar: 'https://github.com/ygj6.png',
     name: 'ygj6',
