@@ -46,6 +46,19 @@ features:
     details: APIs programáticamente flexibles con tipado completo en TypeScript.
 ---
 
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  const urlParams = new URLSearchParams(window.location.search)
+  if (urlParams.get('uwu') != null) {
+    const img = document.querySelector('.VPHero .VPImage.image-src')
+    img.src = '/logo-uwu.png'
+    img.alt = 'Vite Kawaii Logo by @icarusgkx'
+  }
+})
+</script>
+
 <style>
 .VPButton.alt[href="https://lu.ma/vite"] {
   background: var(--vp-home-hero-name-background);

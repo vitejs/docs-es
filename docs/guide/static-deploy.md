@@ -332,14 +332,25 @@ De forma predeterminada, cualquier nueva confirmación enviada a la rama especif
 
 También puedes agregar un [dominio personalizado](https://render.com/docs/custom-domains) a tu proyecto.
 
+<!--
+  NOTA: Las secciones a continuación están reservadas para más plataformas de implementación no enumeradas anteriormente.
+  Siéntete libre de enviar una solicitud de cambios que agregue una nueva sección con un enlace a la guía de implementación de tu plataforma, siempre y cuando cumpla con estos criterios:
+  1. Los usuarios deben poder implementar su sitio de forma gratuita.
+  2. Las ofertas de nivel gratuito deben alojar el sitio indefinidamente y no estar limitadas en el tiempo.
+     Ofrecer un número limitado de recursos computacionales o cuentas de sitios a cambio está bien.
+  3. Las guías enlazadas no deben contener contenido malicioso.
+  El equipo de Vite puede cambiar los criterios y auditar la lista actual de vez en cuando.
+  Si se elimina una sección, se notificará a los autores originales de la solicitud de cambios antes de hacerlo.
+-->
+
 ## Flightcontrol
 
 Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
 
-## Alojamiento en AWS Amplify
-
-Despliega tu sitio estático mediante [AWS Amplify Hosting](https://aws.amazon.com/amplify/hosting/), siguiendo estas [instrucciones](https://docs.amplify.aws/guides/hosting/vite/q/plataforma/js/).
-
 ## Alojamiento de sitios estáticos en Kinsta
 
 Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https://kinsta.com/static-site-hosting/) siguiendo estas [instrucciones](https://kinsta.com/docs/react-vite-ejemplo/).
+
+## Alojamiento de sitio estático en xmit
+
+Despliega tu sitio estático utilizando [xmit](https://xmit.co) siguiendo esta [guía](https://xmit.dev/posts/vite-quickstart/).

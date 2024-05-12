@@ -48,10 +48,10 @@ type ResolveModulePreloadDependenciesFn = (
 
 Se llamará a la función `resolveDependencies` para cada importación dinámica con una lista de los fragmentos de los que depende, y también se llamará para cada fragmento importado en los archivos de entrada HTML. Se puede devolver un nuevo array de dependencias con estas dependencias filtradas, u otras más inyectadas, y sus rutas modificadas. Las rutas de `deps` son relativas a `build.outDir`. Se permite tambien retornar una ruta relativa al `hostId` para `hostType === 'js'`, en cuyo caso se usa `new URL(dep, import.meta.url)` para obtener una ruta absoluta al inyectar la precarga de este módulo en el encabezado HTML.
 
-<!-- prettier-ignore-start -->
 ```js twoslash
 /** @type {import('vite').UserConfig} */
 const config = {
+  // prettier-ignore
   build: {
 // ---cut-before---
 modulePreload: {
@@ -63,9 +63,6 @@ modulePreload: {
   },
 }
 ```
-<!-- prettier-ignore-end -->
-
-````
 
 Las rutas de dependencia resueltas se pueden modificar aún más usando [`experimental.renderBuiltUrl`](../guide/build.md#advanced-base-options)
 
@@ -214,7 +211,7 @@ Se debe instalar Terser cuando se configura como `'terser'`.
 
 ```sh
 npm add -D terser
-````
+```
 
 ## build.terserOptions
 

@@ -140,6 +140,13 @@ module.exports = defineConfig({
       },
     },
     {
+      files: ['packages/vite/src/client/**'],
+      excludedFiles: '**/__tests__/**',
+      rules: {
+        'n/no-unsupported-features/node-builtins': 'off',
+      },
+    },
+    {
       files: ['packages/vite/src/types/**', '*.spec.ts'],
       rules: {
         'node/no-extraneous-import': 'off',

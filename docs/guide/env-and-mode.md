@@ -2,7 +2,7 @@
 
 ## Variables de Entorno
 
-Vite expone variables de entorno en el objeto especial **`import.meta.env`**. Algunas variables integradas están disponibles en todos los casos:
+Vite expone variables de entorno en el objeto especial **`import.meta.env`**, que se reemplazan estáticamente en tiempo de compilación. Algunas variables integradas están disponibles en todos los casos:
 
 - **`import.meta.env.MODE`**: {string} el [modo](#modos) en el que se ejecuta la aplicación.
 

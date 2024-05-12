@@ -238,9 +238,9 @@ Un usuario puede elegir desplegar en tres rutas diferentes:
 
 Una sola [base](#ruta-base-publica) estática no es suficiente en estos escenarios. Vite brinda soporte experimental para opciones avanzadas para Base durante la compilación, usando `experimental.renderBuiltUrl`.
 
-<!-- prettier-ignore-start -->
 ```ts twoslash
 import type { UserConfig } from 'vite'
+// prettier-ignore
 const config: UserConfig = {
 // ---cut-before---
 experimental: {
@@ -255,30 +255,28 @@ experimental: {
 // ---cut-after---
 }
 ```
-<!-- prettier-ignore-end -->
 
 Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el segundo parámetro de `context` proporcionado a la función.
 
-<!-- prettier-ignore-start -->
 ```ts twoslash
 import type { UserConfig } from 'vite'
 import path from 'node:path'
+// prettier-ignore
 const config: UserConfig = {
-// ---cut-before---
-experimental: {
-  renderBuiltUrl(filename, { hostId, hostType, type }) {
-    if (type === 'public') {
-      return 'https://www.domain.com/' + filename
-    } else if (path.extname(hostId) === '.js') {
-      return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
-    } else {
-      return 'https://cdn.domain.com/assets/' + filename
-    }
+  // ---cut-before---
+  experimental: {
+    renderBuiltUrl(filename, { hostId, hostType, type }) {
+      if (type === 'public') {
+        return 'https://www.domain.com/' + filename
+      } else if (path.extname(hostId) === '.js') {
+        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+      } else {
+        return 'https://cdn.domain.com/assets/' + filename
+      }
+    },
   },
-},
-// ---cut-after---
+  // ---cut-after---
 }
 ```
-<!-- prettier-ignore-end -->
 
 Ten en cuenta que el `filename` que se pasa es una URL decodificada, y si la función devuelve una cadena de URL, también debería estar decodificada. Vite manejará automáticamente la codificación al renderizar las URLs. Si se devuelve un objeto con `runtime`, debes manejar la codificación tú mismo donde sea necesario, ya que el código de ejecución se renderizará tal como está.

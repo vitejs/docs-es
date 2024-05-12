@@ -220,7 +220,7 @@ Envía eventos personalizados al servidor de desarrollo de Vite.
 
 Si se llama antes de conectarse, los datos se almacenarán en búfer y se enviarán una vez que se establezca la conexión.
 
-Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#comunicacion-cliente-servidor) para obtener más detalles.
+Consulta [Comunicación cliente-servidor](/guide/api-plugin.html#comunicacion-cliente-servidor) para obtener más detalles, incluyendo una sección sobre [Typing Custom Events](/guide/api-plugin.html#typescript-for-custom-events).
 
 ## Lecturas adicionales
 
