@@ -423,8 +423,7 @@ interface HtmlTagDescriptor {
 
   ```js
     handleHotUpdate({ server, modules, timestamp }) {
-      // También usar `server.ws.send` para admitir Vite <5.1 si es necesario
-      server.hot.send({ type: 'full-reload' })
+      server.ws.send({ type: 'full-reload' })
       // Invalidar módulos manualmente
       const invalidatedModules = new Set()
       for (const mod of modules) {
@@ -443,8 +442,7 @@ interface HtmlTagDescriptor {
 
   ```js
   handleHotUpdate({ server }) {
-    // También usar `server.ws.send` para admitir Vite <5.1 si es necesario
-    server.hot.send({
+    server.ws.send({
       type: 'custom',
       event: 'special-update',
       data: {}
@@ -453,7 +451,7 @@ interface HtmlTagDescriptor {
   }
   ```
 
-  El código del cliente debe registrar el controlador correspondiente utilizando la [APi HMR](./api-hmr) (esto podría inyectarse mediante el hook `transform` del mismo complemento):
+  El código del cliente debe registrar el controlador correspondiente utilizando la [API HMR](./api-hmr) (esto podría inyectarse mediante el hook `transform` del mismo complemento):
 
   ```js
   if (import.meta.hot) {
@@ -551,7 +549,7 @@ Desde Vite 2.9, proporcionamos algunas utilidades para complementos que ayudan a
 
 ### Servidor a Cliente
 
-En el lado del complemento, podríamos usar `server.hot.send` (a partir de Vite 5.1) o `server.ws.send` para transmitir eventos a todos los clientes:
+En el lado del complemento, podríamos usar `server.ws.send` para transmitir eventos al cliente:
 
 ```js
 // vite.config.js
@@ -560,9 +558,8 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        // Ejemplo: espera a que un cliente se conecte antes de enviar un mensaje
-        server.hot.on('connection', () => {
-          server.hot.send('my:greetings', { msg: 'hello' })
+        server.ws.on('connection', () => {
+          server.ws.send('my:greetings', { msg: 'hello' })
         })
       },
     },
@@ -598,7 +595,7 @@ if (import.meta.hot) {
 }
 ```
 
-Luego usar `server.hot.on` (a partir de Vite 5.1) o `server.ws.on` y escuchar los eventos en el lado del servidor:
+Luego usa `server.ws.on` y así escuchar los eventos en el lado del servidor:
 
 ```js
 // vite.config.js
@@ -607,7 +604,7 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        server.hot.on('my:from-client', (data, client) => {
+        server.ws.on('my:from-client', (data, client) => {
           console.log('Message from client:', data.msg) // Hey!
           // reply only to the client (if needed)
           client.send('my:ack', { msg: 'Hi! I got your message!' })
