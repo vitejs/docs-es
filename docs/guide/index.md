@@ -88,6 +88,8 @@ bun create vite my-vue-app --template vue
 
 Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
+Puede utilizar `.` para el nombre del proyecto para andamiar en el directorio actual.
+
 ## Plantillas de la comunidad
 
 `create-vite` es una herramienta para iniciar rápidamente un proyecto desde una plantilla básica para frameworks populares. Echa un vistazo a Awesome Vite para [plantillas soportadas por la comunidad](https://github.com/vitejs/awesome-vite#templates) que incluyen otras herramientas o se dirigen a diferentes frameworks.
