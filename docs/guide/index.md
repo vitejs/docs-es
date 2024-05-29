@@ -88,7 +88,7 @@ bun create vite my-vue-app --template vue
 
 Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
-Puede utilizar `.` para el nombre del proyecto para andamiar en el directorio actual.
+Puedes usar `.` como nombre del proyecto para generar la estructura en el directorio actual.
 
 ## Plantillas de la comunidad
 
