@@ -36,7 +36,6 @@ De forma predeterminada, la salida de compilación se colocará en `dist`. Puede
 Una vez que hayas creado la aplicación, puedes probarla localmente ejecutando el comando `npm run preview`.
 
 ```bash
-npm run build
 npm run preview
 ```
 

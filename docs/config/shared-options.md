@@ -18,7 +18,7 @@ Consulta [Raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto) para obten
 Ruta pública base cuando se sirve en desarrollo o producción. Los valores válidos incluyen:
 
 - Nombre de ruta absoluta URL, ejemplo, `/foo/`
-- URL completa, por ejemplo, `https://foo.com/` (La parte del origen no se utilizará en el desarrollo)
+- URL completa, por ejemplo, `https://bar.com/foo/` (La parte del origen no se utilizará en el desarrollo asi que el valor es el mismo que `/foo/`)
 - Cadena vacía o `./` (para implementación incrustada)
 
 Consulta [Ruta base pública](/guide/build#ruta-base-publica) para obtener más detalles.

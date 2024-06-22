@@ -44,7 +44,7 @@ Los ajustes preestablecidos de plantilla admitidos son:
 ## Inicia tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) version 18+. 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+Vite requiere [Node.js](https://nodejs.org/en/) version 18+ o 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
 :::
 
 ::: code-group
@@ -105,6 +105,44 @@ cd my-project
 npm install
 npm run dev
 ```
+
+## Instalación Manual
+
+En tu proyecto, puedes instalar la CLI de `vite` utilizando:
+
+::: code-group
+
+```bash [NPM]
+$ npm install -D vite
+```
+
+```bash [Yarn]
+$ yarn add -D vite
+```
+
+```bash [PNPM]
+$ pnpm add -D vite
+```
+
+```bash [Bun]
+$ bun add -D vite
+```
+
+:::
+
+Y crea un archivo `index.html` como este:
+
+```html
+<p>Hello Vite!</p>
+```
+
+Luego ejecuta la CLI de `vite` en tu terminal:
+
+```bash
+vite
+```
+
+El archivo `index.html` se servirá en `http://localhost:5173`.
 
 ## `index.html` y raíz del proyecto
 

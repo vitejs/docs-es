@@ -419,3 +419,29 @@ async function loadConfigFromFile(
 ```
 
 Carga un archivo de configuración de Vite manualmente con esbuild.
+
+## `preprocessCSS`
+
+- **Experimental:** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13815)
+
+**Firma de Tipo:**
+
+```ts
+async function preprocessCSS(
+  code: string,
+  filename: string,
+  config: ResolvedConfig,
+): Promise<PreprocessCSSResult>
+interface PreprocessCSSResult {
+  code: string
+  map?: SourceMapInput
+  modules?: Record<string, string>
+  deps?: Set<string>
+}
+```
+
+Preprocesa archivos `.css`, `.scss`, `.sass`, `.less`, `.styl` y `.stylus` a CSS plano para que puedan ser utilizados en navegadores o analizados por otras herramientas. Similar al [soporte de preprocesamiento CSS incorporado](/guide/features#preprocesadores-css), se debe instalar el preprocesador correspondiente si se quiere usar.
+
+El preprocesador utilizado se infiere de la extensión del `filename`. Si el `filename` termina con `.module.{ext}`, se infiere como un [módulo CSS](https://github.com/css-modules/css-modules) y el resultado devuelto incluirá un objeto `modules` que mapea los nombres de clases originales a los transformados.
+
+Ten en cuenta que el preprocesamiento no resolverá URLs en `url()` o `image-set()`.

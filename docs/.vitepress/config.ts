@@ -1,4 +1,5 @@
-import { defineConfig, DefaultTheme } from 'vitepress'
+import type { DefaultTheme } from 'vitepress'
+import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { buildEnd } from './buildEnd.config'
 
@@ -383,7 +384,7 @@ export default defineConfig({
     return pageData
   },
   markdown: {
-    codeTransformers: [transformerTwoslash()],
+    // codeTransformers: [transformerTwoslash()],
   },
   buildEnd,
 })
