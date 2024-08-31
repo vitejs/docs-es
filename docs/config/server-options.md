@@ -106,7 +106,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
-        // con RegEx
+        // con RegExp
         '^/fallback/.*': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
@@ -320,6 +320,14 @@ createServer()
 - **Por defecto:** `['.env', '.env.*', '*.{crt,pem}']`
 
   Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
+
+## server.fs.cachedChecks
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+- **Experimental**
+
+Cachea los nombres de archivo de los directorios accedidos para evitar operaciones repetidas del sistema de archivos. Especialmente en Windows, esto podría resultar en una mejora de rendimiento. Está desactivado por defecto debido a casos límite al escribir un archivo en una carpeta en caché e importarlo inmediatamente.
 
 ## server.origin
 

@@ -217,7 +217,7 @@ Ten en cuenta que si se proporciona una configuración inline, Vite no buscará 
 
 Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de archivo se utilizan como claves para las opciones. Las opciones admitidas para cada preprocesador se pueden encontrar en su documentación respectiva:
 
-- `sass`/`scss` - [Opciones](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+- `sass`/`scss` - la opción de nivel superior `api: "legacy" | "modern"` (por defecto `"legacy"`) permite cambiar qué API de Sass usar. [Opciones (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions), [Opciones (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/).
 - `less` - [Opciones](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: solo se admite [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual se puede pasar como un objeto.
 
@@ -235,6 +235,12 @@ export default defineConfig({
           $specialColor: new stylus.nodes.RGBA(51, 197, 255, 1),
         },
       },
+    },
+    scss: {
+      api: 'modern', // o "legacy"
+      importers: [
+        // ...
+      ],
     },
   },
 })

@@ -423,12 +423,10 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
 
   - Filtrar y reducir la lista de módulos afectados para que el HMR sea más preciso.
 
-  - Devuelva un array vacío y realiza una recarga completa:
+  - Devolver un array vacío y realizar una recarga completa:
 
   ```js
     handleHotUpdate({ server, modules, timestamp }) {
-      server.ws.send({ type: 'full-reload' })
-      // Invalidar módulos manualmente
       const invalidatedModules = new Set()
       for (const mod of modules) {
         server.moduleGraph.invalidateModule(
@@ -438,11 +436,12 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
           true
         )
       }
+      server.ws.send({ type: 'full-reload' })
       return []
     }
   ```
 
-  - Devuelve un array vacío y realiza un manejo personalizado completo de HMR enviando eventos personalizados al cliente:
+  - Devolver un array vacío y realizar un manejo personalizado completo de HMR enviando eventos personalizados al cliente:
 
   ```js
   handleHotUpdate({ server }) {

@@ -6,15 +6,27 @@ Existe un registro de cambios completo de versiones anteriores en [disponible en
 
 ## Ciclo de lanzamientos
 
-Vite no tiene un ciclo de liberación fijo.
+Vite no tiene un ciclo de lanzamientos fijo.
 
-- Los lanzamientos de **parches** se publican según sea necesario.
-- Las versiones **menores** siempre contienen nuevas funciones y también se publican según sea necesario. Los lanzamientos menores siempre pasan por una fase de prelanzamiento beta.
-- Los lanzamientos **principales** generalmente se alinean con el [programa de finalización de soporte de Node.js](https://endoflife.date/nodejs) y se anunciarán con anticipación. Estos lanzamientos pasarán por una fase de discusión temprana y por fases previas al lanzamiento tanto alfa como beta.
+- Los lanzamientos de **patch** se realizan según sea necesario (generalmente cada semana).
+- Los lanzamientos **minor** siempre contienen nuevas características y se lanzan según sea necesario. Los lanzamientos minor siempre tienen una fase de pre-lanzamiento beta (generalmente cada dos meses).
+- Los lanzamientos **major** generalmente se alinean con el [calendario EOL de Node.js](https://endoflife.date/nodejs) y se anunciarán con antelación. Estos lanzamientos pasarán por discusiones prolongadas con el ecosistema y tendrán fases de pre-lanzamiento alfa y beta (generalmente cada año).
 
-La versión principal anterior de Vite seguirá recibiendo correcciones importantes y parches de seguridad. Después de eso, solo recibirá actualizaciones si hay problemas de seguridad. Recomendamos actualizar Vite regularmente. Consulta las [Guías de migración](https://es.vitejs.dev/guide/migration.html) cuando actualices a cada versión principal.
+Los rangos de versiones de Vite que son soportados por el equipo de Vite se determinan automáticamente de la siguiente manera:
 
-El equipo de Vite se asocia con los principales proyectos del ecosistema para probar nuevas versiones de Vite antes de su lanzamiento a través del [proyecto vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci). La mayoría de los proyectos que usan Vite deberían poder ofrecer soporte rápidamente o migrar a nuevas versiones tan pronto como se publiquen.
+- **Minor Actual** recibe correcciones regulares.
+- **Major Anterior** (solo para su último minor) y **Minor Anterior** reciben correcciones importantes y parches de seguridad.
+- **Penúltimo Major** (solo para su último minor) y **Penúltimo Minor** reciben parches de seguridad.
+- Todas las versiones anteriores a estas ya no están soportadas.
+
+Como ejemplo, si la última versión de Vite es la 5.3.10:
+
+- Se lanzan parches regulares para `vite@5.3`.
+- Las correcciones importantes y los parches de seguridad se transfieren a `vite@4` y `vite@5.2`.
+- Los parches de seguridad también se transfieren a `vite@3` y `vite@5.1`.
+- `vite@2` y `vite@5.0` ya no están soportados. Los usuarios deben actualizar para recibir actualizaciones.
+
+Recomendamos actualizar Vite regularmente. Consulta las [Guías de Migración](./guide/migration) cuando actualices a cada versión Major. El equipo de Vite trabaja estrechamente con los principales proyectos del ecosistema para garantizar la calidad de las nuevas versiones. Probamos nuevas versiones de Vite antes de lanzarlas a través del [proyecto vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci). La mayoría de los proyectos que utilizan Vite deberían poder ofrecer soporte rápidamente o migrar a nuevas versiones tan pronto como se lancen.
 
 ## Casos especiales de versiones semánticas
 
