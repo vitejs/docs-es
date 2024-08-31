@@ -88,7 +88,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
   Ten en cuenta que si estás utilizando una [`base`](/config/shared-options.md#base) no relativa, debes prefijar cada clave con esa `base`.
 
-  Extiende [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Las opciones adicionales están [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12). Ten en cuenta que, [a diferencia de http-proxy](https://github.com/http-party/node-http-proxy/issues/1669), la opción `changeOrigin` cambiará tanto el host como los encabezados de origen para que coincidan con el objetivo.
+  Extiende [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Las opciones adicionales están [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12).
 
   En algunos casos, es posible que también desees configurar el servidor de desarrollo relacionado (por ejemplo, para agregar middlewares personalizados a la aplicación interna [connect](https://github.com/senchalabs/connect)). Para hacerlo, debes escribir tu propio [complemento](/guide/using-plugins.html) y usar la función [configureServer](/guide/api-plugin.html#configureserver).
 
@@ -120,10 +120,12 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
             // proxy será una instancia de 'http-proxy'
           },
         },
-        // Haciendo proxy de websockets o socket.io
+        // Haciendo proxy de websockets o socket.io: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
+        // Ten precaución al usar `rewriteWsOrigin`, ya que puede dejar el proxy abierto a ataques CSRF.
         '/socket.io': {
           target: 'ws://localhost:5173',
           ws: true,
+          rewriteWsOrigin: true,
         },
       },
     },

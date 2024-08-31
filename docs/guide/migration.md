@@ -169,8 +169,8 @@ Vite 5 usa esbuild 0.19 y elimina la capa de compatibilidad para esbuild 0.18, l
     // Configurar en true si deseas usar decoradores
     "experimentalDecorators": true,
     // Configurar en true si ves errores de análisis en tu navegador
-    "useDefineForClassFields": true
-  }
+    "useDefineForClassFields": true,
+  },
 }
 ```
 
@@ -188,7 +188,7 @@ Las APIs `resolvePackageEntry` y `resolvePackageData` se eliminan ya que exponí
 - `resolvePackageData`: igual que arriba, rastreando el directorio del paquete para obtener la ruta raíz de `package.json`. O utiliza el paquete de la comunidad [`vitefu`](https://github.com/svitejs/vitefu).
 
 ```js
-import { resolve } from 'import-meta-env'
+import { resolve } from 'import-meta-resolve'
 import { findDepPkgJsonPath } from 'vitefu'
 import fs from 'node:fs'
 

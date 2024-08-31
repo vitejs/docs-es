@@ -2,9 +2,9 @@
 
 ## WMR
 
-[WMR](https://github.com/preactjs/wmr) del equipo de Preact proporciona un conjunto de funciones similar, y el soporte de Vite 2.0 para la interfaz de complemento de Rollup está inspirado en él.
+[WMR](https://github.com/preactjs/wmr) del equipo de Preact intentaba proporcionar un conjunto de características similares. La API universal de complementos de Rollup de Vite para desarrollo y compilación se inspiró en ella.
 
-WMR está diseñado principalmente para proyectos [Preact](https://preactjs.com/) y ofrece funciones más integradas, como prerenderizado. En términos de alcance, está más cerca de un marco meta de Preact, con el mismo énfasis en el tamaño compacto que el mismo Preact. Si estás utilizando Preact, es probable que WMR ofrezca una experiencia más afinada.
+WMR ya no se mantiene. El equipo de Preact ahora recomienda Vite con [@preactjs/preset-vite](https://github.com/preactjs/preset-vite).
 
 ## Snowpack
 

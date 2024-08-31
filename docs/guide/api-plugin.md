@@ -394,6 +394,10 @@ interface HtmlTagDescriptor {
 }
 ```
 
+:::warning Nota
+Este hook no se invocará si estás utilizando un framework que tenga un manejo personalizado de los archivos de entrada (por ejemplo, [SvelteKit](https://github.com/sveltejs/kit/discussions/8269#discussioncomment-4509145)).
+:::
+
 ### `handleHotUpdate`
 
 - **Tipo:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`

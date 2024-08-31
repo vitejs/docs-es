@@ -46,7 +46,7 @@ export default defineConfig({
 
 ## preview.https
 
-- **Tipo:** `boolean | https.ServerOptions`
+- **Tipo:** `https.ServerOptions`
 - **Por defecto:** [`server.https`](#server_https)
 
   Habilita TLS + HTTP/2. Ten en cuenta que esto cambia a TLS solo cuando también se usa la opción [`server.proxy`](#server-proxy).
