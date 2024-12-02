@@ -43,7 +43,7 @@ type ResolveModulePreloadDependenciesFn = (
   context: {
     hostId: string
     hostType: 'html' | 'js'
-  },
+  }
 ) => string[]
 ```
 
@@ -192,6 +192,13 @@ Cuando se coloca en `true`, la compilación también generará un manifiesto SSR
 
 Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rollupOptions.input`.
 
+## build.emitAssets
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+
+Durante compilaciones que no son del cliente, los recursos estáticos no se emiten, ya que se asume que serán emitidos como parte de la compilación del cliente. Esta opción permite a los frameworks forzar su emisión en compilaciones de otros entornos. Es responsabilidad del framework combinar los recursos en un paso posterior a la compilación. Esta opción será reemplazada por `build.emitAssets` una vez que la API de Entorno sea estable.
+
 ## build.ssrEmitAssets
 
 - **Tipo:** `boolean`
@@ -263,7 +270,7 @@ Límite para advertencias de tamaño de fragmento (en kB). Se compara con el tam
 - **Tipo:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
 - **Por defecto:** `null`
 
-Configurar en `{}` para habilitar el observador de Rollup. Esto se usa principalmente en casos que involucran complementos de solo compilación o procesos de integración.
+Configurar en `{}` para habilitar el observador de Rollup. Esto se usa principalmente en casos que involucran plugins de solo compilación o procesos de integración.
 
 ::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
 

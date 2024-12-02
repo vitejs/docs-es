@@ -1,7 +1,7 @@
 # API de HMR
 
 :::tip Nota
-Esta es la API cliente de HMR. Para manejar actualizaciones HMR en los complementos, dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate).
+Esta es la API cliente de HMR. Para manejar actualizaciones HMR en los plugins, dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate).
 
 La API HMR está pensada para autores de marco de trabajo y autores de herramientas. Como usuario final, HMR ya está siendo manejado para ti en las plantillas de inicio del marco de trabajo específico.
 :::
@@ -25,7 +25,7 @@ interface ViteHotContext {
   accept(dep: string, cb: (mod: ModuleNamespace | undefined) => void): void
   accept(
     deps: readonly string[],
-    cb: (mods: Array<ModuleNamespace | undefined>) => void,
+    cb: (mods: Array<ModuleNamespace | undefined>) => void
   ): void
 
   dispose(cb: (data: any) => void): void
@@ -34,11 +34,11 @@ interface ViteHotContext {
 
   on<T extends string>(
     event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void,
+    cb: (payload: InferCustomEventPayload<T>) => void
   ): void
   off<T extends string>(
     event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void,
+    cb: (payload: InferCustomEventPayload<T>) => void
   ): void
   send<T extends string>(event: T, data?: InferCustomEventPayload<T>): void
 }
@@ -212,7 +212,7 @@ Los siguientes eventos HMR son enviados por Vite automáticamente:
 - `'vite:ws:disconnect'` cuando la conexión WebSocket se pierde
 - `'vite:ws:connect'` cuando la conexión WebScocket se (re)establece
 
-Los eventos HMR personalizados también se pueden enviar desde complementos. Dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate) para más detalles.
+Los eventos HMR personalizados también se pueden enviar desde plugins. Dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate) para más detalles.
 
 ## `hot.send(event, data)`
 

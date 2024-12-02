@@ -1,12 +1,12 @@
-# Complementos
+# Plugins
 
 :::tip NOTA
-Vite está pensado para proveer un soporte listo para usar para los patrones de desarrollo web comunes. Antes de buscar algún complemento para Vite o de Rollup , dale un vistazo a la [Guía de funcionalidades](../guide/features.md). Muchos de los casos en los que se necesita un complemento de Rollup ya están cubiertos en Vite.
+Vite está pensado para proveer un soporte listo para usar para los patrones de desarrollo web comunes. Antes de buscar algún plugin para Vite o de Rollup , dale un vistazo a la [Guía de funcionalidades](../guide/features.md). Muchos de los casos en los que se necesita un plugin de Rollup ya están cubiertos en Vite.
 :::
 
-Revisa [Uso de complementos](../guide/using-plugins.md) para más información sobre cómo utilizarlos.
+Revisa [Uso de plugins](../guide/using-plugins.md) para más información sobre cómo utilizarlos.
 
-## Complementos Oficiales
+## Plugins Oficiales
 
 ### [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
@@ -30,20 +30,20 @@ Revisa [Uso de complementos](../guide/using-plugins.md) para más información s
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-- Utiliza esbuild y Babel, logrando HMR rápido con un tamaño de paquete pequeño y la flexibilidad de poder usar la canalización de transformación de Babel. Sin complementos adicionales de Babel, solo se usa esbuild durante las compilaciones.
+- Utiliza esbuild y Babel, logrando HMR rápido con un tamaño de paquete pequeño y la flexibilidad de poder usar la canalización de transformación de Babel. Sin plugins adicionales de Babel, solo se usa esbuild durante las compilaciones.
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-- Reemplaza Babel con SWC durante el desarrollo. Durante las compilaciones, SWC+esbuild se usan con complementos, y esbuild sino no hay uso de ellos. Para grandes proyectos que no requieren extensiones no estándar de React, el arranque en frío y el Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
+- Reemplaza Babel con SWC durante el desarrollo. Durante las compilaciones, SWC+esbuild se usan con plugins, y esbuild sino no hay uso de ellos. Para grandes proyectos que no requieren extensiones no estándar de React, el arranque en frío y el Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
 - Provee soporte para los navegadores obsoletos en el compilado para producción.
 
-## Complementos de la Comunidad
+## Plugins de la Comunidad
 
-Dale un vistazo a [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). También puedes enviar una solicitud de cambio para enlistar tus complementos ahí.
+Dale un vistazo a [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). También puedes enviar una solicitud de cambio para enlistar tus plugins ahí.
 
-## Complementos de Rollup
+## Plugins de Rollup
 
-Los [Complementos de Vite](../guide/api-plugin) son una extensión a la interfaz de los Complementos de Rollup. Dale un vistazo a la [Sección de compatibilidad para complementos de Rollup](../guide/api-plugin#compatibilidad-de-complementos-rollup) para más información.
+Los [Plugins de Vite](../guide/api-plugin) son una extensión a la interfaz de los Plugins de Rollup. Dale un vistazo a la [Sección de compatibilidad para plugins de Rollup](../guide/api-plugin#compatibilidad-de-plugins-rollup) para más información.

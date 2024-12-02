@@ -81,7 +81,7 @@ Los primeros usuarios en usar Vite 4.3 también informaron de una mejora del tie
 
 Seguiremos trabajando en el rendimiento de Vite. Estamos trabajando en una [herramienta comparativa oficial](https://github.com/vitejs/vite-benchmark) para Vite que nos permite obtener métricas de rendimiento para cada solicitud de cambio de código.
 
-Y [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) ahora tiene más funciones relacionadas con el rendimiento para ayudar a identificar qué complementos o middlewares son el cuello de botella para tus aplicaciones.
+Y [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) ahora tiene más funciones relacionadas con el rendimiento para ayudar a identificar qué plugins o middlewares son el cuello de botella para tus aplicaciones.
 
 Usando `vite --profile` (y luego presionando `p`) una vez que se carga la página, se guardará un perfil de CPU del inicio del servidor de desarrollo. Puedes abrirlos en una aplicación como [speedscope](https://www.speedscope.app/) para identificar problemas de rendimiento. Y puedes compartir tus hallazgos con el equipo de Vite en una [Discusión](https://github.com/vitejs/vite/discussions) o en el [Discord de Vite](https://chat.vitejs.dev).
 

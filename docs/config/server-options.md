@@ -60,7 +60,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
   El valor también puede ser un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
 
-  Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los complementos del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
+  Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los plugins del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
 
 ## server.open
 
@@ -90,7 +90,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
   Extiende [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Las opciones adicionales están [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12).
 
-  En algunos casos, es posible que también desees configurar el servidor de desarrollo relacionado (por ejemplo, para agregar middlewares personalizados a la aplicación interna [connect](https://github.com/senchalabs/connect)). Para hacerlo, debes escribir tu propio [complemento](/guide/using-plugins.html) y usar la función [configureServer](/guide/api-plugin.html#configureserver).
+  En algunos casos, es posible que también desees configurar el servidor de desarrollo relacionado (por ejemplo, para agregar middlewares personalizados a la aplicación interna [connect](https://github.com/senchalabs/connect)). Para hacerlo, debes escribir tu propio [plugin](/guide/using-plugins.html) y usar la función [configureServer](/guide/api-plugin.html#configureserver).
 
   **Ejemplo:**
 

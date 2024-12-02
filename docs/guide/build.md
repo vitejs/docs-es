@@ -43,7 +43,7 @@ export default defineConfig({
 })
 ```
 
-Por ejemplo, puedes especificar varias salidas de Rollup con complementos que solo son aplicados durante la compilación.
+Por ejemplo, puedes especificar varias salidas de Rollup con plugins que solo son aplicados durante la compilación.
 
 ## Estrategia de división
 

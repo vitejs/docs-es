@@ -12,11 +12,11 @@ Algunas extensiones del navegador pueden interferir con las solicitudes y ralent
 
 El servidor de desarrollo de Vite realiza un almacenamiento en caché de las dependencias preempaquetadas e implementa respuestas 304 rápidas para el código fuente. Deshabilitar la caché mientras las Herramientas de desarrollo del navegador están abiertas puede tener un gran impacto en los tiempos de inicio y recarga de la página completa. Asegúrate de que "Desactivar caché" no esté habilitado mientras trabajas con el servidor de Vite.
 
-## Auditar complementos de Vite configurados
+## Auditar plugins de Vite configurados
 
-Los complementos internos y oficiales de Vite están optimizados para realizar la menor cantidad de trabajo posible y al mismo tiempo brindar compatibilidad con el ecosistema más amplio. Por ejemplo, las transformaciones de código usan expresiones regulares en desarrollo, pero realizan un análisis completo en compilación para garantizar exactitud.
+Los plugins internos y oficiales de Vite están optimizados para realizar la menor cantidad de trabajo posible y al mismo tiempo brindar compatibilidad con el ecosistema más amplio. Por ejemplo, las transformaciones de código usan expresiones regulares en desarrollo, pero realizan un análisis completo en compilación para garantizar exactitud.
 
-Sin embargo, el rendimiento de los complementos de la comunidad está fuera del control de Vite, lo que puede afectar la experiencia del desarrollador. Aquí hay algunas cosas que puedes tener en cuenta al usar complementos adicionales de Vite:
+Sin embargo, el rendimiento de los plugins de la comunidad está fuera del control de Vite, lo que puede afectar la experiencia del desarrollador. Aquí hay algunas cosas que puedes tener en cuenta al usar plugins adicionales de Vite:
 
 1. Las dependencias grandes que solo se usan en ciertos casos deben importarse dinámicamente para reducir el tiempo de inicio de Node.js. Ejemplos de reescrituras: [vite-plugin-react#212](https://github.com/vitejs/vite-plugin-react/pull/212) y [vite-plugin-pwa#224](https://github.es/vite-pwa/vite-plugin-pwa/pull/244).
 
@@ -49,7 +49,7 @@ Como se muestra, se requiere un total de 6 comprobaciones del sistema de archivo
 
 Por lo tanto, normalmente es mejor ser explícito con las rutas de importación, por ejemplo, `import './Component.jsx'`. También puedes reducir la lista de `resolve.extensions` para reducir las comprobaciones generales del sistema de archivos, pero debes asegurarte de que también funcione para los archivos en `node_modules`.
 
-Si eres creador de un complemento, asegúrate de invocar a [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) solo cuando sea necesario para reducir la cantidad de comprobaciones anteriores.
+Si eres creador de un plugin, asegúrate de invocar a [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) solo cuando sea necesario para reducir la cantidad de comprobaciones anteriores.
 
 :::tip TypeScript
 Si estás utilizando TypeScript, activa `"moduleResolution": "bundler"` y `"allowImportingTsExtensions": true` en las ``compilerOptions` de `tsconfig.json` para usar las extensiones `.ts` y `.tsx` directamente en tu codigo.

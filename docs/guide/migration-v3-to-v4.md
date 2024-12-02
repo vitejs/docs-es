@@ -51,7 +51,7 @@ Para obtener más detalles, consulta [`dotenv`](https://github.com/motdotla/dote
 
 ## Avanzado
 
-Hay algunos cambios que solo afectan a los creadores de complementos/herramientas.
+Hay algunos cambios que solo afectan a los creadores de plugins/herramientas.
 
 - [[#11036] feat(client)!: remove never implemented hot.decline](https://github.com/vitejs/vite/issues/11036)
   - Usa `hot.invalidate` su lugar

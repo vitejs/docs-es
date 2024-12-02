@@ -172,7 +172,7 @@ Vite proporciona soporte Vue de primera clase:
 
 Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io).
 
-Los usuarios de Vue deben usar el complemento oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
+Los usuarios de Vue deben usar el plugin oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 
 Si estás utilizando JSX sin React o Vue, puedes configurar las opciones `jsxFactory` y `jsxFragment` personalizadas utilizando la opción [`esbuild`](/config/shared-options.md#esbuild). Por ejemplo, para Preact:
 
@@ -251,9 +251,9 @@ document.getElementById('foo').className = applyColor
 
 ### Preprocesadores CSS
 
-Debido a que Vite solo se dirige a los navegadores modernos, se recomienda usar variables CSS nativas con complementos de PostCSS que implementen borradores de CSSWG (por ejemplo, [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)) y CSS simple y compatible con estándares futuros.
+Debido a que Vite solo se dirige a los navegadores modernos, se recomienda usar variables CSS nativas con plugins de PostCSS que implementen borradores de CSSWG (por ejemplo, [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)) y CSS simple y compatible con estándares futuros.
 
-Dicho esto, Vite proporciona soporte integrado para archivos `.scss`, `.sass`, `.less`, `.styl` y `.stylus`. No es necesario instalar complementos específicos de Vite para ellos, pero se debe instalar el preprocesador correspondiente:
+Dicho esto, Vite proporciona soporte integrado para archivos `.scss`, `.sass`, `.less`, `.styl` y `.stylus`. No es necesario instalar plugins específicos de Vite para ellos, pero se debe instalar el preprocesador correspondiente:
 
 ```bash
 # .scss and .sass
@@ -529,7 +529,7 @@ const moduleUrls = {
 }
 ```
 
-También puedes proporcionar consultas personalizadas para que las consuman otros complementos:
+También puedes proporcionar consultas personalizadas para que las consuman otros plugins:
 
 ```ts twoslash
 import 'vite/client'
@@ -594,7 +594,7 @@ En la compilación de producción, los archivos `.wasm` más pequeños que `asse
 
 ::: tip NOTA
 La [propuesta de integración de módulos ES para WebAssembly](https://github.com/WebAssembly/esm-integration) no es compatible actualmente.
-Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros complementos de la comunidad para darle el manejo apropiado.
+Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros plugins de la comunidad para darle el manejo apropiado.
 :::
 
 ### Acceso al módulo en WebAssembly
@@ -608,8 +608,9 @@ import wasmUrl from 'foo.wasm?url'
 
 const main = async () => {
   const responsePromise = fetch(wasmUrl)
-  const { module, instance } =
-    await WebAssembly.instantiateStreaming(responsePromise)
+  const { module, instance } = await WebAssembly.instantiateStreaming(
+    responsePromise
+  )
   /* ... */
 }
 

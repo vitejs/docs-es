@@ -4,8 +4,11 @@
 *.cpuprofile
 *.local
 *.log
+.vscode
 /.vscode/
 /docs/.vitepress/cache
+docs/.vitepress/dist
+docs/.vitepress/temp
 /packages/vite/LICENSE
 dist
 dist-ssr

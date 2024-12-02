@@ -20,11 +20,11 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 
 - Las referencias `url()` en CSS se manejan de la misma manera.
 
-- Si usa el complemento de Vue, las referencias de recursos en las plantillas de Vue SFC se convierten automáticamente en importaciones.
+- Si usa el plugin de Vue, las referencias de recursos en las plantillas de Vue SFC se convierten automáticamente en importaciones.
 
 - Los tipos de archivos comunes de imágenes, medios y fuentes se detectan como recursos automáticamente. Puedes ampliar la lista interna utilizando la opción [`assetsInclude`](/config/shared-options#assetsinclude).
 
-- Los recursos referenciados se incluyen como parte del gráfico de compilación de recursos, obtendrán nombres de archivo con hash y los complementos pueden procesarlos para su optimización.
+- Los recursos referenciados se incluyen como parte del gráfico de compilación de recursos, obtendrán nombres de archivo con hash y los plugins pueden procesarlos para su optimización.
 
 - Los recursos más pequeños en bytes que la opción [`assetsInlineLimit`](/config/build-options#build-assetsinlinelimit) se insertarán como URL de datos en base64.
 

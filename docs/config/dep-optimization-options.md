@@ -68,7 +68,7 @@ Opciones para pasar a esbuild durante el escaneo y optimización de la dependenc
 Se omiten ciertas opciones ya que cambiarlas no sería compatible con la optimización de la dependencia de Vite.
 
 - También se omite `external`, usa la opción `optimizeDeps.exclude` de Vite
-- `plugins` se fusionan con el complemento de dependencia de Vite
+- `plugins` se fusionan con el plugin de dependencia de Vite
 
 ## optimizeDeps.force
 

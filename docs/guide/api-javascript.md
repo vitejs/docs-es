@@ -115,7 +115,7 @@ interface ViteDevServer {
    */
   ws: WebSocketServer
   /**
-   * Contenedor de complementos de Rollup que puede ejecutar hooks de complementos en un archivo dado.
+   * Contenedor de plugins de Rollup que puede ejecutar hooks de plugins en un archivo dado.
    */
   pluginContainer: PluginContainer
   /**
@@ -134,7 +134,7 @@ interface ViteDevServer {
    */
   transformRequest(
     url: string,
-    options?: TransformOptions,
+    options?: TransformOptions
   ): Promise<TransformResult | null>
   /**
    * Aplica las transformaciones HTML integradas en Vite y las transformaciones HTML de cualquier plugin.
@@ -142,14 +142,14 @@ interface ViteDevServer {
   transformIndexHtml(
     url: string,
     html: string,
-    originalUrl?: string,
+    originalUrl?: string
   ): Promise<string>
   /**
    * Carga una URL dada como un módulo instanciado para SSR.
    */
   ssrLoadModule(
     url: string,
-    options?: { fixStacktrace?: boolean },
+    options?: { fixStacktrace?: boolean }
   ): Promise<Record<string, any>>
   /**
    * Corrige la pila de seguimiento de errores de ssr.
@@ -199,7 +199,7 @@ interface ViteDevServer {
 
 ```ts
 async function build(
-  inlineConfig?: InlineConfig,
+  inlineConfig?: InlineConfig
 ): Promise<RollupOutput | RollupOutput[]>
 ```
 
@@ -294,7 +294,7 @@ async function resolveConfig(
   command: 'build' | 'serve',
   defaultMode = 'development',
   defaultNodeEnv = 'development',
-  isPreview = false,
+  isPreview = false
 ): Promise<ResolvedConfig>
 ```
 
@@ -308,7 +308,7 @@ El valor de `command` es `serve` en desarrollo y vista previa, y `build` en comp
 function mergeConfig(
   defaults: Record<string, any>,
   overrides: Record<string, any>,
-  isRoot = true,
+  isRoot = true
 ): Record<string, any>
 ```
 
@@ -331,7 +331,7 @@ declare const configAsObject: UserConfig
 
 // ---cut---
 export default defineConfig((configEnv) =>
-  mergeConfig(configAsCallback(configEnv), configAsObject),
+  mergeConfig(configAsCallback(configEnv), configAsObject)
 )
 ```
 
@@ -344,7 +344,7 @@ export default defineConfig((configEnv) =>
 ```ts
 function searchForWorkspaceRoot(
   current: string,
-  root = searchForPackageRoot(current),
+  root = searchForPackageRoot(current)
 ): string
 ```
 
@@ -365,7 +365,7 @@ Busca la raíz del espacio de trabajo potencial si cumple las siguientes condici
 function loadEnv(
   mode: string,
   envDir: string,
-  prefixes: string | string[] = 'VITE_',
+  prefixes: string | string[] = 'VITE_'
 ): Record<string, string>
 ```
 
@@ -383,7 +383,7 @@ function normalizePath(id: string): string
 
 **Relacionado:** [Normalización de rutas](./api-plugin.md#normalizacion-de-rutas)
 
-Normaliza una ruta para interoperar entre complementos de Vite.
+Normaliza una ruta para interoperar entre plugins de Vite.
 
 ## `transformWithEsbuild`
 
@@ -394,11 +394,11 @@ async function transformWithEsbuild(
   code: string,
   filename: string,
   options?: EsbuildTransformOptions,
-  inMap?: object,
+  inMap?: object
 ): Promise<ESBuildTransformResult>
 ```
 
-Transforma JavaScript o TypeScript con esbuild. Útil para complementos que prefieren hacer coincidir la transformación interna de esbuild de Vite.
+Transforma JavaScript o TypeScript con esbuild. Útil para plugins que prefieren hacer coincidir la transformación interna de esbuild de Vite.
 
 ## `loadConfigFromFile`
 
@@ -410,7 +410,7 @@ async function loadConfigFromFile(
   configFile?: string,
   configRoot: string = process.cwd(),
   logLevel?: LogLevel,
-  customLogger?: Logger,
+  customLogger?: Logger
 ): Promise<{
   path: string
   config: UserConfig
@@ -430,7 +430,7 @@ Carga un archivo de configuración de Vite manualmente con esbuild.
 async function preprocessCSS(
   code: string,
   filename: string,
-  config: ResolvedConfig,
+  config: ResolvedConfig
 ): Promise<PreprocessCSSResult>
 interface PreprocessCSSResult {
   code: string

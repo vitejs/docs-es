@@ -148,7 +148,7 @@ Si estás ejecutando Vite con WSL2, Vite no puede ver los cambios de archivos en
 
 ### Ocurre una recarga completa en lugar de HMR
 
-Si Vite o un complemento no manejan HMR, se producirá una recarga completa, ya que es la única forma de actualizar el estado.
+Si Vite o un plugin no manejan HMR, se producirá una recarga completa, ya que es la única forma de actualizar el estado.
 
 Si se maneja HMR pero está dentro de una dependencia circular, también se realizará una recarga completa para recuperar la orden de ejecución. Para resolver esto, intenta romper el ciclo. Puedes ejecutar `vite --debug hmr` para registrar la ruta de dependencia circular si un cambio de archivo la activó.
 
@@ -198,7 +198,7 @@ Una vez que la aplicación se abra en el navegador, simplemente espera a que ter
 
 El inspector de Node.js generará `vite-profile-0.cpuprofile` en la carpeta raíz, ve a https://www.speedscope.app/ y sube el perfil de la CPU usando el botón `BROWSE` para inspeccionar el resultado.
 
-Puedes instalar [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect), que te permite inspeccionar el estado intermedio de los complementos de Vite y también puede ayudarte a identificar qué complementos o middlewares están generando el cuello de botella en tus aplicaciones. El complemento se puede usar tanto en modo de desarrollo como compilado. Consulta el archivo readme para obtener más detalles.
+Puedes instalar [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect), que te permite inspeccionar el estado intermedio de los plugins de Vite y también puede ayudarte a identificar qué plugins o middlewares están generando el cuello de botella en tus aplicaciones. El plugin se puede usar tanto en modo de desarrollo como compilado. Consulta el archivo readme para obtener más detalles.
 
 ## Otros
 

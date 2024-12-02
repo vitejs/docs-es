@@ -7,7 +7,7 @@ La siguiente guía también asume experiencia previa trabajando con SSR en tu ma
 :::
 
 :::warning API de bajo nivel
-Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de trabajo. Si tu objetivo es crear una aplicación, asegúrate de consultar primero los complementos y las herramientas de SSR de nivel superior en la [sección SSR de Awesome Vite](https://github.com/vitejs/awesome-vite#ssr). Dicho esto, muchas aplicaciones se construyen con éxito directamente sobre la API nativa de bajo nivel de Vite.
+Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de trabajo. Si tu objetivo es crear una aplicación, asegúrate de consultar primero los plugins y las herramientas de SSR de nivel superior en la [sección SSR de Awesome Vite](https://github.com/vitejs/awesome-vite#ssr). Dicho esto, muchas aplicaciones se construyen con éxito directamente sobre la API nativa de bajo nivel de Vite.
 :::
 
 :::tip Ayuda
@@ -93,7 +93,7 @@ async function createServer() {
   // router de Express (express.Router()), debes usar router.use
   // Cuando el servidor se reinicia (por ejemplo, después de que el usuario modifica
   // vite.config.js), `vite.middlewares` seguirá siendo la misma
-  // referencia (con una nueva cola interna de middlewares de Vite e inyectados por complementos).
+  // referencia (con una nueva cola interna de middlewares de Vite e inyectados por plugins).
   // Lo siguiente es válido incluso después de reinicios.
   app.use(vite.middlewares)
 
@@ -130,11 +130,11 @@ app.use('*', async (req, res) => {
     // 1. Lee index.html
     let template = fs.readFileSync(
       path.resolve(__dirname, 'index.html'),
-      'utf-8',
+      'utf-8'
     )
 
     // 2. Aplica transformaciones Vite HTML. Esto inyecta el cliente Vite HMR
-    // y también aplica transformaciones HTML de los complementos de Vite, por ejemplo,
+    // y también aplica transformaciones HTML de los plugins de Vite, por ejemplo,
     // preámbulos globales de @vitejs/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
@@ -248,9 +248,9 @@ En el caso de las dependencias vinculadas, no se externalizan por defecto para a
 Si has configurado aliases que redirigen un paquete a otro, es posible que desees crear un alias para los paquetes `node_modules` reales para que funcione para las dependencias externalizadas de SSR. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.io/aliases/) admiten la creación de alias a través del prefijo `npm:`.
 :::
 
-## Lógica de complemento específica de SSR
+## Lógica de plugin específica de SSR
 
-Algunos marcos, como Vue o Svelte, compilan componentes en diferentes formatos en función del cliente frente a SSR. Para admitir transformaciones condicionales, Vite pasa una propiedad `ssr` adicional en el objeto `options` de los siguientes hooks de complementos:
+Algunos marcos, como Vue o Svelte, compilan componentes en diferentes formatos en función del cliente frente a SSR. Para admitir transformaciones condicionales, Vite pasa una propiedad `ssr` adicional en el objeto `options` de los siguientes hooks de plugins:
 
 - `resolveId`
 - `load`
@@ -276,7 +276,7 @@ export function mySSRPlugin() {
 El objeto de opciones en `load` y `transform` es opcional, Rollup no está usando este objeto actualmente, pero puedes ampliar estos hooks con metadatos adicionales en el futuro.
 
 :::tip Nota
-Antes de Vite 2.7, esto se informaba a complementos con un parámetro posicional `ssr` en lugar de usar el objeto `options`. Todos los marcos y complementos principales están actualizados, pero es posible que encuentre publicaciones obsoletas utilizando la API anterior.
+Antes de Vite 2.7, esto se informaba a plugins con un parámetro posicional `ssr` en lugar de usar el objeto `options`. Todos los marcos y plugins principales están actualizados, pero es posible que encuentre publicaciones obsoletas utilizando la API anterior.
 :::
 
 ## Destino de SSR

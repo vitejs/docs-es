@@ -45,7 +45,7 @@ Para mantenerte actualizado, síguenos en [X](https://x.com/vite_js) o [Mastodon
 
 ## API de tiempo de ejecución de Vite
 
-Vite 5.1 agrega soporte experimental para una nueva API de tiempo de ejecución de Vite. Permite ejecutar cualquier código procesándolo primero con los complementos de Vite. Es diferente de `server.ssrLoadModule` porque la implementación del tiempo de ejecución está desacoplada del servidor. Esto permite a los autores de librerías y frameworks implementar su propia capa de comunicación entre el servidor y el tiempo de ejecución. Esta nueva API está destinada a reemplazar las primitivas SSR actuales de Vite una vez que sea estable.
+Vite 5.1 agrega soporte experimental para una nueva API de tiempo de ejecución de Vite. Permite ejecutar cualquier código procesándolo primero con los plugins de Vite. Es diferente de `server.ssrLoadModule` porque la implementación del tiempo de ejecución está desacoplada del servidor. Esto permite a los autores de librerías y frameworks implementar su propia capa de comunicación entre el servidor y el tiempo de ejecución. Esta nueva API está destinada a reemplazar las primitivas SSR actuales de Vite una vez que sea estable.
 
 La nueva API trae muchos beneficios:
 
@@ -56,7 +56,11 @@ La nueva API trae muchos beneficios:
 
 La idea inicial [fue propuesta por Pooya Parsa](https://github.com/nuxt/vite/pull/201) e implementada por [Anthony Fu](https://github.com/antfu) como el paquete [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/vite-node#readme) para [alimentar el SSR Dev de Nuxt 3](https://antfu.me/posts/dev-ssr-on-nuxt) y posteriormente también se usó como base para [Vitest](https://vitest.dev). Entonces, la idea general de vite-node ha sido probada extensivamente durante bastante tiempo. Esta es una nueva iteración de la API por [Vladimir Sheremet](https://github.com/sheremet-va), quien ya había implementado vite-node en Vitest y tomó los conocimientos para hacer la API aún más poderosa y flexible al agregarla al núcleo de Vite. La solicitud de cambio tardó un año en realizarse, puedes ver la evolución y las discusiones con los mantenedores del ecosistema [aquí](https://github.com/vitejs/vite/issues/12165).
 
-Lee más en la [guía de la API de tiempo de ejecución de Vite](/guide/api-vite-runtime) y [danos tu opinión](https://github.com/vitejs/vite/discussions/15774).
+::: info
+
+La API de Entorno de Tiempo de Ejecución de Vite evolucionó hacia la API de Ejecución de Módulos, lanzada en Vite 6 como parte de la [API de Entorno](/guide/api-environment).
+
+:::
 
 ## Características
 
@@ -127,7 +131,7 @@ El preempaquetado en tiempo de compilación, una característica experimental ag
 
 ## Involúcrate
 
-Estamos agradecidos con los [900 colaboradores de Vite Core](https://github.com/vitejs/vite/graphs/contributors) y los mantenedores de complementos, integraciones, herramientas y traducciones que siguen impulsando el ecosistema hacia adelante. Si estás disfrutando de Vite, te invitamos a participar y ayudarnos. Consulta nuestra [Guía de Contribución](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md), y únete a [triage de problemas](https://github.com/vitejs/vite/issues), [revisión de solicitud de cambios](https://github.com/vitejs/vite/pulls), responder preguntas en las[Discusiones de GitHub](https://github.com/vitejs/vite/discussions) y ayudar a otros en la comunidad en [Vite Land](https://chat.vitejs.dev).
+Estamos agradecidos con los [900 colaboradores de Vite Core](https://github.com/vitejs/vite/graphs/contributors) y los mantenedores de plugins, integraciones, herramientas y traducciones que siguen impulsando el ecosistema hacia adelante. Si estás disfrutando de Vite, te invitamos a participar y ayudarnos. Consulta nuestra [Guía de Contribución](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md), y únete a [triage de problemas](https://github.com/vitejs/vite/issues), [revisión de solicitud de cambios](https://github.com/vitejs/vite/pulls), responder preguntas en las[Discusiones de GitHub](https://github.com/vitejs/vite/discussions) y ayudar a otros en la comunidad en [Vite Land](https://chat.vitejs.dev).
 
 ## Reconocimientos
 

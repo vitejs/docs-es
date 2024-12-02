@@ -61,17 +61,17 @@ También puedes ejecutar `pnpm create vite-extra` para obtener acceso a plantill
 
 Ten en cuenta que las plantillas de inicio de Vite están diseñadas para usarse como un campo de juego para probar Vite con diferentes marcos. Cuando empieces a trabajar en tu próximo proyecto, te recomendamos utilizar los iniciadores sugeridos por cada marco. Algunos de ellos ahora también redirigen `create vite` a sus iniciadores (`create-vue` y `Nuxt 3` para Vue, y `SvelteKit` para Svelte).
 
-## Nuevo complemento React usando SWC durante el desarrollo
+## Nuevo plugin React usando SWC durante el desarrollo
 
-[SWC](https://swc.rs/) ahora es un reemplazo maduro para [Babel](https://babeljs.io/), especialmente en el contexto de los proyectos React. La implementación de React Fast Refresh de SWC es mucho más rápida que Babel y, para algunos proyectos, ahora es una mejor alternativa. Desde Vite 4, hay dos complementos disponibles para proyectos React con diferentes compensaciones. Creemos que vale la pena soportar ambos enfoques en este momento, y continuaremos explorando mejoras para ambos complementos en el futuro.
+[SWC](https://swc.rs/) ahora es un reemplazo maduro para [Babel](https://babeljs.io/), especialmente en el contexto de los proyectos React. La implementación de React Fast Refresh de SWC es mucho más rápida que Babel y, para algunos proyectos, ahora es una mejor alternativa. Desde Vite 4, hay dos plugins disponibles para proyectos React con diferentes compensaciones. Creemos que vale la pena soportar ambos enfoques en este momento, y continuaremos explorando mejoras para ambos plugins en el futuro.
 
 ### @vitejs/plugin-react
 
-[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react) es un complemento que usa esbuild y Babel, logrando HMR rápido con un tamaño de paquete pequeño y la flexibilidad de poder usar el pipeline de transformación de Babel.
+[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react) es un plugin que usa esbuild y Babel, logrando HMR rápido con un tamaño de paquete pequeño y la flexibilidad de poder usar el pipeline de transformación de Babel.
 
 ### @vitejs/plugin-react-swc (nuevo)
 
-[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) es un nuevo complemento que usa esbuild durante la compilación, pero reemplaza Babel con SWC durante el desarrollo. Para grandes proyectos que no requieren extensiones de React no estándar, el arranque en frío y Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
+[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) es un nuevo plugin que usa esbuild durante la compilación, pero reemplaza Babel con SWC durante el desarrollo. Para grandes proyectos que no requieren extensiones de React no estándar, el arranque en frío y Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
 
 ## Compatibilidad de navegador
 
@@ -119,9 +119,9 @@ Vite se preocupa por su huella, para agilizar la instalación, especialmente en 
 
 [Vite Core](https://github.com/vitejs/vite) y [vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci) continúan evolucionando para brindar una mejor experiencia a los mantenedores y colaboradores y para garantizar que el desarrollo se escale para hacer frente al crecimiento en el ecosistema.
 
-### Complementos de frameworks fuera del core
+### Plugins de frameworks fuera del core
 
-[`@vitejs/plugin-vue`](https://github.com/vitejs/vite-plugin-vue) y [`@vitejs/plugin-vue`](https://github.com/vitejs/vite-plugin-react) han sido parte del monorepo del core de Vite desde las primeras versiones de Vite. Esto nos ayudó a obtener un ciclo de retroalimentación cercano al realizar cambios, ya que estábamos probando y lanzando tanto Core como los complementos juntos. Con [vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci) podemos obtener estos comentarios con estos complementos desarrollados en repositorios independientes, por lo que desde Vite 4, [se han sacado del monorepo del núcleo de Vite](https://github.com/vitejs/vite/pull/11158). Esto es significativo para la historia del marco de trabajo agnóstico de Vite y nos permitirá crear equipos independientes para mantener cada uno de los complementos. Si tienes errores a informar o funciones a solicitar, crea propuestas en los nuevos repositorios en el futuro: [`vitejs/vite-plugin-vue`](https://github.com/vitejs/vite-plugin-vue) y [`vitejs/vite-plugin-react`](https://github.com/vitejs/vite-plugin-react).
+[`@vitejs/plugin-vue`](https://github.com/vitejs/vite-plugin-vue) y [`@vitejs/plugin-vue`](https://github.com/vitejs/vite-plugin-react) han sido parte del monorepo del core de Vite desde las primeras versiones de Vite. Esto nos ayudó a obtener un ciclo de retroalimentación cercano al realizar cambios, ya que estábamos probando y lanzando tanto Core como los plugins juntos. Con [vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci) podemos obtener estos comentarios con estos plugins desarrollados en repositorios independientes, por lo que desde Vite 4, [se han sacado del monorepo del núcleo de Vite](https://github.com/vitejs/vite/pull/11158). Esto es significativo para la historia del marco de trabajo agnóstico de Vite y nos permitirá crear equipos independientes para mantener cada uno de los plugins. Si tienes errores a informar o funciones a solicitar, crea propuestas en los nuevos repositorios en el futuro: [`vitejs/vite-plugin-vue`](https://github.com/vitejs/vite-plugin-vue) y [`vitejs/vite-plugin-react`](https://github.com/vitejs/vite-plugin-react).
 
 ### Mejoras para vite-ecosystem-ci
 
@@ -129,7 +129,7 @@ Vite se preocupa por su huella, para agilizar la instalación, especialmente en 
 
 ## Agradecimientos
 
-Vite 4 no sería posible sin las incontables horas de trabajo de los colaboradores de Vite, muchos de ellos mantenedores de proyectos y complementos posteriores, y los esfuerzos del [Equipo de Vite](/team). Todos hemos trabajado juntos para mejorar la experiencia de desarrollo de Vite una vez más, para cada marco y aplicación que lo usa. Estamos agradecidos de poder mejorar una base común para un ecosistema tan vibrante.
+Vite 4 no sería posible sin las incontables horas de trabajo de los colaboradores de Vite, muchos de ellos mantenedores de proyectos y plugins posteriores, y los esfuerzos del [Equipo de Vite](/team). Todos hemos trabajado juntos para mejorar la experiencia de desarrollo de Vite una vez más, para cada marco y aplicación que lo usa. Estamos agradecidos de poder mejorar una base común para un ecosistema tan vibrante.
 
 También estamos agradecidos con las personas y empresas que patrocinan el equipo de Vite y las empresas que invierten directamente en el futuro de Vite: el trabajo de [@antfu7](https://twitter.com/antfu7) en Vite y el ecosistema es parte de su trabajo; en [Nuxt Labs](https://nuxtlabs.com/), [Astro](https://astro.build) está financiando el trabajo realizado por [@bluwyoo](https://twitter.com/bluwyoo) en el core de Vite, y [StackBlitz](https://stackblitz.com/) contrata a [@patak_dev](https://twitter.com/patak_dev) para trabajar a tiempo completo en Vite.
 

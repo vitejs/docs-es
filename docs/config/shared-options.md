@@ -59,8 +59,8 @@ Para usuarios de TypeScript, asegúrense de agregar las declaraciones de tipo en
 
 - **Tipo:** `(Plugin | Plugin[] | Promise<Plugin | Plugin[]>)[]`
 
-Array de complementos a usar. Los complementos falsos se ignoran y los arrays de complementos se simplifican.
-Si se devuelve una promesa, se resolvería antes de ejecutarse. Consulta la [API de complementos](/guide/api-plugin) para obtener más detalles sobre los complementos de Vite.
+Array de plugins a usar. Los plugins falsos se ignoran y los arrays de plugins se simplifican.
+Si se devuelve una promesa, se resolvería antes de ejecutarse. Consulta la [API de plugins](/guide/api-plugin) para obtener más detalles sobre los plugins de Vite.
 
 ## publicDir
 
@@ -89,7 +89,7 @@ Se pasará a `@rollup/plugin-alias` como su [opción de entradas](https://github
 
 Cuando crees alias en las rutas del sistema de archivos, utiliza siempre rutas absolutas. Los valores de alias relativos se utilizarán tal cual y no se resolverán en rutas del sistema de archivos.
 
-Se puede lograr una resolución personalizada más avanzada a través de [complementos](/guide/api-plugin).
+Se puede lograr una resolución personalizada más avanzada a través de [plugins](/guide/api-plugin).
 
 :::warning Uso con SSR
 Si has configurado alias para [dependencias externalizadas de SSR](/guide/ssr.md#ssr-externals), es posible que desees crear un alias para los paquetes `node_modules` reales. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.io/aliases/) admiten la creación de alias a través del prefijo `npm:`.
@@ -101,7 +101,7 @@ Si has configurado alias para [dependencias externalizadas de SSR](/guide/ssr.md
 Si tienes copias duplicadas de la misma dependencia en tu aplicación (probablemente debido a hoisting o paquetes vinculados en monorepos), usa esta opción para obligar a Vite a resolver siempre las dependencias enumeradas en la misma copia (desde la raíz del proyecto).
 
 :::warning SSR + ESM
-Para compilaciones de SSR, la deduplicación no funciona para las salidas de compilación de ESM configuradas desde `build.rollupOptions.output`. Una solución consiste en utilizar las salidas de compilación de CJS hasta que ESM tenga una mejor compatibilidad con complementos para la carga de módulos.
+Para compilaciones de SSR, la deduplicación no funciona para las salidas de compilación de ESM configuradas desde `build.rollupOptions.output`. Una solución consiste en utilizar las salidas de compilación de CJS hasta que ESM tenga una mejor compatibilidad con plugins para la carga de módulos.
 :::
 
 ## resolve.conditions
@@ -170,7 +170,7 @@ interface CSSModulesOptions {
   getJSON?: (
     cssFileName: string,
     json: Record<string, string>,
-    outputFileName: string,
+    outputFileName: string
   ) => void
   scopeBehaviour?: 'global' | 'local'
   globalModulePaths?: RegExp[]
@@ -190,7 +190,7 @@ interface CSSModulesOptions {
     | ((
         originalClassName: string,
         generatedClassName: string,
-        inputFile: string,
+        inputFile: string
       ) => string)
 }
 ```
@@ -301,12 +301,12 @@ Ten en cuenta que postcss (postcss-import) tiene un comportamiento diferente con
 
 ```js
 import type {
-CSSModulesConfig,
-Drafts,
-Features,
-NonStandard,
-PseudoClasses,
-Targets,
+  CSSModulesConfig,
+  Drafts,
+  Features,
+  NonStandard,
+  PseudoClasses,
+  Targets,
 } from 'lightningcss'
 ```
 
@@ -380,9 +380,9 @@ Colocarlo en `false` deshabilita las transformaciones de esbuild.
 
 Especifica [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features) adicionales para ser tratados como recursos estáticos para que:
 
-- Sean excluidos de la canalización de transformación del complemento cuando se haga referencia a ellos desde HTML o se soliciten directamente a través de `fetch` o XHR.
+- Sean excluidos de la canalización de transformación del plugin cuando se haga referencia a ellos desde HTML o se soliciten directamente a través de `fetch` o XHR.
 
-- Importarlos desde JS devolverá su cadena de URL resuelta (esto se puede sobrescribir si tiene un complemento `enforce: 'pre'` para manejar el tipo de recursos de manera diferente).
+- Importarlos desde JS devolverá su cadena de URL resuelta (esto se puede sobrescribir si tiene un plugin `enforce: 'pre'` para manejar el tipo de recursos de manera diferente).
 
 La lista de tipos de recursos integrados se puede encontrar [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts).
 
@@ -479,3 +479,12 @@ Si tu aplicación es una aplicación de página única (SPA), una [aplicación m
 - `'custom'`: no incluye middleware HTML
 
 Obtén más información en la [guía SSR](/guide/ssr#vite-cli) de Vite. Relacionado: [`server.middlewareMode`](./server-options#server-middlewaremode).
+
+## future
+
+- **Tipo:** `Record<string, 'warn' | undefined>`
+- **Relacionado:** [Cambios importantes](/changes/)
+
+Habilita cambios importantes futuros para prepararse para una migración fluida a la próxima versión principal de Vite. La lista puede actualizarse, ampliarse o eliminarse en cualquier momento a medida que se desarrollen nuevas características.
+
+Consulta la página de [Cambios importantes](/changes/) para obtener detalles sobre las opciones posibles.

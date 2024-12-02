@@ -39,8 +39,8 @@ features:
     title: Compilación optimizada
     details: Compilado de Rollup preconfigurado con soporte de multi-página y modo librería.
   - icon: 🔩
-    title: Complementos universales
-    details: Interfaz de complementos basados en Rollup compartidos entre desarrollo y compilación.
+    title: Plugins universales
+    details: Interfaz de plugins basados en Rollup compartidos entre desarrollo y compilación.
   - icon: 🔑
     title: APIs completamente tipadas
     details: APIs programáticamente flexibles con tipado completo en TypeScript.

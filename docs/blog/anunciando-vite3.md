@@ -125,12 +125,12 @@ Uno de los puntos débiles de Vite 2 fue configurar el servidor cuando se ejecut
 
 ### Mejoras en el arranque en frío
 
-Vite ahora evita la recarga completa durante el arranque en frío cuando los complementos inyectan las importaciones mientras se rastrean los módulos previamente importados estáticamente ([#8869](https://github.com/vitejs/vite/issues/8869)).
+Vite ahora evita la recarga completa durante el arranque en frío cuando los plugins inyectan las importaciones mientras se rastrean los módulos previamente importados estáticamente ([#8869](https://github.com/vitejs/vite/issues/8869)).
 
 <details>
   <summary><b>Haz click para más información</b></summary>
 
-En Vite 2.9, tanto el escáner como el optimizador se ejecutaban en segundo plano. En el mejor escenario, donde el escáner encontraría todas las dependencias, no se necesitaba refrescar en el arranque en frío. Pero si el escáner pasaba por alto una dependencia, se necesitaba una nueva fase de optimización y luego un refresco. Vite pudo evitar algunas de estas recargas en v2.9, ya que detectamos si los nuevos fragmentos optimizados eran compatibles con los que tenía el navegador. Pero si había una dependencia común, los subfragmentos podían cambiar y se requería un refresco para evitar el estado duplicado. En Vite 3, las dependencias optimizadas no se entregan al navegador hasta que se realiza el rastreo de las importaciones estáticas. Se emite una fase de optimización rápida si falta una dependencia (por ejemplo, inyectada por un complemento), y solo entonces se envían las dependencias empaquetadas. Por lo tanto, ya no es necesario un refresco de página para estos casos.
+En Vite 2.9, tanto el escáner como el optimizador se ejecutaban en segundo plano. En el mejor escenario, donde el escáner encontraría todas las dependencias, no se necesitaba refrescar en el arranque en frío. Pero si el escáner pasaba por alto una dependencia, se necesitaba una nueva fase de optimización y luego un refresco. Vite pudo evitar algunas de estas recargas en v2.9, ya que detectamos si los nuevos fragmentos optimizados eran compatibles con los que tenía el navegador. Pero si había una dependencia común, los subfragmentos podían cambiar y se requería un refresco para evitar el estado duplicado. En Vite 3, las dependencias optimizadas no se entregan al navegador hasta que se realiza el rastreo de las importaciones estáticas. Se emite una fase de optimización rápida si falta una dependencia (por ejemplo, inyectada por un plugin), y solo entonces se envían las dependencias empaquetadas. Por lo tanto, ya no es necesario un refresco de página para estos casos.
 
 </details>
 
@@ -219,7 +219,7 @@ Vite se preocupa por su huella de publicación e instalación; una instalación 
 | Vite 3.0.0  |        3.05MB         |        17.8MB         |
 | Reducción   |         -30%          |          -7%          |
 
-En parte, esta reducción fue posible al hacer que algunas dependencias que la mayoría de los usuarios no necesitaban fueran opcionales. Primero, [Terser](https://github.com/terser/terser) ya no está instalado de manera predeterminada. Esta dependencia ya no era necesaria porque ya hicimos que esbuild fuera el minificador predeterminado para JS y CSS en Vite 2. Si usas `build.minify: 'terser'`, deberás instalarlo (`npm add -D terser `). También sacamos [node-forge](https://github.com/digitalbazaar/forge) del monorepo, implementando soporte para la generación automática de certificados https como nuevo complemento: [`@vitejs/plugin-basic-ssl`](/guide/migration#generacion-automatica-de-certificados-https). Dado que esta función solo crea certificados que no son de confianza y que no se agregan al almacén local, no justificaba el tamaño agregado.
+En parte, esta reducción fue posible al hacer que algunas dependencias que la mayoría de los usuarios no necesitaban fueran opcionales. Primero, [Terser](https://github.com/terser/terser) ya no está instalado de manera predeterminada. Esta dependencia ya no era necesaria porque ya hicimos que esbuild fuera el minificador predeterminado para JS y CSS en Vite 2. Si usas `build.minify: 'terser'`, deberás instalarlo (`npm add -D terser `). También sacamos [node-forge](https://github.com/digitalbazaar/forge) del monorepo, implementando soporte para la generación automática de certificados https como nuevo plugin: [`@vitejs/plugin-basic-ssl`](/guide/migration#generacion-automatica-de-certificados-https). Dado que esta función solo crea certificados que no son de confianza y que no se agregan al almacén local, no justificaba el tamaño agregado.
 
 ## Corrección de errores
 
@@ -247,7 +247,7 @@ Mientras trabajábamos en Vite 3, también mejoramos la experiencia de contribuc
 - Vite se ha actualizado a [pnpm 7](https://pnpm.io/), siguiendo al resto del ecosistema.
 - Playgrounds se ha movido a [`/playgrounds`](https://github.com/vitejs/vite/tree/main/playground) fuera del directorio de paquetes.
 - Los paquetes y playgrounds ahora son `"type": "module"`,
-- Los complementos ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
+- Los plugins ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
 
 ## El ecosistema está listo para v3
 
@@ -260,7 +260,7 @@ Vite 3 es el resultado del esfuerzo conjunto de los miembros del [Equipo de Vite
 Queremos agradecer a todos los que han implementado funciones y correcciones, han brindado comentarios y han estado involucrados en Vite 3:
 
 - Miembros del equipo de Vite [@youyuxi](https://twitter.com/youyuxi), [@patak_dev](https://twitter.com/patak_dev), [@antfu7](https://twitter.com/antfu7), [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), [@haoqunjiang](https://twitter.com/haoqunjiang), [@poyoho](https://github.com/poyoho), [@Shini_92](https://twitter.com/Shini_92), y [@retropragma](https://twitter.com/retropragma).
-- [@benmccann](https://github.com/benmccann), [@danielcroe](https://twitter.com/danielcroe), [@brillout](https://twitter.com/brillout), [@sheremet_va](https://twitter.com/sheremet_va), [@userquin](https://twitter.com/userquin), [@enzoinnocenzi](https://twitter.com/enzoinnocenzi), [@maximomussini](https://twitter.com/maximomussini), [@IanVanSchooten](https://twitter.com/IanVanSchooten), el [equipo de Astro](https://astro.build/), y todos los demás mantenedores de marcos y complementos en el ecosistema que ayudaron a dar forma a v3.
+- [@benmccann](https://github.com/benmccann), [@danielcroe](https://twitter.com/danielcroe), [@brillout](https://twitter.com/brillout), [@sheremet_va](https://twitter.com/sheremet_va), [@userquin](https://twitter.com/userquin), [@enzoinnocenzi](https://twitter.com/enzoinnocenzi), [@maximomussini](https://twitter.com/maximomussini), [@IanVanSchooten](https://twitter.com/IanVanSchooten), el [equipo de Astro](https://astro.build/), y todos los demás mantenedores de marcos y plugins en el ecosistema que ayudaron a dar forma a v3.
 - [@dominikg](https://github.com/dominikg) por su trabajo en vite-ecosystem-ci.
 - [@ZoltanKochan](https://twitter.com/ZoltanKochan) por su trabajo en [pnpm](https://pnpm.io/), y por su capacidad de respuesta cuando necesitábamos apoyo.
 - [@rixo](https://github.com/rixo) por el soporte de aceptación parcial de HMR.
@@ -273,6 +273,6 @@ También queremos agradecer a las personas y empresas que patrocinan el equipo d
 
 Nos tomaremos los siguientes meses para asegurar una transición fluida para todos los proyectos construidos sobre Vite. Por lo tanto, las primeras versiones menores se centrarán en continuar con nuestros esfuerzos de clasificación con un enfoque en los problemas recién abiertos.
 
-El equipo de Rollup está [trabajando en su próxima gran versión](https://twitter.com/lukastaegert/status/1544186847399743488), que se lanzará en los próximos meses. Una vez que el ecosistema de complementos de Rollup tenga tiempo de actualizarse, haremos un seguimiento con una nueva versión importante de Vite. Esto nos dará otra oportunidad de introducir cambios más significativos este año, que podríamos aprovechar para estabilizar algunas de las funcionalidades experimentales introducidas en esta versión.
+El equipo de Rollup está [trabajando en su próxima gran versión](https://twitter.com/lukastaegert/status/1544186847399743488), que se lanzará en los próximos meses. Una vez que el ecosistema de plugins de Rollup tenga tiempo de actualizarse, haremos un seguimiento con una nueva versión importante de Vite. Esto nos dará otra oportunidad de introducir cambios más significativos este año, que podríamos aprovechar para estabilizar algunas de las funcionalidades experimentales introducidas en esta versión.
 
-Si estás interesado en ayudar a mejorar Vite, la mejor manera de unirse es ayudar con las incidencias ya clasificadas. Únete a [nuestro Discord](https://chat.vitejs.dev) y busca el canal `#contributing`. O participa en nuestros `#docs`, `#help` , o crea complementos. Recién estamos comenzando. Hay muchas ideas abiertas para seguir mejorando la experiencia de desarrollo de Vite.
+Si estás interesado en ayudar a mejorar Vite, la mejor manera de unirse es ayudar con las incidencias ya clasificadas. Únete a [nuestro Discord](https://chat.vitejs.dev) y busca el canal `#contributing`. O participa en nuestros `#docs`, `#help` , o crea plugins. Recién estamos comenzando. Hay muchas ideas abiertas para seguir mejorando la experiencia de desarrollo de Vite.

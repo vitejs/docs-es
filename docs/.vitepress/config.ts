@@ -1,6 +1,6 @@
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Herramienta frontend de próxima generación'
@@ -161,14 +161,13 @@ export default defineConfig({
 
     footer: {
       message: `Publicado bajo licencia MIT. (${commitRef})`,
-      copyright:
-        'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
+      copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
     },
 
     nav: [
       { text: 'Guía', link: '/guide/', activeMatch: '/guide/' },
       { text: 'Configuración', link: '/config/', activeMatch: '/config/' },
-      { text: 'Complementos', link: '/plugins/', activeMatch: '/plugins/' },
+      { text: 'Plugins', link: '/plugins/', activeMatch: '/plugins/' },
       {
         text: 'Recursos',
         items: [
@@ -241,7 +240,7 @@ export default defineConfig({
               link: '/guide/cli',
             },
             {
-              text: 'Uso de complementos',
+              text: 'Uso de plugins',
               link: '/guide/using-plugins',
             },
             {
@@ -296,9 +295,17 @@ export default defineConfig({
             //   text: 'Migración desde v3',
             //   link: '/guide/migration-v3-to-v4',
             // },
+            // {
+            //   text: 'Migración desde v4',
+            //   link: '/guide/migration-v4-to-v5',
+            // },
             {
-              text: 'Migración desde v4',
+              text: 'Migración desde v5',
               link: '/guide/migration',
+            },
+            {
+              text: 'Cambios importantes',
+              link: '/changes/',
             },
           ],
         },
@@ -306,7 +313,7 @@ export default defineConfig({
           text: 'APIs',
           items: [
             {
-              text: 'API de complementos',
+              text: 'API de plugins',
               link: '/guide/api-plugin',
             },
             {
@@ -318,8 +325,8 @@ export default defineConfig({
               link: '/guide/api-javascript',
             },
             {
-              text: 'API de tiempo de ejecución de Vite',
-              link: '/guide/api-vite-runtime',
+              text: 'API de Entorno',
+              link: '/guide/api-environment',
             },
             {
               text: 'Referencia de Configuración',
@@ -367,6 +374,45 @@ export default defineConfig({
           ],
         },
       ],
+      '/changes/': [
+        {
+          text: 'Cambios importantes',
+          link: '/changes/',
+        },
+        {
+          text: 'Actual',
+          items: [],
+        },
+        {
+          text: 'Futuro',
+          items: [
+            {
+              text: 'this.environment en Hooks',
+              link: '/changes/this-environment-in-hooks',
+            },
+            {
+              text: 'Hooks de Plugin hotUpdate para HMR',
+              link: '/changes/hotupdate-hook',
+            },
+            {
+              text: 'Migración a APIs por entorno',
+              link: '/changes/per-environment-apis',
+            },
+            {
+              text: 'SSR usando la API ModuleRunner',
+              link: '/changes/ssr-using-modulerunner',
+            },
+            {
+              text: 'Plugins compartidos durante la compilación',
+              link: '/changes/shared-plugins-during-build',
+            },
+          ],
+        },
+        {
+          text: 'Pasado',
+          items: [],
+        },
+      ],
     },
     outline: {
       level: [2, 3],
@@ -379,7 +425,7 @@ export default defineConfig({
     pageData.frontmatter.head ??= []
     pageData.frontmatter.head.unshift(
       ['link', { rel: 'canonical', href: canonicalUrl }],
-      ['meta', { property: 'og:title', content: pageData.title }],
+      ['meta', { property: 'og:title', content: pageData.title }]
     )
     return pageData
   },

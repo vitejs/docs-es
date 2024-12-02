@@ -39,7 +39,7 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 
   El valor predeterminado es la raíz [`resolve.conditions`](./shared-options.md#resolve-conditions).
 
-  Estas condiciones se utilizan en la canalización del complemento y solo afectan a las dependencias no externalizadas durante la compilación de SSR. Utiliza `ssr.resolve.externalConditions` para afectar las importaciones externalizadas.
+  Estas condiciones se utilizan en la canalización del plugin y solo afectan a las dependencias no externalizadas durante la compilación de SSR. Utiliza `ssr.resolve.externalConditions` para afectar las importaciones externalizadas.
 
 ## ssr.resolve.externalConditions
 

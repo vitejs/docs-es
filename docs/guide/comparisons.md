@@ -2,7 +2,7 @@
 
 ## WMR
 
-[WMR](https://github.com/preactjs/wmr) del equipo de Preact intentaba proporcionar un conjunto de características similares. La API universal de complementos de Rollup de Vite para desarrollo y compilación se inspiró en ella.
+[WMR](https://github.com/preactjs/wmr) del equipo de Preact intentaba proporcionar un conjunto de características similares. La API universal de plugins de Rollup de Vite para desarrollo y compilación se inspiró en ella.
 
 WMR ya no se mantiene. El equipo de Preact ahora recomienda Vite con [@preactjs/preset-vite](https://github.com/preactjs/preset-vite).
 

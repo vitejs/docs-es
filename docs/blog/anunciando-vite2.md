@@ -43,11 +43,11 @@ Desde que decidimos refactorizar completamente los archivos internos antes que l
 
 La idea original de Vite comenzó como un [prototipo trucado que entregaba componentes de una pagina de Vue sobre ESM nativo](https://github.com/vuejs/vue-dev-server). Vite 1 fue la continuación de esa idea con HMR implementado en base a esta.
 
-Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los complementos. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
+Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
 
 ### Nuevo formato de Plugin y API
 
-Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de complementos extiende la interfaz de complementos de Rollup y es [compatible con varios complementos de Rollup](https://vite-rollup-plugins.patak.dev/) por defecto. Los complementos pueden usar hooks de Rollup compatibles, adicionalmente con hooks específicos de Vite y propiedades para ajustar el comportamiento específico de Vite (ej. diferenciar desarrollo vs construcción o manejo personalizado del HMR).
+Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de plugins extiende la interfaz de plugins de Rollup y es [compatible con varios plugins de Rollup](https://vite-rollup-plugins.patak.dev/) por defecto. Los plugins pueden usar hooks de Rollup compatibles, adicionalmente con hooks específicos de Vite y propiedades para ajustar el comportamiento específico de Vite (ej. diferenciar desarrollo vs construcción o manejo personalizado del HMR).
 
 La [API programable](https://vitejs.dev/guide/api-javascript.html) también fue mejorada para facilitar herramientas de alto nivel / marcos de trabajos construidos con base en Vite.
 

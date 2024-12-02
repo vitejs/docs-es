@@ -93,7 +93,7 @@ Puedes usar `?init`, que es similar al comportamiento anterior.
 ### Generación Automática de Certificados https
 
 Se necesita un certificado válido cuando se usa `https`. En Vite v2, si no se configuraba ningún certificado, se creaba y almacenaba automáticamente un certificado autofirmado.
-Desde Vite v3, recomendamos crear manualmente tus certificados. Si aún deseas utilizar la generación automática de la v2, esta función se puede volver a habilitar agregando [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los complementos del proyecto.
+Desde Vite v3, recomendamos crear manualmente tus certificados. Si aún deseas utilizar la generación automática de la v2, esta función se puede volver a habilitar agregando [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los plugins del proyecto.
 
 ```js
 import basicSsl from '@vitejs/plugin-basic-ssl'
@@ -112,14 +112,14 @@ Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disa
 
 ## Avanzado
 
-Hay algunos cambios que solo afectan a los creadores de complementos/herramientas.
+Hay algunos cambios que solo afectan a los creadores de plugins/herramientas.
 
 - [[#5868] refactor: eliminada API en desuso para 3.0](https://github.com/vitejs/vite/pull/5868)
   - Se elimina `printHttpServerUrls`
   - Se eliminan `server.app`, `server.transformWithEsbuild`
   - Se elimina `import.meta.hot.acceptDeps`
 - [[#6901] fix: inyección secuencial de etiquetas en transformIndexHtml](https://github.com/vitejs/vite/pull/6901)
-  - `transformIndexHtml` ahora obtiene el contenido correcto modificado por complementos anteriores, por lo que el orden de las etiquetas inyectadas ahora funciona como se esperaba.
+  - `transformIndexHtml` ahora obtiene el contenido correcto modificado por plugins anteriores, por lo que el orden de las etiquetas inyectadas ahora funciona como se esperaba.
 - [[#7995] chore: no fixStacktrace](https://github.com/vitejs/vite/pull/7995)
   - El valor predeterminado de la opción `fixStacktrace` de `ssrLoadModule` ahora es `false`
 - [[#8178] feat!: migración a ESM](https://github.com/vitejs/vite/pull/8178)
