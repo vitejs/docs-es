@@ -1,7 +1,7 @@
 # Plugins Compartidos durante la Construcción
 
 ::: tip Feedback  
-Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vite/vite/discussions/16358).  
+Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vitejs/vite/discussions/16358).  
 :::
 
 Consulta [Plugins compartidos durante la compilación](/guide/api-environment.md#shared-plugins-during-build).

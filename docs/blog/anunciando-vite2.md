@@ -43,7 +43,7 @@ Desde que decidimos refactorizar completamente los archivos internos antes que l
 
 La idea original de Vite comenzó como un [prototipo trucado que entregaba componentes de una pagina de Vue sobre ESM nativo](https://github.com/vuejs/vue-dev-server). Vite 1 fue la continuación de esa idea con HMR implementado en base a esta.
 
-Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vite/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
+Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
 
 ### Nuevo formato de Plugin y API
 
@@ -71,7 +71,7 @@ El SSR de Vite es proporcionado como una caracteristica de bajo nivel y estamos 
 
 ### Soporte para buscadores antiguos opcional
 
-Vite apunta a buscadores modernos con el soporte nativo de ESM por defecto, pero también puedes optar por el soporte para buscadores antiguos por medio del plugin oficial [@vite/plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy). El plugin genera automáticamente doble empaquetado para la versión moderna/antigua respectivamente, y entrega el paquete correcto basado en la característica de detección de buscador, asegurando código más eficiente en buscadores modernos que lo soportan.
+Vite apunta a buscadores modernos con el soporte nativo de ESM por defecto, pero también puedes optar por el soporte para buscadores antiguos por medio del plugin oficial [@vite/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). El plugin genera automáticamente doble empaquetado para la versión moderna/antigua respectivamente, y entrega el paquete correcto basado en la característica de detección de buscador, asegurando código más eficiente en buscadores modernos que lo soportan.
 
 ## ¡Pruebalo Ya!
 
@@ -81,4 +81,4 @@ Esas fueron varias características, pero empezar con Vite es simple. Puedes ini
 npm init @vite/app
 ```
 
-Después, revisa [la guía](https://vite.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vite/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unete a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vite.dev/).
+Después, revisa [la guía](https://vite.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unete a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vite.dev/).

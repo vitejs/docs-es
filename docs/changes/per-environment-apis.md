@@ -1,7 +1,7 @@
 # Migración a APIs por entorno
 
 ::: tip Feedback  
-Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vite/vite/discussions/16358).  
+Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vitejs/vite/discussions/16358).  
 :::
 
 Varias APIs de `ViteDevServer` relacionadas con el grafo de módulos han sido reemplazadas por APIs de Entorno más aisladas:

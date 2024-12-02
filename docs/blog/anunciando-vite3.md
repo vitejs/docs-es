@@ -42,9 +42,9 @@ Enlaces rápidos:
 
 - [Documentación](/)
 - [Guía de migración](/guide/migration)
-- [Registro de cambios](https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md#300-beta9-2022-07-13)
+- [Registro de cambios](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#300-beta9-2022-07-13)
 
-Si eres nuevo en Vite, te recomendamos que leas la [Guía de por qué Vite](../guide/why). Luego consulta [Introducción](../guide/) y [Guía de funcionalidades](../guide/features) para ver lo que Vite proporciona de manera inmediata. Como de costumbre, las contribuciones son bienvenidas en [GitHub](https://github.com/vite/vite). Más de [600 colaboradores](https://github.com/vite/vite/graphs/contributors) han ayudado a mejorar Vite hasta ahora. Sigue las actualizaciones en [Twitter](https://twitter.com/vite_js), o únete a debatir con otros usuarios de Vite en nuestro [servidor de chat de Discord](http://chat.vite.dev/).
+Si eres nuevo en Vite, te recomendamos que leas la [Guía de por qué Vite](../guide/why). Luego consulta [Introducción](../guide/) y [Guía de funcionalidades](../guide/features) para ver lo que Vite proporciona de manera inmediata. Como de costumbre, las contribuciones son bienvenidas en [GitHub](https://github.com/vitejs/vite). Más de [600 colaboradores](https://github.com/vitejs/vite/graphs/contributors) han ayudado a mejorar Vite hasta ahora. Sigue las actualizaciones en [Twitter](https://twitter.com/vite_js), o únete a debatir con otros usuarios de Vite en nuestro [servidor de chat de Discord](http://chat.vite.dev/).
 
 ## Nueva Documentación
 
@@ -104,7 +104,7 @@ Las plantillas de [create-vite](/guide/#probar-vite-online) han sido una gran he
 }
 </style>
 
-El tema ahora es compartido por todas las plantillas. Esto debería ayudar a transmitir mejor el alcance de estos como plantillas mínimas para comenzar con Vite. Para obtener soluciones más completas que incluyen linting, configuración de prueba y otras funciones, existen plantillas oficiales con tecnología de Vite para algunos marcos de trabajo como [create-vue](https://github.com/vuejs/create-vue) y [create-svelte](https://github.com/sveltejs/kit). Hay una lista de plantillas mantenidas por la comunidad en [Awesome Vite](https://github.com/vite/awesome-vite#templates).
+El tema ahora es compartido por todas las plantillas. Esto debería ayudar a transmitir mejor el alcance de estos como plantillas mínimas para comenzar con Vite. Para obtener soluciones más completas que incluyen linting, configuración de prueba y otras funciones, existen plantillas oficiales con tecnología de Vite para algunos marcos de trabajo como [create-vue](https://github.com/vuejs/create-vue) y [create-svelte](https://github.com/sveltejs/kit). Hay una lista de plantillas mantenidas por la comunidad en [Awesome Vite](https://github.com/vitejs/awesome-vite#templates).
 
 ## Mejoras de desarrollo
 
@@ -125,7 +125,7 @@ Uno de los puntos débiles de Vite 2 fue configurar el servidor cuando se ejecut
 
 ### Mejoras en el arranque en frío
 
-Vite ahora evita la recarga completa durante el arranque en frío cuando los plugins inyectan las importaciones mientras se rastrean los módulos previamente importados estáticamente ([#8869](https://github.com/vite/vite/issues/8869)).
+Vite ahora evita la recarga completa durante el arranque en frío cuando los plugins inyectan las importaciones mientras se rastrean los módulos previamente importados estáticamente ([#8869](https://github.com/vitejs/vite/issues/8869)).
 
 <details>
   <summary><b>Haz click para más información</b></summary>
@@ -207,7 +207,7 @@ Dado que Rollup v3 estará disponible en los próximos meses, y vamos a seguir c
 
 ### Aceptación parcial de HMR (experimental)
 
-Hay soporte opcional para [Aceptación parcial de HMR](https://github.com/vite/vite/pull/7324). Esta funcionalidad podría desbloquear un HMR más robusto para los componentes del marco que exportan varios enlaces en el mismo módulo. Puedes obtener más información en [la discusión de esta propuesta](https://github.com/vite/vite/discussions/7309).
+Hay soporte opcional para [Aceptación parcial de HMR](https://github.com/vitejs/vite/pull/7324). Esta funcionalidad podría desbloquear un HMR más robusto para los componentes del marco que exportan varios enlaces en el mismo módulo. Puedes obtener más información en [la discusión de esta propuesta](https://github.com/vitejs/vite/discussions/7309).
 
 ## Reducción de tamaño de paquete
 
@@ -223,7 +223,7 @@ En parte, esta reducción fue posible al hacer que algunas dependencias que la m
 
 ## Corrección de errores
 
-Un maratón de selección de incidencias fue encabezado por [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), que recientemente se unió al equipo de Vite. Durante los últimos tres meses, las incidencias abiertas de Vite se redujeron de 770 a 400. Todo esto se logró mientras las solicitudes de cambios recién abiertas estaban en su punto más alto. Al mismo tiempo, [@haoqunjiang](https://twitter.com/haoqunjiang) también preparó una [descripción general de los problemas de Vite](https://github.com/vite/vite/discussions/8232).
+Un maratón de selección de incidencias fue encabezado por [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), que recientemente se unió al equipo de Vite. Durante los últimos tres meses, las incidencias abiertas de Vite se redujeron de 770 a 400. Todo esto se logró mientras las solicitudes de cambios recién abiertas estaban en su punto más alto. Al mismo tiempo, [@haoqunjiang](https://twitter.com/haoqunjiang) también preparó una [descripción general de los problemas de Vite](https://github.com/vitejs/vite/discussions/8232).
 
 [![Graph of open issues and pull requests in Vite](../images/v3-open-issues-and-PRs.png)](https://www.repotrends.com/vite/vite)
 
@@ -240,18 +240,18 @@ Obtén más información en la [Guía de migración](/guide/migration).
 
 ## Actualizaciones al Core de Vite
 
-Mientras trabajábamos en Vite 3, también mejoramos la experiencia de contribución para los colaboradores de [Vite Core](https://github.com/vite/vite).
+Mientras trabajábamos en Vite 3, también mejoramos la experiencia de contribución para los colaboradores de [Vite Core](https://github.com/vitejs/vite).
 
 - Las pruebas unitarias y E2E se han migrado a [Vitest](https://vitest.dev), proporcionando una experiencia de desarrollo más rápida y estable. Este movimiento también funciona como trabajo interno para un importante proyecto de infraestructura en el ecosistema.
 - La compilación de VitePress ahora se prueba como parte de la integración continua.
 - Vite se ha actualizado a [pnpm 7](https://pnpm.io/), siguiendo al resto del ecosistema.
-- Playgrounds se ha movido a [`/playgrounds`](https://github.com/vite/vite/tree/main/playground) fuera del directorio de paquetes.
+- Playgrounds se ha movido a [`/playgrounds`](https://github.com/vitejs/vite/tree/main/playground) fuera del directorio de paquetes.
 - Los paquetes y playgrounds ahora son `"type": "module"`,
-- Los plugins ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vite/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
+- Los plugins ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
 
 ## El ecosistema está listo para v3
 
-Hemos trabajado de cerca con proyectos en el ecosistema para garantizar que los marcos impulsados ​​por Vite estén listos para Vite 3. [vite-ecosystem-ci](https://github.com/vite/vite-ecosystem-ci) nos permite ejecutar las integraciones continuas de los actores principales en el ecosistema en contraste con la rama principal de Vite y recibir informes oportunos antes de introducir una regresión. El lanzamiento de hoy pronto debería ser compatible con la mayoría de los proyectos que usan Vite.
+Hemos trabajado de cerca con proyectos en el ecosistema para garantizar que los marcos impulsados ​​por Vite estén listos para Vite 3. [vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci) nos permite ejecutar las integraciones continuas de los actores principales en el ecosistema en contraste con la rama principal de Vite y recibir informes oportunos antes de introducir una regresión. El lanzamiento de hoy pronto debería ser compatible con la mayoría de los proyectos que usan Vite.
 
 ## Agradecimientos
 

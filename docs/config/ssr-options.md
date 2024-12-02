@@ -31,7 +31,7 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 
 ## ssr.resolve.conditions
 
-- **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vite/vite/discussions/13816)
+- **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vitejs/vite/discussions/13816)
 - **Tipo:** `'esm' | 'cjs'`
 - **Por defecto:** `esm`
 - **Tipo:** `string[]`

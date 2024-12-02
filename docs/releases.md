@@ -2,7 +2,7 @@
 
 Los lanzamientos de Vite siguen el [versionamiento semántico](https://semver.org/). Puedes ver la última versión estable de Vite en la [página de Vite en npm](https://www.npmjs.com/package/vite).
 
-Existe un registro de cambios completo de versiones anteriores en [disponible en GitHub](https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md).
+Existe un registro de cambios completo de versiones anteriores en [disponible en GitHub](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md).
 
 ## Ciclo de lanzamientos
 
@@ -26,7 +26,7 @@ Como ejemplo, si la última versión de Vite es la 5.3.10:
 - Los parches de seguridad también se transfieren a `vite@3` y `vite@5.1`.
 - `vite@2` y `vite@5.0` ya no están soportados. Los usuarios deben actualizar para recibir actualizaciones.
 
-Recomendamos actualizar Vite regularmente. Consulta las [Guías de Migración](./guide/migration) cuando actualices a cada versión Major. El equipo de Vite trabaja estrechamente con los principales proyectos del ecosistema para garantizar la calidad de las nuevas versiones. Probamos nuevas versiones de Vite antes de lanzarlas a través del [proyecto vite-ecosystem-ci](https://github.com/vite/vite-ecosystem-ci). La mayoría de los proyectos que utilizan Vite deberían poder ofrecer soporte rápidamente o migrar a nuevas versiones tan pronto como se lancen.
+Recomendamos actualizar Vite regularmente. Consulta las [Guías de Migración](./guide/migration) cuando actualices a cada versión Major. El equipo de Vite trabaja estrechamente con los principales proyectos del ecosistema para garantizar la calidad de las nuevas versiones. Probamos nuevas versiones de Vite antes de lanzarlas a través del [proyecto vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci). La mayoría de los proyectos que utilizan Vite deberían poder ofrecer soporte rápidamente o migrar a nuevas versiones tan pronto como se lancen.
 
 ## Casos especiales de versiones semánticas
 
@@ -58,4 +58,4 @@ Periódicamente descartamos características que han sido reemplazadas por mejor
 
 ## Características experimentales
 
-Algunas funciones se marcan como experimentales cuando se lanzan en una versión estable de Vite. Las características experimentales nos permiten recopilar experiencias del mundo real para influir en su diseño final. El objetivo es permitir que los usuarios proporcionen comentarios probándolos en producción. Las características experimentales en sí mismas se consideran inestables y solo deben usarse de manera controlada. Estas funciones pueden cambiar entre versiones menores, por lo que los usuarios deben anclar su versión de Vite cuando se confían en ellas. Crearemos [una discusión en GitHub](https://github.com/vite/vite/discussions/categories/feedback?discussions_q=is%3Aopen+label%3Aexperimental+category%3AFeedback) para cada función experimental.
+Algunas funciones se marcan como experimentales cuando se lanzan en una versión estable de Vite. Las características experimentales nos permiten recopilar experiencias del mundo real para influir en su diseño final. El objetivo es permitir que los usuarios proporcionen comentarios probándolos en producción. Las características experimentales en sí mismas se consideran inestables y solo deben usarse de manera controlada. Estas funciones pueden cambiar entre versiones menores, por lo que los usuarios deben anclar su versión de Vite cuando se confían en ellas. Crearemos [una discusión en GitHub](https://github.com/vitejs/vite/discussions/categories/feedback?discussions_q=is%3Aopen+label%3Aexperimental+category%3AFeedback) para cada función experimental.

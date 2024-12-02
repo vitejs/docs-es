@@ -117,14 +117,14 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.svg',
     editLink: {
-      pattern: 'https://github.com/vite/docs-es/edit/main/docs/:path',
+      pattern: 'https://github.com/vitejs/docs-es/edit/main/docs/:path',
       text: 'Sugerir cambios para esta página',
     },
     socialLinks: [
       { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@vite' },
       { icon: 'twitter', link: 'https://twitter.com/vite_js' },
       { icon: 'discord', link: 'https://chat.vite.dev' },
-      { icon: 'github', link: 'https://github.com/vite/vite' },
+      { icon: 'github', link: 'https://github.com/vitejs/vite' },
     ],
     darkModeSwitchLabel: 'Apariencia',
     algolia: {
@@ -219,7 +219,7 @@ export default defineConfig({
               },
               {
                 text: 'Awesome Vite',
-                link: 'https://github.com/vite/awesome-vite',
+                link: 'https://github.com/vitejs/awesome-vite',
               },
               {
                 text: 'ViteConf',
@@ -231,11 +231,11 @@ export default defineConfig({
               },
               {
                 text: 'Lista de Cambios',
-                link: 'https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md',
+                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
               },
               {
                 text: 'Contribución',
-                link: 'https://github.com/vite/docs-es/blob/main/CONTRIBUTING.md',
+                link: 'https://github.com/vitejs/docs-es/blob/main/CONTRIBUTING.md',
               },
             ],
           },

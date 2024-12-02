@@ -76,7 +76,7 @@ Si deseas personalizar el prefijo de las variables env, consulta la opción [env
 
 ### IntelliSense para TypeScript
 
-De forma predeterminada, Vite proporciona definiciones de tipo para `import.meta.env` en [`vite/client.d.ts`](https://github.com/vite/vite/blob/main/packages/vite/client.d.ts). Si bien puedes definir más variables de entorno personalizadas en los archivos `.env.[mode]`, es posible que desees que IntelliSense funcione para las variables de entorno definidas por el usuario que tienen el prefijo `VITE_`.
+De forma predeterminada, Vite proporciona definiciones de tipo para `import.meta.env` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Si bien puedes definir más variables de entorno personalizadas en los archivos `.env.[mode]`, es posible que desees que IntelliSense funcione para las variables de entorno definidas por el usuario que tienen el prefijo `VITE_`.
 
 Para hacerlo, puedes crear un `vite-env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
 
@@ -117,7 +117,7 @@ Vite también admite la sustitución de variables de entorno en archivos HTML. C
 
 Si el entorno no existe en `import.meta.env`, por ejemplo, `%NON_EXISTENT%`, se ignorará y no se reemplazará, a diferencia de `import.meta.env.NON_EXISTENT` en JS, donde se reemplaza como `undefined`.
 
-Dado que Vite es utilizado por muchos frameworks, está intencionalmente diseñado sin preferencias establecidad sobre reemplazos complejos como, por ejemplo, los condicionales. Vite puede ser extendido utilizando [un plugin existente en el ámbito de usuario](https://github.com/vite/awesome-vite#transformers) o un plugin personalizado que implemente el hook [`transformIndexHtml`](./api-plugin#transformindexhtml).
+Dado que Vite es utilizado por muchos frameworks, está intencionalmente diseñado sin preferencias establecidad sobre reemplazos complejos como, por ejemplo, los condicionales. Vite puede ser extendido utilizando [un plugin existente en el ámbito de usuario](https://github.com/vitejs/awesome-vite#transformers) o un plugin personalizado que implemente el hook [`transformIndexHtml`](./api-plugin#transformindexhtml).
 
 ## Modos
 

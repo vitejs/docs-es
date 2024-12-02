@@ -268,7 +268,7 @@ export default defineConfig({
 
 ## css.preprocessorMaxWorkers
 
-- **Experimental:** [Hacer comentarios](https://github.com/vite/vite/discussions/15835)
+- **Experimental:** [Hacer comentarios](https://github.com/vitejs/vite/discussions/15835)
 - **Tipo:** `number | true`
 - **Por defecto:** `0` (no crea ningún worker y se ejecuta en el hilo principal)
 
@@ -276,7 +276,7 @@ Si se configura esta opción, los preprocesadores CSS se ejecutarán en los work
 
 ## css.devSourcemap
 
-- **Experimental** [Hacer comentarios](https://github.com/vite/vite/discussions/13845)
+- **Experimental** [Hacer comentarios](https://github.com/vitejs/vite/discussions/13845)
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
 
@@ -284,7 +284,7 @@ Habilita los mapas de origen durante el desarrollo.
 
 ## css.transformer
 
-- **Experimental** [Hacer Comentarios](https://github.com/vite/vite/discussions/13835)
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)
 - **Tipo:** `'postcss' | 'lightningcss'`
 - **Por defecto:** `'postcss'`
 
@@ -296,7 +296,7 @@ Ten en cuenta que postcss (postcss-import) tiene un comportamiento diferente con
 
 ## css.lightningcss
 
-- **Experimental** [Hacer Comentarios](https://github.com/vite/vite/discussions/13835)
+- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13835)
 - **Type:**
 
 ```js
@@ -384,7 +384,7 @@ Especifica [patrones de picomatch](https://github.com/micromatch/picomatch#globb
 
 - Importarlos desde JS devolverá su cadena de URL resuelta (esto se puede sobrescribir si tiene un plugin `enforce: 'pre'` para manejar el tipo de recursos de manera diferente).
 
-La lista de tipos de recursos integrados se puede encontrar [aquí](https://github.com/vite/vite/blob/main/packages/vite/src/node/constants.ts).
+La lista de tipos de recursos integrados se puede encontrar [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts).
 
 **Ejemplo:**
 

@@ -1,7 +1,7 @@
 # Integración de Backend
 
 :::tip Nota
-Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vite/awesome-vite#integrations-with-backends).
+Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
 
 Si necesitas una integración personalizada, puedes seguir los pasos de esta guía para configuración manual.
 :::

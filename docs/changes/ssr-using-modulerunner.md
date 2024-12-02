@@ -1,7 +1,7 @@
 # SSR usando la API `ModuleRunner`
 
 ::: tip Feedback  
-Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vite/vite/discussions/16358).  
+Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vitejs/vite/discussions/16358).  
 :::
 
 El método `server.ssrLoadModule` ha sido reemplazado por [Module Runner](/guide/api-environment#modulerunner).

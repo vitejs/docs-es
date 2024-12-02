@@ -18,7 +18,7 @@ Los plugins internos y oficiales de Vite están optimizados para realizar la men
 
 Sin embargo, el rendimiento de los plugins de la comunidad está fuera del control de Vite, lo que puede afectar la experiencia del desarrollador. Aquí hay algunas cosas que puedes tener en cuenta al usar plugins adicionales de Vite:
 
-1. Las dependencias grandes que solo se usan en ciertos casos deben importarse dinámicamente para reducir el tiempo de inicio de Node.js. Ejemplos de reescrituras: [vite-plugin-react#212](https://github.com/vite/vite-plugin-react/pull/212) y [vite-plugin-pwa#224](https://github.es/vite-pwa/vite-plugin-pwa/pull/244).
+1. Las dependencias grandes que solo se usan en ciertos casos deben importarse dinámicamente para reducir el tiempo de inicio de Node.js. Ejemplos de reescrituras: [vite-plugin-react#212](https://github.com/vitejs/vite-plugin-react/pull/212) y [vite-plugin-pwa#224](https://github.es/vite-pwa/vite-plugin-pwa/pull/244).
 
 2. Los hooks `buildStart`, `config` y `configResolved` no deben ejecutar operaciones largas y extensas. Estos hooks son asíncronos durante el inicio del servidor de desarrollo, lo que retrasa el acceso al sitio en el navegador.
 
@@ -67,7 +67,7 @@ export * from './slash.js'
 
 Cuando solo importas una API individual, por ejemplo, `import { slash } from './utils'`, todos los archivos en ese archivo barril deben recuperarse y transformarse, ya que pueden contener la API `slash` y también pueden contener efectos secundarios que se ejecutan durante la inicialización. Esto significa que está cargando más archivos de los necesarios en la carga inicial de la página, lo que resulta en una carga de página más lenta.
 
-Si es posible, evita los archivos barril e importa las API individuales directamente, ejemplo, `import { slash } from './utils/slash.js'`. Puedes leer el [issue #8237](https://github.com/vite/vite/issues/8237) para más información.
+Si es posible, evita los archivos barril e importa las API individuales directamente, ejemplo, `import { slash } from './utils/slash.js'`. Puedes leer el [issue #8237](https://github.com/vitejs/vite/issues/8237) para más información.
 
 ## Preparación de archivos de uso frecuente
 
@@ -122,5 +122,5 @@ Ejemplos de utilizar herramientas nativas:
 
 El uso de herramientas nativas a menudo implica un mayor tamaño de instalación y, por lo tanto, no es la configuración predeterminada al iniciar un nuevo proyecto Vite. Pero puede valer la pena el costo para aplicaciones más grandes.
 
-- Prueba el soporte experimental para [LightningCSS](https://github.com/vite/vite/discussions/13835)
-- Utiliza [`@vite/plugin-react-swc`](https://github.com/vite/vite-plugin-react-swc) en lugar de `@vite/plugin-react`.
+- Prueba el soporte experimental para [LightningCSS](https://github.com/vitejs/vite/discussions/13835)
+- Utiliza [`@vite/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) en lugar de `@vite/plugin-react`.

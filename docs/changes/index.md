@@ -10,7 +10,7 @@ Estos cambios están planificados para la próxima versión principal de Vite. L
 
 ## En Evaluación
 
-Estos cambios están siendo considerados y a menudo son APIs experimentales que pretenden mejorar los patrones de uso actuales. Como no todos los cambios están listados aquí, por favor consulta la [Etiqueta Experimental en las discusiones de GitHub de Vite](https://github.com/vite/vite/discussions/categories/feedback?discussions_q=label%3Aexperimental+category%3AFeedback) para la lista completa.
+Estos cambios están siendo considerados y a menudo son APIs experimentales que pretenden mejorar los patrones de uso actuales. Como no todos los cambios están listados aquí, por favor consulta la [Etiqueta Experimental en las discusiones de GitHub de Vite](https://github.com/vitejs/vite/discussions/categories/feedback?discussions_q=label%3Aexperimental+category%3AFeedback) para la lista completa.
 
 No recomendamos cambiar a estas APIs aún. Están incluidas en Vite para ayudarnos a recopilar retroalimentación. Consulta estas propuestas y háznos saber cómo funcionan en tu caso de uso en las discusiones de GitHub enlazadas.
 

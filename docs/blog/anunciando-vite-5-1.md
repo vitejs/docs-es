@@ -33,7 +33,7 @@ _8 de febrero de 2024_
 
 Vite 5 [fue lanzado](./anunciando-vite5.md) en noviembre pasado, y representó otro gran avance para Vite y el ecosistema. Hace unas semanas celebramos 10 millones de descargas semanales de npm y 900 colaboradores en el repositorio de Vite. Hoy, nos complace anunciar el lanzamiento de Vite 5.1.
 
-Enlaces rápidos: [Documentación](/), [Registro de cambios](https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md)
+Enlaces rápidos: [Documentación](/), [Registro de cambios](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
 
 Documentación en otros idiomas: [Inglés](https://vite.dev/), [简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [Português](https://pt.vite.dev/), [한국어](https://ko.vite.dev/), [Deutsch](https://de.vite.dev/)
 
@@ -54,7 +54,7 @@ La nueva API trae muchos beneficios:
 - No depende de ninguna API integrada de node/bun/deno, por lo que puede ejecutarse en cualquier entorno.
 - Es fácil de integrar con herramientas que tienen su propio mecanismo para ejecutar código (puede proporcionar un ejecutador para usar `eval` en lugar de `new AsyncFunction`, por ejemplo).
 
-La idea inicial [fue propuesta por Pooya Parsa](https://github.com/nuxt/vite/pull/201) e implementada por [Anthony Fu](https://github.com/antfu) como el paquete [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/vite-node#readme) para [alimentar el SSR Dev de Nuxt 3](https://antfu.me/posts/dev-ssr-on-nuxt) y posteriormente también se usó como base para [Vitest](https://vitest.dev). Entonces, la idea general de vite-node ha sido probada extensivamente durante bastante tiempo. Esta es una nueva iteración de la API por [Vladimir Sheremet](https://github.com/sheremet-va), quien ya había implementado vite-node en Vitest y tomó los conocimientos para hacer la API aún más poderosa y flexible al agregarla al núcleo de Vite. La solicitud de cambio tardó un año en realizarse, puedes ver la evolución y las discusiones con los mantenedores del ecosistema [aquí](https://github.com/vite/vite/issues/12165).
+La idea inicial [fue propuesta por Pooya Parsa](https://github.com/nuxt/vite/pull/201) e implementada por [Anthony Fu](https://github.com/antfu) como el paquete [vite-node](https://github.com/vitejsst-dev/vitest/tree/main/packages/vite-node#readme) para [alimentar el SSR Dev de Nuxt 3](https://antfu.me/posts/dev-ssr-on-nuxt) y posteriormente también se usó como base para [Vitest](https://vitest.dev). Entonces, la idea general de vite-node ha sido probada extensivamente durante bastante tiempo. Esta es una nueva iteración de la API por [Vladimir Sheremet](https://github.com/sheremet-va), quien ya había implementado vite-node en Vitest y tomó los conocimientos para hacer la API aún más poderosa y flexible al agregarla al núcleo de Vite. La solicitud de cambio tardó un año en realizarse, puedes ver la evolución y las discusiones con los mantenedores del ecosistema [aquí](https://github.com/vitejs/vite/issues/12165).
 
 ::: info
 
@@ -66,25 +66,25 @@ La API de Entorno de Tiempo de Ejecución de Vite evolucionó hacia la API de Ej
 
 ### Mejora del soporte para `.css?url`
 
-Importar archivos CSS como URLs ahora funciona de manera confiable y correcta. Este era el último obstáculo restante en el movimiento de Remix a Vite. Ver ([#15259](https://github.com/vite/vite/issues/15259)).
+Importar archivos CSS como URLs ahora funciona de manera confiable y correcta. Este era el último obstáculo restante en el movimiento de Remix a Vite. Ver ([#15259](https://github.com/vitejs/vite/issues/15259)).
 
 ### `build.assetsInlineLimit` ahora admite un callback
 
-Los usuarios ahora pueden [proporcionar un callback](/config/build-options.html#build-assetsinlinelimit) que devuelve un booleano para optar por la inclusión o exclusión de la inserción de recursos específicos. Si se devuelve `undefined`, se aplica la lógica predeterminada. Ver ([#15366](https://github.com/vite/vite/issues/15366)).
+Los usuarios ahora pueden [proporcionar un callback](/config/build-options.html#build-assetsinlinelimit) que devuelve un booleano para optar por la inclusión o exclusión de la inserción de recursos específicos. Si se devuelve `undefined`, se aplica la lógica predeterminada. Ver ([#15366](https://github.com/vitejs/vite/issues/15366)).
 
 ### Mejora del HMR para importaciones circulares
 
-En Vite 5.0, los módulos aceptados dentro de las importaciones circulares siempre desencadenaban una recarga completa de la página incluso si podían manejarse bien en el cliente. Esto ahora se hace flexible para permitir que el HMR se aplique sin una recarga completa de la página, pero si ocurre algún error durante el HMR, se recargará la página. Ver ([#15118](https://github.com/vite
+En Vite 5.0, los módulos aceptados dentro de las importaciones circulares siempre desencadenaban una recarga completa de la página incluso si podían manejarse bien en el cliente. Esto ahora se hace flexible para permitir que el HMR se aplique sin una recarga completa de la página, pero si ocurre algún error durante el HMR, se recargará la página. Ver ([#15118](https://github.com/vitejs
 
 /vite/issues/15118)).
 
 ### Soporte `ssr.external: true` para externalizar todos los paquetes SSR
 
-Históricamente, Vite externalizaba todos los paquetes excepto los vinculados. Esta nueva opción se puede utilizar para forzar la externalización de todos los paquetes, incluidos los vinculados también. Esto es útil en pruebas dentro de monorepos donde queremos emular el caso habitual de todos los paquetes externalizados, o al usar `ssrLoadModule` para cargar un archivo arbitrario y siempre queremos externalizar paquetes ya que no nos importa el HMR. Ver ([#10939](https://github.com/vite/vite/issues/10939)).
+Históricamente, Vite externalizaba todos los paquetes excepto los vinculados. Esta nueva opción se puede utilizar para forzar la externalización de todos los paquetes, incluidos los vinculados también. Esto es útil en pruebas dentro de monorepos donde queremos emular el caso habitual de todos los paquetes externalizados, o al usar `ssrLoadModule` para cargar un archivo arbitrario y siempre queremos externalizar paquetes ya que no nos importa el HMR. Ver ([#10939](https://github.com/vitejs/vite/issues/10939)).
 
 ### Exponer el método `close` en el servidor de vista previa
 
-El servidor de vista previa ahora expone un método `close`, que desmontará adecuadamente el servidor, incluidas todas las conexiones de socket abiertas. Ver ([#15630](https://github.com/vite/vite/issues/15630)).
+El servidor de vista previa ahora expone un método `close`, que desmontará adecuadamente el servidor, incluidas todas las conexiones de socket abiertas. Ver ([#15630](https://github.com/vitejs/vite/issues/15630)).
 
 ## Mejoras de rendimiento
 
@@ -103,19 +103,19 @@ Los resultados de esta prueba de referencia se ejecutan en Headless Puppeteer y 
 
 ### Ejecutar preprocesadores CSS en hilos
 
-Vite ahora tiene soporte opcional para ejecutar preprocesadores CSS en hilos. Puedes habilitarlo usando [`css.preprocessorMaxWorkers: true`](/config/shared-options.html#css-preprocessormaxworkers). Para un proyecto de Vuetify 2, el tiempo de inicio de dev se redujo en un 40% con esta función habilitada. Hay una [comparación de rendimiento para otras configuraciones en la solicitud de cambios](https://github.com/vite/vite/pull/13584#issuecomment-1678827918). Ver ([#13584](https://github.com/vite/vite/issues/13584)). [Hacer comentarios](https://github.com/vite/vite/discussions/15835).
+Vite ahora tiene soporte opcional para ejecutar preprocesadores CSS en hilos. Puedes habilitarlo usando [`css.preprocessorMaxWorkers: true`](/config/shared-options.html#css-preprocessormaxworkers). Para un proyecto de Vuetify 2, el tiempo de inicio de dev se redujo en un 40% con esta función habilitada. Hay una [comparación de rendimiento para otras configuraciones en la solicitud de cambios](https://github.com/vitejs/vite/pull/13584#issuecomment-1678827918). Ver ([#13584](https://github.com/vitejs/vite/issues/13584)). [Hacer comentarios](https://github.com/vitejs/vite/discussions/15835).
 
 ### Nuevas opciones para mejorar los inicios en frío del servidor
 
-Puedes establecer `optimizeDeps.holdUntilCrawlEnd: false` para cambiar a una nueva estrategia de optimización de dependencias que puede ayudar en proyectos grandes. Estamos considerando cambiar a esta estrategia de forma predeterminada en el futuro. [Hacer comentarios](https://github.com/vite/vite/discussions/15834). ([#15244](https://github.com/vite/vite/issues/15244))
+Puedes establecer `optimizeDeps.holdUntilCrawlEnd: false` para cambiar a una nueva estrategia de optimización de dependencias que puede ayudar en proyectos grandes. Estamos considerando cambiar a esta estrategia de forma predeterminada en el futuro. [Hacer comentarios](https://github.com/vitejs/vite/discussions/15834). ([#15244](https://github.com/vitejs/vite/issues/15244))
 
 ### Resolución más rápida con comprobaciones en caché
 
-La optimización `fs.cachedChecks` ahora está habilitada de forma predeterminada. En Windows, `tryFsResolve` fue ~14 veces más rápido con ella, y la resolución de ids en general obtuvo un aumento de velocidad de ~5 veces en el benchmark de triángulo. ([#15704](https://github.com/vite/vite/issues/15704))
+La optimización `fs.cachedChecks` ahora está habilitada de forma predeterminada. En Windows, `tryFsResolve` fue ~14 veces más rápido con ella, y la resolución de ids en general obtuvo un aumento de velocidad de ~5 veces en el benchmark de triángulo. ([#15704](https://github.com/vitejs/vite/issues/15704))
 
 ### Mejoras de rendimiento internas
 
-El servidor de desarrollo tuvo varias ganancias incrementales de rendimiento. Se añadió un nuevo middleware para cortocircuitar en 304 ([#15586](https://github.com/vite/vite/issues/15586)). Evitamos `parseRequest` en caminos críticos ([#15617](https://github.com/vite/vite/issues/15617)). Ahora Rollup se carga de forma diferida de manera adecuada ([#15621](https://github.com/vite/vite/issues/15621)).
+El servidor de desarrollo tuvo varias ganancias incrementales de rendimiento. Se añadió un nuevo middleware para cortocircuitar en 304 ([#15586](https://github.com/vitejs/vite/issues/15586)). Evitamos `parseRequest` en caminos críticos ([#15617](https://github.com/vitejs/vite/issues/15617)). Ahora Rollup se carga de forma diferida de manera adecuada ([#15621](https://github.com/vitejs/vite/issues/15621)).
 
 ## Deprecaciones
 
@@ -123,15 +123,15 @@ Continuamos reduciendo la superficie de la API de Vite siempre que sea posible p
 
 ### Opción `as` en `import.meta.glob` es obsoleta
 
-El estándar se trasladó a [Atributos de importación](https://github.com/tc39/proposal-import-attributes), pero no planeamos reemplazar `as` con una nueva opción en este momento. En su lugar, se recomienda que el usuario cambie a `query`. Ver ([#14420](https://github.com/vite/vite/issues/14420)).
+El estándar se trasladó a [Atributos de importación](https://github.com/tc39/proposal-import-attributes), pero no planeamos reemplazar `as` con una nueva opción en este momento. En su lugar, se recomienda que el usuario cambie a `query`. Ver ([#14420](https://github.com/vitejs/vite/issues/14420)).
 
 ### Se eliminó el preempaquetado experimental en tiempo de compilación
 
-El preempaquetado en tiempo de compilación, una característica experimental agregada en Vite 3, ha sido eliminada. Con Rollup 4 cambiando su analizador a nativo, y con Rolldown en desarrollo, tanto el rendimiento como la inconsistencia entre desarrollo y producción para esta característica ya no son válidos. Queremos seguir mejorando la consistencia entre desarrollo y producción, y hemos concluido que usar Rolldown para "preempaquetado durante el desarrollo" y "compilaciones de producción" es la mejor opción para el futuro. Rolldown también puede implementar el almacenamiento en caché de una manera mucho más eficiente durante la compilación que el preempaquetado de dependencias. Ver ([#15184](https://github.com/vite/vite/issues/15184)).
+El preempaquetado en tiempo de compilación, una característica experimental agregada en Vite 3, ha sido eliminada. Con Rollup 4 cambiando su analizador a nativo, y con Rolldown en desarrollo, tanto el rendimiento como la inconsistencia entre desarrollo y producción para esta característica ya no son válidos. Queremos seguir mejorando la consistencia entre desarrollo y producción, y hemos concluido que usar Rolldown para "preempaquetado durante el desarrollo" y "compilaciones de producción" es la mejor opción para el futuro. Rolldown también puede implementar el almacenamiento en caché de una manera mucho más eficiente durante la compilación que el preempaquetado de dependencias. Ver ([#15184](https://github.com/vitejs/vite/issues/15184)).
 
 ## Involúcrate
 
-Estamos agradecidos con los [900 colaboradores de Vite Core](https://github.com/vite/vite/graphs/contributors) y los mantenedores de plugins, integraciones, herramientas y traducciones que siguen impulsando el ecosistema hacia adelante. Si estás disfrutando de Vite, te invitamos a participar y ayudarnos. Consulta nuestra [Guía de Contribución](https://github.com/vite/vite/blob/main/CONTRIBUTING.md), y únete a [triage de problemas](https://github.com/vite/vite/issues), [revisión de solicitud de cambios](https://github.com/vite/vite/pulls), responder preguntas en las[Discusiones de GitHub](https://github.com/vite/vite/discussions) y ayudar a otros en la comunidad en [Vite Land](https://chat.vite.dev).
+Estamos agradecidos con los [900 colaboradores de Vite Core](https://github.com/vitejs/vite/graphs/contributors) y los mantenedores de plugins, integraciones, herramientas y traducciones que siguen impulsando el ecosistema hacia adelante. Si estás disfrutando de Vite, te invitamos a participar y ayudarnos. Consulta nuestra [Guía de Contribución](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md), y únete a [triage de problemas](https://github.com/vitejs/vite/issues), [revisión de solicitud de cambios](https://github.com/vitejs/vite/pulls), responder preguntas en las[Discusiones de GitHub](https://github.com/vitejs/vite/discussions) y ayudar a otros en la comunidad en [Vite Land](https://chat.vite.dev).
 
 ## Reconocimientos
 

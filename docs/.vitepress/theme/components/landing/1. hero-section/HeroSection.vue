@@ -27,7 +27,7 @@ import HeroDiagram from './HeroDiagram.vue'
       <div class="hero__actions">
         <a href="/guide/" class="btn btn--primary">Iniciar</a>
         <a
-          href="https://github.com/vite/vite"
+          href="https://github.com/vitejs/vite"
           target="_blank"
           class="btn btn--outline"
         >

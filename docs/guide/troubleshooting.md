@@ -2,13 +2,13 @@
 
 Consulta la [guía de solución de problemas de Rollup](https://rollupjs.org/troubleshooting/) para obtener más información también.
 
-Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vite/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vite.dev).
+Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vitejs/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vite.dev).
 
 ## CJS
 
 ### API de Node para la compilación CJS de Vite, ahora obsoleto
 
-La compilación CJS de la API de Node de Vite está obsoleta y se eliminará en Vite 6. Consulta la [discusión de GitHub](https://github.com/vite/vite/discussions/13928) correspondiente para obtener más contexto. En su lugar, debes actualizar tus archivos o frameworks para importar la compilación ESM de Vite.
+La compilación CJS de la API de Node de Vite está obsoleta y se eliminará en Vite 6. Consulta la [discusión de GitHub](https://github.com/vitejs/vite/discussions/13928) correspondiente para obtener más contexto. En su lugar, debes actualizar tus archivos o frameworks para importar la compilación ESM de Vite.
 
 En un proyecto básico de Vite, asegúrate que:
 
@@ -140,7 +140,7 @@ Es posible que estés importando un archivo con un caso diferente. Por ejemplo, 
 import './Foo.js' // debe ser './foo.js'
 ```
 
-Problema relacionado: [#964](https://github.com/vite/vite/issues/964)
+Problema relacionado: [#964](https://github.com/vitejs/vite/issues/964)
 
 ### Vite no detecta un cambio de archivo
 
@@ -237,4 +237,4 @@ Un ejemplo de enlaces cruzados entre unidades son:
 - una unidad virtual enlazada a una carpeta mediante el comando `subst`
 - un enlace simbólico/junción a una unidad diferente mediante el comando `mklink` (por ejemplo, la caché global de Yarn)
 
-Issue relacionada: [#10802](https://github.com/vite/vite/issues/10802)
+Issue relacionada: [#10802](https://github.com/vitejs/vite/issues/10802)
