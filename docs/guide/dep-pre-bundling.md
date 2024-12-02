@@ -37,7 +37,7 @@ En una configuración monorepo, una dependencia puede ser un paquete vinculado d
 
 Sin embargo, esto requiere que la dependencia vinculada se exporte como ESM. De lo contrario, puede agregar la dependencia a [`optimizeDeps.include`](/config/dep-optimization-options#optimizedeps-include) y [`build.commonjsOptions.include`](/config/build-options#build-commonjsoptions) en tus configuraciones.
 
-```js twoslash
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 // ---cut---
 export default defineConfig({

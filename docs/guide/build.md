@@ -33,7 +33,7 @@ Para obtener un control avanzado de la ruta base, consulta [Opciones avanzadas d
 
 La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/configuration-options/) fundamentales a través de `build.rollupOptions`:
 
-```js
+```js [vite.config.js]
 export default defineConfig({
   build: {
     rollupOptions: {
@@ -65,7 +65,7 @@ Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los
 
 Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch-options) a través de `build.watch`:
 
-```js
+```js [vite.config.js]
 // vite.config.js
 export default defineConfig({
   build: {
@@ -96,8 +96,7 @@ Durante el desarrollo, simplemente navega o enlaza a `/nested/` - funcionará co
 
 Durante la compilación, todo lo que necesitas hacer es especificar varios archivos `.html` como puntos de entrada:
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
@@ -123,8 +122,7 @@ Cuando estás desarrollando una librería orientada al navegador, es probable qu
 
 Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la [opción de configuración `build.lib`](/config/build-options#build-lib). Asegúrate de externalizar también cualquier dependencia que no desees incluir en tu librería, por ejemplo, `vue` o `react`:
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
@@ -155,8 +153,7 @@ export default defineConfig({
 
 El archivo de entrada contendría exportaciones que los usuarios de su paquete pueden importar:
 
-```js
-// lib/main.js
+```js [lib/main.js]
 import Foo from './Foo.vue'
 import Bar from './Bar.vue'
 export { Foo, Bar }
@@ -173,7 +170,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 `package.json` recomendado para tu librería
 
-```json
+```json [package.json]
 {
   "name": "my-lib",
   "type": "module",
@@ -191,7 +188,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 O, si expones múltiples puntos de entrada:
 
-```json
+```json [package.json]
 {
   "name": "my-lib",
   "type": "module",

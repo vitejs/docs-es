@@ -42,7 +42,7 @@ Una aplicación SSR típica tendrá la siguiente estructura de archivo fuente:
 
 `index.html` deberá hacer referencia a `entry-client.js` e incluir un placeholder donde se debe inyectar el markup generado por el servidor:
 
-```html
+```html [index.html]
 <div id="app"><!--ssr-outlet--></div>
 <script type="module" src="/src/entry-client.js"></script>
 ```
@@ -67,9 +67,7 @@ Esto se reemplaza estáticamente durante la compilación, por lo que permitirá 
 
 Al crear una aplicación SSR, es probable que desees tener control total sobre tu servidor principal y desacoplar Vite del entorno de producción. Por lo tanto, se recomienda utilizar Vite en modo middleware. Aquí hay un ejemplo con [express](https://expressjs.com/):
 
-**server.js**
-
-```js{15-18} twoslash
+```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -111,7 +109,7 @@ Aquí `vite` es una instancia de [ViteDevServer](./api-javascript#vitedevserver)
 
 El siguiente paso es implementar el controlador `*` para servir el HTML generado por el servidor:
 
-```js twoslash
+```js twoslash [server.js]
 // @noErrors
 import fs from 'node:fs'
 import path from 'node:path'
@@ -171,7 +169,7 @@ app.use('*', async (req, res) => {
 
 El script `dev` en `package.json` también debe cambiarse para usar el script del servidor en su lugar:
 
-```diff
+```diff [package.json]
   "scripts": {
 -   "dev": "vite"
 +   "dev": "node server"
@@ -187,7 +185,7 @@ Para enviar un proyecto de SSR a producción, necesitamos:
 
 Nuestros scripts en `package.json` se verán así:
 
-```json
+```json [package.json]
 {
   "scripts": {
     "dev": "node server",
@@ -224,8 +222,7 @@ Para aprovechar el manifiesto, los marcos de trabajo deben proporcionar una form
 
 `@vitejs/plugin-vue` admite esto desde el primer momento y registra automáticamente los ID de módulos de componentes usados ​​en el contexto Vue SSR asociado:
 
-```js
-// src/entry-server.js
+```js [src/entry-server.js]
 const ctx = {}
 const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules is now a Set of module IDs that were used during the render

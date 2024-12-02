@@ -59,8 +59,7 @@ Si estás utilizando TypeScript, activa `"moduleResolution": "bundler"` y `"allo
 
 Los archivos Barril son archivos que reexportan las API de otros archivos en el mismo directorio. Por ejemplo:
 
-```js
-// src/utils/index.js
+```js [src/utils/index.js]
 export * from './color.js'
 export * from './dom.js'
 export * from './slash.js'
@@ -92,7 +91,7 @@ vite:transform 62.95ms /src/components/BigComponent.vue +1ms
 vite:transform 102.54ms /src/utils/big-utils.js +1ms
 ```
 
-```js
+```js [vite.config.js]
 export default defineConfig({
   server: {
     warmup: {

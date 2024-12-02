@@ -1,14 +1,14 @@
 # API de Entorno
 
 ::: warning API de bajo nivel
-El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de Entorno en Tiempo de Ejecución". Esta guía describe una API revisada, renombrada como API de Entorno. Esta API será lanzada en Vite 6. Puedes probarla ya en la última versión `vite@6.0.0-alpha.x`.
+El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de Entorno en Tiempo de Ejecución". Esta guía describe una API revisada, renombrada como API de Entorno. Esta API será lanzada en Vite 6 como experimental. Puedes probarla ya en la última versión `vite@6.0.0-beta.x`.
 
 Recursos:
 
-- [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementa y revisa la nueva API.
 - [Discusión de retroalimentación](https://github.com/vitejs/vite/discussions/16358) donde estamos recopilando comentarios sobre las nuevas APIs.
+- [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementa y revisa la nueva API.
 
-No dudes en enviar solicitudes de cambios en la rama `v6/environment-api` para corregir los problemas que descubras. Comparte tus comentarios mientras pruebas la propuesta.  
+Por favor, compártenos tus comentarios a medida que pruebas la propuesta.
 :::
 
 Vite 6 formaliza el concepto de Entornos, introduciendo nuevas APIs para crear y configurar estos entornos, así como acceder a las opciones y utilidades de contexto con una API consistente. Desde Vite 2, existían dos entornos implícitos (`client` y `ssr`). Los hooks de plugins recibían un parámetro `ssr` boolean en el último parámetro de opciones para identificar el entorno de destino para cada módulo procesado. Varias APIs esperaban un parámetro opcional `ssr` para asociar adecuadamente los módulos al entorno correcto (por ejemplo, `server.moduleGraph.getModuleByUrl(url, { ssr })`). El entorno `ssr` se configuraba mediante `config.ssr`, que tenía un conjunto parcial de las opciones presentes en el entorno cliente. Durante el desarrollo, tanto el entorno `client` como el `ssr` se ejecutaban simultáneamente con una única canalización compartida de plugins. Durante la compilación, cada compilación obtenía una nueva instancia de configuración resuelta con un nuevo conjunto de plugins.
@@ -109,6 +109,21 @@ interface TransformResult {
 }
 ```
 
+Vite también soporta un `RunnableDevEnvironment`, que extiende un `DevEnvironment` exponiendo una instancia de `ModuleRunner`. Puedes proteger cualquier entorno ejecutable con una función `isRunnableDevEnvironment`.
+
+:::warning
+El `runner` se evalúa de manera anticipada cuando se accede por primera vez. Ten en cuenta que Vite habilita el soporte de mapas de fuentes cuando el `runner` se crea llamando a `process.setSourceMapsEnabled` o sobrescribiendo `Error.prepareStackTrace` si no está disponible.
+:::
+
+```ts
+export class RunnableDevEnvironment extends DevEnvironment {
+  public readonly runner: ModuleRunnner
+}
+if (isRunnableDevEnvironment(server.environments.ssr)) {
+  await server.environments.ssr.runner.import('/entry-point.js')
+}
+```
+
 Una instancia de entorno en el servidor de Vite permite procesar una URL utilizando el método `environment.transformRequest(url)`. Esta función utilizará el pipeline de plugins para resolver la `url` a un `id` de módulo, cargarlo (leyendo el archivo desde el sistema de archivos o a través de un plugin que implemente un módulo virtual) y luego transformar el código. Mientras se transforma el módulo, las importaciones y otros metadatos se registrarán en el gráfico de módulos del entorno creando o actualizando el nodo de módulo correspondiente. Cuando se termine el procesamiento, el resultado de la transformación también se almacenará en el módulo.
 
 Pero la instancia del entorno no puede ejecutar el código en sí misma, ya que el entorno donde se ejecutará el módulo podría ser diferente del que está utilizando el servidor de Vite. Este es el caso para el entorno del navegador. Cuando un HTML se carga en el navegador, sus scripts se ejecutan, lo que activa la evaluación de todo el gráfico estático de módulos. Cada URL importada genera una solicitud al servidor de Vite para obtener el código del módulo, lo que finalmente es manejado por el Middleware de Transformación llamando a `server.environments.client.transformRequest(url)`. La conexión entre la instancia de entorno en el servidor y el ejecutor del módulo en el navegador se realiza a través de HTTP en este caso.
@@ -121,7 +136,7 @@ Estamos utilizando `transformRequest(url)` y `warmupRequest(url)` en la versión
 La propuesta inicial tenía un método `run` que permitiría a los consumidores invocar una importación en el lado del ejecutor utilizando la opción `transport`. Durante nuestras pruebas, descubrimos que la API no era lo suficientemente universal como para recomendarla. Estamos abiertos a implementar una capa integrada para la implementación remota de SSR basada en los comentarios de los frameworks. Mientras tanto, Vite aún expone una API [`RunnerTransport`](#runnertransport) para ocultar la complejidad del RPC del ejecutor.
 :::
 
-Para el entorno `ssr` que se ejecuta por defecto en Node, Vite crea un ejecutor de módulos que implementa la evaluación utilizando `new AsyncFunction` ejecutándose en el mismo entorno JS que el servidor de desarrollo. Este ejecutor es una instancia de `ModuleRunner` que expone:
+En modo de desarrollo, el entorno `ssr` por defecto es un `RunnableDevEnvironment` con un ejecutor de módulos que implementa la evaluación utilizando `new AsyncFunction`, ejecutándose en el mismo entorno de ejecución de JavaScript que el servidor de desarrollo. Este ejecutor es una instancia de `ModuleRunner` que expone:
 
 ```ts
 class ModuleRunner {
@@ -139,15 +154,10 @@ class ModuleRunner {
 En la API de v5.1 de Entorno en Tiempo de Ejecución, existían los métodos `executeUrl` y `executeEntryPoint` - ahora se han fusionado en un solo método `import`. Si deseas deshabilitar el soporte de HMR, crea un ejecutor con la bandera `hmr: false`.
 :::
 
-El ejecutor de módulos SSR predeterminado para Node no está expuesto. Puedes usar la API `createNodeEnvironment` con `createServerModuleRunner` juntos para crear un runner que ejecute el código en el mismo hilo, admita HMR y no entre en conflicto con la implementación SSR (en caso de que se haya anulado en la configuración). Dado un servidor Vite configurado en modo middleware como se describe en la [guía de configuración SSR](/guide/ssr#setting-up-the-dev-server), implementemos el middleware SSR usando la API de entorno. Se omite el manejo de errores.
+Dado un servidor Vite configurado en modo middleware como se describe en la [guía de configuración SSR](/guide/ssr#setting-up-the-dev-server), implementemos el middleware SSR utilizando la API de entornos. La gestión de errores se omite.
 
 ```js
-import {
-  createServer,
-  createServerHotChannel,
-  createServerModuleRunner,
-  createNodeDevEnvironment,
-} from 'vite'
+import { createServer, createRunnableDevEnvironment } from 'vite'
 
 const server = await createServer({
   server: { middlewareMode: true },
@@ -158,16 +168,16 @@ const server = await createServer({
         // El entorno SSR predeterminado de Vite puede ser anulado en la configuración, así que
         // asegúrate de tener un entorno Node antes de que se reciba la solicitud.
         createEnvironment(name, config) {
-          return createNodeDevEnvironment(name, config, {
-            hot: createServerHotChannel(),
-          })
+          return createRunnableDevEnvironment(name, config)
         },
       },
     },
   },
 })
 
-const runner = createServerModuleRunner(server.environments.node)
+// Es posible que necesites convertir esto a RunnableDevEnvironment en TypeScript o usar
+// la función "isRunnableDevEnvironment" para proteger el acceso al runner
+const environment = server.environments.node
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
@@ -183,7 +193,7 @@ app.use('*', async (req, res, next) => {
   // 3. Cargar la entrada del servidor. import(url) transforma automáticamente
   //    el código fuente ESM para ser usable en Node.js. ¡No se requiere empaquetado
   //    y ofrece soporte completo para HMR!
-  const { render } = await runner.import('/src/entry-server.js')
+  const { render } = await environment.runner.import('/src/entry-server.js')
 
   // 4. Renderizar el HTML de la aplicación. Esto supone que la función `render` exportada de entry-server.js
   //     llama a las API SSR correspondientes del marco,
@@ -312,7 +322,7 @@ function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, conte
       ...context.options,
     },
     hot,
-    runner: {
+    remoteRunner: {
       transport,
     },
   })
@@ -397,7 +407,7 @@ export default {
       dev: {
         createEnvironment(name, config, { watcher }) {
           // Se llama con 'rsc' y la configuración resuelta durante el desarrollo
-          return createNodeDevEnvironment(name, config, {
+          return createRunnableDevEnvironment(name, config, {
             hot: customHotChannel(),
             watcher
           })
@@ -652,7 +662,7 @@ export class ModuleRunner {
 
 El evaluador de módulos en `ModuleRunner` es responsable de ejecutar el código. Vite exporta `ESModulesEvaluator` por defecto, que usa `new AsyncFunction` para evaluar el código. Si tu entorno de ejecución de JavaScript no admite evaluaciones inseguras, puedes proporcionar tu propia implementación.
 
-El _module runner_ expone el método `import`. Cuando el servidor Vite activa el evento `full-reload` de HMR, todos los módulos afectados se volverán a ejecutar. Ten en cuenta que `ModuleRunner` no actualiza el objeto `exports` cuando esto sucede (lo sobrescribe), por lo que necesitarías ejecutar `import` nuevamente o obtener el módulo desde `moduleCache` si dependes de tener el objeto `exports` más actualizado.
+El _module runner_ expone el método `import`. Cuando el servidor Vite activa el evento `full-reload` de HMR, todos los módulos afectados se volverán a ejecutar. Ten en cuenta que `ModuleRunner` no actualiza el objeto `exports` cuando esto sucede (lo sobrescribe), por lo que necesitarías ejecutar `import` nuevamente u obtener el módulo desde `evaluatedModules` si dependes de tener el objeto `exports` más actualizado.
 
 **Ejemplo de uso:**
 
@@ -719,7 +729,7 @@ export interface ModuleRunnerOptions {
   /**
    * Caché de módulos personalizada. Si no se proporciona, se crea una caché de módulos separada para cada instancia de *module runner*.
    */
-  moduleCache?: ModuleCacheMap
+  evaluatedModules?: EvaluatedModules
 }
 ```
 
@@ -731,6 +741,10 @@ export interface ModuleRunnerOptions {
 
 ```ts
 export interface ModuleEvaluator {
+  /**
+   * Número de líneas con prefijo en el código transformado.
+   */
+  startOffset?: number
   /**
    * Evalúa el código que fue transformado por Vite.
    * @param context Contexto de la función
@@ -751,7 +765,7 @@ export interface ModuleEvaluator {
 }
 ```
 
-Vite exporta `ESModulesEvaluator` que implementa esta interfaz por defecto. Este utiliza `new AsyncFunction` para evaluar el código, por lo que si el código tiene un mapa de fuente en línea, debe contener una [separación de 2 líneas](https://tc39.es/ecma262/#sec-createdynamicfunction) para acomodar las nuevas líneas agregadas. Esto se hace automáticamente en el entorno del servidor de Node. Si la implementación de tu runner no tiene esta restricción, deberías usar `fetchModule` (exportado desde `vite`) directamente.
+Vite exporta `ESModulesEvaluator` que implementa esta interfaz por defecto. Este utiliza `new AsyncFunction` para evaluar el código, por lo que si el código tiene un mapa de fuente en línea, debe contener una [separación de 2 líneas](https://tc39.es/ecma262/#sec-createdynamicfunction) para acomodar las nuevas líneas agregadas. Esto se hace automáticamente por el `ESModulesEvaluator`. Los evaluadores personalizados no agregarán líneas adicionales.
 
 ## RunnerTransport
 
@@ -800,7 +814,7 @@ function createWorkerEnvironment(name, config, context) {
   const worker = new Worker('./worker.js')
   return new DevEnvironment(name, config, {
     hot: /* canal hot personalizado */,
-    runner: {
+    remoteRunner: {
       transport: new RemoteEnvironmentTransport({
         send: (data) => worker.postMessage(data),
         onMessage: (listener) => worker.on('message', listener),
@@ -904,7 +918,7 @@ Luego, en el punto de entrada de SSR, puedes llamar a `import('virtual:index-htm
 ```ts
 import { render } from 'framework'
 
-// este ejemplo usa la sintaxis de cloudflare
+// este ejemplo usa la sintaxis de Cloudflare
 export default {
   async fetch() {
     // durante el desarrollo, devolverá el HTML transformado
@@ -928,13 +942,13 @@ Esto mantiene el procesamiento de HTML independiente del servidor.
 ```ts
 export interface ModuleRunnerHMRConnection {
   /**
-   * Verificado antes de enviar mensajes al cliente.
+   * Verificado antes de enviar mensajes al servidor.
    */
   isReady(): boolean
   /**
-   * Envía un mensaje al cliente.
+   * Envía un mensaje al servidor.
    */
-  send(message: string): void
+  send(payload: HotPayload): void
   /**
    * Configura cómo se maneja HMR cuando esta conexión activa una actualización.
    * Este método espera que la conexión comience a escuchar las actualizaciones de HMR y llame a este callback cuando se reciba.

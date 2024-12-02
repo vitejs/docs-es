@@ -10,8 +10,7 @@ Para usar un plugin, este debe agregarse a `devDependencies` del proyecto e incl
 $ npm add -D @vitejs/plugin-legacy
 ```
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import legacy from '@vitejs/plugin-legacy'
 import { defineConfig } from 'vite'
 
@@ -46,8 +45,7 @@ Para la compatibilidad con algunos plugins de Rollup, es posible que sea necesar
 - predeterminado: invocar el plugin después de los plugins principales de Vite
 - `post`: invocar el plugin después de los plugins de compilación de Vite
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import image from '@rollup/plugin-image'
 import { defineConfig } from 'vite'
 
@@ -67,8 +65,7 @@ Consulta la [Guía de API de plugins](./api-plugin.md#orden-de-plugins) para obt
 
 De forma predeterminada, los plugins se invocan tanto para servir como para compilar. En los casos en que un plugin deba aplicarse condicionalmente solo durante el servicio o la compilación, usa la propiedad `apply` para invocarlos solo durante `'build'` o `'serve'`:
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import typescript2 from 'rollup-plugin-typescript2'
 import { defineConfig } from 'vite'
 

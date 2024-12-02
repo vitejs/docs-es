@@ -42,8 +42,7 @@ Puedes ver también la [Convención de Módulos Virtuales](./api-plugin.md#conve
 
 Los usuarios agregarán plugins al proyecto `devDependencies` y los configurarán usando la opción de array `plugins`.
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
 
@@ -66,8 +65,7 @@ export default function framework(config) {
 }
 ```
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import { defineConfig } from 'vite'
 import framework from 'vite-plugin-framework'
 
@@ -513,8 +511,7 @@ Si un plugin de Rollup solo tiene sentido para la fase de compilación, entonces
 
 También puede aumentar un plugin de Rollup existente con propiedades exclusivas de Vite:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import example from 'rollup-plugin-example'
 import { defineConfig } from 'vite'
 
@@ -554,8 +551,7 @@ Desde Vite 2.9, proporcionamos algunas utilidades para plugins que ayudan a mane
 
 En el lado del plugin, podríamos usar `server.ws.send` para transmitir eventos al cliente:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   plugins: [
     {
@@ -600,8 +596,7 @@ if (import.meta.hot) {
 
 Luego usa `server.ws.on` y así escuchar los eventos en el lado del servidor:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   plugins: [
     {
@@ -626,8 +621,7 @@ Internamente, Vite infiere el tipo de un payload a partir de la interfaz `Custom
 Asegúrate de incluir la extensión `.d.ts` al especificar archivos de declaración TypeScript. De lo contrario, TypeScript puede que no sepa qué archivo está intentando extender el módulo.
 :::
 
-```ts
-// events.d.ts
+```ts [events.d.ts]
 import 'vite/types/customEvent.d.ts'
 
 declare module 'vite/types/customEvent.d.ts' {

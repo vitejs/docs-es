@@ -18,8 +18,7 @@
 
   Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para deshabilitar el comportamiento de reordenación. Vite luego imprimirá la dirección como `localhost`.
 
-  ```js twoslash
-  // vite.config.js
+  ```js twoslash [vite.config.js]
   import { defineConfig } from 'vite'
   import dns from 'node:dns'
   dns.setDefaultResultOrder('verbatim')

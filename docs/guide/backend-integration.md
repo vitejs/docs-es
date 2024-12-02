@@ -8,7 +8,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
 1. En tu configuración de Vite, configura el archivo de entrada y habilita el manifest de compilación:
 
-   ```js twoslash
+   ```js twoslash [vite.config.js]
    import { defineConfig } from 'vite'
    // ---cut---
    // vite.config.js
@@ -60,7 +60,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
 3. Para producción: despues de ejecutar `vite build`, se generará un archivo `.vite/manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
 
-   ```json
+   ```json [.vite/manifest.json]
    {
      "_shared-!~{003}~.js": {
        "file": "assets/shared-ChJ_j-JJ.css",

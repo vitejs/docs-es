@@ -38,7 +38,7 @@ Las variables de entorno cargadas también se exponen al código fuente del clie
 
 Para evitar la filtración accidental de variables de entorno al cliente, solo las variables con el prefijo `VITE_` se exponen a su código procesado por Vite, por ejemplo, las siguientes variables de entorno:
 
-```
+```[.env]
 VITE_SOME_KEY=123
 DB_PASSWORD=foobar
 ```
@@ -58,7 +58,7 @@ Además, Vite usa [dotenv-expand](https://github.com/motdotla/dotenv-expand) par
 
 Ten en cuenta que si deseas usar `$` dentro del valor de la variable de entorno, debe escapar con `\`.
 
-```
+```[.env]
 KEY=123
 NEW_KEY1=test$foo   # test
 NEW_KEY2=test\$foo  # test$foo
@@ -80,7 +80,7 @@ De forma predeterminada, Vite proporciona definiciones de tipo para `import.meta
 
 Para hacerlo, puedes crear un `vite-env.d.ts` en el directorio `src`, luego extender `ImportMetaEnv` de esta manera:
 
-```typescript
+```typescript [vite-env.d.ts]
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
@@ -96,7 +96,7 @@ interface ImportMeta {
 Si tu código se basa en tipos de entornos de navegador como [DOM](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts) y [WebWorker](https://github.com/microsoft/TypeScript/blob/main/src/lib/webworker.generated.d.ts), puedes actualizar el campo
 [lib](https://www.typescriptlang.org/tsconfig#lib) en el `tsconfig.json`.
 
-```json
+```json [tsconfig.json]
 {
   "lib": ["WebWorker"]
 }

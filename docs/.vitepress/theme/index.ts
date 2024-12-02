@@ -1,12 +1,13 @@
-import { h } from 'vue'
-import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import '@shikijs/vitepress-twoslash/style.css'
-import './styles/vars.css'
-import HomeSponsors from './components/HomeSponsors.vue'
+import 'virtual:group-icons.css'
+import type { Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import { h } from 'vue'
 import AsideSponsors from './components/AsideSponsors.vue'
+import HomeSponsors from './components/HomeSponsors.vue'
 import SvgImage from './components/SvgImage.vue'
+import './styles/vars.css'
 
 export default {
   extends: DefaultTheme,

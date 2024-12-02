@@ -142,11 +142,27 @@ Y crea un archivo `index.html` como este:
 <p>Hello Vite!</p>
 ```
 
-Luego ejecuta la CLI de `vite` en tu terminal:
+Luego, ejecuta el comando CLI apropiado en tu terminal:
 
-```bash
-vite
+::: code-group
+
+```bash [NPM]
+$ npx vite
 ```
+
+```bash [Yarn]
+$ yarn vite
+```
+
+```bash [PNPM]
+$ pnpm vite
+```
+
+```bash [Bun]
+$ bunx vite
+```
+
+:::
 
 El archivo `index.html` se servirá en `http://localhost:5173`.
 
@@ -170,7 +186,7 @@ Ten en cuenta que Vite también resolverá [su archivo de configuración (`vite.
 En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus scripts npm, o ejecutarlo directamente con `npx vite`. Estos son los scripts npm predeterminados en un proyecto de Vite ya montado:
 
 <!-- prettier-ignore -->
-```json
+```json [package.json]
 {
   "scripts": {
     "dev": "vite", // inicia el servidor de desarrollo, alias: `vite dev`, `vite serve`

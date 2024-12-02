@@ -6,7 +6,7 @@ Las siguientes guías se basan en algunas suposiciones compartidas:
 - Estás usando npm. Puedes usar comandos equivalentes para ejecutar los scripts si estás usando Yarn u otros gestores de paquetes.
 - Vite está instalado como una dependencia de desarrollo local en tu proyecto y has configurado los siguientes scripts de npm:
 
-```json
+```json [package.json]
 {
   "scripts": {
     "build": "vite build",
@@ -43,7 +43,7 @@ El comando `vite preview` arrancará el servidor web estático local que sirve l
 
 Puedes configurar el puerto del servidor pasando el indicador `--port` como argumento.
 
-```json
+```json [package.json]
 {
   "scripts": {
     "preview": "vite preview --port 8080"
@@ -127,7 +127,7 @@ jobs:
 
 2. Crea un archivo llamado `.gitlab-ci.yml` en la raíz de tu proyecto con el contenido a continuación. Esto creará y desplegará tu sitio cada vez que realices cambios en el contenido:
 
-   ```yaml
+   ```yaml [.gitlab-ci.yml]
    image: node:16.5.0
    pages:
      stage: deploy
@@ -255,9 +255,7 @@ También puedes agregar dominios personalizados y manejar la configuración de c
 
 2. Crea `firebase.json` y `.firebaserc` en la raíz de tu proyecto con el siguiente contenido:
 
-   `firebase.json`:
-
-   ```json
+   ```json [firebase.json]
    {
      "hosting": {
        "public": "dist",
@@ -272,9 +270,7 @@ También puedes agregar dominios personalizados y manejar la configuración de c
    }
    ```
 
-   `.firebaserc`:
-
-   ```js
+   ```js [.firebaserc]
    {
      "projects": {
        "default": "<YOUR_FIREBASE_ID>"
@@ -320,7 +316,7 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 
 4. Especifica un nombre para el proyecto y una rama.
 
-   - **Comando de compilación**: `npm run build`
+   - **Comando de compilación**: `npm install && npm run build`
    - **Directorio público**: `dist`
 
 5. Has clic en **Crear sitio estático**.
