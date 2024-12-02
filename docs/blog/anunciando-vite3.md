@@ -13,10 +13,10 @@ head:
       content: Anunciando Vite 3
   - - meta
     - property: og:image
-      content: https://es.vitejs.dev/og-image-announcing-vite3.png
+      content: https://es.vite.dev/og-image-announcing-vite3.png
   - - meta
     - property: og:url
-      content: https://es.vitejs.dev/blog/anunciando-vite3
+      content: https://es.vite.dev/blog/anunciando-vite3
   - - meta
     - property: og:description
       content: Anuncio de lanzamiento de Vite 3
@@ -32,7 +32,7 @@ head:
 
 _23 de julio de 2022_: mira el [anuncio de Vite 4.0](./anunciando-vite4.md)
 
-En febrero del año pasado, [Evan You](https://twitter.com/youyuxi) lanzó Vite 2. Desde entonces, su adopción ha crecido sin parar, alcanzando más de 1 millón de descargas en npm por semana. Un ecosistema expansivo se ha estado formando rápidamente después del lanzamiento. Vite está impulsando una carrera de innovación en los frameworks. [Nuxt 3](https://v3.nuxtjs.org/) utiliza Vite por defecto. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) y [SolidStart](https://docs.solidjs.com/quick-start) están todos construidos con Vite. [Laravel ahora ha decidido usar Vite por defecto](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) muestra cómo Vite puede mejorar la experiencia de desarrollo en Rails. [Vitest](https://vitest.dev) está avanzando como una alternativa nativa de Vite a Jest. Vite está detrás de las nuevas características de pruebas de componentes de [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) y [Playwright](https://playwright.dev/docs/test-components), Storybook usa a [Vite como su compilador oficial](https://github.com/storybookjs/builder-vite). Y [la lista continúa](https://patak.dev/vite/ecosystem.html). Los mantenedores de la mayoría de estos proyectos se involucraron en la mejora del núcleo de Vite, trabajando de cerca con el [equipo](https://vitejs.dev/team) de Vite y otros colaboradores.
+En febrero del año pasado, [Evan You](https://twitter.com/youyuxi) lanzó Vite 2. Desde entonces, su adopción ha crecido sin parar, alcanzando más de 1 millón de descargas en npm por semana. Un ecosistema expansivo se ha estado formando rápidamente después del lanzamiento. Vite está impulsando una carrera de innovación en los frameworks. [Nuxt 3](https://v3.nuxtjs.org/) utiliza Vite por defecto. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) y [SolidStart](https://docs.solidjs.com/quick-start) están todos construidos con Vite. [Laravel ahora ha decidido usar Vite por defecto](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) muestra cómo Vite puede mejorar la experiencia de desarrollo en Rails. [Vitest](https://vitest.dev) está avanzando como una alternativa nativa de Vite a Jest. Vite está detrás de las nuevas características de pruebas de componentes de [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) y [Playwright](https://playwright.dev/docs/test-components), Storybook usa a [Vite como su compilador oficial](https://github.com/storybookjs/builder-vite). Y [la lista continúa](https://patak.dev/vite/ecosystem.html). Los mantenedores de la mayoría de estos proyectos se involucraron en la mejora del núcleo de Vite, trabajando de cerca con el [equipo](https://vite.dev/team) de Vite y otros colaboradores.
 
 ![Vite 3 Announcement Cover Image](./../public/og-image-announcing-vite3.png)
 
@@ -42,25 +42,25 @@ Enlaces rápidos:
 
 - [Documentación](/)
 - [Guía de migración](/guide/migration)
-- [Registro de cambios](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#300-beta9-2022-07-13)
+- [Registro de cambios](https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md#300-beta9-2022-07-13)
 
-Si eres nuevo en Vite, te recomendamos que leas la [Guía de por qué Vite](../guide/why). Luego consulta [Introducción](../guide/) y [Guía de funcionalidades](../guide/features) para ver lo que Vite proporciona de manera inmediata. Como de costumbre, las contribuciones son bienvenidas en [GitHub](https://github.com/vitejs/vite). Más de [600 colaboradores](https://github.com/vitejs/vite/graphs/contributors) han ayudado a mejorar Vite hasta ahora. Sigue las actualizaciones en [Twitter](https://twitter.com/vite_js), o únete a debatir con otros usuarios de Vite en nuestro [servidor de chat de Discord](http://chat.vitejs.dev/).
+Si eres nuevo en Vite, te recomendamos que leas la [Guía de por qué Vite](../guide/why). Luego consulta [Introducción](../guide/) y [Guía de funcionalidades](../guide/features) para ver lo que Vite proporciona de manera inmediata. Como de costumbre, las contribuciones son bienvenidas en [GitHub](https://github.com/vite/vite). Más de [600 colaboradores](https://github.com/vite/vite/graphs/contributors) han ayudado a mejorar Vite hasta ahora. Sigue las actualizaciones en [Twitter](https://twitter.com/vite_js), o únete a debatir con otros usuarios de Vite en nuestro [servidor de chat de Discord](http://chat.vite.dev/).
 
 ## Nueva Documentación
 
-Ve a [vitejs.dev](https://vitejs.dev) para disfrutar de la nueva documentacion para la v3. Vite ahora usa el nuevo tema predeterminado para [VitePress](https://vitepress.vuejs.org), con un impresionante modo oscuro entre otras características.
+Ve a [vite.dev](https://vite.dev) para disfrutar de la nueva documentacion para la v3. Vite ahora usa el nuevo tema predeterminado para [VitePress](https://vitepress.vuejs.org), con un impresionante modo oscuro entre otras características.
 
-[![Vite documentation frontpage](../images/v3-docs.png)](https://vitejs.dev)
+[![Vite documentation frontpage](../images/v3-docs.png)](https://vite.dev)
 
 Varios proyectos en el ecosistema ya han migrado (ver [Vitest](https://vitest.dev), [vite-plugin-pwa](https://vite-plugin-pwa.netlify.app/), y [VitePress](https://vitepress.vuejs.org/) mismo).
 
-Si necesitas acceder a la documentación de Vite 2, permanecerán en línea en [v2.vitejs.dev](https://v2.vitejs.dev). También hay un nuevo subdominio [main.vitejs.dev](https://main.vitejs.dev), donde cada cambio en la rama principal de Vite se implementa automáticamente. Esto es útil cuando se prueban versiones beta o se contribuye al desarrollo del core.
+Si necesitas acceder a la documentación de Vite 2, permanecerán en línea en [v2.vite.dev](https://v2.vite.dev). También hay un nuevo subdominio [main.vite.dev](https://main.vite.dev), donde cada cambio en la rama principal de Vite se implementa automáticamente. Esto es útil cuando se prueban versiones beta o se contribuye al desarrollo del core.
 
 Ahora también hay una traducción oficial al español, que se ha agregado a las traducciones al chino y japonés:
 
-- [简体中文](https://cn.vitejs.dev/)
-- [日本語](https://ja.vitejs.dev/)
-- [Español](https://es.vitejs.dev/)
+- [简体中文](https://cn.vite.dev/)
+- [日本語](https://ja.vite.dev/)
+- [Español](https://es.vite.dev/)
 
 ## Plantillas de Inicio para Create Vite
 
@@ -104,7 +104,7 @@ Las plantillas de [create-vite](/guide/#probar-vite-online) han sido una gran he
 }
 </style>
 
-El tema ahora es compartido por todas las plantillas. Esto debería ayudar a transmitir mejor el alcance de estos como plantillas mínimas para comenzar con Vite. Para obtener soluciones más completas que incluyen linting, configuración de prueba y otras funciones, existen plantillas oficiales con tecnología de Vite para algunos marcos de trabajo como [create-vue](https://github.com/vuejs/create-vue) y [create-svelte](https://github.com/sveltejs/kit). Hay una lista de plantillas mantenidas por la comunidad en [Awesome Vite](https://github.com/vitejs/awesome-vite#templates).
+El tema ahora es compartido por todas las plantillas. Esto debería ayudar a transmitir mejor el alcance de estos como plantillas mínimas para comenzar con Vite. Para obtener soluciones más completas que incluyen linting, configuración de prueba y otras funciones, existen plantillas oficiales con tecnología de Vite para algunos marcos de trabajo como [create-vue](https://github.com/vuejs/create-vue) y [create-svelte](https://github.com/sveltejs/kit). Hay una lista de plantillas mantenidas por la comunidad en [Awesome Vite](https://github.com/vite/awesome-vite#templates).
 
 ## Mejoras de desarrollo
 
@@ -125,7 +125,7 @@ Uno de los puntos débiles de Vite 2 fue configurar el servidor cuando se ejecut
 
 ### Mejoras en el arranque en frío
 
-Vite ahora evita la recarga completa durante el arranque en frío cuando los plugins inyectan las importaciones mientras se rastrean los módulos previamente importados estáticamente ([#8869](https://github.com/vitejs/vite/issues/8869)).
+Vite ahora evita la recarga completa durante el arranque en frío cuando los plugins inyectan las importaciones mientras se rastrean los módulos previamente importados estáticamente ([#8869](https://github.com/vite/vite/issues/8869)).
 
 <details>
   <summary><b>Haz click para más información</b></summary>
@@ -207,7 +207,7 @@ Dado que Rollup v3 estará disponible en los próximos meses, y vamos a seguir c
 
 ### Aceptación parcial de HMR (experimental)
 
-Hay soporte opcional para [Aceptación parcial de HMR](https://github.com/vitejs/vite/pull/7324). Esta funcionalidad podría desbloquear un HMR más robusto para los componentes del marco que exportan varios enlaces en el mismo módulo. Puedes obtener más información en [la discusión de esta propuesta](https://github.com/vitejs/vite/discussions/7309).
+Hay soporte opcional para [Aceptación parcial de HMR](https://github.com/vite/vite/pull/7324). Esta funcionalidad podría desbloquear un HMR más robusto para los componentes del marco que exportan varios enlaces en el mismo módulo. Puedes obtener más información en [la discusión de esta propuesta](https://github.com/vite/vite/discussions/7309).
 
 ## Reducción de tamaño de paquete
 
@@ -219,15 +219,15 @@ Vite se preocupa por su huella de publicación e instalación; una instalación 
 | Vite 3.0.0  |        3.05MB         |        17.8MB         |
 | Reducción   |         -30%          |          -7%          |
 
-En parte, esta reducción fue posible al hacer que algunas dependencias que la mayoría de los usuarios no necesitaban fueran opcionales. Primero, [Terser](https://github.com/terser/terser) ya no está instalado de manera predeterminada. Esta dependencia ya no era necesaria porque ya hicimos que esbuild fuera el minificador predeterminado para JS y CSS en Vite 2. Si usas `build.minify: 'terser'`, deberás instalarlo (`npm add -D terser `). También sacamos [node-forge](https://github.com/digitalbazaar/forge) del monorepo, implementando soporte para la generación automática de certificados https como nuevo plugin: [`@vitejs/plugin-basic-ssl`](/guide/migration#generacion-automatica-de-certificados-https). Dado que esta función solo crea certificados que no son de confianza y que no se agregan al almacén local, no justificaba el tamaño agregado.
+En parte, esta reducción fue posible al hacer que algunas dependencias que la mayoría de los usuarios no necesitaban fueran opcionales. Primero, [Terser](https://github.com/terser/terser) ya no está instalado de manera predeterminada. Esta dependencia ya no era necesaria porque ya hicimos que esbuild fuera el minificador predeterminado para JS y CSS en Vite 2. Si usas `build.minify: 'terser'`, deberás instalarlo (`npm add -D terser `). También sacamos [node-forge](https://github.com/digitalbazaar/forge) del monorepo, implementando soporte para la generación automática de certificados https como nuevo plugin: [`@vite/plugin-basic-ssl`](/guide/migration#generacion-automatica-de-certificados-https). Dado que esta función solo crea certificados que no son de confianza y que no se agregan al almacén local, no justificaba el tamaño agregado.
 
 ## Corrección de errores
 
-Un maratón de selección de incidencias fue encabezado por [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), que recientemente se unió al equipo de Vite. Durante los últimos tres meses, las incidencias abiertas de Vite se redujeron de 770 a 400. Todo esto se logró mientras las solicitudes de cambios recién abiertas estaban en su punto más alto. Al mismo tiempo, [@haoqunjiang](https://twitter.com/haoqunjiang) también preparó una [descripción general de los problemas de Vite](https://github.com/vitejs/vite/discussions/8232).
+Un maratón de selección de incidencias fue encabezado por [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), que recientemente se unió al equipo de Vite. Durante los últimos tres meses, las incidencias abiertas de Vite se redujeron de 770 a 400. Todo esto se logró mientras las solicitudes de cambios recién abiertas estaban en su punto más alto. Al mismo tiempo, [@haoqunjiang](https://twitter.com/haoqunjiang) también preparó una [descripción general de los problemas de Vite](https://github.com/vite/vite/discussions/8232).
 
-[![Graph of open issues and pull requests in Vite](../images/v3-open-issues-and-PRs.png)](https://www.repotrends.com/vitejs/vite)
+[![Graph of open issues and pull requests in Vite](../images/v3-open-issues-and-PRs.png)](https://www.repotrends.com/vite/vite)
 
-[![Graph of new issues and pull requests in Vite](../images/v3-new-open-issues-and-PRs.png)](https://www.repotrends.com/vitejs/vite)
+[![Graph of new issues and pull requests in Vite](../images/v3-new-open-issues-and-PRs.png)](https://www.repotrends.com/vite/vite)
 
 ## Notas de compatibilidad
 
@@ -240,18 +240,18 @@ Obtén más información en la [Guía de migración](/guide/migration).
 
 ## Actualizaciones al Core de Vite
 
-Mientras trabajábamos en Vite 3, también mejoramos la experiencia de contribución para los colaboradores de [Vite Core](https://github.com/vitejs/vite).
+Mientras trabajábamos en Vite 3, también mejoramos la experiencia de contribución para los colaboradores de [Vite Core](https://github.com/vite/vite).
 
 - Las pruebas unitarias y E2E se han migrado a [Vitest](https://vitest.dev), proporcionando una experiencia de desarrollo más rápida y estable. Este movimiento también funciona como trabajo interno para un importante proyecto de infraestructura en el ecosistema.
 - La compilación de VitePress ahora se prueba como parte de la integración continua.
 - Vite se ha actualizado a [pnpm 7](https://pnpm.io/), siguiendo al resto del ecosistema.
-- Playgrounds se ha movido a [`/playgrounds`](https://github.com/vitejs/vite/tree/main/playground) fuera del directorio de paquetes.
+- Playgrounds se ha movido a [`/playgrounds`](https://github.com/vite/vite/tree/main/playground) fuera del directorio de paquetes.
 - Los paquetes y playgrounds ahora son `"type": "module"`,
-- Los plugins ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
+- Los plugins ahora se empaquetan usando [unbuild](https://github.com/unjs/unbuild), y [plugin-vue-jsx](https://github.com/vite/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) y [plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy) se reescribieron en TypeScript.
 
 ## El ecosistema está listo para v3
 
-Hemos trabajado de cerca con proyectos en el ecosistema para garantizar que los marcos impulsados ​​por Vite estén listos para Vite 3. [vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci) nos permite ejecutar las integraciones continuas de los actores principales en el ecosistema en contraste con la rama principal de Vite y recibir informes oportunos antes de introducir una regresión. El lanzamiento de hoy pronto debería ser compatible con la mayoría de los proyectos que usan Vite.
+Hemos trabajado de cerca con proyectos en el ecosistema para garantizar que los marcos impulsados ​​por Vite estén listos para Vite 3. [vite-ecosystem-ci](https://github.com/vite/vite-ecosystem-ci) nos permite ejecutar las integraciones continuas de los actores principales en el ecosistema en contraste con la rama principal de Vite y recibir informes oportunos antes de introducir una regresión. El lanzamiento de hoy pronto debería ser compatible con la mayoría de los proyectos que usan Vite.
 
 ## Agradecimientos
 
@@ -275,4 +275,4 @@ Nos tomaremos los siguientes meses para asegurar una transición fluida para tod
 
 El equipo de Rollup está [trabajando en su próxima gran versión](https://twitter.com/lukastaegert/status/1544186847399743488), que se lanzará en los próximos meses. Una vez que el ecosistema de plugins de Rollup tenga tiempo de actualizarse, haremos un seguimiento con una nueva versión importante de Vite. Esto nos dará otra oportunidad de introducir cambios más significativos este año, que podríamos aprovechar para estabilizar algunas de las funcionalidades experimentales introducidas en esta versión.
 
-Si estás interesado en ayudar a mejorar Vite, la mejor manera de unirse es ayudar con las incidencias ya clasificadas. Únete a [nuestro Discord](https://chat.vitejs.dev) y busca el canal `#contributing`. O participa en nuestros `#docs`, `#help` , o crea plugins. Recién estamos comenzando. Hay muchas ideas abiertas para seguir mejorando la experiencia de desarrollo de Vite.
+Si estás interesado en ayudar a mejorar Vite, la mejor manera de unirse es ayudar con las incidencias ya clasificadas. Únete a [nuestro Discord](https://chat.vite.dev) y busca el canal `#contributing`. O participa en nuestros `#docs`, `#help` , o crea plugins. Recién estamos comenzando. Hay muchas ideas abiertas para seguir mejorando la experiencia de desarrollo de Vite.

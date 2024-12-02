@@ -7,7 +7,7 @@ La siguiente guía también asume experiencia previa trabajando con SSR en tu ma
 :::
 
 :::warning API de bajo nivel
-Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de trabajo. Si tu objetivo es crear una aplicación, asegúrate de consultar primero los plugins y las herramientas de SSR de nivel superior en la [sección SSR de Awesome Vite](https://github.com/vitejs/awesome-vite#ssr). Dicho esto, muchas aplicaciones se construyen con éxito directamente sobre la API nativa de bajo nivel de Vite.
+Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de trabajo. Si tu objetivo es crear una aplicación, asegúrate de consultar primero los plugins y las herramientas de SSR de nivel superior en la [sección SSR de Awesome Vite](https://github.com/vite/awesome-vite#ssr). Dicho esto, muchas aplicaciones se construyen con éxito directamente sobre la API nativa de bajo nivel de Vite.
 :::
 
 :::tip Ayuda
@@ -133,7 +133,7 @@ app.use('*', async (req, res) => {
 
     // 2. Aplica transformaciones Vite HTML. Esto inyecta el cliente Vite HMR
     // y también aplica transformaciones HTML de los plugins de Vite, por ejemplo,
-    // preámbulos globales de @vitejs/plugin-react
+    // preámbulos globales de @vite/plugin-react
     template = await vite.transformIndexHtml(url, template)
 
     // 3a. Carga la entrada del servidor. vite.ssrLoadModule se transforma automáticamente
@@ -220,7 +220,7 @@ La secuencia de comandos anterior ahora generará `dist/client/.vite/ssr-manifes
 
 Para aprovechar el manifiesto, los marcos de trabajo deben proporcionar una forma de recopilar los ID de módulo de los componentes que se usaron durante una llamada de procesamiento del servidor.
 
-`@vitejs/plugin-vue` admite esto desde el primer momento y registra automáticamente los ID de módulos de componentes usados ​​en el contexto Vue SSR asociado:
+`@vite/plugin-vue` admite esto desde el primer momento y registra automáticamente los ID de módulos de componentes usados ​​en el contexto Vue SSR asociado:
 
 ```js [src/entry-server.js]
 const ctx = {}
@@ -228,11 +228,11 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules is now a Set of module IDs that were used during the render
 ```
 
-En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo. También puedes utilizar esta información para [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103).
+En la rama de producción de `server.js` necesitamos leer y pasar el manifiesto a la función `render` exportada por `src/entry-server.js`. ¡Esto nos proporcionaría suficiente información para generar directivas de precarga para archivos utilizados por rutas asíncronas! Consulta el [código fuente de demostración](https://github.com/vite/vite-plugin-vue/blob/main/playground/ssr-vue/src/entry-server.js) para ver un ejemplo completo. También puedes utilizar esta información para [103 Early Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103).
 
 ## Renderizado previo / SSG
 
-Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipación, podemos renderizar previamente estas rutas en HTML estático usando la misma lógica que SSR de producción. Esto también puede considerarse una forma de generación de sitios estáticos (SSG). Consulta el [demo del script de pre-renderizado](https://github.com/vitejs/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js) para ver un ejemplo práctico.
+Si las rutas y los datos necesarios para ciertas rutas se conocen con anticipación, podemos renderizar previamente estas rutas en HTML estático usando la misma lógica que SSR de producción. Esto también puede considerarse una forma de generación de sitios estáticos (SSG). Consulta el [demo del script de pre-renderizado](https://github.com/vite/vite-plugin-vue/blob/main/playground/ssr-vue/prerender.js) para ver un ejemplo práctico.
 
 ## SSR Externos
 

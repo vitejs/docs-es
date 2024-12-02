@@ -1,10 +1,10 @@
-import path from 'node:path'
-import { writeFileSync } from 'node:fs'
 import { Feed } from 'feed'
+import { writeFileSync } from 'node:fs'
+import path from 'node:path'
 import type { SiteConfig } from 'vitepress'
 import { createContentLoader } from 'vitepress'
 
-const siteUrl = 'https://es.vitejs.dev'
+const siteUrl = 'https://es.vite.dev'
 const blogUrl = `${siteUrl}/blog`
 
 export const buildEnd = async (config: SiteConfig): Promise<void> => {
@@ -14,10 +14,10 @@ export const buildEnd = async (config: SiteConfig): Promise<void> => {
     id: blogUrl,
     link: blogUrl,
     language: 'es',
-    image: 'https://es.vitejs.dev/og-image.png',
-    favicon: 'https://es.vitejs.dev/logo.svg',
+    image: 'https://es.vite.dev/og-image.png',
+    favicon: 'https://es.vite.dev/logo.svg',
     copyright:
-      'Derechos reservados © 2019-actualidad Evan You & los colaboradores de Vite',
+      'Derechos reservados © 2019-actualidad VoidZero Inc. & los colaboradores de Vite',
   })
   const posts = await createContentLoader('blog/*.md', {
     excerpt: true,
@@ -26,7 +26,7 @@ export const buildEnd = async (config: SiteConfig): Promise<void> => {
   posts.sort(
     (a, b) =>
       +new Date(b.frontmatter.date as string) -
-      +new Date(a.frontmatter.date as string),
+      +new Date(a.frontmatter.date as string)
   )
   for (const { url, excerpt, frontmatter, html } of posts) {
     feed.addItem({

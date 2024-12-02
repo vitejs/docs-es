@@ -1,60 +1,46 @@
 ---
-layout: home
-
 title: Vite
 titleTemplate: Herramienta frontend de próxima generación
+pageClass: landing dark
 
-hero:
-  name: Vite
-  text: Herramienta frontend de próxima generación
-  tagline: Prepárate para un entorno de desarrollo que finalmente está hecho para tí.
-  image:
-    src: /logo-with-shadow.png
-    alt: Vite
-  actions:
-    - theme: brand
-      text: Introducción
-      link: /guide/
-    - theme: alt
-      text: ¿Por qué Vite?
-      link: /guide/why
-    - theme: alt
-      text: Ver en GitHub
-      link: https://github.com/vitejs/vite
-    - theme: brand
-      text: ⚡ ViteConf 24!
-      link: https://viteconf.org/?utm=vite-homepage
-
-features:
-  - icon: 💡
-    title: Inicio de servidor al instante
-    details: Servidor de archivo bajo demanda sobre ESM nativo, no requiere empaquetado!
-  - icon: ⚡️
-    title: HMR ultra rápido
-    details: Hot Module Replacement (HMR) que se mantiene rápido sin importar el tamaño de la aplicación.
-  - icon: 🛠️
-    title: Funcionalidades enriquecidas
-    details: Soporte para TypeScript, JSX, CSS y más, listos para usar.
-  - icon: 📦
-    title: Compilación optimizada
-    details: Compilado de Rollup preconfigurado con soporte de multi-página y modo librería.
-  - icon: 🔩
-    title: Plugins universales
-    details: Interfaz de plugins basados en Rollup compartidos entre desarrollo y compilación.
-  - icon: 🔑
-    title: APIs completamente tipadas
-    details: APIs programáticamente flexibles con tipado completo en TypeScript.
+layout: home
+aside: false
+editLink: false
+markdownStyles: false
 ---
 
 <script setup>
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  const urlParams = new URLSearchParams(window.location.search)
-  if (urlParams.get('uwu') != null) {
-    const img = document.querySelector('.VPHero .VPImage.image-src')
-    img.src = '/logo-uwu.png'
-    img.alt = 'Vite Kawaii Logo by @icarusgkx'
-  }
-})
+import Hero from '.vitepress/theme/components/landing/1. hero-section/HeroSection.vue'
+import FeatureSection from './.vitepress/theme/components/landing/2. feature-section/FeatureSection.vue'
+import FrameworksSection from './.vitepress/theme/components/landing/3. frameworks-section/FrameworksSection.vue'
+import CommunitySection from './.vitepress/theme/components/landing/4. community-section/CommunitySection.vue'
+import SponsorSection from './.vitepress/theme/components/landing/5. sponsor-section/SponsorSection.vue'
+import GetStartedSection from '.vitepress/theme/components/landing/6. get-started-section/GetStartedSection.vue'
+import FeatureInstantServerStart from './.vitepress/theme/components/landing/2. feature-section/FeatureInstantServerStart.vue'
+import FeatureHMR from './.vitepress/theme/components/landing/2. feature-section/FeatureHMR.vue'
+import FeatureRichFeatures from './.vitepress/theme/components/landing/2. feature-section/FeatureRichFeatures.vue'
+import FeatureOptimizedBuild from './.vitepress/theme/components/landing/2. feature-section/FeatureOptimizedBuild.vue'
+import FeatureFlexiblePlugins from './.vitepress/theme/components/landing/2. feature-section/FeatureFlexiblePlugins.vue'
+import FeatureTypedAPI from './.vitepress/theme/components/landing/2. feature-section/FeatureTypedAPI.vue'
+import FeatureSSRSupport from './.vitepress/theme/components/landing/2. feature-section/FeatureSSRSupport.vue'
+import FeatureCI from './.vitepress/theme/components/landing/2. feature-section/FeatureCI.vue'
 </script>
+<div class="VPHome">
+  <Hero/>
+  <FeatureSection title="Redefiniendo la experiencia del desarrollador" description="Vite hace que el desarrollo web vuelva a ser simple" type="blue">
+    <FeatureInstantServerStart />
+    <FeatureHMR />
+    <FeatureRichFeatures />
+    <FeatureOptimizedBuild />
+  </FeatureSection>
+  <FeatureSection title="Una fundación compartida sobre la cual construir." type="pink" class="feature-section--flip">
+    <FeatureFlexiblePlugins />
+    <FeatureTypedAPI />
+    <FeatureSSRSupport />
+    <FeatureCI />
+  </FeatureSection>
+  <FrameworksSection />
+  <CommunitySection />
+  <SponsorSection />
+  <GetStartedSection />
+</div>

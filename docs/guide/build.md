@@ -15,7 +15,7 @@ Puedes especificar objetivos personalizados a través de la [opción de configur
 
 Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar https://cdnjs.cloudflare.com/polyfill/ el cual genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
 
-Los navegadores obsoletos pueden ser soportados a través de [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos y las correspondientes polyfills con características en lenguaje ES. Los fragmentos se cargan condicionalmente solo en navegadores que no tienen soporte ESM nativo.
+Los navegadores obsoletos pueden ser soportados a través de [@vite/plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos y las correspondientes polyfills con características en lenguaje ES. Los fragmentos se cargan condicionalmente solo en navegadores que no tienen soporte ESM nativo.
 
 ## Ruta base pública
 
@@ -223,7 +223,7 @@ El modo librería incluye una configuración simple y pragmática para librería
 ## Opciones avanzadas para Base
 
 :::warning Nota
-Esta característica es experimental. [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13834).
+Esta característica es experimental. [Hacer Comentarios](https://github.com/vite/vite/discussions/13834).
 :::
 
 Para casos de uso avanzado, los recursos estaticos y los archivos públicos desplegados pueden estar en diferentes rutas, por ejemplo, para usar diferentes estrategias de caché.

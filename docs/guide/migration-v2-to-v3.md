@@ -13,7 +13,7 @@ El paquete de producción asume soporte para JavaScript moderno. De forma predet
 - Safari >=13
 - Edge >=88
 
-Una pequeña fracción de usuarios ahora requerirán el uso de [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos heredados y el correspondiente polyfills de características de lenguaje ES.
+Una pequeña fracción de usuarios ahora requerirán el uso de [@vite/plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos heredados y el correspondiente polyfills de características de lenguaje ES.
 
 ## Cambios en las opciones de configuración
 
@@ -24,7 +24,7 @@ Se han eliminado las siguientes opciones que ya estaban en desuso en v2:
 - `build.base` (cambialo por [`base`](../config/shared-options.md#base))
 - `build.brotliSize` (cambialo por [`build.reportCompressedSize`](../config/build-options.md#build-reportcompressedsize))
 - `build.cleanCssOptions` (Vite ahora usa esbuild para la minificación de CSS)
-- `build.polyfillDynamicImport` (usa [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
+- `build.polyfillDynamicImport` (usa [`@vite/plugin-legacy`](https://github.com/vite/vite/tree/main/packages/plugin-legacy) para navegadores sin soporte de importación dinámica).
 - `optimizeDeps.keepNames` (cambialo por [`optimizeDeps.esbuildOptions.keepNames`](../config/dep-optimization-options.md#optimizedeps-esbuildoptions))
 
 ## Cambios de Arquitectura y Opciones Heredadas
@@ -93,10 +93,10 @@ Puedes usar `?init`, que es similar al comportamiento anterior.
 ### Generación Automática de Certificados https
 
 Se necesita un certificado válido cuando se usa `https`. En Vite v2, si no se configuraba ningún certificado, se creaba y almacenaba automáticamente un certificado autofirmado.
-Desde Vite v3, recomendamos crear manualmente tus certificados. Si aún deseas utilizar la generación automática de la v2, esta función se puede volver a habilitar agregando [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los plugins del proyecto.
+Desde Vite v3, recomendamos crear manualmente tus certificados. Si aún deseas utilizar la generación automática de la v2, esta función se puede volver a habilitar agregando [@vite/plugin-basic-ssl](https://github.com/vite/vite-plugin-basic-ssl) a los plugins del proyecto.
 
 ```js
-import basicSsl from '@vitejs/plugin-basic-ssl'
+import basicSsl from '@vite/plugin-basic-ssl'
 export default {
   plugins: [basicSsl()],
 }
@@ -114,33 +114,33 @@ Si deseas probar esta estrategia de compilación, puedes usar `optimizeDeps.disa
 
 Hay algunos cambios que solo afectan a los creadores de plugins/herramientas.
 
-- [[#5868] refactor: eliminada API en desuso para 3.0](https://github.com/vitejs/vite/pull/5868)
+- [[#5868] refactor: eliminada API en desuso para 3.0](https://github.com/vite/vite/pull/5868)
   - Se elimina `printHttpServerUrls`
   - Se eliminan `server.app`, `server.transformWithEsbuild`
   - Se elimina `import.meta.hot.acceptDeps`
-- [[#6901] fix: inyección secuencial de etiquetas en transformIndexHtml](https://github.com/vitejs/vite/pull/6901)
+- [[#6901] fix: inyección secuencial de etiquetas en transformIndexHtml](https://github.com/vite/vite/pull/6901)
   - `transformIndexHtml` ahora obtiene el contenido correcto modificado por plugins anteriores, por lo que el orden de las etiquetas inyectadas ahora funciona como se esperaba.
-- [[#7995] chore: no fixStacktrace](https://github.com/vitejs/vite/pull/7995)
+- [[#7995] chore: no fixStacktrace](https://github.com/vite/vite/pull/7995)
   - El valor predeterminado de la opción `fixStacktrace` de `ssrLoadModule` ahora es `false`
-- [[#8178] feat!: migración a ESM](https://github.com/vitejs/vite/pull/8178)
+- [[#8178] feat!: migración a ESM](https://github.com/vite/vite/pull/8178)
   - `formatPostcssSourceMap` ahora es asíncrono
   - `resolvePackageEntry`, `resolvePackageData` ya no están disponibles desde la compilación de CJS (se necesita una importación dinámica para usar en CJS)
-- [[#8626] refactor: mapeo de tipo client](https://github.com/vitejs/vite/pull/8626)
+- [[#8626] refactor: mapeo de tipo client](https://github.com/vite/vite/pull/8626)
   - El tipo del callback para `import.meta.hot.accept` ahora es más estricto. Ahora es `(mod: (Record<string, any> & { [Symbol.toStringTag]: 'Module' }) | undefined) => void` (antes `(mod: any) => void`).
 
 También hay otros cambios importantes que solo afectan a unos pocos usuarios.
 
-- [[#5018] feat: habilita `generatedCode: 'es2015'` para compilación de Rollup](https://github.com/vitejs/vite/pull/5018)
+- [[#5018] feat: habilita `generatedCode: 'es2015'` para compilación de Rollup](https://github.com/vite/vite/pull/5018)
   - Transpilar a ES5 ahora es necesario incluso si el código de usuario solo incluye ES5.
-- [[#7877] fix: tipos de clientes vite](https://github.com/vitejs/vite/pull/7877)
+- [[#7877] fix: tipos de clientes vite](https://github.com/vite/vite/pull/7877)
   - `/// <reference lib="dom" />` se elimina de `vite/client.d.ts`. `{ "lib": ["dom"] }` o `{ "lib": ["webworker"] }` es necesario en el `tsconfig.json`.
-- [[#8090] feat: conservar variables de entorno en el proceso de compilación de librería](https://github.com/vitejs/vite/pull/8090)
+- [[#8090] feat: conservar variables de entorno en el proceso de compilación de librería](https://github.com/vite/vite/pull/8090)
   - `process.env.*` ahora se conserva en modo biblioteca
-- [[#8280] feat: optimización de esbuild sin bloqueos en el momento de la compilación](https://github.com/vitejs/vite/pull/8280)
+- [[#8280] feat: optimización de esbuild sin bloqueos en el momento de la compilación](https://github.com/vite/vite/pull/8280)
   - La opción `server.force` se eliminó en favor de la opción `optimizeDeps.force`.
-- [[#8550] fix: no manejar sigterm en modo middleware](https://github.com/vitejs/vite/pull/8550)
+- [[#8550] fix: no manejar sigterm en modo middleware](https://github.com/vite/vite/pull/8550)
   - Cuando se ejecuta en modo middleware, Vite ya no elimina el proceso en `SIGTERM`.
 
 ## Migración desde v1
 
-Consulta la [Guía de migración desde v1](https://v2.vitejs.dev/guide/migration.html) en la documentación de Vite v2 primero para ver los cambios necesarios para migrar tu aplicación a Vite v2 y luego continuar con los cambios descritos en esta página.
+Consulta la [Guía de migración desde v1](https://v2.vite.dev/guide/migration.html) en la documentación de Vite v2 primero para ver los cambios necesarios para migrar tu aplicación a Vite v2 y luego continuar con los cambios descritos en esta página.

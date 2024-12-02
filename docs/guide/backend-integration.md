@@ -1,7 +1,7 @@
 # Integración de Backend
 
 :::tip Nota
-Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vitejs/awesome-vite#integrations-with-backends).
+Si quieres servir el HTML utilizando herramientas backend tradicionales (como Rails, Laravel) pero usando Vite para servir los recursos, revisa la lista de integraciones existentes en [Awesome Vite](https://github.com/vite/awesome-vite#integrations-with-backends).
 
 Si necesitas una integración personalizada, puedes seguir los pasos de esta guía para configuración manual.
 :::
@@ -46,7 +46,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
    Esto es necesario para que los recursos, como imágenes, se carguen correctamente.
 
-   Ten en cuenta que si estas usando React con `@vitejs/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo (reemplaza `http://localhost:5173` con la URL local donde Vite se está ejecutando):
+   Ten en cuenta que si estas usando React con `@vite/plugin-react`, tambien necesitarás agregar esto antes del script de arriba, esto porque el plugin no podrá modificar el HTML que estás sirviendo (reemplaza `http://localhost:5173` con la URL local donde Vite se está ejecutando):
 
    ```html
    <script type="module">

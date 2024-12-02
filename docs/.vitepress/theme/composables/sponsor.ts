@@ -14,7 +14,7 @@ interface Sponsor {
   img: string
   url: string
   /**
-   * Se espera también tener una imagen **invertida** con el sufijo `-dark`.
+   * Expects to also have an **inversed** image with `-dark` postfix.
    */
   hasDark?: true
 }
@@ -25,7 +25,12 @@ const data = ref()
 const dataHost = 'https://sponsors.vuejs.org'
 const dataUrl = `${dataHost}/vite.json`
 
-// no sponsors yet :(
+export const voidZero = {
+  name: 'VoidZero',
+  url: 'https://voidzero.dev',
+  img: '/voidzero.svg',
+} satisfies Sponsor
+
 const viteSponsors: Pick<Sponsors, 'special' | 'gold'> = {
   special: [
     // sponsors patak-dev
@@ -84,6 +89,7 @@ export function useSponsor() {
     if (data.value) {
       return
     }
+
     const result = await fetch(dataUrl)
     const json = await result.json()
 
@@ -99,17 +105,17 @@ export function useSponsor() {
 function mapSponsors(sponsors: Sponsors) {
   return [
     {
-      tier: 'Patrocinadores Especiales',
+      tier: 'in partnership with',
       size: 'big',
       items: viteSponsors['special'],
     },
     {
-      tier: 'Patrocinadores Platinum',
+      tier: 'Platinum Sponsors',
       size: 'big',
       items: mapImgPath(sponsors['platinum']),
     },
     {
-      tier: 'Patrocinadores Oro',
+      tier: 'Gold Sponsors',
       size: 'medium',
       items: [...mapImgPath(sponsors['gold']), ...viteSponsors['gold']],
     },
@@ -117,11 +123,12 @@ function mapSponsors(sponsors: Sponsors) {
 }
 
 const viteSponsorNames = new Set(
-  Object.values(viteSponsors).flatMap((sponsors) =>
-    sponsors.map((s) => s.name),
-  ),
+  Object.values(viteSponsors).flatMap((sponsors) => sponsors.map((s) => s.name))
 )
 
+/**
+ * Map Vue/Vite sponsors data to objects and filter out Vite-specific sponsors
+ */
 function mapImgPath(sponsors: Sponsor[]) {
   return sponsors
     .filter((sponsor) => !viteSponsorNames.has(sponsor.name))

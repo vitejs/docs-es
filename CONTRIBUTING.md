@@ -1,6 +1,6 @@
 # Guía de contribución de Vite
 
-¡Hola! Estamos muy emocionados de que estés interesado en contribuir con Vite. Antes de enviar tu contribución, tómate un momento para leer la siguiente guía. También te sugerimos que leas la [Filosofía del Proyecto](https://es.vitejs.dev/guide/philosophy) en nuestra documentación.
+¡Hola! Estamos muy emocionados de que estés interesado en contribuir con Vite. Antes de enviar tu contribución, tómate un momento para leer la siguiente guía. También te sugerimos que leas la [Filosofía del Proyecto](https://es.vite.dev/guide/philosophy) en nuestra documentación.
 
 ## Configuración del repositorio
 
@@ -14,7 +14,7 @@ Para desarrollar y probar el paquete central `vite`:
 
 3. Si estás desarrollando con Vite mismo, puedes ir a `packages/vite` y ejecutar `pnpm run dev` para recompilar automáticamente Vite siempre que cambie el código.
 
-También puedes usar [Vite.js Docker Dev](https://github.com/nystudio107/vitejs-docker-dev) para una configuración de Docker en contenedores para el desarrollo de Vite.js.
+También puedes usar [Vite.js Docker Dev](https://github.com/nystudio107/vite-docker-dev) para una configuración de Docker en contenedores para el desarrollo de Vite.js.
 
 ## Depuración
 
@@ -71,7 +71,7 @@ Y vuelve a ejecutar `pnpm install` para vincular el paquete.
 
 Cada paquete en `playground/` contiene un directorio `__tests__`. Las pruebas se ejecutan usando [Jest](https://jestjs.io/) + [Playwright](https://playwright.dev/) con integraciones personalizadas para simplificar las pruebas de escritura. La configuración detallada se encuentra dentro de los archivos `jest.config.js` y `scripts/jest*`.
 
-Antes de ejecutar las pruebas, asegúrate de que [Vite haya compilado](#repo-setup). En Windows, es posible que desees [activar el modo de desarrollador](https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development) para resolver [problemas con creación de enlaces simbólicos para no administradores](https://github.com/vitejs/vite/issues/7390). También es posible que desees [configurar `core.symlinks` de git en `true` para resolver problemas con enlaces simbólicos](https://github.com/vitejs/vite/issues/5242).
+Antes de ejecutar las pruebas, asegúrate de que [Vite haya compilado](#repo-setup). En Windows, es posible que desees [activar el modo de desarrollador](https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development) para resolver [problemas con creación de enlaces simbólicos para no administradores](https://github.com/vite/vite/issues/7390). También es posible que desees [configurar `core.symlinks` de git en `true` para resolver problemas con enlaces simbólicos](https://github.com/vite/vite/issues/5242).
 
 Cada prueba de integración se puede ejecutar en el modo servidor de desarrollo o en el modo de compilación.
 
@@ -105,18 +105,18 @@ test('should work', async () => {
 
 Algunos helpers de prueba comunes, como `testDir`, `isBuild` o `editFile` están disponibles en `playground/testUtils.ts`.
 
-Nota: El entorno de compilación de prueba utiliza un [set predeterminado de configuración de Vite](https://github.com/vitejs/vite/blob/9c6501d9c363eaa3c1e7708d531fb2a92b633db6/scripts/jestPerTestSetup.ts#L102-L122) diferente para omitir la transpilación durante las pruebas para hacerlo más rápido. Esto puede producir un resultado diferente en comparación con la compilación de producción predeterminada.
+Nota: El entorno de compilación de prueba utiliza un [set predeterminado de configuración de Vite](https://github.com/vite/vite/blob/9c6501d9c363eaa3c1e7708d531fb2a92b633db6/scripts/jestPerTestSetup.ts#L102-L122) diferente para omitir la transpilación durante las pruebas para hacerlo más rápido. Esto puede producir un resultado diferente en comparación con la compilación de producción predeterminada.
 
 ### Ampliación de la suite de pruebas
 
-Para agregar nuevas pruebas, debes encontrar un playground relacionado con la corrección o función (o crear una nueva). Como ejemplo, la carga de recursos estáticos se prueba en el [playground de recursos](https://github.com/vitejs/vite/tree/main/playground/assets). En esta aplicación de Vite, hay una prueba para las importaciones `?raw`, con [una sección definida en `index.html`](https://github.com/vitejs/vite/blob/71215533ac60e8ff566dc3467feabfc2c71a01e2/playground/assets/index.html#L121) para ello:
+Para agregar nuevas pruebas, debes encontrar un playground relacionado con la corrección o función (o crear una nueva). Como ejemplo, la carga de recursos estáticos se prueba en el [playground de recursos](https://github.com/vite/vite/tree/main/playground/assets). En esta aplicación de Vite, hay una prueba para las importaciones `?raw`, con [una sección definida en `index.html`](https://github.com/vite/vite/blob/71215533ac60e8ff566dc3467feabfc2c71a01e2/playground/assets/index.html#L121) para ello:
 
 ```html
 <h2>?raw import</h2>
 <code class="raw"></code>
 ```
 
-Esto se modificará [con el resultado de la importación de un archivo](https://github.com/vitejs/vite/blob/main/playground/assets/index.html#L151):
+Esto se modificará [con el resultado de la importación de un archivo](https://github.com/vite/vite/blob/main/playground/assets/index.html#L151):
 
 ```js
 import rawSvg from './nested/fragment.svg?raw'
@@ -131,7 +131,7 @@ function text(el, text) {
 }
 ```
 
-En las [pruebas de especificaciones](https://github.com/vitejs/vite/blob/main/playground/assets/__tests__/assets.spec.ts#L180), las modificaciones al DOM enumeradas anteriormente se usan para probar esta funcionalidad:
+En las [pruebas de especificaciones](https://github.com/vite/vite/blob/main/playground/assets/__tests__/assets.spec.ts#L180), las modificaciones al DOM enumeradas anteriormente se usan para probar esta funcionalidad:
 
 ```js
 test('?raw import', async () => {
@@ -187,11 +187,11 @@ Puedes configurar la variable de entorno `DEBUG` para activar los registros de d
 
 ### Flujo de trabajo de evaluación de errores
 
-![issue-workflow](https://github.com/vitejs/vite/raw/main/.github/issue-workflow.png)
+![issue-workflow](https://github.com/vite/vite/raw/main/.github/issue-workflow.png)
 
 ### Flujo de trabajo de revisión de pull requests
 
-![issue-workflow](https://github.com/vitejs/vite/raw/main/.github/pr-workflow.png)
+![issue-workflow](https://github.com/vite/vite/raw/main/.github/pr-workflow.png)
 
 ## Notas sobre las dependencias
 
@@ -236,7 +236,7 @@ Ya tenemos muchas opciones de configuración, y debemos evitar solucionar un pro
 
 ## Contribución de traducción de documentación
 
-Si deseas comenzar una traducción en tu idioma, ¡puede contribuir! Únete al [canal de #traducciones en Vite Land](https://chat.vitejs.dev) para discutir y coordinar con otros.
+Si deseas comenzar una traducción en tu idioma, ¡puede contribuir! Únete al [canal de #traducciones en Vite Land](https://chat.vite.dev) para discutir y coordinar con otros.
 
 Las documentaciones en inglés están integradas en el repositorio principal de Vite, para permitir que los contribuyentes trabajen en documentaciones, pruebas y despliegue en la misma solicitud de cambio. Las traducciones se realizan clonando el repositorio principal.
 
@@ -257,4 +257,4 @@ Las documentaciones en inglés están integradas en el repositorio principal de 
 4. Envía tus commits a tu repositorio de GitHub. También puedes configurar una vista previa de netlify.
 5. Usa la herramienta [Ryu-cho](https://github.com/vuejs-translations/ryu-cho) para configurar una acción de GitHub, rastrear automáticamente la actualización de documentación en inglés más adelante.
 
-Recomendamos hablar con otros usuarios en Vite Land para que encuentres más colaboradores para tu idioma y así compartir el trabajo de mantenimiento. Una vez que se haya realizado la traducción, comunícalo al equipo de Vite para que el repositorio se pueda mover a la organización oficial de vitejs en GitHub.
+Recomendamos hablar con otros usuarios en Vite Land para que encuentres más colaboradores para tu idioma y así compartir el trabajo de mantenimiento. Una vez que se haya realizado la traducción, comunícalo al equipo de Vite para que el repositorio se pueda mover a la organización oficial de vite en GitHub.

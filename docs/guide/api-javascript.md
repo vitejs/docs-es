@@ -422,7 +422,7 @@ Carga un archivo de configuración de Vite manualmente con esbuild.
 
 ## `preprocessCSS`
 
-- **Experimental:** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13815)
+- **Experimental:** [Hacer Comentarios](https://github.com/vite/vite/discussions/13815)
 
 **Firma de Tipo:**
 

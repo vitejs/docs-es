@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 2.0
   - - meta
     - property: og:url
-      content: https://es.vitejs.dev/blog/anunciando-vite2
+      content: https://es.vite.dev/blog/anunciando-vite2
   - - meta
     - property: og:description
       content: Anuncio de lanzamiento de Vite 2
@@ -33,7 +33,7 @@ Vite (palabra francesa que significa "rápido", pronunciado como `/vit/`) es un 
 
 Para tener una idea de cuan rápido es Vite, revisa este [video de comparaciones](https://twitter.com/amasad/status/1355379680275128321) arrancando una aplicacián de React en Repl.it usando Vite vs. `create-react-app` (CRA).
 
-Si nunca antes habías escuchado de Vite y quieres aprender más sobre este, revisa la [razón detrás del proyecto](https://vitejs.dev/guide/why.html). Si estás interesado en como Vite se diferencia de otras herramientas similares, revisa las [comparaciones](https://vitejs.dev/guide/comparisons.html).
+Si nunca antes habías escuchado de Vite y quieres aprender más sobre este, revisa la [razón detrás del proyecto](https://vite.dev/guide/why.html). Si estás interesado en como Vite se diferencia de otras herramientas similares, revisa las [comparaciones](https://vite.dev/guide/comparisons.html).
 
 ## Que hay de nuevo en la versión 2.0
 
@@ -43,13 +43,13 @@ Desde que decidimos refactorizar completamente los archivos internos antes que l
 
 La idea original de Vite comenzó como un [prototipo trucado que entregaba componentes de una pagina de Vue sobre ESM nativo](https://github.com/vuejs/vue-dev-server). Vite 1 fue la continuación de esa idea con HMR implementado en base a esta.
 
-Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vitejs/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
+Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde cero con una arquitectura interna más robusta. Ahora es completamente independiente del marco de trabajo, y todos lo que es específico para cada marco de trabajos es delegado a los plugins. Ahora hay [plantillas oficiales para Vue, React, Preact, Lit Element](https://github.com/vite/vite/tree/main/packages/create-vite), y esfuerzos en curso hechos por la comunidad para la integración con Svelte.
 
 ### Nuevo formato de Plugin y API
 
 Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de plugins extiende la interfaz de plugins de Rollup y es [compatible con varios plugins de Rollup](https://vite-rollup-plugins.patak.dev/) por defecto. Los plugins pueden usar hooks de Rollup compatibles, adicionalmente con hooks específicos de Vite y propiedades para ajustar el comportamiento específico de Vite (ej. diferenciar desarrollo vs construcción o manejo personalizado del HMR).
 
-La [API programable](https://vitejs.dev/guide/api-javascript.html) también fue mejorada para facilitar herramientas de alto nivel / marcos de trabajos construidos con base en Vite.
+La [API programable](https://vite.dev/guide/api-javascript.html) también fue mejorada para facilitar herramientas de alto nivel / marcos de trabajos construidos con base en Vite.
 
 ### Preempaquetado de dependencias impulsado por esbuild
 
@@ -65,20 +65,20 @@ Vite trata el CSS como un elemento de primera clase en el gráfico de módulos y
 
 ### Soporte para renderizado del lado del servidor (SSR)
 
-Vite 2.0 viene con [soporte experimental para SSR](https://vitejs.dev/guide/ssr.html). Vite proporciona APIs para de manera eficiente, cargar y actualizar código basado en ESM durante el desarrollo (casi como HMR del lado del servidor), y automáticamente externaliza dependencias compatibles con CommonJS para mejorar la velocidad de desarrollo y construcción SSR. El servidor de producción puede ser completamente desacoplado de Vite, y la misma configuración puede ser fácilmente adaptada para realizar pre-renderizado / SSG.
+Vite 2.0 viene con [soporte experimental para SSR](https://vite.dev/guide/ssr.html). Vite proporciona APIs para de manera eficiente, cargar y actualizar código basado en ESM durante el desarrollo (casi como HMR del lado del servidor), y automáticamente externaliza dependencias compatibles con CommonJS para mejorar la velocidad de desarrollo y construcción SSR. El servidor de producción puede ser completamente desacoplado de Vite, y la misma configuración puede ser fácilmente adaptada para realizar pre-renderizado / SSG.
 
 El SSR de Vite es proporcionado como una caracteristica de bajo nivel y estamos esperando ver marcos de trabajo de alto nivel implementarlo como base.
 
 ### Soporte para buscadores antiguos opcional
 
-Vite apunta a buscadores modernos con el soporte nativo de ESM por defecto, pero también puedes optar por el soporte para buscadores antiguos por medio del plugin oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). El plugin genera automáticamente doble empaquetado para la versión moderna/antigua respectivamente, y entrega el paquete correcto basado en la característica de detección de buscador, asegurando código más eficiente en buscadores modernos que lo soportan.
+Vite apunta a buscadores modernos con el soporte nativo de ESM por defecto, pero también puedes optar por el soporte para buscadores antiguos por medio del plugin oficial [@vite/plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy). El plugin genera automáticamente doble empaquetado para la versión moderna/antigua respectivamente, y entrega el paquete correcto basado en la característica de detección de buscador, asegurando código más eficiente en buscadores modernos que lo soportan.
 
 ## ¡Pruebalo Ya!
 
 Esas fueron varias características, pero empezar con Vite es simple. Puedes iniciar una aplicación manejada por Vite en literalmente un minuto, empezando con los siguientes comandos (asegurate de tener Node.js >= 12):
 
 ```bash
-npm init @vitejs/app
+npm init @vite/app
 ```
 
-Después, revisa [la guía](https://vitejs.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unete a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vitejs.dev/).
+Después, revisa [la guía](https://vite.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vite/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unete a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vite.dev/).

@@ -10,7 +10,7 @@ WMR ya no se mantiene. El equipo de Preact ahora recomienda Vite con [@preactjs/
 
 [Snowpack](https://www.snowpack.dev/) también era un servidor de desarrollo de ESM nativo sin empaquetado, muy similar en alcance a Vite. El proyecto ya no se mantiene. El equipo de Snowpack ahora está trabajando en [Astro](https://astro.build/), un creador de sitios estáticos impulsado por Vite. El equipo de Astro ahora es un actor importante en el ecosistema y está ayudando a mejorar Vite.
 
-Aparte de los diferentes detalles de implementación, los dos proyectos compartieron mucho en términos de ventajas técnicas sobre las herramientas tradicionales. El preempaquetado de dependencias de Vite también está inspirado en Snowpack v1 (ahora [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)). Algunas de las principales diferencias entre los dos proyectos se enumeran en [la Guía de comparaciones de la v2](https://v2.vitejs.dev/guide/comparisons).
+Aparte de los diferentes detalles de implementación, los dos proyectos compartieron mucho en términos de ventajas técnicas sobre las herramientas tradicionales. El preempaquetado de dependencias de Vite también está inspirado en Snowpack v1 (ahora [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)). Algunas de las principales diferencias entre los dos proyectos se enumeran en [la Guía de comparaciones de la v2](https://v2.vite.dev/guide/comparisons).
 
 ## @web/servidor-dev
 

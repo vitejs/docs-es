@@ -5,8 +5,8 @@ El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de 
 
 Recursos:
 
-- [Discusión de retroalimentación](https://github.com/vitejs/vite/discussions/16358) donde estamos recopilando comentarios sobre las nuevas APIs.
-- [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementa y revisa la nueva API.
+- [Discusión de retroalimentación](https://github.com/vite/vite/discussions/16358) donde estamos recopilando comentarios sobre las nuevas APIs.
+- [Solicitud de cambios de la API de Entorno](https://github.com/vite/vite/pull/16471) donde se implementa y revisa la nueva API.
 
 Por favor, compártenos tus comentarios a medida que pruebas la propuesta.
 :::
@@ -187,7 +187,7 @@ app.use('*', async (req, res, next) => {
 
   // 2. Aplicar transformaciones de Vite en HTML. Esto inyecta el cliente HMR,
   //    y también aplica transformaciones de HTML de los plugins de Vite, como preámbulos globales
-  //    de @vitejs/plugin-react.
+  //    de @vite/plugin-react.
   template = await server.transformIndexHtml(url, template)
 
   // 3. Cargar la entrada del servidor. import(url) transforma automáticamente

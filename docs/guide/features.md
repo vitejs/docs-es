@@ -22,7 +22,7 @@ Vite almacena en caché las solicitudes de dependencias a través de encabezados
 
 ## Hot Module Replacement
 
-Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Componentes de único archivo de Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite proporciona una [API de HMR](./api-hmr) sobre ESM nativo. Los marcos de trabajo con capacidades HMR pueden aprovechar la API para proporcionar actualizaciones instantáneas y precisas sin recargar la página o eliminar el estado de la aplicación. Vite proporciona integraciones HMR propias para [Componentes de único archivo de Vue](https://github.com/vite/vite-plugin-vue/tree/main/packages/plugin-vue) y [React Fast Refresh](https://github.com/vite/vite-plugin-react/tree/main/packages/plugin-react). También hay integraciones oficiales para Preact a través de [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
 
 Ten en cuenta que no necesitas configurarlos manualmente: cuando [creas una aplicación a través de `create-vite`](./), las plantillas seleccionadas ya las tendrán preconfiguradas.
 
@@ -163,16 +163,16 @@ Por ejemplo, para hacer que la importación predeterminada de `*.svg` a un compo
 
 Vite proporciona soporte Vue de primera clase:
 
-- Compatibilidad con Vue 3 SFC a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
-- Compatibilidad con Vue 3 JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- Compatibilidad con Vue 2.7 SFC a través de [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Compatibilidad con Vue 2.7 JSX a través de [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
+- Compatibilidad con Vue 3 SFC a través de [@vite/plugin-vue](https://github.com/vite/vite-plugin-vue/tree/main/packages/plugin-vue)
+- Compatibilidad con Vue 3 JSX a través de [@vite/plugin-vue-jsx](https://github.com/vite/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+- Compatibilidad con Vue 2.7 SFC a través de [@vite/plugin-vue2](https://github.com/vite/vite-plugin-vue2)
+- Compatibilidad con Vue 2.7 JSX a través de [@vite/plugin-vue2-jsx](https://github.com/vite/vite-plugin-vue2-jsx)
 
 ## JSX
 
 Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io).
 
-Los usuarios de Vue deben usar el plugin oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
+Los usuarios de Vue deben usar el plugin oficial [@vite/plugin-vue-jsx](https://github.com/vite/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
 
 Si estás utilizando JSX sin React o Vue, puedes configurar las opciones `jsxFactory` y `jsxFragment` personalizadas utilizando la opción [`esbuild`](/config/shared-options.md#esbuild). Por ejemplo, para Preact:
 
@@ -617,7 +617,7 @@ main()
 ### Obteniendo el módulo en Node.js
 
 En SSR, el `fetch()` que ocurre como parte de la importación `?init`, puede fallar con `TypeError: URL no válida`.
-Consulta el problema en el debate de [Soporte wasm en SSR](https://github.com/vitejs/vite/issues/8882).
+Consulta el problema en el debate de [Soporte wasm en SSR](https://github.com/vite/vite/issues/8882).
 
 Aquí hay una alternativa, asumiendo que la base del proyecto es el directorio actual:
 

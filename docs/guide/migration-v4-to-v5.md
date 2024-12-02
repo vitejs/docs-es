@@ -147,7 +147,7 @@ Cuando el CSS debe ser inyectado por separado, debe agregarse como una entrada s
 
 Los atajos del CLI, como `r` para reiniciar el servidor de desarrollo, ahora requieren presionar un `Enter` adicional para activar el atajo. Por ejemplo, `r + Enter` para reiniciar el servidor de desarrollo.
 
-Este cambio evita que Vite absorba y controle accesos directos específicos del sistema operativo, lo que permite una mejor compatibilidad al combinar el servidor de desarrollo de Vite con otros procesos y evita las [advertencias anteriores](https://github.com/vitejs/vite/pull/14342).
+Este cambio evita que Vite absorba y controle accesos directos específicos del sistema operativo, lo que permite una mejor compatibilidad al combinar el servidor de desarrollo de Vite con otros procesos y evita las [advertencias anteriores](https://github.com/vite/vite/pull/14342).
 
 ### Actualizado el comportamiento de TypeScript `experimentalDecorators` y `useDefineForClassFields`
 
@@ -178,14 +178,14 @@ Vite 5 usa esbuild 0.19 y elimina la capa de compatibilidad para esbuild 0.18, l
 
 El indicador `--https` configura `server.https: true` y `preview.https: true` internamente. Esta configuración estaba destinada a usarse junto con la función de generación automática de certificación https que [se eliminó en Vite 3](/guide/migration-v2-to-v3.html#generacion-automatica-de-certificados-https). Esto indica que dicha configuración ya no es útil, ya que iniciará un servidor HTTPS de Vite sin un certificado.
 
-Si usas [`@vitejs/plugin-basic-ssl`](https://github.com/vitejs/vite-plugin-basic-ssl) o [`vite-plugin-mkcert`](https://github.com/liuweiGL/vite-plugin-mkcert), estas configurarán `https` internamente, por lo que puedes eliminar `--https`, `server.https: true` y `preview.https: true`.
+Si usas [`@vite/plugin-basic-ssl`](https://github.com/vite/vite-plugin-basic-ssl) o [`vite-plugin-mkcert`](https://github.com/liuweiGL/vite-plugin-mkcert), estas configurarán `https` internamente, por lo que puedes eliminar `--https`, `server.https: true` y `preview.https: true`.
 
 ### Eliminadas las APIs `resolvePackageEntry` y `resolvePackageData`
 
 Las APIs `resolvePackageEntry` y `resolvePackageData` se eliminan ya que exponían componentes internos de Vite y bloqueaban posibles optimizaciones de Vite 4.3 en el pasado. Estas APIs se pueden reemplazar con paquetes de terceros, por ejemplo:
 
 - `resolvePackageEntry`: [`import.meta.resolve`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta/resolve) o el paquete [`import-meta-resolve`](https://github.com/wooorm/import-meta-resolve).
-- `resolvePackageData`: igual que arriba, rastreando el directorio del paquete para obtener la ruta raíz de `package.json`. O utiliza el paquete de la comunidad [`vitefu`](https://github.com/svitejs/vitefu).
+- `resolvePackageData`: igual que arriba, rastreando el directorio del paquete para obtener la ruta raíz de `package.json`. O utiliza el paquete de la comunidad [`vitefu`](https://github.com/svite/vitefu).
 
 ```js
 import { resolve } from 'import-meta-resolve'
@@ -207,39 +207,39 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 
 - Exportaciones predeterminadas de archivos CSS (por ejemplo, `import style from './foo.css'`): usa la consulta `?inline` en su lugar
 - `import.meta.globEager`: usa `import.meta.glob('*', { eager: true })` en su lugar
-- `ssr.format: 'cjs`' y `legacy.buildSsrCjsExternalHeuristics` ([#13816](https://github.com/vitejs/vite/discussions/13816))
-- `server.middlewareMode: 'ssr'` y `server.middlewareMode: 'html'`: Usa [`appType`](/config/shared-options.md#apptype) + [`server.middlewareMode: true`](/config/server-options.md#server-middlewaremode) en su lugar ([#8452](https://github.com/vitejs/vite/pull/8452))
+- `ssr.format: 'cjs`' y `legacy.buildSsrCjsExternalHeuristics` ([#13816](https://github.com/vite/vite/discussions/13816))
+- `server.middlewareMode: 'ssr'` y `server.middlewareMode: 'html'`: Usa [`appType`](/config/shared-options.md#apptype) + [`server.middlewareMode: true`](/config/server-options.md#server-middlewaremode) en su lugar ([#8452](https://github.com/vite/vite/pull/8452))
 
 ## Avanzado
 
 Hay algunos cambios que solo afectan a los creadores de plugins/herramientas.
 
-- [[#14119] refactor!: fusiona `PreviewServerForHook` en el tipo `PreviewServer`](https://github.com/vitejs/vite/pull/14119)
+- [[#14119] refactor!: fusiona `PreviewServerForHook` en el tipo `PreviewServer`](https://github.com/vite/vite/pull/14119)
   - El hook `configurePreviewServer` ahora acepta el tipo `PreviewServer` en lugar del tipo `PreviewServerForHook`.
-- [[#14818] refactor(preview)!: usa middleware base](https://github.com/vitejs/vite/pull/14818)
+- [[#14818] refactor(preview)!: usa middleware base](https://github.com/vite/vite/pull/14818)
   - Los middlewares agregados desde la función devuelta en `configurePreviewServer` ahora no tienen acceso a `base` al comparar el valor `req.url`. Esto alinea el comportamiento con el del servidor de desarrollo. Puedes verificar `base` desde el hook `configResolved` si es necesario.
-- [[#14834] fix(types)!: expone httpServer con la unión Http2SecureServer](https://github.com/vitejs/vite/pull/14834)
+- [[#14834] fix(types)!: expone httpServer con la unión Http2SecureServer](https://github.com/vite/vite/pull/14834)
   - Ahora se utiliza `http.Server | http2.Http2SecureServer` en lugar de `http.Server` cuando sea apropiado.
 
 También hay otros cambios importantes que sólo afectan a unos pocos usuarios.
 
-- [[#14098] fix!: evita reescribir esto (revierte #5312)](https://github.com/vitejs/vite/pull/14098)
+- [[#14098] fix!: evita reescribir esto (revierte #5312)](https://github.com/vite/vite/pull/14098)
   - El nivel superior "this" se reescribía a "globalThis" por defecto durante la compilación. Este comportamiento ahora se elimina.
-- [[#14231] feat!: agrega extensión a los módulos virtuales internos](https://github.com/vitejs/vite/pull/14231)
+- [[#14231] feat!: agrega extensión a los módulos virtuales internos](https://github.com/vite/vite/pull/14231)
   - La identificación de los módulos virtuales internos ahora tiene una extensión (`.js`).
-- [[#14583] refactor!: elimina APIs internas de exportación](https://github.com/vitejs/vite/pull/14583)
+- [[#14583] refactor!: elimina APIs internas de exportación](https://github.com/vite/vite/pull/14583)
   - Se eliminaron las APIs internas exportadas accidentalmente: `isDepsOptimizerEnabled` y `getDepOptimizationConfig`
   - Se eliminaron los tipos internos exportados: `DepOptimizationResult`, `DepOptimizationProcessing` y `DepsOptimizer`.
   - Se cambió el nombre del tipo `ResolveWorkerOptions` a `ResolvedWorkerOptions`
-- [[#5657] fix: devuelve 404 para solicitudes de recursos fuera de la ruta base](https://github.com/vitejs/vite/pull/5657)
+- [[#5657] fix: devuelve 404 para solicitudes de recursos fuera de la ruta base](https://github.com/vite/vite/pull/5657)
   - En el pasado, Vite respondía a solicitudes fuera de la ruta base sin `Accept: text/html`, como si fueran solicitadas con la ruta base. Vite ya no hace eso y responde con 404.
-- [[#14723] fix(resolve)!: elimina el manejo especial de .mjs](https://github.com/vitejs/vite/pull/14723)
+- [[#14723] fix(resolve)!: elimina el manejo especial de .mjs](https://github.com/vite/vite/pull/14723)
   - En el pasado, cuando un campo`"export"` de librería se asignaba a un archivo `.mjs`, Vite aún intentaba hacer coincidir los campos `"browser"` y `"module"` para corregir la compatibilidad con ciertas librerías. Este comportamiento ahora se elimina para alinearse con el algoritmo de resolución de exportaciones.
-- [[#14733] feat(resolve)!: elimina `resolve.browserField`](https://github.com/vitejs/vite/pull/14733)
+- [[#14733] feat(resolve)!: elimina `resolve.browserField`](https://github.com/vite/vite/pull/14733)
   - `resolve.browserField` ha sido marcado como obsoleto desde Vite 3 en favor de una actualización de valores por defecto de `['browser', 'module', 'jsnext:main', 'jsnext']` para [`resolve.mainFields`](/config/shared-options.md#resolve-mainfields).
-- [[#14855] feat!: agrega isPreview a ConfigEnv y resolveConfig](https://github.com/vitejs/vite/pull/14855)
+- [[#14855] feat!: agrega isPreview a ConfigEnv y resolveConfig](https://github.com/vite/vite/pull/14855)
   - Se cambió el nombre de `ssrBuild` a `isSsrBuild` en el objeto `ConfigEnv`.
-- [[#14945] fix(css): Configura correctamente el nombre fuente del manifiesto y emite el archivo CSS](https://github.com/vitejs/vite/pull/14945)
+- [[#14945] fix(css): Configura correctamente el nombre fuente del manifiesto y emite el archivo CSS](https://github.com/vite/vite/pull/14945)
   - Los nombres de los archivos CSS ahora se generan en función del nombre del fragmento (chunk).
     ​
 

@@ -1,7 +1,7 @@
 # `this.environment` en Hooks
 
 ::: tip Feedback  
-Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vitejs/vite/discussions/16358).  
+Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vite/vite/discussions/16358).  
 :::
 
 Antes de Vite 6, solo estaban disponibles dos entornos: `client` y `ssr`. Un único argumento `options.ssr` en los hooks de plugins como `resolveId`, `load` y `transform` permitía a los autores de plugins diferenciar entre estos dos entornos al procesar módulos. En Vite 6, una aplicación de Vite puede definir cualquier cantidad de entornos nombrados según sea necesario. Se introduce `this.environment` en el contexto del plugin para interactuar con el entorno del módulo actual en los hooks.

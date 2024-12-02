@@ -8,9 +8,9 @@ import {
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Herramienta frontend de próxima generación'
-const ogImage = 'https://es.vitejs.dev/og-image.png'
+const ogImage = 'https://es.vite.dev/og-image.png'
 const ogTitle = 'Vite'
-const ogUrl = 'https://es.vitejs.dev'
+const ogUrl = 'https://es.vite.dev'
 
 // netlify envs
 const deployURL = process.env.DEPLOY_PRIME_URL || ''
@@ -44,7 +44,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
       return [
         {
           text: 'Documentación de Vite 2',
-          link: 'https://v2.vitejs.dev',
+          link: 'https://v2.vite.dev',
         },
       ]
   }
@@ -60,13 +60,37 @@ export default defineConfig({
       'link',
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
     ],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    [
+      'link',
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'true',
+      },
+    ],
+    [
+      'link',
+      {
+        rel: 'preload',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=IBM+Plex+Mono:wght@400&display=swap',
+        as: 'style',
+      },
+    ],
+    [
+      'link',
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=IBM+Plex+Mono:wght@400&display=swap',
+      },
+    ],
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: ogTitle }],
     ['meta', { property: 'og:image', content: ogImage }],
     ['meta', { property: 'og:url', content: ogUrl }],
     ['meta', { property: 'og:description', content: ogDescription }],
-    ['meta', { property: 'og:site_name', content: 'vitejs' }],
+    ['meta', { property: 'og:site_name', content: 'vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
@@ -82,31 +106,31 @@ export default defineConfig({
   ],
   locales: {
     root: { label: 'Español' },
-    en: { label: 'English', link: 'https://vitejs.dev' },
-    zh: { label: '简体中文', link: 'https://cn.vitejs.dev' },
-    ja: { label: '日本語', link: 'https://ja.vitejs.dev' },
-    pt: { label: 'Português', link: 'https://pt.vitejs.dev' },
-    ko: { label: '한국어', link: 'https://ko.vitejs.dev' },
-    de: { label: 'Deutsch', link: 'https://de.vitejs.dev' },
+    en: { label: 'English', link: 'https://vite.dev' },
+    zh: { label: '简体中文', link: 'https://cn.vite.dev' },
+    ja: { label: '日本語', link: 'https://ja.vite.dev' },
+    pt: { label: 'Português', link: 'https://pt.vite.dev' },
+    ko: { label: '한국어', link: 'https://ko.vite.dev' },
+    de: { label: 'Deutsch', link: 'https://de.vite.dev' },
   },
 
   themeConfig: {
     logo: '/logo.svg',
     editLink: {
-      pattern: 'https://github.com/vitejs/docs-es/edit/main/docs/:path',
+      pattern: 'https://github.com/vite/docs-es/edit/main/docs/:path',
       text: 'Sugerir cambios para esta página',
     },
     socialLinks: [
       { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@vite' },
       { icon: 'twitter', link: 'https://twitter.com/vite_js' },
-      { icon: 'discord', link: 'https://chat.vitejs.dev' },
-      { icon: 'github', link: 'https://github.com/vitejs/vite' },
+      { icon: 'discord', link: 'https://chat.vite.dev' },
+      { icon: 'github', link: 'https://github.com/vite/vite' },
     ],
     darkModeSwitchLabel: 'Apariencia',
     algolia: {
       appId: '7H67QR5P0A',
       apiKey: '208bb9c14574939326032b937431014b',
-      indexName: 'vitejs',
+      indexName: 'vite',
       searchParameters: {
         facetFilters: ['tags:es'],
       },
@@ -154,7 +178,7 @@ export default defineConfig({
 
     carbonAds: {
       code: 'CEBIEK3N',
-      placement: 'vitejsdev',
+      placement: 'vitedev',
     },
 
     outlineTitle: 'En esta página',
@@ -165,7 +189,8 @@ export default defineConfig({
 
     footer: {
       message: `Publicado bajo licencia MIT. (${commitRef})`,
-      copyright: 'Copyright © 2019-actualidad Evan You & colaboradores de Vite',
+      copyright:
+        'Copyright © 2019-actualidad VoidZero Inc. & colaboradores de Vite',
     },
 
     nav: [
@@ -190,11 +215,11 @@ export default defineConfig({
               },
               {
                 text: 'Chat de Discord',
-                link: 'https://chat.vitejs.dev',
+                link: 'https://chat.vite.dev',
               },
               {
                 text: 'Awesome Vite',
-                link: 'https://github.com/vitejs/awesome-vite',
+                link: 'https://github.com/vite/awesome-vite',
               },
               {
                 text: 'ViteConf',
@@ -206,11 +231,11 @@ export default defineConfig({
               },
               {
                 text: 'Lista de Cambios',
-                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+                link: 'https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md',
               },
               {
                 text: 'Contribución',
-                link: 'https://github.com/vitejs/docs-es/blob/main/CONTRIBUTING.md',
+                link: 'https://github.com/vite/docs-es/blob/main/CONTRIBUTING.md',
               },
             ],
           },

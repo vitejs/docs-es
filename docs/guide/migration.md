@@ -2,9 +2,9 @@
 
 ## API de Entorno
 
-Como parte de la nueva [API de Entorno](/guide/api-environment.md) experimental, se necesitó una gran reestructuración interna. Vite 6 se esfuerza por evitar cambios incompatibles para asegurar que la mayoría de los proyectos puedan actualizarse rápidamente a la nueva versión mayor. Esperaremos hasta que una gran parte del ecosistema se haya trasladado para estabilizar y comenzar a recomendar el uso de las nuevas API. Pueden haber algunos casos extremos, pero estos solo deberían afectar el uso de bajo nivel por parte de frameworks y herramientas. Hemos trabajado con los mantenedores del ecosistema para mitigar estas diferencias antes del lanzamiento. Por favor, [inicia un reporte](https://github.com/vitejs/vite/issues/new?assignees=&labels=pending+triage&projects=&template=bug_report.yml) si encuentras una regresión.
+Como parte de la nueva [API de Entorno](/guide/api-environment.md) experimental, se necesitó una gran reestructuración interna. Vite 6 se esfuerza por evitar cambios incompatibles para asegurar que la mayoría de los proyectos puedan actualizarse rápidamente a la nueva versión mayor. Esperaremos hasta que una gran parte del ecosistema se haya trasladado para estabilizar y comenzar a recomendar el uso de las nuevas API. Pueden haber algunos casos extremos, pero estos solo deberían afectar el uso de bajo nivel por parte de frameworks y herramientas. Hemos trabajado con los mantenedores del ecosistema para mitigar estas diferencias antes del lanzamiento. Por favor, [inicia un reporte](https://github.com/vite/vite/issues/new?assignees=&labels=pending+triage&projects=&template=bug_report.yml) si encuentras una regresión.
 
-Algunas API internas han sido eliminadas debido a cambios en la implementación de Vite. Si dependías de alguna de ellas, por favor crea una [solicitud de función](https://github.com/vitejs/vite/issues/new?assignees=&labels=enhancement%3A+pending+triage&projects=&template=feature_request.yml).
+Algunas API internas han sido eliminadas debido a cambios en la implementación de Vite. Si dependías de alguna de ellas, por favor crea una [solicitud de función](https://github.com/vite/vite/issues/new?assignees=&labels=enhancement%3A+pending+triage&projects=&template=feature_request.yml).
 
 ## API de Ejecución de Vite
 

@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vitejs/docs-es.git"
+    "url": "git+https://github.com/vite/docs-es.git"
   },
   "keywords": [
     "vite",
     "docs",
     "español",
     "traduccion",
-    "es.vitejs.dev"
+    "es.vite.dev"
   ],
   "author": {
     "name": "César Gomez",
@@ -30,9 +30,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vitejs/docs-es/issues"
+    "url": "https://github.com/vite/docs-es/issues"
   },
-  "homepage": "https://github.com/vitejs/docs-es#readme",
+  "homepage": "https://github.com/vite/docs-es#readme",
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {

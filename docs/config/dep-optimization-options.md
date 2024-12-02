@@ -37,7 +37,7 @@
 
   De forma predeterminada, los paquetes vinculados que no están dentro de `node_modules` no están preempaquetados. Usa esta opción para forzar que un paquete vinculado se empaquete previamente.
 
-**Experimental:** Si utilizas una biblioteca con muchas importaciones profundas, también puede especificar un patrón glob para preagrupar todas las importaciones profundas a la vez. De este modo, se evitará la precarga constante cada vez que se utilice una nueva importación profunda. [Hacer c](https://github.com/vitejs/vite/discussions/15833) Por ejemplo:
+**Experimental:** Si utilizas una biblioteca con muchas importaciones profundas, también puede especificar un patrón glob para preagrupar todas las importaciones profundas a la vez. De este modo, se evitará la precarga constante cada vez que se utilice una nueva importación profunda. [Hacer c](https://github.com/vite/vite/discussions/15833) Por ejemplo:
 
 ```js twoslash
 import { defineConfig } from 'vite'
@@ -78,7 +78,7 @@ Configurar en `true` para forzar el empaquetado previo de dependencias, ignorand
 
 ## optimizeDeps.holdUntilCrawlEnd
 
-- **Experimental:** [Hacer comentarios](https://github.com/vitejs/vite/discussions/15834)
+- **Experimental:** [Hacer comentarios](https://github.com/vite/vite/discussions/15834)
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
 
@@ -87,7 +87,7 @@ Cuando está habilitado, retendrá los primeros resultados de las dependencias o
 ## optimizeDeps.disabled
 
 - **Obsoleto**
-- **Experimental** [Hacer comentarios](https://github.com/vitejs/vite/discussions/13839)
+- **Experimental** [Hacer comentarios](https://github.com/vite/vite/discussions/13839)
 - **Tipo:** `boolean | 'build' | 'dev'`
 - **Por defecto:** `'build'`
 

@@ -6,9 +6,9 @@ Los plugins de Vite amplían la interfaz de plugins bien diseñada de Rollup con
 
 ## Creación de un plugin
 
-Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo plugin, asegúrate de consultar la [Guía de funcionalidades](https://vitejs.dev/guide/features) para ver si tu necesidad está cubierta. Revisa también los plugins de la comunidad disponibles, tanto en forma de [plugins de Rollup compatible](https://github.com/rollup/awesome) como [plugins específicos de Vite](https://github.com/vitejs/awesome-vite#plugins)
+Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo plugin, asegúrate de consultar la [Guía de funcionalidades](https://vite.dev/guide/features) para ver si tu necesidad está cubierta. Revisa también los plugins de la comunidad disponibles, tanto en forma de [plugins de Rollup compatible](https://github.com/rollup/awesome) como [plugins específicos de Vite](https://github.com/vite/awesome-vite#plugins)
 
-Al crear un plugin, puedes colocarlo en tu `vite.config.js`. No hay necesidad de crear un nuevo paquete para ello. Una vez que veas que un plugin fue útil en tus proyectos, considera compartirlo para ayudar a otros [en el ecosistema](https://chat.vitejs.dev).
+Al crear un plugin, puedes colocarlo en tu `vite.config.js`. No hay necesidad de crear un nuevo paquete para ello. Una vez que veas que un plugin fue útil en tus proyectos, considera compartirlo para ayudar a otros [en el ecosistema](https://chat.vite.dev).
 
 ::: tip
 Al aprender, depurar o crear plugins, sugerimos incluir [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) en tu proyecto. Este te permite inspeccionar el estado intermedio de los plugins de Vite. Después de la instalación, puedes visitar `localhost:5173/__inspect/` para inspeccionar los módulos y la pila de transformación de tu proyecto. Consulta las instrucciones de instalación en los [documentos de vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect).

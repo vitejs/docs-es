@@ -22,7 +22,7 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 Durante el desarrollo, Vite configura [`esnext` como el objetivo de transformación](https://esbuild.github.io/api/#target), porque asumimos que se está utilizando un navegador moderno que admite todas las características más recientes de JavaScript y CSS. Esto evita la reducción de sintaxis, permitiendo que Vite sirva módulos lo más cercanos posible al código fuente original.
 
-Para la compilación de producción, de forma predeterminada Vite apunta a navegadores que admiten [Módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Los navegadores legacy pueden ser compatibles a través del plugin oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). Consulta la sección [Compilación en Producción](./build) para obtener más detalles.
+Para la compilación de producción, de forma predeterminada Vite apunta a navegadores que admiten [Módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Los navegadores legacy pueden ser compatibles a través del plugin oficial [@vite/plugin-legacy](https://github.com/vite/vite/tree/main/packages/plugin-legacy). Consulta la sección [Compilación en Producción](./build) para obtener más detalles.
 
 ## Probar Vite online
 
@@ -92,13 +92,13 @@ $ bun create vite my-vue-app --template vue
 
 :::
 
-Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
+Consulta [create-vite](https://github.com/vite/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 Puedes usar `.` como nombre del proyecto para generar la estructura en el directorio actual.
 
 ## Plantillas de la comunidad
 
-`create-vite` es una herramienta para iniciar rápidamente un proyecto desde una plantilla básica para frameworks populares. Echa un vistazo a Awesome Vite para [plantillas soportadas por la comunidad](https://github.com/vitejs/awesome-vite#templates) que incluyen otras herramientas o se dirigen a diferentes frameworks.
+`create-vite` es una herramienta para iniciar rápidamente un proyecto desde una plantilla básica para frameworks populares. Echa un vistazo a Awesome Vite para [plantillas soportadas por la comunidad](https://github.com/vite/awesome-vite#templates) que incluyen otras herramientas o se dirigen a diferentes frameworks.
 
 Para una plantilla en `https://github.com/user/project`, puedes probarla en línea usando `https://github.stackblitz.com/user/project` (agregando `.stackblitz` después de `github` en la URL del proyecto).
 
@@ -202,10 +202,10 @@ Aprende más sobre la [interfaz de línea de comnando](./cli.md)
 
 ## Uso de confirmaciones no publicadas
 
-Si no puedes esperar a una nueva versión para probar las funciones más recientes, deberás clonar el [repo de vite](https://github.com/vitejs/vite) en tu máquina local y luego compilarlo y vincularlo tu mismo. ([pnpm](https://pnpm.io/) es obligatorio):
+Si no puedes esperar a una nueva versión para probar las funciones más recientes, deberás clonar el [repo de vite](https://github.com/vite/vite) en tu máquina local y luego compilarlo y vincularlo tu mismo. ([pnpm](https://pnpm.io/) es obligatorio):
 
 ```bash
-git clone https://github.com/vitejs/vite.git
+git clone https://github.com/vite/vite.git
 cd vite
 pnpm install
 cd packages/vite
@@ -217,4 +217,4 @@ Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link --global vite` (o el 
 
 ## Comunidad
 
-Si tienes preguntas o necesitas ayuda, comunícate con la comunidad en [Discord](https://chat.vitejs.dev) y en [Discusiones de Github](https://github.com/vitejs/vite/discussions).
+Si tienes preguntas o necesitas ayuda, comunícate con la comunidad en [Discord](https://chat.vite.dev) y en [Discusiones de Github](https://github.com/vite/vite/discussions).

@@ -59,7 +59,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
   El valor también puede ser un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
 
-  Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los plugins del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
+  Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vite/plugin-basic-ssl](https://github.com/vite/vite-plugin-basic-ssl) a los plugins del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
 
 ## server.open
 
@@ -87,7 +87,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
   Ten en cuenta que si estás utilizando una [`base`](/config/shared-options.md#base) no relativa, debes prefijar cada clave con esa `base`.
 
-  Extiende [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Las opciones adicionales están [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12).
+  Extiende [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Las opciones adicionales están [aquí](https://github.com/vite/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12).
 
   En algunos casos, es posible que también desees configurar el servidor de desarrollo relacionado (por ejemplo, para agregar middlewares personalizados a la aplicación interna [connect](https://github.com/senchalabs/connect)). Para hacerlo, debes escribir tu propio [plugin](/guide/using-plugins.html) y usar la función [configureServer](/guide/api-plugin.html#configureserver).
 
@@ -164,7 +164,7 @@ Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catal
 Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
 
 ```
-Direct websocket connection fallback. Check out https://vitejs.dev/config/server-options.html#server-hmr to remove the previous connection error.
+Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-hmr to remove the previous connection error.
 ```
 
 Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
@@ -207,7 +207,7 @@ El observador del servidor Vite observa el `root` y omite los directorios `.git/
 Si se configura en `null`, no se observará ningún archivo. `server.watcher` proporcionará un emisor de eventos compatible, pero invocar a `add` o `unwatch` no tendrá ningún efecto.
 
 ::: warning Observando archivos en `node_modules`
-Actualmente no es posible ver archivos y paquetes en `node_modules`. Para obtener más avances y soluciones alternativas, puede seguir la [propuesta #8619](https://github.com/vitejs/vite/issues/8619).
+Actualmente no es posible ver archivos y paquetes en `node_modules`. Para obtener más avances y soluciones alternativas, puede seguir la [propuesta #8619](https://github.com/vite/vite/issues/8619).
 :::
 
 ::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2

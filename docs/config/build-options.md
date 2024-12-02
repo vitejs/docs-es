@@ -34,7 +34,7 @@ El polyfill se puede deshabilitar usando `{ polyfill: false }`.
 
 Vite calcula la lista de fragmentos a precargar para cada importación dinámica. De forma predeterminada, se utilizará una ruta absoluta que incluya la `base` al cargar estas dependencias. Si la `base` es relativa (`''` o `'./''`), se usa `import.meta.url` en tiempo de ejecución para evitar rutas absolutas que dependen de la base final implementada.
 
-Existe soporte experimental para un control detallado sobre la lista de dependencias y sus rutas usando la función `resolveDependencies`. [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13841). Esto espera una función de tipo `ResolveModulePreloadDependenciesFn`:
+Existe soporte experimental para un control detallado sobre la lista de dependencias y sus rutas usando la función `resolveDependencies`. [Hacer Comentarios](https://github.com/vite/vite/discussions/13841). Esto espera una función de tipo `ResolveModulePreloadDependenciesFn`:
 
 ```ts
 type ResolveModulePreloadDependenciesFn = (
@@ -245,7 +245,7 @@ De forma predeterminada, Vite vaciará `outDir` en la compilación si está dent
 
 ## build.copyPublicDir
 
-- **Experimental** [Hacer Comentarios](https://github.com/vitejs/vite/discussions/13807)
+- **Experimental** [Hacer Comentarios](https://github.com/vite/vite/discussions/13807)
 - **Tipo:** `boolean`
 - **Por defecto:** `true`
 

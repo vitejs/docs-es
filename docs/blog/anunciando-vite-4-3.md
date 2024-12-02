@@ -13,10 +13,10 @@ head:
       content: Announcing Vite 4.3
   - - meta
     - property: og:image
-      content: https://vitejs.dev/og-image-announcing-vite4-3.png
+      content: https://vite.dev/og-image-announcing-vite4-3.png
   - - meta
     - property: og:url
-      content: https://es.vitejs.dev/blog/anunciando-vite-4-3
+      content: https://es.vite.dev/blog/anunciando-vite-4-3
   - - meta
     - property: og:description
       content: Vite 4.3 Release Announcement
@@ -33,8 +33,8 @@ _April 20, 2023_
 
 Enlaces rápidos:
 
-- Documentaciones: [English](/), [简体中文](https://cn.vitejs.dev/), [日本語](https://ja.vitejs.dev/), [Español](https://es.vitejs.dev/), [Português](https://pt.vitejs.dev/)
-- [Lista de cambios de Vite 4.3 (en inglés)](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#430-2023-04-20)
+- Documentaciones: [English](/), [简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [Español](https://es.vite.dev/), [Português](https://pt.vite.dev/)
+- [Lista de cambios de Vite 4.3 (en inglés)](https://github.com/vite/vite/blob/main/packages/vite/CHANGELOG.md#430-2023-04-20)
 
 ## Mejoras de rendimiento
 
@@ -79,12 +79,12 @@ Los primeros usuarios en usar Vite 4.3 también informaron de una mejora del tie
 
 ## Perfilado
 
-Seguiremos trabajando en el rendimiento de Vite. Estamos trabajando en una [herramienta comparativa oficial](https://github.com/vitejs/vite-benchmark) para Vite que nos permite obtener métricas de rendimiento para cada solicitud de cambio de código.
+Seguiremos trabajando en el rendimiento de Vite. Estamos trabajando en una [herramienta comparativa oficial](https://github.com/vite/vite-benchmark) para Vite que nos permite obtener métricas de rendimiento para cada solicitud de cambio de código.
 
 Y [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) ahora tiene más funciones relacionadas con el rendimiento para ayudar a identificar qué plugins o middlewares son el cuello de botella para tus aplicaciones.
 
-Usando `vite --profile` (y luego presionando `p`) una vez que se carga la página, se guardará un perfil de CPU del inicio del servidor de desarrollo. Puedes abrirlos en una aplicación como [speedscope](https://www.speedscope.app/) para identificar problemas de rendimiento. Y puedes compartir tus hallazgos con el equipo de Vite en una [Discusión](https://github.com/vitejs/vite/discussions) o en el [Discord de Vite](https://chat.vitejs.dev).
+Usando `vite --profile` (y luego presionando `p`) una vez que se carga la página, se guardará un perfil de CPU del inicio del servidor de desarrollo. Puedes abrirlos en una aplicación como [speedscope](https://www.speedscope.app/) para identificar problemas de rendimiento. Y puedes compartir tus hallazgos con el equipo de Vite en una [Discusión](https://github.com/vite/vite/discussions) o en el [Discord de Vite](https://chat.vite.dev).
 
 ## Próximos pasos
 
-Decidimos hacer una sola versión importante de Vite este año alineándonos con el [final de soporte de Node.js 16](https://endoflife.date/nodejs) en septiembre, eliminando el soporte para Node.js 14 y 16 en él. Si deseas participar, abrimos una [Discusión de Vite 5](https://github.com/vitejs/vite/discussions/12466) para recopilar comentarios desde ahora.
+Decidimos hacer una sola versión importante de Vite este año alineándonos con el [final de soporte de Node.js 16](https://endoflife.date/nodejs) en septiembre, eliminando el soporte para Node.js 14 y 16 en él. Si deseas participar, abrimos una [Discusión de Vite 5](https://github.com/vite/vite/discussions/12466) para recopilar comentarios desde ahora.
