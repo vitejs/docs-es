@@ -16,21 +16,21 @@ jobs:
           access-token: ${{ secrets.ACCESS_TOKEN }}
 
           # Git user name to use when making issues and PRs. Required.
-          username: vite/vite
+          username: vite/vitejs
 
           # Git email address to use when making issues and PRs. Required.
           email: "cesargomezh90@gmail.com"
 
           # The url for the upstream repo. This is the repository that you
           # set up Ryu-Cho. Required.
-          upstream-repo: https://github.com/vite/docs-es.git
+          upstream-repo: https://github.com/vitejs/docs-es.git
 
           # The branch for the upstream repo. Optional. Defaults to `main`.
           upstream-repo-branch: main
 
           # The head repo to track. This is the repository you want to
           # take a diff. Required.
-          head-repo: https://github.com/vite/vite
+          head-repo: https://github.com/vitejs/vite
 
           # The branch for the head repo. Optional. Defaults to `main`.
           head-repo-branch: main
