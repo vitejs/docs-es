@@ -1,4 +1,4 @@
-https://es.vite.dev/* https://es.vite.dev/:splat 301!
+https://es.vitejs.dev/* https://es.vite.dev/:splat 301!
 
 # temporary, we'll flip this around some day
 /guide/api-vite-runtime /guide/api-environment 302
