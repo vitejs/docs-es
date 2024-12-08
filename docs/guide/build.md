@@ -227,7 +227,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 }
 ```
 
-```js twoslash [vite.config.js (multiples entradas)]
+```json twoslash [package.json (múltiples entradas)]
 {
   "name": "my-lib",
   "type": "module",
