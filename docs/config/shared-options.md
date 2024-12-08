@@ -1,5 +1,7 @@
 # Opciones compartidas
 
+A menos que se indique lo contrario, las opciones en esta sección se aplican a desarrollo, compilación y vista previa.
+
 ## root
 
 - **Tipo:** `string`
@@ -207,7 +209,7 @@ Configuración de PostCSS inline o un directorio personalizado para buscar la co
 
 Para la configuración de PostCSS inline, espera el mismo formato que `postcss.config.js`. Pero para la propiedad `plugins`, solo se puede usar [formato de array](https://github.com/postcss/postcss-load-config/blob/main/README.md#array).
 
-La búsqueda se realiza mediante [postcss-load-config](https://github.com/postcss/postcss-load-config) y solo se cargan los nombres de archivos de configuración admitidos.
+La búsqueda se realiza mediante [postcss-load-config](https://github.com/postcss/postcss-load-config) y solo se cargan los nombres de archivos de configuración admitidos. Los archivos de configuración fuera de la raíz del espacio de trabajo (o de la [raíz del proyecto](/guide/#index-html-and-project-root) si no se encuentra un espacio de trabajo) no se buscan por defecto. Puedes especificar una ruta personalizada fuera de la raíz para cargar el archivo de configuración específico si es necesario.
 
 Ten en cuenta que si se proporciona una configuración inline, Vite no buscará otras fuentes de configuración de PostCSS.
 
@@ -217,9 +219,12 @@ Ten en cuenta que si se proporciona una configuración inline, Vite no buscará 
 
 Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de archivo se utilizan como claves para las opciones. Las opciones admitidas para cada preprocesador se pueden encontrar en su documentación respectiva:
 
-- `sass`/`scss` - la opción de nivel superior `api: "legacy" | "modern"` (por defecto `"legacy"`) permite cambiar qué API de Sass usar. [Opciones (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions), [Opciones (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/).
-- `less` - [Opciones](https://lesscss.org/usage/#less-options).
-- `styl`/`stylus`: solo se admite [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual se puede pasar como un objeto.
+- `sass`/`scss`:
+  - Selecciona la API de Sass a usar con `api: "modern-compiler" | "modern" | "legacy"` (por defecto `"modern-compiler"` si se tiene instalado `sass-embedded`, de lo contrario `"modern"`). Para obtener el mejor rendimiento, se recomienda usar `api: "modern-compiler"` con el paquete `sass-embedded`. La API `"legacy"` está obsoleta y se eliminará en Vite 7.
+  - [Opciones (moderna)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
+  - [Opciones (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+- `less`: [Opciones](https://lesscss.org/usage/#less-options).
+- `styl`/`stylus`: Solo se soporta [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual puede ser pasado como un objeto.
 
 **Ejemplo**:
 
@@ -335,12 +340,12 @@ Admite importaciones con nombre desde archivos `.json`.
 
 ## json.stringify
 
-- **Tipo:** `boolean`
-- **Por defecto:** `false`
+- **Tipo:** `boolean | 'auto'`
+- **Por defecto:** `'auto'`
 
 Si se coloca en `true`, el JSON importado se transformará en `export default JSON.parse("...")`, que tiene un rendimiento significativamente mayor que los objetos literales, especialmente cuando el archivo JSON es grande.
 
-Habilitar esto deshabilita las importaciones con nombre.
+Si se configura en `'auto'`, los datos se convertirán en una cadena solo si [los datos son mayores de 10 kB](https://v8.dev/blog/cost-of-javascript-2019#json:~:text=A%20good%20rule%20of%20thumb%20is%20to%20apply%20this%20technique%20for%20objects%20of%2010%20kB%20or%20larger).
 
 ## esbuild
 

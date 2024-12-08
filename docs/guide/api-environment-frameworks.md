@@ -368,9 +368,9 @@ export function createHandler(input) {
 
 ## Entornos durante la compilación
 
-En la CLI, al ejecutar `vite build` y `vite build --ssr`, se seguirán compilando únicamente los entornos de cliente y SSR para mantener la retrocompatibilidad.
+En la interfaz de línea de comandos, al ejecutar `vite build` y `vite build --ssr`, se seguirán compilando únicamente los entornos de cliente y SSR para mantener la retrocompatibilidad.
 
-Cuando `builder.entireApp` es `true` (o al usar `vite build --app`), `vite build` optará por compilar toda la aplicación en lugar de solo partes específicas. En el futuro, esto se convertirá en el comportamiento predeterminado en una versión principal. Durante este proceso, se creará una instancia de `ViteBuilder` (el equivalente en tiempo de compilación a `ViteDevServer`) para compilar todos los entornos configurados para producción.
+Cuando `builder` no es `undefined` (o al llamar `vite build --app`), `vite build` optará por compilar toda la aplicación en su lugar. Esto se convertirá en el valor por defecto en una futura versión principal. Se creará una instancia de `ViteBuilder` (equivalente en tiempo de compilación a un `ViteDevServer`) para construir todos los entornos configurados para producción. De forma predeterminada, la compilación de los entornos se ejecuta en serie, respetando el orden del registro `environments`. Un marco o usuario puede configurar aún más cómo se construyen los entornos utilizando:
 
 Por defecto, la compilación de los entornos se ejecuta en serie, respetando el orden definido en el registro de `environments`. Sin embargo, los usuarios o frameworks pueden configurar adicionalmente cómo se compulan los entornos usando un bloque de código como el siguiente:
 

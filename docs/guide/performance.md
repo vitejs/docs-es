@@ -52,7 +52,7 @@ Por lo tanto, normalmente es mejor ser explícito con las rutas de importación,
 Si eres creador de un plugin, asegúrate de invocar a [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) solo cuando sea necesario para reducir la cantidad de comprobaciones anteriores.
 
 :::tip TypeScript
-Si estás utilizando TypeScript, activa `"moduleResolution": "bundler"` y `"allowImportingTsExtensions": true` en las ``compilerOptions` de `tsconfig.json` para usar las extensiones `.ts` y `.tsx` directamente en tu codigo.
+Si estás utilizando TypeScript, activa `"moduleResolution": "Bundler"` y `"allowImportingTsExtensions": true` en las ``compilerOptions` de `tsconfig.json` para usar las extensiones `.ts` y `.tsx` directamente en tu codigo.
 :::
 
 ## Evita los archivos Barril

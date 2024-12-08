@@ -62,14 +62,14 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
    ```json [.vite/manifest.json]
    {
-     "_shared-!~{003}~.js": {
-       "file": "assets/shared-ChJ_j-JJ.css",
-       "src": "_shared-!~{003}~.js"
-     },
      "_shared-B7PI925R.js": {
        "file": "assets/shared-B7PI925R.js",
        "name": "shared",
        "css": ["assets/shared-ChJ_j-JJ.css"]
+     },
+     "_shared-ChJ_j-JJ.css": {
+       "file": "assets/shared-ChJ_j-JJ.css",
+       "src": "_shared-ChJ_j-JJ.css"
      },
      "baz.js": {
        "file": "assets/baz-B2H3sXNv.js",
@@ -147,3 +147,35 @@ Mientras que lo siguiente debería incluirse para el punto de entrada `views/bar
 <!-- opcional -->
 <link rel="modulepreload" href="assets/shared-B7PI925R.js" />
 ```
+
+::: details Pseudo implementación de `importedChunks`
+Un ejemplo de pseudo implementación de `importedChunks` en TypeScript (esto necesitará ser adaptado para tu lenguaje de programación y lenguaje de plantillas):
+
+```ts
+import type { Manifest, ManifestChunk } from 'vite'
+
+export default function importedChunks(
+  manifest: Manifest,
+  name: string
+): ManifestChunk[] {
+  const seen = new Set<string>()
+
+  function getImportedChunks(chunk: ManifestChunk): ManifestChunk[] {
+    const chunks: ManifestChunk[] = []
+    for (const file of chunk.imports ?? []) {
+      const importee = manifest[file]
+      if (seen.has(file)) {
+        continue
+      }
+      seen.add(file)
+      chunks.push(...getImportedChunks(importee))
+      chunks.push(importee)
+    }
+    return chunks
+  }
+
+  return getImportedChunks(manifest[name])
+}
+```
+
+:::

@@ -27,7 +27,61 @@ Vite 6 permite a los usuarios configurar su aplicación durante la compilación 
 
 ## Configuración del Entorno
 
-Los entornos se configuran explícitamente con la opción de configuración `environments`.
+Los entornos se configuran explícitamente con la opción de configuración `environments`.´
+
+```js
+export default {
+  environments: {
+    client: {
+      resolve: {
+        conditions: [], // configurar el entorno Cliente
+      },
+    },
+    ssr: {
+      optimizeDeps: {}, // configurar el entorno SSR
+    },
+    rsc: {
+      resolve: {
+        noExternal: true, // configurar un entorno personalizado
+      },
+    },
+  },
+}
+```
+
+Todos los archivos de configuración de entornos se extienden desde la configuración raíz del usuario, lo que permite a los usuarios agregar valores predeterminados para todos los entornos a nivel raíz. Esto es muy útil para el caso común de configurar una aplicación solo para cliente en Vite, lo cual se puede hacer sin pasar por `environments.client`.
+
+```js
+export default {
+  resolve: {
+    conditions: [], // configurar un valor predeterminado para todos los entornos
+  },
+}
+```
+
+La interfaz `EnvironmentOptions` expone todas las opciones por entorno. Existen `SharedEnvironmentOptions` que se aplican tanto a `build` como a `dev`, como `resolve`. Y también existen `DevEnvironmentOptions` y `BuildEnvironmentOptions` para las opciones específicas de `dev` y `build` (como `optimizeDeps` o `build.outDir`).
+
+```ts
+interface EnvironmentOptions extends SharedEnvironmentOptions {
+  dev: DevOptions
+  build: BuildOptions
+}
+```
+
+Como se explicó, las opciones específicas de entorno definidas a nivel raíz en la configuración del usuario son usadas para el entorno predeterminado `client` (la interfaz `UserConfig` extiende de la interfaz `EnvironmentOptions`). Los entornos pueden configurarse explícitamente usando el registro `environments`. Los entornos `client` y `ssr` siempre están presentes durante el desarrollo, incluso si se asigna un objeto vacío a `environments`. Esto permite la compatibilidad con `server.ssrLoadModule(url)` y `server.moduleGraph`. Durante la compilación, el entorno `client` siempre está presente, y el entorno `ssr` solo está presente si se configura explícitamente (usando `environments.ssr` o, por compatibilidad, `build.ssr`).
+
+```ts
+interface UserConfig extends EnvironmentOptions {
+  environments: Record<string, EnvironmentOptions>
+  // otras opciones
+}
+```
+
+::: info
+
+La propiedad de nivel superior `ssr` tiene muchas opciones en común con `EnvironmentOptions`. Esta opción fue creada para el mismo caso de uso que `environments`, pero solo permitía la configuración de un número reducido de opciones. Vamos a descontinuarla a favor de una forma unificada de definir la configuración del entorno.
+
+:::
 
 ## Instancias personalizadas de entorno
 

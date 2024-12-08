@@ -69,7 +69,7 @@ vite build [root]
 | `-f, --filter <filter>`        | Filtra registros de depuración(`string`)                                                                                                                 |
 | `-m, --mode <mode>`            | Configura el modo de entorno(`string`)                                                                                                                   |
 | `-h, --help`                   | Muestra las opciones de CLI disponibles options                                                                                                          |
-| `--app`                        | Compilar todos los entornos, igual que `builder.entireApp` (`boolean`, experimental)                                                                     |
+| `--app`                        | Compilar todos los entornos, igual que `builder: {}` (`boolean`, experimental)                                                                           |
 
 ## Otros
 

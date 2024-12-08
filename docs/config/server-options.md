@@ -1,5 +1,7 @@
 # Opciones para server
 
+A menos que se indique lo contrario, las opciones en esta sección solo se aplican a desarrollo.
+
 ## server.host
 
 - **Tipo:** `string | boolean`
@@ -83,7 +85,7 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 - **Tipo:** `Record<string, string | ProxyOptions>`
 
-  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de pares `{ key: options }`. Cualquier solicitud cuya ruta de solicitud comience con esa clave se enviará a ese destino especificado. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy.
+  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de pares `{ key: options }`. Cualquier solicitud cuya ruta de solicitud comience con esa clave se enviará a ese destino especificado. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy. Si una solicitud coincide con alguna de las reglas de proxy configuradas, la solicitud no será transformada por Vite.
 
   Ten en cuenta que si estás utilizando una [`base`](/config/shared-options.md#base) no relativa, debes prefijar cada clave con esa `base`.
 
@@ -181,7 +183,7 @@ Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback.
 
 Prepara archivos para transformarlos y almacenar en caché los resultados por adelantado. Esto mejora la carga de la página inicial durante el inicio del servidor y evita transformaciones en cascada.
 
-`clientFiles` son archivos que se usan solo en el cliente, mientras que `ssrFiles` son archivos que se usan solo en SSR. Aceptan una variedad de rutas de archivos o patrones [`fast-glob`](https://github.com/mrmlnc/fast-glob) relativos a `root`.
+`clientFiles` son archivos que se usan solo en el cliente, mientras que `ssrFiles` son archivos que se usan solo en SSR. Aceptan una variedad de rutas de archivos o patrones [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) relativos a `root`.
 
 Asegúrate de agregar solo archivos que se usan con frecuencia para no sobrecargar el servidor de desarrollo de Vite al iniciar.
 
@@ -316,7 +318,7 @@ createServer()
 ## server.fs.deny
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['.env', '.env.*', '*.{crt,pem}']`
+- **Por defecto:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
   Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
 

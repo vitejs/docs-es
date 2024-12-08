@@ -1,6 +1,6 @@
 # Opciones para Worker
 
-Opciones relacionadas con Web Workers.
+A menos que se indique lo contrario, las opciones en esta sección se aplican a desarrollo, compilación y vista previa.
 
 ## worker.format
 

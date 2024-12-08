@@ -51,6 +51,8 @@ Garantizar un resultado óptimo y una coherencia de comportamiento entre el serv
 
 ## ¿Por qué no empaquetar con esbuild?
 
+Mientras que Vite utiliza esbuild para [preempaquetar algunas dependencias en desarrollo](./dep-pre-bundling.md), Vite no utiliza esbuild como un empaquetador para las compilaciones de producción.
+
 La API de plugins actual de Vite no es compatible con el uso de `esbuild` como paquete. A pesar de que `esbuild` es más rápido, la adopción por parte de Vite de la infraestructura y API de plugins flexible de Rollup contribuyó en gran medida a su éxito en el ecosistema. Por el momento, creemos que Rollup ofrece una mejor compensación entre rendimiento y flexibilidad.
 
 Rollup también ha estado trabajando en mejoras de rendimiento, [cambiando su analizador a SWC en la versión 4](https://github.com/rollup/rollup/pull/5073). Además, hay un esfuerzo en curso para construir una versión en Rust de Rollup llamada Rolldown. Una vez que Rolldown esté listo, podría reemplazar tanto a Rollup como a esbuild en Vite, mejorando significativamente el rendimiento de la compilación y eliminando las inconsistencias entre el desarrollo y la compilación. Puedes ver [la presentación principal de Evan You en ViteConf 2023 para obtener más detalles](https://youtu.be/hrdwQHoAp0M).

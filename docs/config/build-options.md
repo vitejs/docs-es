@@ -1,5 +1,7 @@
 # Opciones para build
 
+A menos que se indique lo contrario, las opciones en esta sección solo se aplican a la compilación.
+
 ## build.target
 
 - **Tipo:** `string | string[]`
@@ -8,10 +10,7 @@
 
 El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module), [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import) y soporte para [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Vite reemplazará `'modules'` con `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']`
 
-Otro valor especial es `'esnext'`, el cual asume el soporte nativo de importaciones dinámicas y transpilará lo menos posible:
-
-- Si la opción [`build.minify`](#build-minify) es `'terser'` y la versión de Terser instalada es inferior a la 5.16.0, `'esnext'` se verá obligado a bajar a `'es2021'`.
-- En otros casos, no realizará ninguna transpilación.
+Otro valor especial es `'esnext'`, que asume soporte nativo para importaciones dinámicas y solo realiza una transpilación mínima.
 
 La transformación se realiza con esbuild y el valor debe ser una [opción de destino de esbuild](https://esbuild.github.io/api/#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.
 
@@ -131,7 +130,7 @@ En este caso, debes configurar `build.cssTarget` en `chrome61` para evitar que v
 ## build.cssMinify
 
 - **Tipo:** `boolean | 'esbuild' | 'lightningcss'`
-- **Por defecto:** lo mismo que [`build.minify`](#build-minify)
+- **Por defecto:** lo mismo que [`build.minify`](#build-minify) para cliente, `'esbuild'` para SSR
 
 Esta opción permite a los usuarios configurar la minificación de CSS específicamente en vez de usar por defecto `build.minify`, así se podrá trabajar la minificación para JS y CSS por separado. Vite usa `esbuild` por defecto para minimizar CSS. Establece la opción ' `'lightningcss'` para usar [Lightning CSS](https://lightningcss.dev/minification.html) en su lugar. Si se selecciona, se puede configurar utilizando [`css.lightningcss`](./shared-options.md#css-lightningcss).
 

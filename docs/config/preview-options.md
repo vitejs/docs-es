@@ -1,5 +1,7 @@
 # Opciones para preview
 
+A menos que se indique lo contrario, las opciones en esta sección solo se aplican a la vista previa.
+
 ## preview.host
 
 - **Tipo:** `string | boolean`

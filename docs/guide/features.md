@@ -87,12 +87,12 @@ Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor por
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#target)
 
-Vite no transpila TypeScript con el valor `target` configurado por defecto, siguiendo el mismo comportamiento que `esbuild`.
+Vite ignora el valor de `target` en el `tsconfig.json`, siguiendo el mismo comportamiento que `esbuild`.
 
-En su lugar, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), cuyo valor por defecto es `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad y también se puede configurar si es necesario.
+Para especificar el objetivo en desarrollo, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), que por defecto está configurada a `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad sobre `esbuild.target` y también se puede configurar si es necesario.
 
 ::: warning `useDefineForClassFields`
-Si `target` no es `ESNext` o `ES2022` o más reciente, o si no hay un archivo `tsconfig.json`, `useDefineForClassFields` por defecto será `false`, lo que puede ser problemático con el valor por defecto de `esbuild.target` de `es siguiente`. Puede transpilarse a [bloques de inicialización estáticos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility) que pueden no ser compatibles con tu navegador.
+Si el valor de `target` en `tsconfig.json` no es `ESNext` o `ES2022` o más reciente, o si no existe el archivo `tsconfig.json`, `useDefineForClassFields` se establecerá por defecto a `false`, lo que puede ser problemático con el valor predeterminado de `esbuild.target` que es `esnext`. Esto podría ser transpilado a [bloques de inicialización estática](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility), los cuales pueden no ser compatibles con tu navegador.
 
 Como tal, se recomienda configurar `target` en `ESNext` o `ES2022` o más reciente, o configurar `useDefineForClassFields` en `true` explícitamente en el `tsconfig.json`.
 :::
@@ -542,7 +542,7 @@ Ten en cuenta que:
 
 - Esta es una característica exclusiva de Vite y no es un estándar web o ES.
 - Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [opción `resolve.alias`](/config/shared-options#resolve-alias)).
-- La coincidencia de glob se realiza a través de [`fast-glob`](https://github.com/mrmlnc/fast-glob) - Consulta la documentación de los [patrones de glob compatibles](https://github.com/mrmlnc/fast-glob#pattern-syntax).
+- La coincidencia de glob se realiza a través de [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby).
 - También debes tener en cuenta que todos los argumentos en `import.meta.glob` deben **pasarse como literales**. NO puede usar variables o expresiones en ellos.
 
 ## Importación dinámica

@@ -2,13 +2,15 @@
 
 - **Relacionado:** [Preempaquetado de dependencias](/guide/dep-pre-bundling)
 
+A menos que se indique lo contrario, las opciones en esta sección solo se aplican al optimizador de dependencias, que solo se usa en desarrollo.
+
 ## optimizeDeps.entries
 
 - **Tipo:** `string | string[]`
 
   De forma predeterminada, Vite rastreará todos sus archivos `.html` para detectar las dependencias que deben empaquetarse previamente (ignorando `node_modules`, `build.outDir`, `__tests__` y `coverage`). Si se especifica `build.rollupOptions.input`, Vite rastreará esos puntos de entrada en su lugar.
 
-  Si ninguno de estos se ajusta a tus necesidades, puedes especificar entradas personalizadas con esta opción; el valor debe ser un [patrón fast-glob](https://github.com/mrmlnc/fast-glob#basic-syntax) o un array de patrones que son relativos a la raíz del proyecto Vite. Esto sobrescribirá la inferencia de entradas predeterminadas. Solo las carpetas `node_modules` y `build.outDir` se ignorarán de forma predeterminada cuando se defina explícitamente `optimizeDeps.entries`. Si es necesario ignorar otras carpetas, puedes usar un patrón de ignorado como parte de la lista de entradas, marcado con un '!' inicial.
+  Si ninguno de estos se ajusta a tus necesidades, puedes especificar entradas personalizadas con esta opción; el valor debe ser un [patrón `tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) o un array de patrones que son relativos a la raíz del proyecto Vite. Esto sobrescribirá la inferencia de entradas predeterminadas. Solo las carpetas `node_modules` y `build.outDir` se ignorarán de forma predeterminada cuando se defina explícitamente `optimizeDeps.entries`. Si es necesario ignorar otras carpetas, puedes usar un patrón de ignorado como parte de la lista de entradas, marcado con un '!' inicial. Si no deseas ignorar `node_modules` y `build.outDir`, puedes especificarlo utilizando rutas de cadena literal (sin patrones de `tinyglobby`).
 
 ## optimizeDeps.exclude
 

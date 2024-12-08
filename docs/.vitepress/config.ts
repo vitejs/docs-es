@@ -495,5 +495,13 @@ export default defineConfig({
       }),
     ],
   },
+  optimizeDeps: {
+    include: [
+      '@shikijs/vitepress-twoslash/client',
+      'gsap',
+      'gsap/dist/ScrollTrigger',
+      'gsap/dist/MotionPathPlugin',
+    ],
+  },
   buildEnd,
 })

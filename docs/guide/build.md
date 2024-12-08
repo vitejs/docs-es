@@ -130,13 +130,14 @@ Cuando estás desarrollando una librería orientada al navegador, es probable qu
 
 Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la [opción de configuración `build.lib`](/config/build-options#build-lib). Asegúrate de externalizar también cualquier dependencia que no desees incluir en tu librería, por ejemplo, `vue` o `react`:
 
-```js twoslash [vite.config.js]
+::: code-group
+
+```js twoslash [vite.config.js (entrada única)]
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
   build: {
-    // También podría ser un diccionario o un array de múltiples puntos de entrada
     lib: {
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
@@ -159,6 +160,36 @@ export default defineConfig({
 })
 ```
 
+```js twoslash [vite.config.js (multiples entradas)]
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+export default defineConfig({
+  build: {
+    lib: {
+      entry: {
+        'my-lib': resolve(__dirname, 'lib/main.js'),
+        secondary: resolve(__dirname, 'lib/secondary.js'),
+      },
+      name: 'MyLib',
+    },
+    rollupOptions: {
+      // Asegúrate de externalizar las dependencias que no deberían estar empaquetadas
+      // en tu librería
+      external: ['vue'],
+      output: {
+        // Proporciona variables globales para usar en la compilación UMD
+        // para dependencias externalizadas
+        globals: {
+          vue: 'Vue',
+        },
+      },
+    },
+  },
+})
+```
+
+:::
+
 El archivo de entrada contendría exportaciones que los usuarios de su paquete pueden importar:
 
 ```js [lib/main.js]
@@ -178,7 +209,9 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 `package.json` recomendado para tu librería
 
-```json [package.json]
+::: code-group
+
+```json [package.json (entrada única)]
 {
   "name": "my-lib",
   "type": "module",
@@ -194,9 +227,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 }
 ```
 
-O, si expones múltiples puntos de entrada:
-
-```json [package.json]
+```js twoslash [vite.config.js (multiples entradas)]
 {
   "name": "my-lib",
   "type": "module",
@@ -215,6 +246,8 @@ O, si expones múltiples puntos de entrada:
   }
 }
 ```
+
+:::
 
 :::tip Extensiones de archivo
 Si `package.json` no contiene `"type": "module"`, Vite generará diferentes extensiones de archivo para compatibilidad con Node.js. `.js` se convertirá en `.mjs` y `.cjs` se convertirá en `.js`.

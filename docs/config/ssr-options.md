@@ -1,5 +1,7 @@
 # Opciones para SSR
 
+A menos que se indique lo contrario, las opciones en esta sección se aplican tanto a desarrollo como a compilación.
+
 ## ssr.external
 
 - **Tipo:** `string[] | true`
