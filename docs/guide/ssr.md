@@ -65,7 +65,7 @@ Esto se reemplaza estáticamente durante la compilación, por lo que permitirá 
 
 ## Configuración del servidor de desarrollo
 
-Al crear una aplicación SSR, es probable que desees tener control total sobre tu servidor principal y desacoplar Vite del entorno de producción. Por lo tanto, se recomienda utilizar Vite en modo middleware. Aquí hay un ejemplo con [express](https://expressjs.com/):
+Al crear una aplicación SSR, es probable que desees tener control total sobre tu servidor principal y desacoplar Vite del entorno de producción. Por lo tanto, se recomienda utilizar Vite en modo middleware. Aquí hay un ejemplo con [express](https://expressjs.com/) (v4):
 
 ```js{15-18} twoslash [server.js]
 import fs from 'node:fs'

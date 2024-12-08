@@ -20,7 +20,8 @@ export class RunnableDevEnvironment extends DevEnvironment {
 }
 class ModuleRunner {
   /**
-   * URL para ejecutar. Acepta la ruta del archivo, la ruta del servidor o el ID relativo a la raíz.
+   * URL para ejecutar.
+   * Acepta la ruta del archivo, la ruta del servidor o el ID relativo a la raíz.
    * Devuelve un módulo instanciado (igual que en ssrLoadModule).
    */
   public async import(url: string): Promise<Record<string, any>>
@@ -48,17 +49,18 @@ const server = await createServer({
   appType: 'custom',
   environments: {
     server: {
-      // por defecto, los módulos se ejecutan en el mismo proceso que el servidor vite durante el desarrollo
+      // por defecto, los módulos se ejecutan en el mismo proceso que el servidor de Vite
     },
   },
 })
-// Podrías necesitar convertir esto a RunnableDevEnvironment en TypeScript o usar
-// la función "isRunnableDevEnvironment" para proteger el acceso al runner.
+// Podrías necesitar convertir esto a RunnableDevEnvironment en TypeScript o
+// utilizar isRunnableDevEnvironment para proteger el acceso al runner.
 const environment = server.environments.node
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
   // 1. Leer index.html
-  let template = fs.readFileSync(path.resolve(__dirname, 'index.html'), 'utf-8')
+  const indexHtmlPath = path.resolve(__dirname, 'index.html')
+  let template = fs.readFileSync(indexHtmlPath, 'utf-8')
   // 2. Aplicar las transformaciones de HTML de Vite. Esto inyecta el cliente de HMR de Vite,
   //    y también aplica transformaciones HTML de los plugins de Vite, e.g., preámbulos
   //    globales de @vitejs/plugin-react.
@@ -93,10 +95,12 @@ Por ejemplo, el siguiente ejemplo usa el valor del módulo del usuario desde el 
 ```ts
 // Código que usa las APIs de Vite
 import { createServer } from 'vite'
+
 const server = createServer()
 const ssrEnvironment = server.environment.ssr
 const input = {}
-const { createHandler } = await ssrEnvironment.runner.import('./entrypoint.js')
+
+const { createHandler } = await ssrEnvironment.runner.import('./entry.js')
 const handler = createHandler(input)
 const response = handler(new Request('/'))
 // -------------------------------------
@@ -167,10 +171,10 @@ function vitePluginVirtualIndexHtml(): Plugin {
         let html: string
         if (server) {
           this.addWatchFile('index.html')
-          html = await fs.promises.readFile('index.html', 'utf-8')
+          html = fs.readFileSync('index.html', 'utf-8')
           html = await server.transformIndexHtml('/', html)
         } else {
-          html = await fs.promises.readFile('dist/client/index.html', 'utf-8')
+          html = fs.readFileSync('dist/client/index.html', 'utf-8')
         }
         return `export default ${JSON.stringify(html)}`
       }

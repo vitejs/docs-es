@@ -159,6 +159,51 @@ Por ejemplo, para hacer que la importación predeterminada de `*.svg` a un compo
 
 :::
 
+## HTML
+
+Los archivos HTML son el centro de un proyecto Vite, sirviendo como los puntos de entrada para tu aplicación, lo que facilita la construcción de aplicaciones de una sola página (SPA) y [aplicaciones multipágina](/guide/build.html#multi-page-app).
+
+Cualquier archivo HTML en la raíz de tu proyecto se puede acceder directamente a través de su ruta de directorio respectiva:
+
+- `<root>/index.html` -> `http://localhost:5173/`
+- `<root>/about.html` -> `http://localhost:5173/about.html`
+- `<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
+
+Los recursos referenciados por elementos HTML como `<script type="module" src>` y `<link href>` son procesados y agrupados como parte de la aplicación. La lista completa de elementos compatibles es la siguiente:
+
+- `<audio src>`
+- `<embed src>`
+- `<img src>` y `<img srcset>`
+- `<image src>`
+- `<input src>`
+- `<link href>` y `<link imagesrcet>`
+- `<object data>`
+- `<script type="module" src>`
+- `<source src>` y `<source srcset>`
+- `<track src>`
+- `<use href>` y `<use xlink:href>`
+- `<video src>` y `<video poster>`
+- `<meta content>`
+  - Solo si el atributo `name` coincide con `msapplication-tileimage`, `msapplication-square70x70logo`, `msapplication-square150x150logo`, `msapplication-wide310x150logo`, `msapplication-square310x310logo`, `msapplication-config`, o `twitter:image`
+  - O solo si el atributo `property` coincide con `og:image`, `og:image:url`, `og:image:secure_url`, `og:audio`, `og:audio:secure_url`, `og:video`, o `og:video:secure_url`
+
+```html {4-5,8-9}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <img src="/src/images/logo.svg" alt="logo" />
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
+```
+
+Para excluir ciertos elementos del procesamiento de HTML, puedes agregar el atributo `vite-ignore` en el elemento, lo que puede ser útil cuando se hace referencia a recursos externos o CDN.
+
 ## Vue
 
 Vite proporciona soporte Vue de primera clase:

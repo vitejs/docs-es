@@ -12,6 +12,10 @@ html:has(.landing) {
   }
 }
 
+html.dark:has(.landing) {
+  --vp-c-bg: #101010;
+}
+
 .landing {
   overflow-x: hidden;
   background-color: #101010;

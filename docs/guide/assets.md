@@ -55,6 +55,17 @@ import workletURL from 'extra-scalloped-border/worklet.js?url'
 CSS.paintWorklet.addModule(workletURL)
 ```
 
+### Manejo explícito de elementos en línea
+
+Los recursos pueden ser importados explícitamente con o sin inlining utilizando los sufijos `?inline` o `?no-inline`, respectivamente.
+
+```js twoslash
+import 'vite/client'
+// ---corte---
+import imgUrl1 from './img.svg?no-inline'
+import imgUrl2 from './img.png?inline'
+```
+
 ### Importar recursos como cadenas de texto
 
 Los recursos pueden ser importados como cadenas de texto usando el sufijo `?raw`.
@@ -124,6 +135,7 @@ Este patrón también admite direcciones URL dinámicas a través de literales d
 
 ```js
 function getImageUrl(name) {
+  // ten en cuenta que esto no incluye archivos en subdirectorios
   return new URL(`./dir/${name}.png`, import.meta.url).href
 }
 ```
@@ -134,6 +146,23 @@ Durante la compilación en producción, Vite realizará las transformaciones nec
 // Vite will not transform this
 const imgUrl = new URL(imagePath, import.meta.url).href
 ```
+
+::: detalles Cómo funciona  
+Vite transformará la función `getImageUrl` a:
+
+```js
+import __img0png from './dir/img0.png'
+import __img1png from './dir/img1.png'
+function getImageUrl(name) {
+  const modules = {
+    './dir/img0.png': __img0png,
+    './dir/img1.png': __img1png,
+  }
+  return new URL(modules[`./dir/${name}.png`], import.meta.url).href
+}
+```
+
+:::
 
 ::: warning Nota: No funciona con SSR
 Este patrón no funciona si estás utilizando Vite para Server-Side Rendering, porque `import.meta.url` tiene una semántica diferente en navegadores con respecto a Node.js. El empaquetado del servidor tampoco puede determinar la URL del host del cliente con anticipación.

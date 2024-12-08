@@ -99,15 +99,23 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
   export default defineConfig({
     server: {
       proxy: {
-        // string shorthand
+        // abreviatura de cadena:
+        // http://localhost:5173/foo
+        //   -> http://localhost:4567/foo
         '/foo': 'http://localhost:4567',
-        // con opciones
+        // con opciones:
+        // http://localhost:5173/api/bar
+        //   -> http://jsonplaceholder.typicode.com/bar
+
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
-        // con RegExp
+        // con RegExp:
+
+        // http://localhost:5173/fallback/
+        //   -> http://jsonplaceholder.typicode.com/
         '^/fallback/.*': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
@@ -121,8 +129,13 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
             // proxy será una instancia de 'http-proxy'
           },
         },
-        // Haciendo proxy de websockets o socket.io: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
-        // Ten precaución al usar `rewriteWsOrigin`, ya que puede dejar el proxy abierto a ataques CSRF.
+        // Proxy de websockets o socket.io:
+
+        // ws://localhost:5173/socket.io
+
+        //   -> ws://localhost:5174/socket.io
+        // Ten cuidado al usar `rewriteWsOrigin`, ya que puede dejar
+        // el proxy abierto a ataques CSRF.
         '/socket.io': {
           target: 'ws://localhost:5173',
           ws: true,
@@ -202,11 +215,11 @@ export defineConfig default ({
 
 - **Tipo:** `object | null`
 
-Opciones para el observador del sistema de archivos que serán pasados a [chokidar](https://github.com/paulmillr/chokidar#api).
+Opciones del observador del sistema de archivos que se pasan a [chokidar](https://github.com/paulmillr/chokidar#getting-started). Si se pasa la opción `ignored`, Vite también convertirá automáticamente cualquier cadena en [patrones picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
 El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
-Si se configura en `null`, no se observará ningún archivo. `server.watcher` proporcionará un emisor de eventos compatible, pero invocar a `add` o `unwatch` no tendrá ningún efecto.
+Si se configura en `null`, no se observarán archivos. `server.watcher` no observará ningún archivo y llamar a `add` no tendrá efecto.
 
 ::: warning Observando archivos en `node_modules`
 Actualmente no es posible ver archivos y paquetes en `node_modules`. Para obtener más avances y soluciones alternativas, puede seguir la [propuesta #8619](https://github.com/vitejs/vite/issues/8619).
@@ -246,14 +259,16 @@ async function createServer() {
   // Crea servidor Vite en modo middleware
   const vite = await createViteServer({
     server: { middlewareMode: true },
-    appType: 'custom' // no incluir middlewares de manejo de HTML predeterminado de Vite
+    // no incluir middlewares de manejo de HTML predeterminado de Vite
+    appType: 'custom',
+  })
   // Usa la instancia de conexión de vite como middleware
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
     // Dado que `appType` es `'custom'`, debería servir la respuesta aquí.
-    // Nota: si `appType` es `'spa'` o `'mpa'`, Vite incluye middlewares para manejar
-    // Solicitudes HTML y 404, por lo que se deben agregar middlewares de usuario
+    // Nota: si `appType` es `'spa'` o `'mpa'`, Vite incluye middlewares
+    // para manejar solicitudes HTML y 404, por lo que se deben agregar middlewares de usuario
     // antes de que los middlewares de Vite surtan efecto en su lugar
   })
 }
@@ -321,14 +336,6 @@ createServer()
 - **Por defecto:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
   Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
-
-## server.fs.cachedChecks
-
-- **Tipo:** `boolean`
-- **Por defecto:** `false`
-- **Experimental**
-
-Cachea los nombres de archivo de los directorios accedidos para evitar operaciones repetidas del sistema de archivos. Especialmente en Windows, esto podría resultar en una mejora de rendimiento. Está desactivado por defecto debido a casos límite al escribir un archivo en una carpeta en caché e importarlo inmediatamente.
 
 ## server.origin
 

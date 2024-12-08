@@ -33,11 +33,9 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 
 ## ssr.resolve.conditions
 
-- **Experimental** [El soporte CJS se eliminará en Vite 5](https://github.com/vitejs/vite/discussions/13816)
-- **Tipo:** `'esm' | 'cjs'`
-- **Por defecto:** `esm`
 - **Tipo:** `string[]`
-- **Relacionado:** [resolve.conditions](./shared-options.md#resolve-conditions)
+- **Por defecto:** `['module', 'node', 'development|production']` (`['module', 'browser', 'development|production']` for `ssr.target === 'webworker'`)
+- **Relacionado:** [Condiciones de resolución](./shared-options.md#resolve-conditions)
 
   El valor predeterminado es la raíz [`resolve.conditions`](./shared-options.md#resolve-conditions).
 
@@ -46,6 +44,6 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 ## ssr.resolve.externalConditions
 
 - **Tipo:** `string[]`
-- **Por defecto:** `[]`
+- **Por defecto:** `['node']`
 
   Condiciones que se utilizan durante la importación ssr (incluido `ssrLoadModule`) de dependencias externalizadas.

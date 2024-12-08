@@ -198,7 +198,12 @@ import Bar from './Bar.vue'
 export { Foo, Bar }
 ```
 
-Ejecutar `vite build` con esta configuración utiliza un ajuste preestablecido de Rollup que está orientado a la distribución de librerías y produce dos formatos de empaquetado: `es` y `umd` (configurable a través de `build.lib`):
+Al ejecutar `vite build` con esta configuración, se utiliza un ajuste predeterminado de Rollup orientado a la distribución de librerías y se producen dos formatos de paquete:
+
+- `es` y `umd` (para una sola entrada)
+- `es` y `cjs` (para múltiples entradas)
+
+Los formatos se pueden configurar con la opción [`build.lib.formats`](/config/build-options.md#build-lib).
 
 ```
 $ vite build
@@ -248,6 +253,29 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 ```
 
 :::
+
+### Soporte para CSS
+
+Si tu biblioteca importa algún archivo CSS, este será empaquetado como un archivo CSS único además de los archivos JS generados, por ejemplo, `dist/my-lib.css`. El nombre por defecto es `build.lib.fileName`, pero también puede cambiarse con [`build.lib.cssFileName`](/config/build-options.md#build-lib).
+
+Puedes exportar el archivo CSS en tu `package.json` para que los usuarios lo importen:
+
+```json {12}
+{
+  "name": "my-lib",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    },
+    "./style.css": "./dist/my-lib.css"
+  }
+}
+```
 
 :::tip Extensiones de archivo
 Si `package.json` no contiene `"type": "module"`, Vite generará diferentes extensiones de archivo para compatibilidad con Node.js. `.js` se convertirá en `.mjs` y `.cjs` se convertirá en `.js`.
@@ -307,7 +335,9 @@ const config: UserConfig = {
       if (type === 'public') {
         return 'https://www.domain.com/' + filename
       } else if (path.extname(hostId) === '.js') {
-        return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+        return {
+          runtime: `window.__assetsPath(${JSON.stringify(filename)})`
+        }
       } else {
         return 'https://cdn.domain.com/assets/' + filename
       }

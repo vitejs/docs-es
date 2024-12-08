@@ -103,9 +103,10 @@ Ten en cuenta que Vite no carga archivos `.env` de forma predeterminada, ya que 
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   // Carga el archivo env basado en el `modo` en el directorio de trabajo actual.
-  // Coloca el tercer parámetro en '' para cargar todos los env independientemente del prefijo `VITE_`.
+  // Establece el tercer parámetro como '' para cargar todas las variables de entorno sin importar el prefijo
+  // `VITE_`.
   const env = loadEnv(mode, process.cwd(), '')
   return {
     // configuración de vite

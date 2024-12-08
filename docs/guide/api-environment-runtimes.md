@@ -29,7 +29,8 @@ function createWorkerdEnvironment(
       dev: {
         createEnvironment(name, config) {
           return createWorkerdDevEnvironment(name, config, {
-            hot: customHotChannel(),
+            hot: true,
+            transport: customHotChannel(),
           })
         },
       },
@@ -84,14 +85,17 @@ El navegador se comunica con su entorno correspondiente usando el WebSocket del 
 Uno de los objetivos de esta funcionalidad es proporcionar una API personalizable para procesar y ejecutar código. Los usuarios pueden crear nuevas fábricas de entornos usando las primitivas expuestas.
 
 ```ts
-import { DevEnvironment, RemoteEnvironmentTransport } from 'vite';
+import { DevEnvironment, HotChannel } from 'vite';
 
-function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, context: DevEnvironmentContext) {
-  const hot = /* ... */;
+function createWorkerdDevEnvironment(
+  name: string,
+  config: ResolvedConfig,
+  context: DevEnvironmentContext
+) {
   const connection = /* ... */;
-  const transport = new RemoteEnvironmentTransport({
+  const transport = HotChannel({
+    on: (listener) => { connection.on('message', listener) },
     send: (data) => connection.send(data),
-    onMessage: (listener) => connection.on('message', listener),
   });
 
   const workerdDevEnvironment = new DevEnvironment(name, config, {
@@ -99,10 +103,8 @@ function createWorkerdDevEnvironment(name: string, config: ResolvedConfig, conte
       resolve: { conditions: ['custom'] },
       ...context.options,
     },
-    hot,
-    remoteRunner: {
-      transport,
-    },
+    hot: true,
+    transport,
   });
 
   return workerdDevEnvironment;
@@ -123,7 +125,8 @@ export class ModuleRunner {
     private debug?: ModuleRunnerDebugger
   ) {}
   /**
-   * URL a ejecutar. Acepta ruta de archivo, ruta del servidor o ID relativo a la raíz.
+   * URL a ejecutar.
+   * Acepta ruta de archivo, ruta del servidor o ID relativo a la raíz.
    */
   public async import<T = any>(url: string): Promise<T>
   /**
@@ -131,7 +134,7 @@ export class ModuleRunner {
    */
   public clearCache(): void
   /**
-   * Limpia todas las cachés, elimina todos los listeners de HMR y reinicia el soporte para mapas de origen.
+   * Limpia todas las cachés, elimina todos los listeners de HMR, reinicia el soporte para mapas de origen.
    * Este método no detiene la conexión HMR.
    */
   public async close(): Promise<void>
@@ -150,12 +153,12 @@ El ejecutor de módulos expone el método `import`. Cuando el servidor Vite acti
 
 ```js
 import { ModuleRunner, ESModulesEvaluator } from 'vite/module-runner'
-import { root, fetchModule } from './rpc-implementation.js'
+import { root, transport } from './rpc-implementation.js'
 
 const moduleRunner = new ModuleRunner(
   {
     root,
-    fetchModule,
+    transport,
     // También puedes proporcionar hmr.connection para soportar HMR.
   },
   new ESModulesEvaluator()
@@ -175,11 +178,17 @@ export interface ModuleRunnerOptions {
   /**
    * Conjunto de métodos para comunicarse con el servidor.
    */
-  transport: RunnerTransport
+  transport: ModuleRunnerTransport
   /**
-   * Configura cómo se resuelven los mapas de origen. Prefiere `node` si `process.setSourceMapsEnabled` está disponible.
-   * De lo contrario, usará `prepareStackTrace` por defecto, que sobrescribe el método `Error.prepareStackTrace`.
-   * Puedes proporcionar un objeto para configurar cómo se resuelven los contenidos de archivos y mapas de origen para archivos que no fueron procesados por Vite.
+   * Configura cómo se resuelven los mapas de origen. 
+   
+   * Prefiere `node` si `process.setSourceMapsEnabled` está disponible.
+   
+   * De lo contrario, usará `prepareStackTrace` por defecto, que sobrescribe 
+   
+   * el método `Error.prepareStackTrace`.
+   * Puedes proporcionar un objeto para configurar cómo se resuelven los contenidos de archivos y 
+   * mapas de origen para archivos que no fueron procesados por Vite.
    */
   sourcemapInterceptor?:
     | false
@@ -193,16 +202,14 @@ export interface ModuleRunnerOptions {
     | false
     | {
         /**
-         * Configura cómo se comunica HMR entre el cliente y el servidor.
-         */
-        connection: ModuleRunnerHMRConnection
-        /**
-         * Configura el registrador de HMR.
+         * Configura el logger de HMR.
          */
         logger?: false | HMRLogger
       }
   /**
-   * Caché de módulos personalizado. Si no se proporciona, crea un caché separado para cada instancia de ejecutor de módulos.
+   * Caché de módulos personalizado. Si no se proporciona, crea un caché separado
+   
+   * para cada instancia de ejecutor de módulos.
    */
   evaluatedModules?: EvaluatedModules
 }
@@ -239,60 +246,91 @@ export interface ModuleEvaluator {
 
 Vite exporta `ESModulesEvaluator` que implementa esta interfaz por defecto. Utiliza `new AsyncFunction` para evaluar código, por lo que si el código tiene un mapa de origen en línea, debe contener un [desplazamiento de 2 líneas](https://tc39.es/ecma262/#sec-createdynamicfunction) para acomodar las nuevas líneas añadidas. Esto se hace automáticamente en el caso de `ESModulesEvaluator`. Los evaluadores personalizados no agregarán líneas adicionales.
 
-## `RunnerTransport`
+## `ModuleRunnerTransport`
 
 **Firma de Tipo:**
 
 ```ts
-interface RunnerTransport {
-  /**
-   * Método para obtener la información del módulo.
-   */
-  fetchModule: FetchFunction
+interface ModuleRunnerTransport {
+  connect?(handlers: ModuleRunnerTransportHandlers): Promise<void> | void
+  disconnect?(): Promise<void> | void
+  send?(data: HotPayload): Promise<void> | void
+  invoke?(
+    data: HotPayload
+  ): Promise<{ /** result */ r: any } | { /** error */ e: any }>
+  timeout?: number
 }
 ```
 
-El objeto de transporte se comunica con el entorno a través de un RPC o llamando directamente a la función. Por defecto, necesitas pasar un objeto con el método `fetchModule`, que puede usar cualquier tipo de RPC. Sin embargo, Vite también expone una interfaz de transporte bidireccional mediante la clase `RemoteRunnerTransport` para facilitar la configuración. Debes combinarlo con la instancia `RemoteEnvironmentTransport` en el servidor, como en este ejemplo donde se crea un ejecutor de módulos en un _worker thread_:
+Objeto de transporte que se comunica con el entorno mediante un RPC o llamando directamente a la función. Cuando el método `invoke` no está implementado, es necesario implementar los métodos `send` y `connect`. Vite construirá internamente el método `invoke`.
+
+Debes combinarlo con la instancia de `HotChannel` en el servidor, como en este ejemplo donde el ejecutor del módulo se crea en el subproceso del trabajador:
 
 ::: code-group
 
-```ts [worker.js]
+```js [worker.js]
 import { parentPort } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
-import {
-  ESModulesEvaluator,
-  ModuleRunner,
-  RemoteRunnerTransport,
-} from 'vite/module-runner'
+import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
+/** @type {import('vite/module-runner').ModuleRunnerTransport} */
+const transport = {
+  connect({ onMessage, onDisconnection }) {
+    parentPort.on('message', onMessage)
+    parentPort.on('close', onDisconnection)
+  },
+  send(data) {
+    parentPort.postMessage(data)
+  },
+}
 
 const runner = new ModuleRunner(
   {
     root: fileURLToPath(new URL('./', import.meta.url)),
-    transport: new RemoteRunnerTransport({
-      send: (data) => parentPort.postMessage(data),
-      onMessage: (listener) => parentPort.on('message', listener),
-      timeout: 5000,
-    }),
+    transport,
   },
   new ESModulesEvaluator()
 )
 ```
 
-```ts [server.js]
-import { BroadcastChannel } from 'node:worker_threads';
-import { createServer, RemoteEnvironmentTransport, DevEnvironment } from 'vite';
+```js [server.js]
+import { BroadcastChannel } from 'node:worker_threads'
+import { createServer, RemoteEnvironmentTransport, DevEnvironment } from 'vite'
 
 function createWorkerEnvironment(name, config, context) {
-  const worker = new Worker('./worker.js');
-  return new DevEnvironment(name, config, {
-    hot: /* canal caliente personalizado */,
-    remoteRunner: {
-      transport: new RemoteEnvironmentTransport({
-        send: (data) => worker.postMessage(data),
-        onMessage: (listener) => worker.on('message', listener),
-      }),
+  const worker = new Worker('./worker.js')
+  const handlerToWorkerListener = new WeakMap()
+
+  const workerHotChannel = {
+    send: (data) => w.postMessage(data),
+    on: (event, handler) => {
+      if (event === 'connection') return
+
+      const listener = (value) => {
+        if (value.type === 'custom' && value.event === event) {
+          const client = {
+            send(payload) {
+              w.postMessage(payload)
+            },
+          }
+          handler(value.data, client)
+        }
+      }
+      handlerToWorkerListener.set(handler, listener)
+      w.on('message', listener)
     },
-  });
+    off: (event, handler) => {
+      if (event === 'connection') return
+      const listener = handlerToWorkerListener.get(handler)
+      if (listener) {
+        w.off('message', listener)
+        handlerToWorkerListener.delete(handler)
+      }
+    },
+  }
+
+  return new DevEnvironment(name, config, {
+    transport: workerHotChannel,
+  })
 }
 
 await createServer({
@@ -303,12 +341,12 @@ await createServer({
       },
     },
   },
-});
+})
 ```
 
 :::
 
-`RemoteRunnerTransport` y `RemoteEnvironmentTransport` están diseñados para usarse juntos, pero no es obligatorio. Puedes definir tu propia función para comunicarte entre el ejecutor y el servidor. Por ejemplo, si te conectas al entorno a través de una solicitud HTTP, puedes llamar a `fetch().json()` en la función `fetchModule`:
+Un ejemplo diferente utilizando una solicitud HTTP para comunicarse entre el ejecutor y el servidor:
 
 ```ts
 import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
@@ -317,10 +355,11 @@ export const runner = new ModuleRunner(
   {
     root: fileURLToPath(new URL('./', import.meta.url)),
     transport: {
-      async fetchModule(id, importer) {
-        const response = await fetch(
-          `http://my-vite-server/fetch?id=${id}&importer=${importer}`
-        )
+      async invoke(data) {
+        const response = await fetch(`http://my-vite-server/invoke`, {
+          method: 'POST',
+          body: JSON.stringify(data),
+        })
         return response.json()
       },
     },
@@ -331,36 +370,21 @@ export const runner = new ModuleRunner(
 await runner.import('/entry.js')
 ```
 
-## `ModuleRunnerHMRConnection`
-
-**Firma de Tipo:**
+En este caso, se puede utilizar el método `handleInvoke` en el `NormalizedHotChannel`:
 
 ```ts
-export interface ModuleRunnerHMRConnection {
-  /**
-   * Se verifica antes de enviar mensajes al servidor.
-   */
-  isReady(): boolean
-  /**
-   * Envía un mensaje al servidor.
-   */
-  send(payload: HotPayload): void
-  /**
-   * Configura cómo se maneja HMR cuando esta conexión desencadena una actualización.
-   * Este método espera que la conexión comience a escuchar actualizaciones HMR y llame a este callback cuando reciba una.
-   */
-  onUpdate(callback: (payload: HotPayload) => void): void
-}
+const customEnvironment = new DevEnvironment(name, config, context)
+server.onRequest((request: Request) => {
+  const url = new URL(request.url)
+  if (url.pathname === '/invoke') {
+    const payload = (await request.json()) as HotPayload
+    const result = customEnvironment.hot.handleInvoke(payload)
+    return new Response(JSON.stringify(result))
+  }
+  return Response.error()
+})
+
+Pero ten en cuenta que para el soporte de HMR, se requieren los métodos `send` y `connect`. El método `send` generalmente se llama cuando se activa un evento personalizado (como, `import.meta.hot.send("my-event")`).
+
+Vite exporta `createServerHotChannel` desde el punto de entrada principal para soportar HMR durante Vite SSR.
 ```
-
-Esta interfaz define cómo se establece la comunicación HMR. Vite exporta `ServerHMRConnector` desde el punto de entrada principal para admitir HMR durante el SSR de Vite. Los métodos `isReady` y `send` suelen ser llamados cuando se desencadena un evento personalizado (como `import.meta.hot.send("my-event")`).
-
-El método `onUpdate` se llama solo una vez cuando se inicia el nuevo ejecutor de módulos. Se pasa un método que debe ser llamado cuando la conexión desencadene el evento HMR. La implementación depende del tipo de conexión (como, por ejemplo, puede ser `WebSocket`, `EventEmitter`, `MessageChannel`), pero usualmente se ve algo como esto:
-
-```js
-function onUpdate(callback) {
-  this.connection.on('hmr', (event) => callback(event.data))
-}
-```
-
-El callback se pone en cola y esperará a que se resuelva la actualización actual antes de procesar la siguiente. A diferencia de la implementación en el navegador, las actualizaciones de HMR en un ejecutor de módulos esperarán a que todos los oyentes (como `vite:beforeUpdate`/`vite:beforeFullReload`) terminen antes de actualizar los módulos.

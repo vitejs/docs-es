@@ -109,6 +109,7 @@ Para compilaciones de SSR, la deduplicación no funciona para las salidas de com
 ## resolve.conditions
 
 - **Tipo:** `string[]`
+- **Por defecto:** `['module', 'browser', 'development|production']`
 
 Condiciones adicionales permitidas al resolver las [exportaciones condicionales](https://nodejs.org/api/packages.html#packages_conditional_exports) desde un paquete.
 
@@ -127,7 +128,9 @@ Un paquete con exportaciones condicionales puede tener el siguiente campo `expor
 
 Aquí, `import` y `require` son "condiciones". Las condiciones se pueden anidar y deben especificarse de la más a la menos específica.
 
-Vite tiene una lista de "condiciones permitidas" y coincidirá con la primera condición que está en la lista permitida. Las condiciones permitidas por defecto son: `import`, `module`, `browser`, `default` y `production/development` dependiendo del modo actual. La opción de configuración `resolve.conditions` permite especificar condiciones adicionales permitidas.
+`development|production` es un valor especial que se reemplaza con `production` o `development` dependiendo del valor de `process.env.NODE_ENV`. Se reemplaza con `production` cuando `process.env.NODE_ENV === 'production'` y con `development` en caso contrario.
+
+Ten en cuenta que las condiciones `import`, `require`, `default` siempre se aplican si se cumplen los requisitos.
 
 :::warning Resolviendo exportaciones de rutas secundarias
 Las claves de exportación que terminan en "/" están obsoletas en Node y es posible que no funcionen bien. Comunícate con el autor del paquete para usar [patrones de subruta `*`](https://nodejs.org/api/packages.html#package-entry-points) en su lugar.

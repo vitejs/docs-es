@@ -13,62 +13,75 @@ Por favor, compártenos tus comentarios a medida que pruebas la propuesta.
 
 ## Formalizando entornos
 
-Vite 6 formaliza el concepto de Entornos. Hasta Vite 5, existían dos entornos implícitos (`client` y `ssr`). La nueva API de Entornos permite a los usuarios crear tantos entornos como sea necesario para mapear la forma en que sus aplicaciones funcionan en producción. Estas nuevas capacidades requirieron una gran reestructuración interna, pero se ha puesto un gran esfuerzo en mantener la retrocompatibilidad. El objetivo inicial de Vite 6 es trasladar el ecosistema a esta nueva versión principal de la manera más fluida posible, retrasando la adopción de estas nuevas APIs experimentales hasta que suficientes usuarios hayan migrado y los autores de frameworks y plugins hayan validado el nuevo diseño.
+Vite 6 formaliza el concepto de Entornos. Hasta Vite 5, había dos entornos implícitos (`client` y opcionalmente `ssr`). La nueva API de Entornos permite a los usuarios y autores de frameworks crear tantos entornos como sea necesario para mapear la forma en que sus aplicaciones funcionan en producción. Esta nueva capacidad requirió una gran reestructuración interna, pero se ha puesto mucho esfuerzo en mantener la retrocompatibilidad. El objetivo inicial de Vite 6 es migrar el ecosistema a la nueva versión principal de la manera más fluida posible, retrasando la adopción de estas nuevas APIs experimentales hasta que un número suficiente de usuarios haya migrado y los autores de frameworks y plugins hayan validado el nuevo diseño.
 
 ## Cerrando la brecha entre la compilación y el desarrollo
 
-Para una SPA simple, hay un solo entorno. La aplicación se ejecutará en el navegador del usuario. Durante el desarrollo, salvo por el requisito de Vite de usar un navegador moderno, el entorno coincide estrechamente con el entorno de producción. En Vite 6, seguiría siendo posible usar Vite sin que los usuarios tengan que conocer los entornos. La configuración habitual de Vite funciona para el entorno predeterminado de cliente en este caso.
+Para una SPA/MPA simple, no se exponen nuevas APIs sobre los entornos en la configuración. Internamente, Vite aplicará las opciones a un entorno `client`, pero no es necesario conocer este concepto al configurar Vite. La configuración y el comportamiento de Vite 5 deberían funcionar de manera fluida aquí.
 
-En una típica aplicación renderizada en el servidor con Vite, hay dos entornos. El entorno de cliente ejecuta la aplicación en el navegador, y el entorno de Node ejecuta el servidor que realiza el SSR. Al ejecutar Vite en modo de desarrollo, el código del servidor se ejecuta en el mismo proceso de Node que el servidor de desarrollo de Vite, lo que da una aproximación cercana al entorno de producción. Sin embargo, una aplicación puede ejecutar servidores en otros entornos JS, como [workerd de Cloudflare](https://github.com/cloudflare/workerd). También es común que las aplicaciones modernas tengan más de dos entornos (por ejemplo, una aplicación podría ejecutarse en un navegador, un servidor Node y un servidor en el edge). Vite 5 no permitía representar adecuadamente estos casos.
+Cuando pasamos a una aplicación típica renderizada del lado del servidor (SSR), tendremos dos entornos:
 
-Vite 6 permite a los usuarios configurar su aplicación durante la compilación y el desarrollo para mapear todos sus entornos. Durante el desarrollo, ahora se puede usar un único servidor de desarrollo Vite para ejecutar código en varios entornos diferentes de manera concurrente. El código fuente de la aplicación sigue siendo transformado por el servidor de desarrollo Vite. Sobre el servidor HTTP compartido, los middlewares, la configuración resuelta y el pipeline de plugins, el servidor Vite ahora tiene un conjunto de entornos de desarrollo independientes. Cada uno de ellos está configurado para coincidir lo más posible con el entorno de producción y está conectado a un entorno de ejecución de desarrollo donde el código se ejecuta (para workerd, el código del servidor ahora puede ejecutarse localmente en miniflare). En el cliente, el navegador importa y ejecuta el código. En otros entornos, un ejecutor de módulos obtiene y evalúa el código transformado.
+- `client`: ejecuta la aplicación en el navegador.
+- `server`: ejecuta la aplicación en Node (u otros entornos de servidor) que renderiza las páginas antes de enviarlas al navegador.
+
+En desarrollo, Vite ejecuta el código del servidor en el mismo proceso de Node que el servidor de desarrollo de Vite, lo que proporciona una aproximación cercana al entorno de producción. Sin embargo, también es posible que los servidores se ejecuten en otros entornos de ejecución de JavaScript, como [workerd de Cloudflare](https://github.com/cloudflare/workerd), que tienen restricciones diferentes. Las aplicaciones modernas también pueden ejecutarse en más de dos entornos, por ejemplo, en un navegador, un servidor Node y un servidor de borde. Vite 5 no permitía representar correctamente estos entornos.
+
+Vite 6 permite a los usuarios configurar su aplicación durante la compilación y el desarrollo para mapear todos sus entornos. Durante el desarrollo, un solo servidor de desarrollo de Vite ahora puede usarse para ejecutar código en múltiples entornos diferentes simultáneamente. El código fuente de la aplicación aún es transformado por el servidor de desarrollo de Vite. Sobre el servidor HTTP compartido, los middleware, la configuración resuelta y la canalización de plugins, el servidor de desarrollo de Vite ahora tiene un conjunto de entornos de desarrollo independientes. Cada uno de ellos se configura para coincidir con el entorno de producción lo más posible y está conectado a un entorno de ejecución en desarrollo donde se ejecuta el código (para workerd, el código del servidor ahora puede ejecutarse localmente en miniflare). En el cliente, el navegador importa y ejecuta el código. En otros entornos, un ejecutor de módulos obtiene y evalúa el código transformado.
 
 ![Entornos de Vite](../images/vite-environments.svg)
 
-## Configuración del Entorno
+## Configuración de Entornos
 
-Los entornos se configuran explícitamente con la opción de configuración `environments`.´
+Para una SPA/MPA, la configuración será similar a la de Vite 5. Internamente, estas opciones se utilizan para configurar el entorno `client`.
+
+```js
+export default defineConfig({
+  build: {
+    sourcemap: false,
+  },
+  optimizeDeps: {
+    include: ['lib'],
+  },
+})
+```
+
+Esto es importante porque queremos mantener Vite accesible y evitar exponer nuevos conceptos hasta que sean necesarios. Si la aplicación está compuesta por varios entornos, estos pueden configurarse explícitamente con la opción de configuración `environments`.
 
 ```js
 export default {
+  build: {
+    sourcemap: false,
+  },
+  optimizeDeps: {
+    include: ['lib'],
+  },
   environments: {
-    client: {
+    server: {},
+    edge: {
       resolve: {
-        conditions: [], // configurar el entorno Cliente
-      },
-    },
-    ssr: {
-      optimizeDeps: {}, // configurar el entorno SSR
-    },
-    rsc: {
-      resolve: {
-        noExternal: true, // configurar un entorno personalizado
+        noExternal: true,
       },
     },
   },
 }
 ```
 
-Todos los archivos de configuración de entornos se extienden desde la configuración raíz del usuario, lo que permite a los usuarios agregar valores predeterminados para todos los entornos a nivel raíz. Esto es muy útil para el caso común de configurar una aplicación solo para cliente en Vite, lo cual se puede hacer sin pasar por `environments.client`.
+Cuando no está documentado explícitamente, los entornos heredan las opciones de configuración del nivel superior (por ejemplo, los nuevos entornos `server` y `edge` heredarán la opción `build.sourcemap: false`). Un pequeño número de opciones de nivel superior, como `optimizeDeps`, solo se aplica al entorno `client`, ya que no funcionan bien cuando se aplican como predeterminadas a los entornos de servidor. El entorno `client` también puede configurarse explícitamente a través de `environments.client`, pero se recomienda hacerlo con las opciones de nivel superior para que la configuración del cliente permanezca sin cambios al agregar nuevos entornos.
 
-```js
-export default {
-  resolve: {
-    conditions: [], // configurar un valor predeterminado para todos los entornos
-  },
-}
-```
-
-La interfaz `EnvironmentOptions` expone todas las opciones por entorno. Existen `SharedEnvironmentOptions` que se aplican tanto a `build` como a `dev`, como `resolve`. Y también existen `DevEnvironmentOptions` y `BuildEnvironmentOptions` para las opciones específicas de `dev` y `build` (como `optimizeDeps` o `build.outDir`).
+La interfaz `EnvironmentOptions` expone todas las opciones por entorno. Existen opciones de entorno que se aplican tanto a `build` como a `dev`, como `resolve`. Y hay `DevEnvironmentOptions` y `BuildEnvironmentOptions` para opciones específicas de dev y compilación (como `dev.warmup` o `build.outDir`). Algunas opciones como `optimizeDeps` solo se aplican a dev, pero se mantienen como nivel superior en lugar de anidarse en `dev` para mantener la compatibilidad con versiones anteriores.
 
 ```ts
-interface EnvironmentOptions extends SharedEnvironmentOptions {
+interface EnvironmentOptions {
+  define?: Record<string, any>
+  resolve?: EnvironmentResolveOptions
+  optimizeDeps: DepOptimizationOptions
+  consumer?: 'client' | 'server'
   dev: DevOptions
   build: BuildOptions
 }
 ```
 
-Como se explicó, las opciones específicas de entorno definidas a nivel raíz en la configuración del usuario son usadas para el entorno predeterminado `client` (la interfaz `UserConfig` extiende de la interfaz `EnvironmentOptions`). Los entornos pueden configurarse explícitamente usando el registro `environments`. Los entornos `client` y `ssr` siempre están presentes durante el desarrollo, incluso si se asigna un objeto vacío a `environments`. Esto permite la compatibilidad con `server.ssrLoadModule(url)` y `server.moduleGraph`. Durante la compilación, el entorno `client` siempre está presente, y el entorno `ssr` solo está presente si se configura explícitamente (usando `environments.ssr` o, por compatibilidad, `build.ssr`).
+La interfaz `UserConfig` extiende de la interfaz `EnvironmentOptions`, lo que permite configurar el cliente y los valores predeterminados para otros entornos, configurados a través de la opción `environments`. El entorno `client` y un entorno de servidor llamado `ssr` siempre están presentes durante el desarrollo. Esto permite la compatibilidad con versiones anteriores con `server.ssrLoadModule(url)` y `server.moduleGraph`. Durante la compilación, el entorno `client` siempre está presente, y el entorno `ssr` solo está presente si se configura explícitamente (utilizando `environments.ssr` o, para compatibilidad con versiones anteriores, `build.ssr`). Una aplicación no necesita usar el nombre `ssr` para su entorno SSR; podría llamarlo `server`, por ejemplo.
 
 ```ts
 interface UserConfig extends EnvironmentOptions {
@@ -77,27 +90,21 @@ interface UserConfig extends EnvironmentOptions {
 }
 ```
 
-::: info
+Ten en cuenta que la propiedad de nivel superior `ssr` se va a declarar obsoleta una vez que la API de Entornos sea estable. Esta opción tiene el mismo rol que `environments`, pero para el entorno predeterminado `ssr` y solo permitía configurar un pequeño conjunto de opciones.
 
-La propiedad de nivel superior `ssr` tiene muchas opciones en común con `EnvironmentOptions`. Esta opción fue creada para el mismo caso de uso que `environments`, pero solo permitía la configuración de un número reducido de opciones. Vamos a descontinuarla a favor de una forma unificada de definir la configuración del entorno.
+## Instancias de entornos personalizados
 
-:::
-
-## Instancias personalizadas de entorno
-
-Están disponibles APIs de configuración de bajo nivel para que los proveedores de entornos proporcionen entornos para sus entornos de ejecución.
+Están disponibles APIs de configuración de bajo nivel para que los proveedores de entornos en tiempo de ejecución puedan proporcionar entornos con valores predeterminados adecuados para sus entornos de ejecución. Estos entornos también pueden generar otros procesos o hilos para ejecutar los módulos durante el desarrollo en un entorno de ejecución más cercano al entorno de producción.
 
 ```js
-import { createCustomEnvironment } from 'vite-environment-provider'
+import { customEnvironment } from 'vite-environment-provider'
 
 export default {
+  build: {
+    outDir: '/dist/client',
+  },
   environments: {
-    client: {
-      build: {
-        outDir: '/dist/client',
-      },
-    }
-    ssr: createCustomEnvironment({
+    ssr: customEnvironment({
       build: {
         outDir: '/dist/ssr',
       },

@@ -162,10 +162,26 @@ Opciones para [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plu
 
 ## build.lib
 
-- **Tipo:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string) }`
+- **Tipo:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
 - **Relacionado:** [Modo Librería](/guide/build#modo-libreria)
 
-Compilar como una librería. Se requiere `entry` ya que la librería no puede usar HTML como archivo de entrada. `name` es la variable global expuesta y se requiere cuando `formats` incluye `'umd'` o `'iife'`. Por defecto `formats` es `['es', 'umd']`, o `['es', 'cjs']`, si se usan multiples archivos de entrada. `fileName` es el nombre de la salida del archivo del paquete, por defecto `fileName` es la opción de nombre del package.json, también se puede definir como una función que toma el `format` y `entryName` como argumentos.
+Compilar como una librería. `entry` es obligatorio ya que la librería no puede usar HTML como punto de entrada. `name` es la variable global expuesta y es obligatoria cuando `formats` incluye `'umd'` o `'iife'`. Los valores predeterminados de `formats` son `['es', 'umd']`, o `['es', 'cjs']`, si se usan múltiples entradas.
+
+`fileName` es el nombre del archivo de salida del paquete, que por defecto es el `"name"` en `package.json`. También puede definirse como una función que toma `format` y `entryName` como argumentos y devuelve el nombre del archivo.
+Si tu paquete importa CSS, se puede usar `cssFileName` para especificar el nombre del archivo CSS de salida. Por defecto, toma el mismo valor que `fileName` si se establece como una cadena, de lo contrario también recae en el `"name"` en `package.json`.
+
+```js
+import { defineConfig } from 'vite'
+export default defineConfig({
+  compilar: {
+    lib: {
+      entry: ['src/main.js'],
+      fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
+      cssFileName: 'my-lib-style',
+    },
+  },
+})
+```
 
 ## build.manifest
 

@@ -55,11 +55,11 @@ Cuando se importa un paquete solo ESM con `require`, ocurre el siguiente error:
 
 > No se pudo resolver "foo". Este paquete es solo ESM pero se intentó cargar con `require`.
 
-> "foo" se resolvió como un archivo ESM. Los archivos ESM no se pueden cargar con require.
+> Error [ERR_REQUIRE_ESM]: no se admite el uso de `require()` de un módulo ES `/path/to/dependency.js` desde `/path/to/vite.config.js`.  
+> En su lugar, cambia la llamada a `require` de `index.js` en `/path/to/vite.config.js` a una importación dinámica `import()`, la cual está disponible en todos los módulos CommonJS.  
+> En Node.js <=22, los archivos ESM no pueden cargarse mediante `require()` por defecto.
 
-Los archivos ESM no se pueden cargar mediante [`require`](<https://nodejs.org/docs/latest-v18.x/api/esm.html#require:~:text=Using%20require%20to%20load%20an%20ES%20module%20is%20not%20supported%20because%20ES%20modules%20have%20asynchronous%20execution.%20Instead%2C%20use%20import()%20to%20load%20an%20ES%20module%20from%20a%20CommonJS%20module.>).
-
-Recomendamos convertir tu configuración a ESM siguiendo una de estas opciones:
+Aunque puede funcionar utilizando `--experimental-require-module` o en versiones de Node.js >22, o en otros entornos, aún se recomienda convertir tu configuración a ESM así:
 
 - Añade `"type": "module"` al archivo `package.json` más cercano.
 - Renombra `vite.config.js`/`vite.config.ts` a `vite.config.mjs`/`vite.config.mts`
