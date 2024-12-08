@@ -1,17 +1,17 @@
 # API de Entorno para Plugins
 
 :::warning Experimental
-El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de Runtime de Vite". Esta guía describe una API revisada, renombrada a API de Entorno. Esta API se lanzará en Vite 6 como experimental. Ya puedes probarla en la última versión `vite@6.0.0-beta.x`.
+La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
 
-Recursos:
+**Recursos:**
 
 - [Discusión de feedback](https://github.com/vitejs/vite/discussions/16358) donde estamos recopilando comentarios sobre las nuevas APIs.
 - [PR de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementaron y revisaron las nuevas APIs.
 
-Por favor, comparte con nosotros tus comentarios mientras pruebas la propuesta.
+Por favor, comparte tus comentarios con nosotros.
 :::
 
-## Accediendo al entorno actual en hooks
+## Accediendo al Entorno Actual en Hooks
 
 Dado que solo había dos entornos hasta Vite 6 (`client` y `ssr`), un booleano `ssr` era suficiente para identificar el entorno actual en las APIs de Vite. Los hooks de plugins recibían un booleano `ssr` en el último parámetro de opciones, y varias APIs esperaban un parámetro `ssr` opcional para asociar correctamente los módulos con el entorno adecuado (por ejemplo, `server.moduleGraph.getModuleByUrl(url, { ssr })`).
 
@@ -27,7 +27,7 @@ transform(code, id) {
 }
 ```
 
-## Registrar nuevos entornos usando hooks
+## Registrar Nuevos Entornos usando Hooks
 
 Los plugins pueden agregar nuevos entornos en el hook `config` (por ejemplo, para tener un grafo de módulos separado para [RSC](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components)):
 
@@ -39,7 +39,7 @@ config(config: UserConfig) {
 
 Un objeto vacío es suficiente para registrar el entorno, con valores predeterminados desde la configuración de entorno a nivel raíz.
 
-## Configuración del entorno usando hooks
+## Configuración del Entorno usando Hooks
 
 Mientras el hook `config` se está ejecutando, la lista completa de entornos aún no es conocida y los entornos pueden verse afectados tanto por los valores predeterminados desde la configuración de entorno a nivel raíz como explícitamente a través del registro `config.environments`.
 
@@ -53,7 +53,7 @@ configEnvironment(name: string, options: EnvironmentOptions) {
 }
 ```
 
-## El hook `hotUpdate`
+## El Hook `hotUpdate`
 
 - **Tipo:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
 - **Ver también:** [API de HMR](./api-hmr)
@@ -140,7 +140,8 @@ const UnoCssPlugin = () => {
       // usar hooks globales normalmente
     },
     applyToEnvironment(environment) {
-      // retorna true si este plugin debe estar activo en este entorno
+      // devuelve `true` si este plugin debe estar activo en este entorno,
+      // o devuelve un nuevo plugin para reemplazarlo.
       // si no se usa el hook, el plugin está activo en todos los entornos
     },
     resolveId(id, importer) {
@@ -150,13 +151,42 @@ const UnoCssPlugin = () => {
 }
 ```
 
-## Entorno en hooks de compilación
+Si un plugin no es consciente del entorno y tiene un estado que no está asociado al entorno actual, el hook `applyToEnvironment` permite convertirlo fácilmente en un plugin por entorno.
+
+```js
+import { nonShareablePlugin } from 'non-shareable-plugin'
+export default defineConfig({
+  plugins: [
+    {
+      name: 'per-environment-plugin',
+      applyToEnvironment(environment) {
+        return nonShareablePlugin({ outputName: environment.name })
+      },
+    },
+  ],
+})
+```
+
+Vite exporta un helper `perEnvironmentPlugin` para simplificar estos casos donde no se requieren otros hooks:
+
+```js
+import { nonShareablePlugin } from 'non-shareable-plugin'
+export default defineConfig({
+  plugins: [
+    perEnvironmentPlugin('per-environment-plugin', (environment) =>
+      nonShareablePlugin({ outputName: environment.name })
+    ),
+  ],
+})
+```
+
+## Entorno en Hooks de Compilación
 
 De la misma manera que durante el desarrollo, los hooks de plugins también reciben la instancia del entorno durante la compilación, reemplazando el booleano `ssr`.
 
 Esto también funciona para `renderChunk`, `generateBundle` y otros hooks solo de compilación.
 
-## Plugins compartidos durante la compilación
+## Plugins Compartidos durante la Compilación
 
 Antes de Vite 6, los pipelines de plugins funcionaban de manera diferente durante el desarrollo y la compilación:
 

@@ -1,13 +1,14 @@
 # API de Entorno para Frameworks
 
 :::warning Experimental  
-El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de Runtime de Vite". Esta guía describe una API revisada, renombrada como API de Entorno. Esta API será lanzada en Vite 6 como experimental. Ya puedes probarla en la última versión `vite@6.0.0-beta.x`.  
-Recursos:
+La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ella. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
+
+**Recursos:**
 
 - [Discusión sobre comentarios](https://github.com/vitejs/vite/discussions/16358) donde estamos recopilando opiniones sobre las nuevas APIs.
 - [PR de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementaron y revisaron las nuevas APIs.
 
-Por favor, comparte tus comentarios mientras pruebas la propuesta.  
+Por favor, comparte tus comentarios con nosotros.  
 :::
 
 ## Entornos y frameworks
@@ -80,7 +81,7 @@ app.use('*', async (req, res, next) => {
 })
 ```
 
-## SSR agnóstico al tiempo de ejecución
+## SSR Agnóstico al tiempo de ejecución
 
 Dado que el `RunnableDevEnvironment` solo se puede usar para ejecutar código en el mismo tiempo de ejecución que el servidor Vite, requiere un entorno compatible con Node.js. Esto significa que necesitarás usar el `DevEnvironment` sin modificar para hacerlo agnóstico al tiempo de ejecución.
 
@@ -370,7 +371,7 @@ export function createHandler(input) {
 }
 ```
 
-## Entornos durante la compilación
+## Entornos Durante la Compilación
 
 En la interfaz de línea de comandos, al ejecutar `vite build` y `vite build --ssr`, se seguirán compilando únicamente los entornos de cliente y SSR para mantener la retrocompatibilidad.
 
@@ -391,7 +392,7 @@ export default {
 }
 ```
 
-## Código independiente del entorno
+## Código Agnóstico del entorno
 
 La mayor parte del tiempo, la instancia actual de `environment` estará disponible como parte del contexto del código que se está ejecutando, por lo que la necesidad de acceder a ella a través de `server.environments` será poco común.
 

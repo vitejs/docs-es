@@ -116,6 +116,12 @@ export const core = [
     ],
     sponsor: 'https://github.com/sponsors/hi-ogawa',
   },
+  {
+    avatar: 'https://github.com/btea.png',
+    name: 'btea',
+    title: 'Web Developer',
+    links: [{ icon: 'github', link: 'https://github.com/btea' }],
+  },
 ]
 
 export const emeriti = [
@@ -202,18 +208,18 @@ export const emeriti = [
     sponsor: 'https://github.com/sponsors/Shinigami92',
   },
   {
-    avatar: 'https://github.com/sodatea.png',
+    avatar: 'https://github.com/haoqunjiang.png',
     name: 'Haoqun Jiang',
-    title: 'Desarrollador',
+    title: 'Miembro principal del equipo',
     org: 'Vue.js',
     orgLink: 'https://vuejs.org/',
-    desc: 'Miembro del equipo principal de Vue/Vite. Contribuyente del codigo abierto a tiempo completo.',
+    desc: 'Curador de mejores prácticas para herramientas de Vue.js.',
     links: [
       { icon: 'github', link: 'https://github.com/sodatea' },
       { icon: 'x', link: 'https://x.com/haoqunjiang' },
       { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/haoqun.dev' },
     ],
-    sponsor: 'https://github.com/sponsors/sodatea',
+    sponsor: 'https://github.com/sponsors/haoqunjiang',
   },
 ]

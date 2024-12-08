@@ -25,11 +25,11 @@ Las condiciones que ya no se agregan internamente para:
 - `resolve.conditions` son `['module', 'browser', 'development|production']`
 - `ssr.resolve.conditions` son `['module', 'node', 'development|production']`
 
-Los valores por defecto para esas opciones se actualizan a los valores correspondientes y `ssr.resolve.conditions` ya no utiliza `resolve.conditions` como valor por defecto. Ten en cuenta que `development|production` es una variable especial que se reemplaza por `production` o `development` dependiendo del valor de `process.env.NODE_ENV`.
+Los valores por defecto para esas opciones se actualizan a los valores correspondientes y `ssr.resolve.conditions` ya no utiliza `resolve.conditions` como valor por defecto. Ten en cuenta que `development|production` es una variable especial que se reemplaza por `production` o `development` dependiendo del valor de `process.env.NODE_ENV`. Estos valores por defecto se exportan desde `vite` como `defaultClientConditions` y `defaultServerConditions`.
 
 Si especificaste un valor personalizado para `resolve.conditions` o `ssr.resolve.conditions`, debes actualizarlo para incluir las nuevas condiciones.
 
-Por ejemplo, si antes especificabas `['custom']` para `resolve.conditions`, ahora debes especificar `['custom', 'module', 'browser', 'development|production']`.
+Por ejemplo, si antes especificabas `['custom']` para `resolve.conditions`, ahora debes especificar `['custom', ...defaultClientConditions]`.
 
 ### JSON stringify
 
@@ -83,6 +83,8 @@ Si prefieres mantener `style.css` como en Vite 5, puedes establecer `build.lib.c
 
 Existen otros cambios incompatibles que solo afectan a algunos usuarios.
 
+- [[#17922] fix(css)!: elimina la importación predeterminada en el desarrollo SSR](https://github.com/vitejs/vite/pull/17922)
+  - El soporte para la importación predeterminada de archivos CSS fue [descontinuado en Vite 4](https://v4.vite.dev/guide/migration.html#importing-css-as-a-string) y eliminado en Vite 5, pero todavía se mantenía sin querer en el modo de desarrollo SSR. Este soporte ahora se ha eliminado.
 - [[#15637] fix!: establece `build.cssMinify` a `'esbuild'` por defecto para SSR](https://github.com/vitejs/vite/pull/15637)
   - [`build.cssMinify`](/config/build-options#build-cssminify) ahora está habilitado por defecto incluso para compilaciones SSR.
 - [[#18070] feat!: bypass de proxy con WebSocket](https://github.com/vitejs/vite/pull/18070)
@@ -93,6 +95,8 @@ Existen otros cambios incompatibles que solo afectan a algunos usuarios.
   - [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) ahora es `true` por defecto (antes era `'auto'`). Esto puede llevar a tamaños de paquetes más grandes, pero resultará en compilaciones más deterministas.
 - [[#18243] chore(deps)!: migra `fast-glob` a `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
   - Ya no se soportan los corchetes de rango (`{01..03}` ⇒ `['01', '02', '03']`) ni los corchetes incrementales (`{2..8..2}` ⇒ `['2', '4', '6', '8']`) en los globs.
+- [[#18395] feat(resolve)!: permite eliminar condiciones](https://github.com/vitejs/vite/pull/18395)
+  - Este PR no solo introduce un cambio importante mencionado anteriormente como "Valor por defecto para `resolve.conditions`", sino que también hace que `resolve.mainFields` no se use para las dependencias no externalizadas en SSR. Si estabas usando `resolve.mainFields` y deseas aplicarlo a las dependencias no externalizadas en SSR, puedes usar [`ssr.resolve.mainFields`](/config/ssr-options#ssr-resolve-mainfields).
 - [[#18493] refactor!: elimina la opción fs.cachedChecks](https://github.com/vitejs/vite/pull/18493)
   - Esta optimización opcional fue eliminada debido a casos extremos al escribir un archivo en una carpeta de caché e importarlo inmediatamente.
 

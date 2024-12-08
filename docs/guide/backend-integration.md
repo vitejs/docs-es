@@ -98,6 +98,8 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
    - El manifest tiene una estructura `Record<name, chunk>`.
    - Para fragmentos de entrada fija o dinámica, la key es la ruta src relativa de la raíz del proyecto.
+   - Para los fragmentos que no son de entrada, la clave es el nombre base del archivo generado, precedido por un `_`.
+   - Para el archivo CSS generado cuando [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) es `false`, la clave es `style.css`.
    - Los fragmentos contendrán información en sus importaciones estaticas y dinamicas (ambos son keys que mapean al correspondiente fragmento en el manifest), y tambien su correspondiente css y archivo de recurso estatico (si los hay).
 
 4. Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash.

@@ -215,11 +215,11 @@ export defineConfig default ({
 
 - **Tipo:** `object | null`
 
-Opciones del observador del sistema de archivos que se pasan a [chokidar](https://github.com/paulmillr/chokidar#getting-started). Si se pasa la opción `ignored`, Vite también convertirá automáticamente cualquier cadena en [patrones picomatch](https://github.com/micromatch/picomatch#globbing-features).
+Opciones del observador del sistema de archivos que se pasan a [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
 
 El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
-Si se configura en `null`, no se observarán archivos. `server.watcher` no observará ningún archivo y llamar a `add` no tendrá efecto.
+Si se configura en `null`, no se vigilarán archivos. `server.watcher` proporcionará un emisor de eventos compatible, pero llamar a `add` o `unwatch` no tendrá efecto.
 
 ::: warning Observando archivos en `node_modules`
 Actualmente no es posible ver archivos y paquetes en `node_modules`. Para obtener más avances y soluciones alternativas, puede seguir la [propuesta #8619](https://github.com/vitejs/vite/issues/8619).
@@ -234,7 +234,7 @@ Para solucionarlo, podrías:
 - **Recomendado**: Utilizar las aplicaciones WSL2 para editar tus archivos.
   - También se recomienda mover la carpeta del proyecto fuera del sistema de archivos de Windows. El acceso al sistema de archivos de Windows desde WSL2 es lento. Eliminar esa sobrecarga mejorará el rendimiento.
 - Configura `{ usePolling: true }`.
-  - Ten en cuenta que [`usePolling` conduce a un uso elevado de la CPU](https://github.com/paulmillr/chokidar#performance).
+  - Ten en cuenta que [`usePolling` conduce a un uso elevado de la CPU](https://github.com/paulmillr/chokidar/tree/3.6.0#performance).
 
 :::
 

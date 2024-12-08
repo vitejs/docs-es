@@ -106,9 +106,9 @@ interface ViteDevServer {
    */
   httpServer: http.Server | null
   /**
-   * Instancia del observador Chokidar. Si `config.server.watch` está configurado en `null`,
-   * no observará ningún archivo y llamar a `add` no tendrá efecto.
-   * https://github.com/paulmillr/chokidar#getting-started
+   * Instancia del observador Chokidar. Si `config.server.watch` se establece en `null`,
+   * no se vigilarán archivos y llamar a `add` o `unwatch` no tendrá efecto.
+   * https://github.com/paulmillr/chokidar/tree/3.6.0#api
    */
   watcher: FSWatcher
   /**

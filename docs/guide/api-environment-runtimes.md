@@ -1,14 +1,14 @@
 # API de Entorno para Runtimes
 
 :::warning Experimental
-El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de Runtime de Vite". Esta guía describe una API revisada, renombrada a API de Entorno. Esta API se lanzará en Vite 6 como experimental. Ya puedes probarla en la última versión `vite@6.0.0-beta.x`.
+La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
 
 **Recursos:**
 
 - [Discusión de feedback](https://github.com/vitejs/vite/discussions/16358) donde recopilamos opiniones sobre las nuevas APIs.
 - [PR de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementaron y revisaron las nuevas APIs.
 
-Por favor, comparte tus comentarios mientras pruebas esta propuesta.
+Por favor, comparte tus comentarios con nosotros.
 :::
 
 ## Fábricas de Entornos
@@ -72,7 +72,7 @@ Los frameworks pueden usar un entorno con el runtime Workerd para hacer SSR medi
 const ssrEnvironment = server.environments.ssr
 ```
 
-## Crear una nueva fábrica de entornos
+## Crear una nueva Fábrica de Entornos
 
 Un servidor de desarrollo Vite expone dos entornos por defecto: un entorno `client` y un entorno `ssr`. El entorno `client` es un entorno de navegador por defecto, y el ejecutor de módulos se implementa importando el módulo virtual `/@vite/client` en las aplicaciones cliente. El entorno `ssr` se ejecuta en el mismo runtime Node que el servidor Vite por defecto y permite que los servidores de aplicaciones procesen solicitudes con soporte completo de HMR durante el desarrollo.
 
@@ -255,9 +255,7 @@ interface ModuleRunnerTransport {
   connect?(handlers: ModuleRunnerTransportHandlers): Promise<void> | void
   disconnect?(): Promise<void> | void
   send?(data: HotPayload): Promise<void> | void
-  invoke?(
-    data: HotPayload
-  ): Promise<{ /** result */ r: any } | { /** error */ e: any }>
+  invoke?(data: HotPayload): Promise<{ result: any } | { error: any }>
   timeout?: number
 }
 ```

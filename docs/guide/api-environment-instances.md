@@ -1,17 +1,17 @@
-# Uso de instancias de `Environment`
+# Uso de Instancias de `Environment`
 
 :::warning Experimental  
-El trabajo inicial para esta API se introdujo en Vite 5.1 bajo el nombre "API de Runtime de Vite". Esta guía describe una API revisada, renombrada a API de Entorno (Environment API). Esta API será lanzada en Vite 6 como experimental. Puedes probarla en la última versión beta `vite@6.0.0-beta.x`.
+La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ella. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
 
 **Recursos:**
 
 - [Discusión de feedback](https://github.com/vitejs/vite/discussions/16358), donde estamos recopilando opiniones sobre las nuevas APIs.
 - [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471), donde se implementó y revisó la nueva API.
 
-Por favor, compártenos tus comentarios mientras pruebas esta propuesta.  
+Por favor, comparte tus comentarios con nosotros.
 :::
 
-## Acceso a los entornos
+## Acceso a los Entornos
 
 Durante el desarrollo, los entornos disponibles en un servidor de desarrollo se pueden acceder utilizando `server.environments`:
 
@@ -100,7 +100,7 @@ Una instancia de entorno en el servidor Vite permite procesar una URL utilizando
 Estamos usando `transformRequest(url)` y `warmupRequest(url)` en la versión actual de esta propuesta para que sea más fácil de discutir y entender para los usuarios acostumbrados a la API actual de Vite. Antes de liberar, podemos aprovechar la oportunidad para revisar estos nombres también. Por ejemplo, podría llamarse `environment.processModule(url)` o `environment.loadModule(url)` tomando como referencia el `context.load(id)` de los hooks de Rollup. Por el momento, creemos que mantener los nombres actuales y posponer esta discusión es lo mejor.
 :::
 
-## Grafos de módulos separados
+## Grafos de Módulos Separados
 
 Cada entorno tiene un grafo de módulos aislado. Estos grafos tienen la misma estructura, lo que permite implementar algoritmos genéricos para recorrer o consultar los nodos sin depender del entorno. Por ejemplo, cuando un archivo es modificado, el grafo de módulos de cada entorno se usa para descubrir los módulos afectados y ejecutar HMR independientemente.
 

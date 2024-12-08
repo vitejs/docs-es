@@ -14,7 +14,7 @@ import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-Por ejemplo, `imgUrl` será `/img.png` durante el desarrollo y se convertirá en `/assets/img.2d8efhg.png` en la compilación de producción.
+Por ejemplo, `imgUrl` será `/src/img.png` durante el desarrollo y se convertirá en `/assets/img.2d8efhg.png` en la compilación de producción.
 
 El comportamiento es similar al `file-loader` de webpack. La diferencia es que la importación puede ser usando rutas públicas absolutas (basadas en la raíz del proyecto durante el desarrollo) o rutas relativas.
 

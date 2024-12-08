@@ -34,7 +34,7 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 ## ssr.resolve.conditions
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['module', 'node', 'development|production']` (`['module', 'browser', 'development|production']` for `ssr.target === 'webworker'`)
+- **Por defecto:** `['module', 'node', 'development|production']` (`defaultServerConditions`) (`['module', 'browser', 'development|production']` (`defaultClientConditions`) for `ssr.target === 'webworker'`)
 - **Relacionado:** [Condiciones de resolución](./shared-options.md#resolve-conditions)
 
   El valor predeterminado es la raíz [`resolve.conditions`](./shared-options.md#resolve-conditions).
@@ -46,4 +46,17 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 - **Tipo:** `string[]`
 - **Por defecto:** `['node']`
 
-  Condiciones que se utilizan durante la importación ssr (incluido `ssrLoadModule`) de dependencias externalizadas.
+  Condiciones que se utilizan durante la importación en SSR (incluyendo `ssrLoadModule`) de dependencias directas externalizadas (dependencias externas importadas por Vite).
+
+  :::tip
+
+  Al usar esta opción, asegúrate de ejecutar Node con la [opción `--conditions`](https://nodejs.org/docs/latest/api/cli.html#-c-condition---conditionscondition) y los mismos valores tanto en desarrollo como en compilación para obtener un comportamiento coherente.
+
+  Por ejemplo, al establecer `['node', 'custom']`, deberías ejecutar `NODE_OPTIONS='--conditions custom' vite` en desarrollo y `NODE_OPTIONS="--conditions custom" node ./dist/server.js` después de compilar.
+
+### ssr.resolve.mainFields
+
+- **Tipo:** `string[]`
+- **Por defecto:** `['module', 'jsnext:main', 'jsnext']`
+
+Lista de campos en `package.json` que se intentarán al resolver el punto de entrada de un paquete. Ten en cuenta que esta configuración tiene menor precedencia que las exportaciones condicionales resueltas desde el campo `exports`: si se resuelve con éxito un punto de entrada desde `exports`, se ignorará el campo `main`. Esta configuración solo afecta a las dependencias no externalizadas.

@@ -1,21 +1,21 @@
 # API de Entorno
 
 ::: warning Experimental
-El trabajo inicial para esta API se introdujo en Vite 5.1 con el nombre "API de Entorno en Tiempo de Ejecución". Esta guía describe una API revisada, renombrada como API de Entorno. Esta API será lanzada en Vite 6 como experimental. Puedes probarla ya en la última versión `vite@6.0.0-beta.x`.
+La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
 
 Recursos:
 
 - [Discusión de feedback](https://github.com/vitejs/vite/discussions/16358) donde estamos recopilando comentarios sobre las nuevas APIs.
 - [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471) donde se implementa y revisa la nueva API.
 
-Por favor, compártenos tus comentarios a medida que pruebas la propuesta.
+Por favor, comparte tus comentarios con nosotros.
 :::
 
 ## Formalizando entornos
 
 Vite 6 formaliza el concepto de Entornos. Hasta Vite 5, había dos entornos implícitos (`client` y opcionalmente `ssr`). La nueva API de Entornos permite a los usuarios y autores de frameworks crear tantos entornos como sea necesario para mapear la forma en que sus aplicaciones funcionan en producción. Esta nueva capacidad requirió una gran reestructuración interna, pero se ha puesto mucho esfuerzo en mantener la retrocompatibilidad. El objetivo inicial de Vite 6 es migrar el ecosistema a la nueva versión principal de la manera más fluida posible, retrasando la adopción de estas nuevas APIs experimentales hasta que un número suficiente de usuarios haya migrado y los autores de frameworks y plugins hayan validado el nuevo diseño.
 
-## Cerrando la brecha entre la compilación y el desarrollo
+## Cerrando la Brecha entre la Compilación y el Desarrollo
 
 Para una SPA/MPA simple, no se exponen nuevas APIs sobre los entornos en la configuración. Internamente, Vite aplicará las opciones a un entorno `client`, pero no es necesario conocer este concepto al configurar Vite. La configuración y el comportamiento de Vite 5 deberían funcionar de manera fluida aquí.
 
@@ -92,7 +92,7 @@ interface UserConfig extends EnvironmentOptions {
 
 Ten en cuenta que la propiedad de nivel superior `ssr` se va a declarar obsoleta una vez que la API de Entornos sea estable. Esta opción tiene el mismo rol que `environments`, pero para el entorno predeterminado `ssr` y solo permitía configurar un pequeño conjunto de opciones.
 
-## Instancias de entornos personalizados
+## Instancias de Entornos Personalizados
 
 Están disponibles APIs de configuración de bajo nivel para que los proveedores de entornos en tiempo de ejecución puedan proporcionar entornos con valores predeterminados adecuados para sus entornos de ejecución. Estos entornos también pueden generar otros procesos o hilos para ejecutar los módulos durante el desarrollo en un entorno de ejecución más cercano al entorno de producción.
 
@@ -121,7 +121,7 @@ La API actual del servidor Vite aún no está obsoleta y es compatible con versi
 - [SSR usando la API `ModuleRunner`](/changes/ssr-using-modulerunner)
 - [Plugins compartidos durante la compilación](/changes/shared-plugins-during-build)
 
-## Usuarios objetivo
+## Usuarios Objetivo
 
 Esta guía proporciona los conceptos básicos sobre entornos para usuarios finales.
 

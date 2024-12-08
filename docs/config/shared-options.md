@@ -109,7 +109,7 @@ Para compilaciones de SSR, la deduplicación no funciona para las salidas de com
 ## resolve.conditions
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['module', 'browser', 'development|production']`
+- **Por defecto:** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
 
 Condiciones adicionales permitidas al resolver las [exportaciones condicionales](https://nodejs.org/api/packages.html#packages_conditional_exports) desde un paquete.
 
@@ -139,7 +139,7 @@ Las claves de exportación que terminan en "/" están obsoletas en Node y es pos
 ## resolve.mainFields
 
 - **Tipo:** `string[]`
-- **Por defecto:** `[''browser', 'module', 'jsnext:main', 'jsnext']`
+- **Por defecto:** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)
 
 Lista de campos en `package.json` para probar al resolver el punto de entrada de un paquete. Ten en cuenta que esto tiene menos prioridad que las exportaciones condicionales resueltas desde el campo `exports`: si un punto de entrada se resuelve con éxito desde `exports`, el campo principal se ignorará.
 

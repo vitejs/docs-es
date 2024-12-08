@@ -176,7 +176,7 @@ Los recursos referenciados por elementos HTML como `<script type="module" src>` 
 - `<img src>` y `<img srcset>`
 - `<image src>`
 - `<input src>`
-- `<link href>` y `<link imagesrcet>`
+- `<link href>` y `<link imagesrcset>`
 - `<object data>`
 - `<script type="module" src>`
 - `<source src>` y `<source srcset>`

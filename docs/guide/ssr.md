@@ -153,7 +153,7 @@ app.use('*', async (req, res) => {
     const appHtml = await render(url)
 
     // 5. Inyecta el HTML generado por la aplicación en la plantilla.
-    const html = template.replace(`<!--ssr-outlet-->`, appHtml)
+    const html = template.replace(`<!--ssr-outlet-->`, () => appHtml)
 
     // 6. Devuelve el HTML renderizado.
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)

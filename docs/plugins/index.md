@@ -34,7 +34,7 @@ Revisa [Uso de plugins](../guide/using-plugins.md) para más información sobre 
 
 ### [@vite/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-- Reemplaza Babel con SWC durante el desarrollo. Durante las compilaciones, SWC+esbuild se usan con plugins, y esbuild sino no hay uso de ellos. Para grandes proyectos que no requieren extensiones no estándar de React, el arranque en frío y el Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
+- Reemplaza Babel con SWC durante el desarrollo. Durante las compilaciones de producción, SWC+esbuild se usan con plugins, y esbuild sino no hay uso de ellos. Para grandes proyectos que no requieren extensiones no estándar de React, el arranque en frío y el Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
 
 ### [@vite/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
