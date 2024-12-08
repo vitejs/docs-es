@@ -1,0 +1,25 @@
+import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
+import '@shikijs/vitepress-twoslash/style.css'
+import 'virtual:group-icons.css'
+import type { Theme } from 'vitepress'
+import DefaultTheme from 'vitepress/theme'
+import { h } from 'vue'
+import AsideSponsors from './components/AsideSponsors.vue'
+import SvgImage from './components/SvgImage.vue'
+import YouTubeVideo from './components/YouTubeVideo.vue'
+import './styles/landing.css'
+import './styles/vars.css'
+
+export default {
+  extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'aside-ads-before': () => h(AsideSponsors),
+    })
+  },
+  enhanceApp({ app }) {
+    app.component('SvgImage', SvgImage)
+    app.component('YouTubeVideo', YouTubeVideo)
+    app.use(TwoslashFloatingVue)
+  },
+} satisfies Theme
