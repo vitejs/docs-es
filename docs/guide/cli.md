@@ -14,25 +14,25 @@ vite [root]
 
 #### Opciones
 
-| Opción                    | Descripción                                                                                                                           |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `--host [host]`           | Especificar el nombre de host (`string`)                                                                                              |
-| `--port <port>`           | Especificar el puerto (`number`)                                                                                                      |
-| `--open [path]`           | Abrir el navegador al iniciar (`boolean \| string`)                                                                                   |
-| `--cors`                  | Habilitar CORS (`boolean`)                                                                                                            |
-| `--strictPort`            | Salir si el puerto especificado ya está en uso (`boolean`)                                                                            |
-| `--force`                 | Forzar al optimizador a ignorar la caché y volver a compilar (`boolean`)                                                              |
-| `-c, --config <file>`     | Usar el archivo de configuración especificado (`string`)                                                                              |
-| `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                                    |
-| `-l, --logLevel <level>`  | Nivel de log: info \| warn \| error \| silent (`string`)                                                                              |
-| `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                                           |
-| `--configLoader <loader>` | Usar `bundle` para compilar la configuración con `esbuild` o `runner` (experimental) para procesarla en tiempo real                   |
-| `--profile`               | Iniciar el inspector de Node.js incorporado (ver [cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks)) |
-| `-d, --debug [feat]`      | Mostrar logs de depuración (`string \| boolean`)                                                                                      |
-| `-f, --filter <filter>`   | Filtrar logs de depuración (`string`)                                                                                                 |
-| `-m, --mode <mode>`       | Definir el modo de entorno (`string`)                                                                                                 |
-| `-h, --help`              | Mostrar opciones disponibles en CLI                                                                                                   |
-| `-v, --version`           | Mostrar número de versión                                                                                                             |
+| Opciones                  | Descripción                                                                                                                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--host [host]`           | Especificar el nombre del host (`string`)                                                                                                                                                                     |
+| `--port <port>`           | Especificar el puerto (`number`)                                                                                                                                                                              |
+| `--open [path]`           | Abrir el navegador al iniciar (`boolean \| string`)                                                                                                                                                           |
+| `--cors`                  | Habilitar CORS (`boolean`)                                                                                                                                                                                    |
+| `--strictPort`            | Salir si el puerto especificado ya está en uso (`boolean`)                                                                                                                                                    |
+| `--force`                 | Obligar al optimizador a ignorar la caché y volver a empaquetar (`boolean`)                                                                                                                                   |
+| `-c, --config <file>`     | Usar el archivo de configuración especificado (`string`)                                                                                                                                                      |
+| `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                                                                                                            |
+| `-l, --logLevel <level>`  | `info` \| `warn` \| `error` \| `silent` (`string`)                                                                                                                                                            |
+| `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla en los registros (`boolean`)                                                                                                                                    |
+| `--configLoader <loader>` | Usar `bundle` para empaquetar la configuración con esbuild, `runner` (experimental) para procesarla sobre la marcha, o `native` (experimental) para cargarla con el runtime nativo (predeterminado: `bundle`) |
+| `--profile`               | Iniciar el inspector de Node.js integrado (ver [Cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks))                                                                           |
+| `-d, --debug [feat]`      | Mostrar registros de depuración (`string \| boolean`)                                                                                                                                                         |
+| `-f, --filter <filter>`   | Filtrar registros de depuración (`string`)                                                                                                                                                                    |
+| `-m, --mode <mode>`       | Establecer el modo de entorno (`string`)                                                                                                                                                                      |
+| `-h, --help`              | Mostrar las opciones disponibles en la CLI                                                                                                                                                                    |
+| `-v, --version`           | Mostrar el número de versión                                                                                                                                                                                  |
 
 ## Compilación
 
@@ -78,6 +78,8 @@ vite build [root]
 ### `vite optimize`
 
 Precompila las dependencias.
+
+**Obsoleto**: el proceso de pre-empaquetado se ejecuta automáticamente y no necesita ser llamado.
 
 #### Uso
 

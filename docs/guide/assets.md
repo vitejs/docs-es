@@ -46,7 +46,7 @@ document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 
 ### Importaciones de URL explícita
 
-Los recursos que no están incluidos en la lista interna o en `assetsInclude`, se pueden importar explícitamente como una URL usando el sufijo `?url`. Esto es útil, por ejemplo, para importar los [Houdini Paint Worklets](https://houdini.how/usage).
+Los recursos que no están incluidos en la lista interna o en `assetsInclude`, se pueden importar explícitamente como una URL usando el sufijo `?url`. Esto es útil, por ejemplo, para importar los [Houdini Paint Worklets](https://developer.mozilla.org/en-US/docs/Web/API/CSS/paintWorklet_static).
 
 ```js twoslash
 import 'vite/client'

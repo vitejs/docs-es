@@ -4,16 +4,25 @@ Cuando sea el momento de implementar tu aplicación en producción, simplemente 
 
 ## Compatibilidad de navegadores
 
-El empaquetado de producción asume soporte para código JavaScript moderno. De forma predeterminada, Vite apunta a los navegadores que admiten [modulos ES nativo](https://caniuse.com/es6-module), la [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) e [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
+Por defecto, el paquete de producción asume compatibilidad con JavaScript moderno, como [módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import), [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta), [operador de fusión de nulos](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) y [BigInt](https://caniuse.com/bigint). El rango de soporte de navegadores predeterminado es:
+
+<!-- Busca la constante `ESBUILD_MODULES_TARGET` para más información -->
 
 - Chrome >=87
 - Firefox >=78
 - Safari >=14
 - Edge >=88
 
-Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options#build-target), donde el objetivo más bajo es `es2015`.
+Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options.md#build-target), donde el objetivo más bajo es `es2015`. Si se configura un objetivo inferior, Vite seguirá requiriendo estos rangos mínimos de compatibilidad con navegadores, ya que depende de [la importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
 
-Ten en cuenta que, de forma predeterminada, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar https://cdnjs.cloudflare.com/polyfill/ el cual genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
+<!-- Busca la constante `defaultEsbuildSupported` para más información -->
+
+- Chrome >=64
+- Firefox >=67
+- Safari >=11.1
+- Edge >=79
+
+Ten en cuenta que, por defecto, Vite solo maneja las transformaciones de sintaxis y **no cubre los polyfills**. Puedes consultar https://cdnjs.cloudflare.com/polyfill/ el cual genera automáticamente paquetes de polyfill en función de la cadena UserAgent del navegador del usuario.
 
 Los navegadores obsoletos pueden ser soportados a través de [@vite/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy), que generará automáticamente fragmentos y las correspondientes polyfills con características en lenguaje ES. Los fragmentos se cargan condicionalmente solo en navegadores que no tienen soporte ESM nativo.
 

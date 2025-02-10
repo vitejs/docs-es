@@ -64,6 +64,15 @@ Aunque puede funcionar utilizando `--experimental-require-module` o en versiones
 - Añade `"type": "module"` al archivo `package.json` más cercano.
 - Renombra `vite.config.js`/`vite.config.ts` a `vite.config.mjs`/`vite.config.mts`
 
+### `Error al cargar la configuración desde '/path/to/config*/vite.config.js'`
+
+> Error al cargar la configuración desde '/path/to/config\*/vite.config.js'  
+> Error al iniciar el servidor de desarrollo:  
+> Error: La compilación falló con 1 error:  
+> error: Se debe usar "outdir" cuando hay múltiples archivos de entrada
+
+El error anterior puede ocurrir si la ruta de la carpeta de tu proyecto contiene `*`, ya que esbuild trata `*` como un patrón global (glob). Deberás renombrar tu directorio para eliminar el `*`.
+
 ## Servidor de desarrollo
 
 ### Las solicitudes se congelan para siempre
@@ -129,6 +138,14 @@ Cuando el servidor / el servidor WebSocket recibe una cabecera HTTP grande, la p
 Esto se debe a que Node.js limita el tamaño del encabezado de la solicitud para mitigar [CVE-2018-12121](https://www.cve.org/CVERecord?id=CVE-2018-12121).
 
 Para evitar esto, intenta reducir el tamaño del encabezado de la solicitud. Por ejemplo, si la cookie es larga, elimínala. O puedes usar [`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize) para cambiar el tamaño máximo de la cabecera.
+
+### Contenedores de desarrollo / Redirección de puertos en VS Code
+
+Si estás utilizando un contenedor de desarrollo o la función de redirección de puertos en VS Code, es posible que necesites configurar la opción [`server.host`](/config/server-options.md#server-host) en `127.0.0.1` dentro de la configuración para que funcione correctamente.
+
+Esto se debe a que [la función de redirección de puertos en VS Code no admite IPv6](https://github.com/microsoft/vscode-remote-release/issues/7029).
+
+Consulta el [#16522](https://github.com/vitejs/vite/issues/16522) para más detalles.
 
 ## HMR
 

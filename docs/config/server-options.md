@@ -50,11 +50,21 @@ Los nombres de host a los que Vite tiene permitido responder.
 Por defecto, `localhost`, los dominios bajo `.localhost` y todas las direcciones IP están permitidos.  
 Cuando se usa HTTPS, esta verificación se omite.
 
-Si una cadena comienza con `.`, permitirá ese nombre de host sin el `.` y todos los subdominios bajo él.  
-Por ejemplo, `.example.com` permitirá `example.com`, `foo.example.com` y `foo.bar.example.com`.
+Si una cadena comienza con `.`, permitirá ese nombre de host sin el `.` y todos los subdominios bajo ese nombre de host. Por ejemplo, `.example.com` permitirá `example.com`, `foo.example.com` y `foo.bar.example.com`. Si se establece en `true`, el servidor podrá responder a solicitudes de cualquier host.
 
-Si se configura en `true`, el servidor podrá responder a solicitudes de cualquier host.  
-Esto **no es recomendable**, ya que lo hace vulnerable a ataques de _DNS rebinding_.
+::: details ¿Qué hosts son seguros para agregar?
+Los hosts sobre los que tienes control y de los cuales puedes determinar a qué direcciones IP resuelven son seguros para agregar a la lista de hosts permitidos.
+Por ejemplo, si eres propietario de un dominio `vite.dev`, puedes agregar `vite.dev` y `.vite.dev` a la lista. Si no eres propietario de ese dominio y no puedes confiar en el propietario del mismo, no deberías agregarlo.
+Especialmente, nunca debes agregar dominios de nivel superior (Top-Level Domains) como `.com` a la lista. Esto se debe a que cualquier persona puede comprar un dominio como `example.com` y controlar la dirección IP a la que resuelve.
+:::
+
+::: danger
+Configurar `server.allowedHosts` en `true` permite que cualquier sitio web envíe solicitudes a tu servidor de desarrollo a través de ataques de reasignación de DNS, lo que les permitiría descargar tu código fuente y contenido. Recomendamos siempre utilizar una lista explícita de hosts permitidos. Consulta [GHSA-vg6x-rcgg-rjx6](https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6) para obtener más detalles.
+:::
+
+::: details Configurar mediante variable de entorno
+Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` para agregar un host adicional permitido.
+:::
 
 ## server.port
 
@@ -169,8 +179,10 @@ Esto **no es recomendable**, ya que lo hace vulnerable a ataques de _DNS rebindi
 
 Configura CORS para el servidor de desarrollo. Pasa un [objeto de opciones](https://github.com/expressjs/cors#configuration-options) para ajustar el comportamiento o usa `true` para permitir cualquier origen.
 
-:::warning  
-Se recomienda establecer un valor específico en lugar de `true` para evitar exponer el código fuente a orígenes no confiables.  
+::: danger
+
+Configurar `server.cors` en `true` permite que cualquier sitio web envíe solicitudes a tu servidor de desarrollo y descargue tu código fuente y contenido. Recomendamos siempre utilizar una lista explícita de orígenes permitidos.
+
 :::
 
 ## server.headers

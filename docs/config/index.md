@@ -22,8 +22,10 @@ También puedes especificar explícitamente un archivo de configuración para us
 vite --config my-config.js
 ```
 
-::: tip COMPILACIÓN DE LA CONFIGURACIÓN  
-De forma predeterminada, Vite usa `esbuild` para compilar la configuración en un archivo temporal. Esto puede causar problemas al importar archivos TypeScript en un monorepo. Si encuentras algún inconveniente con este enfoque, puedes especificar `--configLoader=runner` para usar el módulo ejecutor en su lugar; este no creará un archivo temporal y transformará cualquier archivo sobre la marcha. Ten en cuenta que el módulo ejecutor no admite CJS en archivos de configuración, pero los paquetes CJS externos deberían funcionar como de costumbre.  
+::: tip CARGA DE CONFIGURACIÓN
+Por defecto, Vite utiliza `esbuild` para empaquetar la configuración en un archivo temporal y cargarlo. Esto puede causar problemas al importar archivos TypeScript en un monorepo. Si encuentras inconvenientes con este enfoque, puedes especificar `--configLoader runner` para usar el [módulo runner](/guide/api-environment-runtimes.html#modulerunner) en su lugar, el cual no creará un archivo de configuración temporal y transformará los archivos sobre la marcha. Ten en cuenta que el módulo runner no admite CJS en archivos de configuración, pero los paquetes CJS externos deberían funcionar con normalidad.
+
+Alternativamente, si utilizas un entorno que admite TypeScript (por ejemplo, `node --experimental-strip-types`), o si solo escribes JavaScript puro, puedes especificar `--configLoader native` para usar el runtime nativo del entorno para cargar el archivo de configuración. Sin embargo, las actualizaciones de los módulos importados por el archivo de configuración no se detectarán y, por lo tanto, no reiniciarán automáticamente el servidor de Vite.
 :::
 
 ## Configuración de Intellisense
@@ -59,7 +61,7 @@ export default {
 
 ## Configuración condicional
 
-Si la configuración necesita determinar condicionalmente las opciones basadas en el comando (`dev`/`serve` o `build`), el [modo](/guide/env-and-mode) que se está utilizando, si es una compilación SSR (`isSsrBuild`), o está previsualizando una compilación (`isPreview`), puedes exportar una función en su lugar:
+Si la configuración necesita determinar condicionalmente las opciones basadas en el comando (`dev`/`serve` o `build`), el [modo](/guide/env-and-mode#modes) que se está utilizando, si es una compilación SSR (`isSsrBuild`), o está previsualizando una compilación (`isPreview`), puedes exportar una función en su lugar:
 
 ```js twoslash
 import { defineConfig } from 'vite'
