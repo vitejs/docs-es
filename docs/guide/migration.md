@@ -1,7 +1,3 @@
-Aquí tienes la traducción en formato Markdown:
-
----
-
 # Migración desde Vite 5
 
 ## API de Entorno
