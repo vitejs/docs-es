@@ -19,6 +19,14 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
   :::
 
+## preview.allowedHosts
+
+- **Tipo:** `string | true`
+- **Por defecto:** [`server.allowedHosts`](./server-options#server-allowedhosts)
+
+  Los nombres de host a los que Vite tiene permitido responder.  
+  Consulta [`server.allowedHosts`](./server-options#server-allowedhosts) para obtener más detalles.
+
 ## preview.port
 
 - **Tipo:** `number`
@@ -78,7 +86,9 @@ export default defineConfig({
 - **Tipo:** `boolean | CorsOptions`
 - **Por defecto:** [`server.cors`](#server-proxy)
 
-  Configura las CORS para el servidor de vista previa. Esto está habilitado por defecto y permite cualquier origen. Pasa un [objeto de opciones](https://github.com/expressjs/cors#configuration-options) para ajustar el comportamiento o `false` para deshabilitarlo.
+  Configura CORS para el servidor de vista previa.
+
+  Consulta [`server.cors`](./server-options#server-cors) para más detalles.
 
 ## preview.headers
 

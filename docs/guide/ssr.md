@@ -1,4 +1,4 @@
-# Server Side Rendering
+# Server Side Rendering (SSR)
 
 :::tip Nota
 SSR se refiere específicamente a los marcos front-end (por ejemplo, React, Preact, Vue y Svelte) que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Si estás buscando una integración con marcos tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
@@ -8,10 +8,6 @@ La siguiente guía también asume experiencia previa trabajando con SSR en tu ma
 
 :::warning API de bajo nivel
 Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de trabajo. Si tu objetivo es crear una aplicación, asegúrate de consultar primero los plugins y las herramientas de SSR de nivel superior en la [sección SSR de Awesome Vite](https://github.com/vitejs/awesome-vite#ssr). Dicho esto, muchas aplicaciones se construyen con éxito directamente sobre la API nativa de bajo nivel de Vite.
-:::
-
-:::tip Ayuda
-Si tienes preguntas, la comunidad suele ser útil en [el canal #ssr del Discord de Vite](https://discord.gg/PkbxgzPhJv).
 :::
 
 ## Proyectos de ejemplo

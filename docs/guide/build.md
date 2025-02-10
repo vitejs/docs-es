@@ -105,8 +105,11 @@ Durante el desarrollo, simplemente navega o enlaza a `/nested/` - funcionará co
 Durante la compilación, todo lo que necesitas hacer es especificar varios archivos `.html` como puntos de entrada:
 
 ```js twoslash [vite.config.js]
-import { resolve } from 'path'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
@@ -133,8 +136,11 @@ Cuando sea el momento de empaquetar tu biblioteca para su distribución, usa la 
 ::: code-group
 
 ```js twoslash [vite.config.js (entrada única)]
-import { resolve } from 'path'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
@@ -161,8 +167,12 @@ export default defineConfig({
 ```
 
 ```js twoslash [vite.config.js (multiples entradas)]
-import { resolve } from 'path'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
 export default defineConfig({
   build: {
     lib: {

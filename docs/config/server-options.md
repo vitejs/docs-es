@@ -40,6 +40,22 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 
 :::
 
+## server.allowedHosts
+
+- **Tipo:** `string[] | true`
+- **Por defecto:** `[]`
+
+Los nombres de host a los que Vite tiene permitido responder.
+
+Por defecto, `localhost`, los dominios bajo `.localhost` y todas las direcciones IP están permitidos.  
+Cuando se usa HTTPS, esta verificación se omite.
+
+Si una cadena comienza con `.`, permitirá ese nombre de host sin el `.` y todos los subdominios bajo él.  
+Por ejemplo, `.example.com` permitirá `example.com`, `foo.example.com` y `foo.bar.example.com`.
+
+Si se configura en `true`, el servidor podrá responder a solicitudes de cualquier host.  
+Esto **no es recomendable**, ya que lo hace vulnerable a ataques de _DNS rebinding_.
+
 ## server.port
 
 - **Tipo:** `number`
@@ -149,8 +165,13 @@ Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/net
 ## server.cors
 
 - **Tipo:** `boolean | CorsOptions`
+- **Por defecto:** `{ origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/ }` (permite localhost, `127.0.0.1` y `::1`)
 
-  Configura las CORS para el servidor de desarrollo. Esto está habilitado por defecto y permite cualquier origen. Pase un [objeto de opciones](https://github.com/expressjs/cors#configuration-options) para ajustar el comportamiento o `false` para deshabilitarlo.
+Configura CORS para el servidor de desarrollo. Pasa un [objeto de opciones](https://github.com/expressjs/cors#configuration-options) para ajustar el comportamiento o usa `true` para permitir cualquier origen.
+
+:::warning  
+Se recomienda establecer un valor específico en lugar de `true` para evitar exponer el código fuente a orígenes no confiables.  
+:::
 
 ## server.headers
 

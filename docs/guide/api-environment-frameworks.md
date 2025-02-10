@@ -44,7 +44,13 @@ El `runner` se evalúa de forma prioritaria cuando se accede por primera vez. Te
 Dado un servidor Vite configurado en modo middleware como se describe en la [guía de configuración SSR](/guide/ssr#setting-up-the-dev-server), implementemos el middleware SSR usando la API de entorno. El manejo de errores se omite.
 
 ```js
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
 const server = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',

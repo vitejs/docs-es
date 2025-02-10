@@ -26,6 +26,7 @@ import logoStorybook from './images/storybook.svg'
 import logoSvelte from './images/svelte.svg'
 import logoVitest from './images/vitest.svg'
 import logoVue from './images/vue.svg'
+import logoHono from './images/hono.svg'
 
 /**
  * The frameworks and tools to display in this section.
@@ -162,6 +163,13 @@ const frameworks: Framework[] = [
     logo: logoEmber,
     color: '#e04e39',
     url: 'https://emberjs.com/',
+    visible: ref(false),
+  },
+  {
+    name: 'Hono',
+    logo: logoHono,
+    color: '#ff5c13',
+    url: 'https://hono.dev/',
     visible: ref(false),
   },
 ]

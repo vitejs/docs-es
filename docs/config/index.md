@@ -22,6 +22,10 @@ También puedes especificar explícitamente un archivo de configuración para us
 vite --config my-config.js
 ```
 
+::: tip COMPILACIÓN DE LA CONFIGURACIÓN  
+De forma predeterminada, Vite usa `esbuild` para compilar la configuración en un archivo temporal. Esto puede causar problemas al importar archivos TypeScript en un monorepo. Si encuentras algún inconveniente con este enfoque, puedes especificar `--configLoader=runner` para usar el módulo ejecutor en su lugar; este no creará un archivo temporal y transformará cualquier archivo sobre la marcha. Ten en cuenta que el módulo ejecutor no admite CJS en archivos de configuración, pero los paquetes CJS externos deberían funcionar como de costumbre.  
+:::
+
 ## Configuración de Intellisense
 
 Dado que Vite se distribuye con tipados de TypeScript, puedes aprovechar el intellisense de tu IDE con sugerencias de tipo jsdoc:

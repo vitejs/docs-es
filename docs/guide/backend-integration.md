@@ -13,6 +13,12 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    // ---cut---
    // vite.config.js
    export default defineConfig({
+     server: {
+       cors: {
+         // el origin al que accederás a través del navegador
+         origin: 'http://my-backend.example.com',
+       },
+     },
      build: {
        // genera el archivo .vite/manifest.json en outDir
        manifest: true,
