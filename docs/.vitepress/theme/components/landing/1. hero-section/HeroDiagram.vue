@@ -32,7 +32,7 @@ const inputLines: Ref<SvgNodeProps>[] = inputPaths.map((path) =>
     dotColor: null,
     glowColor: null,
     path,
-  }),
+  })
 )
 
 // Define the file set "combinations" that can be shown on the input side
@@ -121,7 +121,7 @@ const animateDiagram = () => {
       isMobile
         ? animateSingleInputMobile(inputLines[lineIndex as number])
         : animateSingleInputDesktop(inputLines[lineIndex as number]),
-      fileIndex * (isMobile ? 0.4 : 0.2),
+      fileIndex * (isMobile ? 0.4 : 0.2)
     )
   })
 
@@ -137,7 +137,7 @@ const animateDiagram = () => {
       isMobile
         ? animateSingleOutputMobile(outputLine)
         : animateSingleOutputDesktop(outputLine, index),
-      'showOutput+=' + (isMobile ? 0.3 : 0.1) * index,
+      'showOutput+=' + (isMobile ? 0.3 : 0.1) * index
     )
   })
 
@@ -184,7 +184,7 @@ const prepareInputs = () => {
  */
 const animateSingleOutputDesktop = (
   outputLine: Ref<SvgNodeProps>,
-  index: number,
+  index: number
 ) => {
   const timeline = gsap.timeline()
 
@@ -194,7 +194,7 @@ const animateSingleOutputDesktop = (
     {
       position: 0,
     },
-    0,
+    0
   )
 
   // Animate the dot in
@@ -205,7 +205,7 @@ const animateSingleOutputDesktop = (
       duration: 1.5,
       ease: 'expo.out',
     },
-    0,
+    0
   )
 
   // Show the dot
@@ -214,7 +214,7 @@ const animateSingleOutputDesktop = (
     {
       visible: true,
     },
-    0,
+    0
   )
 
   // Show the label
@@ -223,7 +223,7 @@ const animateSingleOutputDesktop = (
     {
       labelVisible: true,
     },
-    0.4,
+    0.4
   )
 
   // Animate the dot out
@@ -234,7 +234,7 @@ const animateSingleOutputDesktop = (
       duration: 1.5,
       ease: 'power3.in',
     },
-    2,
+    2
   )
 
   // Hide the label
@@ -243,7 +243,7 @@ const animateSingleOutputDesktop = (
     {
       labelVisible: false,
     },
-    2.5,
+    2.5
   )
 
   // Hide the dot
@@ -252,7 +252,7 @@ const animateSingleOutputDesktop = (
     {
       visible: false,
     },
-    3,
+    3
   )
 
   return timeline
@@ -271,7 +271,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
     {
       position: 0,
     },
-    0,
+    0
   )
 
   // Animate the dot in
@@ -282,7 +282,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
       duration: 2,
       ease: 'power1.inOut',
     },
-    0.3,
+    0.3
   )
 
   // Show the dot
@@ -291,7 +291,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
     {
       visible: true,
     },
-    0.75,
+    0.75
   )
 
   // Hide the dot
@@ -300,7 +300,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
     {
       visible: false,
     },
-    1.2,
+    1.2
   )
 
   return timeline
@@ -318,7 +318,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       position: 0,
     },
-    0,
+    0
   )
 
   // Animate the dot in
@@ -329,7 +329,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
       duration: 1,
       ease: 'expo.out',
     },
-    0,
+    0
   )
 
   // Show the dot
@@ -338,7 +338,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: true,
     },
-    0,
+    0
   )
 
   // Show the label
@@ -347,7 +347,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       labelVisible: true,
     },
-    0.2,
+    0.2
   )
 
   // Animate the dot out
@@ -358,7 +358,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
       duration: 1.2,
       ease: 'power3.in',
     },
-    1.2,
+    1.2
   )
 
   // Hide the label
@@ -367,7 +367,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       labelVisible: false,
     },
-    1.6,
+    1.6
   )
 
   // Hide the dot
@@ -376,7 +376,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: false,
     },
-    1.9,
+    1.9
   )
 
   // Return the timeline
@@ -395,7 +395,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
     {
       position: 0,
     },
-    0,
+    0
   )
 
   // Animate the dot in
@@ -406,7 +406,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
       duration: 1.8,
       ease: 'power2.out',
     },
-    0,
+    0
   )
 
   // Show the dot
@@ -415,7 +415,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: true,
     },
-    0,
+    0
   )
 
   // Hide the dot
@@ -424,7 +424,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: false,
     },
-    0.5,
+    0.5
   )
 
   // Return the timeline
@@ -436,6 +436,12 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
 const isChromiumBrowser = ref(false)
 onMounted(() => {
   isChromiumBrowser.value = 'chrome' in window
+})
+
+// Check for uwu query
+const isUwu = ref(false)
+onMounted(() => {
+  isUwu.value = location.search.includes('?uwu')
 })
 </script>
 
@@ -463,7 +469,12 @@ onMounted(() => {
         ></div>
       </div>
       <div class="vite-chip__filter" />
-      <img src="/logo.svg" alt="Vite Logo" class="vite-chip__logo" />
+      <img
+        :src="isUwu ? '/logo-uwu.png' : '/logo.svg'"
+        :alt="isUwu ? 'Vite Kawaii Logo by @icarusgkx' : 'Vite Logo'"
+        class="vite-chip__logo"
+        :class="{ uwu: isUwu }"
+      />
     </div>
   </div>
 
@@ -636,6 +647,10 @@ onMounted(() => {
     filter: grayscale(100%);
     transition: all 0.2s ease;
     z-index: 3;
+  }
+
+  .uwu.vite-chip__logo {
+    width: 134px;
   }
 
   &.active {

@@ -153,11 +153,10 @@ El ejecutor de módulos expone el método `import`. Cuando el servidor Vite acti
 
 ```js
 import { ModuleRunner, ESModulesEvaluator } from 'vite/module-runner'
-import { root, transport } from './rpc-implementation.js'
+import { transport } from './rpc-implementation.js'
 
 const moduleRunner = new ModuleRunner(
   {
-    root,
     transport,
     // También puedes proporcionar hmr.connection para soportar HMR.
   },
@@ -171,10 +170,6 @@ await moduleRunner.import('/src/entry-point.js')
 
 ```ts
 export interface ModuleRunnerOptions {
-  /**
-   * Raíz del proyecto.
-   */
-  root: string
   /**
    * Conjunto de métodos para comunicarse con el servidor.
    */
@@ -283,7 +278,6 @@ const transport = {
 
 const runner = new ModuleRunner(
   {
-    root: fileURLToPath(new URL('./', import.meta.url)),
     transport,
   },
   new ESModulesEvaluator()
@@ -351,7 +345,6 @@ import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
 
 export const runner = new ModuleRunner(
   {
-    root: fileURLToPath(new URL('./', import.meta.url)),
     transport: {
       async invoke(data) {
         const response = await fetch(`http://my-vite-server/invoke`, {

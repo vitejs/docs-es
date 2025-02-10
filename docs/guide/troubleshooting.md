@@ -176,7 +176,7 @@ Debes acceder al archivo con el protocolo `http`. La forma más fácil de lograr
 
 La clave hash utilizada para invalidar las dependencias optimizadas depende del contenido del package lock, los parches aplicados a las dependencias y las opciones en el archivo de configuración de Vite que afecta el empaquetado de módulos de Node. Esto significa que Vite detectará cuándo se invalida una dependencia mediante una característica como [invalidaciones de npm](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides), y volverá a empaquetar las dependencias en el próximo inicio del servidor. Vite no invalidará las dependencias cuando utilices una función como [npm link](https://docs.npmjs.com/cli/v9/commands/npm-link). En caso de que vincules o desvincules una dependencia, deberás forzar la reoptimización en el próximo inicio del servidor usando `vite --force`. En su lugar, recomendamos usar invalidaciones, que ahora son compatibles con todos los gestores de paquetes (consulta también [invalidaciones de pnpm](https://pnpm.io/package_json#pnpmoverrides) y [resoluciones de yarn](https://yarnpkg.com/configuration/manifest/#resolutions)).
 
-## Cuellos de botella en el rendimiento
+## Cuellos de Botella en el Rendimiento
 
 Si sufres cuellos de botella en el rendimiento de la aplicación que resultan en tiempos de carga lentos, puedes iniciar el inspector integrado de Node.js con tu servidor de desarrollo de Vite o al compilar tu aplicación para crear el perfil de la CPU:
 
