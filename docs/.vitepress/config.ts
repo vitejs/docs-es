@@ -255,16 +255,25 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: 'Guía',
+          text: 'Introducción',
           items: [
-            {
-              text: '¿Por qué Vite?',
-              link: '/guide/why',
-            },
             {
               text: 'Introducción',
               link: '/guide/',
             },
+            {
+              text: 'Filosofía',
+              link: '/guide/philosophy',
+            },
+            {
+              text: '¿Por qué Vite?',
+              link: '/guide/why',
+            },
+          ],
+        },
+        {
+          text: 'Guía',
+          items: [
             {
               text: 'Funcionalidades',
               link: '/guide/features',
@@ -305,10 +314,10 @@ export default defineConfig({
               text: 'Integración al Backend',
               link: '/guide/backend-integration',
             },
-            {
-              text: 'Comparaciones',
-              link: '/guide/comparisons',
-            },
+            // {
+            //   text: 'Comparaciones',
+            //   link: '/guide/comparisons',
+            // },
             {
               text: 'Solución de problemas',
               link: '/guide/troubleshooting',
@@ -316,10 +325,6 @@ export default defineConfig({
             {
               text: 'Rendimiento',
               link: '/guide/performance',
-            },
-            {
-              text: 'Filosofía',
-              link: '/guide/philosophy',
             },
             // {
             //   text: 'Migración desde v2',

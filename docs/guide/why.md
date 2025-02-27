@@ -57,6 +57,10 @@ La API de plugins actual de Vite no es compatible con el uso de `esbuild` como p
 
 Rollup también ha estado trabajando en mejoras de rendimiento, [cambiando su analizador a SWC en la versión 4](https://github.com/rollup/rollup/pull/5073). Además, hay un esfuerzo en curso para construir una versión en Rust de Rollup llamada Rolldown. Una vez que Rolldown esté listo, podría reemplazar tanto a Rollup como a esbuild en Vite, mejorando significativamente el rendimiento de la compilación y eliminando las inconsistencias entre el desarrollo y la compilación. Puedes ver [la presentación principal de Evan You en ViteConf 2023 para obtener más detalles](https://youtu.be/hrdwQHoAp0M).
 
-## ¿En qué se diferencia Vite de X?
+## ¿Cómo se relaciona Vite con otras herramientas de compilación sin empaquetado?
 
-Puedes consultar la sección [Comparaciones](./comparisons.md) para obtener más detalles sobre cómo Vite difiere de otras herramientas similares.
+[WMR](https://github.com/preactjs/wmr), desarrollado por el equipo de Preact, buscaba ofrecer un conjunto de características similar al de Vite. De hecho, la API universal de plugins de Rollup para desarrollo y compilación de Vite se inspiró en WMR. Sin embargo, WMR ya no está en mantenimiento. Ahora, el equipo de Preact recomienda usar Vite con [@preactjs/preset-vite](https://github.com/preactjs/preset-vite).
+
+[Snowpack](https://www.snowpack.dev/) también fue un servidor de desarrollo sin empaquetado basado en ESM, con un enfoque muy similar a Vite. El pre-empaquetado de dependencias de Vite se inspiró en Snowpack v1 (ahora [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)). Actualmente, Snowpack ya no recibe mantenimiento, y su equipo ha cambiado el enfoque a [Astro](https://astro.build/), un generador de sitios estáticos basado en Vite.
+
+[@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) (anteriormente `es-dev-server`) es un proyecto excelente, y la configuración del servidor de Vite 1.0 basada en Koa se inspiró en él. El proyecto `@web` sigue siendo activamente mantenido e incluye muchas otras herramientas que pueden ser útiles para los usuarios de Vite.

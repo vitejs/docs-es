@@ -5,3 +5,5 @@ https://es.vitejs.dev/* https://es.vite.dev/:splat 301!
 /guide/api-vite-runtime.html /guide/api-environment 302
 /guide/api-vite-environment /guide/api-environment 302
 /guide/api-vite-environment.html /guide/api-environment 302
+/guide/comparisons /guide/why#¿como-se-relaciona-vite-con-otras-herramientas-de-compilacion-sin-empaquetado 302
+/guide/comparisons.html /guide/why#¿como-se-relaciona-vite-con-otras-herramientas-de-compilacion-sin-empaquetado 302

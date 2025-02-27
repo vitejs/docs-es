@@ -71,17 +71,15 @@ Si una dependencia no funciona bien con `"isolatedModules": true`, puedes usar `
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
 
-A partir de Vite 2.5.0, el valor predeterminado será `true` si el destino de TypeScript es `ESNext` o `ES2022` o superiores. Esto es consistente con el [comportamiento de `tsc` 4.3.2 y versiones posteriores](https://github.com/microsoft/TypeScript/pull/42663). También es el comportamiento esperado en tiempo de ejecución de ECMAScript.
+El valor predeterminado será `true` si el objetivo de TypeScript es `ES2022` o una versión más reciente, incluyendo `ESNext`. Esto es consistente con el [comportamiento de TypeScript 4.3.2+](https://github.com/microsoft/TypeScript/pull/42663).
 
-Otros destinos de TypeScript tendrán el valor predeterminado `false`.
+Para otros objetivos de TypeScript, el valor predeterminado será `false`.
 
-Pero esto puede ser contrario para aquellos que provienen de otros lenguajes de programación o versiones anteriores de TypeScript. Puedes leer más sobre la transición en las [notas de la versión de TypeScript 3.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-el-declare-property-modifier).
+`true` representa el comportamiento estándar del tiempo de ejecución de ECMAScript.
 
-Si estás utilizando una biblioteca que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la biblioteca.
+Si estás utilizando una librería que depende en gran medida de los campos de clase, ten cuidado con el uso previsto de la librería.
 
-La mayoría de las bibliotecas esperan `"useDefineForClassFields": true`, como [MobX](https://mobx.js.org/installation.html#use-spec-obediente-transpilation-for-class-properties).
-
-Pero algunas bibliotecas aún no han hecho la transición a este nuevo valor por defecto, incluido [`lit-element`](https://github.com/lit/lit-element/issues/1030). Configura explícitamente `useDefineForClassFields` en `false` en estos casos.
+Si bien la mayoría de las librerías esperan `"useDefineForClassFields": true`, puedes establecer explícitamente `useDefineForClassFields` en `false` si tu librería no lo admite.
 
 #### `target`
 
@@ -123,17 +121,21 @@ Los tipos predeterminados de Vite son para su API de Node.js. Para ajustar el en
 /// <reference types="vite/client" />
 ```
 
+::: details Usando `compilerOptions.types`
+
 Como altenativa, puedes agregar `vite/client` a `compilerOptions.types` en tu `tsconfig.json`:
 
 ```json [tsconfig.json]
 {
   "compilerOptions": {
-    "types": ["vite/client"]
+    "types": ["vite/client", "some-other-global-lib"]
   }
 }
 ```
 
-Esto proporcionará los siguientes tipos de librerías:
+Ten en cuenta que si se especifica [`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types), solo estos paquetes se incluirán en el ámbito global (en lugar de todos los paquetes `@types` visibles).
+
+`vite/client` proporciona las siguientes declaraciones de tipos:
 
 - Importaciones de recursos (por ejemplo, importar un archivo `.svg`)
 - Tipos para las [variables de entorno](./env-and-mode#variables-de-entorno) inyectadas por Vite en `import.meta.env`
@@ -204,22 +206,24 @@ Los recursos referenciados por elementos HTML como `<script type="module" src>` 
 
 Para excluir ciertos elementos del procesamiento de HTML, puedes agregar el atributo `vite-ignore` en el elemento, lo que puede ser útil cuando se hace referencia a recursos externos o CDN.
 
-## Vue
+## Frameworks
 
-Vite proporciona soporte Vue de primera clase:
+Todos los frameworks modernos mantienen integraciones con Vite. La mayoría de los plugins de framework son mantenidos por cada equipo de desarrollo del framework, con la excepción de los plugins oficiales de Vue y React para Vite, que son mantenidos en la organización de Vite.
 
-- Compatibilidad con Vue 3 SFC a través de [@vite/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
-- Compatibilidad con Vue 3 JSX a través de [@vite/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- Compatibilidad con Vue 2.7 SFC a través de [@vite/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
-- Compatibilidad con Vue 2.7 JSX a través de [@vite/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
+- Soporte para Vue a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- Soporte para Vue JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+- Soporte para React a través de [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
+- Soporte para React usando SWC a través de [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+
+Consulta la [Guía de Plugins](https://vite.dev/plugins) para más información.
 
 ## JSX
 
 Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io).
 
-Los usuarios de Vue deben usar el plugin oficial [@vite/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluidas HMR, resolución de componentes globales, directivas y slots.
+Tu framework de preferencia ya configurará JSX de forma predeterminada (por ejemplo, los usuarios de Vue deberían usar el plugin oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluyendo HMR, resolución global de componentes, directivas y slots).
 
-Si estás utilizando JSX sin React o Vue, puedes configurar las opciones `jsxFactory` y `jsxFragment` personalizadas utilizando la opción [`esbuild`](/config/shared-options.md#esbuild). Por ejemplo, para Preact:
+Si usas JSX con tu propio framework, puedes configurar `jsxFactory` y `jsxFragment` utilizando la [opción `esbuild`](/config/shared-options.md#esbuild). Por ejemplo, el plugin de Preact usaría:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -420,8 +424,8 @@ Lo anterior se transformará en lo siguiente:
 ```js
 // código producido por vite
 const modules = {
-  './dir/foo.js': () => import('./dir/foo.js'),
   './dir/bar.js': () => import('./dir/bar.js'),
+  './dir/foo.js': () => import('./dir/foo.js'),
 }
 ```
 
@@ -447,11 +451,11 @@ Lo anterior se transformará en lo siguiente:
 
 ```js
 // código producido por vite
-import * as __glob__0_0 from './dir/foo.js'
-import * as __glob__0_1 from './dir/bar.js'
+import * as __vite_glob_0_0 from './dir/bar.js'
+import * as __vite_glob_0_1 from './dir/foo.js'
 const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __vite_glob_0_0,
+  './dir/foo.js': __vite_glob_0_1,
 }
 ```
 
@@ -495,8 +499,8 @@ const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```ts
 // código producido por vite
 const modules = {
-  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
   './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
+  './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
 }
 ```
 
@@ -513,11 +517,11 @@ const modules = import.meta.glob('./dir/*.js', {
 
 ```ts
 // código producido por vite:
-import { setup as __glob__0_0 } from './dir/foo.js'
-import { setup as __glob__0_1 } from './dir/bar.js'
+import { setup as __vite_glob_0_0 } from './dir/bar.js'
+import { setup as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __vite_glob_0_0,
+  './dir/foo.js': __vite_glob_0_1,
 }
 ```
 
@@ -534,11 +538,11 @@ const modules = import.meta.glob('./dir/*.js', {
 
 ```ts
 // código producido por vite:
-import __glob__0_0 from './dir/foo.js'
-import __glob__0_1 from './dir/bar.js'
+import { default as __vite_glob_0_0 } from './dir/bar.js'
+import { default as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
-  './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __vite_glob_0_0,
+  './dir/foo.js': __vite_glob_0_1,
 }
 ```
 
@@ -562,12 +566,12 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 ```ts
 // código producido por vite:
 const moduleStrings = {
-  './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.svg?raw').then((m) => m['default']),
+  './dir/foo.svg': () => import('./dir/foo.svg?raw').then((m) => m['default']),
 }
 const moduleUrls = {
-  './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.svg?url').then((m) => m['default']),
+  './dir/foo.svg': () => import('./dir/foo.svg?url').then((m) => m['default']),
 }
 ```
 

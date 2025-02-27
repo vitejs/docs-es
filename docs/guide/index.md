@@ -202,7 +202,31 @@ Aprende más sobre la [interfaz de línea de comnando](./cli.md)
 
 ## Uso de confirmaciones no publicadas
 
-Si no puedes esperar a una nueva versión para probar las funciones más recientes, deberás clonar el [repo de vite](https://github.com/vitejs/vite) en tu máquina local y luego compilarlo y vincularlo tu mismo. ([pnpm](https://pnpm.io/) es obligatorio):
+Si no puedes esperar a una nueva versión para probar las últimas funciones, puedes instalar un commit específico de Vite usando [pkg.pr.new](https://pkg.pr.new):
+
+::: code-group
+
+```bash [npm]
+$ npm install -D https://pkg.pr.new/vite@SHA
+```
+
+```bash [Yarn]
+$ yarn add -D https://pkg.pr.new/vite@SHA
+```
+
+```bash [pnpm]
+$ pnpm add -D https://pkg.pr.new/vite@SHA
+```
+
+```bash [Bun]
+$ bun add -D https://pkg.pr.new/vite@SHA
+```
+
+:::
+
+Sustituye `SHA` por cualquier [SHA de commit de Vite](https://github.com/vitejs/vite/commits/main). Ten en cuenta que solo funcionarán los commits del último mes, ya que las versiones más antiguas se eliminan.
+
+Como alternativa, también puedes clonar el [repositorio de Vite](https://github.com/vitejs/vite) en tu máquina local, compilarlo y enlazarlo manualmente (es necesario [pnpm](https://pnpm.io/)):
 
 ```bash
 git clone https://github.com/vitejs/vite.git
@@ -214,6 +238,10 @@ pnpm link --global # utiliza el gestor de paquetes de tu preferencia para este p
 ```
 
 Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link --global vite` (o el gestor de paquetes que usaste para vincular `vite` globalmente). ¡Ahora reinicia el servidor de desarrollo para hacerlo funcionar!
+
+::: tip Dependencias que usan Vite  
+Para reemplazar la versión de Vite utilizada por las dependencias de forma transitiva, debes usar [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) o [pnpm overrides](https://pnpm.io/package_json#pnpmoverrides).  
+:::
 
 ## Comunidad
 
