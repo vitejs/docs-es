@@ -121,3 +121,19 @@ export default defineConfig(({ mode }) => {
   }
 })
 ```
+
+## Depuración del Archivo de Configuración en VS Code
+
+Con el comportamiento por defecto `--configLoader bundle`, Vite escribe el archivo de configuración temporal generado en la carpeta `node_modules/.vite-temp`, y se producirá un error de archivo no encontrado al establecer un punto de interrupción para depurar el archivo de configuración de Vite. Para solucionar este problema, agrega la siguiente configuración en `.vscode/settings.json`:
+
+```json
+{
+  "debug.javascript.terminalOptions": {
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**",
+      "!**/node_modules/**",
+      "**/node_modules/.vite-temp/**"
+    ]
+  }
+}
+```

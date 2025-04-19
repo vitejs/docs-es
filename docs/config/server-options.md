@@ -83,9 +83,9 @@ Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
 
 - **Tipo:** `https.ServerOptions`
 
-  Habilita TLS + HTTP/2. Ten en cuenta que esto cambia a TLS solo cuando también se usa la opción [`server.proxy`](#server-proxy).
+  Habilita TLS + HTTP/2. El valor es un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
 
-  El valor también puede ser un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
+  Ten en cuenta que esto se degrada a solo TLS cuando también se utiliza la opción [`server.proxy`](#server-proxy).
 
   Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vite/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los plugins del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
 
