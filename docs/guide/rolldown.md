@@ -32,7 +32,17 @@ Para más información sobre las motivaciones detrás de Rolldown, visita [por q
 
 ## Cómo probar Rolldown
 
-La versión de Vite con Rolldown está disponible actualmente como un paquete separado llamado `rolldown-vite`. Puedes probarlo agregando `overrides` a tu `package.json`:
+La versión de Vite impulsada por Rolldown está disponible actualmente como un paquete separado llamado `rolldown-vite`. Si tienes `vite` como una dependencia directa, puedes hacer un alias del paquete `vite` a `rolldown-vite` en tu proyecto, lo que debería resultar en un reemplazo directo.
+
+```json
+{
+  "dependencies": {
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
+```
+
+Si usas Vitepress o un meta framework que tiene `vite` como dependencia par, deberás sobrescribir la dependencia `vite` en tu gestor de paquetes.
 
 :::code-group
 
@@ -88,11 +98,37 @@ Rolldown lanza un error cuando se pasan opciones desconocidas o no válidas. Dad
 
 Si tú no estás pasando esa opción directamente, esto debe ser corregido por el framework que estés utilizando. Mientras tanto, puedes suprimir este error estableciendo la variable de entorno `ROLLDOWN_OPTIONS_VALIDATION=loose`.
 
-## Habilitar Plugins Nativos
+## Rendimiento
+
+`rolldown-vite` se centra en garantizar la compatibilidad con el ecosistema existente, por lo que los valores predeterminados están orientados a una transición fluida. Puedes obtener mejoras de rendimiento adicionales al cambiar a complementos internos basados en Rust más rápidos y otras personalizaciones.
+
+### Habilitar Plugins Nativos
 
 Gracias a Rolldown y Oxc, varios plugins internos de Vite, como el de alias o el de resolución, han sido reescritos en Rust. Al momento de redactar esto, el uso de estos plugins no está habilitado por defecto, ya que su comportamiento puede diferir del de sus versiones en JavaScript.
 
 Para probarlos, puedes establecer la opción `experimental.enableNativePlugin` en `true` dentro de tu configuración de Vite.
+
+### Envoltorio de `withFilter`
+
+Los autores de plugins tienen la opción de usar la [característica de filtro de hooks](#caracteristica-de-filtro-de-hooks) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Pero en caso de que algunos de los plugins que uses no soporten esta característica (aún) pero aún desees aprovecharla, puedes usar el envoltorio `withFilter` para envolver el complemento con un filtro por ti mismo.
+
+```js
+// En tu vite.config.ts
+import { withFilter, defineConfig } from 'vite'
+import svgr from 'vite-plugin-svgr'
+
+export default defineConfig({
+  plugins: [
+    // Cargar el complemento `svgr` solo para archivos que terminen en `.svg?react`
+    withFilter(
+      svgr({
+        /*...*/
+      }),
+      { load: { id: /\.svg?react$/ } }
+    ),
+  ],
+})
+```
 
 ## Reporta problemas
 
