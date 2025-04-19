@@ -10,7 +10,7 @@ Rolldown se basa en tres principios clave:
 
 - **Velocidad**: Construido con Rust para obtener el máximo rendimiento.
 - **Compatibilidad**: Funciona con los plugins existentes de Rollup.
-- **Experiencia de desarrollo**: API familiar para usuarios de Rollup.
+- **Optimización**: Viene con características que van más allá de lo que implementan esbuild y Rollup.
 
 ## ¿Por qué Vite está migrando a Rolldown?
 
@@ -19,6 +19,8 @@ Rolldown se basa en tres principios clave:
 2. **Rendimiento**: La implementación en Rust de Rolldown ofrece mejoras de rendimiento significativas en comparación con los empaquetadores basados en JavaScript. Aunque los benchmarks específicos pueden variar, las pruebas iniciales muestran aumentos de velocidad prometedores frente a Rollup.
 
 Para más información sobre las motivaciones detrás de Rolldown, visita [por qué se construye Rolldown](https://rolldown.rs/guide/#why-rolldown).
+
+3. **Funciones Adicionales**: Rolldown introduce características que no están disponibles en Rollup ni en esbuild, como un control avanzado de la división en fragmentos, HMR incorporado y Module Federation.
 
 ## Beneficios de probar `rolldown-vite`
 
@@ -72,13 +74,29 @@ Luego de agregar estos `overrides`, reinstala tus dependencias y ejecuta tu serv
 
 ## Limitaciones conocidas
 
-Aunque Rolldown busca ser un reemplazo directo de Rollup, todavía hay funciones en desarrollo y algunas diferencias intencionales de comportamiento. Para una lista completa y actualizada, consulta [esta solicitud de cambios en GitHub](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667).
+Aunque Rolldown busca ser un reemplazo directo de Rollup, todavía hay funciones en desarrollo y algunas diferencias intencionales de comportamiento. Para una lista completa y actualizada, consulta [esta solicitud de cambios en GitHub](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667), el cual se actualiza de forma constante.
+
+### Errores de Validación de Opciones
+
+Rolldown lanza un error cuando se pasan opciones desconocidas o no válidas. Dado que algunas opciones disponibles en Rollup no son compatibles con Rolldown, es posible que encuentres errores según las opciones que tú o el meta framework que uses hayan configurado. A continuación, se muestra un ejemplo de uno de estos mensajes de error:
+
+> Error: Failed validate input options.
+>
+> - Para "preserveEntrySignatures". Clave no válida: Se esperaba `never` pero se recibió `"preserveEntrySignatures"`.
+
+Si tú no estás pasando esa opción directamente, esto debe ser corregido por el framework que estés utilizando. Mientras tanto, puedes suprimir este error estableciendo la variable de entorno `ROLLDOWN_OPTIONS_VALIDATION=loose`.
+
+## Habilitar Plugins Nativos
+
+Gracias a Rolldown y Oxc, varios plugins internos de Vite, como el de alias o el de resolución, han sido reescritos en Rust. Al momento de redactar esto, el uso de estos plugins no está habilitado por defecto, ya que su comportamiento puede diferir del de sus versiones en JavaScript.
+
+Para probarlos, puedes establecer la opción `experimental.enableNativePlugin` en `true` dentro de tu configuración de Vite.
 
 ## Reporta problemas
 
 Como se trata de una integración experimental, podrías encontrarte con errores. Si es así, repórtalos en el repositorio [`vitejs/rolldown-vite`](https://github.com/vitejs/rolldown-vite), **no en el repositorio principal de Vite**.
 
-Al [reportar problemas](https://github.com/vitejs/rolldown-vite/issues/new), sigue la plantilla del issue e incluye:
+Al [reportar problemas](https://github.com/vitejs/rolldown-vite/issues/new), por favor sigue la plantilla de issues correspondiente y proporciona lo que se solicita allí, que comúnmente incluye:
 
 - Una reproducción mínima del problema.
 - Detalles de tu entorno (SO, versión de Node, gestor de paquetes).
@@ -91,3 +109,131 @@ Para discusiones en tiempo real y ayuda, únete al [Discord de Rolldown](https:/
 El paquete `rolldown-vite` es una solución temporal para recopilar feedback y estabilizar la integración. En el futuro, esta funcionalidad se incorporará al repositorio principal de Vite.
 
 Te animamos a probar `rolldown-vite` y contribuir a su desarrollo con tu retroalimentación y reportes.
+
+En el futuro, también se introducirá un "Modo de Empaquetado Completo" para Vite, el cual servirá archivos empaquetados tanto en modo producción _como en modo desarrollo_.
+
+### ¿Por qué introducir un Modo de Empaquetado Completo?
+
+Vite es conocido por su enfoque de servidor de desarrollo sin empaquetado, lo cual ha sido una de las principales razones de su velocidad y popularidad desde su lanzamiento. Este enfoque fue, inicialmente, un experimento para ver hasta dónde podíamos llevar los límites del rendimiento del servidor de desarrollo sin usar un empaquetador tradicional.
+
+Sin embargo, a medida que los proyectos crecen en tamaño y complejidad, han surgido dos desafíos principales:
+
+1. **Inconsistencias entre desarrollo y producción**: El JavaScript sin empaquetar que se sirve en desarrollo frente al paquete generado para producción crea comportamientos diferentes en tiempo de ejecución. Esto puede provocar errores que solo se manifiestan en producción, lo que dificulta la depuración.
+
+2. **Degradación del rendimiento durante el desarrollo**: El enfoque sin empaquetado implica que cada módulo se solicita por separado, lo que genera una gran cantidad de solicitudes de red. Si bien esto _no afecta en producción_, sí provoca una sobrecarga significativa durante el inicio del servidor de desarrollo y al recargar la página en desarrollo. El impacto es especialmente notorio en aplicaciones grandes donde se deben procesar cientos o miles de solicitudes individuales. Estos cuellos de botella se agravan aún más cuando los desarrolladores utilizan proxies de red, lo que resulta en tiempos de recarga más lentos y una experiencia de desarrollo degradada.
+
+Con la integración de Rolldown, tenemos la oportunidad de unificar las experiencias de desarrollo y producción, manteniendo al mismo tiempo el rendimiento característico de Vite. Un Modo de Empaquetado Completo permitiría servir archivos empaquetados no solo en producción, sino también durante el desarrollo, combinando lo mejor de ambos mundos:
+
+- Tiempos de inicio rápidos incluso para aplicaciones grandes
+- Comportamiento consistente entre desarrollo y producción
+- Menor sobrecarga de red al recargar la página
+- Mantenimiento de un HMR eficiente sobre la salida ESM
+
+Cuando se introduzca el Modo de Empaquetado Completo, será una funcionalidad opcional al principio. Al igual que con la integración de Rolldown, el objetivo es convertirlo en el comportamiento predeterminado una vez que se haya recopilado suficiente retroalimentación y se haya garantizado su estabilidad.
+
+## Guía para autores de plugins / frameworks
+
+::: tip
+Esta sección es principalmente relevante para autores de plugins y frameworks. Si eres un usuario, puedes omitirla.
+:::
+
+### Resumen de los principales cambios
+
+- **Rolldown** se usa para la compilación (anteriormente se usaba Rollup).
+- **Rolldown** se usa para el optimizador (anteriormente se usaba esbuild).
+- El soporte de **CommonJS** es manejado por **Rolldown** (anteriormente se usaba `@rollup/plugin-commonjs`).
+- **Oxc** se usa para la reducción de sintaxis (anteriormente se usaba esbuild).
+- **Lightning CSS** se usa para la minificación de CSS por defecto (anteriormente se usaba esbuild).
+- El minificador de **Oxc** se usa para la minificación de JS por defecto (anteriormente se usaba esbuild).
+- **Rolldown** se usa para empaquetar la configuración (anteriormente se usaba esbuild).
+
+### Detectar `rolldown-vite`
+
+::: warning
+En la mayoría de los casos, no necesitas detectar si tu plugin se ejecuta con `rolldown-vite` o con `vite`, y deberías procurar un comportamiento consistente entre ambos, sin ramificaciones condicionales.
+:::
+
+En caso de que necesites un comportamiento diferente con `rolldown-vite`, tienes dos formas de detectar si se está usando `rolldown-vite`:
+
+- Comprobando la existencia de `this.meta.rolldownVersion`:
+
+```js
+const plugin = {
+  resolveId() {
+    if (this.meta.rolldownVersion) {
+      // lógica para rolldown-vite
+    } else {
+      // lógica para rollup-vite
+    }
+  },
+}
+```
+
+- Comprobando la existencia de la exportación `rolldownVersion`:
+
+```js
+import * as vite from 'vite'
+
+if (vite.rolldownVersion) {
+  // lógica para rolldown-vite
+} else {
+  // lógica para rollup-vite
+}
+```
+
+Si tienes `vite` como dependencia (no como dependencia par), la exportación `rolldownVersion` es útil y puede ser utilizada en cualquier parte de tu código.
+
+### Ignorar la validación de opciones en Rolldown
+
+Como se [mencionó anteriormente](#errores-de-validacion-de-opciones), Rolldown lanza un error cuando se pasan opciones desconocidas o inválidas.
+
+Esto se puede solucionar pasando la opción condicionalmente, verificando si se está ejecutando con `rolldown-vite` como se muestra [aquí arriba](#detectar-rolldown-vite).
+
+También puedes suprimir el error estableciendo la variable de entorno `ROLLDOWN_OPTIONS_VALIDATION=loose`.
+
+Sin embargo, ten en cuenta que **eventualmente deberás dejar de pasar las opciones no compatibles con Rolldown**.
+
+### `transformWithEsbuild` requiere que `esbuild` esté instalado por separado
+
+Una función similar llamada `transformWithOxc`, que usa Oxc en lugar de `esbuild`, es exportada desde `rolldown-vite`.
+
+### Capa de compatibilidad para opciones de `esbuild`
+
+Rolldown-Vite tiene una capa de compatibilidad para convertir las opciones de `esbuild` a las correspondientes de Oxc o `rolldown`. Según las pruebas realizadas en [el ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci/blob/rolldown-vite/README-temp.md), esto funciona en muchos casos, incluidos los plugins simples de `esbuild`. Dicho esto, **el soporte para las opciones de `esbuild` será eliminado en el futuro** y se recomienda probar las opciones correspondientes de Oxc o `rolldown`.
+
+Puedes obtener las opciones configuradas por la capa de compatibilidad desde el hook `configResolved`:
+
+```js
+const plugin = {
+  name: 'log-config',
+  configResolved(config) {
+    console.log('options', config.optimizeDeps, config.oxc)
+  },
+}
+```
+
+### Característica de filtro de hooks
+
+Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Al usar esta característica, puedes hacer que tu plugin sea más eficiente.
+Esta funcionalidad también es compatible con Rollup 4.38.0+ y Vite 6.3.0+. Para hacer que tu plugin sea compatible con versiones anteriores, asegúrate de ejecutar el filtro dentro de los controladores de hooks.
+
+### Convertir contenido a JavaScript en los hooks `load` o `transform`
+
+Si estás convirtiendo el contenido a JavaScript desde otros tipos en los hooks `load` o `transform`, es posible que debas agregar `moduleType: 'js'` al valor devuelto.
+
+```js
+const plugin = {
+  name: 'txt-loader',
+  load(id) {
+    if (id.endsWith('.txt')) {
+      const content = fs.readFile(id, 'utf-8')
+      return {
+        code: `export default ${JSON.stringify(content)}`,
+        moduleType: 'js', // [!código ++]
+      }
+    }
+  },
+}
+```
+
+Esto se debe a que [Rolldown admite módulos no JavaScript](https://rolldown.rs/guide/in-depth/module-types) e infiere el tipo de módulo a partir de las extensiones, a menos que se especifique lo contrario. Ten en cuenta que `rolldown-vite` no admite ModuleTypes en desarrollo.

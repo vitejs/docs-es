@@ -132,10 +132,6 @@ Aquí, `import` y `require` son "condiciones". Las condiciones se pueden anidar 
 
 Ten en cuenta que las condiciones `import`, `require`, `default` siempre se aplican si se cumplen los requisitos.
 
-:::warning Resolviendo exportaciones de rutas secundarias
-Las claves de exportación que terminan en "/" están obsoletas en Node y es posible que no funcionen bien. Comunícate con el autor del paquete para usar [patrones de subruta `*`](https://nodejs.org/api/packages.html#package-entry-points) en su lugar.
-:::
-
 ## resolve.mainFields
 
 - **Tipo:** `string[]`
