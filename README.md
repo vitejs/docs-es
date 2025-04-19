@@ -15,7 +15,7 @@
 
 # Vite ⚡
 
-> Herramienta frontend de próxima generación
+> La herramienta de compilación para la Web.
 
 - 💡 Inicio instantáneo del servidor.
 - ⚡️ HMR ultra rápido

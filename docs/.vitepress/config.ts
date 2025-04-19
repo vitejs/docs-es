@@ -511,22 +511,22 @@ export default defineConfig({
       }),
       llmstxt({
         ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md'],
-        description: 'The Build Tool for the Web',
+        description: 'La herramienta de compilación para la Web',
         details: `\
-- 💡 Instant Server Start
-- ⚡️ Lightning Fast HMR
-- 🛠️ Rich Features
-- 📦 Optimized Build
-- 🔩 Universal Plugin Interface
-- 🔑 Fully Typed APIs
+- 💡 Inicio instantáneo del servidor  
+- ⚡️ HMR ultrarrápido  
+- 🛠️ Funcionalidades avanzadas  
+- 📦 Build optimizado  
+- 🔩 Interfaz universal de plugins  
+- 🔑 APIs totalmente tipadas  
 
-Vite is a new breed of frontend build tooling that significantly improves the frontend development experience. It consists of two major parts:
+Vite es una nueva generación de herramientas de compilación para frontend que mejora significativamente la experiencia de desarrollo. Consta de dos partes principales:
 
-- A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), with [rich built-in features](https://vite.dev/guide/features.md) and astonishingly fast [Hot Module Replacement (HMR)](https://vite.dev/guide/features.md#hot-module-replacement).
+- Un servidor de desarrollo que sirve tus archivos fuente usando [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), con [funciones integradas](https://es.vite.dev/guide/features.md) y un [Hot Module Replacement (HMR)](https://es.vite.dev/guide/features.md#hot-module-replacement) increíblemente rápido.
 
-- A [build command](https://vite.dev/guide/build.md) that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
+- Un [comando de compilación](https://es.vite.dev/guide/build.md)) que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar archivos estáticos altamente optimizados para producción.
 
-In addition, Vite is highly extensible via its [Plugin API](https://vite.dev/guide/api-plugin.md) and [JavaScript API](https://vite.dev/guide/api-javascript.md) with full typing support.`,
+Además, Vite es altamente extensible gracias a su [API de plugins](https://es.vite.dev/guide/api-plugin.md) y su [API de JavaScript](https://es.vite.dev/guide/api-javascript.md), ambas con soporte completo para tipado.`,
       }) as PluginOption,
     ],
   },
