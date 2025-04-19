@@ -99,7 +99,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: lts/*
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
@@ -128,7 +128,7 @@ jobs:
 2. Crea un archivo llamado `.gitlab-ci.yml` en la raíz de tu proyecto con el contenido a continuación. Esto creará y desplegará tu sitio cada vez que realices cambios en el contenido:
 
    ```yaml [.gitlab-ci.yml]
-   image: node:16.5.0
+   image: node:lts
    pages:
      stage: deploy
      cache:

@@ -2,15 +2,18 @@
 import { builtinModules, createRequire } from 'node:module'
 import eslint from '@eslint/js'
 import pluginN from 'eslint-plugin-n'
-import * as pluginI from 'eslint-plugin-i'
+import pluginImportX from 'eslint-plugin-import-x'
 import pluginRegExp from 'eslint-plugin-regexp'
-import tsParser from '@typescript-eslint/parser'
 import tseslint from 'typescript-eslint'
 import globals from 'globals'
 
 const require = createRequire(import.meta.url)
-const pkg = require('./package.json')
-// const pkgVite = require('./packages/vite/package.json')
+const pkgVite = require('./packages/vite/package.json')
+
+// Some rules work better with typechecking enabled, but as enabling it is slow,
+// we only do so when linting in IDEs for now. If you want to lint with typechecking
+// explicitly, set this to `true` manually.
+const shouldTypeCheck = typeof process.env.VSCODE_PID === 'string'
 
 export default tseslint.config(
   {
@@ -27,23 +30,34 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   ...tseslint.configs.stylistic,
-  /** @type {any} */ (pluginRegExp.configs['flat/recommended']),
+  pluginRegExp.configs['flat/recommended'],
   {
     name: 'main',
     languageOptions: {
-      parser: tsParser,
+      parser: tseslint.parser,
       parserOptions: {
         sourceType: 'module',
         ecmaVersion: 2022,
+        project: shouldTypeCheck
+          ? [
+              './packages/*/tsconfig.json',
+              './packages/vite/src/*/tsconfig.json',
+            ]
+          : undefined,
       },
       globals: {
         ...globals.es2021,
         ...globals.node,
       },
     },
+    settings: {
+      node: {
+        version: '^18.0.0 || ^20.0.0 || >=22.0.0',
+      },
+    },
     plugins: {
       n: pluginN,
-      i: pluginI,
+      'import-x': pluginImportX,
     },
     rules: {
       'n/no-exports-assign': 'error',
@@ -63,7 +77,6 @@ export default tseslint.config(
       'no-debugger': ['error'],
       'no-empty': ['warn', { allowEmptyCatch: true }],
       'no-process-exit': 'off',
-      'no-useless-escape': 'off',
       'prefer-const': [
         'warn',
         {
@@ -82,7 +95,15 @@ export default tseslint.config(
       'n/no-extraneous-import': [
         'error',
         {
-          allowModules: ['vite', 'less', 'sass', 'vitest', 'unbuild'],
+          allowModules: [
+            'vite',
+            'less',
+            'sass',
+            'sass-embedded',
+            'lightningcss',
+            'vitest',
+            'unbuild',
+          ],
         },
       ],
       'n/no-extraneous-require': [
@@ -93,7 +114,7 @@ export default tseslint.config(
       ],
 
       '@typescript-eslint/ban-ts-comment': 'error',
-      '@typescript-eslint/ban-types': 'off', // TODO: we should turn this on in a new PR
+      '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': [
         'error',
         { allowArgumentsExplicitlyTypedAsAny: true },
@@ -102,33 +123,45 @@ export default tseslint.config(
         'error',
         { allow: ['arrowFunctions'] },
       ],
+      '@typescript-eslint/no-empty-object-type': [
+        'error',
+        { allowInterfaces: 'with-single-extends' },
+      ],
       '@typescript-eslint/no-empty-interface': 'off',
-      '@typescript-eslint/no-explicit-any': 'off', // maybe we should turn this on in a new PR
+      '@typescript-eslint/no-explicit-any': 'off',
       'no-extra-semi': 'off',
       '@typescript-eslint/no-extra-semi': 'off', // conflicts with prettier
       '@typescript-eslint/no-inferrable-types': 'off',
-      '@typescript-eslint/no-unused-vars': 'off', // maybe we should turn this on in a new PR
-      '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          ignoreRestSiblings: true,
+        },
+      ],
+      '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { prefer: 'type-imports', disallowTypeAnnotations: false },
       ],
-      // disable rules set in @typescript-eslint/stylistic v6 that wasn't set in @typescript-eslint/recommended v5 and which conflict with current code
-      // maybe we should turn them on in a new PR
+      // disable rules set in @typescript-eslint/stylistic which conflict with current code
+      // we should discuss if we want to enable these as they encourage consistent code
       '@typescript-eslint/array-type': 'off',
-      '@typescript-eslint/ban-tslint-comment': 'off',
-      '@typescript-eslint/consistent-generic-constructors': 'off',
-      '@typescript-eslint/consistent-indexed-object-style': 'off',
       '@typescript-eslint/consistent-type-definitions': 'off',
       '@typescript-eslint/prefer-for-of': 'off',
       '@typescript-eslint/prefer-function-type': 'off',
 
-      'i/no-nodejs-modules': [
+      'import-x/no-nodejs-modules': [
         'error',
         { allow: builtinModules.map((mod) => `node:${mod}`) },
       ],
-      'i/no-duplicates': 'error',
-      'i/order': 'error',
+      'import-x/no-duplicates': 'error',
+      'import-x/order': 'error',
       'sort-imports': [
         'error',
         {
@@ -140,7 +173,8 @@ export default tseslint.config(
         },
       ],
 
-      'regexp/no-contradiction-with-assertion': 'error',
+      'regexp/prefer-regexp-exec': 'error',
+      'regexp/prefer-regexp-test': 'error',
       // in some cases using explicit letter-casing is more performant than the `i` flag
       'regexp/use-ignore-case': 'off',
     },
@@ -153,23 +187,23 @@ export default tseslint.config(
       'no-restricted-globals': ['error', 'require', '__dirname', '__filename'],
     },
   },
-  // {
-  //   name: 'vite/node',
-  //   files: ['packages/vite/src/node/**/*.?([cm])[jt]s?(x)'],
-  //   rules: {
-  //     'no-console': ['error'],
-  //     'n/no-restricted-require': [
-  //       'error',
-  //       Object.keys(pkgVite.devDependencies).map((d) => ({
-  //         name: d,
-  //         message:
-  //           `devDependencies can only be imported using ESM syntax so ` +
-  //           `that they are included in the rollup bundle. If you are trying to ` +
-  //           `lazy load a dependency, use (await import('dependency')).default instead.`,
-  //       })),
-  //     ],
-  //   },
-  // },
+  {
+    name: 'vite/node',
+    files: ['packages/vite/src/node/**/*.?([cm])[jt]s?(x)'],
+    rules: {
+      'no-console': ['error'],
+      'n/no-restricted-require': [
+        'error',
+        Object.keys(pkgVite.devDependencies).map((d) => ({
+          name: d,
+          message:
+            `devDependencies can only be imported using ESM syntax so ` +
+            `that they are included in the rollup bundle. If you are trying to ` +
+            `lazy load a dependency, use (await import('dependency')).default instead.`,
+        })),
+      ],
+    },
+  },
   {
     name: 'playground/enforce-esm',
     files: ['playground/**/*.?([cm])[jt]s?(x)'],
@@ -182,27 +216,19 @@ export default tseslint.config(
       'playground/resolve/browser-field/**',
     ],
     rules: {
-      'i/no-commonjs': 'error',
+      'import-x/no-commonjs': 'error',
     },
   },
   {
-    name: 'playground/test',
-    files: ['playground/**/__tests__/**/*.?([cm])[jt]s?(x)'],
+    name: 'tests',
+    files: ['**/__tests__/**/*.?([cm])[jt]s?(x)'],
     rules: {
-      // engine field doesn't exist in playgrounds
-      'n/no-unsupported-features/es-builtins': [
-        'error',
-        {
-          version: pkg.engines.node,
-        },
-      ],
       'n/no-unsupported-features/node-builtins': [
         'error',
         {
-          version: pkg.engines.node,
           // ideally we would like to allow all experimental features
           // https://github.com/eslint-community/eslint-plugin-n/issues/199
-          ignores: ['fetch'],
+          ignores: ['fetch', 'import.meta.dirname'],
         },
       ],
     },
@@ -225,6 +251,14 @@ export default tseslint.config(
     ],
     rules: {
       'n/no-extraneous-import': 'off',
+    },
+  },
+  {
+    name: 'disables/vite/cjs',
+    files: ['packages/vite/index.cjs'],
+    rules: {
+      'no-restricted-globals': 'off',
+      'n/no-missing-require': 'off',
     },
   },
   {
@@ -252,6 +286,8 @@ export default tseslint.config(
       'n/no-unsupported-features/es-builtins': 'off',
       'n/no-unsupported-features/node-builtins': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
       'no-undef': 'off',
       'no-empty': 'off',
       'no-constant-condition': 'off',
@@ -280,6 +316,7 @@ export default tseslint.config(
     name: 'disables/dts',
     files: ['**/*.d.ts'],
     rules: {
+      '@typescript-eslint/consistent-indexed-object-style': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
     },
   },
@@ -289,6 +326,27 @@ export default tseslint.config(
     rules: {
       'no-console': 'off',
       '@typescript-eslint/ban-ts-comment': 'off',
+    },
+  },
+  {
+    name: 'disables/typechecking',
+    files: [
+      '**/*.js',
+      '**/*.mjs',
+      '**/*.cjs',
+      '**/*.d.ts',
+      '**/*.d.cts',
+      '**/__tests__/**',
+      'docs/**',
+      'playground/**',
+      'scripts/**',
+      'vitest.config.ts',
+      'vitest.config.e2e.ts',
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: false,
+      },
     },
   }
 )
