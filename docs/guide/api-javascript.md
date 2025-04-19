@@ -74,7 +74,6 @@ parentServer.use(vite.middlewares)
 La interfaz `InlineConfig` extiende a `UserConfig` con propiedades adicionales:
 
 - `configFile`: Especifica el archivo de configuración a utilizar. Si no se establece, Vite tratará de resolver automáticamente uno de la raíz del proyecto. Establezca `false` para desactivar la resolución automática.
-- `envFile`: Establece a `false` para desactivar los archivos `.env`.
 
 ## `ResolvedConfig`
 

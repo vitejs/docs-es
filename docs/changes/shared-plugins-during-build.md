@@ -4,7 +4,7 @@
 Danos tu opinión en [Discusión sobre la API del entorno](https://github.com/vitejs/vite/discussions/16358)
 :::
 
-Consulta [Plugins compartidos durante la compilación](/guide/api-environment.md#shared-plugins-during-build).
+Consulta [Plugins compartidos durante la compilación](/guide/api-environment-plugins.html#plugins-compartidos-durante-la-compilacion).
 
 Ámbito afectado: `Autores de plugins de Vite`
 

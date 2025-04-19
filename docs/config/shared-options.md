@@ -449,10 +449,10 @@ Colocalo en `false` para evitar que Vite borre la pantalla del terminal al regis
 
 ## envDir
 
-- **Tipo:** `string`
+- **Tipo:** `string | false`
 - **Por defecto:** `root`
 
-El directorio desde el que se cargan los archivos `.env`. Puede ser una ruta absoluta o una ruta relativa a la raíz del proyecto.
+El directorio desde el que se cargan los archivos `.env`. Puede ser una ruta absoluta o una ruta relativa a la raíz del proyecto. `false` desactivará la carga del archivo `.env`.
 
 Entra [aquí](/guide/env-and-mode#archivos-env) para obtener más información sobre los archivos de entorno.
 
