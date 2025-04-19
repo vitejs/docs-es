@@ -189,7 +189,9 @@ export default defineConfig({
 - **Por defecto:** `false`
 - **Relacionado:** [Integración del backend](/guide/backend-integration)
 
-Cuando se coloca en `true`, la compilación también generará un archivo `.vite/manifest.json` que contiene una asignación de nombres de archivo de recursos sin hash a sus versiones hash, que luego puede ser utilizado por un marco de trabajo orientado a servidor para representar los enlaces de recursos correctos.
+Indica si se debe generar un archivo de manifiesto que contenga un mapeo de nombres de archivos de recursos sin hash a sus versiones con hash, que luego puede ser utilizado por un framework de servidor para renderizar los enlaces correctos a los recursos.
+
+Cuando el valor es una cadena, se usará como la ruta del archivo de manifiesto relativa a `build.outDir`. Cuando se establece en `true`, la ruta será `.vite/manifest.json`.
 
 ## build.ssrManifest
 
@@ -197,7 +199,9 @@ Cuando se coloca en `true`, la compilación también generará un archivo `.vite
 - **Por defecto:** `false`
 - **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
-Cuando se coloca en `true`, la compilación también generará un manifiesto SSR para determinar los enlaces de estilo y las directivas de precarga de recursos en producción.
+Indica si se debe generar un archivo de manifiesto para SSR (renderizado del lado del servidor) con el fin de determinar los enlaces a estilos y las directivas de precarga de recursos en producción.
+
+Cuando el valor es una cadena, se usará como la ruta del archivo de manifiesto relativa a `build.outDir`. Cuando se establece en `true`, la ruta será `.vite/ssr-manifest.json`.
 
 ## build.ssr
 

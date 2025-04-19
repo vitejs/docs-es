@@ -111,6 +111,8 @@ Para Linux Ubuntu, es posible que debas agregar la línea `* - nofile 65536` al 
 
 Ten en cuenta que estas configuraciones persisten pero **se requiere un reinicio**.
 
+Alternativamente, si el servidor se está ejecutando dentro de un _devcontainer_ de VS Code, la solicitud puede parecer bloqueada. Para solucionar este problema, consulta [Contenedores de desarrollo / Redirección de puertos en VS Code](#contenedores-de-desarrollo-redireccion-de-puertos-en-vs-code).
+
 ### Las solicitudes de red dejan de cargarse
 
 Al usar un certificado SSL autofirmado, Chrome ignora todas las directivas de almacenamiento en caché y vuelve a cargar el contenido. Vite se basa en estas directivas de almacenamiento en caché.
