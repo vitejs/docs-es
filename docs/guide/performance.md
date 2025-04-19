@@ -122,5 +122,6 @@ Ejemplos de utilizar herramientas nativas:
 
 El uso de herramientas nativas a menudo implica un mayor tamaño de instalación y, por lo tanto, no es la configuración predeterminada al iniciar un nuevo proyecto Vite. Pero puede valer la pena el costo para aplicaciones más grandes.
 
+- Usa [Rolldown en lugar de Rollup y esbuild](./rolldown) para compilaciones más rápidas y una experiencia más alineada entre desarrollo y compilación.
 - Prueba el soporte experimental para [LightningCSS](https://github.com/vitejs/vite/discussions/13835)
 - Utiliza [`@vite/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) en lugar de `@vite/plugin-react`.

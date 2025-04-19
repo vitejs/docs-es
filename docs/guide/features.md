@@ -349,10 +349,6 @@ Para configurar CSS Modules, debes utilizar [`css.lightningcss.cssModules`](http
 
 Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify).
 
-::: tip NOTA
-Los [preprocesadores de CSS](#css-pre-processors) no son compatibles cuando se utiliza Lightning CSS.
-:::
-
 ## Recursos estáticos
 
 La importación de un recurso estático devolverá la URL pública resuelta cuando se sirva:

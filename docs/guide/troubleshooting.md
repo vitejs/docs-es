@@ -64,15 +64,6 @@ Aunque puede funcionar utilizando `--experimental-require-module` o en versiones
 - Añade `"type": "module"` al archivo `package.json` más cercano.
 - Renombra `vite.config.js`/`vite.config.ts` a `vite.config.mjs`/`vite.config.mts`
 
-### `Error al cargar la configuración desde '/path/to/config*/vite.config.js'`
-
-> Error al cargar la configuración desde '/path/to/config\*/vite.config.js'  
-> Error al iniciar el servidor de desarrollo:  
-> Error: La compilación falló con 1 error:  
-> error: Se debe usar "outdir" cuando hay múltiples archivos de entrada
-
-El error anterior puede ocurrir si la ruta de la carpeta de tu proyecto contiene `*`, ya que esbuild trata `*` como un patrón global (glob). Deberás renombrar tu directorio para eliminar el `*`.
-
 ## Servidor de desarrollo
 
 ### Las solicitudes se congelan para siempre

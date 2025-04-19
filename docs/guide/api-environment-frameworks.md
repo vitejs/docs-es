@@ -35,8 +35,49 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 }
 ```
 
-:::warning  
-El `runner` se evalúa de forma prioritaria cuando se accede por primera vez. Ten en cuenta que Vite habilita el soporte para mapas de origen cuando el `runner` se crea llamando a `process.setSourceMapsEnabled` o sobrescribiendo `Error.prepareStackTrace` si no está disponible.  
+:::warning
+El `runner` se evalúa de manera perezosa solo cuando se accede por primera vez. Ten en cuenta que Vite habilita el soporte para mapa de fuente cuando se crea el `runner` al llamar a `process.setSourceMapsEnabled` o al sobrescribir `Error.prepareStackTrace` si no está disponible.
+:::
+
+Los frameworks que se comunican con su _runtime_ mediante la [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) pueden utilizar el `FetchableDevEnvironment`, que proporciona una forma estandarizada de manejar solicitudes a través del método `handleRequest`:
+
+```ts
+import {
+  createServer,
+  createFetchableDevEnvironment,
+  isFetchableDevEnvironment,
+} from 'vite'
+
+const server = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  environments: {
+    custom: {
+      dev: {
+        createEnvironment(name, config) {
+          return createFetchableDevEnvironment(name, config, {
+            handleRequest(request: Request): Promise<Response> | Response {
+              // Manejar la Request y devolver una Response
+            },
+          })
+        },
+      },
+    },
+  },
+})
+
+// Cualquier cliente de la API de entorno ahora puede llamar a `dispatchFetch`
+if (isFetchableDevEnvironment(server.environments.custom)) {
+  const response: Response = await server.environments.custom.dispatchFetch(
+    new Request('/request-to-handle')
+  )
+}
+```
+
+:::warning
+Vite valida tanto la entrada como la salida del método `dispatchFetch`: la solicitud debe ser una instancia de la clase global `Request` y la respuesta debe ser una instancia de la clase global `Response`. Vite lanzará un `TypeError` si esto no es así.
+
+Ten en cuenta que, aunque `FetchableDevEnvironment` está implementado como una clase, **se considera un detalle de implementación por parte del equipo de Vite** y **puede cambiar en cualquier momento**.
 :::
 
 ## `RunnableDevEnvironment` predeterminado
