@@ -2,7 +2,7 @@
 
 Vite expone ciertas constantes bajo el objeto especial `import.meta.env`. Estas constantes se definen como variables globales durante el desarrollo y se reemplazan estáticamente en el momento de la compilación para que el tree-shaking sea efectivo.
 
-## Constantes incorporadas
+## Constantes Incorporadas
 
 Algunas constantes incorporadas están disponibles en todos los casos:
 

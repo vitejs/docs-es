@@ -44,7 +44,7 @@ jobs:
       - name: Construir
         run: npm run build
       - name: Configurar Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v3
         with:
