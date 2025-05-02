@@ -83,7 +83,7 @@ importers:
         version: 1.5.2
       vitepress-plugin-llms:
         specifier: ^1.1.0
-        version: 1.1.1
+        version: 1.1.2
       vue:
         specifier: ^3.5.13
         version: 3.5.13(typescript@5.8.3)
@@ -2408,8 +2408,8 @@ packages:
   vitepress-plugin-group-icons@1.5.2:
     resolution: {integrity: sha512-zen07KxZ83y3eecou4EraaEgwIriwHaB5Q0cHAmS4yO1UZEQvbljTylHPqiJ7LNkV39U8VehfcyquAJXg/26LA==}
 
-  vitepress-plugin-llms@1.1.1:
-    resolution: {integrity: sha512-QuMXQVlGvXOnF2G3Rr/32Jebl9tdy/Gg9p4Rx52YMo+e7tasWW/m6LHwW2kqJQR39bOe/SDO0fEtRXOCCuSbbQ==}
+  vitepress-plugin-llms@1.1.2:
+    resolution: {integrity: sha512-zjFFy2wEZAk9zP73KrbLSrTo7uTUCD4P3macrLX5HQM2pSV+j6HdxOZOpfZAGmrhM4gbhIgjH+raFgj9BN6V5w==}
 
   vitepress@1.6.3:
     resolution: {integrity: sha512-fCkfdOk8yRZT8GD9BFqusW3+GggWYZ/rYncOfmgcDtP3ualNHCAg+Robxp2/6xfH1WwPHtGpPwv7mbA3qomtBw==}
@@ -4954,7 +4954,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vitepress-plugin-llms@1.1.1:
+  vitepress-plugin-llms@1.1.2:
     dependencies:
       byte-size: 9.0.1
       gray-matter: 4.0.3
