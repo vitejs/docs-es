@@ -176,7 +176,7 @@ Con la integración de Rolldown, tenemos la oportunidad de unificar las experien
 
 Cuando se introduzca el Modo de Empaquetado Completo, será una funcionalidad opcional al principio. Al igual que con la integración de Rolldown, el objetivo es convertirlo en el comportamiento predeterminado una vez que se haya recopilado suficiente retroalimentación y se haya garantizado su estabilidad.
 
-## Guía para autores de plugins / frameworks
+## Guía para Autores de Plugins / Frameworks
 
 ::: tip
 Esta sección es principalmente relevante para autores de plugins y frameworks. Si eres un usuario, puedes omitirla.
@@ -242,7 +242,7 @@ Sin embargo, ten en cuenta que **eventualmente deberás dejar de pasar las opcio
 
 Una función similar llamada `transformWithOxc`, que usa Oxc en lugar de `esbuild`, es exportada desde `rolldown-vite`.
 
-### Capa de compatibilidad para opciones de `esbuild`
+### Capa de Compatibilidad para Opciones de `esbuild`
 
 Rolldown-Vite tiene una capa de compatibilidad para convertir las opciones de `esbuild` a las correspondientes de Oxc o `rolldown`. Según las pruebas realizadas en [el ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci/blob/rolldown-vite/README-temp.md), esto funciona en muchos casos, incluidos los plugins simples de `esbuild`. Dicho esto, **el soporte para las opciones de `esbuild` será eliminado en el futuro** y se recomienda probar las opciones correspondientes de Oxc o `rolldown`.
 
@@ -257,12 +257,12 @@ const plugin = {
 }
 ```
 
-### Característica de filtro de hooks
+### Característica de Filtro de Hooks
 
 Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Al usar esta característica, puedes hacer que tu plugin sea más eficiente.
 Esta funcionalidad también es compatible con Rollup 4.38.0+ y Vite 6.3.0+. Para hacer que tu plugin sea compatible con versiones anteriores, asegúrate de ejecutar el filtro dentro de los controladores de hooks.
 
-### Convertir contenido a JavaScript en los hooks `load` o `transform`
+### Convertir Contenido a JavaScript en los Hooks `load` o `transform`
 
 Si estás convirtiendo el contenido a JavaScript desde otros tipos en los hooks `load` o `transform`, es posible que debas agregar `moduleType: 'js'` al valor devuelto.
 

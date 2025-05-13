@@ -370,6 +370,12 @@ createServer()
 
   Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
+::: tip NOTA
+
+Esta lista de bloqueo no se aplica al [directorio público](/guide/assets.md#the-public-directory). Todos los archivos en el directorio público se sirven sin ningún tipo de filtrado, ya que se copian directamente al directorio de salida durante la construcción.
+
+:::
+
 ## server.origin
 
 - **Tipo:** `string`

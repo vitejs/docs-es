@@ -14,7 +14,7 @@ export default {
 }
 ```
 
-Ten en cuenta que Vite admite el uso de la sintaxis de los módulos ES en el archivo de configuración, incluso si el proyecto no utiliza ESM de nodo nativo, por ejemplo `type: "module"` en el `package.json`. En este caso, el archivo de configuración se preprocesa automáticamente antes de cargarlo.
+Ten en cuenta que Vite admite el uso de la sintaxis de los módulos ES en el archivo de configuración, incluso si el proyecto no utiliza ESM de nodo nativo, por ejemplo `"type": "module"` en el `package.json`. En este caso, el archivo de configuración se preprocesa automáticamente antes de cargarlo.
 
 También puedes especificar explícitamente un archivo de configuración para usar con la opción CLI `--config` (resuelta relativa a `cwd`):
 

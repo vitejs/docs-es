@@ -11,7 +11,7 @@ La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 
 Por favor, comparte tus comentarios con nosotros.  
 :::
 
-## Entornos y frameworks
+## Entornos y Frameworks
 
 El entorno implícito `ssr` y otros entornos no cliente usan por defecto un `RunnableDevEnvironment` durante el desarrollo. Aunque esto requiere que el tiempo de ejecución sea el mismo que el del servidor Vite, funciona de manera similar a `ssrLoadModule` y permite que los frameworks migren y habiliten HMR (Hot Module Replacement) para su desarrollo SSR. Puedes proteger cualquier entorno ejecutable con la función `isRunnableDevEnvironment`.
 

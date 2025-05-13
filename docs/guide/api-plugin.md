@@ -1,10 +1,10 @@
-# API de plugins
+# API de Plugins
 
 Los plugins de Vite amplían la interfaz de plugins bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Como resultado, puedes escribir un plugin de Vite una vez y hacer que funcione tanto para desarrollo como para compilación.
 
 **Se recomienda revisar primero la [documentación de plugins de Rollup](https://rollupjs.org/plugin-development/) antes de leer las secciones a continuación.**
 
-## Creación de un plugin
+## Creación de un Plugin
 
 Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo plugin, asegúrate de consultar la [Guía de funcionalidades](https://vite.dev/guide/features) para ver si tu necesidad está cubierta. Revisa también los plugins de la comunidad disponibles, tanto en forma de [plugins de Rollup compatible](https://github.com/rollup/awesome) como [plugins específicos de Vite](https://github.com/vitejs/awesome-vite#plugins)
 
@@ -38,7 +38,7 @@ Si tu plugin solo funcionará para un marco de trabajo en particular, su nombre 
 
 Puedes ver también la [Convención de Módulos Virtuales](./api-plugin.md#convencion-de-modulos-virtuales).
 
-## Configuración de plugins
+## Configuración de Plugins
 
 Los usuarios agregarán plugins al proyecto `devDependencies` y los configurarán usando la opción de array `plugins`.
 
@@ -74,13 +74,13 @@ export default defineConfig({
 })
 ```
 
-## Ejemplos simples
+## Ejemplos Simples
 
 :::tip
 Es una convención común crear un plugin Vite/Rollup como una función de factoría que devuelve el objeto del plugin real. La función puede aceptar opciones que permiten a los usuarios personalizar el comportamiento del plugin.
 :::
 
-### Transformación de tipos de archivos personalizados
+### Transformación de Tipos de Archivos Personalizados
 
 ```js
 export default function myPlugin() {
@@ -99,7 +99,7 @@ export default function myPlugin() {
 }
 ```
 
-### Importación de un archivo virtual
+### Importación de un Archivo Virtual
 
 Mira el ejemplo en [la siguente sección](./api-plugin.md#convencion-de-modulos-virtuales).
 
@@ -140,7 +140,7 @@ Los módulos virtuales en Vite (y Rollup) tienen el prefijo `virtual:` para la r
 
 Ten en cuenta que los módulos derivados directamente de un archivo real, como en el caso de un módulo de secuencia de comandos en un componente de archivo único (como .vue o .svelte SFC) no necesitan seguir esta convención. Los SFC generalmente generan un conjunto de submódulos cuando se procesan, pero el código en estos se puede mapear de nuevo al sistema de archivos. El uso de `\0` para estos submódulos evitaría que los mapas de origen funcionen correctamente.
 
-## Hooks universales
+## Hooks Universales
 
 Durante el desarrollo, el servidor de desarrollo de Vite crea un contenedor de plugins que invoca [Hooks de compilación de Rollup](https://rollupjs.org/plugin-development/#build-hooks) de la misma manera que lo hace Rollup.
 
@@ -168,7 +168,7 @@ Ten en cuenta que el hook [`moduleParsed`](https://rollupjs.org/plugin-developme
 
 [Los hooks de generación de salida](https://rollupjs.org/plugin-development/#output-generation-hooks) (excepto `closeBundle`) **no** se llaman durante el desarrollo. Puedes pensar esto como que el servidor de desarrollo de Vite solo llama a `rollup.rollup()` sin llamar a `bundle.generate()`.
 
-## Hooks específicos de Vite
+## Hooks Específicos de Vite
 
 Los plugins de Vite también pueden proporcionar hooks que sirven para propósitos específicos de Vite. Estos hooks son ignorados por Rollup.
 
@@ -462,7 +462,7 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
   }
   ```
 
-## Orden de plugins
+## Orden de Plugins
 
 Un plugin de Vite también puede especificar una propiedad `enforce` (similar a los cargadores de paquetes web) para ajustar su orden de aplicación. El valor de `enforce` puede ser `"pre"` o `"post"`. Los plugins resueltos estarán en el siguiente orden:
 
@@ -476,7 +476,7 @@ Un plugin de Vite también puede especificar una propiedad `enforce` (similar a 
 
 Es importante tener en cuenta que esto es independiente del ordenamiento de los hooks, los cuales siguen estando sujetos por separado a su atributo `order` [como es habitual en los hooks de Rollup](https://rollupjs.org/plugin-development/#build-hooks).
 
-## Solicitud condicional
+## Solicitud Condicional
 
 Por defecto, los plugins se invocan tanto para servir como para compilar. En los casos en que un plugin deba aplicarse condicionalmente solo durante el servicio o la construcción, use la propiedad `apply` para invocarlos solo durante la `'build'` o `'serve'`:
 
@@ -498,7 +498,7 @@ apply(config, { command }) {
 }
 ```
 
-## Compatibilidad de plugins Rollup
+## Compatibilidad de Plugins Rollup
 
 Una buena cantidad de plugins de Rollup funcionarán directamente como un plugin de Vite (por ejemplo, `@rollup/plugin-alias` o `@rollup/plugin-json`), pero no todos, ya que algunos hooks de plugin no tienen sentido en un contexto de servidor de desarrollo desacoplado.
 
@@ -526,7 +526,7 @@ export default defineConfig({
 })
 ```
 
-## Normalización de rutas
+## Normalización de Rutas
 
 Vite normaliza las rutas mientras resuelve las identificaciones para usar los separadores POSIX (/) mientras conserva el volumen en Windows. Por otro lado, Rollup mantiene intactas las rutas resueltas de manera predeterminada, por lo que las identificaciones resueltas tienen separadores win32 ( \\ ) en Windows. Sin embargo, los plugins de Rollup utilizan una [función de utilidad `normalizePath`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath) de `@rollup/pluginutils` internamente, que convierte los separadores en POSIX antes de realizar comparaciones. Esto significa que cuando estos plugins se usan en Vite, el patrón de configuración `include` y `exclude` y otras rutas similares contra las comparaciones de identificadores resueltos funcionan correctamente.
 
@@ -539,11 +539,11 @@ normalizePath('foo\\bar') // 'foo/bar'
 normalizePath('foo/bar') // 'foo/bar'
 ```
 
-## Filtrado, patrón include/exclude
+## Filtrado, Patrón include/exclude
 
 Vite expone la función `createFilter` de [`@rollup/pluginutils`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) para alentar a los plugins e integraciones específicos de Vite a usar el patrón de filtrado estándar include/exclude, que también se utiliza en el propio núcleo de Vite.
 
-## Comunicación cliente-servidor
+## Comunicación Cliente-Servidor
 
 Desde Vite 2.9, proporcionamos algunas utilidades para plugins que ayudan a manejar la comunicación con los clientes.
 
@@ -583,7 +583,7 @@ if (import.meta.hot) {
 }
 ```
 
-### Cliente a servidor
+### Cliente a Servidor
 
 Para enviar eventos del cliente al servidor, podemos usar [`hot.send`](/guide/api-hmr.html#hot-send-event-payload):
 
@@ -613,7 +613,7 @@ export default defineConfig({
 })
 ```
 
-### TypeScript para eventos personalizados
+### TypeScript para Eventos Personalizados
 
 Internamente, Vite infiere el tipo de un payload a partir de la interfaz `CustomEventMap`, por lo que es posible tipar eventos personalizados mediante la extensión de la interfaz:
 

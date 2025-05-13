@@ -457,19 +457,19 @@ export default defineConfig({
               link: '/changes/this-environment-in-hooks',
             },
             {
-              text: 'Hooks de Plugin hotUpdate para HMR',
+              text: 'Hooks de Plugin HotUpdate para HMR',
               link: '/changes/hotupdate-hook',
             },
             {
-              text: 'Migración a APIs por entorno',
+              text: 'Migración a APIs por Entorno',
               link: '/changes/per-environment-apis',
             },
             {
-              text: 'SSR usando la API ModuleRunner',
+              text: 'SSR Usando la API ModuleRunner',
               link: '/changes/ssr-using-modulerunner',
             },
             {
-              text: 'Plugins compartidos durante la compilación',
+              text: 'Plugins Compartidos Durante la Compilación',
               link: '/changes/shared-plugins-during-build',
             },
           ],

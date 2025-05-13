@@ -16,9 +16,9 @@ No recomendamos cambiar a estas APIs aún. Están incluidas en Vite para ayudarn
 
 - [`this.environment` en Hooks](/changes/this-environment-in-hooks)
 - [Hooks de Plugin `hotUpdate` para HMR](/changes/hotupdate-hook)
-- [Migración a las APIs por entorno](/changes/per-environment-apis)
-- [SSR usando la API `ModuleRunner`](/changes/ssr-using-modulerunner)
-- [Plugins compartidos durante la compilación](/changes/shared-plugins-during-build)
+- [Migración a las APIs por Entorno](/changes/per-environment-apis)
+- [SSR Usando la API `ModuleRunner`](/changes/ssr-using-modulerunner)
+- [Plugins Compartidos Durante la Compilación](/changes/shared-plugins-during-build)
 
 ## Pasados
 

@@ -117,9 +117,9 @@ export default {
 
 La API actual del servidor Vite aún no está obsoleta y es compatible con versiones anteriores a Vite 5. La nueva API de entornos es experimental.
 
-- [Migración a las APIs por entorno](/changes/per-environment-apis)
-- [SSR usando la API `ModuleRunner`](/changes/ssr-using-modulerunner)
-- [Plugins compartidos durante la compilación](/changes/shared-plugins-during-build)
+- [Migración a las APIs por Entorno](/changes/per-environment-apis)
+- [SSR Usando la API `ModuleRunner`](/changes/ssr-using-modulerunner)
+- [Plugins Compartidos Durante la Compilación](/changes/shared-plugins-during-build)
 
 ## Usuarios Objetivo
 

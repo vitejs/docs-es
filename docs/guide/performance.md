@@ -6,13 +6,13 @@ Si bien Vite es rápido por defecto, los problemas de rendimiento pueden aparece
 - Cargas de página lentas
 - compilaciones lentas
 
-## Revisa las configuraciones en tu navegador
+## Revisa las Configuraciones en tu Navegador
 
 Algunas extensiones del navegador pueden interferir con las solicitudes y ralentizar los tiempos de inicio y recarga de aplicaciones grandes, especialmente cuando se utilizan herramientas de desarrollo del navegador. Recomendamos crear un perfil solo para desarrolladores sin extensiones, o cambiar al modo incógnito, mientras usa el servidor de desarrollo de Vite en estos casos. El modo incógnito también debería ser más rápido que un perfil normal sin extensiones.
 
 El servidor de desarrollo de Vite realiza un almacenamiento en caché de las dependencias preempaquetadas e implementa respuestas 304 rápidas para el código fuente. Deshabilitar la caché mientras las Herramientas de desarrollo del navegador están abiertas puede tener un gran impacto en los tiempos de inicio y recarga de la página completa. Asegúrate de que "Desactivar caché" no esté habilitado mientras trabajas con el servidor de Vite.
 
-## Auditar plugins de Vite configurados
+## Auditar Plugins de Vite Configurados
 
 Los plugins internos y oficiales de Vite están optimizados para realizar la menor cantidad de trabajo posible y al mismo tiempo brindar compatibilidad con el ecosistema más amplio. Por ejemplo, las transformaciones de código usan expresiones regulares en desarrollo, pero realizan un análisis completo en compilación para garantizar exactitud.
 
@@ -32,7 +32,7 @@ Puedes inspeccionar el tiempo que lleva transformar un archivo usando `vite --de
 Puede ejecutar `vite --profile`, visitar el sitio y presionar `p + enter` en el terminal para registrar un `.cpuprofile`. Luego se puede utilizar una herramienta como [speedscope](https://www.speedscope.app) para inspeccionar el perfil e identificar los cuellos de botella. También puedes [compartir los perfiles](https://chat.vite.dev) con el equipo de Vite para ayudarnos a identificar problemas de rendimiento.
 :::
 
-## Reducir operaciones de resolución
+## Reducir Operaciones de Resolución
 
 Resolver rutas de importación puede ser una operación costosa cuando se llega con frecuencia al peor de los casos. Por ejemplo, Vite admite "adivinar" rutas de importación con la opción [`resolve.extensions`](/config/shared-options.md#resolve-extensions), que por defecto es `['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']`.
 
@@ -55,7 +55,7 @@ Si eres creador de un plugin, asegúrate de invocar a [`this.resolve`](https://r
 Si estás utilizando TypeScript, activa `"moduleResolution": "Bundler"` y `"allowImportingTsExtensions": true` en las ``compilerOptions` de `tsconfig.json` para usar las extensiones `.ts` y `.tsx` directamente en tu codigo.
 :::
 
-## Evita los archivos Barril
+## Evita los Archivos Barril
 
 Los archivos Barril son archivos que reexportan las API de otros archivos en el mismo directorio. Por ejemplo:
 
@@ -69,7 +69,7 @@ Cuando solo importas una API individual, por ejemplo, `import { slash } from './
 
 Si es posible, evita los archivos barril e importa las API individuales directamente, ejemplo, `import { slash } from './utils/slash.js'`. Puedes leer el [issue #8237](https://github.com/vitejs/vite/issues/8237) para más información.
 
-## Preparación de archivos de uso frecuente
+## Preparación de Archivos de Uso Frecuente
 
 El servidor de desarrollo de Vite solo transforma los archivos según lo solicita el navegador, lo que le permite iniciarse rápidamente y solo aplicar transformaciones a los archivos usados. También puede pretransformar archivos si prevé que ciertos archivos se solicitarán en breve. Sin embargo, es posible que se produzcan cascadas de solicitudes si algunos archivos tardan más en transformarse que otros. Por ejemplo:
 
@@ -108,7 +108,7 @@ Ten en cuenta que solo debes preparar los archivos que se utilizan con frecuenci
 
 El uso de [`--open` o `server.open`](/config/server-options.html#server-open) también proporciona un aumento de rendimiento, ya que Vite preparará automáticamente el punto de entrada de tu aplicación o la URL proporcionada a abrir.
 
-## Utilizar herramientas nativas o menos potentes
+## Utilizar Herramientas Nativas o Menos Potentes
 
 Mantener Vite rápido con un código en crecimiento se trata de reducir la cantidad de trabajo para los archivos fuente (JS/TS/CSS).
 
