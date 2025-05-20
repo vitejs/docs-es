@@ -5,7 +5,6 @@ import {
   groupIconMdPlugin,
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
-import llmstxt from 'vitepress-plugin-llms'
 import type { PluginOption } from 'vite'
 import { buildEnd } from './buildEnd.config'
 
@@ -510,25 +509,6 @@ export default defineConfig({
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
         },
       }),
-      llmstxt({
-        ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md'],
-        description: 'La herramienta de compilación para la Web',
-        details: `\
-- 💡 Inicio instantáneo del servidor  
-- ⚡️ HMR ultrarrápido  
-- 🛠️ Funcionalidades avanzadas  
-- 📦 Build optimizado  
-- 🔩 Interfaz universal de plugins  
-- 🔑 APIs totalmente tipadas  
-
-Vite es una nueva generación de herramientas de compilación para frontend que mejora significativamente la experiencia de desarrollo. Consta de dos partes principales:
-
-- Un servidor de desarrollo que sirve tus archivos fuente usando [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), con [funciones integradas](https://es.vite.dev/guide/features.md) y un [Hot Module Replacement (HMR)](https://es.vite.dev/guide/features.md#hot-module-replacement) increíblemente rápido.
-
-- Un [comando de compilación](https://es.vite.dev/guide/build.md)) que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar archivos estáticos altamente optimizados para producción.
-
-Además, Vite es altamente extensible gracias a su [API de plugins](https://es.vite.dev/guide/api-plugin.md) y su [API de JavaScript](https://es.vite.dev/guide/api-javascript.md), ambas con soporte completo para tipado.`,
-      }) as PluginOption,
     ],
   },
   optimizeDeps: {
