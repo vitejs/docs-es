@@ -44,7 +44,7 @@ Los ajustes preestablecidos de plantilla admitidos son:
 ## Inicia tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) version 18+ o 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+Vite requiere [Node.js](https://nodejs.org/en/) version 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
 :::
 
 ::: code-group

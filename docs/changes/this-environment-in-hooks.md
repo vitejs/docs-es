@@ -18,7 +18,7 @@ Antes de Vite 6, solo estaban disponibles dos entornos: `client` y `ssr`. Un ún
 
 ## Guía de Migración
 
-Para realizar una migración rápida en un plugin existente, reemplaza el argumento `options.ssr` por `this.environment.name !== 'client'` en los hooks `resolveId`, `load` y `transform`:
+Para realizar una migración rápida en un plugin existente, reemplaza el argumento `options.ssr` por `this.environment.config.consumer === 'server'` en los hooks `resolveId`, `load` y `transform`:
 
 ```ts
 import { Plugin } from 'vite'
@@ -28,7 +28,7 @@ export function myPlugin(): Plugin {
     name: 'my-plugin',
     resolveId(id, importer, options) {
       const isSSR = options.ssr // [!code --]
-      const isSSR = this.environment.name !== 'client' // [!code ++]
+      const isSSR = this.environment.config.consumer === 'server' // [!code ++]
       if (isSSR) {
         // Lógica específica de SSR
       } else {

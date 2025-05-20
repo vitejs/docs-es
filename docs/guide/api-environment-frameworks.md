@@ -128,7 +128,7 @@ app.use('*', async (req, res, next) => {
 })
 ```
 
-## SSR Agnóstico al tiempo de ejecución
+## SSR Agnóstico en tiempo de ejecución
 
 Dado que el `RunnableDevEnvironment` solo se puede usar para ejecutar código en el mismo tiempo de ejecución que el servidor Vite, requiere un entorno compatible con Node.js. Esto significa que necesitarás usar el `DevEnvironment` sin modificar para hacerlo agnóstico al tiempo de ejecución.
 
@@ -438,6 +438,8 @@ export default {
   },
 }
 ```
+
+Los plugins también pueden definir un hook `buildApp`. Los hooks con orden `'pre'` y `null` se ejecutan antes de que se ejecute el `builder.buildApp` configurado, y los hooks con orden `'post'` se ejecutan después de ese momento. `environment.isBuilt` se puede utilizar para comprobar si un entorno ya ha sido compilado.
 
 ## Código Agnóstico del entorno
 

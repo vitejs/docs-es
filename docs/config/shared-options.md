@@ -219,9 +219,8 @@ Ten en cuenta que si se proporciona una configuración inline, Vite no buscará 
 Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de archivo se utilizan como claves para las opciones. Las opciones admitidas para cada preprocesador se pueden encontrar en su documentación respectiva:
 
 - `sass`/`scss`:
-  - Selecciona la API de Sass a usar con `api: "modern-compiler" | "modern" | "legacy"` (por defecto `"modern-compiler"` si se tiene instalado `sass-embedded`, de lo contrario `"modern"`). Para obtener el mejor rendimiento, se recomienda usar `api: "modern-compiler"` con el paquete `sass-embedded`. La API `"legacy"` está obsoleta y se eliminará en Vite 7.
-  - [Opciones (moderna)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
-  - [Opciones (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+  - Selecciona la API de Sass a usar con `api: "modern-compiler" | "modern"` (por defecto `"modern-compiler"` si se tiene instalado `sass-embedded`, de lo contrario `"modern"`). Para obtener el mejor rendimiento, se recomienda usar `api: "modern-compiler"` con el paquete `sass-embedded`.
+  - [Opciones](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [Opciones](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: Solo se soporta [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual puede ser pasado como un objeto.
 
@@ -241,7 +240,7 @@ export default defineConfig({
       },
     },
     scss: {
-      api: 'modern', // o "legacy"
+      api: 'modern-compiler', // or "modern"
       importers: [
         // ...
       ],
@@ -457,7 +456,7 @@ Entra [aquí](/guide/env-and-mode#archivos-env) para obtener más información s
 - **Tipo:** `string | string[]`
 - **Por defecto:** `VITE_`
 
-Las variables de entorno que comienzan con `envPrefix` se expondrán al código fuente de tu cliente a través de import.meta.env.
+Las variables de entorno que comienzan con `envPrefix` se expondrán al código fuente de tu cliente a través de `import.meta.env`.
 
 :::warning NOTAS DE SEGURIDAD
 `envPrefix` no debe configurarse como `''`, esto expondrá todas tus variables env y provocará una filtración inesperada de información confidencial. De todas formas, Vite arrojará un error al detectar `''`.
