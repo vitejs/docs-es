@@ -1,4 +1,4 @@
-{
+Y {
   "name": "vite-docs-es",
   "version": "6.3.1",
   "description": "Documentación oficial de Vite en Español",
@@ -67,7 +67,6 @@
     "typescript-eslint": "^8.30.1",
     "vitepress": "^1.6.3",
     "vitepress-plugin-group-icons": "^1.5.2",
-    "vitepress-plugin-llms": "^1.1.0",
     "vue": "^3.5.13"
   },
   "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
