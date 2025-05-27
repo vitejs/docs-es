@@ -47,7 +47,7 @@
   "devDependencies": {
     "@algolia/client-search": "^5.23.4",
     "@eslint/js": "^9.25.0",
-    "@shikijs/vitepress-twoslash": "^2.5.0",
+    "@shikijs/vitepress-twoslash": "^3.0.0",
     "@types/express": "^5.0.1",
     "@types/node": "22.15.23",
     "@types/react": "^18.3.20",
