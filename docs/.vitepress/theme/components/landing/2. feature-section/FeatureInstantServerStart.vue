@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { gsap } from 'gsap'
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useCardAnimation } from '../../../composables/useCardAnimation'
@@ -26,6 +26,8 @@ const { startAnimation } = useCardAnimation(
       commandTriggered.value = true
       highlightEnter.value = false
     })
+
+    return timeline
   },
   {
     once: true,
@@ -35,7 +37,7 @@ const { startAnimation } = useCardAnimation(
 /**
  * Run the command animation on enter press
  */
-function handleEnterPress(event) {
+function handleEnterPress(event: KeyboardEvent) {
   if (event.key === 'Enter') {
     startAnimation()
     window.removeEventListener('keydown', handleEnterPress)

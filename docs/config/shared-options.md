@@ -219,7 +219,7 @@ Ten en cuenta que si se proporciona una configuración inline, Vite no buscará 
 Especifica las opciones a pasar a los preprocesadores de CSS. Las extensiones de archivo se utilizan como claves para las opciones. Las opciones admitidas para cada preprocesador se pueden encontrar en su documentación respectiva:
 
 - `sass`/`scss`:
-  - Selecciona la API de Sass a usar con `api: "modern-compiler" | "modern"` (por defecto `"modern-compiler"` si se tiene instalado `sass-embedded`, de lo contrario `"modern"`). Para obtener el mejor rendimiento, se recomienda usar `api: "modern-compiler"` con el paquete `sass-embedded`.
+  - Utiliza `sass-embedded` si está instalado, de lo contrario utiliza `sass`. Para obtener el mejor rendimiento, se recomienda instalar el paquete `sass-embedded`.
   - [Opciones](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [Opciones](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: Solo se soporta [`define`](https://stylus-lang.com/docs/js.html#define-name-node), el cual puede ser pasado como un objeto.
@@ -240,7 +240,6 @@ export default defineConfig({
       },
     },
     scss: {
-      api: 'modern-compiler', // or "modern"
       importers: [
         // ...
       ],

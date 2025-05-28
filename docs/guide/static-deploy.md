@@ -18,7 +18,7 @@ Las siguientes guías se basan en algunas suposiciones compartidas:
 Es importante tener en cuenta que `vite preview` está diseñada para obtener una vista previa de la compilación localmente y no como un servidor de producción.
 
 :::tip NOTA
-Estas guías brindan instrucciones para realizar un despliegue de tu sitio estatico con Vite. Vite también tiene soporte para Server Side Rendering. SSR se refiere a marcos front-end que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Consulta la [Guía de SSR](./ssr) para obtener información sobre esta función. Por otro lado, si estás buscando una integración con marcos de trabajo tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
+Estas guías brindan instrucciones para realizar un despliegue de tu sitio estatico con Vite. Vite también tiene soporte para Server-Side Rendering. SSR se refiere a marcos front-end que admiten la ejecución de la misma aplicación en Node.js, renderizándola previamente en HTML y finalmente hidratándola en el cliente. Consulta la [Guía de SSR](./ssr) para obtener información sobre esta función. Por otro lado, si estás buscando una integración con marcos de trabajo tradicionales del lado del servidor, consulta la [Guía de integración de backend](./backend-integration) en su lugar.
 :::
 
 ## Compilación de la aplicación

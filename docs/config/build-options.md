@@ -5,10 +5,10 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 ## build.target
 
 - **Tipo:** `string | string[]`
-- **Por defecto:** `'modules'`
+- **Por defecto:** `'baseline-widely-available'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
-El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'modules'`, que apunta a navegadores con [soporte de módulos ES nativo](https://caniuse.com/es6-module), [soporte de importación ESM nativo](https://caniuse.com/es6-module-dynamic-import) y soporte para [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Vite reemplazará `'modules'` con `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']`
+El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/web-features/) de 2025-05-01. En particular, es `['chrome107', 'edge107', 'firefox104', 'safari16']`.
 
 Otro valor especial es `'esnext'`, que asume soporte nativo para importaciones dinámicas y solo realiza una transpilación mínima.
 

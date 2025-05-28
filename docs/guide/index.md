@@ -22,7 +22,7 @@ Puedes obtener más información sobre la razón de ser del proyecto en la secci
 
 Durante el desarrollo, Vite configura [`esnext` como el objetivo de transformación](https://esbuild.github.io/api/#target), porque asumimos que se está utilizando un navegador moderno que admite todas las características más recientes de JavaScript y CSS. Esto evita la reducción de sintaxis, permitiendo que Vite sirva módulos lo más cercanos posible al código fuente original.
 
-Para la compilación de producción, Vite apunta por defecto a navegadores que soportan JavaScript moderno, como [módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import), [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta), [nullish coalescing](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) y [BigInt](https://caniuse.com/bigint). Los navegadores heredados pueden ser soportados mediante el plugin oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). Consulta la sección [Compilación para producción](./build) para más detalles.
+Para compilaciones de producción, Vite apunta por defecto a navegadores [Baseline](https://web-platform-dx.github.io/web-features/) Ampliamente Disponibles. Estos son navegadores que se lanzaron al menos hace 2.5 años. El objetivo puede ser reducido mediante configuración. Además, los navegadores obsoletos pueden ser soportados mediante el plugin oficial [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy). Consulta la sección [Compilación para producción](./build) para obtener más detalles.
 
 ## Probar Vite online
 
@@ -44,7 +44,7 @@ Los ajustes preestablecidos de plantilla admitidos son:
 ## Inicia tu primer proyecto Vite
 
 ::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) version 20+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+Vite requiere [Node.js](https://nodejs.org/en/) version 20.19+, 22.12+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
 :::
 
 ::: code-group

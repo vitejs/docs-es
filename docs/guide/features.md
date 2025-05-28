@@ -176,7 +176,7 @@ Los recursos referenciados por elementos HTML como `<script type="module" src>` 
 - `<audio src>`
 - `<embed src>`
 - `<img src>` y `<img srcset>`
-- `<image src>`
+- `<image href>` y `<image xlink:href>`
 - `<input src>`
 - `<link href>` y `<link imagesrcset>`
 - `<object data>`
@@ -314,7 +314,7 @@ npm add -D stylus
 
 Si usas componentes de archivo único de Vue (SFC), esto también habilita automáticamente `<style lang="sass">` et al.
 
-Vite mejora la resolución de `@import` para Sass y Less para que también se respeten los alias de Vite. Además, las referencias `url()` relativas dentro de los archivos Sass/Less importados que se encuentran en directorios diferentes del archivo raíz también se reorganizan automáticamente para garantizar la corrección.
+Vite mejora la resolución de `@import` para Sass y Less para que también se respeten los alias de Vite. Además, las referencias `url()` relativas dentro de los archivos Sass/Less importados que se encuentran en directorios diferentes del archivo raíz también se reorganizan automáticamente para garantizar la corrección. Las referencias `url()` que comienzan con una variable o una interpolación tampoco son compatibles debido a las restricciones de su API.
 
 El alias `@import` y el cambio de base de URL no son compatibles con Stylus debido a las limitaciones de su API.
 
@@ -365,21 +365,21 @@ Las consultas especiales pueden modificar cómo se cargan los recursos:
 ```js twoslash
 import 'vite/client'
 // ---cut--
-// carga recursos explícitamente como URL
+// Carga recursos explícitamente como URL (se incrustan automáticamente dependiendo del tamaño del archivo)
 import assetAsURL from './asset.js?url'
 ```
 
 ```js twoslash
 import 'vite/client'
 // ---cut--
-// carga recursos como string
+// Carga recursos como string
 import assetAsString from './shader.glsl?raw'
 ```
 
 ```js twoslash
 import 'vite/client'
 // ---cut--
-// cargar Web Workers
+// Cargar Web Workers
 import Worker from './worker.js?worker'
 ```
 

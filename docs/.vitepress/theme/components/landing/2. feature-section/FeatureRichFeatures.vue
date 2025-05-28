@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useCardAnimation } from '../../../composables/useCardAnimation'
 import { useSlideIn } from '../../../composables/useSlideIn'
 import logoCSS from './images/css3.svg'
@@ -18,7 +18,7 @@ useSlideIn('#rich-features-card')
  */
 const { isCardActive, startAnimation } = useCardAnimation(
   '#rich-features-card',
-  null,
+  undefined,
   {
     once: true,
   }

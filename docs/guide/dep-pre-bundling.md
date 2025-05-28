@@ -83,6 +83,6 @@ Si por alguna razón deseas forzar a Vite a volver a empaquetar las dependencias
 
 Las solicitudes de dependencia resueltas se almacenan fuertemente en caché con encabezados HTTP `max-age=31536000,immutable` para mejorar el rendimiento de recarga de la página durante el desarrollo. Una vez almacenadas en caché, estas solicitudes nunca volverán a llegar al servidor de desarrollo. La consulta de versión adjunta los invalida automáticamente si se instala una versión diferente (como se refleja en el archivo de bloqueo del administrador de paquetes). Si deseas depurar tus dependencias mediante ediciones locales, puedes:
 
-1. Deshabilitar temporalmente el caché a través de la pestaña Red de las herramientas de desarrollo del navegador;
-2. Reiniciar el servidor de desarrollo de Vite con el indicador `--force` para volver a empaquetar las dependencias;
+1. Deshabilitar temporalmente el caché a través de la pestaña Red de las herramientas de desarrollo del navegador.
+2. Reiniciar el servidor de desarrollo de Vite con el indicador `--force` para volver a empaquetar las dependencias.
 3. Volver a cargar la página.

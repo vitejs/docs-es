@@ -4,14 +4,14 @@ Cuando sea el momento de implementar tu aplicación en producción, simplemente 
 
 ## Compatibilidad de navegadores
 
-Por defecto, el paquete de producción asume compatibilidad con JavaScript moderno, como [módulos ES nativos](https://caniuse.com/es6-module), [importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import), [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta), [operador de fusión de nulos](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) y [BigInt](https://caniuse.com/bigint). El rango de soporte de navegadores predeterminado es:
+Por defecto, el paquete de producción asume un navegador moderno que se incluye en los [Baseline](https://web-platform-dx.github.io/web-features/) objetivos de disponibilidad amplia. El rango de soporte de navegadores predeterminado es:
 
-<!-- Busca la constante `ESBUILD_MODULES_TARGET` para más información -->
+<!-- Busca la constante `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` para más información -->
 
-- Chrome >=87
-- Firefox >=78
-- Safari >=14
-- Edge >=88
+- Chrome >=107
+- Edge >=107
+- Firefox >=104
+- Safari >=16
 
 Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options.md#build-target), donde el objetivo más bajo es `es2015`. Si se configura un objetivo inferior, Vite seguirá requiriendo estos rangos mínimos de compatibilidad con navegadores, ya que depende de [la importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
 
