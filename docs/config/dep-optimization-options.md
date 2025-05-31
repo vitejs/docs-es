@@ -8,9 +8,9 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
 - **Tipo:** `string | string[]`
 
-  De forma predeterminada, Vite rastreará todos sus archivos `.html` para detectar las dependencias que deben empaquetarse previamente (ignorando `node_modules`, `build.outDir`, `__tests__` y `coverage`). Si se especifica `build.rollupOptions.input`, Vite rastreará esos puntos de entrada en su lugar.
+  Por defecto, Vite rastreará todos sus archivos `.html` para detectar las dependencias que deben empaquetarse previamente (ignorando `node_modules`, `build.outDir`, `__tests__` y `coverage`). Si se especifica `build.rollupOptions.input`, Vite rastreará esos puntos de entrada en su lugar.
 
-  Si ninguno de estos se ajusta a tus necesidades, puedes especificar entradas personalizadas con esta opción; el valor debe ser un [patrón `tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) o un array de patrones que son relativos a la raíz del proyecto Vite. Esto sobrescribirá la inferencia de entradas predeterminadas. Solo las carpetas `node_modules` y `build.outDir` se ignorarán de forma predeterminada cuando se defina explícitamente `optimizeDeps.entries`. Si es necesario ignorar otras carpetas, puedes usar un patrón de ignorado como parte de la lista de entradas, marcado con un '!' inicial. Si no deseas ignorar `node_modules` y `build.outDir`, puedes especificarlo utilizando rutas de cadena literal (sin patrones de `tinyglobby`).
+  Si ninguna de estas opciones se ajusta a tus necesidades, puedes especificar entradas personalizadas utilizando esta opción; el valor debe ser un [patrón `tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) o un array de patrones que son relativos a la raíz del proyecto Vite. Esto sobrescribirá la inferencia de entradas predeterminadas. Solo la carpeta `build.outDir` se ignorará de forma predeterminada cuando se defina explícitamente `optimizeDeps.entries`. Si se necesita ignorar otras carpetas, puedes usar un patrón de ignorado como parte de la lista de entradas, marcado con un '!' inicial. Si no deseas ignorar `build.outDir`, puedes especificarlo utilizando una ruta de cadena literal (sin patrones de `tinyglobby`).
 
 ## optimizeDeps.exclude
 
@@ -77,6 +77,13 @@ Se omiten ciertas opciones ya que cambiarlas no sería compatible con la optimiz
 - **Tipo:** `boolean`
 
 Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.
+
+## optimizeDeps.noDiscovery
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+
+Cuando se configura en `true`, se deshabilitará el descubrimiento automático de dependencias y solo se optimizarán las dependencias listadas en `optimizeDeps.include`. Las dependencias solo-CJS deben estar presentes en `optimizeDeps.include` durante el desarrollo.
 
 ## optimizeDeps.holdUntilCrawlEnd
 

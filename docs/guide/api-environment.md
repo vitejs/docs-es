@@ -22,7 +22,7 @@ Para una SPA/MPA simple, no se exponen nuevas APIs sobre los entornos en la conf
 Cuando pasamos a una aplicación típica renderizada del lado del servidor (SSR), tendremos dos entornos:
 
 - `client`: ejecuta la aplicación en el navegador.
-- `server`: ejecuta la aplicación en Node (u otros entornos de servidor) que renderiza las páginas antes de enviarlas al navegador.
+- `ssr`: ejecuta la aplicación en Node (u otros entornos de servidor) que renderiza las páginas antes de enviarlas al navegador.
 
 En desarrollo, Vite ejecuta el código del servidor en el mismo proceso de Node que el servidor de desarrollo de Vite, lo que proporciona una aproximación cercana al entorno de producción. Sin embargo, también es posible que los servidores se ejecuten en otros entornos de ejecución de JavaScript, como [workerd de Cloudflare](https://github.com/cloudflare/workerd), que tienen restricciones diferentes. Las aplicaciones modernas también pueden ejecutarse en más de dos entornos, por ejemplo, en un navegador, un servidor Node y un servidor de borde. Vite 5 no permitía representar correctamente estos entornos.
 

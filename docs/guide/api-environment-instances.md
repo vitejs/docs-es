@@ -19,8 +19,8 @@ Durante el desarrollo, los entornos disponibles en un servidor de desarrollo se 
 // Crear el servidor o obtenerlo desde el hook configureServer
 const server = await createServer(/* opciones */)
 
-const environment = server.environments.client
-environment.transformRequest(url)
+const clientEnvironment = server.environments.client
+clientEnvironment.transformRequest(url)
 console.log(server.environments.ssr.moduleGraph)
 ```
 

@@ -82,7 +82,7 @@ Ten en cuenta que, aunque `FetchableDevEnvironment` está implementado como una 
 
 ## `RunnableDevEnvironment` predeterminado
 
-Dado un servidor Vite configurado en modo middleware como se describe en la [guía de configuración SSR](/guide/ssr#setting-up-the-dev-server), implementemos el middleware SSR usando la API de entorno. El manejo de errores se omite.
+Dado un servidor Vite configurado en modo middleware como se describe en la [guía de configuración SSR](/guide/ssr#setting-up-the-dev-server), implementemos el middleware SSR utilizando la API de entorno. En este ejemplo, lo llamaremos `server` en lugar de `ssr`. El manejo de errores se omite.
 
 ```js
 import fs from 'node:fs'
@@ -92,7 +92,7 @@ import { createServer } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const server = await createServer({
+const viteServer = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',
   environments: {
@@ -103,7 +103,7 @@ const server = await createServer({
 })
 // Podrías necesitar convertir esto a RunnableDevEnvironment en TypeScript o
 // utilizar isRunnableDevEnvironment para proteger el acceso al runner.
-const environment = server.environments.node
+const serverEnvironment = viteServer.environments.server
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
   // 1. Leer index.html
@@ -112,11 +112,13 @@ app.use('*', async (req, res, next) => {
   // 2. Aplicar las transformaciones de HTML de Vite. Esto inyecta el cliente de HMR de Vite,
   //    y también aplica transformaciones HTML de los plugins de Vite, e.g., preámbulos
   //    globales de @vitejs/plugin-react.
-  template = await server.transformIndexHtml(url, template)
+  template = await viteServer.transformIndexHtml(url, template)
   // 3. Cargar la entrada del servidor. import(url) transforma automáticamente
   //    el código fuente ESM para ser usable en Node.js. ¡No se requiere empaquetado
   //    y se proporciona soporte completo para HMR!
-  const { render } = await environment.runner.import('/src/entry-server.js')
+  const { render } = await serverEnvironment.runner.import(
+    '/src/entry-server.js'
+  )
   // 4. Renderizar el HTML de la aplicación. Esto asume que la función `render`
   //     exportada en entry-server.js llama a las APIs SSR del framework correspondiente,
   //    e.g., ReactDOMServer.renderToString().

@@ -153,7 +153,7 @@ Por ejemplo, para hacer que la importación predeterminada de `*.svg` a un compo
     export default content
   }
   ```
-- El archivo que contiene la referencia a `vite/client`:
+- El archivo que contiene la referencia a `vite/client` (normalmente `vite-env.d.ts`):
   ```ts
   /// <reference types="./vite-env-override.d.ts" />
   /// <reference types="vite/client" />

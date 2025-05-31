@@ -125,7 +125,7 @@ export default defineConfig({
       svgr({
         /*...*/
       }),
-      { load: { id: /\.svg?react$/ } }
+      { load: { id: /\.svg\?react$/ } }
     ),
   ],
 })

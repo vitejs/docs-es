@@ -62,9 +62,9 @@ if (import.meta.hot) {
 
 ## IntelliSense para TypeScript
 
-Vite proporciona definiciones de tipos para `import.meta.hot` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Puedes crear un `env.d.ts` en el directorio `src` para que TypeScript tome las definiciones de tipo:
+Vite proporciona definiciones de tipos para `import.meta.hot` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Puedes crear un `vite-env.d.ts` en el directorio `src` para que TypeScript tome las definiciones de tipo:
 
-```ts
+```ts [vite-env.d.ts]
 /// <reference types="vite/client" />
 ```
 

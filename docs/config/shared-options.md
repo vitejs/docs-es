@@ -54,7 +54,7 @@ export default defineConfig({
 ```
 
 ::: tip NOTA
-Para usuarios de TypeScript, asegúrense de agregar las declaraciones de tipo en el archivo `env.d.ts` o `vite-env.d.ts` para obtener comprobaciones de tipos e Intellisense.
+Para usuarios de TypeScript, asegúrense de agregar las declaraciones de tipo en el archivo `vite-env.d.ts` para obtener comprobaciones de tipos e Intellisense.
 :::
 
 ## plugins
@@ -270,11 +270,12 @@ export default defineConfig({
 
 ## css.preprocessorMaxWorkers
 
-- **Experimental:** [Hacer comentarios](https://github.com/vitejs/vite/discussions/15835)
 - **Tipo:** `number | true`
-- **Por defecto:** `0` (no crea ningún worker y se ejecuta en el hilo principal)
+- **Por defecto:** `true`
 
-Si se configura esta opción, los preprocesadores CSS se ejecutarán en los workers cuando sea posible. `true` significa el número de CPU menos 1.
+Especifica el número máximo de hilos que los preprocesadores CSS pueden utilizar. `true` significa el número de CPUs menos 1. Cuando se configura en `0`, Vite no creará ningún worker y ejecutará los preprocesadores en el hilo principal.
+
+Dependiendo de las opciones del preprocesador, Vite puede ejecutar los preprocesadores en el hilo principal incluso si esta opción no se configura en `0`.
 
 ## css.devSourcemap
 
