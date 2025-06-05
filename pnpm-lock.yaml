@@ -595,8 +595,8 @@ packages:
   '@iconify-json/simple-icons@1.2.36':
     resolution: {integrity: sha512-ZMpVdoW/7hhbt2aHVSvudjH8eSVNNjKkAAjwAQHgiuPUiIfbvNakVin+H9uhUz4N9TbDT/nanzV/4Slb+6dDXw==}
 
-  '@iconify-json/vscode-icons@1.2.21':
-    resolution: {integrity: sha512-velkIWAZRxvM9VuhkVeD6obyw0UXjTFk7lqcaxIzY+X7lXx2+yX2MoMbIwgpH3PbgqjvymS/SujBb4aWYcfmhw==}
+  '@iconify-json/vscode-icons@1.2.22':
+    resolution: {integrity: sha512-qQ+2q3E7ULfDreFOspoYKcGJ76o0/D7wZiBt5g8wco9v+Qq6JDH3z2YNoM/36zzAqRnhVEIs5A9sdZeAJeJUwA==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -2722,7 +2722,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/vscode-icons@1.2.21':
+  '@iconify-json/vscode-icons@1.2.22':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -4600,7 +4600,7 @@ snapshots:
   vitepress-plugin-group-icons@1.6.0(vite@6.3.5(@types/node@22.15.29)(yaml@2.8.0)):
     dependencies:
       '@iconify-json/logos': 1.2.4
-      '@iconify-json/vscode-icons': 1.2.21
+      '@iconify-json/vscode-icons': 1.2.22
       '@iconify/utils': 2.3.0
       vite: 6.3.5(@types/node@22.15.29)(yaml@2.8.0)
     transitivePeerDependencies:
