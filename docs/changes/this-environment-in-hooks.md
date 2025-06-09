@@ -39,4 +39,4 @@ export function myPlugin(): Plugin {
 }
 ```
 
-Para una implementación más robusta a largo plazo, el hook del plugin debería manejar [múltiples entornos](/guide/api-environment.html#accessing-the-current-environment-in-hooks) usando opciones detalladas del entorno en lugar de depender del nombre del entorno.
+Para una implementación más robusta a largo plazo, el hook del plugin debería manejar [múltiples entornos](/guide/api-environment-plugins.html#accediendo-al-entorno-actual-en-hooks) usando opciones detalladas del entorno en lugar de depender del nombre del entorno.
