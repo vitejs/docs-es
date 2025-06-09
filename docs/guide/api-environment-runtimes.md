@@ -1,7 +1,7 @@
 # API de Entorno para Runtimes
 
 :::warning Experimental
-La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
+La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 **Recursos:**
 

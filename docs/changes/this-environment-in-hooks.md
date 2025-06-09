@@ -9,7 +9,7 @@ Antes de Vite 6, solo estaban disponibles dos entornos: `client` y `ssr`. Un ún
 Ámbito afectado: **`Autores de Plugins para Vite`**
 
 ::: warning Obsolencia Futura  
-`this.environment` fue introducido en `v6.0`. La declaración de desuso de `options.ssr` está planificada para `v7.0`. En ese momento, recomendaremos migrar tus plugins para usar la nueva API. Para identificar tu uso, configura `future.removePluginHookSsrArgument` como `"warn"` en tu archivo de configuración de Vite.  
+`this.environment` fue introducido en `v6.0`. La declaración de desuso de `options.ssr` está planificada para una versión importante posteriormente. En ese momento, recomendaremos migrar tus plugins para usar la nueva API. Para identificar tu uso, configura `future.removePluginHookSsrArgument` como `"warn"` en tu archivo de configuración de Vite.  
 :::
 
 ## Motivación

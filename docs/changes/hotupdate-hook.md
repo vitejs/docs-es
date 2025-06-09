@@ -9,7 +9,7 @@ Estamos planeando colocar en desuso el hook de plugin `handleHotUpdate` a favor 
 Ámbito afectado: **`Autores de Plugins para Vite`**
 
 ::: warning Obsolencia Futura
-El hook `hotUpdate` se introdujo por primera vez en la versión `v6.0`. La declaración de desuso de `handleHotUpdate` está planificada para la versión `v7.0`. Aún no recomendamos abandonar `handleHotUpdate`. Si deseas experimentar y darnos tu opinión, puedes usar `future.removePluginHookHandleHotUpdate` con el valor `"warn"` en tu configuración de Vite.
+El hook `hotUpdate` se introdujo por primera vez en la versión `v6.0`. La declaración de desuso de `handleHotUpdate` está planificada para una versión importante posteriormente. Aún no recomendamos abandonar `handleHotUpdate`. Si deseas experimentar y darnos tu opinión, puedes usar `future.removePluginHookHandleHotUpdate` con el valor `"warn"` en tu configuración de Vite.
 :::
 
 ## Motivación

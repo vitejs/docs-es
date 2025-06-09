@@ -99,6 +99,42 @@ Rolldown lanza un error cuando se pasan opciones desconocidas o no válidas. Dad
 
 Si tú no estás pasando esa opción directamente, esto debe ser corregido por el framework que estés utilizando. Mientras tanto, puedes suprimir este error estableciendo la variable de entorno `ROLLDOWN_OPTIONS_VALIDATION=loose`.
 
+### Diferencias en la API
+
+#### `manualChunks` a `advancedChunks`
+
+Rolldown no soporta la opción `manualChunks` que estaba disponible en Rollup. En su lugar, ofrece una configuración más detallada a través de la [opción `advancedChunks`](https://rolldown.rs/guide/in-depth/advanced-chunks#advanced-chunks), que es más similar a `splitChunk` de webpack:
+
+```js
+// Configuración antigua (Rollup)
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (/\/react(?:-dom)?/.test(id)) {
+            return 'vendor'
+          }
+        }
+      }
+    }
+  }
+}
+
+// Nueva configuración (Rolldown)
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        advancedChunks: {
+          groups: [{ name: 'vendor', test: /\/react(?:-dom)?// }]
+        }
+      }
+    }
+  }
+}
+```
+
 ## Rendimiento
 
 `rolldown-vite` se centra en garantizar la compatibilidad con el ecosistema existente, por lo que los valores predeterminados están orientados a una transición fluida. Puedes obtener mejoras de rendimiento adicionales al cambiar a complementos internos basados en Rust más rápidos y otras personalizaciones.
@@ -108,6 +144,12 @@ Si tú no estás pasando esa opción directamente, esto debe ser corregido por e
 Gracias a Rolldown y Oxc, varios plugins internos de Vite, como el de alias o el de resolución, han sido reescritos en Rust. Al momento de redactar esto, el uso de estos plugins no está habilitado por defecto, ya que su comportamiento puede diferir del de sus versiones en JavaScript.
 
 Para probarlos, puedes establecer la opción `experimental.enableNativePlugin` en `true` dentro de tu configuración de Vite.
+
+### `@vitejs/plugin-react-oxc`
+
+Cuando uses `@vitejs/plugin-react` o `@vitejs/plugin-react-swc`, puedes cambiar a `@vitejs/plugin-react-oxc`, que utiliza Oxc para fast-refresh de React en lugar de Babel o SWC. Está diseñado para ser un reemplazo directo, proporcionando un mejor rendimiento de compilación y alineándose con la arquitectura subyacente de `rolldown-vite`.
+
+Ten en cuenta que solo puedes cambiar a `@vitejs/plugin-react-oxc` si no estás usando ningún plugin de Babel o SWC (incluyendo el compilador de React), o mutando las opciones de SWC.
 
 ### Envoltorio de `withFilter`
 

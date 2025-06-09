@@ -1,7 +1,7 @@
 # Uso de Instancias de `Environment`
 
 :::warning Experimental  
-La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ella. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
+La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 **Recursos:**
 
@@ -64,13 +64,17 @@ class DevEnvironment {
    */
   config: ResolvedConfig & ResolvedDevEnvironmentOptions
 
-  constructor(name, config, { hot, options }: DevEnvironmentSetup)
+  constructor(
+    name: string,
+    config: ResolvedConfig,
+    context: DevEnvironmentContext
+  )
 
   /**
    * Resuelve la URL a un id, la carga y procesa el código utilizando el
    * pipeline de plugins. El grafo de módulos también se actualiza.
    */
-  async transformRequest(url: string): TransformResult
+  async transformRequest(url: string): Promise<TransformResult | null>
 
   /**
    * Registra una solicitud para ser procesada con baja prioridad. Esto es útil
@@ -78,11 +82,25 @@ class DevEnvironment {
    * módulos importados por otras solicitudes, por lo que puede preparar el grafo de módulos
    * para que los módulos ya estén procesados cuando sean solicitados.
    */
-  async warmupRequest(url: string): void
+  async warmupRequest(url: string): Promise<void>
 }
 ```
 
-Con `TransformResult` siendo:
+Con `DevEnvironmentContext` siendo:
+
+```ts
+interface DevEnvironmentContext {
+  hot: boolean
+  transport?: HotChannel | WebSocketServer
+  options?: EnvironmentOptions
+  remoteRunner?: {
+    inlineSourceMap?: boolean
+  }
+  depsOptimizer?: DepsOptimizer
+}
+```
+
+y con `TransformResult` siendo:
 
 ```ts
 interface TransformResult {
@@ -102,23 +120,32 @@ Estamos usando `transformRequest(url)` y `warmupRequest(url)` en la versión act
 
 ## Grafos de Módulos Separados
 
-Cada entorno tiene un grafo de módulos aislado. Estos grafos tienen la misma estructura, lo que permite implementar algoritmos genéricos para recorrer o consultar los nodos sin depender del entorno. Por ejemplo, cuando un archivo es modificado, el grafo de módulos de cada entorno se usa para descubrir los módulos afectados y ejecutar HMR independientemente.
+Cada entorno tiene un grafo de módulos aislado. Todos los grafos de módulos tienen la misma firma, por lo que se pueden implementar algoritmos genéricos para recorrer o consultar el grafo sin depender del entorno. `hotUpdate` es un buen ejemplo. Cuando un archivo se modifica, el grafo de módulos de cada entorno se utilizará para descubrir los módulos afectados y realizar HMR para cada entorno de forma independiente.
 
-### Representación de un módulo en el grafo
+::: info
+Vite v5 tenía un grafo de módulos mixto de Cliente y SSR. Dado un nodo no procesado o invalidado, no es posible saber si corresponde al entorno del cliente, SSR o ambos. Los nodos de módulo tienen algunas propiedades con prefijo, como `clientImportedModules` y `ssrImportedModules` (y `importedModules` que devuelve la unión de ambos). `importers` contiene todos los importadores de ambos entornos del cliente y SSR para cada nodo de módulo. Un nodo de módulo también tiene `transformResult` y `ssrTransformResult`. Una capa de compatibilidad con versiones anteriores permite al ecosistema migrar desde la API de `server.moduleGraph` obsoleta.
+:::
+
+Cada módulo se representa con una instancia de `EnvironmentModuleNode`. Los módulos pueden registrarse en el grafo sin haber sido procesados aún (`transformResult` sería `null` en ese caso). `importers` y `importedModules` también se actualizan después de procesar el módulo.
 
 ```ts
 class EnvironmentModuleNode {
   environment: string
+
   url: string
   id: string | null = null
   file: string | null = null
+
   type: 'js' | 'css'
+
   importers = new Set<EnvironmentModuleNode>()
   importedModules = new Set<EnvironmentModuleNode>()
   importedBindings: Map<string, Set<string>> | null = null
+
   info?: ModuleInfo
   meta?: Record<string, any>
   transformResult: TransformResult | null = null
+
   acceptedHmrDeps = new Set<EnvironmentModuleNode>()
   acceptedHmrExports: Set<string> | null = null
   isSelfAccepting?: boolean
@@ -127,11 +154,12 @@ class EnvironmentModuleNode {
 }
 ```
 
-### Clase `EnvironmentModuleGraph`
+`environment.moduleGraph` es una instancia de `EnvironmentModuleGraph`:
 
 ```ts
 export class EnvironmentModuleGraph {
   environment: string
+
   urlToModuleMap = new Map<string, EnvironmentModuleNode>()
   idToModuleMap = new Map<string, EnvironmentModuleNode>()
   etagToModuleMap = new Map<string, EnvironmentModuleNode>()
@@ -145,25 +173,38 @@ export class EnvironmentModuleGraph {
   async getModuleByUrl(
     rawUrl: string
   ): Promise<EnvironmentModuleNode | undefined>
+
+  getModuleById(id: string): EnvironmentModuleNode | undefined
+
   getModulesByFile(file: string): Set<EnvironmentModuleNode> | undefined
+
   onFileChange(file: string): void
+
+  onFileDelete(file: string): void
+
   invalidateModule(
     mod: EnvironmentModuleNode,
-    seen?: Set<EnvironmentModuleNode>,
-    timestamp?: number,
-    isHmr?: boolean
+    seen: Set<EnvironmentModuleNode> = new Set(),
+    timestamp: number = Date.now(),
+    isHmr: boolean = false
   ): void
+
   invalidateAll(): void
+
   async ensureEntryFromUrl(
     rawUrl: string,
-    setIsSelfAccepting?: boolean
+    setIsSelfAccepting = true
   ): Promise<EnvironmentModuleNode>
+
   createFileOnlyEntry(file: string): EnvironmentModuleNode
+
   async resolveUrl(url: string): Promise<ResolvedUrl>
+
   updateModuleTransformResult(
     mod: EnvironmentModuleNode,
     result: TransformResult | null
   ): void
+
   getModuleByEtag(etag: string): EnvironmentModuleNode | undefined
 }
 ```

@@ -1,7 +1,7 @@
 # API de Entorno para Plugins
 
 :::warning Experimental
-La API de Entorno es experimental. Mantendremos las API estables durante Vite 6 para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API con posibles cambios incompatibles en Vite 7.
+La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 **Recursos:**
 
@@ -180,6 +180,8 @@ export default defineConfig({
 })
 ```
 
+El hook `applyToEnvironment` se llama en el momento de la configuración, actualmente después de `configResolved` debido a que proyectos del ecosistema modifican los plugins en él. La resolución de plugins de entorno puede ser movida antes de `configResolved` en el futuro.
+
 ## Entorno en Hooks de Compilación
 
 De la misma manera que durante el desarrollo, los hooks de plugins también reciben la instancia del entorno durante la compilación, reemplazando el booleano `ssr`.
@@ -195,7 +197,7 @@ Antes de Vite 6, los pipelines de plugins funcionaban de manera diferente durant
 
 Esto obligaba a los frameworks a compartir estado entre la compilación `client` y la compilación `ssr` a través de archivos de manifiesto escritos en el sistema de archivos. En Vite 6, ahora estamos compilando todos los entornos en un solo proceso, por lo que la forma en que el pipeline de plugins y la comunicación entre entornos puede alinearse con el desarrollo.
 
-En una futura versión principal (Vite 7 o 8), nuestro objetivo es tener una alineación completa:
+En una futura versión principal, podríamos tener una alineación completa:
 
 - **Tanto durante el desarrollo como la compilación:** los plugins son compartidos, con [filtrado por entorno](#per-environment-plugins).
 

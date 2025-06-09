@@ -7,9 +7,6 @@ import pluginRegExp from 'eslint-plugin-regexp'
 import tseslint from 'typescript-eslint'
 import globals from 'globals'
 
-const require = createRequire(import.meta.url)
-const pkgVite = require('./packages/vite/package.json')
-
 // Some rules work better with typechecking enabled, but as enabling it is slow,
 // we only do so when linting in IDEs for now. If you want to lint with typechecking
 // explicitly, set this to `true` manually.
@@ -40,9 +37,9 @@ export default tseslint.config(
         ecmaVersion: 2022,
         project: shouldTypeCheck
           ? [
-              './packages/*/tsconfig.json',
-              './packages/vite/src/*/tsconfig.json',
-            ]
+            './packages/*/tsconfig.json',
+            './packages/vite/src/*/tsconfig.json',
+          ]
           : undefined,
       },
       globals: {
@@ -161,7 +158,19 @@ export default tseslint.config(
         { allow: builtinModules.map((mod) => `node:${mod}`) },
       ],
       'import-x/no-duplicates': 'error',
-      'import-x/order': 'error',
+      'import-x/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
+        },
+      ],
       'sort-imports': [
         'error',
         {
@@ -185,23 +194,6 @@ export default tseslint.config(
     ignores: ['**/__tests__/**'],
     rules: {
       'no-restricted-globals': ['error', 'require', '__dirname', '__filename'],
-    },
-  },
-  {
-    name: 'vite/node',
-    files: ['packages/vite/src/node/**/*.?([cm])[jt]s?(x)'],
-    rules: {
-      'no-console': ['error'],
-      'n/no-restricted-require': [
-        'error',
-        Object.keys(pkgVite.devDependencies).map((d) => ({
-          name: d,
-          message:
-            `devDependencies can only be imported using ESM syntax so ` +
-            `that they are included in the rollup bundle. If you are trying to ` +
-            `lazy load a dependency, use (await import('dependency')).default instead.`,
-        })),
-      ],
     },
   },
   {
