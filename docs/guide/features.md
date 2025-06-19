@@ -213,7 +213,7 @@ Todos los frameworks modernos mantienen integraciones con Vite. La mayoría de l
 - Soporte para Vue a través de [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - Soporte para Vue JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Soporte para React a través de [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
-- Soporte para React usando SWC a través de [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- Soporte para React usando SWC a través de [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
 Consulta la [Guía de Plugins](https://vite.dev/plugins) para más información.
 
@@ -580,6 +580,32 @@ const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true },
 })
 ```
+
+#### Ruta base
+
+También puedes utilizar la opción `base` para proporcionar la ruta base para las importaciones:
+
+```ts twoslash
+import 'vite/client'
+// ---cut---
+const modulesWithBase = import.meta.glob('./**/*.js', {
+  base: './base',
+})
+```
+
+```ts
+// código producido por vite:
+const modulesWithBase = {
+  './dir/foo.js': () => import('./base/dir/foo.js'),
+  './dir/bar.js': () => import('./base/dir/bar.js'),
+}
+```
+
+La opción `base` solo puede ser un directorio relativo al archivo importador o una ruta absoluta en relación con la raíz del proyecto. Los alias y los módulos virtuales no están soportados.
+
+Solo los globs que son rutas relativas se interpretan como relativas al directorio base resuelto.
+
+Todas las claves de módulo resultantes se modifican para que sean relativas al directorio base si se proporciona.
 
 ### Advertencias de importación glob
 

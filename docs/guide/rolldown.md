@@ -89,15 +89,15 @@ Luego de agregar estos `overrides`, reinstala tus dependencias y ejecuta tu serv
 
 Aunque Rolldown busca ser un reemplazo directo de Rollup, todavía hay funciones en desarrollo y algunas diferencias intencionales de comportamiento. Para una lista completa y actualizada, consulta [esta solicitud de cambios en GitHub](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667), el cual se actualiza de forma constante.
 
-### Errores de Validación de Opciones
+### Advertencias de Validación de Opciones
 
-Rolldown lanza un error cuando se pasan opciones desconocidas o no válidas. Dado que algunas opciones disponibles en Rollup no son compatibles con Rolldown, es posible que encuentres errores según las opciones que tú o el meta framework que uses hayan configurado. A continuación, se muestra un ejemplo de uno de estos mensajes de error:
+Rolldown lanza una advertencia cuando se pasan opciones desconocidas o no válidas. Dado que algunas opciones disponibles en Rollup no son compatibles con Rolldown, es posible que encuentres advertencias según las opciones que tú o el meta framework que uses hayan configurado. A continuación, se muestra un ejemplo de uno de estos mensajes de advertencia:
 
-> Error: Failed validate input options.
+> Warning validate output options.
 >
-> - Para "preserveEntrySignatures". Clave no válida: Se esperaba `never` pero se recibió `"preserveEntrySignatures"`.
+> - For the "generatedCode". Invalid key: Expected never but received "generatedCode".
 
-Si tú no estás pasando esa opción directamente, esto debe ser corregido por el framework que estés utilizando. Mientras tanto, puedes suprimir este error estableciendo la variable de entorno `ROLLDOWN_OPTIONS_VALIDATION=loose`.
+Si tú no estás pasando esa opción directamente, esto debe ser corregido por el framework que estés utilizando.
 
 ### Diferencias en la API
 
@@ -234,7 +234,7 @@ Esta sección es principalmente relevante para autores de plugins y frameworks. 
 - El minificador de **Oxc** se usa para la minificación de JS por defecto (anteriormente se usaba esbuild).
 - **Rolldown** se usa para empaquetar la configuración (anteriormente se usaba esbuild).
 
-### Detectar `rolldown-vite`
+### Detectando `rolldown-vite`
 
 ::: warning
 En la mayoría de los casos, no necesitas detectar si tu plugin se ejecuta con `rolldown-vite` o con `vite`, y deberías procurar un comportamiento consistente entre ambos, sin ramificaciones condicionales.
@@ -256,6 +256,14 @@ const plugin = {
 }
 ```
 
+::: tip
+
+A partir de Vite 7.0.0, `this.meta` está disponible en todos los hooks. En versiones anteriores, `this.meta` no estaba disponible en hooks específicos de Vite, como el hook `config`.
+
+:::
+
+<br>
+
 - Comprobando la existencia de la exportación `rolldownVersion`:
 
 ```js
@@ -272,17 +280,15 @@ Si tienes `vite` como dependencia (no como dependencia par), la exportación `ro
 
 ### Ignorar la validación de opciones en Rolldown
 
-Como se [mencionó anteriormente](#errores-de-validacion-de-opciones), Rolldown lanza un error cuando se pasan opciones desconocidas o inválidas.
+Como se [mencionó anteriormente](#advertencias-de-validacion-de-opciones), Rolldown lanza una advertencia cuando se pasan opciones desconocidas o inválidas.
 
-Esto se puede solucionar pasando la opción condicionalmente, verificando si se está ejecutando con `rolldown-vite` como se muestra [aquí arriba](#detectar-rolldown-vite).
-
-También puedes suprimir el error estableciendo la variable de entorno `ROLLDOWN_OPTIONS_VALIDATION=loose`.
-
-Sin embargo, ten en cuenta que **eventualmente deberás dejar de pasar las opciones no compatibles con Rolldown**.
+Esto se puede solucionar pasando la opción condicionalmente, verificando si se está ejecutando con `rolldown-vite` como se muestra [aquí arriba](#detectando-rolldown-vite).
 
 ### `transformWithEsbuild` requiere que `esbuild` esté instalado por separado
 
-Una función similar llamada `transformWithOxc`, que usa Oxc en lugar de `esbuild`, es exportada desde `rolldown-vite`.
+Como Vite ya no usa `esbuild` por sí mismo, `esbuild` ahora es un peer-dependency opcional. Si tu plugin usa `transformWithEsbuild`, el plugin necesita agregar `esbuild` a sus dependencias o el usuario necesitará instalarlo manualmente.
+
+La migración recomendada es usar la nueva función exportada `transformWithOxc`, que utiliza Oxc en lugar de `esbuild`.
 
 ### Capa de Compatibilidad para Opciones de `esbuild`
 
@@ -304,6 +310,12 @@ const plugin = {
 Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Al usar esta característica, puedes hacer que tu plugin sea más eficiente.
 Esta funcionalidad también es compatible con Rollup 4.38.0+ y Vite 6.3.0+. Para hacer que tu plugin sea compatible con versiones anteriores, asegúrate de ejecutar el filtro dentro de los controladores de hooks.
 
+::: tip
+
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) exporta algunas utilidades para filtros de hooks como `exactRegex` y `prefixRegex`.
+
+:::
+
 ### Convertir Contenido a JavaScript en los Hooks `load` o `transform`
 
 Si estás convirtiendo el contenido a JavaScript desde otros tipos en los hooks `load` o `transform`, es posible que debas agregar `moduleType: 'js'` al valor devuelto.
@@ -323,4 +335,4 @@ const plugin = {
 }
 ```
 
-Esto se debe a que [Rolldown admite módulos no JavaScript](https://rolldown.rs/guide/in-depth/module-types) e infiere el tipo de módulo a partir de las extensiones, a menos que se especifique lo contrario. Ten en cuenta que `rolldown-vite` no admite ModuleTypes en desarrollo.
+Esto se debe a que [Rolldown soporta módulos de no JavaScript](https://rolldown.rs/guide/in-depth/module-types) e infiere el tipo de módulo a partir de las extensiones, a menos que se especifique lo contrario.

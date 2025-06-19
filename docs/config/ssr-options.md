@@ -54,7 +54,7 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est�
 
   Por ejemplo, al establecer `['node', 'custom']`, deberías ejecutar `NODE_OPTIONS='--conditions custom' vite` en desarrollo y `NODE_OPTIONS="--conditions custom" node ./dist/server.js` después de compilar.
 
-### ssr.resolve.mainFields
+## ssr.resolve.mainFields
 
 - **Tipo:** `string[]`
 - **Por defecto:** `['module', 'jsnext:main', 'jsnext']`
