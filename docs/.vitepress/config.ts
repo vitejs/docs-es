@@ -345,7 +345,7 @@ export default defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: 'Migración desde v5',
+              text: 'Migración desde v6',
               link: '/guide/migration',
             },
             {

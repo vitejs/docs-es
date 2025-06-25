@@ -124,6 +124,29 @@ El hook puede optar por:
   }
   ```
 
+## Estado por entorno en Plugins
+
+Dado que la misma instancia de plugin se usa para diferentes entornos, el estado del plugin necesita ser clave con `this.environment`. Esto es el mismo patrón que el ecosistema ha estado utilizando para mantener el estado sobre los módulos usando el booleano `ssr` como clave para evitar mezclar el estado de módulos cliente y ssr. Un `Map<Environment, State>` puede ser utilizado para mantener el estado para cada entorno por separado. Ten en cuenta que para la retrocompatibilidad, `buildStart` y `buildEnd` solo se llaman para el entorno cliente sin la bandera `perEnvironmentStartEndDuringDev: true`.
+
+```js
+function PerEnvironmentCountTransformedModulesPlugin() {
+  const state = new Map<Environment, { count: number }>()
+  return {
+    name: 'count-transformed-modules',
+    perEnvironmentStartEndDuringDev: true,
+    buildStart() {
+      state.set(this.environment, { count: 0 })
+    },
+    transform(id) {
+      state.get(this.environment).count++
+    },
+    buildEnd() {
+      console.log(this.environment.name, state.get(this.environment).count)
+    }
+  }
+}
+```
+
 ## Plugins por entorno
 
 Un plugin puede definir cuáles son los entornos a los que debe aplicarse con la función `applyToEnvironment`.
@@ -174,7 +197,7 @@ import { nonShareablePlugin } from 'non-shareable-plugin'
 export default defineConfig({
   plugins: [
     perEnvironmentPlugin('per-environment-plugin', (environment) =>
-      nonShareablePlugin({ outputName: environment.name })
+      nonShareablePlugin({ outputName: environment.name }),
     ),
   ],
 })
