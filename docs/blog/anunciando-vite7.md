@@ -57,7 +57,7 @@ Mantén la actualización y conecta con otros que trabajan con Vite siguiéndono
 
 Vite ahora requiere Node.js 20.19+, 22.12+. Hemos quitado el soporte para Node.js 18, ya que ha alcanzado su [final de vida](https://endoflife.date/nodejs) a finales de abril de 2025.
 
-Requerimos estos nuevos rangos para que Node.js admita `require(esm)` sin un indicador. Esto nos permite distribuir Vite 7.0 como ESM solo sin impedir que la API de JavaScript de Vite sea requerida por módulos CJS. Consulta la publicación de blog de Anthony Fu ["Move on to ESM-only"](/posts/move-on-to-esm-only) para obtener un análisis detallado del estado actual de ESM en el ecosistema.
+Requerimos estos nuevos rangos para que Node.js admita `require(esm)` sin un indicador. Esto nos permite distribuir Vite 7.0 como ESM solo sin impedir que la API de JavaScript de Vite sea requerida por módulos CJS. Consulta la publicación de blog de Anthony Fu ["Move on to ESM-only"](https://antfu.me/posts/move-on-to-esm-only) para obtener un análisis detallado del estado actual de ESM en el ecosistema.
 
 ## Cambio predeterminado del target del navegador a Baseline Ampliamente Disponible
 
