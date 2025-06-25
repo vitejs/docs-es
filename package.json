@@ -38,7 +38,10 @@
       "allowedVersions": {
         "react": "18"
       }
-    }
+    },
+    "ignoredBuiltDependencies": [
+      "unrs-resolver"
+    ]
   },
   "dependencies": {
     "search-insights": "^2.17.3",
@@ -58,8 +61,8 @@
     "eslint-plugin-n": "^17.19.0",
     "eslint-plugin-regexp": "^2.8.0",
     "feed": "^5.1.0",
-    "gsap": "^3.13.0",
     "globals": "^16.2.0",
+    "gsap": "^3.13.0",
     "lint-staged": "^16.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
