@@ -19,13 +19,13 @@ import HeroDiagram from './HeroDiagram.vue'
       <h1>La herramienta de compilación<br />para la Web</h1>
       <!-- Tagline -->
       <h3>
-        Vite es una herramienta de compilación de frontend extremadamente
-        rápida, que impulsa la próxima generación de aplicaciones web.
+        Vite es una herramienta de compilación frontend extremadamente rápida,
+        que impulsa la próxima generación de aplicaciones web.
       </h3>
 
       <!-- CTA Buttons -->
       <div class="hero__actions">
-        <a href="/guide/" class="btn btn--primary">Iniciar</a>
+        <a href="/guide/" class="btn btn--primary">Inicio</a>
         <a
           href="https://github.com/vitejs/vite"
           target="_blank"
