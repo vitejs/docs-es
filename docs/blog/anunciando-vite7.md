@@ -43,7 +43,7 @@ Enlaces rápidos:
 
 - [Documentación](/)
 - Nueva traducción: [فارسی](https://fa.vite.dev/)
-- Otras traducciones: [简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [Español](https://es.vite.dev/), [Português](https://pt.vite.dev/), [한국어](https://ko.vite.dev/), [Deutsch](https://de.vite.dev/)
+- Otras traducciones: [简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [Inglés](https://vite.dev/), [Português](https://pt.vite.dev/), [한국어](https://ko.vite.dev/), [Deutsch](https://de.vite.dev/)
 - [Guía de migración](/guide/migration)
 - [Registro de cambios de GitHub](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
 
