@@ -70,7 +70,7 @@ const { data } = useSponsor()
         href="https://github.com/sponsors/vite"
         target="_blank"
         class="btn btn--outline btn--rounded"
-        >Become a Sponsor</a
+        >Conviértete en patrocinador</a
       >
     </div>
   </div>
