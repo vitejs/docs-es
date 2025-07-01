@@ -49,13 +49,13 @@
   },
   "devDependencies": {
     "@algolia/client-search": "^5.25.0",
-    "@eslint/js": "^9.27.0",
-    "@shikijs/vitepress-twoslash": "^2.5.0",
+    "@eslint/js": "^9.30.0",
+    "@shikijs/vitepress-twoslash": "^3.7.0",
     "@types/express": "^5.0.3",
-    "@types/node": "22.15.33",
+    "@types/node": "22.15.34",
     "@types/react": "^18.3.23",
     "@typescript-eslint/parser": "^8.33.0",
-    "eslint": "^9.28.0",
+    "eslint": "^9.30.0",
     "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-import-x": "^4.15.1",
     "eslint-plugin-n": "^17.19.0",
@@ -64,14 +64,14 @@
     "globals": "^16.2.0",
     "gsap": "^3.13.0",
     "lint-staged": "^16.1.0",
-    "prettier": "3.6.0",
+    "prettier": "3.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.34.1",
-    "vitepress": "^1.6.3",
+    "typescript-eslint": "^8.35.0",
+    "vitepress": "^2.0.0-alpha.6",
     "vitepress-plugin-group-icons": "^1.6.0",
     "vue": "^3.5.17"
   },
-  "packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
+  "packageManager": "pnpm@10.12.4"
 }

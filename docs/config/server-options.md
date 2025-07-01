@@ -250,7 +250,7 @@ export defineConfig default ({
 
 Opciones del observador del sistema de archivos que se pasan a [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
 
-El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
+El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, `test-results/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
 Si se configura en `null`, no se vigilarán archivos. `server.watcher` proporcionará un emisor de eventos compatible, pero llamar a `add` o `unwatch` no tendrá efecto.
 
@@ -325,7 +325,6 @@ createServer()
   Se pueden proporcionar tanto directorios como archivos.
 
   Vite buscará la raíz del potencial espacio de trabajo y la usará por defecto. Un espacio de trabajo válido cumple con las siguientes condiciones; de lo contrario, se recurrirá a la [raíz del proyecto](/guide/#index-html-y-raiz-del-proyecto).
-
   - contiene el campo `workspaces` en `package.json`
   - contiene uno de los siguientes archivos
     - `pnpm-workspace.yaml`
