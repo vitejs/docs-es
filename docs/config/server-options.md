@@ -33,12 +33,12 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
   :::
 
-  ::: Consejo: Acceder al servidor en WSL2 desde tu LAN
+  :::tip Acceder al servidor en WSL2 desde tu LAN
 
-Cuando ejecutas Vite en WSL2, no es suficiente configurar `host: true` para acceder al servidor desde tu LAN.
-Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-a-wsl-2-distribution-from-your-local-area-network-lan) para más detalles.
+  Cuando ejecutas Vite en WSL2, no es suficiente configurar `host: true` para acceder al servidor desde tu LAN.
+  Consulta [el documento de WSL](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-a-wsl-2-distribution-from-your-local-area-network-lan) para más detalles.
 
-:::
+  :::
 
 ## server.allowedHosts
 
