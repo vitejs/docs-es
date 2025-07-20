@@ -70,7 +70,7 @@ También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esb
 
 Vite almacena en caché las dependencias preempaquetadas en `node_modules/.vite`. Esto determina si necesita volver a ejecutar el preempaquetado en función de algunas fuentes:
 
-- Contenido del archivo de bloqueo del administrador de paquetes, por ejemplo, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml` o `bun.lockb`.
+- Contenido del archivo de bloqueo del administrador de paquetes, por ejemplo, `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml` o `bun.lock`.
 - Tiempo de modificación de la carpeta de parches.
 - Campos relevantes en el `vite.config.js`, si está presente.
 - Valor de `NODE_ENV`.

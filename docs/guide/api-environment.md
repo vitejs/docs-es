@@ -1,7 +1,9 @@
 # API de Entorno
 
-::: warning Experimental
-La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
+:::info Lanzamiento Candidato
+La API de Entorno se encuentra en la fase de lanzamiento candidato. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Sin embargo, ten en cuenta que [algunas API específicas](/changes/#en-evaluacion) siguen considerándose experimentales.
+
+Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 Recursos:
 
@@ -13,7 +15,7 @@ Por favor, comparte tus comentarios con nosotros.
 
 ## Formalizando entornos
 
-Vite 6 formaliza el concepto de Entornos. Hasta Vite 5, había dos entornos implícitos (`client` y opcionalmente `ssr`). La nueva API de Entornos permite a los usuarios y autores de frameworks crear tantos entornos como sea necesario para mapear la forma en que sus aplicaciones funcionan en producción. Esta nueva capacidad requirió una gran reestructuración interna, pero se ha puesto mucho esfuerzo en mantener la retrocompatibilidad. El objetivo inicial de Vite 6 es migrar el ecosistema a la nueva versión principal de la manera más fluida posible, retrasando la adopción de estas nuevas APIs experimentales hasta que un número suficiente de usuarios haya migrado y los autores de frameworks y plugins hayan validado el nuevo diseño.
+Vite 6 formaliza el concepto de Entornos. Hasta Vite 5, había dos entornos implícitos (`client` y opcionalmente `ssr`). La nueva API de Entornos permite a los usuarios y autores de frameworks crear tantos entornos como sea necesario para mapear la forma en que sus aplicaciones funcionan en producción. Esta nueva capacidad requirió una gran reestructuración interna, pero se ha puesto mucho esfuerzo en mantener la retrocompatibilidad. El objetivo inicial de Vite 6 es migrar el ecosistema a la nueva versión principal de la manera más fluida posible, retrasando la adopción de las APIs hasta que un número suficiente de usuarios haya migrado y los autores de frameworks y plugins hayan validado el nuevo diseño.
 
 ## Cerrando la Brecha entre la Compilación y el Desarrollo
 
@@ -115,7 +117,7 @@ export default {
 
 ## Retrocompatibilidad
 
-La API actual del servidor Vite aún no está obsoleta y es compatible con versiones anteriores a Vite 5. La nueva API de entornos es experimental.
+La API actual del servidor Vite no está obsoleta y es compatible con versiones anteriores a Vite 6. La nueva API de entornos es experimental.
 
 - [Migración a las APIs por Entorno](/changes/per-environment-apis)
 - [SSR Usando la API `ModuleRunner`](/changes/ssr-using-modulerunner)

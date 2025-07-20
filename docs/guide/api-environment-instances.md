@@ -1,7 +1,9 @@
 # Uso de Instancias de `Environment`
 
-:::warning Experimental  
-La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
+:::info Lanzamiento Candidato
+La API de Entorno se encuentra en la fase de lanzamiento candidato. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Sin embargo, ten en cuenta que [algunas API específicas](/changes/#en-evaluacion) siguen considerándose experimentales.
+
+Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 **Recursos:**
 
@@ -67,7 +69,7 @@ class DevEnvironment {
   constructor(
     name: string,
     config: ResolvedConfig,
-    context: DevEnvironmentContext
+    context: DevEnvironmentContext,
   )
 
   /**
@@ -167,11 +169,11 @@ export class EnvironmentModuleGraph {
 
   constructor(
     environment: string,
-    resolveId: (url: string) => Promise<PartialResolvedId | null>
+    resolveId: (url: string) => Promise<PartialResolvedId | null>,
   )
 
   async getModuleByUrl(
-    rawUrl: string
+    rawUrl: string,
   ): Promise<EnvironmentModuleNode | undefined>
 
   getModuleById(id: string): EnvironmentModuleNode | undefined
@@ -186,14 +188,14 @@ export class EnvironmentModuleGraph {
     mod: EnvironmentModuleNode,
     seen: Set<EnvironmentModuleNode> = new Set(),
     timestamp: number = Date.now(),
-    isHmr: boolean = false
+    isHmr: boolean = false,
   ): void
 
   invalidateAll(): void
 
   async ensureEntryFromUrl(
     rawUrl: string,
-    setIsSelfAccepting = true
+    setIsSelfAccepting = true,
   ): Promise<EnvironmentModuleNode>
 
   createFileOnlyEntry(file: string): EnvironmentModuleNode
@@ -202,7 +204,7 @@ export class EnvironmentModuleGraph {
 
   updateModuleTransformResult(
     mod: EnvironmentModuleNode,
-    result: TransformResult | null
+    result: TransformResult | null,
   ): void
 
   getModuleByEtag(etag: string): EnvironmentModuleNode | undefined

@@ -37,7 +37,7 @@ La versión de Vite impulsada por Rolldown está disponible actualmente como un 
 ```json
 {
   "dependencies": {
-    "vite": "^6.0.0" // [!code --]
+    "vite": "^7.0.0" // [!code --]
     "vite": "npm:rolldown-vite@latest" // [!code ++]
   }
 }
@@ -103,7 +103,7 @@ Si tú no estás pasando esa opción directamente, esto debe ser corregido por e
 
 #### `manualChunks` a `advancedChunks`
 
-Rolldown no soporta la opción `manualChunks` que estaba disponible en Rollup. En su lugar, ofrece una configuración más detallada a través de la [opción `advancedChunks`](https://rolldown.rs/guide/in-depth/advanced-chunks#advanced-chunks), que es más similar a `splitChunk` de webpack:
+Aunque Rolldown tiene soporte para la opción `manualChunks` expuesta por Rollup, esta se encuentra marcada como obsoleta. En su lugar, Rolldown ofrece una configuración más detallada a través de la [opción `advancedChunks`](https://rolldown.rs/guide/in-depth/advanced-chunks#advanced-chunks), que es más similar a `splitChunk` de webpack:
 
 ```js
 // Configuración antigua (Rollup)
@@ -167,7 +167,7 @@ export default defineConfig({
       svgr({
         /*...*/
       }),
-      { load: { id: /\.svg\?react$/ } }
+      { load: { id: /\.svg\?react$/ } },
     ),
   ],
 })

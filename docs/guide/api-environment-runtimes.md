@@ -1,7 +1,9 @@
 # API de Entorno para Runtimes
 
-:::warning Experimental
-La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
+:::info Lanzamiento Candidato
+La API de Entorno se encuentra en la fase de lanzamiento candidato. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Sin embargo, ten en cuenta que [algunas API específicas](/changes/#en-evaluacion) siguen considerándose experimentales.
+
+Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 **Recursos:**
 
@@ -17,7 +19,7 @@ Las fábricas de entornos están destinadas a ser implementadas por proveedores 
 
 ```ts
 function createWorkerdEnvironment(
-  userConfig: EnvironmentOptions
+  userConfig: EnvironmentOptions,
 ): EnvironmentOptions {
   return mergeConfig(
     {
@@ -40,7 +42,7 @@ function createWorkerdEnvironment(
         },
       },
     },
-    userConfig
+    userConfig,
   )
 }
 ```
@@ -122,7 +124,7 @@ export class ModuleRunner {
   constructor(
     public options: ModuleRunnerOptions,
     public evaluator: ModuleEvaluator,
-    private debug?: ModuleRunnerDebugger
+    private debug?: ModuleRunnerDebugger,
   ) {}
   /**
    * URL a ejecutar.
@@ -160,7 +162,7 @@ const moduleRunner = new ModuleRunner(
     transport,
     // También puedes proporcionar hmr.connection para soportar HMR.
   },
-  new ESModulesEvaluator()
+  new ESModulesEvaluator(),
 )
 
 await moduleRunner.import('/src/entry-point.js')
@@ -229,7 +231,7 @@ export interface ModuleEvaluator {
   runInlinedModule(
     context: ModuleRunnerContext,
     code: string,
-    id: string
+    id: string,
   ): Promise<any>
   /**
    * Evalúa un módulo externalizado.
@@ -280,7 +282,7 @@ const runner = new ModuleRunner(
   {
     transport,
   },
-  new ESModulesEvaluator()
+  new ESModulesEvaluator(),
 )
 ```
 
@@ -355,7 +357,7 @@ export const runner = new ModuleRunner(
       },
     },
   },
-  new ESModulesEvaluator()
+  new ESModulesEvaluator(),
 )
 
 await runner.import('/entry.js')

@@ -1,7 +1,9 @@
 # API de Entorno para Frameworks
 
-:::warning Experimental  
-La API de Entorno es experimental. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
+:::info Lanzamiento Candidato
+La API de Entorno se encuentra en la fase de lanzamiento candidato. Seguiremos manteniendo la estabilidad en las API entre lanzamientos principales para permitir que el ecosistema experimente y construya sobre ellas. Sin embargo, ten en cuenta que [algunas API específicas](/changes/#en-evaluacion) siguen considerándose experimentales.
+
+Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un lanzamiento principal futuro una vez que los proyectos downstream hayan tenido tiempo de experimentar con las nuevas características y validarlas.
 
 **Recursos:**
 
@@ -69,7 +71,7 @@ const server = await createServer({
 // Cualquier cliente de la API de entorno ahora puede llamar a `dispatchFetch`
 if (isFetchableDevEnvironment(server.environments.custom)) {
   const response: Response = await server.environments.custom.dispatchFetch(
-    new Request('/request-to-handle')
+    new Request('/request-to-handle'),
   )
 }
 ```
@@ -117,7 +119,7 @@ app.use('*', async (req, res, next) => {
   //    el código fuente ESM para ser usable en Node.js. ¡No se requiere empaquetado
   //    y se proporciona soporte completo para HMR!
   const { render } = await serverEnvironment.runner.import(
-    '/src/entry-server.js'
+    '/src/entry-server.js',
   )
   // 4. Renderizar el HTML de la aplicación. Esto asume que la función `render`
   //     exportada en entry-server.js llama a las APIs SSR del framework correspondiente,
@@ -186,7 +188,7 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
   throw new Error(
-    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`
+    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`,
   )
 }
 // -------------------------------------
@@ -258,7 +260,7 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
   throw new Error(
-    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`
+    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`,
   )
 }
 const req = new Request('/')
@@ -315,7 +317,7 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
   throw new Error(
-    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`
+    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`,
   )
 }
 // -------------------------------------
@@ -387,7 +389,7 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
   throw new Error(
-    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`
+    `Tiempo de ejecución no compatible para ${ssrEnvironment.name}`,
   )
 }
 const req = new Request('/')
@@ -434,7 +436,7 @@ export default {
     buildApp: async (builder) => {
       const environments = Object.values(builder.environments)
       return Promise.all(
-        environments.map((environment) => builder.build(environment))
+        environments.map((environment) => builder.build(environment)),
       )
     },
   },
