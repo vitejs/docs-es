@@ -7,6 +7,7 @@ import { h } from 'vue'
 import AsideSponsors from './components/AsideSponsors.vue'
 import SvgImage from './components/SvgImage.vue'
 import YouTubeVideo from './components/YouTubeVideo.vue'
+import SponsorBanner from './components/SponsorBanner.vue'
 import './styles/landing.css'
 import './styles/vars.css'
 
@@ -14,6 +15,7 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
+      'layout-top': () => h(SponsorBanner),
       'aside-ads-before': () => h(AsideSponsors),
     })
   },

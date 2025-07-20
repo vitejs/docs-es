@@ -1,11 +1,12 @@
+import path from 'node:path'
+import fs from 'node:fs'
+import type { DefaultTheme, HeadConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
-import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
-import type { PluginOption } from 'vite'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Herramienta frontend de próxima generación'
@@ -51,6 +52,17 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   }
 })()
 
+function inlineScript(file: string): HeadConfig {
+  return [
+    'script',
+    {},
+    fs.readFileSync(
+      path.resolve(__dirname, `./inlined-scripts/${file}`),
+      'utf-8',
+    ),
+  ]
+}
+
 export default defineConfig({
   lang: 'es',
   title: `Vite${additionalTitle}`,
@@ -85,6 +97,7 @@ export default defineConfig({
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=IBM+Plex+Mono:wght@400&display=swap',
       },
     ],
+    inlineScript('banner.js'),
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: ogTitle }],
@@ -512,14 +525,14 @@ export default defineConfig({
         },
       }),
     ],
-  },
-  optimizeDeps: {
-    include: [
-      '@shikijs/vitepress-twoslash/client',
-      'gsap',
-      'gsap/dist/ScrollTrigger',
-      'gsap/dist/MotionPathPlugin',
-    ],
+    optimizeDeps: {
+      include: [
+        '@shikijs/vitepress-twoslash/client',
+        'gsap',
+        'gsap/dist/ScrollTrigger',
+        'gsap/dist/MotionPathPlugin',
+      ],
+    },
   },
   buildEnd,
 })
