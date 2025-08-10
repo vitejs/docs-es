@@ -50,7 +50,7 @@ importers:
         version: 17.21.3(eslint@9.33.0)(typescript@5.9.2)
       eslint-plugin-regexp:
         specifier: ^2.8.0
-        version: 2.9.1(eslint@9.33.0)
+        version: 2.10.0(eslint@9.33.0)
       feed:
         specifier: ^5.1.0
         version: 5.1.0
@@ -1174,8 +1174,8 @@ packages:
     peerDependencies:
       eslint: '>=8.23.0'
 
-  eslint-plugin-regexp@2.9.1:
-    resolution: {integrity: sha512-JwK6glV/aoYDxvXcrvMQbw/pByBewZwqXVSBzzjot3GxSbmjDYuWU4LWiLdBO8JKi4o8A1+rygO6JWRBg4qAQQ==}
+  eslint-plugin-regexp@2.10.0:
+    resolution: {integrity: sha512-ovzQT8ESVn5oOe5a7gIDPD5v9bCSjIFJu57sVPDqgPRXicQzOnYfFN21WoQBQF18vrhT5o7UMKFwJQVVjyJ0ng==}
     engines: {node: ^18 || >=20}
     peerDependencies:
       eslint: '>=8.44.0'
@@ -3124,7 +3124,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  eslint-plugin-regexp@2.9.1(eslint@9.33.0):
+  eslint-plugin-regexp@2.10.0(eslint@9.33.0):
     dependencies:
       '@eslint-community/eslint-utils': 4.7.0(eslint@9.33.0)
       '@eslint-community/regexpp': 4.12.1
