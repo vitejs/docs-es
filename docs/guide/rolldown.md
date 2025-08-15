@@ -145,11 +145,17 @@ Gracias a Rolldown y Oxc, varios plugins internos de Vite, como el de alias o el
 
 Para probarlos, puedes establecer la opción `experimental.enableNativePlugin` en `true` dentro de tu configuración de Vite.
 
-### `@vitejs/plugin-react-oxc`
+### Utilizando transformación de React refresh de Oxc
 
-Cuando uses `@vitejs/plugin-react` o `@vitejs/plugin-react-swc`, puedes cambiar a `@vitejs/plugin-react-oxc`, que utiliza Oxc para fast-refresh de React en lugar de Babel o SWC. Está diseñado para ser un reemplazo directo, proporcionando un mejor rendimiento de compilación y alineándose con la arquitectura subyacente de `rolldown-vite`.
+`@vitejs/plugin-react` v5.0.0+ utiliza la transformación de React refresh de Oxc. Si no estás utilizando ningún plugin de Babel (incluyendo el compilador de React), la transformación completa ahora se realizará por Oxc y mejorará el rendimiento de la compilación sin ningún cambio adicional que no sea actualizar `@vitejs/plugin-react`.
 
-Ten en cuenta que solo puedes cambiar a `@vitejs/plugin-react-oxc` si no estás usando ningún plugin de Babel o SWC (incluyendo el compilador de React), o mutando las opciones de SWC.
+Si estás utilizando `@vitejs/plugin-react-swc` sin plugins de SWC y opciones personalizadas de SWC, puedes cambiar a `@vitejs/plugin-react` para utilizar Oxc.
+
+::: details `@vitejs/plugin-react-oxc` plugin es obsoleto
+
+Anteriormente, recomendábamos usar `@vitejs/plugin-react-oxc` para utilizar la transformación de React refresh de Oxc. Sin embargo, hemos fusionado la implementación en `@vitejs/plugin-react` para que sea más fácil cambiar a `rolldown-vite`. `@vitejs/plugin-react-oxc` ya no se actualiza y ya no se actualizará.
+
+:::
 
 ### Envoltorio de `withFilter`
 

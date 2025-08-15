@@ -14,7 +14,7 @@ El hook `hotUpdate` se introdujo por primera vez en la versión `v6.0`. La decla
 
 ## Motivación
 
-El [hook `handleHotUpdate`](/guide/api-plugin.md#handlehotupdate) permite manejar actualizaciones personalizadas para HMR. Se pasa una lista de módulos para actualizar en el contexto `HmrContext`:
+El [hook `handleHotUpdate`](/guide/api-plugin.md#handlehotupdate) permite manejar actualizaciones personalizadas para HMR. Se pasa una lista de módulos para actualizar en el contexto `HmrContext`.
 
 ```ts
 interface HmrContext {
