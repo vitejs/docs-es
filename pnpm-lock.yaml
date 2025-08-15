@@ -80,7 +80,7 @@ importers:
         version: 8.39.1(eslint@9.33.0)(typescript@5.9.2)
       vitepress:
         specifier: ^2.0.0-alpha.8
-        version: 2.0.0-alpha.10(@types/node@22.17.1)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1)
+        version: 2.0.0-alpha.11(@types/node@22.17.1)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1)
       vitepress-plugin-group-icons:
         specifier: ^1.6.0
         version: 1.6.2(vite@7.1.2(@types/node@22.17.1)(yaml@2.8.1))
@@ -2011,8 +2011,8 @@ packages:
       markdown-it: '>=14'
       vite: '>=3'
 
-  vitepress@2.0.0-alpha.10:
-    resolution: {integrity: sha512-RqnglVOngEHB74pv4Ho/RqOPhqaxN8KBvZkdKFj2hfvrG30QXhQQ/5qk31uuTVuCG+2qXj/c4kpHCPEJKGQMDw==}
+  vitepress@2.0.0-alpha.11:
+    resolution: {integrity: sha512-l3FFkGtcB3u3iMlpnvkCR+MdOYqNaz2z+xPRlgZZnx8Xne4XLgQR0yfEfTqY/UyloTymXwxvRvu443Yo9Cr8pA==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4
@@ -4099,7 +4099,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vitepress@2.0.0-alpha.10(@types/node@22.17.1)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1):
+  vitepress@2.0.0-alpha.11(@types/node@22.17.1)(postcss@8.5.6)(typescript@5.9.2)(yaml@2.8.1):
     dependencies:
       '@docsearch/css': 4.0.0-beta.6
       '@docsearch/js': 4.0.0-beta.6
