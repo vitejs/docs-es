@@ -141,9 +141,9 @@ export default {
 
 ### Habilitar Plugins Nativos
 
-Gracias a Rolldown y Oxc, varios plugins internos de Vite, como el de alias o el de resolución, han sido reescritos en Rust. Al momento de redactar esto, el uso de estos plugins no está habilitado por defecto, ya que su comportamiento puede diferir del de sus versiones en JavaScript.
+Gracias a Rolldown y Oxc, varios plugins internos de Vite han sido convertidos a Rust. Ahora, los plugins nativos están habilitados por defecto, con el valor predeterminado establecido en `'v1'`.
 
-Para probarlos, puedes establecer la opción `experimental.enableNativePlugin` en `true` dentro de tu configuración de Vite.
+Si experimentas algún problema, puedes cambiar la opción `experimental.enableNativePlugin` en tu configuración de Vite a `'resolver'` o `false` como una solución alternativa. Ten en cuenta que esta opción será removida en el futuro.
 
 ### Utilizando transformación de React refresh de Oxc
 
