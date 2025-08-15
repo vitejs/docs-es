@@ -154,13 +154,17 @@ El ejecutor de módulos expone el método `import`. Cuando el servidor Vite acti
 **Ejemplo de uso:**
 
 ```js
-import { ModuleRunner, ESModulesEvaluator } from 'vite/module-runner'
+import {
+  ModuleRunner,
+  ESModulesEvaluator,
+  createNodeImportMeta,
+} from 'vite/module-runner'
 import { transport } from './rpc-implementation.js'
 
 const moduleRunner = new ModuleRunner(
   {
     transport,
-    // También puedes proporcionar hmr.connection para soportar HMR.
+    importMeta: createNodeImportMeta(), // Si el ejecutor de módulos se ejecuta en Node.js
   },
   new ESModulesEvaluator(),
 )
@@ -266,7 +270,12 @@ Debes combinarlo con la instancia de `HotChannel` en el servidor, como en este e
 ```js [worker.js]
 import { parentPort } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
-import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
+import {
+  ESModulesEvaluator,
+  ModuleRunner,
+  createNodeImportMeta,
+} from 'vite/module-runner'
+
 /** @type {import('vite/module-runner').ModuleRunnerTransport} */
 const transport = {
   connect({ onMessage, onDisconnection }) {
@@ -281,6 +290,7 @@ const transport = {
 const runner = new ModuleRunner(
   {
     transport,
+    importMeta: createNodeImportMeta(),
   },
   new ESModulesEvaluator(),
 )

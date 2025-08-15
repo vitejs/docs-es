@@ -12,7 +12,8 @@ Al crear un plugin, puedes colocarlo en tu `vite.config.js`. No hay necesidad de
 
 ::: tip
 Al aprender, depurar o crear plugins, sugerimos incluir [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) en tu proyecto. Este te permite inspeccionar el estado intermedio de los plugins de Vite. Después de la instalación, puedes visitar `localhost:5173/__inspect/` para inspeccionar los módulos y la pila de transformación de tu proyecto. Consulta las instrucciones de instalación en los [documentos de vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect).
-![vite-plugin-inspect](/images/vite-plugin-inspect.png)
+![vite-plugin-inspect](../images/vite-plugin-inspect.png)
+
 :::
 
 ## Convenciones
@@ -352,7 +353,7 @@ const htmlPlugin = () => {
     transformIndexHtml(html) {
       return html.replace(
         /<title>(.*?)<\/title>/,
-        `<title>Title replaced!</title>`
+        `<title>Title replaced!</title>`,
       )
     },
   }
@@ -370,7 +371,7 @@ type IndexHtmlTransformHook = (
     server?: ViteDevServer
     bundle?: import('rollup').OutputBundle
     chunk?: import('rollup').OutputChunk
-  }
+  },
 ) => IndexHtmlTransformResult | void | Promise<IndexHtmlTransformResult | void>
 
 type IndexHtmlTransformResult =
@@ -418,7 +419,6 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
   - `read` es una función de lectura asíncrona que devuelve el contenido del archivo. Esto se proporciona porque en algunos sistemas, la devolución de llamada de cambio de archivo puede activarse demasiado rápido antes de que el editor termine de actualizar el archivo y `fs.readFile` directo devolverá contenido vacío. La función de lectura pasada normaliza este comportamiento.
 
   El hook puede optar por:
-
   - Filtrar y reducir la lista de módulos afectados para que el HMR sea más preciso.
 
   - Devolver un array vacío y realizar una recarga completa:

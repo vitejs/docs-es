@@ -52,7 +52,7 @@ const testimonials: Testimonial[] = [
     name: 'David Cramer',
     handle: '@zeeg',
     avatar:
-      'https://pbs.twimg.com/profile_images/1706891973553168384/zdAPOznc_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1911613315765133312/HVkULegC_400x400.jpg',
     comment: ['Vite ha sido un cambio de juego para la industria.'],
   },
   {
@@ -68,7 +68,7 @@ const testimonials: Testimonial[] = [
     name: 'Christoph Nakazawa',
     handle: '@cpojer',
     avatar:
-      'https://pbs.twimg.com/profile_images/1854151427595407360/4GyUCgEH_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1910252462126313472/gXgT-jxL_400x400.jpg',
     comment: ['Vite va a conquistar el mundo (de JavaScript).'],
   },
   {

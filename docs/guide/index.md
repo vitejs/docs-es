@@ -6,7 +6,7 @@
 
 ## Descripción General
 
-Vite (palabra en francés para "rápido", pronunciado como `/vit/`<button style="border:none;padding:3px;border-radius:4px;vertical-align:bottom" id="play-vite-audio" onclick="document.getElementById('vite-audio').play();"><svg style="height:2em;width:2em"><use href="/voice.svg?no-inline#voice" /></svg></button>, como "veet") es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
+Vite (palabra en francés para "rápido", pronunciado como `/vit/`<button style="border:none;padding:3px;border-radius:4px;vertical-align:bottom" id="play-vite-audio" aria-label="pronounce" onclick="document.getElementById('vite-audio').play();"><svg style="height:2em;width:2em"><use href="/voice.svg?no-inline#voice" /></svg></button>, como "veet") es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
 
 - Un servidor de desarrollo que proporciona [mejoras enriquecidas de funcionalidades](./features) sobre [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), por ejemplo [Hot Module Replacement (HMR)](./features#hot-module-replacement) extremadamente rápido.
 
@@ -43,10 +43,6 @@ Los ajustes preestablecidos de plantilla admitidos son:
 
 ## Inicia tu primer proyecto Vite
 
-::: tip Nota de compatibilidad
-Vite requiere [Node.js](https://nodejs.org/en/) version 20.19+, 22.12+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
-:::
-
 ::: code-group
 
 ```bash [npm]
@@ -72,6 +68,12 @@ $ deno init --npm vite
 :::
 
 ¡Entonces sigue las instrucciones!
+
+::: tip Nota de compatibilidad
+Vite requiere [Node.js](https://nodejs.org/en/) version 20.19+, 22.12+. Sin embargo, algunas plantillas requieren una versión superior de Node.js para funcionar, por favor actualiza si tu gestor de paquetes te advierte sobre ello.
+:::
+
+:::: details Utilizando create vite con opciones de línea de comandos
 
 También puedes especificar directamente el nombre del proyecto y la plantilla que deseas usar a través de las opciones de línea de comandos adicionales. Por ejemplo, para montar un proyecto de Vite + Vue, ejecuta:
 
@@ -103,6 +105,8 @@ $ deno init --npm vite my-vue-app --template vue
 Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 Puedes usar `.` como nombre del proyecto para generar la estructura en el directorio actual.
+
+::::
 
 ## Plantillas de la comunidad
 
@@ -256,7 +260,7 @@ pnpm link --global # utiliza el gestor de paquetes de tu preferencia para este p
 Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link --global vite` (o el gestor de paquetes que usaste para vincular `vite` globalmente). ¡Ahora reinicia el servidor de desarrollo para hacerlo funcionar!
 
 ::: tip Dependencias que usan Vite  
-Para reemplazar la versión de Vite utilizada por las dependencias de forma transitiva, debes usar [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) o [pnpm overrides](https://pnpm.io/package_json#pnpmoverrides).  
+Para reemplazar la versión de Vite utilizada por las dependencias de forma transitiva, debes usar [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) o [pnpm overrides](https://pnpm.io/9.x/package_json#pnpmoverrides).  
 :::
 
 ## Comunidad

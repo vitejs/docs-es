@@ -1,21 +1,23 @@
-# SSR Usando la API `ModuleRunner`
+# SSR Utilizando la API `ModuleRunner`
 
-::: tip Feedback  
-Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vitejs/vite/discussions/16358).  
+::: tip Feedback
+Danos tus opiniones en [Discusión de la API de entorno](https://github.com/vitejs/vite/discussions/16358)
 :::
 
-El método `server.ssrLoadModule` ha sido reemplazado por [Module Runner](/guide/api-environment#modulerunner).
+`server.ssrLoadModule` ha sido reemplazado por la importación desde un [Ejecutor de Módulos](/guide/api-environment#modulerunner).
 
-Ámbito afectado: **`Autores de Plugins para Vite`**
+Ámbito afectado: `Autor de Plugins de Vite`
 
-::: warning Obsolencia Futura  
-`ModuleRunner` se introdujo por primera vez en `v6.0`. La declaración de desuso de `server.ssrLoadModule` está planificada para una futura versión principal. Para identificar tu uso, configura `future.removeSrLoadModule` como `"warn"` en tu archivo de configuración de Vite.  
+::: warning Futura eliminación
+`ModuleRunner` fue introducido en `v6.0`. El retiro de `server.ssrLoadModule` está planeado para una versión principal futura. Para identificar tu uso, configura `future.removeSsrLoadModule` en `"warn"` en tu configuración de Vite.
 :::
 
 ## Motivación
 
-// TODO:
+El `server.ssrLoadModule(url)` solo permite importar módulos en el entorno `ssr` y puede ejecutar los módulos en el mismo proceso del servidor de desarrollo de Vite. Para aplicaciones con entornos personalizados, cada uno está asociado con un `ModuleRunner` que puede estar ejecutándose en un hilo o proceso diferente. Para importar módulos, ahora tenemos `moduleRunner.import(url)`.
 
-## Guía de Migración
+## Guía de migración
 
-// TODO:
+Revisa la [Guía de la API de entorno para Frameworks](/guide/api-environment-frameworks.md).
+
+`server.ssrFixStacktrace` y `server.ssrRewriteStacktrace` no tienen que ser llamados cuando se usan las API del Ejecutor de Módulos. Los seguimientos de pila se actualizarán a menos que `sourcemapInterceptor` esté configurado en `false`.

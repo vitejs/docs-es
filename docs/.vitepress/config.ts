@@ -7,6 +7,7 @@ import {
   groupIconMdPlugin,
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
+import { markdownItImageSize } from 'markdown-it-image-size'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Herramienta frontend de próxima generación'
@@ -504,7 +505,7 @@ export default defineConfig({
     pageData.frontmatter.head ??= []
     pageData.frontmatter.head.unshift(
       ['link', { rel: 'canonical', href: canonicalUrl }],
-      ['meta', { property: 'og:title', content: pageData.title }]
+      ['meta', { property: 'og:title', content: pageData.title }],
     )
     return pageData
   },
@@ -514,6 +515,9 @@ export default defineConfig({
     codeTransformers: [transformerTwoslash()],
     config(md) {
       md.use(groupIconMdPlugin)
+      md.use(markdownItImageSize, {
+        publicDir: path.resolve(import.meta.dirname, '../public'),
+      })
     },
   },
   vite: {

@@ -8,13 +8,17 @@ Múltiples APIs de `ViteDevServer` relacionadas con el grafo de módulos han sid
 
 Ámbito afectado: **`Autores de Plugins para Vite`**
 
-::: warning Obsolencia Futura  
+::: warning Futura eliminación
 La instancia de Entorno se introdujo por primera vez en `v6.0`. La declaración de obsolencia de `server.moduleGraph` y otros métodos que ahora están en los entornos está planificada para una versión importante posteriormente. Aún no recomendamos abandonar los métodos del servidor. Para identificar tu uso, configura estas opciones en tu archivo de configuración de Vite:
 
 ```ts
 future: {
   removeServerModuleGraph: 'warn',
+  removeServerReloadModule: 'warn',
+  removeServerPluginContainer: 'warn',
+  removeServerHot: 'warn',
   removeServerTransformRequest: 'warn',
+  removeServerWarmupRequest: 'warn',
 }
 ```
 
@@ -29,5 +33,8 @@ En Vite v6, ahora es posible crear cualquier número de entornos personalizados 
 ## Guía de Migración
 
 - `server.moduleGraph` -> [`environment.moduleGraph`](/guide/api-environment-instances#grafos-de-modulos-separados)
+- `server.reloadModule(module)` -> `environment.reloadModule(module)`
+- `server.pluginContainer` -> `environment.pluginContainer`
 - `server.transformRequest` -> `environment.transformRequest`
 - `server.warmupRequest` -> `environment.warmupRequest`
+- `server.hot` -> `server.client.environment.hot`

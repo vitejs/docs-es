@@ -79,7 +79,7 @@ export default defineConfig({
 
   Configura reglas de proxy personalizadas para el servidor de vista previa. Espera un objeto de pares `{ key: options }`. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy.
 
-  Usa [`http-proxy`](https://github.com/http-party/node-http-proxy). Todas las opciones [aquí](https://github.com/http-party/node-http-proxy#options).
+  Utiliza [`http-proxy-3`](https://github.com/sagemathinc/http-proxy-3). Las opciones completas se pueden encontrar [aquí](https://github.com/sagemathinc/http-proxy-3#opciones).
 
 ## preview.cors
 

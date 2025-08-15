@@ -115,7 +115,7 @@ Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
 
   Ten en cuenta que si estás utilizando una [`base`](/config/shared-options.md#base) no relativa, debes prefijar cada clave con esa `base`.
 
-  Extiende [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Las opciones adicionales están [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12).
+  Extiende [`http-proxy-3`](https://github.com/sagemathinc/http-proxy-3#options). Las opciones adicionales están [aquí](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L12).
 
   En algunos casos, es posible que también desees configurar el servidor de desarrollo relacionado (por ejemplo, para agregar middlewares personalizados a la aplicación interna [connect](https://github.com/senchalabs/connect)). Para hacerlo, debes escribir tu propio [plugin](/guide/using-plugins.html) y usar la función [configureServer](/guide/api-plugin.html#configureserver).
 

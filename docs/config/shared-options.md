@@ -106,7 +106,7 @@ Si tienes copias duplicadas de la misma dependencia en tu aplicación (probablem
 Para compilaciones de SSR, la deduplicación no funciona para las salidas de compilación de ESM configuradas desde `build.rollupOptions.output`. Una solución consiste en utilizar las salidas de compilación de CJS hasta que ESM tenga una mejor compatibilidad con plugins para la carga de módulos.
 :::
 
-## resolve.conditions
+## resolve.conditions <NonInheritBadge />
 
 - **Tipo:** `string[]`
 - **Por defecto:** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
@@ -132,7 +132,7 @@ Aquí, `import` y `require` son "condiciones". Las condiciones se pueden anidar 
 
 Ten en cuenta que las condiciones `import`, `require`, `default` siempre se aplican si se cumplen los requisitos.
 
-## resolve.mainFields
+## resolve.mainFields <NonInheritBadge />
 
 - **Tipo:** `string[]`
 - **Por defecto:** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)
@@ -171,7 +171,7 @@ interface CSSModulesOptions {
   getJSON?: (
     cssFileName: string,
     json: Record<string, string>,
-    outputFileName: string
+    outputFileName: string,
   ) => void
   scopeBehaviour?: 'global' | 'local'
   globalModulePaths?: RegExp[]
@@ -191,7 +191,7 @@ interface CSSModulesOptions {
     | ((
         originalClassName: string,
         generatedClassName: string,
-        inputFile: string
+        inputFile: string,
       ) => string)
 }
 ```

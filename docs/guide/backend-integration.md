@@ -46,7 +46,6 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    ```
 
    Para servir correctamente los recursos, tienes dos opciones:
-
    - Asegúrarse de que el servidor esté configurado para enviar solicitudes de recursos estáticos al servidor de Vite.
    - Configurar [`server.origin`](/config/server-options#server-origin) para que las URL de recursos generados resuelvan en la URL del servidor backend en lugar de una ruta relativa.
 
@@ -77,6 +76,10 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
        "file": "assets/shared-ChJ_j-JJ.css",
        "src": "_shared-ChJ_j-JJ.css"
      },
+     "logo.svg": {
+       "file": "assets/logo-BuPIv-2h.svg",
+       "src": "logo.svg"
+     },
      "baz.js": {
        "file": "assets/baz-B2H3sXNv.js",
        "name": "baz",
@@ -102,11 +105,31 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    }
    ```
 
-   - El manifest tiene una estructura `Record<name, chunk>`.
-   - Para fragmentos de entrada fija o dinámica, la key es la ruta src relativa de la raíz del proyecto.
-   - Para los fragmentos que no son de entrada, la clave es el nombre base del archivo generado, precedido por un `_`.
-   - Para el archivo CSS generado cuando [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) es `false`, la clave es `style.css`.
-   - Los fragmentos contendrán información en sus importaciones estaticas y dinamicas (ambos son keys que mapean al correspondiente fragmento en el manifest), y tambien su correspondiente css y archivo de recurso estatico (si los hay).
+   El manifiesto tiene una estructura `Record<name, chunk>` donde cada chunk sigue la interfaz `ManifestChunk`:
+
+   ```ts
+   interface ManifestChunk {
+     src?: string
+     file: string
+     css?: string[]
+     assets?: string[]
+     isEntry?: boolean
+     name?: string
+     names?: string[]
+     isDynamicEntry?: boolean
+     imports?: string[]
+     dynamicImports?: string[]
+   }
+   ```
+
+   Cada entrada en el manifiesto representa uno de los siguientes:
+   - **Fragmentos de entrada**: Generados a partir de archivos especificados en [`build.rollupOptions.input`](https://rollupjs.org/configuration-options/#input). Estos fragmentos tienen `isEntry: true` y su clave es la ruta src relativa desde la raíz del proyecto.
+   - **Fragmentos de entrada dinámica**: Generados a partir de importaciones dinámicas. Estos fragmentos tienen `isDynamicEntry: true` y su clave es la ruta src relativa desde la raíz del proyecto.
+   - **Fragmentos no de entrada**: Su clave es el nombre base del archivo generado con `_` como prefijo.
+   - **Fragmentos de activos**: Generados a partir de activos importados como imágenes, fuentes. Su clave es la ruta src relativa desde la raíz del proyecto.
+   - **Archivos CSS**: Cuando [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) es `false`, se genera un solo archivo CSS con la clave `style.css`. Cuando `build.cssCodeSplit` no es `false`, la clave se genera similar a los fragmentos de JavaScript (es decir, los fragmentos de entrada no tendrán prefijo `_` y los fragmentos no de entrada tendrán prefijo `_`).
+
+   Los fragmentos contendrán información sobre sus importaciones estáticas y dinámicas (ambos son claves que mapean al correspondiente fragmento en el manifiesto), y también su correspondiente CSS y archivo de recurso estatico (si los hay).
 
 4. Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash.
 
@@ -129,15 +152,14 @@ Aquí tienes un ejemplo de plantilla HTML para renderizar los enlaces adecuados.
 <link rel="modulepreload" href="/{{ chunk.file }}" />
 ````
 
-Específicamente, un backend que genera HTML debería incluir las siguientes etiquetas dado un archivo de manifiesto y un punto de entrada:
+Especificamente, un backend que genera HTML debería incluir las siguientes etiquetas dados un archivo de manifiesto y un punto de entrada. Ten en cuenta que seguir este orden es recomendado para el rendimiento óptimo:
 
-- Una etiqueta `<link rel="stylesheet">` para cada archivo en la lista `css` del fragmento del punto de entrada.
-- Seguir recursivamente todos los fragmentos en la lista `imports` del punto de entrada e incluir una etiqueta `<link rel="stylesheet">` para cada archivo CSS de cada fragmento importado.
-- Una etiqueta para la clave `file` del fragmento del punto de entrada (`<script type="module">` para JavaScript,
-  o `<link rel="stylesheet">` para CSS)
-- Opcionalmente, una etiqueta `<link rel="modulepreload">` para el `file` de cada fragmento de JavaScript importado, nuevamente siguiendo recursivamente las importaciones a partir del fragmento del punto de entrada.
+1.  Una etiqueta `<link rel="stylesheet">` para cada archivo en la lista `css` del fragmento del punto de entrada (si existe)
+2.  Recursivamente seguir todos los fragmentos en la lista `imports` del punto de entrada y agregar una etiqueta `<link rel="stylesheet">` para cada archivo CSS de la lista `css` de cada fragmento importado (si existe).
+3.  Una etiqueta para la clave `file` del fragmento del punto de entrada. Esto puede ser `<script type="module">` para JavaScript, `<link rel="stylesheet">` para CSS.
+4.  Opcionalmente, `<link rel="modulepreload">` para el `file` de cada fragmento de JavaScript importado, siguiendo recursivamente las importaciones a partir del fragmento del punto de entrada.
 
-Siguiendo el ejemplo de manifiesto anterior, para el punto de entrada `views/foo.js`, los siguientes tags deberían incluirse en producción:
+Siguiendo el ejemplo del manifiesto anterior, para el punto de entrada `views/foo.js`, los siguientes tags deberían incluirse en producción:
 
 ```html
 <link rel="stylesheet" href="assets/foo-5UjPuW-k.css" />
@@ -164,7 +186,7 @@ import type { Manifest, ManifestChunk } from 'vite'
 
 export default function importedChunks(
   manifest: Manifest,
-  name: string
+  name: string,
 ): ManifestChunk[] {
   const seen = new Set<string>()
 

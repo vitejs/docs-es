@@ -4,7 +4,7 @@
 
 A menos que se indique lo contrario, las opciones en esta sección solo se aplican al optimizador de dependencias, que solo se usa en desarrollo.
 
-## optimizeDeps.entries
+## optimizeDeps.entries <NonInheritBadge />
 
 - **Tipo:** `string | string[]`
 
@@ -12,7 +12,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
   Si ninguna de estas opciones se ajusta a tus necesidades, puedes especificar entradas personalizadas utilizando esta opción; el valor debe ser un [patrón `tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) o un array de patrones que son relativos a la raíz del proyecto Vite. Esto sobrescribirá la inferencia de entradas predeterminadas. Solo la carpeta `build.outDir` se ignorará de forma predeterminada cuando se defina explícitamente `optimizeDeps.entries`. Si se necesita ignorar otras carpetas, puedes usar un patrón de ignorado como parte de la lista de entradas, marcado con un '!' inicial. Si no deseas ignorar `build.outDir`, puedes especificarlo utilizando una ruta de cadena literal (sin patrones de `tinyglobby`).
 
-## optimizeDeps.exclude
+## optimizeDeps.exclude <NonInheritBadge />
 
 - **Tipo:** `string[]`
 
@@ -33,7 +33,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
   :::
 
-## optimizeDeps.include
+## optimizeDeps.include <NonInheritBadge />
 
 - **Tipo:** `string[]`
 
@@ -51,7 +51,7 @@ export default defineConfig({
 })
 ```
 
-## optimizeDeps.esbuildOptions
+## optimizeDeps.esbuildOptions <NonInheritBadge />
 
 - **Tipo:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
 | 'bundle'
@@ -72,20 +72,20 @@ Se omiten ciertas opciones ya que cambiarlas no sería compatible con la optimiz
 - También se omite `external`, usa la opción `optimizeDeps.exclude` de Vite
 - `plugins` se fusionan con el plugin de dependencia de Vite
 
-## optimizeDeps.force
+## optimizeDeps.force <NonInheritBadge />
 
 - **Tipo:** `boolean`
 
 Configurar en `true` para forzar el empaquetado previo de dependencias, ignorando las dependencias previamente optimizadas y almacenadas en caché.
 
-## optimizeDeps.noDiscovery
+## optimizeDeps.noDiscovery <NonInheritBadge />
 
 - **Tipo:** `boolean`
 - **Por defecto:** `false`
 
 Cuando se configura en `true`, se deshabilitará el descubrimiento automático de dependencias y solo se optimizarán las dependencias listadas en `optimizeDeps.include`. Las dependencias solo-CJS deben estar presentes en `optimizeDeps.include` durante el desarrollo.
 
-## optimizeDeps.holdUntilCrawlEnd
+## optimizeDeps.holdUntilCrawlEnd <NonInheritBadge />
 
 - **Experimental:** [Hacer comentarios](https://github.com/vitejs/vite/discussions/15834)
 - **Tipo:** `boolean`
@@ -93,7 +93,7 @@ Cuando se configura en `true`, se deshabilitará el descubrimiento automático d
 
 Cuando está habilitado, retendrá los primeros resultados de las dependencias optimizadas hasta que todas las importaciones estáticas se rastreen en el arranque en frío. Esto evita la necesidad de recargar la página completa cuando se descubren nuevas dependencias y desencadenan la generación de nuevos fragmentos comunes. Si el escáner encuentra todas las dependencias más las definidas explícitamente en `include`, es mejor deshabilitar esta opción para permitir que el navegador procese más solicitudes en paralelo.
 
-## optimizeDeps.disabled
+## optimizeDeps.disabled <NonInheritBadge />
 
 - **Obsoleto**
 - **Experimental** [Hacer comentarios](https://github.com/vitejs/vite/discussions/13839)
@@ -108,7 +108,7 @@ Para deshabilitar el optimizador por completo, usa `optimizeDeps.noDiscovery: tr
 La optimización de las dependencias durante el tiempo de compilación fue una característica **experimental**. Los proyectos que probaron esta estrategia también eliminaron `@rollup/plugin-commonjs` usando `build.commonjsOptions: { include: [] }`. Si lo hiciste en algún momento, una advertencia te guiará a volver a habilitarlo y así darle soporte a paquetes CJS únicamente mientras se realiza el empaquetado.
 :::
 
-## optimizeDeps.needsInterop
+## optimizeDeps.needsInterop <NonInheritBadge />
 
 - **Experimental**
 - **Tipo:** `string[]`
