@@ -1,8 +1,15 @@
 <script setup lang="ts">
+import {
+  computed,
+  type ComputedRef,
+  onMounted,
+  onUnmounted,
+  type Ref,
+  ref,
+} from 'vue'
+import FrameworkCard, { type Framework } from './FrameworkCard.vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { computed, ComputedRef, onMounted, onUnmounted, Ref, ref } from 'vue'
-import FrameworkCard, { Framework } from './FrameworkCard.vue'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -257,7 +264,7 @@ const paddedBlocksPerSide: ComputedRef<number> = computed(() => {
 })
 
 const numFrameworksPerRow = computed(
-  () => numBlocksPerRow.value - paddedBlocksPerSide.value * 2
+  () => numBlocksPerRow.value - paddedBlocksPerSide.value * 2,
 )
 
 /**
@@ -282,7 +289,7 @@ const centerIndexes: ComputedRef<{ start: number; end: number }[]> = computed(
       Math.floor(
         (frameworksPerFirstRows -
           (frameworks.length % frameworksPerFirstRows)) /
-          2
+          2,
       )
     return new Array(numRows.value + 1).fill(0).map((_, i) => {
       return i < numRows.value ||
@@ -299,7 +306,7 @@ const centerIndexes: ComputedRef<{ start: number; end: number }[]> = computed(
               1,
           }
     })
-  }
+  },
 )
 
 /**

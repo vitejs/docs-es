@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 5
   - - meta
     - property: og:image
-      content: https://es.vite.dev/og-image-announcing-vite5.png
+      content: https://es.vite.dev/og-image-announcing-vite5.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/anunciando-vite5
@@ -29,7 +29,7 @@ head:
 
 _16 de noviembre de 2023_
 
-![Imagen de portada del anuncio de Vite 5](/og-image-announcing-vite5.png)
+![Imagen de portada del anuncio de Vite 5](/og-image-announcing-vite5.webp)
 
 Vite 4 [fue lanzado](./anunciando-vite4.md) hace casi un año, y sirvió como una base sólida para el ecosistema. Las descargas de npm por semana aumentaron de 2.5 millones a 7.5 millones, ya que los proyectos se siguen construyendo sobre una infraestructura compartida. Los frameworks continuaron innovando, y sobre [Astro](https://astro.build/), [Nuxt](https://nuxt.com/), [SvelteKit](https://kit.svelte.dev/), [Solid Start](https://www.solidjs.com/blog/introducing-solidstart), [Qwik City](https://qwik.builder.io/qwikcity/overview/), entre otros, vimos nuevos frameworks unirse y fortalecer el ecosistema. [RedwoodJS](https://redwoodjs.com/) y [Remix](https://remix.run/) cambiaron a Vite, allanando el camino para una mayor adopción en el ecosistema React. [Vitest](https://vitest.dev) siguió creciendo a un ritmo aún más rápido que Vite. Su equipo ha estado trabajando arduamente y pronto [lanzarán Vitest 1.0](https://github.com/vitejsst-dev/vitest/issues/3596). La historia de Vite cuando se usa con otras herramientas como [Storybook](https://storybook.js.org), [Nx](https://nx.dev) y [Playwright](https://playwright.dev) siguió mejorando, al igual que los entornos, con Vite dev funcionando tanto en [Deno](https://deno.com) como en [Bun](https://bun.sh).
 

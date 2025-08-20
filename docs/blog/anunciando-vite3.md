@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 3
   - - meta
     - property: og:image
-      content: https://es.vite.dev/og-image-announcing-vite3.png
+      content: https://vite.dev/og-image-announcing-vite3.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/anunciando-vite3
@@ -34,7 +34,7 @@ _23 de julio de 2022_: mira el [anuncio de Vite 4.0](./anunciando-vite4.md)
 
 En febrero del año pasado, [Evan You](https://twitter.com/youyuxi) lanzó Vite 2. Desde entonces, su adopción ha crecido sin parar, alcanzando más de 1 millón de descargas en npm por semana. Un ecosistema expansivo se ha estado formando rápidamente después del lanzamiento. Vite está impulsando una carrera de innovación en los frameworks. [Nuxt 3](https://v3.nuxtjs.org/) utiliza Vite por defecto. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) y [SolidStart](https://docs.solidjs.com/quick-start) están todos construidos con Vite. [Laravel ahora ha decidido usar Vite por defecto](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) muestra cómo Vite puede mejorar la experiencia de desarrollo en Rails. [Vitest](https://vitest.dev) está avanzando como una alternativa nativa de Vite a Jest. Vite está detrás de las nuevas características de pruebas de componentes de [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) y [Playwright](https://playwright.dev/docs/test-components), Storybook usa a [Vite como su compilador oficial](https://github.com/storybookjs/builder-vite). Y [la lista continúa](https://patak.dev/vite/ecosystem.html). Los mantenedores de la mayoría de estos proyectos se involucraron en la mejora del núcleo de Vite, trabajando de cerca con el [equipo](https://vite.dev/team) de Vite y otros colaboradores.
 
-![Vite 3 Announcement Cover Image](./../public/og-image-announcing-vite3.png)
+![Imagen de portada del anuncio de Vite 3](/og-image-announcing-vite3-es.webp)
 
 Hoy, 16 meses después del [lanzamiento de la v2](anunciando-vite2.md), nos complace anunciar el lanzamiento de Vite 3. Decidimos lanzar una nueva versión importante de Vite al menos cada año para alinearnos con el [tiempo establecido de soporte de Node.js](https://nodejs.org/en/about/releases/), y aprovechar la oportunidad de revisar la API de Vite regularmente con una ruta de migración corta para proyectos en el ecosistema.
 
@@ -50,7 +50,7 @@ Si eres nuevo en Vite, te recomendamos que leas la [Guía de por qué Vite](../g
 
 Ve a [vite.dev](https://vite.dev) para disfrutar de la nueva documentacion para la v3. Vite ahora usa el nuevo tema predeterminado para [VitePress](https://vitepress.vuejs.org), con un impresionante modo oscuro entre otras características.
 
-[![Vite documentation frontpage](../images/v3-docs.png)](https://vite.dev)
+[![Página de inicio de documentación de Vite](../images/v3-docs.webp)](https://es.vite.dev)
 
 Varios proyectos en el ecosistema ya han migrado (ver [Vitest](https://vitest.dev), [vite-plugin-pwa](https://vite-plugin-pwa.netlify.app/), y [VitePress](https://vitepress.vuejs.org/) mismo).
 
@@ -225,9 +225,9 @@ En parte, esta reducción fue posible al hacer que algunas dependencias que la m
 
 Un maratón de selección de incidencias fue encabezado por [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), que recientemente se unió al equipo de Vite. Durante los últimos tres meses, las incidencias abiertas de Vite se redujeron de 770 a 400. Todo esto se logró mientras las solicitudes de cambios recién abiertas estaban en su punto más alto. Al mismo tiempo, [@haoqunjiang](https://twitter.com/haoqunjiang) también preparó una [descripción general de los problemas de Vite](https://github.com/vitejs/vite/discussions/8232).
 
-[![Graph of open issues and pull requests in Vite](../images/v3-open-issues-and-PRs.png)](https://www.repotrends.com/vite/vite)
+[![Gráfico de incidencias abiertas y solicitudes de cambios en Vite](../images/v3-open-issues-and-PRs.webp)](https://www.repotrends.com/vite/vite)
 
-[![Graph of new issues and pull requests in Vite](../images/v3-new-open-issues-and-PRs.png)](https://www.repotrends.com/vite/vite)
+[![Gráfico de nuevas incidencias y solicitudes de cambios en Vite](../images/v3-new-open-issues-and-PRs.webp)](https://www.repotrends.com/vite/vite)
 
 ## Notas de compatibilidad
 

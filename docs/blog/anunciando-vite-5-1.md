@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 5.1
   - - meta
     - property: og:image
-      content: https://es.vite.dev/og-image-announcing-vite5-1.png
+      content: https://es.vite.dev/og-image-announcing-vite5-1.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/anunciando-vite-5-1
@@ -29,7 +29,7 @@ head:
 
 _8 de febrero de 2024_
 
-![Imagen de Portada del Anuncio de Vite 5.1](/og-image-announcing-vite5-1.png)
+![Imagen de Portada del Anuncio de Vite 5.1](/og-image-announcing-vite5-1.webp)
 
 Vite 5 [fue lanzado](./anunciando-vite5.md) en noviembre pasado, y representó otro gran avance para Vite y el ecosistema. Hace unas semanas celebramos 10 millones de descargas semanales de npm y 900 colaboradores en el repositorio de Vite. Hoy, nos complace anunciar el lanzamiento de Vite 5.1.
 
@@ -90,7 +90,7 @@ El servidor de vista previa ahora expone un método `close`, que desmontará ade
 
 Vite sigue mejorando con cada lanzamiento, y Vite 5.1 está repleto de mejoras de rendimiento. Medimos el tiempo de carga para 10K módulos (árbol de 25 niveles de profundidad) usando [vite-dev-server-perf](https://github.com/yyx990803/vite-dev-server-perf) para todas las versiones menores desde Vite 4.0. Este es un buen punto de referencia para medir el efecto del enfoque sin bundle de Vite. Cada módulo es un pequeño archivo TypeScript con un contador e importaciones a otros archivos en el árbol, por lo que esto mayormente mide el tiempo que lleva realizar las solicitudes de módulos separados. En Vite 4.0, cargar 10K módulos llevó 8 segundos en un M1 MAX. Tuvimos un avance en [Vite 4.3 donde nos enfocamos en el rendimiento](./anunciando-vite-4-3.md), y pudimos cargarlos en 6.35 segundos. En Vite 5.1, logramos otro salto de rendimiento. Vite ahora sirve los 10K módulos en 5.35 segundos.
 
-![Progresión del tiempo de carga de 10K módulos de Vite](/vite5-1-10K-modules-loading-time.png)
+![Progresión del tiempo de carga de 10K módulos de Vite](../images/vite5-1-10K-modules-loading-time.webp)
 
 Los resultados de esta prueba de referencia se ejecutan en Headless Puppeteer y son una buena manera de comparar versiones. Sin embargo, no representan el tiempo tal como lo experimentan los usuarios. Cuando ejecutamos los mismos 10K módulos en una ventana de incógnito en Chrome, tenemos:
 

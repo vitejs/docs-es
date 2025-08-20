@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 6
   - - meta
     - property: og:image
-      content: https://es.vite.dev/og-image-announcing-vite6.png
+      content: https://es.vite.dev/og-image-announcing-vite6.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/announcing-vite6
@@ -29,7 +29,7 @@ head:
 
 _26 de Noviembre de 2024_
 
-![Imagen de portada del anuncio de Vite 6](/og-image-announcing-vite6.png)
+![Imagen de portada del anuncio de Vite 6](/og-image-announcing-vite6.webp)
 
 Hoy damos otro gran paso en la historia de Vite. El equipo de Vite, los colaboradores y los socios del ecosistema están emocionados de anunciar el lanzamiento de Vite 6.
 
@@ -39,7 +39,7 @@ Nuevos frameworks también se han unido al ecosistema de Vite, incluyendo [TanSt
 
 Vite es utilizado por OpenAI, Google, Apple, Microsoft, NASA, Shopify, Cloudflare, GitLab, Reddit, Linear, entre muchos otros. Hace dos meses, comenzamos una lista de [empresas que usan Vite](https://github.com/vitejs/companies-using-vite). Nos alegra ver a muchos desarrolladores enviándonos un PR para agregar sus empresas a la lista. Es difícil de creer cuánto ha crecido el ecosistema que construimos juntos desde que Vite dio sus primeros pasos.
 
-![Descargas semanales de npm de Vite](/vite6-npm-weekly-downloads.png)
+![Descargas semanales de npm de Vite](../images/vite6-npm-weekly-downloads.webp)
 
 ## Acelerando el ecosistema de Vite
 

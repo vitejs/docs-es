@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import { ref, Ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { useCardAnimation } from '../../../composables/useCardAnimation'
 import { useSlideIn } from '../../../composables/useSlideIn'
 import SvgNode from '../common/SvgNode.vue'
@@ -29,7 +29,7 @@ const { startAnimation } = useCardAnimation(
     const timeline = gsap.timeline()
 
     // Animate in each node
-    nodes.forEach((node, i) => {
+    nodes.forEach((node) => {
       let subTimeline = gsap.timeline()
       subTimeline.call(() => {
         node.visible.value = true
@@ -44,7 +44,7 @@ const { startAnimation } = useCardAnimation(
           node.visible.value = false
         },
         undefined,
-        '-=0.6'
+        '-=0.6',
       )
       timeline.add(subTimeline, Math.random())
     })
@@ -55,7 +55,7 @@ const { startAnimation } = useCardAnimation(
         isBoltActive.value = true
       },
       undefined,
-      '-=0.5'
+      '-=0.5',
     )
 
     // All done
@@ -63,7 +63,7 @@ const { startAnimation } = useCardAnimation(
   },
   {
     once: true,
-  }
+  },
 )
 </script>
 

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin'
-import { onMounted, onUnmounted, Ref, ref } from 'vue'
+import { onMounted, onUnmounted, type Ref, ref } from 'vue'
 import SvgInputs from './svg-elements/SvgInputs.vue'
 import SvgOutputs from './svg-elements/SvgOutputs.vue'
 import SvgBlueIndicator from './svg-elements/SvgBlueIndicator.vue'
 import SvgPinkIndicator from './svg-elements/SvgPinkIndicator.vue'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { SvgNodeProps } from '../common/SvgNode.vue'
+import type { SvgNodeProps } from '../common/SvgNode.vue'
 
 gsap.registerPlugin(MotionPathPlugin)
 
@@ -32,7 +32,7 @@ const inputLines: Ref<SvgNodeProps>[] = inputPaths.map((path) =>
     dotColor: undefined,
     glowColor: undefined,
     path,
-  })
+  }),
 )
 
 // Define the file set "combinations" that can be shown on the input side
@@ -121,7 +121,7 @@ const animateDiagram = () => {
       isMobile
         ? animateSingleInputMobile(inputLines[lineIndex])
         : animateSingleInputDesktop(inputLines[lineIndex]),
-      fileIndex * (isMobile ? 0.4 : 0.2)
+      fileIndex * (isMobile ? 0.4 : 0.2),
     )
   })
 
@@ -137,7 +137,7 @@ const animateDiagram = () => {
       isMobile
         ? animateSingleOutputMobile(outputLine)
         : animateSingleOutputDesktop(outputLine, index),
-      'showOutput+=' + (isMobile ? 0.3 : 0.1) * index
+      'showOutput+=' + (isMobile ? 0.3 : 0.1) * index,
     )
   })
 
@@ -184,7 +184,7 @@ const prepareInputs = () => {
  */
 const animateSingleOutputDesktop = (
   outputLine: Ref<SvgNodeProps>,
-  index: number
+  index: number,
 ) => {
   const timeline = gsap.timeline()
 
@@ -194,7 +194,7 @@ const animateSingleOutputDesktop = (
     {
       position: 0,
     },
-    0
+    0,
   )
 
   // Animate the dot in
@@ -205,7 +205,7 @@ const animateSingleOutputDesktop = (
       duration: 1.5,
       ease: 'expo.out',
     },
-    0
+    0,
   )
 
   // Show the dot
@@ -214,7 +214,7 @@ const animateSingleOutputDesktop = (
     {
       visible: true,
     },
-    0
+    0,
   )
 
   // Show the label
@@ -223,7 +223,7 @@ const animateSingleOutputDesktop = (
     {
       labelVisible: true,
     },
-    0.4
+    0.4,
   )
 
   // Animate the dot out
@@ -234,7 +234,7 @@ const animateSingleOutputDesktop = (
       duration: 1.5,
       ease: 'power3.in',
     },
-    2
+    2,
   )
 
   // Hide the label
@@ -243,7 +243,7 @@ const animateSingleOutputDesktop = (
     {
       labelVisible: false,
     },
-    2.5
+    2.5,
   )
 
   // Hide the dot
@@ -252,7 +252,7 @@ const animateSingleOutputDesktop = (
     {
       visible: false,
     },
-    3
+    3,
   )
 
   return timeline
@@ -271,7 +271,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
     {
       position: 0,
     },
-    0
+    0,
   )
 
   // Animate the dot in
@@ -282,7 +282,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
       duration: 2,
       ease: 'power1.inOut',
     },
-    0.3
+    0.3,
   )
 
   // Show the dot
@@ -291,7 +291,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
     {
       visible: true,
     },
-    0.75
+    0.75,
   )
 
   // Hide the dot
@@ -300,7 +300,7 @@ const animateSingleOutputMobile = (outputLine: Ref<SvgNodeProps>) => {
     {
       visible: false,
     },
-    1.2
+    1.2,
   )
 
   return timeline
@@ -318,7 +318,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       position: 0,
     },
-    0
+    0,
   )
 
   // Animate the dot in
@@ -329,7 +329,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
       duration: 1,
       ease: 'expo.out',
     },
-    0
+    0,
   )
 
   // Show the dot
@@ -338,7 +338,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: true,
     },
-    0
+    0,
   )
 
   // Show the label
@@ -347,7 +347,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       labelVisible: true,
     },
-    0.2
+    0.2,
   )
 
   // Animate the dot out
@@ -358,7 +358,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
       duration: 1.2,
       ease: 'power3.in',
     },
-    1.2
+    1.2,
   )
 
   // Hide the label
@@ -367,7 +367,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       labelVisible: false,
     },
-    1.6
+    1.6,
   )
 
   // Hide the dot
@@ -376,7 +376,7 @@ const animateSingleInputDesktop = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: false,
     },
-    1.9
+    1.9,
   )
 
   // Return the timeline
@@ -395,7 +395,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
     {
       position: 0,
     },
-    0
+    0,
   )
 
   // Animate the dot in
@@ -406,7 +406,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
       duration: 1.8,
       ease: 'power2.out',
     },
-    0
+    0,
   )
 
   // Show the dot
@@ -415,7 +415,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: true,
     },
-    0
+    0,
   )
 
   // Hide the dot
@@ -424,7 +424,7 @@ const animateSingleInputMobile = (inputLine: Ref<SvgNodeProps>) => {
     {
       visible: false,
     },
-    0.5
+    0.5,
   )
 
   // Return the timeline
@@ -470,7 +470,7 @@ onMounted(() => {
       </div>
       <div class="vite-chip__filter" />
       <img
-        :src="isUwu ? '/logo-uwu.png' : '/logo.svg'"
+        :src="isUwu ? '/logo-uwu.webp' : '/logo.svg'"
         :alt="isUwu ? 'Vite Kawaii Logo by @icarusgkx' : 'Vite Logo'"
         class="vite-chip__logo"
         :class="{ uwu: isUwu }"
@@ -520,7 +520,8 @@ onMounted(() => {
     bottom: 0;
     transform: translate3d(0, 0, 0) scale(1);
     transition: transform 0.3s ease-in-out;
-    background: linear-gradient(
+    background:
+      linear-gradient(
         130deg,
         rgba(61, 61, 61, 0.3) 0%,
         rgba(61, 61, 61, 0) 40%
@@ -713,7 +714,8 @@ onMounted(() => {
     opacity: 0.1;
   }
 
-  background: url('/noise.png'),
+  background:
+    url('../common/noise.webp'),
     radial-gradient(
       circle at right center,
       rgb(86, 50, 119) 0%,
@@ -729,7 +731,8 @@ onMounted(() => {
   );
 
   @media (min-width: 1024px) {
-    background: url('/noise.png'),
+    background:
+      url('../common/noise.webp'),
       radial-gradient(
         circle at right center,
         rgba(75, 41, 105, 0.5) 0%,
@@ -747,7 +750,8 @@ onMounted(() => {
   }
 
   @media (min-width: 1500px) {
-    background: url('/noise.png'),
+    background:
+      url('../common/noise.webp'),
       radial-gradient(
         circle at right center,
         rgba(75, 41, 105, 0.5) 0%,
@@ -765,7 +769,8 @@ onMounted(() => {
   }
 
   @media (min-width: 1800px) {
-    background: url('/noise.png'),
+    background:
+      url('../common/noise.webp'),
       radial-gradient(
         circle at right center,
         rgba(75, 41, 105, 0.5) 0%,

@@ -14,7 +14,7 @@ export const buildEnd = async (config: SiteConfig): Promise<void> => {
     id: blogUrl,
     link: blogUrl,
     language: 'es',
-    image: 'https://es.vite.dev/og-image.png',
+    image: 'https://es.vite.dev/og-image.jpg',
     favicon: 'https://es.vite.dev/logo.svg',
     copyright:
       'Derechos reservados © 2019-actualidad VoidZero Inc. & los colaboradores de Vite',
@@ -26,7 +26,7 @@ export const buildEnd = async (config: SiteConfig): Promise<void> => {
   posts.sort(
     (a, b) =>
       +new Date(b.frontmatter.date as string) -
-      +new Date(a.frontmatter.date as string)
+      +new Date(a.frontmatter.date as string),
   )
   for (const { url, excerpt, frontmatter, html } of posts) {
     feed.addItem({

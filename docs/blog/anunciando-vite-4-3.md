@@ -13,7 +13,7 @@ head:
       content: Announcing Vite 4.3
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite4-3.png
+      content: https://vite.dev/og-image-announcing-vite4-3.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/anunciando-vite-4-3
@@ -29,7 +29,7 @@ head:
 
 _April 20, 2023_
 
-![Imagen de portada de lanzamiento de Vite 4.3](/og-image-announcing-vite4-3.png)
+![Imagen de portada de lanzamiento de Vite 4.3](/og-image-announcing-vite4-3.webp)
 
 Enlaces rápidos:
 
@@ -60,9 +60,9 @@ Estas son las mejoras de rendimiento medidas por [sapphi-red/performance-compare
 | **HMR Padre**          |    30.5ms |   24.0ms | -21.3% |
 | **Leaf HMR**           |    16.9ms |   10.0ms | -40.8% |
 
-![Comparación de tiempo Vite 4.3 vs 4.2](/vite4-3-startup-time.png)
+![Comparación de tiempo Vite 4.3 vs 4.2](../images/vite4-3-startup-time.webp)
 
-![Comparación del HMR de Vite 4.3 vs 4.2](/vite4-3-hmr-time.png)
+![Comparación del HMR de Vite 4.3 vs 4.2](../images/vite4-3-hmr-time.webp)
 
 Puedes leer más información sobre las pruebas de rendimiento [aquí](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e). Especificaciones y versiones para esta ejecución de rendimiento:
 

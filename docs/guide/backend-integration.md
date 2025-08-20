@@ -63,7 +63,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    </script>
    ```
 
-3. Para producción: despues de ejecutar `vite build`, se generará un archivo `.vite/manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
+3. Para producción, despues de ejecutar `vite build`, se generará un archivo `.vite/manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
 
    ```json [.vite/manifest.json]
    {

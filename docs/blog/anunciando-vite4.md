@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 4
   - - meta
     - property: og:image
-      content: https://es.vite.dev/og-image-announcing-vite4.png
+      content: https://es.vite.dev/og-image-announcing-vite4.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/anunciando-vite4
@@ -31,13 +31,13 @@ _9 de diciembre de 2022_ - Echa un vistazo al [anuncio de Vite 5.0](./anunciando
 
 Vite 3 [fue lanzado](./anunciando-vite3.md) hace 5 meses. Las descargas de npm por semana han pasado de 1 millón a 2.5 millones desde entonces. El ecosistema también ha madurado y sigue creciendo. En la [encuesta Jamstack Conf de este año](https://twitter.com/vite_js/status/1589665610119585793), el uso entre la comunidad saltó del 14% al 32%, manteniendo un alto puntaje de satisfacción de 9.7. Vimos los lanzamientos estables de [Astro 1.0](https://astro.build/), [Nuxt 3](https://v3.nuxtjs.org/) y otros marcos impulsados ​​por Vite que están innovando y colaborando: [SvelteKit](https://kit.svelte.dev/), [Solid Start](https://www.solidjs.com/blog/introducing-solidstart), [Qwik City](https://qwik.builder.io/qwikcity/overview/). Storybook anunció soporte de primera clase para Vite como una de sus características principales para [Storybook 7.0](https://storybook.js.org/blog/first-class-vite-support-in-storybook/). Deno ahora [ofrece soporte para Vite](https://www.youtube.com/watch?v=Zjojo9wdvmY). La adopción de [Vitest](https://vitest.dev) se está disparando, pronto representará la mitad de las descargas de Vite en npm. Nx también está invirtiendo en el ecosistema y [oficialmente es compatible con Vite](https://nx.dev/packages/vite).
 
-[![Ecosistema de Vite 4](/ecosystem-vite4.png)](https://viteconf.org/2022/replay)
+[![Ecosistema de Vite 4](../images/ecosystem-vite4.webp)](https://viteconf.org/2022/replay)
 
 Como muestra del crecimiento que han experimentado Vite y los proyectos relacionados, el ecosistema de Vite se reunió el 11 de octubre en el [ViteConf 2022](https://viteconf.org/2022/replay). Vimos a representantes del principal marco web y herramientas contar historias de innovación y colaboración. Y en un movimiento simbólico, el equipo de Rollup elige ese día exacto para lanzar [Rollup 3](https://rollupjs.org).
 
 Hoy, el [equipo de desarrollo principal de Vite](https://es.vite.dev/team) con la ayuda de nuestros socios del ecosistema, se complace en anunciar el lanzamiento de Vite 4, impulsado durante el tiempo de compilación por Rollup 3. Hemos trabajado con el ecosistema para garantizar una ruta de actualización sin problemas para esta nueva especialidad. Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
-![Imagen de portada del anuncio de Vite 4](/og-image-announcing-vite4.png)
+![Imagen de portada del anuncio de Vite 4](../images/og-image-announcing-vite4.webp)
 
 Enlaces rápidos:
 

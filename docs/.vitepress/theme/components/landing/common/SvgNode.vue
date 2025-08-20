@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, Ref, ref, watch, ComputedRef } from 'vue'
+import { computed, type ComputedRef, type Ref, ref, watch } from 'vue'
 import { gsap } from 'gsap'
 
 /**

@@ -13,7 +13,7 @@ head:
       content: Anunciando Vite 7
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite7.png
+      content: https://vite.dev/og-image-announcing-vite7.webp
   - - meta
     - property: og:url
       content: https://es.vite.dev/blog/anunciando-vite7
@@ -29,7 +29,7 @@ head:
 
 _24 de junio de 2025_
 
-![Imagen de Portada del Anuncio de Vite 7](/og-image-announcing-vite7.png)
+![Imagen de Portada del Anuncio de Vite 7](/og-image-announcing-vite7.webp)
 
 Estamos felices de compartir el lanzamiento de Vite 7! Han pasado 5 años desde que Evan You envió el primer commit al repositorio de Vite, y nadie podría haber predicho cuánto cambiaría el ecosistema del frontend desde entonces. La mayoría de los frameworks y herramientas de frontend modernos ahora trabajan juntos, construyendo sobre la infraestructura compartida de Vite. Y pueden innovar a un ritmo más rápido al compartir a un nivel más alto. Vite ahora se descarga 31 millones de veces a la semana, con un aumento de 14 millones en los últimos siete meses desde el lanzamiento anterior.
 

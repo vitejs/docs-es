@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import { Ref, ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import { useCardAnimation } from '../../../composables/useCardAnimation'
 import { useSlideIn } from '../../../composables/useSlideIn'
 import SvgNode from '../common/SvgNode.vue'
@@ -36,7 +36,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
         duration: 1.5,
         ease: 'power2.in',
       },
-      0
+      0,
     )
 
     // Make the glowing lines visible
@@ -45,7 +45,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
         glowVisible.value = true
       },
       undefined,
-      0.2
+      0.2,
     )
     // Make the glowing lines hidden shortly after
     timeline.call(
@@ -53,7 +53,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
         glowVisible.value = false
       },
       undefined,
-      1.1
+      1.1,
     )
 
     // Stagger the checkmarks
@@ -63,7 +63,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
           checkmark.value = true
         },
         undefined,
-        1.3 + index * 0.2
+        1.3 + index * 0.2,
       )
     })
 
@@ -72,7 +72,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
   },
   {
     once: true,
-  }
+  },
 )
 </script>
 
@@ -380,7 +380,9 @@ const { startAnimation, isCardActive } = useCardAnimation(
     left: 319px;
     color: #fff;
     text-align: center;
-    font-family: IBM Plex Mono, sans-serif;
+    font-family:
+      IBM Plex Mono,
+      sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

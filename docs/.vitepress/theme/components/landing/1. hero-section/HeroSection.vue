@@ -11,7 +11,12 @@ import HeroDiagram from './HeroDiagram.vue'
         class="hero__pill"
         target="_blank"
       >
-        <img src="/viteconf.svg" alt="Viteconf logo" width="20" height="20" />
+        <img
+          src="../../../../../images/viteconf.svg"
+          alt="Viteconf logo"
+          width="20"
+          height="20"
+        />
         <span>ViteConf 2025</span>
       </a>
 
@@ -31,7 +36,7 @@ import HeroDiagram from './HeroDiagram.vue'
           target="_blank"
           class="btn btn--outline"
         >
-          <img src="/github.svg" alt="GitHub logo" width="20" height="20" />
+          <img src="./github.svg" alt="GitHub logo" width="20" height="20" />
           GitHub
         </a>
       </div>
@@ -112,12 +117,14 @@ import HeroDiagram from './HeroDiagram.vue'
 @keyframes hero-pill-glow {
   0% {
     border-color: rgba(189, 52, 254, 0.5);
-    box-shadow: 0 0 5px rgba(189, 52, 254, 0.01),
+    box-shadow:
+      0 0 5px rgba(189, 52, 254, 0.01),
       inset 0 0 5px rgba(189, 52, 254, 0.1);
   }
   100% {
     border-color: rgba(189, 52, 254, 0.6);
-    box-shadow: 0 0 20px rgba(189, 52, 254, 0.2),
+    box-shadow:
+      0 0 20px rgba(189, 52, 254, 0.2),
       inset 0 0 10px rgba(189, 52, 254, 0.2);
   }
 }
