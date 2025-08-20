@@ -36,11 +36,11 @@ Además, Vite es altamente extensible a través de sus [API de plugins](./api-pl
 
 ## Paquetes
 
-| Paquete                                                                                  | Version (click para lista de cambios)                                                                                           |
-| ---------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| [vite](packages/vite)                                                                    | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](packages/vite/CHANGELOG.md)                                  |
-| [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) | [![plugin-legacy version](https://img.shields.io/npm/v/@vite/plugin-legacy.svg?label=%20)](packages/plugin-legacy/CHANGELOG.md) |
-| [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite)             | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](packages/create-vite/CHANGELOG.md)             |
+| Paquete                                                                                  | Version (click para lista de cambios)                                                                                                                                    |
+| ---------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [vite](https://github.com/vitejs/vite/tree/main/packages/vite)                           | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](https://github.com/vitejs/vite/tree/main/packages/vite/CHANGELOG.md)                                  |
+| [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) | [![plugin-legacy version](https://img.shields.io/npm/v/@vite/plugin-legacy.svg?label=%20)](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy/CHANGELOG.md) |
+| [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite)             | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](https://github.com/vitejs/vite/tree/main/packages/create-vite/CHANGELOG.md)             |
 
 ## Contribución
 
