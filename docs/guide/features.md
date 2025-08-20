@@ -215,7 +215,7 @@ Todos los frameworks modernos mantienen integraciones con Vite. La mayoría de l
 - Soporte para React a través de [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 - Soporte para React usando SWC a través de [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-Consulta la [Guía de Plugins](https://vite.dev/plugins) para más información.
+Consulta la [Guía de Plugins](/plugins/) para más información.
 
 ## JSX
 
@@ -544,7 +544,7 @@ const modules = {
 
 #### Consultas personalizadas
 
-También puedes utilizar la opción `query` para realizar consultas sobre importaciones, por ejemplo, para importar recursos [como una cadena](./assets.html#importar-recursos-como-cadenas-de-texto) o [como URL](./assets.html#importar-recursos-como-url):
+También puedes utilizar la opción `query` para realizar consultas sobre importaciones, por ejemplo, para importar recursos [como una cadena](/guide/assets.html#importar-recursos-como-cadenas-de-texto) o [como URL](/guide/assets.html#importar-recursos-como-url):
 
 ```ts twoslash
 import 'vite/client'
@@ -676,9 +676,8 @@ import wasmUrl from 'foo.wasm?url'
 
 const main = async () => {
   const responsePromise = fetch(wasmUrl)
-  const { module, instance } = await WebAssembly.instantiateStreaming(
-    responsePromise
-  )
+  const { module, instance } =
+    await WebAssembly.instantiateStreaming(responsePromise)
   /* ... */
 }
 

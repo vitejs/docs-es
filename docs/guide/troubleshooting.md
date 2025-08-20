@@ -152,6 +152,45 @@ Debes acceder al archivo con el protocolo `http`. La forma más fácil de lograr
 
 Si encuentras errores como `ENOENT: no such file or directory` o `Module not found`, esto a menudo ocurre cuando tu proyecto fue desarrollado en un sistema de archivos insensible a mayúsculas y minúsculas (Windows / macOS) pero construido en un sistema de archivos sensible a mayúsculas y minúsculas (Linux). Por favor, asegúrate de que los imports tengan las mayúsculas y minúsculas correctas.
 
+### Error `Failed to fetch dynamically imported module`
+
+> TypeError: Failed to fetch dynamically imported module
+
+Este error ocurre en varios casos:
+
+- Despliegue de versiones
+- Condiciones de red pobres
+- Extensiones del navegador bloqueando las solicitudes
+
+#### Despliegue de versiones
+
+Cuando despliegas una nueva versión de tu aplicación, el archivo HTML y los archivos JS siguen referenciando nombres de fragmentos antiguos que fueron eliminados en la nueva despliegue. Esto ocurre cuando:
+
+1. Los usuarios tienen una versión antigua de tu aplicación en caché en su navegador
+2. Despliegas una nueva versión con nombres de fragmentos diferentes (debido a cambios de código)
+3. El HTML en caché intenta cargar fragmentos que ya no existen
+
+Si estás utilizando un framework, consulta su documentación primero ya que puede tener una solución integrada para este problema.
+
+Para resolver esto, puedes:
+
+- **Mantener los fragmentos antiguos temporalmente**: Considera mantener los fragmentos anteriores de la despliegue anterior durante un período para permitir que los usuarios en caché transiten de manera suave.
+- **Implementa un service worker**: Implementa un service worker que haga prefetch de todos los activos y los cachea.
+- **Hacer prefetch de los fragmentos dinámicos**: Ten en cuenta que esto no ayuda si tu archivo HTML está en caché por el navegador debido a la cabecera `Cache-Control`.
+- **Implementa un manejo de errores de carga**: Implementa un manejo de errores para las importaciones dinámicas para recargar la página cuando los fragmentos faltan. Consulta [Manejo de errores de carga](./build.md#manejo-de-errores-de-carga) para más detalles.
+
+#### Condiciones de red pobres
+
+Este error puede ocurrir en entornos de red inestables. Por ejemplo, cuando la solicitud falla debido a errores de red o downtime del servidor.
+
+Ten en cuenta que no puedes reintentar la importación dinámica debido a limitaciones del navegador ([whatwg/html#6768](https://github.com/whatwg/html/issues/6768)).
+
+#### Extensiones del navegador bloqueando las solicitudes
+
+Este error también puede ocurrir si las extensiones del navegador (como bloqueadores de publicidad) están bloqueando la solicitud.
+
+Podría ser posible solucionarlo seleccionando un nombre de fragmento diferente por [`build.rollupOptions.output.chunkFileNames`](../config/build-options.md#build-rollupoptions), ya que estas extensiones a menudo bloquean las solicitudes basadas en nombres de archivos (por ejemplo, nombres que contienen `ad`, `track`).
+
 ## Dependencias optimizadas
 
 ### Dependencias preempaquetadas desactualizadas al vincularlas a un paquete local
@@ -208,7 +247,11 @@ Si este código se usa dentro de las dependencias, podrías usar [`patch-package
 
 ### Extensiones del navegador
 
-Algunas extensiones del navegador (como los bloqueadores de anuncios) pueden evitar que el cliente de Vite envíe solicitudes al servidor de desarrollo de Vite. Es posible que veas una pantalla blanca sin errores en este caso. Intenta deshabilitar las extensiones si tienes este problema.
+Algunas extensiones del navegador (como los bloqueadores de publicidad) pueden impedir que el cliente de Vite envíe solicitudes al servidor de desarrollo de Vite. Puedes ver una pantalla en blanco sin errores registrados en este caso. También puedes ver el siguiente error:
+
+> TypeError: No se pudo cargar dinámicamente el módulo importado
+
+Prueba a deshabilitar las extensiones si tienes este problema.
 
 ### Enlaces cruzados entre unidades en Windows
 
