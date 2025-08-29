@@ -99,24 +99,30 @@ export default defineConfig(async ({ command, mode }) => {
 })
 ```
 
-## Utilizando variables de entorno en Configuración
+## Utilizando Variables de Entorno en Configuración
 
-Las variables de entorno se pueden obtener de `process.env` como de costumbre.
+Las variables de entorno disponibles mientras la configuración se está evaluando son solo aquellas que ya existen en el entorno de proceso actual (`process.env`). Vite deliberadamente posterga la carga de cualquier archivo `.env*` hasta después de que la configuración del usuario se haya resuelto porque el conjunto de archivos a cargar depende de opciones como [`root`](/guide/#index-html-y-directorio-raiz-del-proyecto) y [`envDir`](/config/shared-options.md#envdir), y también finalmente, el `mode`.
 
-Ten en cuenta que Vite no carga archivos `.env` de forma predeterminada, ya que los archivos que se cargarán solo se pueden determinar después de evaluar la configuración de Vite, por ejemplo, las opciones `root` y `envDir` afectan el comportamiento de carga. Sin embargo, puedes usar el helper `loadEnv` exportado para cargar el archivo `.env` específico si es necesario.
+Esto significa: las variables definidas en `.env`, `.env.local`, `.env.[mode]` y `.env.[mode].local` **no** se inyectan automáticamente en `process.env` mientras la configuración de `vite.config.*` se está ejecutando. Se cargan automáticamente más tarde y se exponen a través de `import.meta.env` (con el filtro de prefijo `VITE_` predeterminado) exactamente como se documenta en [Variables de Entorno y Modos](/guide/env-and-mode.html). Por lo tanto, si solo necesitas pasar valores de los archivos `.env*` a la aplicación, no necesitas llamar a nada en la configuración.
+
+Si, sin embargo, los valores de los archivos `.env*` deben influir en la configuración en sí (por ejemplo, para configurar `server.port`, habilitar plugins de forma condicional o calcular reemplazos `define`), puedes cargarlos manualmente utilizando el ayudante exportado [`loadEnv`](/guide/api-javascript.html#loadenv).
 
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ mode }) => {
-  // Carga el archivo env basado en el `modo` en el directorio de trabajo actual.
-  // Establece el tercer parámetro como '' para cargar todas las variables de entorno sin importar el prefijo
+  // Carga el archivo env basado en el `mode` en el directorio de trabajo actual.
+  // Configura el tercer parámetro como '' para cargar todas las variables de entorno sin importar el prefijo
   // `VITE_`.
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    // configuración de vite
     define: {
+      // Proporciona una constante de nivel de aplicación explícita derivada de una variable de entorno.
       __APP_ENV__: JSON.stringify(env.APP_ENV),
+    },
+    // Ejemplo: configura el puerto del servidor de desarrollo condicionalmente.
+    server: {
+      port: env.APP_PORT ? Number(env.APP_PORT) : 5173,
     },
   }
 })

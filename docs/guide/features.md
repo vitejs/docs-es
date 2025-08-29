@@ -214,6 +214,7 @@ Todos los frameworks modernos mantienen integraciones con Vite. La mayoría de l
 - Soporte para Vue JSX a través de [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Soporte para React a través de [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 - Soporte para React usando SWC a través de [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
+- Soporte para [React Server Components (RSC)](https://react.dev/reference/rsc/server-components) a través de [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-rsc)
 
 Consulta la [Guía de Plugins](/plugins/) para más información.
 

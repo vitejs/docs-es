@@ -313,7 +313,7 @@ const plugin = {
 
 ### Característica de Filtro de Hooks
 
-Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Al usar esta característica, puedes hacer que tu plugin sea más eficiente.
+Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/plugins/hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Al usar esta característica, puedes hacer que tu plugin sea más eficiente.
 Esta funcionalidad también es compatible con Rollup 4.38.0+ y Vite 6.3.0+. Para hacer que tu plugin sea compatible con versiones anteriores, asegúrate de ejecutar el filtro dentro de los controladores de hooks.
 
 ::: tip

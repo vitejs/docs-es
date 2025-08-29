@@ -186,7 +186,7 @@ $ deno run -A npm:vite
 
 El archivo `index.html` se servirá en `http://localhost:5173`.
 
-## `index.html` y raíz del proyecto
+## `index.html` y Directorio Raíz del Proyecto
 
 Una cosa que puedes haber notado es que en un proyecto de Vite, `index.html` es frontal y central en lugar de estar escondido dentro de `public`. Esto es intencional: durante el desarrollo, Vite es un servidor e `index.html` es el punto de entrada a tu aplicación.
 

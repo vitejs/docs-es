@@ -31,12 +31,20 @@ transform(code, id) {
 
 ## Registrar Nuevos Entornos usando Hooks
 
-Los plugins pueden agregar nuevos entornos en el hook `config` (por ejemplo, para tener un grafo de módulos separado para [RSC](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components)):
+Los plugins pueden agregar nuevos entornos en el hook `config`. Por ejemplo, [el soporte para RSC](/plugins/#vitejs-plugin-rsc) utiliza un entorno adicional para tener un grafo de módulos separado con la condición `react-server`:
 
 ```ts
-config(config: UserConfig) {
-  config.environments.rsc ??= {}
-}
+  config(config: UserConfig) {
+    return {
+      environments: {
+        rsc: {
+          resolve: {
+            conditions: ['react-server', ...defaultServerConditions],
+          },
+        },
+      },
+    }
+  }
 ```
 
 Un objeto vacío es suficiente para registrar el entorno, con valores predeterminados desde la configuración de entorno a nivel raíz.
@@ -49,8 +57,13 @@ Los plugins deben establecer valores predeterminados usando el hook `config`. Pa
 
 ```ts
 configEnvironment(name: string, options: EnvironmentOptions) {
+  // agrega condición "workerd" al entorno rsc
   if (name === 'rsc') {
-    options.resolve.conditions = // ...
+    return {
+      resolve: {
+        conditions: ['workerd'],
+      },
+    }
   }
 }
 ```
