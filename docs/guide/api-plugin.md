@@ -400,7 +400,8 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
 ### `handleHotUpdate`
 
 - **Tipo:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
-  **Ver tambien:** [HMR API](./api-hmr)
+- **Forma:** `async`, `sequential`
+- **Ver tambien:** [HMR API](./api-hmr)
 
   Realiza el manejo personalizado de actualizaciones de HMR. El hook recibe un objeto de contexto con la siguiente firma:
 

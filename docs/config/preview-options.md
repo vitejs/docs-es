@@ -21,7 +21,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
 ## preview.allowedHosts
 
-- **Tipo:** `string | true`
+- **Tipo:** `string[] | true`
 - **Por defecto:** [`server.allowedHosts`](./server-options#server-allowedhosts)
 
   Los nombres de host a los que Vite tiene permitido responder.  

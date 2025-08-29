@@ -71,6 +71,7 @@ configEnvironment(name: string, options: EnvironmentOptions) {
 ## El Hook `hotUpdate`
 
 - **Tipo:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
+- **Forma:** `async`, `sequential`
 - **Ver también:** [API de HMR](./api-hmr)
 
 El hook `hotUpdate` permite a los plugins realizar un manejo personalizado de actualizaciones HMR para un entorno dado. Cuando un archivo cambia, el algoritmo HMR se ejecuta para cada entorno en serie según el orden en `server.environments`, por lo que el hook `hotUpdate` se llamará múltiples veces. El hook recibe un objeto de contexto con la siguiente firma:
