@@ -32,7 +32,7 @@ importers:
         version: 22.18.7
       '@types/react':
         specifier: ^18.3.24
-        version: 18.3.24
+        version: 18.3.25
       '@typescript-eslint/parser':
         specifier: ^8.41.0
         version: 8.45.0(eslint@9.36.0)(typescript@5.9.2)
@@ -643,8 +643,8 @@ packages:
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
-  '@types/react@18.3.24':
-    resolution: {integrity: sha512-0dLEBsA1kI3OezMBF8nSsb7Nk19ZnsyE1LLhB8r27KbgU5H4pvuqZLdtE+aUkJVoXgTVuA+iLIwmZ0TuK4tx6A==}
+  '@types/react@18.3.25':
+    resolution: {integrity: sha512-oSVZmGtDPmRZtVDqvdKUi/qgCsWp5IDY29wp8na8Bj4B3cc99hfNzvNhlMkVVxctkAOGUA3Km7MMpBHAnWfcIA==}
 
   '@types/send@0.17.5':
     resolution: {integrity: sha512-z6F2D3cOStZvuk2SaP6YrwkNO65iTZcwA2ZkSABegdkAh/lf+Aa/YQndZVfmEXT5vgAp6zv06VQ3ejSVjAny4w==}
@@ -2673,7 +2673,7 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
-  '@types/react@18.3.24':
+  '@types/react@18.3.25':
     dependencies:
       '@types/prop-types': 15.7.15
       csstype: 3.1.3
