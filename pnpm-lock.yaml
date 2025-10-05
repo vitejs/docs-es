@@ -65,7 +65,7 @@ importers:
         version: 16.2.3
       markdown-it-image-size:
         specifier: ^14.8.0
-        version: 14.8.0(markdown-it@14.1.0)
+        version: 14.9.0(markdown-it@14.1.0)
       prettier:
         specifier: 3.6.2
         version: 3.6.2
@@ -138,6 +138,15 @@ packages:
   '@babel/types@7.28.4':
     resolution: {integrity: sha512-bkFqkLhh3pMBUQQkpVgWDWq/lqzc2678eUyDlTBhRqhCHFguYYGM0Efga7tYk4TogG/3x0EEl66/OQ+WGbWB/Q==}
     engines: {node: '>=6.9.0'}
+
+  '@cacheable/memoize@2.0.3':
+    resolution: {integrity: sha512-hl9wfQgpiydhQEIv7fkjEzTGE+tcosCXLKFDO707wYJ/78FVOlowb36djex5GdbSyeHnG62pomYLMuV/OT8Pbw==}
+
+  '@cacheable/memory@2.0.3':
+    resolution: {integrity: sha512-R3UKy/CKOyb1LZG/VRCTMcpiMDyLH7SH3JrraRdK6kf3GweWCOU3sgvE13W3TiDRbxnDKylzKJvhUAvWl9LQOA==}
+
+  '@cacheable/utils@2.0.3':
+    resolution: {integrity: sha512-m7Rce68cMHlAUjvWBy9Ru1Nmw5gU0SjGGtQDdhpe6E0xnbcvrIY0Epy//JU1VYYBUTzrG9jvgmTauULGKzOkWA==}
 
   '@docsearch/css@4.0.0-beta.8':
     resolution: {integrity: sha512-/ZlyvZCjIJM4aaOYoJpVNHPJckX7J5KIbt6IWjnZXvo0QAUI1aH976vKEJUC9olgUbE3LWafB8yuX4qoqahIQg==}
@@ -404,6 +413,13 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
+  '@keyv/bigmap@1.0.2':
+    resolution: {integrity: sha512-KR03xkEZlAZNF4IxXgVXb+uNIVNvwdh8UwI0cnc7WI6a+aQcDp8GL80qVfeB4E5NpsKJzou5jU0r6yLSSbMOtA==}
+    engines: {node: '>= 18'}
+
+  '@keyv/serialize@1.1.1':
+    resolution: {integrity: sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -995,6 +1011,9 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
+  cacheable@2.0.3:
+    resolution: {integrity: sha512-nZF80J3d8RMrroMSYm1E9pBllVDXWPuECZgEZxH+vusCY4MAXAJVrY0jutcHSgh3xYX3G2EUNnmtWGZVVjWCXw==}
+
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
@@ -1308,9 +1327,8 @@ packages:
     resolution: {integrity: sha512-f7ccFPK3SXFHpx15UIGyRJ/FJQctuKZ0zVuN3frBo4HnK3cay9VEW0R6yPYFHC0AgqhukPzKjq22t5DmAyqGyw==}
     engines: {node: '>=16'}
 
-  flat-cache@5.0.0:
-    resolution: {integrity: sha512-JrqFmyUl2PnPi1OvLyTVHnQvwQ0S+e6lGSwu8OkAZlSaNIZciTY2H/cOOROxsBA1m/LZNHDsqAgDZt6akWcjsQ==}
-    engines: {node: '>=18'}
+  flat-cache@6.1.17:
+    resolution: {integrity: sha512-Jzse4YoiUJBVYTwz5Bwl4h/2VQM7e2KK3MVAMlXzX9uamIHAH/TXUlRKU1AQGQOryQhN0EsmufiiF40G057YXA==}
 
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
@@ -1391,6 +1409,9 @@ packages:
   hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==}
 
+  hookified@1.12.1:
+    resolution: {integrity: sha512-xnKGl+iMIlhrZmGHB729MqlmPoWBznctSQTYCpFKqNsCgimJQmithcW0xSQMMFzYnV2iKUh25alswn6epgxS0Q==}
+
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
@@ -1465,6 +1486,9 @@ packages:
   keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
+  keyv@5.5.3:
+    resolution: {integrity: sha512-h0Un1ieD+HUrzBH6dJXhod3ifSghk5Hw/2Y4/KHBziPlZecrFyE9YOTPU6eOs0V9pYl8gOs86fkr/KN8lUX39A==}
+
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
@@ -1516,9 +1540,9 @@ packages:
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
 
-  markdown-it-image-size@14.8.0:
-    resolution: {integrity: sha512-9kjIGEAYX/iFbFKe8IGJLYdWQp+ijiP0MEX384LZ2Om2ZnrR0jcdj8gaAMVvKXpPg4nIUDAvoqN9KZlN8xpb0A==}
-    engines: {node: '>= 16'}
+  markdown-it-image-size@14.9.0:
+    resolution: {integrity: sha512-2JHjZKDRNeNeRWBHQ5a5dqSuS96rEkGJaOerecxiH2GzO4LYt4GUuITihDpnL7lkJoUzthciu6XPS6W/RiO3VQ==}
+    engines: {node: '>= 20'}
     peerDependencies:
       markdown-it: '>= 10 < 15'
     peerDependenciesMeta:
@@ -2217,6 +2241,20 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.27.1
 
+  '@cacheable/memoize@2.0.3':
+    dependencies:
+      '@cacheable/utils': 2.0.3
+
+  '@cacheable/memory@2.0.3':
+    dependencies:
+      '@cacheable/memoize': 2.0.3
+      '@cacheable/utils': 2.0.3
+      '@keyv/bigmap': 1.0.2
+      hookified: 1.12.1
+      keyv: 5.5.3
+
+  '@cacheable/utils@2.0.3': {}
+
   '@docsearch/css@4.0.0-beta.8': {}
 
   '@docsearch/js@4.0.0-beta.8': {}
@@ -2421,6 +2459,12 @@ snapshots:
       '@isaacs/balanced-match': 4.0.1
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
+
+  '@keyv/bigmap@1.0.2':
+    dependencies:
+      hookified: 1.12.1
+
+  '@keyv/serialize@1.1.1': {}
 
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:
@@ -3029,6 +3073,14 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
+  cacheable@2.0.3:
+    dependencies:
+      '@cacheable/memoize': 2.0.3
+      '@cacheable/memory': 2.0.3
+      '@cacheable/utils': 2.0.3
+      hookified: 1.12.1
+      keyv: 5.5.3
+
   callsites@3.1.0: {}
 
   ccount@2.0.1: {}
@@ -3372,10 +3424,11 @@ snapshots:
       flatted: 3.3.3
       keyv: 4.5.4
 
-  flat-cache@5.0.0:
+  flat-cache@6.1.17:
     dependencies:
+      cacheable: 2.0.3
       flatted: 3.3.3
-      keyv: 4.5.4
+      hookified: 1.12.1
 
   flatted@3.3.3: {}
 
@@ -3448,6 +3501,8 @@ snapshots:
 
   hookable@5.5.3: {}
 
+  hookified@1.12.1: {}
+
   html-void-elements@3.0.0: {}
 
   ignore@5.3.2: {}
@@ -3500,6 +3555,10 @@ snapshots:
   keyv@4.5.4:
     dependencies:
       json-buffer: 3.0.1
+
+  keyv@5.5.3:
+    dependencies:
+      '@keyv/serialize': 1.1.1
 
   kolorist@1.8.0: {}
 
@@ -3565,10 +3624,10 @@ snapshots:
 
   mark.js@8.11.1: {}
 
-  markdown-it-image-size@14.8.0(markdown-it@14.1.0):
+  markdown-it-image-size@14.9.0(markdown-it@14.1.0):
     dependencies:
       '@types/markdown-it': 14.1.2
-      flat-cache: 5.0.0
+      flat-cache: 6.1.17
       image-size: 2.0.2
       sync-fetch: 0.5.2
     optionalDependencies:
