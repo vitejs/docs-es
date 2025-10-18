@@ -65,7 +65,7 @@
     "globals": "^16.3.0",
     "gsap": "^3.13.0",
     "lint-staged": "^16.1.5",
-    "markdown-it-image-size": "^14.8.0",
+    "markdown-it-image-size": "^15.0.0",
     "prettier": "3.6.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
