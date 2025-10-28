@@ -53,7 +53,7 @@
     "@eslint/js": "^9.34.0",
     "@shikijs/vitepress-twoslash": "^3.12.0",
     "@types/express": "^5.0.3",
-    "@types/node": "22.18.12",
+    "@types/node": "24.9.1",
     "@types/react": "^18.3.24",
     "@typescript-eslint/parser": "^8.41.0",
     "eslint": "^9.34.0",
