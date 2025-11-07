@@ -68,6 +68,7 @@ export default defineConfig({
   lang: 'es',
   title: `Vite${additionalTitle}`,
   description: 'Herramienta frontend de próxima generación',
+  cleanUrls: true,
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     [
