@@ -65,7 +65,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
 3. Para producción, despues de ejecutar `vite build`, se generará un archivo `.vite/manifest.json` junto a otros archivos de recursos. Un ejemplo de un archivo manifest sería algo como esto:
 
-   ```json [.vite/manifest.json]
+   ```json [.vite/manifest.json] style:max-height:400px
    {
      "_shared-B7PI925R.js": {
        "file": "assets/shared-B7PI925R.js",
@@ -107,17 +107,53 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
 
    El manifiesto tiene una estructura `Record<name, chunk>` donde cada chunk sigue la interfaz `ManifestChunk`:
 
-   ```ts
+   ```ts style:max-height:400px
    interface ManifestChunk {
+     /**
+      * El nombre de archivo de entrada de este chunk o recurso si se conoce
+      */
      src?: string
+     /**
+      * El nombre de archivo de salida de este chunk o recurso
+      */
      file: string
+     /**
+      * La lista de archivos CSS importados por este chunk
+      *
+      * Este campo solo está presente en fragmentos de JavaScript.
+      */
      css?: string[]
+     /**
+      * La lista de archivos de recursos importados por este chunk, excluyendo archivos CSS
+      *
+      * Este campo solo está presente en fragmentos de JavaScript.
+      */
      assets?: string[]
+     /**
+      * Indica si este chunk o recurso es un punto de entrada
+      */
      isEntry?: boolean
+     /**
+      * El nombre de este chunk o recurso si se conoce
+      */
      name?: string
-     names?: string[]
+     /**
+      * Indica si este chunk es un punto de entrada dinámico
+      *
+      * Este campo solo está presente en fragmentos de JavaScript.
+      */
      isDynamicEntry?: boolean
+     /**
+      * La lista de fragmentos importados de forma estática por este chunk
+      *
+      * Los valores son las claves del manifiesto. Este campo solo está presente en fragmentos de JavaScript.
+      */
      imports?: string[]
+     /**
+      * La lista de fragmentos importados dinámicamente por este chunk
+      *
+      * Los valores son las claves del manifiesto. Este campo solo está presente en fragmentos de JavaScript.
+      */
      dynamicImports?: string[]
    }
    ```
@@ -129,7 +165,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    - **Fragmentos de activos**: Generados a partir de activos importados como imágenes, fuentes. Su clave es la ruta src relativa desde la raíz del proyecto.
    - **Archivos CSS**: Cuando [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) es `false`, se genera un solo archivo CSS con la clave `style.css`. Cuando `build.cssCodeSplit` no es `false`, la clave se genera similar a los fragmentos de JavaScript (es decir, los fragmentos de entrada no tendrán prefijo `_` y los fragmentos no de entrada tendrán prefijo `_`).
 
-   Los fragmentos contendrán información sobre sus importaciones estáticas y dinámicas (ambos son claves que mapean al correspondiente fragmento en el manifiesto), y también su correspondiente CSS y archivo de recurso estatico (si los hay).
+   Los fragmentos de JavaScript (fragmentos que no son recursos ni CSS) contendrán información sobre sus importaciones estáticas y dinámicas (ambos son claves que mapean al correspondiente fragmento en el manifiesto), y también su correspondiente CSS y archivo de recurso estatico (si los hay).
 
 4. Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash.
 
