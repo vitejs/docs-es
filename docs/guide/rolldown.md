@@ -20,7 +20,7 @@ Rolldown se basa en tres principios clave:
 
 2. **Rendimiento**: La implementación en Rust de Rolldown ofrece mejoras de rendimiento significativas en comparación con los empaquetadores basados en JavaScript. Aunque los benchmarks específicos pueden variar, las pruebas iniciales muestran aumentos de velocidad prometedores frente a Rollup.
 
-Para más información sobre las motivaciones detrás de Rolldown, visita [por qué se construye Rolldown](https://rolldown.rs/guide/#why-rolldown).
+Para más información sobre las motivaciones detrás de Rolldown, visita [por qué se construye Rolldown](https://rolldown.rs/guide/introduction#why-rolldown).
 
 3. **Funciones Adicionales**: Rolldown introduce características que no están disponibles en Rollup ni en esbuild, como un control avanzado de la división en fragmentos, HMR incorporado y Module Federation.
 
@@ -321,7 +321,7 @@ const plugin = {
 
 ### Característica de Filtro de Hooks
 
-Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/plugins/hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Esta característica permite que los plugins especifiquen patrones que determinan cuándo deben llamarse los hooks, mejorando el rendimiento al evitar invocaciones innecesarias.
+Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/apis/plugins-hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Esta característica permite que los plugins especifiquen patrones que determinan cuándo deben llamarse los hooks, mejorando el rendimiento al evitar invocaciones innecesarias.
 
 Consulta también la [guía de filtros de hooks de la API de plugins](/guide/api-plugin#filtros-de-hooks) para más información.
 

@@ -74,6 +74,12 @@ Los archivos `.env` se cargan al inicio de Vite. Reinicia el servidor después d
 
 :::
 
+:::warning Usuarios de Bun
+
+Cuando uses [Bun](https://bun.sh), ten en cuenta que Bun carga automáticamente los archivos `.env` antes de que se ejecute tu script. Este comportamiento incorporado carga las variables de entorno directamente en `process.env` y puede interferir con la funcionalidad de Vite, que respeta los valores existentes en `process.env`. Consulta [oven-sh/bun#5515](https://github.com/oven-sh/bun/issues/5515) para obtener soluciones alternativas.
+
+:::
+
 Además, Vite utiliza [dotenv-expand](https://github.com/motdotla/dotenv-expand) para expandir variables escritas en archivos de entorno de forma predeterminada. Para obtener más información sobre la sintaxis, consulta [su documentación](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow).
 
 Ten en cuenta que si deseas usar `$` dentro del valor de tu entorno, debes escaparlo con `\`.
@@ -103,7 +109,7 @@ VITE_FOO=foo${VITE_BAR}
 VITE_BAR=bar
 ```
 
-Esto no funciona en scripts de shell y otras herramientas como `docker-compose`.
+Esto no funciona en scripts de shell y otras herramientas como `docker compose`.
 Dicho esto, Vite admite este comportamiento ya que ha sido soportado por `dotenv-expand` durante mucho tiempo y otras herramientas en el ecosistema de JavaScript utilizan versiones antiguas que admiten este comportamiento.
 
 Para evitar problemas de interoperabilidad, se recomienda evitar depender de este comportamiento. Vite podría comenzar a emitir advertencias por este comportamiento en el futuro.
