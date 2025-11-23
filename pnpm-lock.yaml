@@ -19,13 +19,13 @@ importers:
         specifier: ^5.36.0
         version: 5.44.0
       '@eslint/js':
-        specifier: ^9.34.0
+        specifier: ^9.39.1
         version: 9.39.1
       '@shikijs/vitepress-twoslash':
-        specifier: ^3.13.0
+        specifier: ^3.15.0
         version: 3.15.0(typescript@5.9.3)
       '@types/express':
-        specifier: ^5.0.3
+        specifier: ^5.0.5
         version: 5.0.5
       '@types/node':
         specifier: 24.10.1
@@ -37,7 +37,7 @@ importers:
         specifier: ^8.41.0
         version: 8.47.0(eslint@9.39.1)(typescript@5.9.3)
       eslint:
-        specifier: ^9.38.0
+        specifier: ^9.39.1
         version: 9.39.1
       eslint-plugin-i:
         specifier: ^2.29.1
@@ -55,13 +55,13 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       globals:
-        specifier: ^16.3.0
+        specifier: ^16.5.0
         version: 16.5.0
       gsap:
         specifier: ^3.13.0
         version: 3.13.0
       lint-staged:
-        specifier: ^16.1.5
+        specifier: ^16.2.6
         version: 16.2.7
       markdown-it-image-size:
         specifier: ^15.0.1
@@ -79,19 +79,19 @@ importers:
         specifier: ^5.9.2
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.41.0
+        specifier: ^8.46.4
         version: 8.47.0(eslint@9.39.1)(typescript@5.9.3)
       vitepress:
         specifier: 2.0.0-alpha.15
         version: 2.0.0-alpha.15(@types/node@24.10.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.8.1)
       vitepress-plugin-group-icons:
-        specifier: ^1.6.4
+        specifier: ^1.6.5
         version: 1.6.5(vite@7.2.4(@types/node@24.10.1)(yaml@2.8.1))
       vue:
-        specifier: ^3.5.22
+        specifier: ^3.5.24
         version: 3.5.24(typescript@5.9.3)
       vue-tsc:
-        specifier: ^3.1.1
+        specifier: ^3.1.4
         version: 3.1.5(typescript@5.9.3)
 
 packages:
