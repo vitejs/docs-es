@@ -285,7 +285,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
   **Acceso de almacenamiento del servidor**
 
-  En algunos casos, otros hooks de plugins pueden necesitar acceso a la instancia del servidor de desarrollo (por ejemplo, acceder al servidor de socket web, al observador del sistema de archivos o el gráfico del módulo). Este hook también se puede usar para almacenar la instancia del servidor para acceder a otros ganchos:
+  En algunos casos, otros hooks de plugins pueden necesitar acceso a la instancia del servidor de desarrollo (por ejemplo, acceder al servidor de WebSocket, al observador del sistema de archivos o el gráfico del módulo). Este hook también se puede usar para almacenar la instancia del servidor para acceder a otros ganchos:
 
   ```js
   const myPlugin = () => {
@@ -543,6 +543,41 @@ normalizePath('foo/bar') // 'foo/bar'
 ## Filtrado, Patrón include/exclude
 
 Vite expone la función `createFilter` de [`@rollup/pluginutils`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) para alentar a los plugins e integraciones específicos de Vite a usar el patrón de filtrado estándar include/exclude, que también se utiliza en el propio núcleo de Vite.
+
+### Filtros de Hooks
+
+Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/plugins/hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Esta característica permite que los plugins especifiquen patrones que determinan cuándo deben llamarse los hooks, mejorando el rendimiento al evitar invocaciones innecesarias.
+
+Esta funcionalidad también es compatible con Rollup 4.38.0+ y Vite 6.3.0+. Para hacer que tu plugin sea compatible con versiones anteriores, asegúrate de ejecutar el filtro también dentro de los controladores de los hooks.
+
+```js
+export default function myPlugin() {
+  const jsFileRegex = /\.js$/
+
+  return {
+    name: 'my-plugin',
+    // Ejemplo: solo llamar a transform para archivos .js
+    transform: {
+      filter: {
+        id: jsFileRegex,
+      },
+      handler(code, id) {
+        // Comprobación adicional para compatibilidad hacia atrás
+        if (!jsFileRegex.test(id)) return null
+
+        return {
+          code: transformCode(code),
+          map: null,
+        }
+      },
+    },
+  }
+}
+```
+
+::: tip
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) exporta algunas utilidades para filtros de hooks como `exactRegex` y `prefixRegex`.
+:::
 
 ## Comunicación Cliente-Servidor
 

@@ -62,10 +62,14 @@ if (import.meta.hot) {
 
 ## IntelliSense para TypeScript
 
-Vite proporciona definiciones de tipos para `import.meta.hot` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Puedes crear un `vite-env.d.ts` en el directorio `src` para que TypeScript tome las definiciones de tipo:
+Vite proporciona definiciones de tipos para `import.meta.hot` en [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Puedes añadir `"vite/client"` en tu `tsconfig.json` para que TypeScript tome las definiciones de tipo:
 
-```ts [vite-env.d.ts]
-/// <reference types="vite/client" />
+```json [tsconfig.json]
+{
+  "compilerOptions": {
+    "types": ["vite/client"]
+  }
+}
 ```
 
 ## `hot.accept(cb)`
@@ -216,7 +220,7 @@ Los siguientes eventos HMR son enviados por Vite automáticamente:
 - `'vite:invalidate'` cuando un módulo es invalidado con `import.meta.hot.invalidate()`
 - `'vite:error'` cuando un error ocurre (Por ejemplo error de sintaxis).
 - `'vite:ws:disconnect'` cuando la conexión WebSocket se pierde
-- `'vite:ws:connect'` cuando la conexión WebScocket se (re)establece
+- `'vite:ws:connect'` cuando la conexión WebSocket se (re)establece
 
 Los eventos HMR personalizados también se pueden enviar desde plugins. Dale un vistazo a [handleHotUpdate](./api-plugin#handlehotupdate) para más detalles.
 

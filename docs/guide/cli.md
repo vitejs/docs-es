@@ -106,6 +106,8 @@ vite optimize [root]
 
 Previsualiza localmente la compilación de producción. No se recomienda como servidor de producción.
 
+Este comando inicia un servidor en el directorio de compilación (por defecto `dist`). Ejecuta `vite build` de antemano para asegurarte de que el directorio de compilación esté actualizado. Dependiendo del [`appType`](/config/shared-options.html#apptype) configurado en el proyecto, se utilizarán ciertos middlewares.
+
 #### Uso
 
 ```bash

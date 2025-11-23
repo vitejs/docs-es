@@ -43,6 +43,12 @@ La versión de Vite impulsada por Rolldown está disponible actualmente como un 
 }
 ```
 
+::: tip ¡Fija la versión!
+
+Aunque en los ejemplos se use `@latest`, se recomienda utilizar un número de versión específico para evitar cambios inesperados, ya que [`rolldown-vite` se considera experimental](#politica-de-versionado).
+
+:::
+
 Si usas Vitepress o un meta framework que tiene `vite` como dependencia par, deberás sobrescribir la dependencia `vite` en tu `package.json`, el cual funciona ligeramente diferente dependiendo de tu gestor de paquetes.
 
 :::code-group
@@ -84,6 +90,8 @@ Si usas Vitepress o un meta framework que tiene `vite` como dependencia par, deb
 :::
 
 Luego de agregar estos `overrides`, reinstala tus dependencias y ejecuta tu servidor de desarrollo o compila tu proyecto como de costumbre. No se requieren más cambios de configuración.
+
+Si estás comenzando un proyecto nuevo, también puedes usar `create-vite` con `rolldown-vite` con normalidad. La versión más reciente te preguntará si deseas usar `rolldown-vite` o no.
 
 ## Limitaciones conocidas
 
@@ -313,14 +321,9 @@ const plugin = {
 
 ### Característica de Filtro de Hooks
 
-Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/plugins/hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Al usar esta característica, puedes hacer que tu plugin sea más eficiente.
-Esta funcionalidad también es compatible con Rollup 4.38.0+ y Vite 6.3.0+. Para hacer que tu plugin sea compatible con versiones anteriores, asegúrate de ejecutar el filtro dentro de los controladores de hooks.
+Rolldown introdujo una [característica de filtro de hooks](https://rolldown.rs/plugins/hook-filters) para reducir la sobrecarga de comunicación entre los entornos de ejecución de Rust y JavaScript. Esta característica permite que los plugins especifiquen patrones que determinan cuándo deben llamarse los hooks, mejorando el rendimiento al evitar invocaciones innecesarias.
 
-::: tip
-
-[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) exporta algunas utilidades para filtros de hooks como `exactRegex` y `prefixRegex`.
-
-:::
+Consulta también la [guía de filtros de hooks de la API de plugins](/guide/api-plugin#filtros-de-hooks) para más información.
 
 ### Convertir Contenido a JavaScript en los Hooks `load` o `transform`
 

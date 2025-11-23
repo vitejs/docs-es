@@ -313,7 +313,7 @@ export default {
   builder: {
     buildApp: async (builder) => {
       const environments = Object.values(builder.environments)
-      return Promise.all(
+      await Promise.all(
         environments.map((environment) => builder.build(environment)),
       )
     },

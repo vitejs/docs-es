@@ -285,7 +285,6 @@ También puedes agregar un [dominio personalizado](https://render.com/docs/custo
   El equipo de Vite puede cambiar los criterios y auditar la lista actual de vez en cuando.
   Si se elimina una sección, se notificará a los autores originales de la solicitud de cambios antes de hacerlo.
 -->
-
 ## Flightcontrol
 
 Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
@@ -297,3 +296,11 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https:/
 ## Alojamiento de sitio estático en xmit
 
 Despliega tu sitio estático utilizando [xmit](https://xmit.co) siguiendo esta [guía](https://xmit.dev/posts/vite-quickstart/).
+
+## Zephyr Cloud
+
+[Zephyr Cloud](https://zephyr-cloud.io) es una plataforma de despliegue que se integra directamente en tu proceso de compilación y proporciona distribución global en el borde para module federation y otros tipos de aplicaciones.
+
+Zephyr sigue un enfoque diferente al de otros proveedores en la nube. Se integra directamente con el proceso de compilación de Vite, por lo que cada vez que compilas o ejecutas el servidor de desarrollo de tu aplicación, esta se desplegará automáticamente con Zephyr Cloud.
+
+Sigue los pasos de [la guía de despliegue de Vite](https://docs.zephyr-cloud.io/recipes/react-vite) para comenzar.
