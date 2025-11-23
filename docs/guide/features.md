@@ -784,6 +784,42 @@ Por defecto, durante la compilación, Vite incrusta activos pequeños como URIs 
 No le des permisos a `data:` para [`script-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src). Esto permitirá la inyección de scripts arbitrarios.
 :::
 
+## Licencia
+
+Vite puede generar un archivo con todas las licencias de las dependencias usadas en la compilación con la opción [`build.license`](/config/build-options#build-license). Este archivo se puede alojar para mostrar y reconocer las dependencias utilizadas por la aplicación.
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+  },
+})
+```
+
+Esto generará un archivo `.vite/license.md` con un resultado similar a este:
+
+```md
+# Licencias
+
+La aplicación incluye dependencias que contienen las siguientes licencias:
+
+## dep-1 - 1.2.3 (CC0-1.0)
+
+CC0 1.0 Universal
+
+...
+
+## dep-2 - 4.5.6 (MIT)
+
+Licencia MIT
+
+...
+```
+
+Para servir el archivo en una ruta diferente, puedes pasar por ejemplo `{ fileName: 'license.md' }`, de modo que se sirva en `https://example.com/license.md`. Consulta la documentación de [`build.license`](/config/build-options#build-license) para más información.
+
 ## Optimizaciones de compilación
 
 > Las funcionalidades que se enumeran a continuación se aplican automáticamente como parte del proceso de compilación y no hay necesidad de una configuración explícita a menos que desees deshabilitarlas.

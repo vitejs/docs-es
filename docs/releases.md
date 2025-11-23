@@ -1,8 +1,12 @@
+<script setup>
+import SupportedVersions from './.vitepress/theme/components/SupportedVersions.vue';
+</script>
+
 # Lanzamientos
 
 Los lanzamientos de Vite siguen el [versionamiento semántico](https://semver.org/). Puedes ver la última versión estable de Vite en la [página de Vite en npm](https://www.npmjs.com/package/vite).
 
-Existe un registro de cambios completo de versiones anteriores en [disponible en GitHub](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md).
+Existe un registro de cambios completo de versiones anteriores [disponible en GitHub](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md).
 
 ## Ciclo de lanzamientos
 
@@ -12,19 +16,20 @@ Vite no tiene un ciclo de lanzamientos fijo.
 - Los lanzamientos **minor** siempre contienen nuevas características y se lanzan según sea necesario. Los lanzamientos minor siempre tienen una fase de pre-lanzamiento beta (generalmente cada dos meses).
 - Los lanzamientos **major** generalmente se alinean con el [calendario EOL de Node.js](https://endoflife.date/nodejs) y se anunciarán con antelación. Estos lanzamientos pasarán por discusiones prolongadas con el ecosistema y tendrán fases de pre-lanzamiento alfa y beta (generalmente cada año).
 
-Los rangos de versiones de Vite que son soportados por el equipo de Vite se determinan automáticamente de la siguiente manera:
+## Versiones soportadas
 
-- **Minor Actual** recibe correcciones regulares.
-- **Major Anterior** (solo para su último minor) y **Minor Anterior** reciben correcciones importantes y parches de seguridad.
-- **Penúltimo Major** (solo para su último minor) y **Penúltimo Minor** reciben parches de seguridad.
+En resumen, las versiones actuales de Vite soportadas son:
+
+<SupportedVersions />
+
+<br>
+
+Los rangos de versiones soportadas se determinan automáticamente de la siguiente manera:
+
+- La **Minor actual** recibe correcciones regulares.
+- El **Major anterior** (solo para su último minor) y la **Minor anterior** reciben correcciones importantes y parches de seguridad.
+- El **penúltimo Major** (solo para su último minor) y la **penúltima Minor** reciben parches de seguridad.
 - Todas las versiones anteriores a estas ya no están soportadas.
-
-Como ejemplo, si la última versión de Vite es la 5.3.10:
-
-- Se lanzan parches regulares para `vite@5.3`.
-- Las correcciones importantes y los parches de seguridad se transfieren a `vite@4` y `vite@5.2`.
-- Los parches de seguridad también se transfieren a `vite@3` y `vite@5.1`.
-- `vite@2` y `vite@5.0` ya no están soportados. Los usuarios deben actualizar para recibir actualizaciones.
 
 Recomendamos actualizar Vite regularmente. Consulta las [Guías de Migración](./guide/migration) cuando actualices a cada versión Major. El equipo de Vite trabaja estrechamente con los principales proyectos del ecosistema para garantizar la calidad de las nuevas versiones. Probamos nuevas versiones de Vite antes de lanzarlas a través del [proyecto vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci). La mayoría de los proyectos que utilizan Vite deberían poder ofrecer soporte rápidamente o migrar a nuevas versiones tan pronto como se lancen.
 

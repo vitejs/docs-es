@@ -55,15 +55,27 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 ## GitHub Pages
 
-1. Configura la `base` correcta en `vite.config.js`.
+1. **Actualizar la configuración de Vite**
 
-Si estás desplegando en `https://<USERNAME>.github.io/` o en un dominio personalizado a través de GitHub Pages (por ejemplo, `www.example.com`), configura `base` como `'/'`. Alternativamente, puedes eliminar `base` de la configuración, ya que por defecto es `'/'`.
+   Configura la `base` correcta en `vite.config.js`.
 
-Si estás desplegando en `https://<USERNAME>.github.io/<REPO>/` (por ejemplo, tu repositorio está en `https://github.com/<USERNAME>/<REPO>`), entonces configura `base` como `'/<REPO>/'`.
+   Si estás desplegando en `https://<USERNAME>.github.io/` o en un dominio personalizado a través de GitHub Pages (por ejemplo, `www.example.com`), configura `base` como `'/'`. Alternativamente, puedes eliminar `base` de la configuración, ya que por defecto es `'/'`.
 
-2. Ve a la configuración de GitHub Pages en la página de configuración del repositorio y elige la fuente de implementación como "Acciones de GitHub", esto te llevará a crear un flujo de trabajo que compila e implementa el proyecto, se provee un flujo de trabajo de muestra que instala dependencias y compila usando npm:
+   Si estás desplegando en `https://<USERNAME>.github.io/<REPO>/` (por ejemplo, tu repositorio está en `https://github.com/<USERNAME>/<REPO>`), entonces configura `base` como `'/<REPO>/'`.
 
-<<< ./static-deploy-github-pages.yaml#content [.github/workflows/deploy.yml]
+2. **Habilitar GitHub Pages**
+
+   En tu repositorio, ve a **Configuración → Pages**. En **Build and deployment**, abre el desplegable **Source** y selecciona **GitHub Actions**.
+
+   GitHub ahora desplegará tu sitio usando un [workflow](https://docs.github.com/es/actions/concepts/workflows/workflows) de GitHub Actions, que es necesario ya que Vite requiere un paso de compilación para el despliegue.
+
+3. **Crear un workflow**
+
+   Crea un archivo nuevo en tu repositorio en la ruta `.github/workflows/deploy.yml`. También puedes hacer clic en **"create your own"** en el paso anterior, lo que generará un archivo de workflow inicial.
+
+   Aquí tienes un workflow de ejemplo que instala dependencias con npm, compila el sitio y lo despliega cada vez que haces push de cambios a la rama `main`:
+
+   <<< ./static-deploy-github-pages.yaml#content [.github/workflows/deploy.yml]
 
 ## GitLab Pages y GitLab CI
 
