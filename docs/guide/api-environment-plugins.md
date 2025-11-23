@@ -142,7 +142,7 @@ El hook puede optar por:
 
 ## Estado por entorno en Plugins
 
-Dado que la misma instancia de plugin se usa para diferentes entornos, el estado del plugin necesita ser clave con `this.environment`. Esto es el mismo patrón que el ecosistema ha estado utilizando para mantener el estado sobre los módulos usando el booleano `ssr` como clave para evitar mezclar el estado de módulos cliente y ssr. Un `Map<Environment, State>` puede ser utilizado para mantener el estado para cada entorno por separado. Ten en cuenta que para la retrocompatibilidad, `buildStart` y `buildEnd` solo se llaman para el entorno cliente sin la bandera `perEnvironmentStartEndDuringDev: true`.
+Dado que la misma instancia de plugin se usa para diferentes entornos, el estado del plugin necesita ser clave con `this.environment`. Esto es el mismo patrón que el ecosistema ha estado utilizando para mantener el estado sobre los módulos usando el booleano `ssr` como clave para evitar mezclar el estado de módulos cliente y ssr. Un `Map<Environment, State>` puede ser utilizado para mantener el estado para cada entorno por separado. Ten en cuenta que, para la retrocompatibilidad, `buildStart` y `buildEnd` solo se llaman para el entorno cliente sin la bandera `perEnvironmentStartEndDuringDev: true`. Lo mismo ocurre con `watchChange` y la bandera `perEnvironmentWatchChangeDuringDev: true`.
 
 ```js
 function PerEnvironmentCountTransformedModulesPlugin() {

@@ -63,7 +63,7 @@ Si estás desplegando en `https://<USERNAME>.github.io/<REPO>/` (por ejemplo, tu
 
 2. Ve a la configuración de GitHub Pages en la página de configuración del repositorio y elige la fuente de implementación como "Acciones de GitHub", esto te llevará a crear un flujo de trabajo que compila e implementa el proyecto, se provee un flujo de trabajo de muestra que instala dependencias y compila usando npm:
 
-<<< ./static-deploy-github-pages.yaml#content
+<<< ./static-deploy-github-pages.yaml#content [.github/workflows/deploy.yml]
 
 ## GitLab Pages y GitLab CI
 
@@ -291,7 +291,7 @@ Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.de
 
 ## Alojamiento de sitios estáticos en Kinsta
 
-Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https://kinsta.com/static-site-hosting/) siguiendo estas [instrucciones](https://kinsta.com/docs/react-vite-ejemplo/).
+Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https://kinsta.com/static-site-hosting/) siguiendo estas [instrucciones](https://kinsta.com/docs/static-site-hosting/static-site-quick-start/react-static-site-examples/#react-with-vite).
 
 ## Alojamiento de sitio estático en xmit
 
@@ -303,4 +303,4 @@ Despliega tu sitio estático utilizando [xmit](https://xmit.co) siguiendo esta [
 
 Zephyr sigue un enfoque diferente al de otros proveedores en la nube. Se integra directamente con el proceso de compilación de Vite, por lo que cada vez que compilas o ejecutas el servidor de desarrollo de tu aplicación, esta se desplegará automáticamente con Zephyr Cloud.
 
-Sigue los pasos de [la guía de despliegue de Vite](https://docs.zephyr-cloud.io/recipes/react-vite) para comenzar.
+Sigue los pasos de [la guía de despliegue de Vite](https://docs.zephyr-cloud.io/bundlers/vite) para comenzar.

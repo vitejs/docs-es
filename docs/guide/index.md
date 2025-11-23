@@ -259,6 +259,8 @@ pnpm link --global # utiliza el gestor de paquetes de tu preferencia para este p
 
 Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link --global vite` (o el gestor de paquetes que usaste para vincular `vite` globalmente). ¡Ahora reinicia el servidor de desarrollo para hacerlo funcionar!
 
+Para saber más sobre cómo y cuándo Vite realiza lanzamientos, consulta la documentación de [Lanzamientos](../releases.md).
+
 ::: tip Dependencias que usan Vite  
 Para reemplazar la versión de Vite utilizada por las dependencias de forma transitiva, debes usar [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) o [pnpm overrides](https://pnpm.io/9.x/package_json#pnpmoverrides).  
 :::

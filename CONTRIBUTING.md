@@ -258,3 +258,5 @@ Las documentaciones en inglés están integradas en el repositorio principal de 
 5. Usa la herramienta [Ryu-cho](https://github.com/vuejs-translations/ryu-cho) para configurar una acción de GitHub, rastrear automáticamente la actualización de documentación en inglés más adelante.
 
 Recomendamos hablar con otros usuarios en Vite Land para que encuentres más colaboradores para tu idioma y así compartir el trabajo de mantenimiento. Una vez que se haya realizado la traducción, comunícalo al equipo de Vite para que el repositorio se pueda mover a la organización oficial de vite en GitHub.
+
+Para saber más sobre cómo y cuándo Vite realiza lanzamientos, consulta la documentación de [Lanzamientos](https://vite.dev/releases).

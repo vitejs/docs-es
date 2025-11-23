@@ -384,6 +384,9 @@ type IndexHtmlTransformResult =
 
 interface HtmlTagDescriptor {
   tag: string
+  /**
+   * los valores de los atributos se escaparán automáticamente si es necesario
+   */
   attrs?: Record<string, string | boolean>
   children?: string | HtmlTagDescriptor[]
   /**

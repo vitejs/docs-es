@@ -111,7 +111,7 @@ Si tú no estás pasando esa opción directamente, esto debe ser corregido por e
 
 #### `manualChunks` a `advancedChunks`
 
-Aunque Rolldown tiene soporte para la opción `manualChunks` expuesta por Rollup, esta se encuentra marcada como obsoleta. En su lugar, Rolldown ofrece una configuración más detallada a través de la [opción `advancedChunks`](https://rolldown.rs/guide/in-depth/advanced-chunks#advanced-chunks), que es más similar a `splitChunk` de webpack:
+Aunque Rolldown tiene soporte para la opción `manualChunks` expuesta por Rollup, esta se encuentra marcada como obsoleta. En su lugar, Rolldown ofrece una configuración más detallada a través de la [opción `advancedChunks`](https://rolldown.rs/in-depth/advanced-chunks#advanced-chunks), que es más similar a `splitChunk` de webpack:
 
 ```js
 // Configuración antigua (Rollup)
