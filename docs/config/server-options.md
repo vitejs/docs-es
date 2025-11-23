@@ -85,8 +85,6 @@ Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
 
   Habilita TLS + HTTP/2. El valor es un [objeto de opciones](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) pasado a `https.createServer()`.
 
-  Ten en cuenta que esto se degrada a solo TLS cuando también se utiliza la opción [`server.proxy`](#server-proxy).
-
   Se necesita un certificado válido. Para una configuración básica, puedes agregar [@vite/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) a los plugins del proyecto, que crearán y almacenarán automáticamente un certificado autofirmado. Pero recomendamos crear tus propios certificados.
 
 ## server.open
@@ -229,7 +227,7 @@ Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback.
 
 Prepara archivos para transformarlos y almacenar en caché los resultados por adelantado. Esto mejora la carga de la página inicial durante el inicio del servidor y evita transformaciones en cascada.
 
-`clientFiles` son archivos que se usan solo en el cliente, mientras que `ssrFiles` son archivos que se usan solo en SSR. Aceptan una variedad de rutas de archivos o patrones [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) relativos a `root`.
+`clientFiles` son archivos que se usan solo en el cliente, mientras que `ssrFiles` son archivos que se usan solo en SSR. Aceptan una variedad de rutas de archivos o patrones [`tinyglobby`](https://superchupu.dev/tinyglobby/comparison) relativos a `root`.
 
 Asegúrate de agregar solo archivos que se usan con frecuencia para no sobrecargar el servidor de desarrollo de Vite al iniciar.
 

@@ -614,7 +614,7 @@ Ten en cuenta que:
 
 - Esta es una característica exclusiva de Vite y no es un estándar web o ES.
 - Los patrones glob se tratan como especificadores de importación: deben ser relativos (comenzar con `./`) o absolutos (comenzar con `/`, resueltos en relación con la raíz del proyecto) o una ruta de alias (ver [opción `resolve.alias`](/config/shared-options#resolve-alias)).
-- La coincidencia de glob se realiza a través de [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby).
+- La coincidencia de glob se realiza a través de [`tinyglobby`](https://superchupu.dev/tinyglobby/comparison) (consulta allí los patrones glob compatibles).
 - También debes tener en cuenta que todos los argumentos en `import.meta.glob` deben **pasarse como literales**. NO puede usar variables o expresiones en ellos.
 
 ## Importación dinámica

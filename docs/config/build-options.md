@@ -183,6 +183,71 @@ export default defineConfig({
 })
 ```
 
+## build.license
+
+- **Tipo:** `boolean | { fileName?: string }`
+- **Por defecto:** `false`
+
+Cuando se configura en `true`, la compilación generará un archivo `.vite/license.md` que incluye las licencias de todas las dependencias empaquetadas. Este archivo puede hospedarse para mostrar y reconocer las dependencias utilizadas por la aplicación. Cuando se pasa `fileName`, se usará como nombre del archivo de licencia relativo a `outDir`. Un ejemplo de salida podría verse así:
+
+```md
+# Licencias
+
+La aplicación empaqueta dependencias que contienen las siguientes licencias:
+
+## dep-1 - 1.2.3 (CC0-1.0)
+
+CC0 1.0 Universal
+
+...
+
+## dep-2 - 4.5.6 (MIT)
+
+MIT License
+
+...
+```
+
+Si `fileName` termina en `.json`, se generará en su lugar el metadato JSON sin procesar, que se puede usar para procesamiento adicional. Por ejemplo:
+
+```json
+[
+  {
+    "name": "dep-1",
+    "version": "1.2.3",
+    "identifier": "CC0-1.0",
+    "text": "CC0 1.0 Universal\n\n..."
+  },
+  {
+    "name": "dep-2",
+    "version": "4.5.6",
+    "identifier": "MIT",
+    "text": "MIT License\n\n..."
+  }
+]
+```
+
+::: tip
+Si quieres hacer referencia al archivo de licencia en el código compilado, puedes usar `build.rollupOptions.output.banner` para inyectar un comentario en la parte superior de los archivos. Por ejemplo:
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rollupOptions: {
+      output: {
+        banner:
+          '/* Consulta las licencias de las dependencias empaquetadas en https://example.com/license.md */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **Tipo:** `boolean`

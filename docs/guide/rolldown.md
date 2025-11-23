@@ -344,4 +344,4 @@ const plugin = {
 }
 ```
 
-Esto se debe a que [Rolldown soporta módulos de no JavaScript](https://rolldown.rs/guide/in-depth/module-types) e infiere el tipo de módulo a partir de las extensiones, a menos que se especifique lo contrario.
+Esto se debe a que [Rolldown soporta módulos de no JavaScript](https://rolldown.rs/in-depth/module-types) e infiere el tipo de módulo a partir de las extensiones, a menos que se especifique lo contrario.

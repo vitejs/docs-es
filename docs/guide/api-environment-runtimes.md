@@ -303,19 +303,30 @@ import { createServer, RemoteEnvironmentTransport, DevEnvironment } from 'vite'
 function createWorkerEnvironment(name, config, context) {
   const worker = new Worker('./worker.js')
   const handlerToWorkerListener = new WeakMap()
+   const client = {
+    send(payload: HotPayload) {
+      worker.postMessage(payload)
+    },
+  }
 
   const workerHotChannel = {
     send: (data) => worker.postMessage(data),
     on: (event, handler) => {
-      if (event === 'connection') return
+
+      // el cliente ya está conectado
+      if (event === 'vite:client:connect') return
+
+      if (event === 'vite:client:disconnect') {
+        const listener = () => {
+          handler(undefined, client)
+        }
+        handlerToWorkerListener.set(handler, listener)
+        worker.on('exit', listener)
+        return
+      }
 
       const listener = (value) => {
         if (value.type === 'custom' && value.event === event) {
-          const client = {
-            send(payload) {
-              worker.postMessage(payload)
-            },
-          }
           handler(value.data, client)
         }
       }
@@ -323,7 +334,17 @@ function createWorkerEnvironment(name, config, context) {
       worker.on('message', listener)
     },
     off: (event, handler) => {
-      if (event === 'connection') return
+      if (event === 'vite:client:connect') return
+
+      if (event === 'vite:client:disconnect') {
+        const listener = handlerToWorkerListener.get(handler)
+        if (listener) {
+          worker.off('exit', listener)
+          handlerToWorkerListener.delete(handler)
+        }
+        return
+      }
+
       const listener = handlerToWorkerListener.get(handler)
       if (listener) {
         worker.off('message', listener)
@@ -348,6 +369,8 @@ await createServer({
 })
 ```
 
+:::info
+Asegúrate de implementar los eventos `vite:client:connect` / `vite:client:disconnect` en los métodos `on` / `off` cuando estos métodos existan. El evento `vite:client:connect` debe emitirse cuando se establece la conexión, y el evento `vite:client:disconnect` cuando se cierra. El objeto `HotChannelClient` pasado al manejador de eventos debe mantener la misma referencia para la misma conexión.
 :::
 
 Un ejemplo diferente utilizando una solicitud HTTP para comunicarse entre el ejecutor y el servidor:
@@ -386,8 +409,8 @@ server.onRequest((request: Request) => {
   }
   return Response.error()
 })
+```
 
 Pero ten en cuenta que para el soporte de HMR, se requieren los métodos `send` y `connect`. El método `send` generalmente se llama cuando se activa un evento personalizado (como, `import.meta.hot.send("my-event")`).
 
 Vite exporta `createServerHotChannel` desde el punto de entrada principal para soportar HMR durante Vite SSR.
-```
