@@ -89,12 +89,6 @@ Vite ignora el valor de `target` en el `tsconfig.json`, siguiendo el mismo compo
 
 Para especificar el objetivo en desarrollo, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), que por defecto está configurada a `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad sobre `esbuild.target` y también se puede configurar si es necesario.
 
-::: warning `useDefineForClassFields`
-Si el valor de `target` en `tsconfig.json` no es `ESNext` o `ES2022` o más reciente, o si no existe el archivo `tsconfig.json`, `useDefineForClassFields` se establecerá por defecto a `false`, lo que puede ser problemático con el valor predeterminado de `esbuild.target` que es `esnext`. Esto podría ser transpilado a [bloques de inicialización estática](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility), los cuales pueden no ser compatibles con tu navegador.
-
-Como tal, se recomienda configurar `target` en `ESNext` o `ES2022` o más reciente, o configurar `useDefineForClassFields` en `true` explícitamente en el `tsconfig.json`.
-:::
-
 #### Otras opciones del compilador que afectan el resultado de la compilación
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
