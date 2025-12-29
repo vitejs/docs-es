@@ -24,7 +24,7 @@
 - 🔩 Interfaz universal para plugins
 - 🔑 APIs completamente tipadas
 
-Vite (palabra en francés para "rápido", pronunciado como [`/vit/`](https://cdn.jsdelivr.net/gh/vite/vite@main/docs/public/vite.mp3) es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
+Vite (palabra en francés para "rápido", pronunciado como [`/viːt/`](https://cdn.jsdelivr.net/gh/vite/vite@main/docs/public/vite.mp3) es una herramienta de compilación que tiene como objetivo proporcionar una experiencia de desarrollo más rápida y ágil para proyectos web modernos. Consta de dos partes principales:
 
 - Un servidor de desarrollo que proporciona [mejoras enriquecidas de funcionalidades](./features) sobre [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), por ejemplo [Hot Module Replacement (HMR)](./features#hot-module-replacement) extremadamente rápido.
 

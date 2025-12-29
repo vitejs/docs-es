@@ -1,6 +1,8 @@
 # Migración de v7
 
-## Cambio en los Navegadores de Destino Predeterminados
+Si estás migrando desde `rolldown-vite`, la versión de vista técnica para Vite integrado con Rolldown para v6 & v7, solo las secciones con <Badge text="NRV" type="warning" /> en el título son aplicables.
+
+## Cambio en los Navegadores de Destino Predeterminados [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 El valor de los navegadores predeterminados de `build.target` y `'baseline-widely-available'` se actualiza a versiones más recientes del navegador:
 
@@ -23,7 +25,7 @@ Para los usuarios que migran de `rolldown-vite` a Vite 8, puedes deshacer los ca
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "vite": "npm:rolldown-vite@7.2.2" // [!code --]
     "vite": "^8.0.0" // [!code ++]
   }
@@ -216,7 +218,7 @@ export default defineConfig({
 
 ### Minificación de JavaScript por Oxc
 
-El Minificador de Oxc ahora se utiliza para la minificación de JavaScript en lugar de esbuild. Puedes usar la opción obsoleta [`build.minify: 'esbuild'`](/config/build-options#minify) para volver a esbuild. Esta opción de configuración será eliminada en el futuro y necesitas instalar `esbuild` como una `devDependency` ya que Vite ya no depende directamente de esbuild.
+El Minificador de Oxc ahora se utiliza para la minificación de JavaScript en lugar de esbuild. Puedes usar la opción obsoleta [`build.minify: 'esbuild'`](/config/build-options#build-minify) para volver a esbuild. Esta opción de configuración será eliminada en el futuro y necesitas instalar `esbuild` como una `devDependency` ya que Vite ya no depende directamente de esbuild.
 
 Si estabas usando las opciones `esbuild.minify*` para controlar el comportamiento de la minificación, ahora puedes usar `build.rolldownOptions.output.minify` en su lugar. Si estabas usando la opción `esbuild.drop`, ahora puedes usar las opciones [`build.rolldownOptions.output.minify.compress.drop*`](https://oxc.rs/docs/guide/usage/minifier/dead-code-elimination).
 
@@ -231,7 +233,7 @@ Por favor, informa cualquier problema que encuentres relacionado con la minifica
 
 ### Minificación de CSS con Lightning CSS
 
-[Lightning CSS](https://lightningcss.dev/) ahora se utiliza para la minificación de CSS por defecto. Puedes usar la opción [`build.cssMinify: 'esbuild'`](/config/build-options#cssminify) para volver a esbuild. Ten en cuenta que necesitas instalar `esbuild` como una `devDependency`.
+[Lightning CSS](https://lightningcss.dev/) ahora se utiliza para la minificación de CSS por defecto. Puedes usar la opción [`build.cssMinify: 'esbuild'`](/config/build-options#build-cssminify) para volver a esbuild. Ten en cuenta que necesitas instalar `esbuild` como una `devDependency`.
 
 Lightning CSS admite una mejor sintaxis de lowering y el tamaño de tu paquete CSS podría aumentar ligeramente.
 
@@ -334,9 +336,9 @@ Las siguientes opciones están obsoletas y se eliminarán en el futuro:
 - `worker.rollupOptions`: renombrado a `worker.rolldownOptions`
 - `build.commonjsOptions`: ahora es una operación no operativa
 
-## Cambios Generales
+## Cambios Generales [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
-## Características obsoletas eliminadas
+## Características obsoletas eliminadas [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 **_POR HACER: Este cambio aún no está implementado, pero se implementará antes de la versión estable._**
 
