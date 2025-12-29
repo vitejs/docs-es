@@ -22,12 +22,12 @@ Este es Vite realizando lo que llamamos "preempaquetado de dependencias". Este p
    Al hacer preempaquetar `lodash-es` en un solo módulo, ¡ahora solo necesitamos una solicitud HTTP en su lugar!
 
 ::: tip NOTA
-El preempaquetado de dependencias solo se aplica en el modo de desarrollo y utiliza `esbuild` para convertir las dependencias a ESM. En las compilaciones de producción, se usa `@rollup/plugin-commonjs` en su lugar.
+El preempaquetado de dependencias solo se aplica en el modo de desarrollo.
 :::
 
 ## Detección automática de dependencias
 
-Si no se encuentra un caché existente, Vite rastreará su código fuente y descubrirá automáticamente las importaciones de dependencia (es decir, "importaciones básicas" que esperan ser resueltas desde `node_modules`) y usará estas importaciones encontradas como puntos de entrada para el preempaquetado. Este se realiza con `esbuild`, por lo que suele ser muy rápido.
+Si no se encuentra un caché existente, Vite rastreará su código fuente y descubrirá automáticamente las importaciones de dependencia (es decir, "importaciones básicas" que esperan ser resueltas desde `node_modules`) y usará estas importaciones encontradas como puntos de entrada para el preempaquetado. Este se realiza con [Rolldown](https://rolldown.rs/), por lo que suele ser muy rápido.
 
 Después de que el servidor ya se haya iniciado, si se encuentra una nueva importación de dependencia que aún no está en el caché, Vite volverá a ejecutar el proceso de preempaquetado y recargará la página si es necesario.
 
@@ -35,7 +35,7 @@ Después de que el servidor ya se haya iniciado, si se encuentra una nueva impor
 
 En una configuración monorepo, una dependencia puede ser un paquete vinculado desde el mismo repositorio. Vite detecta automáticamente las dependencias que no se resuelven desde `node_modules` y trata la dependencia vinculada como código fuente. Este no intentará empaquetar la dependencia vinculada y, en su lugar, analizará la lista de dependencias de la dependencia vinculada.
 
-Sin embargo, esto requiere que la dependencia vinculada se exporte como ESM. De lo contrario, puede agregar la dependencia a [`optimizeDeps.include`](/config/dep-optimization-options#optimizedeps-include) y [`build.commonjsOptions.include`](/config/build-options#build-commonjsoptions) en tus configuraciones.
+Sin embargo, esto requiere que la dependencia vinculada se exporte como ESM. De lo contrario, puede agregar la dependencia a [`optimizeDeps.include`](/config/dep-optimization-options#optimizedeps-include) en tu configuración.
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -43,11 +43,6 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   optimizeDeps: {
     include: ['linked-dep'],
-  },
-  build: {
-    commonjsOptions: {
-      include: [/linked-dep/, /node_modules/],
-    },
   },
 })
 ```
@@ -62,7 +57,9 @@ Un caso de uso típico para `optimizeDeps.include` o `optimizeDeps.exclude` es c
 
 Tanto `include` como `exclude` se pueden utilizar para solucionar este problema. Si la dependencia es grande (con muchos módulos internos) o es CommonJS, debes incluirla; Si la dependencia es pequeña y ya es un ESM válido, puedes excluirla y dejar que el navegador la cargue directamente.
 
-También puedes personalizar aún más esbuild con la [opción `optimizeDeps.esbuildOptions`](/config/dep-optimization-options.md#optimizedeps-esbuildoptions). Por ejemplo, agregar un plugin esbuild para manejar archivos especiales en dependencias o cambiando el [objetivo de construcción (`target`)](https://esbuild.github.io/api/#target).
+También puedes personalizar aún más esbuild con la [opción `optimizeDeps.rolldownOptions`](/config/dep-optimization-options.md#optimizedeps-rolldownoptions). Por ejemplo, agregar un plugin Rolldown para manejar archivos especiales en dependencias o cambiando el [objetivo de construcción (`target`)](https://esbuild.github.io/api/#target).
+
+<!-- TODO: update the link above to Rolldown's documentation -->
 
 ## Almacenamiento en caché
 

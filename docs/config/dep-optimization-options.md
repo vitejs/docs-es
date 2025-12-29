@@ -51,6 +51,19 @@ export default defineConfig({
 })
 ```
 
+## optimizeDeps.rolldownOptions <NonInheritBadge />
+
+- **Tipo:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`RolldownOptions`, `'input' | 'logLevel' | 'output'> & {
+  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`RolldownOutputOptions`,
+  `'format' | 'sourcemap' | 'dir' | 'banner'>`
+}``
+
+Opciones para pasar a Rolldown durante el escaneo y optimización de la dependencia.
+
+Se omiten ciertas opciones ya que cambiarlas no sería compatible con la optimización de la dependencia de Vite.
+
+- `plugins` se fusionan con el plugin de dependencia de Vite
+
 ## optimizeDeps.esbuildOptions <NonInheritBadge />
 
 - **Tipo:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
@@ -64,6 +77,10 @@ export default defineConfig({
 | 'outbase'
 | 'outExtension'
 | 'metafile'>`
+
+- **Obsoleto**
+
+Esta opción se convierte internamente a `optimizeDeps.rolldownOptions`. Usa `optimizeDeps.rolldownOptions` en su lugar.
 
 Opciones para pasar a esbuild durante el escaneo y optimización de la dependencia.
 

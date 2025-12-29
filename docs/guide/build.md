@@ -8,10 +8,10 @@ Por defecto, el paquete de producción asume un navegador moderno que se incluye
 
 <!-- Busca la constante `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` para más información -->
 
-- Chrome >=107
-- Edge >=107
-- Firefox >=104
-- Safari >=16
+- Chrome >=111
+- Edge >=111
+- Firefox >=114
+- Safari >=16.4
 
 Puedes especificar objetivos personalizados a través de la [opción de configuración `build.target`](/config/build-options.md#build-target), donde el objetivo más bajo es `es2015`. Si se configura un objetivo inferior, Vite seguirá requiriendo estos rangos mínimos de compatibilidad con navegadores, ya que depende de [la importación dinámica ESM nativa](https://caniuse.com/es6-module-dynamic-import) y [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
 
@@ -48,23 +48,25 @@ Se requiere soporte para `import.meta` para las bases relativas. Si necesitas so
 
 ## Personalizando la compilación
 
-La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rollup](https://rollupjs.org/configuration-options/) fundamentales a través de `build.rollupOptions`:
+La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rolldown](https://rollupjs.org/configuration-options/) fundamentales a través de `build.rolldownOptions`:
+
+<!-- TODO: update the link above and below to Rolldown's documentation -->
 
 ```js [vite.config.js]
 export default defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       // https://rollupjs.org/configuration-options/
     },
   },
 })
 ```
 
-Por ejemplo, puedes especificar varias salidas de Rollup con plugins que solo son aplicados durante la compilación.
+Por ejemplo, puedes especificar varias salidas de Rolldown con plugins que solo son aplicados durante la compilación.
 
 ## Estrategia de división
 
-Puedes configurar cómo se dividen los fragmentos utilizando `build.rollupOptions.output.manualChunks` (consulta la [documentación de Rollup](https://rollupjs.org/configuration-options/#outputmanualchunks)). Si usas un framework, consulta su documentación para configurar cómo se dividen los fragmentos.
+Puedes configurar cómo se dividen los fragmentos utilizando `build.rolldownOptions.output.advancedChunks` (consulta la [documentación de Rolldown](https://rolldown.rs/in-depth/advanced-chunks)). Si usas un framework, consulta su documentación para configurar cómo se dividen los fragmentos.
 
 ## Manejo de Errores de Carga
 
@@ -81,6 +83,8 @@ Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los
 ## Recompilar en Cambios de Archivos
 
 Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch-options) a través de `build.watch`:
+
+<!-- TODO: update the link above to Rolldown's documentation -->
 
 ```js [vite.config.js]
 // vite.config.js
@@ -122,7 +126,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         nested: resolve(__dirname, 'nested/index.html'),
@@ -134,7 +138,7 @@ export default defineConfig({
 
 Si especificas una raíz diferente, recuerda que `__dirname` seguirá siendo la carpeta de tu archivo vite.config.js cuando resuelva las rutas de entrada. Por lo tanto, debes agregar tu entrada `raíz` a los argumentos para `resolve`.
 
-Ten en cuenta que para los archivos HTML, Vite ignora el nombre dado a la entrada en el objeto `rollupOptions.input` y en su lugar respeta el id resuelto del archivo al generar el recurso HTML en la carpeta dist. Esto asegura una estructura coherente con la forma en que funciona el servidor dev.
+Ten en cuenta que para los archivos HTML, Vite ignora el nombre dado a la entrada en el objeto `rolldownOptions.input` y en su lugar respeta el id resuelto del archivo al generar el recurso HTML en la carpeta dist. Esto asegura una estructura coherente con la forma en que funciona el servidor dev.
 
 ## Modo Librería
 
@@ -159,7 +163,7 @@ export default defineConfig({
       // Se agregará la extension apropiada.
       fileName: 'my-lib',
     },
-    rollupOptions: {
+    rolldownOptions: {
       // Asegúrate de externalizar las dependencias que no deberían estar empaquetadas
       // en tu librería
       external: ['vue'],
@@ -305,7 +309,7 @@ En el modo librería, todo uso de [`import.meta.env.*`](./env-and-mode.md) se re
 :::
 
 :::warning Uso avanzado
-El modo librería incluye una configuración simple y pragmática para librerías de frameworks Javascript y orientadas al navegador. Si estás creando librerías que no son de navegador o necesitas flujos de compilación avanzados, puedes usar [Rollup](https://rollupjs.org) o [esbuild](https://esbuild.github.io) directamente.
+El modo librería incluye una configuración simple y pragmática para librerías de frameworks Javascript y orientadas al navegador. Si estás creando librerías que no son de navegador o necesitas flujos de compilación avanzados, puedes usar [tsdown](https://tsdown.dev/) o [Rolldown](https://rolldown.rs) directamente.
 :::
 
 ## Opciones avanzadas para Base

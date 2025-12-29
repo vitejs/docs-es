@@ -189,7 +189,7 @@ Ten en cuenta que no puedes reintentar la importación dinámica debido a limita
 
 Este error también puede ocurrir si las extensiones del navegador (como bloqueadores de publicidad) están bloqueando la solicitud.
 
-Podría ser posible solucionarlo seleccionando un nombre de fragmento diferente por [`build.rollupOptions.output.chunkFileNames`](../config/build-options.md#build-rollupoptions), ya que estas extensiones a menudo bloquean las solicitudes basadas en nombres de archivos (por ejemplo, nombres que contienen `ad`, `track`).
+Podría ser posible solucionarlo seleccionando un nombre de fragmento diferente por [`build.rolldownOptions.output.chunkFileNames`](../config/build-options.md#build-rolldownoptions), ya que estas extensiones a menudo bloquean las solicitudes basadas en nombres de archivos (por ejemplo, nombres que contienen `ad`, `track`).
 
 ## Dependencias optimizadas
 

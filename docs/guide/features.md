@@ -53,6 +53,10 @@ export type { T }
 
 ### Opciones del compilador de TypeScript
 
+Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes de esbuild. Para cada archivo, Vite usa el `tsconfig.json` en el directorio padre más cercano. Si ese `tsconfig.json` contiene un campo [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite usará el archivo de configuración referenciado que satisfaga los campos [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
+
+Cuando las opciones se establecen tanto en la configuración de Vite como en `tsconfig.json`, el valor en la configuración de Vite tiene precedencia.
+
 Algunos campos de configuración en `compilerOptions` en `tsconfig.json` requieren atención especial.
 
 #### `isolatedModules`
@@ -89,10 +93,24 @@ Vite ignora el valor de `target` en el `tsconfig.json`, siguiendo el mismo compo
 
 Para especificar el objetivo en desarrollo, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), que por defecto está configurada a `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad sobre `esbuild.target` y también se puede configurar si es necesario.
 
+::: warning `useDefineForClassFields`
+
+Si `target` en `tsconfig.json` no es `ESNext` o `ES2022` o una versión más reciente, o si no hay un archivo `tsconfig.json`, `useDefineForClassFields` se establecerá en `false` lo que puede ser problemático con el valor predeterminado de `esbuild.target` de `esnext`. Puede transpilar a [bloques de inicialización estática](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility) que pueden no ser soportados en tu navegador.
+
+Así que, se recomienda establecer `target` a `ESNext` o `ES2022` o una versión más reciente, o establecer `useDefineForClassFields` a `true` explícitamente cuando se configure `tsconfig.json`.
+:::
+
+#### `paths`
+
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig/#paths)
+
+`resolve.tsconfigPaths: true` puede especificarse para decirle a Vite que use la opción `paths` en `tsconfig.json` para resolver las importaciones.
+
+Ten en cuenta que esta característica tiene un costo de rendimiento y es [desaconsejado por el equipo de TypeScript usar esta opción para cambiar el comportamiento de las herramientas externas](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.).
+
 #### Otras opciones del compilador que afectan el resultado de la compilación
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
-- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
 - [`preserveValueImports`](https://www.typescriptlang.org/tsconfig#preserveValueImports)
 - [`verbatimModuleSyntax`](https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax)
@@ -101,7 +119,12 @@ Para especificar el objetivo en desarrollo, se puede usar la opción [`esbuild.t
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 - [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
 - [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
-- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
+
+#### `emitDecoratorMetadata`
+
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
+
+Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators) para obtener más detalles.
 
 ::: tip `skipLibCheck`
 Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).

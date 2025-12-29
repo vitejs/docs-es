@@ -43,10 +43,6 @@ Podemos enviar cambios incompatibles a las definiciones de TypeScript entre vers
 - Ocasionalmente, es posible que necesitemos adoptar funciones que solo están disponibles en una versión más nueva de TypeScript, elevando la versión mínima requerida de TypeScript.
 - Si usas TypeScript, puedes usar un rango de versiones semanticas que bloquee la versión secundaria actual y actualizar manualmente cuando se lanza una nueva versión secundaria de Vite.
 
-### esbuild
-
-[esbuild](https://esbuild.github.io/) es pre-1.0.0 y, a veces, puede traer un cambio importante que es posible que debamos incluir para tener acceso a funciones más nuevas y mejoras de rendimiento. Es posible que superemos la versión de esbuild en una versión menor de Vite.
-
 ### Versiones no LTS de Node.js
 
 Las versiones de Node.js que no son LTS (con números impares) no se prueban como parte del CI de Vite, pero aún deberían funcionar antes de su [final de soporte](https://endoflife.date/nodejs).

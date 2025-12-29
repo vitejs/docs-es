@@ -18,11 +18,11 @@ Provee soporte de JSX en Vue 3 (por medio de la [transformación dedicada de Bab
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-Utiliza esbuild y Babel, logrando HMR rápido con un tamaño de paquete pequeño y la flexibilidad de poder usar la canalización de transformación de Babel. Sin plugins adicionales de Babel, solo se usa esbuild durante las compilaciones.
+Usa [el transformador Oxc](https://oxc.rs/docs/guide/usage/transformer) y [Babel](https://babeljs.io/), logrando un HMR rápido con un tamaño de paquete pequeño y la flexibilidad de poder usar la canalización de transformación de Babel. Sin plugins adicionales de Babel, solo se utiliza el transformador Oxc.
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-Reemplaza Babel con SWC durante el desarrollo. Durante las compilaciones de producción, SWC+esbuild se usan con plugins, y esbuild sino no hay uso de ellos. Para grandes proyectos que no requieren extensiones no estándar de React, el arranque en frío y el Hot Module Replacement (HMR) pueden ser significativamente más rápidos.
+Reemplaza Babel con [SWC](https://swc.rs/) durante el desarrollo. En las compilaciones de producción, se utilizan SWC+Oxc Transformer cuando se usan plugins, y solo Oxc Transformer en caso contrario. Para proyectos grandes que requieren plugins personalizados, el inicio en frío y la sustitución de módulos en caliente (HMR) pueden ser significativamente más rápidos, si el plugin también está disponible para SWC.
 
 ### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 
@@ -41,6 +41,12 @@ Provee soporte para los navegadores obsoletos en el compilado para producción.
 ## Plugins de la Comunidad
 
 Dale un vistazo a [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). También puedes enviar una solicitud de cambio para enlistar tus plugins ahí.
+
+## Plugins de Rolldown
+
+Vite utiliza [Rolldown](https://rolldown.rs/) por debajo y proporciona algunos plugins integrados para casos de uso comunes.
+
+Lee la [sección de plugins integrados de Rolldown](https://rolldown.rs/builtin-plugins/) para obtener más información.
 
 ## Plugins de Rollup
 

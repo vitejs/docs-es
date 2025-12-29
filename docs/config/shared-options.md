@@ -40,7 +40,7 @@ Consulta [Modos y variables de entorno](/guide/env-and-mode) para obtener más d
 
 Define constantes globales de reemplazo. Las entradas se definirán como globales durante el desarrollo y se reemplazarán estáticamente durante la compilación.
 
-Vite usa [esbuild define](https://esbuild.github.io/api/#define) para realizar reemplazos, por lo que las expresiones de valor deben ser una cadena que contenga un valor serializable JSON (null, boolean, number, string, array, u object) o un único identificador. Para valores que no son cadenas, Vite los convertirá automáticamente en una cadena con `JSON.stringify`.
+Vite usa [la función define de Oxc](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define) para realizar reemplazos, por lo que las expresiones de valor deben ser una cadena que contenga un valor serializable JSON (null, boolean, number, string, array, u object) o un único identificador. Para valores que no son cadenas, Vite los convertirá automáticamente en una cadena con `JSON.stringify`.
 
 **Ejemplo:**
 
@@ -88,6 +88,8 @@ Directorio para guardar archivos de caché. Los archivos en este directorio son 
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
 Se pasará a `@rollup/plugin-alias` como su [opción de entradas](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Puede ser un objeto o un array de pares `{find, replacement, customResolver}`.
+
+<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-alias. we should say it's compatible with it though -->
 
 Cuando crees alias en las rutas del sistema de archivos, utiliza siempre rutas absolutas. Los valores de alias relativos se utilizarán tal cual y no se resolverán en rutas del sistema de archivos.
 
@@ -154,6 +156,13 @@ Lista de extensiones de archivo para probar las importaciones que omiten extensi
 Habilitar esta configuración hace que vite determine la identidad del archivo por la ruta del archivo original (es decir, la ruta sin seguir los enlaces simbólicos) en lugar de la ruta real del archivo (es decir, la ruta después de seguir los enlaces simbólicos).
 
 - **Relacionado:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
+
+## resolve.tsconfigPaths
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+
+Habilita la función de resolución de rutas tsconfig. La opción `paths` en `tsconfig.json` se utilizará para resolver las importaciones. Consulta [Características](/guide/features.md#paths) para obtener más detalles.
 
 ## html.cspNonce
 
@@ -345,36 +354,44 @@ Si se coloca en `true`, el JSON importado se transformará en `export default JS
 
 Si se configura en `'auto'`, los datos se convertirán en una cadena solo si [los datos son mayores de 10 kB](https://v8.dev/blog/cost-of-javascript-2019#json:~:text=A%20good%20rule%20of%20thumb%20is%20to%20apply%20this%20technique%20for%20objects%20of%2010%20kB%20or%20larger).
 
-## esbuild
+## oxc
 
-- **Tipo:** `ESBuildOptions | false`
+- **Tipo:** `OxcOptions | false`
 
-`ESBuildOptions` amplía [las opciones de transformación propias de esbuild](https://esbuild.github.io/api/#transform). El caso de uso más común es personalizar JSX:
+`OxcOptions` amplía [las opciones de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer). El caso de uso más común es personalizar JSX:
 
 ```js
 export default defineConfig({
-  esbuild: {
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment',
+  oxc: {
+    jsx: {
+      runtime: 'classic',
+      pragma: 'h',
+      pragmaFrag: 'Fragment',
+    },
   },
 })
 ```
 
-De forma predeterminada, esbuild se aplica a los archivos `ts`, `jsx` y `tsx`. Puedes personalizar esto con `esbuild.include` y `esbuild.exclude`, que pueden ser una expresión regular, un patrón [picomatch](https://github.com/micromatch/picomatch#globbing-features) o una array de cualquier valor.
+De forma predeterminada, la transformación por Oxc se aplica a los archivos `ts`, `jsx` y `tsx`. Puedes personalizar esto con `oxc.include` y `oxc.exclude`, que pueden ser una expresión regular, un patrón [picomatch](https://github.com/micromatch/picomatch#globbing-features) o una array de cualquier valor.
 
-Además, también puedes usar `esbuild.jsxInject` para inyectar automáticamente importaciones auxiliares de JSX para cada archivo transformado por esbuild:
+Además, también puedes usar `oxc.jsxInject` para inyectar automáticamente importaciones auxiliares de JSX para cada archivo transformado por Oxc:
 
 ```js
 export default defineConfig({
-  esbuild: {
+  oxc: {
     jsxInject: `import React from 'react'`,
   },
 })
 ```
 
-Cuando [`build.minify`](./build-options.md#build-minify) es `true`, todas las optimizaciones de minify se aplican de manera predeterminada. Para deshabilitar [ciertos aspectos](https://esbuild.github.io/api/#minify), configura cualquiera de las opciones `esbuild.minifyIdentifiers`, `esbuild.minifySyntax` o `esbuild.minifyWhitespace` en `false `. Ten en cuenta que la opción `esbuild.minify` no se puede usar para anular `build.minify`.
+Configurar en `false` para deshabilitar la transformación por Oxc.
 
-Colocarlo en `false` deshabilita las transformaciones de esbuild.
+## esbuild
+
+- **Tipo:** `ESBuildOptions | false`
+- **Obsoleto**
+
+Esta opción se convierte internamente a la opción `oxc`. Usa la opción `oxc` en su lugar.
 
 ## assetsInclude
 

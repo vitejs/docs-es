@@ -8,20 +8,20 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 - **Por defecto:** `'baseline-widely-available'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
-El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/web-features/) de 2025-05-01. En particular, es `['chrome107', 'edge107', 'firefox104', 'safari16']`.
+El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/web-features/) Widely Available el 2026-01-01. En particular, es `['chrome111', 'edge111', 'firefox114', 'safari16.4']`.
 
 Otro valor especial es `'esnext'`, que asume soporte nativo para importaciones dinámicas y solo realiza una transpilación mínima.
 
-La transformación se realiza con esbuild y el valor debe ser una [opción de destino de esbuild](https://esbuild.github.io/api/#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.
+La transformación se realiza con Oxc Transformer y el valor debe ser una [opción de destino de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/lowering#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.
 
-Ten en cuenta que la compilación fallará si el código contiene funciones que esbuild no puede transpilar de manera segura. Consulta la [documentación de esbuild](https://esbuild.github.io/content-types/#javascript) para obtener más detalles.
+Ten en cuenta que la compilación mostrará una advertencia si el código contiene funciones que Oxc no puede transpilar de manera segura. Consulta la [documentación de Oxc](https://oxc.rs/docs/guide/usage/transformer/lowering#warnings) para obtener más detalles.
 
 ## build.modulePreload
 
 - **Tipo:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
 - **Por defecto:** `{ polyfill: true }`
 
-Por defecto, se inyecta automáticamente un [polyfill de precarga de módulo](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill). El polyfill se inyecta automáticamente en el módulo proxy de cada archivo de entrada `index.html`. Si la compilación está configurada para usar una entrada personalizada que no sea HTML a través de `build.rollupOptions.input`, entonces es necesario importar manualmente el polyfill en la entrada personalizada:
+Por defecto, se inyecta automáticamente un [polyfill de precarga de módulo](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill). El polyfill se inyecta automáticamente en el módulo proxy de cada archivo de entrada `index.html`. Si la compilación está configurada para usar una entrada personalizada que no sea HTML a través de `build.rolldownOptions.input`, entonces es necesario importar manualmente el polyfill en la entrada personalizada:
 
 ```js
 import 'vite/modulepreload-polyfill'
@@ -129,10 +129,16 @@ En este caso, debes configurar `build.cssTarget` en `chrome61` para evitar que v
 
 ## build.cssMinify
 
-- **Tipo:** `boolean | 'esbuild' | 'lightningcss'`
-- **Por defecto:** lo mismo que [`build.minify`](#build-minify) para cliente, `'esbuild'` para SSR
+- **Tipo:** `boolean | 'lightningcss' | 'esbuild'`
+- **Por defecto:** lo mismo que [`build.minify`](#build-minify) para cliente, `'lightningcss'` para SSR
 
-Esta opción permite a los usuarios configurar la minificación de CSS específicamente en vez de usar por defecto `build.minify`, así se podrá trabajar la minificación para JS y CSS por separado. Vite usa `esbuild` por defecto para minimizar CSS. Establece la opción ' `'lightningcss'` para usar [Lightning CSS](https://lightningcss.dev/minification.html) en su lugar. Si se selecciona, se puede configurar utilizando [`css.lightningcss`](./shared-options.md#css-lightningcss).
+Esta opción permite a los usuarios configurar la minificación de CSS específicamente en vez de usar por defecto `build.minify`, así se podrá trabajar la minificación para JS y CSS por separado. Vite usa [Lightning CSS](https://lightningcss.dev/minification.html) por defecto para minimizar CSS. Se puede configurar utilizando [`css.lightningcss`](./shared-options.md#css-lightningcss). Establece la opción en `'esbuild'` para usar esbuild en su lugar.
+
+esbuild debe estar instalado cuando se establece en `'esbuild'`.
+
+```sh
+npm add -D esbuild
+```
 
 ## build.sourcemap
 
@@ -141,11 +147,11 @@ Esta opción permite a los usuarios configurar la minificación de CSS específi
 
 Genera mapas de fuentes de producción. Si es `true`, se creará un archivo de mapa fuente independiente. Si es `'inline'`, el mapa fuente se agregará al archivo de salida resultante como un URI de datos. `'hidden'` funciona como `true` excepto que se suprimen los comentarios del mapa fuente correspondiente en los archivos incluidos.
 
-## build.rollupOptions
+## build.rolldownOptions
 
-- **Tipo:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **Tipo:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
 
-Personaliza directamente el paquete Rollup relacionado. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rollup y se fusionarán con las opciones de Rollup internas de Vite. Consulta la [documentación de opciones de Rollup](https://rollupjs.org/configuration-options/) para obtener más detalles.
+Personaliza directamente el paquete Rolldown relacionado. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rolldown y se fusionarán con las opciones de Rolldown internas de Vite. Consulta la [documentación de opciones de Rollup](https://rollupjs.org/configuration-options/) para obtener más detalles.
 
 ## build.commonjsOptions
 
@@ -159,6 +165,8 @@ Opciones para [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/m
 - **Relacionado:** [Importado dinámico](/guide/features#importacion-dinamica)
 
 Opciones para [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
+
+<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-dynamic-import-vars. we should say it's compatible with it though -->
 
 ## build.lib
 
@@ -252,17 +260,17 @@ Durante la compilación de SSR, los recursos estáticos no se emiten, ya que se 
 
 ## build.minify
 
-- **Tipo:** `boolean | 'terser' | 'esbuild'`
-- **Por defecto:** `'esbuild'` para la compilación del cliente, `false` para el servidor de compilación SSR.
+- **Tipo:** `boolean | 'oxc' | 'terser' | 'esbuild'`
+- **Por defecto:** `'oxc'` para la compilación del cliente, `false` para el servidor de compilación SSR.
 
-Configurar en `false` para deshabilitar la minificación, o especificar el minificador que se usará. El valor predeterminado es [esbuild](https://github.com/evanw/esbuild), que es 20 ~ 40 veces más rápido que terser y solo 1 ~ 2 % peor en compresión. [Pruebas de rendimiento](https://github.com/privatenumber/minification-benchmarks)
+Configurar en `false` para deshabilitar la minificación, o especificar el minificador que se usará. El valor predeterminado es [Oxc Minifier](https://oxc.rs/docs/guide/usage/minifier), que es 30 ~ 90 veces más rápido que terser y solo 0.5 ~ 2 % peor en compresión. [Pruebas de rendimiento](https://github.com/privatenumber/minification-benchmarks)
 
-Ten en cuenta que la opción `build.minify` no minimiza los espacios en blanco cuando se usa el formato `'es'` en el modo librería, ya que elimina las anotaciones puras y rompe el tree-shaking.
+`build.minify: 'esbuild'` está obsoleto y será eliminado en el futuro.
 
-Se debe instalar Terser cuando se configura como `'terser'`.
+esbuild o Terser deben estar instalados cuando se configura como `'esbuild'` o `'terser'` respectivamente.
 
 ```sh
-npm add -D terser
+npm add -D esbuild
 ```
 
 ## build.terserOptions
@@ -311,10 +319,10 @@ Límite para advertencias de tamaño de fragmento (en kB). Se compara con el tam
 
 ## build.watch
 
-- **Tipo:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)`| null`
+- **Tipo:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)` | null
 - **Por defecto:** `null`
 
-Configurar en `{}` para habilitar el observador de Rollup. Esto se usa principalmente en casos que involucran plugins de solo compilación o procesos de integración.
+Configurar en `{}` para habilitar el observador de Rolldown. Esto se usa principalmente en casos que involucran plugins de solo compilación o procesos de integración.
 
 ::: warning Uso de Vite en el Subsistema de Windows para Linux (WSL) 2
 

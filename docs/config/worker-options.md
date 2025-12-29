@@ -17,8 +17,18 @@ A menos que se indique lo contrario, las opciones en esta sección se aplican a 
 
   La función debería devolver nuevas instancias de plugins a medida que se utilizan en compilaciones paralelas de un worker de Rollup. Como tal, se ignorará la modificación de las opciones de `config.worker` en el hook `config`.
 
+
+## worker.rolldownOptions
+
+<!-- TODO: update the link below to Rolldown's documentation -->
+
+- **Tipo:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+
+  Opciones de Rolldown para crear un paquete de worker de compilación.
+
 ## worker.rollupOptions
 
-- **Tipo:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **Tipo:** `RolldownOptions`
+- **Obsoleto**
 
-  Opciones de Rollup para crear un paquete de worker de compilación.
+Esta opción es un alias de la opción `worker.rolldownOptions`. Usa la opción `worker.rolldownOptions` en su lugar.

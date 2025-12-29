@@ -1,5 +1,5 @@
 // @ts-check
-import { builtinModules, createRequire } from 'node:module'
+import { builtinModules } from 'node:module'
 import eslint from '@eslint/js'
 import pluginN from 'eslint-plugin-n'
 import pluginImportX from 'eslint-plugin-import-x'
@@ -43,7 +43,7 @@ export default tseslint.config(
           : undefined,
       },
       globals: {
-        ...globals.es2021,
+        ...globals.es2023,
         ...globals.node,
       },
     },
@@ -94,6 +94,8 @@ export default tseslint.config(
         {
           allowModules: [
             'vite',
+            'esbuild',
+            'rolldown',
             'less',
             'sass',
             'sass-embedded',
