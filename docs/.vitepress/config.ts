@@ -564,6 +564,9 @@ export default defineConfig({
         'gsap/dist/MotionPathPlugin',
       ],
     },
+    define: {
+      __VITE_VERSION__: JSON.stringify('7.1.3'),
+    },
   },
   buildEnd,
 })

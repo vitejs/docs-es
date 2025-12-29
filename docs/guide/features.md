@@ -100,6 +100,16 @@ Si `target` en `tsconfig.json` no es `ESNext` o `ES2022` o una versión más rec
 Así que, se recomienda establecer `target` a `ESNext` o `ES2022` o una versión más reciente, o establecer `useDefineForClassFields` a `true` explícitamente cuando se configure `tsconfig.json`.
 :::
 
+#### `emitDecoratorMetadata`
+
+- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
+
+Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators) para obtener más detalles.
+
+::: tip `skipLibCheck`
+Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
+:::
+
 #### `paths`
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig/#paths)
@@ -119,16 +129,6 @@ Ten en cuenta que esta característica tiene un costo de rendimiento y es [desac
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 - [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
 - [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
-
-#### `emitDecoratorMetadata`
-
-- [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
-
-Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators) para obtener más detalles.
-
-::: tip `skipLibCheck`
-Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
-:::
 
 ### Tipos de clientes
 

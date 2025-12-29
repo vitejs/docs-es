@@ -18,8 +18,8 @@ export default createContentLoader('blog/*.md', {
     return raw
       .map(({ url, frontmatter }) => ({
         title: frontmatter.head.find(
-          (e: any) => e[1].property === 'og:title',
-        )[1].content,
+          (e: any) => e[1]?.property === 'og:title',
+        )?.[1]?.content || frontmatter.title,
         url,
         date: formatDate(frontmatter.date),
       }))
