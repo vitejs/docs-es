@@ -12,7 +12,7 @@ import { someMethod } from 'my-dep'
 
 Lo anterior arrojará un error en el navegador. Vite detectará tales importaciones de módulos descubiertos en todos los archivos fuente servidos y realizará lo siguiente:
 
-1. [Preempaquetado](./dep-pre-bundling) para mejorar la velocidad de carga de la página y convertir los módulos CommonJS/UMD a ESM. El paso previo al empaquetado se realiza con [esbuild](http://esbuild.github.io/) y hace que el tiempo de inicio en frío de Vite sea significativamente más rápido que cualquier empaquetador basado en JavaScript.
+1. [Preempaquetado](./dep-pre-bundling) para mejorar la velocidad de carga de la página y convertir los módulos CommonJS/UMD a ESM. El paso previo al empaquetado se realiza con [esbuild](https://esbuild.github.io/) y hace que el tiempo de inicio en frío de Vite sea significativamente más rápido que cualquier empaquetador basado en JavaScript.
 
 2. Vuelve a escribir las importaciones en direcciones URL válidas como `/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` para que el navegador pueda importarlas correctamente.
 

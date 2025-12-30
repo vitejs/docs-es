@@ -248,7 +248,7 @@ También puedes agregar dominios personalizados y manejar la configuración de c
 
 3. Despliega en Surge escribiendo `surge dist`.
 
-También puedes desplegar en un [dominio personalizado](http://surge.sh/help/adding-a-custom-domain) agregando `surge dist yourdomain.com`.
+También puedes desplegar en un [dominio personalizado](https://surge.sh/help/adding-a-custom-domain) agregando `surge dist yourdomain.com`.
 
 ## Azure Static Web Apps
 
@@ -316,3 +316,7 @@ Despliega tu sitio estático utilizando [xmit](https://xmit.co) siguiendo esta [
 Zephyr sigue un enfoque diferente al de otros proveedores en la nube. Se integra directamente con el proceso de compilación de Vite, por lo que cada vez que compilas o ejecutas el servidor de desarrollo de tu aplicación, esta se desplegará automáticamente con Zephyr Cloud.
 
 Sigue los pasos de [la guía de despliegue de Vite](https://docs.zephyr-cloud.io/bundlers/vite) para comenzar.
+
+## EdgeOne Pages
+
+Despliega tu sitio estático usando [EdgeOne Pages](https://edgeone.ai/products/pages) siguiendo estas [instrucciones](https://pages.edgeone.ai/document/vite).

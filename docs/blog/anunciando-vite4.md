@@ -51,7 +51,7 @@ Documentación en otros idiomas:
 - [简体中文](https://cn.vite.dev/)
 - [日本語](https://ja.vite.dev/)
 
-Si recientemente comenzaste a usar Vite, te sugerimos leer la [Guía de por qué Vite](https://es.vite.dev/guide/why.html) y consultar [Cómo comenzar](https://es.vite.dev/guide/) y la [Guía de funcionalidades](https://es.vite.dev/guide/features). Si deseas participar, las contribuciones son bienvenidas en [GitHub](https://github.com/vitejs/vite). Casi [700 colaboradores](https://github.com/vitejs/vite/graphs/contributors) han contribuido a Vite. Sigue las actualizaciones en [Twitter](https://twitter.com/vite_js) y [Mastodon](https://webtoo.ls/@vite), o únete y colabora con otros en nuestra [comunidad Discord](http://chat.vite.dev/).
+Si recientemente comenzaste a usar Vite, te sugerimos leer la [Guía de por qué Vite](https://es.vite.dev/guide/why.html) y consultar [Cómo comenzar](https://es.vite.dev/guide/) y la [Guía de funcionalidades](https://es.vite.dev/guide/features). Si deseas participar, las contribuciones son bienvenidas en [GitHub](https://github.com/vitejs/vite). Casi [700 colaboradores](https://github.com/vitejs/vite/graphs/contributors) han contribuido a Vite. Sigue las actualizaciones en [Twitter](https://twitter.com/vite_js) y [Mastodon](https://webtoo.ls/@vite), o colabora con otros en nuestra [comunidad Discord](https://chat.vite.dev/).
 
 ## Empezar a jugar con Vite 4
 

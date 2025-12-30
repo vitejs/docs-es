@@ -81,4 +81,4 @@ Esas fueron varias características, pero empezar con Vite es simple. Puedes ini
 npm init @vite/app
 ```
 
-Después, revisa [la guía](https://vite.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GItHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o unete a la discusión con otros usuarios de Vite en nuestro [Servidor de Discord](http://chat.vite.dev/).
+Después, revisa [la guía](https://vite.dev/guide/) para ver lo que ofrece Vite listo para usar. También puedes revisar el código fuente en [GitHub](https://github.com/vitejs/vite), seguir las actualizaciones en [Twitter](https://twitter.com/vite_js), o únete a la discusión con otros usuarios de Vite en nuestro [servidor de chat de Discord](https://chat.vite.dev/).
