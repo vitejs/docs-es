@@ -116,10 +116,10 @@ Para crear un proyecto sin indicaciones interactivas, puedes usar el flag `--no-
 
 Para una plantilla en `https://github.com/user/project`, puedes probarla en línea usando `https://github.stackblitz.com/user/project` (agregando `.stackblitz` después de `github` en la URL del proyecto).
 
-También puedes usar una herramienta como [degit](https://github.com/Rich-Harris/degit) para estructurar tu proyecto con una de las plantillas. Suponiendo que el proyecto está en GitHub y usa `main` como rama predeterminada, puedes crear una copia local usando:
+También puedes usar una herramienta como [tiged](https://github.com/tiged/tiged) para estructurar tu proyecto con una de las plantillas. Suponiendo que el proyecto está en GitHub y usa `main` como rama predeterminada, puedes crear una copia local usando:
 
 ```bash
-npx degit user/project#main my-project
+npx tiged user/project my-project
 cd my-project
 
 npm install

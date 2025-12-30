@@ -216,6 +216,30 @@ Cuando se configura en `true`, la compilación generará un archivo `.vite/licen
 ]
 ```
 
+::: tip
+
+Si deseas referenciar el archivo de licencia en el código compilado, puedes usar `build.rolldownOptions.output.postBanner` para inyectar un comentario al principio de los archivos. Por ejemplo:
+
+<!-- TODO: agregar un enlace para output.postBanner arriba a la documentación de Rolldown -->
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rolldownOptions: {
+      output: {
+        postBanner:
+          '/* See licenses of bundled dependencies at https://example.com/license.md */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **Tipo:** `boolean`

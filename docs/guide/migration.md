@@ -372,7 +372,7 @@ Estos cambios rotóricos se espera que afecten solo a una minoría de casos de u
   - Hook `resolveImportMeta` ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
   - Hook `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Hook `resolveFileUrl`
-- Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parse` / `parseAsync` que tienen más características.
+- Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parseSync` / `parse` que tienen más características.
 
 ## Migración desde v6
 
