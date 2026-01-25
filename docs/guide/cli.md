@@ -54,7 +54,7 @@ vite build [root]
 | `--outDir <dir>`               | Directorio de salida (predeterminado: `dist`) (`string`)                                                                              |
 | `--assetsDir <dir>`            | Carpeta para colocar los assets dentro de `outDir` (predeterminado: `"assets"`) (`string`)                                            |
 | `--assetsInlineLimit <number>` | Límite en bytes para incrustar assets como base64 (predeterminado: `4096`) (`number`)                                                 |
-| `--ssr [entry]`                | Construcción del SSR para la entrada especificada (`string`)                                                                          |
+| `--ssr [entry]`                | Compilación del SSR para la entrada especificada (`string`)                                                                          |
 | `--sourcemap [output]`         | Generar mapas de origen (`boolean \| "inline" \| "hidden"`)                                                                           |
 | `--minify [minifier]`          | Habilitar/deshabilitar minificación o especificar minificador (predeterminado: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`)      |
 | `--manifest [name]`            | Generar un manifiesto JSON de compilación (`boolean \| string`)                                                                       |

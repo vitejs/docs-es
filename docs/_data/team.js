@@ -85,7 +85,7 @@ export const core = [
   {
     avatar: 'https://github.com/dominikg.png',
     name: 'Dominik G.',
-    title: 'Resident CI Expert',
+    title: 'Experto residente en CI',
     desc: 'Miembro del equipo de Vite y Svelte',
     links: [
       { icon: 'github', link: 'https://github.com/dominikg' },
@@ -119,7 +119,7 @@ export const core = [
   {
     avatar: 'https://github.com/btea.png',
     name: 'btea',
-    title: 'Web Developer',
+    title: 'Desarrollador Web',
     links: [{ icon: 'github', link: 'https://github.com/btea' }],
   },
 ]
@@ -138,9 +138,7 @@ export const emeriti = [
         link: 'https://bsky.app/profile/retropragma.bsky.social',
       },
     ],
-    sponsor: 'https://github.com/sponsors/aleclarson',
   },
-
   {
     avatar: 'https://github.com/poyoho.png',
     name: 'yoho',
@@ -158,7 +156,7 @@ export const emeriti = [
     desc: 'Desarrollador Web. Miembro del equipo de Vue & Vite',
     links: [
       { icon: 'github', link: 'https://github.com/ygj6' },
-      { icon: 'twitter', link: 'https://twitter.com/ygj_66' },
+      { icon: 'x', link: 'https://x.com/ygj_66' },
     ],
   },
   {
@@ -166,7 +164,7 @@ export const emeriti = [
     name: 'Niputi',
     title: 'Desarrollador',
     org: 'Computershare Denmark',
-    desc: 'Amante de weeb/Javascript.',
+    desc: 'Amante de weeb/JavaScript.',
     links: [
       { icon: 'github', link: 'https://github.com/Niputi' },
       { icon: 'x', link: 'https://x.com/Niputi_' },
@@ -197,28 +195,26 @@ export const emeriti = [
   {
     avatar: 'https://github.com/Shinigami92.png',
     name: 'Shinigami',
-    title: 'Mantenedor',
+    title: 'Ingeniero Frontend Senior',
     org: 'Faker',
     orgLink: 'https://fakerjs.dev',
-    desc: 'Entusiasta apasionado de TypeScript que trabaja extensamente con Vue SPA y pug.',
+    desc: 'Entusiasta apasionado de TypeScript que trabaja extensamente con Vue SPA.',
     links: [
       { icon: 'github', link: 'https://github.com/Shinigami92' },
       { icon: 'mastodon', link: 'https://elk.zone/mas.to/@Shini92' },
     ],
-    sponsor: 'https://github.com/sponsors/Shinigami92',
   },
   {
     avatar: 'https://github.com/haoqunjiang.png',
     name: 'Haoqun Jiang',
-    title: 'Miembro principal del equipo',
+    title: 'Miembro Principal del Equipo',
     org: 'Vue.js',
     orgLink: 'https://vuejs.org/',
-    desc: 'Curador de mejores prácticas para herramientas de Vue.js.',
+    desc: 'Curador de mejores prácticas para herramientas de Vue.js',
     links: [
-      { icon: 'github', link: 'https://github.com/sodatea' },
-      { icon: 'x', link: 'https://x.com/haoqunjiang' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' },
+      { icon: 'github', link: 'https://github.com/haoqunjiang' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/haoqun.dev' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' },
     ],
     sponsor: 'https://github.com/sponsors/haoqunjiang',
   },

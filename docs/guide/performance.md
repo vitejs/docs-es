@@ -116,7 +116,7 @@ Ejemplos de hacer menos trabajo:
 
 - Usa CSS en lugar de Sass/Less/Stylus cuando sea posible (el anidamiento puede ser manejado por PostCSS / Lightning CSS).
 - No transformes los SVG en componentes de frameworks visuales (React, Vue, etc.). Impórtalos como cadenas o URL en su lugar.
-- Al usar `@vite/plugin-react`, evita configurar las opciones de Babel, para que omita la transformación durante la construcción (solo se utilizará Oxc).
+- Al usar `@vite/plugin-react`, evita configurar las opciones de Babel, para que omita la transformación durante la compilación (solo se utilizará Oxc).
 
 Ejemplos de utilizar herramientas nativas:
 

@@ -29,7 +29,7 @@ _16 de febrero de 2021_: mira el [anuncio de Vite 3.0](./anunciando-vite3.md)
 
 ¡Hoy estamos emocionados de anunciar el lanzamiento oficial de Vite 2.0!
 
-Vite (palabra francesa que significa "rápido", pronunciado como `/vit/`) es un nuevo tipo de herramienta de construcción para el desarrollo web frontend. Piensa en un conjunto pre configurado de servidor web + empaquetador, pero más ligero y rapido. Este aprovecha el soporte de los navegadores para los [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) y herramientas escritas en lenguajes para compilar-a-nativo como [esbuild](https://esbuild.github.io/) para entregar una rápida y moderna experiencia de desarrollo.
+Vite (palabra francesa que significa "rápido", pronunciado como `/vit/`) es un nuevo tipo de herramienta de compilación para el desarrollo web frontend. Piensa en un conjunto pre configurado de servidor web + empaquetador, pero más ligero y rapido. Este aprovecha el soporte de los navegadores para los [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) y herramientas escritas en lenguajes para compilar-a-nativo como [esbuild](https://esbuild.github.io/) para entregar una rápida y moderna experiencia de desarrollo.
 
 Para tener una idea de cuan rápido es Vite, revisa este [video de comparaciones](https://twitter.com/amasad/status/1355379680275128321) arrancando una aplicacián de React en Repl.it usando Vite vs. `create-react-app` (CRA).
 
@@ -47,7 +47,7 @@ Vite 2.0 toma lo que aprendimos durante este recorrido y es rediseñado desde ce
 
 ### Nuevo formato de Plugin y API
 
-Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de plugins extiende la interfaz de plugins de Rollup y es [compatible con varios plugins de Rollup](https://vite-rollup-plugins.patak.dev/) por defecto. Los plugins pueden usar hooks de Rollup compatibles, adicionalmente con hooks específicos de Vite y propiedades para ajustar el comportamiento específico de Vite (ej. diferenciar desarrollo vs construcción o manejo personalizado del HMR).
+Inspirado por [WMR](https://github.com/preactjs/wmr), el nuevo sistema de plugins extiende la interfaz de plugins de Rollup y es [compatible con varios plugins de Rollup](https://vite-rollup-plugins.patak.dev/) por defecto. Los plugins pueden usar hooks de Rollup compatibles, adicionalmente con hooks específicos de Vite y propiedades para ajustar el comportamiento específico de Vite (ej. diferenciar desarrollo vs compilación o manejo personalizado del HMR).
 
 La [API programable](https://vite.dev/guide/api-javascript.html) también fue mejorada para facilitar herramientas de alto nivel / marcos de trabajos construidos con base en Vite.
 
@@ -65,7 +65,7 @@ Vite trata el CSS como un elemento de primera clase en el gráfico de módulos y
 
 ### Soporte para renderizado del lado del servidor (SSR)
 
-Vite 2.0 viene con [soporte experimental para SSR](https://vite.dev/guide/ssr.html). Vite proporciona APIs para de manera eficiente, cargar y actualizar código basado en ESM durante el desarrollo (casi como HMR del lado del servidor), y automáticamente externaliza dependencias compatibles con CommonJS para mejorar la velocidad de desarrollo y construcción SSR. El servidor de producción puede ser completamente desacoplado de Vite, y la misma configuración puede ser fácilmente adaptada para realizar pre-renderizado / SSG.
+Vite 2.0 viene con [soporte experimental para SSR](https://vite.dev/guide/ssr.html). Vite proporciona APIs para de manera eficiente, cargar y actualizar código basado en ESM durante el desarrollo (casi como HMR del lado del servidor), y automáticamente externaliza dependencias compatibles con CommonJS para mejorar la velocidad de desarrollo y compilación SSR. El servidor de producción puede ser completamente desacoplado de Vite, y la misma configuración puede ser fácilmente adaptada para realizar pre-renderizado / SSG.
 
 El SSR de Vite es proporcionado como una caracteristica de bajo nivel y estamos esperando ver marcos de trabajo de alto nivel implementarlo como base.
 

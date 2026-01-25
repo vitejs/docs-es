@@ -1,29 +1,32 @@
+import { h } from 'vue'
 import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
 import '@shikijs/vitepress-twoslash/style.css'
 import 'virtual:group-icons.css'
-import type { Theme } from 'vitepress'
-import DefaultTheme from 'vitepress/theme'
-import { h } from 'vue'
-import AsideSponsors from './components/AsideSponsors.vue'
+import Theme from '@voidzero-dev/vitepress-theme/src/vite'
+import './styles.css'
+
+// components
 import SvgImage from './components/SvgImage.vue'
 import YouTubeVideo from './components/YouTubeVideo.vue'
-import SponsorBanner from './components/SponsorBanner.vue'
 import NonInheritBadge from './components/NonInheritBadge.vue'
-import './styles/landing.css'
-import './styles/vars.css'
+import AsideSponsors from './components/AsideSponsors.vue'
+import SponsorBanner from './components/SponsorBanner.vue'
 
 export default {
-  extends: DefaultTheme,
   Layout() {
-    return h(DefaultTheme.Layout, null, {
+    return h((Theme as any).Layout, null, {
       'layout-top': () => h(SponsorBanner),
       'aside-ads-before': () => h(AsideSponsors),
     })
   },
-  enhanceApp({ app }) {
+  enhanceApp(ctx: any) {
+    const { app } = ctx
+
     app.component('SvgImage', SvgImage)
     app.component('YouTubeVideo', YouTubeVideo)
     app.component('NonInheritBadge', NonInheritBadge)
     app.use(TwoslashFloatingVue)
+
+    Theme.enhanceApp(ctx)
   },
-} satisfies Theme
+}

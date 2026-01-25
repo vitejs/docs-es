@@ -484,7 +484,7 @@ Es importante tener en cuenta que esto es independiente del ordenamiento de los 
 
 ## Solicitud Condicional
 
-Por defecto, los plugins se invocan tanto para servir como para compilar. En los casos en que un plugin deba aplicarse condicionalmente solo durante el servicio o la construcción, use la propiedad `apply` para invocarlos solo durante la `'build'` o `'serve'`:
+Por defecto, los plugins se invocan tanto para servir como para compilar. En los casos en que un plugin deba aplicarse condicionalmente solo durante el servicio o la compilación, use la propiedad `apply` para invocarlos solo durante la `'build'` o `'serve'`:
 
 ```js
 function myPlugin() {
