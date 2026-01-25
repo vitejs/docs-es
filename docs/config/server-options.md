@@ -369,7 +369,7 @@ createServer()
 
 ::: tip NOTA
 
-Esta lista de bloqueo no se aplica al [directorio público](/guide/assets.md#the-public-directory). Todos los archivos en el directorio público se sirven sin ningún tipo de filtrado, ya que se copian directamente al directorio de salida durante la construcción.
+Esta lista de bloqueo no se aplica al [directorio público](/guide/assets.md#the-public-directory). Todos los archivos en el directorio público se sirven sin ningún tipo de filtrado, ya que se copian directamente al directorio de salida durante la compilación.
 
 :::
 

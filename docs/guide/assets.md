@@ -33,7 +33,7 @@ El comportamiento es similar al `file-loader` de webpack. La diferencia es que l
 - TypeScript, de forma predeterminada, no reconoce las importaciones de recursos estáticos como módulos válidos. Para solucionar esto, incluye [`vite/client`](./features#tipos-de-clientes).
 
 ::: tip Incrustación de SVG a través de `url()`
-Cuando se pasa una URL de SVG a una construcción manual de `url()` mediante JS, la variable debe estar colocada entre comillas dobles.
+Cuando se pasa una URL de SVG a una compilación manual de `url()` mediante JS, la variable debe estar colocada entre comillas dobles.
 
 ```js twoslash
 import 'vite/client'

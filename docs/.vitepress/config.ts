@@ -1,17 +1,23 @@
 import path from 'node:path'
 import fs from 'node:fs'
-import type { DefaultTheme, HeadConfig } from 'vitepress'
-import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import type { HeadConfig } from 'vitepress'
 import { defineConfig } from 'vitepress'
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
+  localIconLoader,
 } from 'vitepress-plugin-group-icons'
 import { markdownItImageSize } from 'markdown-it-image-size'
+import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
+import type { FooterLink } from '@voidzero-dev/vitepress-theme'
 import { buildEnd } from './buildEnd.config'
 
-const ogDescription = 'Herramienta frontend de próxima generación'
-const ogImage = 'https://es.vite.dev/og-image.png'
+const viteVersion = '7.1.3'
+const viteMajorVersion = +viteVersion.split('.')[0]
+
+const ogDescription = 'Herramienta de compilación frontend de próxima generación'
+const ogImage = 'https://es.vite.dev/og-image.jpg'
 const ogTitle = 'Vite'
 const ogUrl = 'https://es.vite.dev'
 
@@ -21,12 +27,12 @@ const commitRef = process.env.COMMIT_REF?.slice(0, 8) || 'dev'
 
 const deployType = (() => {
   switch (deployURL) {
-    case 'https://main--vite-docs-es.netlify.app':
-      return 'release'
+    case 'https://main--vite-docs-main.netlify.app':
+      return 'main'
     case '':
       return 'local'
     default:
-      return 'main'
+      return 'release'
   }
 })()
 const additionalTitle = ((): string => {
@@ -39,18 +45,32 @@ const additionalTitle = ((): string => {
       return ''
   }
 })()
-const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
-  switch (deployType) {
-    case 'main':
-    case 'local':
-    case 'release':
-      return [
-        {
-          text: 'Documentación de Vite 2',
-          link: 'https://v2.vite.dev',
-        },
-      ]
+const versionLinks = (() => {
+  const links: FooterLink[] = []
+
+  if (deployType !== 'main') {
+    links.push({
+      text: 'Docs no lanzadas',
+      link: 'https://main.vite.dev',
+    })
   }
+
+  if (deployType === 'main' || deployType === 'local') {
+    links.push({
+      text: `Docs de Vite ${viteMajorVersion} (lanzamiento)`,
+      link: 'https://vite.dev',
+    })
+  }
+
+  // Create version links from v2 onwards
+  for (let i = viteMajorVersion - 1; i >= 2; i--) {
+    links.push({
+      text: `Docs de Vite ${i}`,
+      link: `https://v${i}.vite.dev`,
+    })
+  }
+
+  return links
 })()
 
 function inlineScript(file: string): HeadConfig {
@@ -64,20 +84,24 @@ function inlineScript(file: string): HeadConfig {
   ]
 }
 
-export default defineConfig({
+const config = defineConfig({
   lang: 'es',
   title: `Vite${additionalTitle}`,
-  description: 'Herramienta frontend de próxima generación',
+  description: 'Herramienta de compilación frontend de próxima generación',
   cleanUrls: true,
   sitemap: {
     hostname: 'https://es.vite.dev',
   },
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    [
+      'link',
+      { rel: 'icon', type: 'image/svg+xml', href: '/logo-without-border.svg' },
+    ],
     [
       'link',
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
     ],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     inlineScript('banner.js'),
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
@@ -85,7 +109,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: ogImage }],
     ['meta', { property: 'og:url', content: ogUrl }],
     ['meta', { property: 'og:description', content: ogDescription }],
-    ['meta', { property: 'og:site_name', content: 'vite' }],
+    ['meta', { property: 'og:site_name', content: 'vitejs' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
@@ -99,6 +123,7 @@ export default defineConfig({
       },
     ],
   ],
+
   locales: {
     root: { label: 'Español' },
     en: { label: 'English', link: 'https://vite.dev' },
@@ -107,15 +132,24 @@ export default defineConfig({
     pt: { label: 'Português', link: 'https://pt.vite.dev' },
     ko: { label: '한국어', link: 'https://ko.vite.dev' },
     de: { label: 'Deutsch', link: 'https://de.vite.dev' },
-    fa: { label: 'فارسی', link: 'https://fa.vite.dev' },
+    fa: { label: 'فارsi', link: 'https://fa.vite.dev' },
   },
 
   themeConfig: {
+    variant: 'vite',
     logo: '/logo.svg',
+
+    banner: {
+      id: 'vite+',
+      text: 'Anunciando Vite+ | La Cadena de Herramientas Unificada para la Web',
+      url: 'https://voidzero.dev/posts/announcing-vite-plus?utm_source=vite&utm_content=top_banner',
+    },
+
     editLink: {
       pattern: 'https://github.com/vitejs/docs-es/edit/main/docs/:path',
       text: 'Sugerir cambios para esta página',
     },
+
     socialLinks: [
       { icon: 'bluesky', link: 'https://bsky.app/profile/vite.dev' },
       { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@vite' },
@@ -127,7 +161,7 @@ export default defineConfig({
     algolia: {
       appId: '7H67QR5P0A',
       apiKey: '208bb9c14574939326032b937431014b',
-      indexName: 'vite',
+      indexName: 'vitejs',
       searchParameters: {
         facetFilters: ['tags:es'],
       },
@@ -176,7 +210,7 @@ export default defineConfig({
 
     carbonAds: {
       code: 'CEBIEK3N',
-      placement: 'vitedev',
+      placement: 'vitejsdev',
     },
 
     outlineTitle: 'En esta página',
@@ -186,9 +220,38 @@ export default defineConfig({
     },
 
     footer: {
-      message: `Publicado bajo licencia MIT. (${commitRef})`,
-      copyright:
-        'Copyright © 2019-actualidad VoidZero Inc. & colaboradores de Vite',
+      copyright: `© 2026 VoidZero Inc. y colaboradores de Vite. (${commitRef})`,
+      nav: [
+        {
+          title: 'Vite',
+          items: [
+            { text: 'Guía', link: '/guide/' },
+            { text: 'Configuración', link: '/config/' },
+            { text: 'Plugins', link: '/plugins/' },
+          ],
+        },
+        {
+          title: 'Recursos',
+          items: [
+            { text: 'Equipo', link: '/team' },
+            { text: 'Blog', link: '/blog' },
+            {
+              text: 'Lanzamientos',
+              link: 'https://github.com/vitejs/vite/releases',
+            },
+          ],
+        },
+        {
+          title: 'Versiones',
+          items: versionLinks,
+        },
+      ],
+      social: [
+        { icon: 'github', link: 'https://github.com/vitejs/vite' },
+        { icon: 'discord', link: 'https://chat.vite.dev' },
+        { icon: 'bluesky', link: 'https://bsky.app/profile/vite.dev' },
+        { icon: 'x', link: 'https://x.com/vite_js' },
+      ],
     },
 
     nav: [
@@ -248,8 +311,20 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Versión',
-        items: versionLinks,
+        text: `v${viteVersion}`,
+        items: [
+          {
+            text: 'Lista de Cambios',
+            link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+          },
+          {
+            text: 'Contribución',
+            link: 'https://github.com/vitejs/docs-es/blob/main/CONTRIBUTING.md',
+          },
+          {
+            items: versionLinks,
+          },
+        ],
       },
     ],
 
@@ -344,7 +419,7 @@ export default defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: 'Migración desde v7',
+              text: `Migración desde v${viteMajorVersion - 1}`,
               link: '/guide/migration',
             },
             {
@@ -541,7 +616,7 @@ export default defineConfig({
         titleBar: {
           includeSnippet: true,
         },
-      })  
+      })
       md.use(markdownItImageSize, {
         publicDir: path.resolve(import.meta.dirname, '../public'),
       })
@@ -553,20 +628,21 @@ export default defineConfig({
         customIcon: {
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
+          'vite.config': localIconLoader(
+            import.meta.url,
+            '../public/logo-without-border.svg',
+          ),
         },
       }),
     ],
     optimizeDeps: {
-      include: [
-        '@shikijs/vitepress-twoslash/client',
-        'gsap',
-        'gsap/dist/ScrollTrigger',
-        'gsap/dist/MotionPathPlugin',
-      ],
+      include: ['@shikijs/vitepress-twoslash/client'],
     },
     define: {
-      __VITE_VERSION__: JSON.stringify('7.1.3'),
+      __VITE_VERSION__: JSON.stringify(viteVersion),
     },
   },
   buildEnd,
 })
+
+export default extendConfig(config)

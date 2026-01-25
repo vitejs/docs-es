@@ -180,7 +180,7 @@ Por ejemplo, para hacer que la importación predeterminada de `*.svg` a un compo
 
 ## HTML
 
-Los archivos HTML son el centro de un proyecto Vite, sirviendo como los puntos de entrada para tu aplicación, lo que facilita la construcción de aplicaciones de una sola página (SPA) y [aplicaciones multipágina](/guide/build.html#multi-page-app).
+Los archivos HTML son el centro de un proyecto Vite, sirviendo como los puntos de entrada para tu aplicación, lo que facilita la compilación de aplicaciones de una sola página (SPA) y [aplicaciones multipágina](/guide/build.html#multi-page-app).
 
 Cualquier archivo HTML en la raíz de tu proyecto se puede acceder directamente a través de su ruta de directorio respectiva:
 
