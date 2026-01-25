@@ -340,12 +340,13 @@ Las siguientes opciones están obsoletas y se eliminarán en el futuro:
 
 ## Características Obsoletas Eliminadas [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
+- Pasar una URL a `import.meta.hot.accept` ya no es compatible. Por favor, pasa un id en su lugar. ([#21382](https://github.com/vitejs/vite/pull/21382))
+
 **_POR HACER: Este cambio aún no está implementado, pero se implementará antes de la versión estable._**
 
 ## Avanzado
 
 Estos cambios rotóricos se espera que afecten solo a una minoría de casos de uso:
-
 - **[POR HACER: esto se corregirá antes de la versión estable]** https://github.com/rolldown/rolldown/issues/5726 (afecta a nuxt, qwik)
 - **[POR HACER: esto se corregirá antes de la versión estable]** Los fragmentos heredados se emiten como un archivo de activo en lugar de un archivo de fragmento debido a la falta de la función de emisión de fragmento preconstruido ([rolldown#4304](https://github.com/rolldown/rolldown/issues/4034)). Esto significa que las opciones relacionadas con los fragmentos no se aplican a los fragmentos heredados y el archivo de manifiesto no incluirá los fragmentos heredados como un archivo de fragmento.
 - **[POR HACER: esto se corregirá antes de la versión estable]** Caso límite del comentario `@vite-ignore` ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
