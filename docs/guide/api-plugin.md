@@ -532,6 +532,8 @@ export default defineConfig({
 })
 ```
 
+Consulta [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) para obtener una lista de plugins oficiales de rollup compatibles con instrucciones de uso.
+
 ## Normalización de Rutas
 
 Vite normaliza las rutas mientras resuelve las identificaciones para usar los separadores POSIX (/) mientras conserva el volumen en Windows. Por otro lado, Rollup mantiene intactas las rutas resueltas de manera predeterminada, por lo que las identificaciones resueltas tienen separadores win32 ( \\ ) en Windows. Sin embargo, los plugins de Rollup utilizan una [función de utilidad `normalizePath`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#normalizepath) de `@rollup/pluginutils` internamente, que convierte los separadores en POSIX antes de realizar comparaciones. Esto significa que cuando estos plugins se usan en Vite, el patrón de configuración `include` y `exclude` y otras rutas similares contra las comparaciones de identificadores resueltos funcionan correctamente.
