@@ -22,7 +22,7 @@ importers:
         specifier: ^9.39.2
         version: 9.39.2
       '@shikijs/vitepress-twoslash':
-        specifier: ^3.20.0
+        specifier: ^3.21.0
         version: 3.21.0(typescript@5.9.3)
       '@types/express':
         specifier: ^5.0.6
@@ -52,7 +52,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(eslint@9.39.2)
       feed:
-        specifier: ^5.1.0
+        specifier: ^5.2.0
         version: 5.2.0
       globals:
         specifier: ^17.0.0
@@ -85,7 +85,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.3
       typescript-eslint:
-        specifier: ^8.48.0
+        specifier: ^8.53.0
         version: 8.53.1(eslint@9.39.2)(typescript@5.9.3)
       vitepress:
         specifier: 2.0.0-alpha.15
@@ -94,10 +94,10 @@ importers:
         specifier: ^1.6.5
         version: 1.7.1(vite@7.3.1(@types/node@24.10.9)(tsx@4.21.0)(yaml@2.8.1))
       vue:
-        specifier: ^3.5.25
+        specifier: ^3.5.26
         version: 3.5.27(typescript@5.9.3)
       vue-tsc:
-        specifier: ^3.1.8
+        specifier: ^3.2.2
         version: 3.2.3(typescript@5.9.3)
 
 packages:
