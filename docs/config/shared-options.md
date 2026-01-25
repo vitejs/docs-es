@@ -87,9 +87,9 @@ Directorio para guardar archivos de caché. Los archivos en este directorio son 
 - **Tipo:**
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
-Se pasará a `@rollup/plugin-alias` como su [opción de entradas](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Puede ser un objeto o un array de pares `{find, replacement, customResolver}`.
+Define alias utilizados para reemplazar valores en declaraciones `import` o `require`. Esto funciona de manera similar a [`@rollup/plugin-alias`](https://github.com/rollup/plugins/tree/master/packages/alias).
 
-<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-alias. we should say it's compatible with it though -->
+El orden de las entradas es importante, en que las primeras reglas definidas se aplican primero.
 
 Cuando crees alias en las rutas del sistema de archivos, utiliza siempre rutas absolutas. Los valores de alias relativos se utilizarán tal cual y no se resolverán en rutas del sistema de archivos.
 
@@ -97,6 +97,41 @@ Se puede lograr una resolución personalizada más avanzada a través de [plugin
 
 :::warning Uso con SSR
 Si has configurado alias para [dependencias externalizadas de SSR](/guide/ssr.md#ssr-externals), es posible que desees crear un alias para los paquetes `node_modules` reales. Tanto [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) como [pnpm](https://pnpm.io/aliases/) admiten la creación de alias a través del prefijo `npm:`.
+:::
+
+### Formato de Objeto (`Record<string, string>`)
+
+El formato de objeto permite especificar alias como una clave, y el valor correspondiente como el valor de importación real. Por ejemplo:
+
+```js
+resolve: {
+  alias: {
+    utils: '../../../utils',
+    'batman-1.0.0': './joker-1.5.0'
+  }
+}
+```
+
+### Formato de Array (`Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`)
+
+El formato de array permite especificar alias como objetos, lo cual puede ser útil para pares clave/valor complejos.
+
+```js
+resolve: {
+  alias: [
+    { find: 'utils', replacement: '../../../utils' },
+    { find: 'batman-1.0.0', replacement: './joker-1.5.0' },
+  ]
+}
+```
+
+Cuando `find` es una expresión regular, el `replacement` puede usar [patrones de reemplazo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement), como `$1`. Por ejemplo, para eliminar extensiones con otra, un patrón como el siguiente podría usarse:
+
+```js
+{ find:/^(.*)\.js$/, replacement: '$1.alias' }
+```
+
+La opción `customResolver` puede usarse para proporcionar una resolución de módulo separada para un alias individual.
 
 ## resolve.dedupe
 

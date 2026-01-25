@@ -113,25 +113,11 @@ Ahora el comando `preview` iniciará el servidor en `http://localhost:8080`.
 
 ### CLI de Netlify
 
-1. Instala la [CLI de Netlify](https://cli.netlify.com/).
-2. Crea un nuevo sitio usando `ntl init`.
-3. Despliega usando `ntl deployment`.
+1. Instala la [CLI de Netlify](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/) a través de `npm install -g netlify-cli`.
+2. Crea un nuevo sitio usando `netlify init`.
+3. Despliega usando `netlify deploy`.
 
-```bash
-# Instala el CLI de Netlify
-$ npm install -g netlify-cli
-# Crea un nuevo sitio en Netlify
-$ ntl init
-# Despliega en una URL de vista previa única
-$ ntl deploy
-```
-
-La CLI de Netlify te compartirá una URL de vista previa para inspeccionar. Cuando esté listo para entrar a producción, usa el indicador `prod`:
-
-```bash
-# Despliega el sitio en producción
-$ ntl deploy --prod
-```
+La CLI de Netlify te compartirá una URL de vista previa para inspeccionar. Cuando esté listo para entrar a producción, usa el indicador `prod`: `netlify deploy --prod`.
 
 ### Netlify con Git
 
@@ -147,19 +133,11 @@ Después de que tu proyecto haya sido importado y desplegado, todos los pushs su
 
 ### CLI de Vercel
 
-1. Instala el [CLI de Vercel](https://vercel.com/cli) y ejecuta `vercel` para desplegar.
+1. Instala el [CLI de Vercel](https://vercel.com/cli) a través de `npm i -g vercel` y ejecuta `vercel` para desplegar.
 2. Vercel detectará que estás utilizando Vite y habilitará la configuración correcta para su despliegue.
 3. ¡Tu aplicación está desplegada! (por ejemplo, [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
 
-```bash
-$ npm i -g vercel
-$ vercel init vite
-Vercel CLI
-> Success! Initialized "vite" example in ~/your-folder.
-- To deploy, `cd vite` and run `vercel`.
-```
-
-### Vercel para Git
+### Vercel con Git
 
 1. Haz un push de tu código en tu repositorio de git (GitHub, GitLab, Bitbucket).
 2. [Importa tu proyecto Vite](https://vercel.com/new) a Vercel.
@@ -211,9 +189,11 @@ También puedes agregar dominios personalizados y manejar la configuración de c
 
 ## Google Firebase
 
-1. Asegúrate de tener [firebase-tools](https://www.npmjs.com/package/firebase-tools) instalado.
+1. Instala [firebase-tools](https://www.npmjs.com/package/firebase-tools) a través de `npm i -g firebase-tools`.
 
-2. Crea `firebase.json` y `.firebaserc` en la raíz de tu proyecto con el siguiente contenido:
+2. Crea los siguientes archivos en la raíz de tu proyecto:
+
+   ::: code-group
 
    ```json [firebase.json]
    {
@@ -238,14 +218,14 @@ También puedes agregar dominios personalizados y manejar la configuración de c
    }
    ```
 
-3. Despues de ejecutar `npm run build`, despliega usando el comando `firebase deploy`.
+   :::
+
+3. Después de ejecutar `npm run build`, despliega usando el comando `firebase deploy`.
 
 ## Surge
 
-1. Primero instala [surge](https://www.npmjs.com/package/surge), si aún no lo has hecho.
-
+1. Instala [surge](https://www.npmjs.com/package/surge) a través de `npm i -g surge`.
 2. Ejecuta `npm run build`.
-
 3. Despliega en Surge escribiendo `surge dist`.
 
 También puedes desplegar en un [dominio personalizado](https://surge.sh/help/adding-a-custom-domain) agregando `surge dist yourdomain.com`.
@@ -279,9 +259,7 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
    - **Comando de compilación**: `npm install && npm run build`
    - **Directorio público**: `dist`
 
-5. Has clic en **Crear sitio estático**.
-
-   Tu aplicación debe desplegarse en `https://<PROJECTNAME>.onrender.com/`.
+5. Has clic en **Crear sitio estático**. Tu aplicación debe desplegarse en `https://<PROJECTNAME>.onrender.com/`.
 
 De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
 
