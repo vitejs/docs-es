@@ -110,7 +110,7 @@ VITE_BAR=bar
 ```
 
 Esto no funciona en scripts de shell y otras herramientas como `docker compose`.
-Dicho esto, Vite admite este comportamiento ya que ha sido soportado por `dotenv-expand` durante mucho tiempo y otras herramientas en el ecosistema de JavaScript utilizan versiones antiguas que admiten este comportamiento.
+Dicho esto, Vite admite este comportamiento ya que ha sido soportado por `dotenv-expand` durante mucho tiempo y otras herramientas en el ecosistema de JavaScript utilizan versiones antiguas que soportan este comportamiento.
 
 Para evitar problemas de interoperabilidad, se recomienda evitar depender de este comportamiento. Vite podría comenzar a emitir advertencias por este comportamiento en el futuro.
 

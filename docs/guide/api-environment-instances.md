@@ -8,7 +8,7 @@ Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un 
 **Recursos:**
 
 - [Discusión de feedback](https://github.com/vitejs/vite/discussions/16358), donde estamos recopilando opiniones sobre las nuevas APIs.
-- [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471), donde se implementó y revisó la nueva API.
+- [Solicitud de cambios de la API de Entorno](https://github.com/vitejs/vite/pull/16471), donde se implementó y revisó las nuevas APIs.
 
 Por favor, comparte tus comentarios con nosotros.
 :::

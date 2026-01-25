@@ -2,7 +2,7 @@
 
 Consulta la [guía de solución de problemas de Rollup](https://rollupjs.org/troubleshooting/) para obtener más información también.
 
-Si estas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vitejs/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vite.dev).
+Si éstas sugerencias no funcionan, prueba colocando tus preguntas en [las discusiones de GitHub](https://github.com/vitejs/vite/discussions) o en el canal `#help` de [ViteLand Discord](https://chat.vite.dev).
 
 ## CLI
 

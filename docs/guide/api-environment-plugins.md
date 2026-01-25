@@ -47,7 +47,7 @@ Los plugins pueden agregar nuevos entornos en el hook `config`. Por ejemplo, [el
   }
 ```
 
-Un objeto vacío es suficiente para registrar el entorno, con valores predeterminados desde la configuración de entorno a nivel raíz.
+Un objeto vacío es suficiente para registrar el entorno, usando los valores predeterminados desde la configuración de entorno a nivel raíz.
 
 ## Configuración del Entorno usando Hooks
 

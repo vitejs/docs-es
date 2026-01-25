@@ -32,7 +32,7 @@ Para los usuarios que migran de `rolldown-vite` a Vite 8, puedes deshacer los ca
 }
 ```
 
-### El optimizador de dependencias ahora usa Rolldown
+### El Optimizador de Dependencias Ahora Usa Rolldown
 
 Rolldown ahora se utiliza para la optimización de dependencias en lugar de esbuild. Vite todavía soporta [`optimizeDeps.esbuildOptions`](/config/dep-optimization-options#optimizedeps-esbuildoptions) para compatibilidad con versiones anteriores, convirtiéndolo automáticamente a [`optimizeDeps.rolldownOptions`](/config/dep-optimization-options#optimizedeps-rolldownoptions). `optimizeDeps.esbuildOptions` ahora está obsoleto y se eliminará en el futuro, y te animamos a migrar a `optimizeDeps.rolldownOptions`.
 
@@ -338,7 +338,7 @@ Las siguientes opciones están obsoletas y se eliminarán en el futuro:
 
 ## Cambios Generales [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
-## Características obsoletas eliminadas [<Badge text="NRV" type="warning" />](#migration-from-v7)
+## Características Obsoletas Eliminadas [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 **_POR HACER: Este cambio aún no está implementado, pero se implementará antes de la versión estable._**
 
@@ -347,19 +347,13 @@ Las siguientes opciones están obsoletas y se eliminarán en el futuro:
 Estos cambios rotóricos se espera que afecten solo a una minoría de casos de uso:
 
 - **[POR HACER: esto se corregirá antes de la versión estable]** https://github.com/rolldown/rolldown/issues/5726 (afecta a nuxt, qwik)
-- **[POR HACER: esto se corregirá antes de la versión estable]** https://github.com/rolldown/rolldown/issues/3403 (afecta a sveltekit)
 - **[POR HACER: esto se corregirá antes de la versión estable]** Los fragmentos heredados se emiten como un archivo de activo en lugar de un archivo de fragmento debido a la falta de la función de emisión de fragmento preconstruido ([rolldown#4304](https://github.com/rolldown/rolldown/issues/4034)). Esto significa que las opciones relacionadas con los fragmentos no se aplican a los fragmentos heredados y el archivo de manifiesto no incluirá los fragmentos heredados como un archivo de fragmento.
-- **[POR HACER: esto se corregirá antes de la versión estable]** La memoria caché del resolutor rompe casos menores en Vitest ([rolldown-vite#466](https://github.com/vitejs/rolldown-vite/issues/466), [vitest#8754](https://github.com/vitest-dev/vitest/issues/8754#issuecomment-3441115032))
-- **[POR HACER: esto se corregirá antes de la versión estable]** El resolutor no funciona con yarn pnp ([rolldown-vite#324](https://github.com/vitejs/rolldown-vite/issues/324), [rolldown-vite#392](https://github.com/vitejs/rolldown-vite/issues/392))
-- **[POR HACER: esto se corregirá antes de la versión estable]** Problema de ordenamiento de plugins nativos ([rolldown-vite#373](https://github.com/vitejs/rolldown-vite/issues/373))
 - **[POR HACER: esto se corregirá antes de la versión estable]** Caso límite del comentario `@vite-ignore` ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
-- **[POR HACER: esto se corregirá antes de la versión estable]** https://github.com/rolldown/rolldown/issues/3403
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) aún no son compatibles ([rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365))
 - `define` no comparte referencias para objetos: Cuando pasas un objeto como valor a `define`, cada variable tendrá una copia separada del objeto. Consulta el [documento del Transformador Oxc](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define) para más detalles.
 - Cambios en el objeto `bundle` (`bundle` es un objeto pasado en los hooks `generateBundle` / `writeBundle`, devuelto por la función `build`):
   - Asignar a `bundle[foo]` no es compatible. Rollup tampoco recomienda esto. Por favor, usa `this.emitFile()` en su lugar.
   - La referencia no se comparte entre los hooks ([rolldown-vite#410](https://github.com/vitejs/rolldown-vite/issues/410))
-  - `structuredClone(bundle)` produce errores con `DataCloneError: #<Object> no se pudo clonar`. Esto ya no es compatible. Por favor, clónalo con `structuredClone({ ...bundle })`. ([rolldown-vite#128](https://github.com/vitejs/rolldown-vite/issues/128))
 - Todos los hooks paralelos en Rollup funcionan como hooks secuenciales. Consulta la [documentación de Rolldown](https://rolldown.rs/apis/plugin-api#sequential-hook-execution) para más detalles.
 - `"use strict";` no se inyecta a veces. Consulta la [documentación de Rolldown](https://rolldown.rs/in-depth/directives) para más detalles.
 - La transformación a ES5 inferior con plugin-legacy no es compatible ([rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452))
@@ -372,7 +366,7 @@ Estos cambios rotóricos se espera que afecten solo a una minoría de casos de u
   - Hook `resolveImportMeta` ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
   - Hook `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Hook `resolveFileUrl`
-- Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parseSync` / `parse` que tienen más características.
+- Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parseSync` / `parse` que ahora tienen más características.
 
 ## Migración desde v6
 

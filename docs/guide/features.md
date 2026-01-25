@@ -140,7 +140,7 @@ Los tipos predeterminados de Vite son para su API de Node.js. Para ajustar el en
 
 ::: details Usando `compilerOptions.types`
 
-Como altenativa, puedes agregar `vite/client` a `compilerOptions.types` en tu `tsconfig.json`:
+Como alternativa, puedes agregar `vite/client` a `compilerOptions.types` en tu `tsconfig.json`:
 
 ```json [tsconfig.json]
 {
@@ -332,7 +332,7 @@ npm add -D stylus
 
 Si usas componentes de archivo único de Vue (SFC), esto también habilita automáticamente `<style lang="sass">` et al.
 
-Vite mejora la resolución de `@import` para Sass y Less para que también se respeten los alias de Vite. Además, las referencias `url()` relativas dentro de los archivos Sass/Less importados que se encuentran en directorios diferentes del archivo raíz también se reorganizan automáticamente para garantizar la corrección. Las referencias `url()` que comienzan con una variable o una interpolación tampoco son compatibles debido a las restricciones de su API.
+Vite mejora la resolución de `@import` para Sass y Less, por lo que también se respetan los alias de Vite. Además, las referencias `url()` relativas dentro de archivos Sass/Less importados que se encuentran en directorios diferentes del archivo raíz se reorganizan automáticamente para garantizar la corrección. No se admite el cambio de base de las referencias `url()` que comienzan con una variable o una interpolación debido a las limitaciones de su API.
 
 El alias `@import` y el cambio de base de URL no son compatibles con Stylus debido a las limitaciones de su API.
 
@@ -761,7 +761,7 @@ const worker = new MyWorker()
 
 El script del worker también puede usar sentencias ESM `import` en lugar de `importScripts()`; **Nota**: ten en cuenta que durante el desarrollo esto depende del [soporte nativo del navegador](https://caniuse.com/?search=module%20worker), pero para la compilación de producción está compilado.
 
-De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas listar el worker como cadenas base64, agrega el parámetro `inline`:
+De forma predeterminada, el script del worker se emitirá como un fragmento separado en la compilación de producción. Si deseas incrustar el worker como cadenas base64, agrega el parámetro `inline`:
 
 ```js twoslash
 import 'vite/client'
@@ -769,7 +769,7 @@ import 'vite/client'
 import MyWorker from './worker?worker&inline'
 ```
 
-Si deseas listar el worker como una URL, agrega el parámetro `url`:
+Si deseas recuperar el worker como una URL, agrega el parámetro `url`:
 
 ```js twoslash
 import 'vite/client'

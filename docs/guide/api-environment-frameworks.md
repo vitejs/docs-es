@@ -306,10 +306,12 @@ export function createHandler(input) {
 
 En el CLI, llamar a `vite build` y `vite build --ssr` todavía compilará los entornos del cliente solo y ssr solo para retrocompatibilidad.
 
-Cuando `builder` no es `undefined` (o cuando se llama a `vite build --app`), `vite build` opta por compilar la aplicación completa en su lugar. En el futuro, esta será la opción predeterminada. Se creará una instancia de `ViteBuilder` (equivalente de tiempo de compilación a `ViteDevServer`) para compilar todos los entornos configurados para producción. Por defecto, la compilación de entornos se ejecuta en serie, respetando el orden de la `environments` record. Un framework o usuario puede configurar adicionalmente cómo se compilan los entornos usando:
+Cuando la opción `builder` no es `undefined` (o cuando se llama a `vite build --app`), `vite build` opta por compilar la aplicación completa en su lugar. En el futuro, esta será la opción predeterminada. Se creará una instancia de `ViteBuilder` (equivalente de tiempo de compilación a `ViteDevServer`) para compilar todos los entornos configurados para producción. Por defecto, la compilación de entornos se ejecuta en serie, respetando el orden de la `environments` record. Un framework o usuario puede configurar adicionalmente cómo se compilan los entornos usando la opción `builder.buildApp`:
 
-```js
-export default {
+```js [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
   builder: {
     buildApp: async (builder) => {
       const environments = Object.values(builder.environments)
@@ -318,10 +320,10 @@ export default {
       )
     },
   },
-}
+})
 ```
 
-Los plugins también pueden definir un hook `buildApp`. Las ordenes `'pre'` y `null` se ejecutan antes que `builder.buildApp`, y la orden `'post'` se ejecuta después de ella. `environment.isBuilt` se puede usar para verificar si un entorno ya ha sido compilado.
+Los plugins también pueden definir un hook `buildApp`. Las órdenes `'pre'` y `null` se ejecutan antes que `builder.buildApp`, y la orden `'post'` se ejecuta después de ella. `environment.isBuilt` se puede usar para verificar si un entorno ya ha sido compilado.
 
 ## Código Agnóstico de Entorno
 

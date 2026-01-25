@@ -71,11 +71,11 @@
     "react-dom": "^18.3.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.48.0",
+    "typescript-eslint": "^8.52.0",
     "vitepress": "2.0.0-alpha.15",
     "vitepress-plugin-group-icons": "^1.6.5",
-    "vue": "^3.5.25",
-    "vue-tsc": "^3.1.8",
+    "vue": "^3.5.26",
+    "vue-tsc": "^3.2.2",
     "rolldown": "1.0.0-rc.1"
   },
   "packageManager": "pnpm@10.28.1"

@@ -48,7 +48,7 @@ Si eres nuevo en Vite, te recomendamos que leas la [Guía de por qué Vite](../g
 
 ## Nueva Documentación
 
-Ve a [vite.dev](https://vite.dev) para disfrutar de la nueva documentacion para la v3. Vite ahora usa el nuevo tema predeterminado para [VitePress](https://vitepress.vuejs.org), con un impresionante modo oscuro entre otras características.
+Ve a [vite.dev](https://vite.dev) para disfrutar de la nueva documentación para la v3. Vite ahora usa el nuevo tema predeterminado para [VitePress](https://vitepress.vuejs.org), con un impresionante modo oscuro entre otras características.
 
 [![Página de inicio de documentación de Vite](../images/v3-docs.webp)](https://es.vite.dev)
 
@@ -257,7 +257,7 @@ Hemos trabajado de cerca con proyectos en el ecosistema para garantizar que los 
 
 Vite 3 es el resultado del esfuerzo conjunto de los miembros del [Equipo de Vite](/team) que trabajan junto con los mantenedores del proyecto del ecosistema y otros colaboradores del núcleo de Vite.
 
-Queremos agradecer a todos los que han implementado funciones y correcciones, han brindado comentarios y han estado involucrados en Vite 3:
+Queremos agradecer a quienes han implementado funciones y correcciones, han brindado comentarios y han estado involucrados en Vite 3:
 
 - Miembros del equipo de Vite [@youyuxi](https://twitter.com/youyuxi), [@patak_dev](https://twitter.com/patak_dev), [@antfu7](https://twitter.com/antfu7), [@bluwyoo](https://twitter.com/bluwyoo), [@sapphi_red](https://twitter.com/sapphi_red), [@haoqunjiang](https://twitter.com/haoqunjiang), [@poyoho](https://github.com/poyoho), [@Shini_92](https://twitter.com/Shini_92), y [@retropragma](https://twitter.com/retropragma).
 - [@benmccann](https://github.com/benmccann), [@danielcroe](https://twitter.com/danielcroe), [@brillout](https://twitter.com/brillout), [@sheremet_va](https://twitter.com/sheremet_va), [@userquin](https://twitter.com/userquin), [@enzoinnocenzi](https://twitter.com/enzoinnocenzi), [@maximomussini](https://twitter.com/maximomussini), [@IanVanSchooten](https://twitter.com/IanVanSchooten), el [equipo de Astro](https://astro.build/), y todos los demás mantenedores de marcos y plugins en el ecosistema que ayudaron a dar forma a v3.
@@ -265,7 +265,7 @@ Queremos agradecer a todos los que han implementado funciones y correcciones, ha
 - [@ZoltanKochan](https://twitter.com/ZoltanKochan) por su trabajo en [pnpm](https://pnpm.io/), y por su capacidad de respuesta cuando necesitábamos apoyo.
 - [@rixo](https://github.com/rixo) por el soporte de aceptación parcial de HMR.
 - [@KiaKing85](https://twitter.com/KiaKing85) por preparar el tema para el lanzamiento de Vite 3, y [@\_brc_dd](https://twitter.com/_brc_dd) por trabajar en las partes internas de VitePress.
-- [@CodingWithCego](https://twitter.com/CodingWithCego) por la nueva traduccion al español, y [@ShenQingchuan](https://twitter.com/ShenQingchuan), [@hiro-lapis](https://github.com/hiro-lapis) y a otros en los equipos de traducción de chino y japonés por mantener actualizados los documentos traducidos.
+- [@CodingWithCego](https://twitter.com/CodingWithCego) por la nueva traducción al español, y [@ShenQingchuan](https://twitter.com/ShenQingchuan), [@hiro-lapis](https://github.com/hiro-lapis) y a otros en los equipos de traducción de chino y japonés por mantener actualizados los documentos traducidos.
 
 También queremos agradecer a las personas y empresas que patrocinan el equipo de Vite, y a las empresas que invierten en el desarrollo de Vite: parte del trabajo de [@antfu7](https://twitter.com/antfu7) en Vite y el ecosistema es parte de su trabajo en [Nuxt Labs](https://nuxtlabs.com/), y [StackBlitz](https://stackblitz.com/) contrató a [@patak_dev](https://twitter.com/patak_dev) para trabajar a tiempo completo en Vite.
 

@@ -8,7 +8,7 @@ Los plugins de Vite amplían la interfaz de plugins bien diseñada de Rollup con
 
 ## Creación de un Plugin
 
-Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo plugin, asegúrate de consultar la [Guía de funcionalidades](/guide/features) para ver si tu necesidad está cubierta. Revisa también los plugins de la comunidad disponibles, tanto en forma de [plugins de Rollup compatible](https://github.com/rollup/awesome) como [plugins específicos de Vite](https://github.com/vitejs/awesome-vite#plugins)
+Vite se esfuerza por ofrecer patrones establecidos listos para usar, así que antes de crear un nuevo plugin, asegúrate de consultar la [Guía de funcionalidades](/guide/features) para ver si tu necesidad está cubierta. Revisa también los plugins de la comunidad disponibles, tanto en forma de [plugins de Rollup compatible](https://github.com/rollup/awesome) como [plugins específicos de Vite](https://github.com/vitejs/awesome-vite#plugins).
 
 Al crear un plugin, puedes colocarlo en tu `vite.config.js`. No hay necesidad de crear un nuevo paquete para ello. Una vez que veas que un plugin fue útil en tus proyectos, considera compartirlo para ayudar a otros [en el ecosistema](https://chat.vite.dev).
 
@@ -33,7 +33,7 @@ Solo para plugins de Vite
 - Incluye la palabra clave `vite-plugin` en package.json.
 - Incluye una sección en los documentos del plugin que detalle por qué es un plugin exclusivo de Vite (por ejemplo, utiliza hooks de plugin específicos de Vite).
 
-Si tu plugin solo funcionará para un marco de trabajo en particular, su nombre debe incluirse como parte del prefijo
+Si tu plugin solo funcionará para un marco de trabajo en particular, su nombre debe incluirse como parte del prefijo.
 
 - Prefijo `vite-plugin-vue-` para Vue
 - Prefijo `vite-plugin-react-` para React

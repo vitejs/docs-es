@@ -35,7 +35,7 @@ Vite 3 [fue lanzado](./anunciando-vite3.md) hace 5 meses. Las descargas de npm p
 
 Como muestra del crecimiento que han experimentado Vite y los proyectos relacionados, el ecosistema de Vite se reunió el 11 de octubre en el [ViteConf 2022](https://viteconf.org/2022/replay). Vimos a representantes del principal marco web y herramientas contar historias de innovación y colaboración. Y en un movimiento simbólico, el equipo de Rollup elige ese día exacto para lanzar [Rollup 3](https://rollupjs.org).
 
-Hoy, el [equipo de desarrollo principal de Vite](https://es.vite.dev/team) con la ayuda de nuestros socios del ecosistema, se complace en anunciar el lanzamiento de Vite 4, impulsado durante el tiempo de compilación por Rollup 3. Hemos trabajado con el ecosistema para garantizar una ruta de actualización sin problemas para esta nueva especialidad. Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
+Hoy, el [equipo de desarrollo principal de Vite](https://es.vite.dev/team) con la ayuda de nuestros socios del ecosistema, se complacen en anunciar el lanzamiento de Vite 4, impulsado durante el tiempo de compilación por Rollup 3. Hemos trabajado con el ecosistema para garantizar una ruta de actualización sin problemas para esta nueva versión. Vite ahora usa [Rollup 3](https://github.com/vitejs/vite/issues/9870), lo que nos permitió simplificar el manejo interno de recursos de Vite y tiene muchas mejoras. Consulta las [notas de la versión de Rollup 3 aquí](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
 ![Imagen de portada del anuncio de Vite 4](../public/og-image-announcing-vite4.webp)
 
@@ -113,7 +113,7 @@ Para obtener más detalles, consulta [`dotenv`](https://github.com/motdotla/dote
 
 ## Tamaño de paquete reducido
 
-Vite se preocupa por su huella, para agilizar la instalación, especialmente en el caso de uso de playgrounds para documentación y reproducciones. Y una vez más, esta especialidad trae mejoras en el tamaño del paquete de Vite. El tamaño de instalación de Vite 4 es un 23% más pequeño en comparación con vite 3.2.5 (14,1 MB frente a 18,3 MB).
+Vite se preocupa por su huella, para agilizar la instalación, especialmente en el caso de uso de playgrounds para documentación y reproducciones. Y una vez más, esta versión trae mejoras en el tamaño del paquete de Vite. El tamaño de instalación de Vite 4 es un 23% más pequeño en comparación con vite 3.2.5 (14,1 MB frente a 18,3 MB).
 
 ## Actualizaciones al Core de Vite
 
