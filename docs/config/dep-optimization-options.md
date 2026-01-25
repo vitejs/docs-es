@@ -53,10 +53,11 @@ export default defineConfig({
 
 ## optimizeDeps.rolldownOptions <NonInheritBadge />
 
-- **Tipo:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`RolldownOptions`, `'input' | 'logLevel' | 'output'> & {
-  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`RolldownOutputOptions`,
-  `'format' | 'sourcemap' | 'dir' | 'banner'>`
-}``
+- **Tipo:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<``[`RolldownOptions`](https://rolldown.rs/reference/), `'input' | 'logLevel' | 'output'> & {
+  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`
+    [`RolldownOutputOptions`](https://rolldown.rs/reference/),
+    `'format' | 'sourcemap' | 'dir' | 'banner'>`
+}`
 
 Opciones para pasar a Rolldown durante el escaneo y optimización de la dependencia.
 

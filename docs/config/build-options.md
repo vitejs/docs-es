@@ -162,12 +162,10 @@ Esta opción es un alias de la opción `build.rolldownOptions`. Usa la opción `
 
 ## build.dynamicImportVarsOptions
 
-- **Tipo:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
+- **Tipo:** `{ include?: string | RegExp | (string | RegExp)[], exclude?: string | RegExp | (string | RegExp)[] }`
 - **Relacionado:** [Importado dinámico](/guide/features#importacion-dinamica)
 
-Opciones para pasar a [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
-
-<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-dynamic-import-vars. we should say it's compatible with it though -->
+Determina si transformar importaciones dinámicas con variables.
 
 ## build.lib
 
@@ -219,9 +217,7 @@ Cuando se configura en `true`, la compilación generará un archivo `.vite/licen
 
 ::: tip
 
-Si deseas referenciar el archivo de licencia en el código compilado, puedes usar `build.rolldownOptions.output.postBanner` para inyectar un comentario al principio de los archivos. Por ejemplo:
-
-<!-- TODO: agregar un enlace para output.postBanner arriba a la documentación de Rolldown -->
+Si deseas referenciar el archivo de licencia en el código compilado, puedes usar [`build.rolldownOptions.output.postBanner`](https://rolldown.rs/reference/OutputOptions.postBanner#postbanner) para inyectar un comentario al principio de los archivos. Por ejemplo:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'

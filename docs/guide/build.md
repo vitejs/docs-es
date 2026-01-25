@@ -64,7 +64,7 @@ Por ejemplo, puedes especificar varias salidas de Rolldown con plugins que solo 
 
 ## Estrategia de división
 
-Puedes configurar cómo se dividen los fragmentos utilizando `build.rolldownOptions.output.advancedChunks` (consulta la [documentación de Rolldown](https://rolldown.rs/in-depth/advanced-chunks)). Si usas un framework, consulta su documentación para configurar cómo se dividen los fragmentos.
+Puedes configurar cómo se dividen los fragmentos utilizando [`build.rolldownOptions.output.codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) (consulta la [documentación de Rolldown](https://rolldown.rs/in-depth/manual-code-splitting)). Si usas un framework, consulta su documentación para configurar cómo se dividen los fragmentos.
 
 ## Manejo de Errores de Carga
 
@@ -81,8 +81,6 @@ Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los
 ## Recompilar en Cambios de Archivos
 
 Puedes habilitar el observador de Rolldown con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) a través de `build.watch`:
-
-<!-- TODO: update the link above to Rolldown's documentation -->
 
 ```js [vite.config.js]
 // vite.config.js

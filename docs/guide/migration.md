@@ -38,19 +38,17 @@ Rolldown ahora se utiliza para la optimización de dependencias en lugar de esbu
 
 Las siguientes opciones se convierten automáticamente:
 
-- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> `rolldownOptions.output.minify`
-- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> `rolldownOptions.treeshake`
-- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> `rolldownOptions.transform.define`
-- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> `rolldownOptions.moduleTypes`
-- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> `!rolldownOptions.resolve.symlinks`
-- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> `rolldownOptions.resolve.extensions`
-- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> `rolldownOptions.resolve.mainFields`
-- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> `rolldownOptions.resolve.conditionNames`
-- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> `rolldownOptions.output.keepNames`
-- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> `rolldownOptions.platform`
-- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> `rolldownOptions.plugins` (soporte parcial)
-
-<!-- TODO: add link to rolldownOptions.* -->
+- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> [`rolldownOptions.output.minify`](https://rolldown.rs/reference/OutputOptions.minify)
+- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> [`rolldownOptions.treeshake`](https://rolldown.rs/reference/InputOptions.treeshake)
+- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> [`rolldownOptions.transform.define`](https://rolldown.rs/reference/InputOptions.transform#define)
+- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> [`rolldownOptions.moduleTypes`](https://rolldown.rs/reference/InputOptions.moduleTypes)
+- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> [`!rolldownOptions.resolve.symlinks`](https://rolldown.rs/reference/InputOptions.resolve#symlinks)
+- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> [`rolldownOptions.resolve.extensions`](https://rolldown.rs/reference/InputOptions.resolve#extensions)
+- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> [`rolldownOptions.resolve.mainFields`](https://rolldown.rs/reference/InputOptions.resolve#mainfields)
+- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> [`rolldownOptions.resolve.conditionNames`](https://rolldown.rs/reference/InputOptions.resolve#conditionnames)
+- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> [`rolldownOptions.output.keepNames`](https://rolldown.rs/reference/OutputOptions.keepNames)
+- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> [`rolldownOptions.platform`](https://rolldown.rs/reference/InputOptions.platform)
+- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> [`rolldownOptions.plugins`](https://rolldown.rs/reference/InputOptions.plugins) (soporte parcial)
 
 Puedes obtener las opciones establecidas por la capa de compatibilidad desde el hook `configResolved`:
 
@@ -293,19 +291,15 @@ Consulta la documentación de Rolldown para obtener más detalles: [`require` m�
 
 ### `import.meta.url` en UMD / IIFE
 
-`import.meta.url` ya no se polifiliza en los formatos de salida UMD / IIFE. Se reemplazará con `undefined` por defecto. Si prefieres el comportamiento anterior, puedes usar la opción `define` con la opción `build.rolldownOptions.output.intro`. Consulta la documentación de Rolldown para más detalles: [Propiedades `import.meta` conocidas - Formatos de salida no ESM | Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties).
+`import.meta.url` ya no se polifiliza en los formatos de salida UMD / IIFE. Se reemplazará con `undefined` por defecto. Si prefieres el comportamiento anterior, puedes usar la opción [`define`](/config/shared-options#define) con la opción [`build.rolldownOptions.output.intro`](https://rolldown.rs/reference/OutputOptions.intro). Consulta la documentación de Rolldown para más detalles: [Propiedades `import.meta` conocidas - Formatos de salida no ESM | Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties).
 
 ### Eliminación de la opción `build.rollupOptions.watch.chokidar`
 
-La opción `build.rollupOptions.watch.chokidar` se eliminó. Por favor, migra a la opción `build.rolldownOptions.watch.notify`.
-
-<!-- TODO: add link to rolldownOptions.watch.notify -->
+La opción `build.rollupOptions.watch.chokidar` se eliminó. Por favor, migra a la opción [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify).
 
 ### Deprecación de `build.rollupOptions.output.manualChunks`
 
-La opción `build.rollupOptions.output.manualChunks` se ha desechado. Rolldown tiene la opción `advancedChunks` más flexible. Consulta la documentación de Rolldown para más detalles sobre `advancedChunks`: [Advanced Chunks - Rolldown](https://rolldown.rs/in-depth/advanced-chunks).
-
-<!-- TODO: add link to rolldownOptions.output.advancedChunks -->
+La opción `build.rollupOptions.output.manualChunks` es obsoleta. Rolldown tiene la opción [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) más flexible. Consulta la documentación de Rolldown para más detalles sobre `codeSplitting`: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
 
 ### Soporte y Detección Automática de Tipos de Módulo
 
@@ -335,6 +329,7 @@ Las siguientes opciones están obsoletas y se eliminarán en el futuro:
 - `build.rollupOptions`: renombrado a `build.rolldownOptions`
 - `worker.rollupOptions`: renombrado a `worker.rolldownOptions`
 - `build.commonjsOptions`: ahora es una operación no operativa
+- `build.dynamicImportVarsOptions.warnOnError`: ahora es no operativa
 
 ## Cambios Generales [<Badge text="NRV" type="warning" />](#migration-from-v7)
 

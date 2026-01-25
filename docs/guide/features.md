@@ -644,6 +644,14 @@ const module = await import(`./dir/${file}.js`)
 
 Ten en cuenta que las variables solo representan nombres de archivo de un nivel de profundidad. Si `file` es `'foo/bar'`, la importación fallaría. Para un uso más avanzado, puede utilizar la función [importación de glob](#importaciones-glob)
 
+También ten en cuenta que la importación dinámica debe cumplir con las siguientes reglas para ser incluida en el bundle:
+
+- Las importaciones deben comenzar con `./` o `../`: ``import(`./dir/${foo}.js`)`` es válido, pero ``import(`${foo}.js`)`` no lo es.
+- Las importaciones deben terminar con una extensión de archivo: ``import(`./dir/${foo}.js`)`` es válido, pero ``import(`./dir/${foo}`)`` no lo es.
+- Las importaciones al propio directorio deben especificar un patrón de nombre de archivo: ``import(`./prefix-${foo}.js`)`` es válido, pero ``import(`./${foo}.js`)`` no lo es.
+
+Estas reglas se aplican para evitar importar accidentalmente archivos que no están destinados a ser incluidos en el bundle. Por ejemplo, sin estas reglas, `import(foo)` incluiría todo en el sistema de archivos.
+
 ## WebAssembly
 
 Los archivos `.wasm` precompilados se pueden importar con `?init`.
