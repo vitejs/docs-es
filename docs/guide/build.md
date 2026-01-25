@@ -48,15 +48,13 @@ Se requiere soporte para `import.meta` para las bases relativas. Si necesitas so
 
 ## Personalizando la compilación
 
-La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rolldown](https://rollupjs.org/configuration-options/) fundamentales a través de `build.rolldownOptions`:
-
-<!-- TODO: update the link above and below to Rolldown's documentation -->
+La compilación se puede personalizar a través de varias [opciones de configuración de build](/config/build-options). Específicamente, puedes ajustar directamente las [opciones de Rolldown](https://rolldown.rs/reference/) fundamentales a través de `build.rolldownOptions`:
 
 ```js [vite.config.js]
 export default defineConfig({
   build: {
     rolldownOptions: {
-      // https://rollupjs.org/configuration-options/
+      // https://rolldown.rs/reference/
     },
   },
 })
@@ -82,7 +80,7 @@ Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los
 
 ## Recompilar en Cambios de Archivos
 
-Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch-options) a través de `build.watch`:
+Puedes habilitar el observador de Rolldown con `vite build --watch`. O bien, puedes ajustar directamente las [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) a través de `build.watch`:
 
 <!-- TODO: update the link above to Rolldown's documentation -->
 
@@ -91,7 +89,7 @@ Puedes habilitar el observador de Rollup con `vite build --watch`. O bien, puede
 export default defineConfig({
   build: {
     watch: {
-      // https://rollupjs.org/configuration-options/#watch-options
+      // https://rolldown.rs/reference/InputOptions.watch
     },
   },
 })

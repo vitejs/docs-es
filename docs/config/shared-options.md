@@ -277,6 +277,10 @@ export default defineConfig({
 })
 ```
 
+::: tip Importar archivos
+Dado que el mismo código se antepone a archivos en diferentes directorios, las rutas relativas no se resolverán correctamente. Usa rutas absolutas o [aliases](#resolve-alias) en su lugar.
+:::
+
 ## css.preprocessorMaxWorkers
 
 - **Tipo:** `number | true`

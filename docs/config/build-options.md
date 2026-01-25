@@ -149,22 +149,23 @@ Genera mapas de fuentes de producción. Si es `true`, se creará un archivo de m
 
 ## build.rolldownOptions
 
-- **Tipo:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+- **Tipo:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
-Personaliza directamente el paquete Rolldown relacionado. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rolldown y se fusionarán con las opciones de Rolldown internas de Vite. Consulta la [documentación de opciones de Rollup](https://rollupjs.org/configuration-options/) para obtener más detalles.
+Personaliza directamente el paquete Rolldown subyacente. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rolldown y se fusionarán con las opciones de Rolldown internas de Vite. Consulta la [documentación de opciones de Rolldown](https://rolldown.rs/reference/) para obtener más detalles.
 
-## build.commonjsOptions
+## build.rollupOptions
 
-- **Tipo:** [`RollupCommonJSOptions`](https://github.com/rollup/plugins/tree/master/packages/commonjs#options)
+- **Tipo:** `RolldownOptions`
+- **Deprecated**
 
-Opciones para [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs).
+Esta opción es un alias de la opción `build.rolldownOptions`. Usa la opción `build.rolldownOptions` en su lugar.
 
 ## build.dynamicImportVarsOptions
 
 - **Tipo:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
 - **Relacionado:** [Importado dinámico](/guide/features#importacion-dinamica)
 
-Opciones para [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
+Opciones para pasar a [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
 
 <!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-dynamic-import-vars. we should say it's compatible with it though -->
 
@@ -343,7 +344,7 @@ Límite para advertencias de tamaño de fragmento (en kB). Se compara con el tam
 
 ## build.watch
 
-- **Tipo:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)` | null
+- **Tipo:** [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch)` | null
 - **Por defecto:** `null`
 
 Configurar en `{}` para habilitar el observador de Rolldown. Esto se usa principalmente en casos que involucran plugins de solo compilación o procesos de integración.

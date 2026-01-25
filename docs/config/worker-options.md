@@ -20,11 +20,9 @@ A menos que se indique lo contrario, las opciones en esta sección se aplican a 
 
 ## worker.rolldownOptions
 
-<!-- TODO: update the link below to Rolldown's documentation -->
+- **Tipo:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
-- **Tipo:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
-
-  Opciones de Rolldown para crear un paquete de worker de compilación.
+Opciones de Rolldown para crear un paquete de worker de compilación.
 
 ## worker.rollupOptions
 
