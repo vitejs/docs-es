@@ -140,7 +140,7 @@ function getImageUrl(name) {
 }
 ```
 
-Durante la compilación en producción, Vite realizará las transformaciones necesarias para que las URL sigan apuntando a la ubicación correcta incluso después del empaquetado y el hashing de recursos. Sin embargo, la cadena de texto de URL debe ser estática la cual permita ser analizada, de otro modo el codigo permanecerá como está, causando errores en tiempo de ejecución si `build.target` no soporta `import.meta.url`.
+Durante la compilación para producción, Vite realizará las transformaciones necesarias para que las URL sigan apuntando a la ubicación correcta incluso después del empaquetado y el hashing de recursos. Sin embargo, la cadena de texto de URL debe ser estática la cual permita ser analizada, de otro modo el codigo permanecerá como está, causando errores en tiempo de ejecución si `build.target` no soporta `import.meta.url`.
 
 ```js
 // Vite will not transform this

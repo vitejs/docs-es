@@ -369,6 +369,8 @@ Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se 
 
 ## Recursos estáticos
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05pq?via=vite" title="Recursos estáticos en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
+
 La importación de un recurso estático devolverá la URL pública resuelta cuando se sirva:
 
 ```js twoslash

@@ -22,6 +22,8 @@ También puedes especificar explícitamente un archivo de configuración para us
 vite --config my-config.js
 ```
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05jg?via=vite" title="Configurando Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
+
 ::: tip CARGA DE CONFIGURACIÓN
 Por defecto, Vite utiliza [Rolldown](https://rolldown.rs/) para empaquetar la configuración en un archivo temporal y cargarlo. Esto puede causar problemas al importar archivos TypeScript en un monorepo. Si encuentras inconvenientes con este enfoque, puedes especificar `--configLoader runner` para usar el [módulo runner](/guide/api-environment-runtimes.html#modulerunner) en su lugar, el cual no creará un archivo de configuración temporal y transformará los archivos sobre la marcha. Ten en cuenta que el módulo runner no admite CJS en archivos de configuración, pero los paquetes CJS externos deberían funcionar con normalidad.
 

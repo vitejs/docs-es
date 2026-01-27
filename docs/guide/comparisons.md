@@ -16,6 +16,6 @@ Aparte de los diferentes detalles de implementación, los dos proyectos comparti
 
 [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) (anteriormente `es-dev-server`) es un gran proyecto y la configuración del servidor de Koa en Vite 1.0 fue inspirada de él.
 
-`@web/dev-server` es un nivel un poco más bajo en términos de alcance. No proporciona integraciones de marco de desarrollo oficiales y requiere configuración manual de Rollup para la compilación en producción.
+`@web/dev-server` es un nivel un poco más bajo en términos de alcance. No proporciona integraciones de marco de desarrollo oficiales y requiere configuración manual de Rollup para la compilación para producción.
 
 En general, Vite es una herramienta más destinada/de alto nivel que tiene como objetivo proporcionar un flujo de trabajo más listo para usar. Dicho esto, el proyecto general `@web` contiene muchas otras herramientas excelentes que también pueden beneficiar a los usuarios de Vite.

@@ -2,6 +2,8 @@
 
 Vite se puede extender mediante plugins, que se basan en la interfaz de plugins bien diseñada de Rollup con algunas opciones adicionales específicas de Vite. Esto significa que los usuarios de Vite pueden confiar en el ecosistema maduro de plugins de Rollup, al tiempo que pueden extender el servidor de desarrollo y la funcionalidad SSR según sea necesario.
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~0y4g?via=vite" title="Uso de plugins en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
+
 ## Agregar un plugin
 
 Para usar un plugin, este debe agregarse a `devDependencies` del proyecto e incluirse en el array `plugins` en el archivo de configuración `vite.config.js`. Por ejemplo, para brindar soporte para navegadores obsoletos, se puede usar el [@vite/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) oficial:

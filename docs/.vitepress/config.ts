@@ -370,7 +370,7 @@ const config = defineConfig({
               link: '/guide/assets',
             },
             {
-              text: 'Compilación en producción',
+              text: 'Compilación para producción',
               link: '/guide/build',
             },
             {

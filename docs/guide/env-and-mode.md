@@ -13,6 +13,8 @@ if (import.meta.env.DEV) {
 
 :::
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05an?via=vite" title="Variables de Entorno en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
+
 ## Constantes Incorporadas
 
 Algunas constantes incorporadas están disponibles en todos los casos:
