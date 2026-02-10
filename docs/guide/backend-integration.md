@@ -119,14 +119,10 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
      file: string
      /**
       * La lista de archivos CSS importados por este chunk
-      *
-      * Este campo solo está presente en fragmentos de JavaScript.
       */
      css?: string[]
      /**
       * La lista de archivos de recursos importados por este chunk, excluyendo archivos CSS
-      *
-      * Este campo solo está presente en fragmentos de JavaScript.
       */
      assets?: string[]
      /**
@@ -165,7 +161,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    - **Fragmentos de activos**: Generados a partir de activos importados como imágenes, fuentes. Su clave es la ruta src relativa desde la raíz del proyecto.
    - **Archivos CSS**: Cuando [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) es `false`, se genera un solo archivo CSS con la clave `style.css`. Cuando `build.cssCodeSplit` no es `false`, la clave se genera similar a los fragmentos de JavaScript (es decir, los fragmentos de entrada no tendrán prefijo `_` y los fragmentos no de entrada tendrán prefijo `_`).
 
-   Los fragmentos de JavaScript (fragmentos que no son recursos ni CSS) contendrán información sobre sus importaciones estáticas y dinámicas (ambos son claves que mapean al correspondiente fragmento en el manifiesto), y también su correspondiente CSS y archivo de recurso estatico (si los hay).
+   Los fragmentos de JavaScript (fragmentos que no son recursos ni CSS) contendrán información sobre sus importaciones estáticas y dinámicas (ambos son claves que mapean al correspondiente fragmento en el manifiesto). Los fragmentos también listan sus correspondientes archivos CSS y de recursos si los tienen.
 
 4. Tambien puedes usar este archivo para renderizar links o precargar directivas con archivos con hash.
 

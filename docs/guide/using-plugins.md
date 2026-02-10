@@ -35,9 +35,7 @@ Se ignorarán los plugins falsos, los cuales pueden ser usar para activar o desa
 Vite tiene como objetivo proporcionar soporte listo para usar para patrones comunes de desarrollo web. Antes de buscar un plugin de Vite o Rollup compatible, consulta la [Guía de funcionalidades](../guide/features.md). Muchos de los casos en los que se necesitaría un plugin en un proyecto de Rollup ya están cubiertos en Vite.
 :::
 
-Consulta la [sección Plugins](../plugins/) para obtener información sobre los plugins oficiales. Los plugins de la comunidad se enumeran en [awesome-vite](https://github.com/vitejs/awesome-vite#plugins).
-
-También puedes encontrar plugins que sigan las [convenciones recomendadas](./api-plugin.md#convenciones) mediante una [búsqueda de npm](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) para plugins de Vite o una [búsqueda de npm](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) para plugins de Rollup.
+Consulta la [sección Plugins](../plugins/) para obtener información sobre los plugins oficiales. Los plugins de la comunidad que se publican en npm se enumeran en el [Registro de Plugins de Vite](https://registry.vite.dev/plugins).
 
 ## Forzar la aplicación de un plugin
 

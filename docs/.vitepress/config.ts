@@ -77,7 +77,7 @@ function inlineScript(file: string): HeadConfig {
     'script',
     {},
     fs.readFileSync(
-      path.resolve(__dirname, `./inlined-scripts/${file}`),
+      path.resolve(import.meta.dirname, `./inlined-scripts/${file}`),
       'utf-8',
     ),
   ]
@@ -157,51 +157,54 @@ const config = defineConfig({
       { icon: 'github', link: 'https://github.com/vitejs/vite' },
     ],
     darkModeSwitchLabel: 'Apariencia',
-    algolia: {
-      appId: '7H67QR5P0A',
-      apiKey: '208bb9c14574939326032b937431014b',
-      indexName: 'vitejs',
-      searchParameters: {
-        facetFilters: ['tags:es'],
-      },
-      insights: true,
-      placeholder: 'Buscar',
-      translations: {
-        button: {
-          buttonText: 'Buscar',
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: '7H67QR5P0A',
+        apiKey: '208bb9c14574939326032b937431014b',
+        indexName: 'vitejs',
+        searchParameters: {
+          facetFilters: ['tags:es'],
         },
+        insights: true,
+        placeholder: 'Buscar',
+        translations: {
+          button: {
+            buttonText: 'Buscar',
+          },
 
-        modal: {
-          searchBox: {
-            resetButtonTitle: 'Limpiar criterios de búsqueda',
-            resetButtonAriaLabel: 'Limpiar criterios de búsqueda',
-            cancelButtonText: 'Cancelar',
-            cancelButtonAriaLabel: 'Cancelar',
-          },
-          startScreen: {
-            recentSearchesTitle: 'Búsquedas recientes',
-            noRecentSearchesText: 'No hay búsquedas recientes',
-            saveRecentSearchButtonTitle: 'Guardar en búsquedas recientes',
-            removeRecentSearchButtonTitle: 'Eliminar de búsquedas recientes',
-            favoriteSearchesTitle: 'Favoritos',
-            removeFavoriteSearchButtonTitle: 'Eliminar de favoritos',
-          },
-          errorScreen: {
-            titleText: 'No se pueden obtener resultados',
-            helpText: 'Es posible que debas revisar tu conexión de red',
-          },
-          footer: {
-            selectText: 'Seleccionar',
-            navigateText: 'Cambiar',
-            closeText: 'Cerrar',
-            searchByText: 'Buscado por',
-          },
-          noResultsScreen: {
-            noResultsText: 'No se encontraron resultados relacionados',
-            suggestedQueryText: 'Puedes intentar buscar',
-            reportMissingResultsText:
-              '¿Crees que esta búsqueda debería tener resultados?',
-            reportMissingResultsLinkText: 'Informar de un problema',
+          modal: {
+            searchBox: {
+              clearButtonTitle: 'Limpiar criterios de búsqueda',
+              clearButtonAriaLabel: 'Limpiar criterios de búsqueda',
+              closeButtonText: 'Cancelar',
+              closeButtonAriaLabel: 'Cancelar',
+            },
+            startScreen: {
+              recentSearchesTitle: 'Búsquedas recientes',
+              noRecentSearchesText: 'No hay búsquedas recientes',
+              saveRecentSearchButtonTitle: 'Guardar en búsquedas recientes',
+              removeRecentSearchButtonTitle: 'Eliminar de búsquedas recientes',
+              favoriteSearchesTitle: 'Favoritos',
+              removeFavoriteSearchButtonTitle: 'Eliminar de favoritos',
+            },
+            errorScreen: {
+              titleText: 'No se pueden obtener resultados',
+              helpText: 'Es posible que debas revisar tu conexión de red',
+            },
+            footer: {
+              selectText: 'Seleccionar',
+              navigateText: 'Cambiar',
+              closeText: 'Cerrar',
+              poweredByText: 'Buscado por',
+            },
+            noResultsScreen: {
+              noResultsText: 'No se encontraron resultados relacionados',
+              suggestedQueryText: 'Puedes intentar buscar',
+              reportMissingResultsText:
+                '¿Crees que esta búsqueda debería tener resultados?',
+              reportMissingResultsLinkText: 'Informar de un problema',
+            },
           },
         },
       },
@@ -238,6 +241,7 @@ const config = defineConfig({
               text: 'Lanzamientos',
               link: 'https://github.com/vitejs/vite/releases',
             },
+            { text: 'Agradecimientos', link: '/acknowledgements' },
           ],
         },
         {
@@ -263,6 +267,7 @@ const config = defineConfig({
           { text: 'Equipo', link: '/team' },
           { text: 'Blog', link: '/blog' },
           { text: 'Lanzamientos', link: '/releases' },
+          { text: 'Agradecimientos', link: '/acknowledgements' },
           {
             text: 'El Documental',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',

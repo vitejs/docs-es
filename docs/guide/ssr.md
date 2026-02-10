@@ -10,6 +10,8 @@ La siguiente guía también asume experiencia previa trabajando con SSR en tu ma
 Esta es una API de bajo nivel destinada a autores de bibliotecas y marcos de trabajo. Si tu objetivo es crear una aplicación, asegúrate de consultar primero los plugins y las herramientas de SSR de nivel superior en la [sección SSR de Awesome Vite](https://github.com/vitejs/awesome-vite#ssr). Dicho esto, muchas aplicaciones se construyen con éxito directamente sobre la API nativa de bajo nivel de Vite.
 :::
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~03be?via=vite" title="Renderizado del lado del servidor en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
+
 ## Proyectos de ejemplo
 
 Vite proporciona soporte integrado para la representación del lado del servidor (SSR). [`create-vite-extra`](https://github.com/bluwy/create-vite-extra) contiene configuraciones de ejemplo para SSR que puedes utilizar como referencias para esta guía:
@@ -66,11 +68,8 @@ Al crear una aplicación SSR, es probable que desees tener control total sobre t
 ```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import express from 'express'
 import { createServer as createViteServer } from 'vite'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 async function createServer() {
   const app = express()
@@ -109,7 +108,6 @@ El siguiente paso es implementar el controlador `*` para servir el HTML generado
 // @noErrors
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 /** @type {import('express').Express} */
 var app
@@ -123,8 +121,8 @@ app.use('*all', async (req, res) => {
   try {
     // 1. Lee index.html
     let template = fs.readFileSync(
-      path.resolve(__dirname, 'index.html'),
-      'utf-8'
+      path.resolve(import.meta.dirname, 'index.html'),
+      'utf-8',
     )
 
     // 2. Aplica transformaciones Vite HTML. Esto inyecta el cliente Vite HMR

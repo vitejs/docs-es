@@ -148,38 +148,48 @@ Después de que tu proyecto haya sido importado y desplegado, todos los push sub
 
 Obtén más información sobre [Integración Git](https://vercel.com/docs/concepts/git) de Vercel.
 
-## Cloudflare Pages
+## Cloudflare
 
-### Cloudflare Pages via Wrangler
+### Cloudflare Workers
 
-1. Instala la [CLI de Wrangler](https://developers.cloudflare.com/workers/wrangler/get-started/).
-2. Autenticate a Wrangler con tu cuenta de Cloudflare usando `wrangler login`.
-3. Ejecuta tu comando de compilación.
-4. Despliega usando `npx wrangler pages deploy dist`.
+El [plugin de Cloudflare Vite](https://developers.cloudflare.com/workers/vite-plugin/) proporciona integración con Cloudflare Workers y utiliza la API de Entornos de Vite para ejecutar tu código del lado del servidor en el entorno de ejecución de Cloudflare Workers durante el desarrollo.
+
+Para agregar Cloudflare Workers a un proyecto Vite existente, instala el plugin y agrégalo a tu configuración:
 
 ```bash
-# Instala la CLI de Wrangler
-$ npm install -g wrangler
-
-# Inicia sesión en la cuenta de Cloudflare desde la CLI
-$ wrangler login
-
-# Ejecuta tu comando de compilación.
-$ npm run build
-
-# Crea un nuevo despliegue
-$ npx wrangler pages deploy dist
+$ npm install --save-dev @cloudflare/vite-plugin
 ```
 
-Después de cargar tus recursos, Wrangler le dará una URL de vista previa para inspeccionar el sitio. Cuando inicies sesión en el panel de control de Cloudflare Pages, verás tu nuevo proyecto.
+```js [vite.config.js]
+import { defineConfig } from 'vite'
+import { cloudflare } from '@cloudflare/vite-plugin'
 
-### Cloudflare Pages con Git
+export default defineConfig({
+  plugins: [cloudflare()],
+})
+```
+
+```jsonc [wrangler.jsonc]
+{
+  "name": "my-vite-app",
+}
+```
+
+Después de ejecutar `npm run build`, tu aplicación ahora puede desplegarse con `npx wrangler deploy`.
+
+También puedes agregar fácilmente APIs de backend a tu aplicación Vite para comunicarte de forma segura con los recursos de Cloudflare. Esto se ejecuta en el entorno de ejecución de Workers durante el desarrollo y se despliega junto con tu frontend. Consulta el [tutorial del plugin de Cloudflare Vite](https://developers.cloudflare.com/workers/vite-plugin/tutorial/) para un recorrido completo.
+
+### Cloudflare Pages
+
+#### Cloudflare Pages con Git
+
+Cloudflare Pages te ofrece una forma de desplegar directamente en Cloudflare sin tener que administrar un archivo Wrangler.
 
 1. Haz push del código a tu repositorio git (GitHub, GitLab).
-2. Inicia sesión en el panel de control de Cloudflare y selecciona tu cuenta en **Inicio de cuenta** > **Páginas**.
-3. Selecciona **Crear un nuevo proyecto** y la opción **Conectar Git**.
+2. Inicia sesión en el panel de control de Cloudflare y selecciona tu cuenta en **Inicio de cuenta** > **Workers & Pages**.
+3. Selecciona **Crear un nuevo proyecto** y la opción **Pages**, luego selecciona Git.
 4. Selecciona el proyecto de git que deseas desplegar y has clic en **Comenzar configuración**
-5. Selecciona el marco preestablecido correspondiente en la configuración de compilación según el marco Vite que hayas escogido.
+5. Selecciona el marco preestablecido correspondiente en la configuración de compilación según el marco Vite que hayas escogido. De lo contrario, ingresa tus comandos de compilación para tu proyecto y tu directorio de salida esperado.
 6. ¡Luego guarda y despliega!
 7. ¡Tu aplicación está desplegada! (por ejemplo, `https://<NOMBRE DEL PROYECTO>.pages.dev/`)
 
@@ -255,7 +265,6 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 3. Conecta tu cuenta de GitHub/GitLab o usa un repositorio público.
 
 4. Especifica un nombre para el proyecto y una rama.
-
    - **Comando de compilación**: `npm install && npm run build`
    - **Directorio público**: `dist`
 
@@ -275,6 +284,7 @@ También puedes agregar un [dominio personalizado](https://render.com/docs/custo
   El equipo de Vite puede cambiar los criterios y auditar la lista actual de vez en cuando.
   Si se elimina una sección, se notificará a los autores originales de la solicitud de cambios antes de hacerlo.
 -->
+
 ## Flightcontrol
 
 Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).

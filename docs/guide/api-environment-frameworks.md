@@ -52,10 +52,7 @@ Dado un servidor Vite configurado en modo middleware como está descrito en la [
 ```js
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const viteServer = await createServer({
   server: { middlewareMode: true },
@@ -75,7 +72,7 @@ app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
   // 1. Leer index.html
-  const indexHtmlPath = path.resolve(__dirname, 'index.html')
+  const indexHtmlPath = path.resolve(import.meta.dirname, 'index.html')
   let template = fs.readFileSync(indexHtmlPath, 'utf-8')
 
   // 2. Aplicar transformaciones HTML de Vite. Esto inyecta el cliente HMR de Vite,

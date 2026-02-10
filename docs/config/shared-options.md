@@ -80,12 +80,11 @@ Consulta [La carpeta `public`](/guide/assets#la-carpeta-public) para obtener má
 - **Tipo:** `string`
 - **Por defecto:** `"node_modules/.vite"`
 
-Directorio para guardar archivos de caché. Los archivos en este directorio son dependencias preempaquetadas o algunos otros archivos de caché generados por vite, que pueden mejorar el rendimiento. Puedes usar el indicador `--force` o eliminar manualmente el directorio para regenerar los archivos de caché. El valor puede ser una ruta absoluta del sistema de archivos o una ruta relativa a la raíz del proyecto. Por defecto a `.vite` cuando no se detecta ningún package.json.
+Directorio para guardar archivos de caché. Los archivos en este directorio son dependencias preempaquetadas o algunos otros archivos de caché generados por vite, que pueden mejorar el rendimiento. Puedes usar el indicador `--force` o eliminar manualmente el directorio para regenerar los archivos de caché. El valor puede ser una ruta absoluta del sistema de archivos o una ruta relativa a la raíz del proyecto. Por defecto a `.vite` cuando no se detecta ningún `package.json`.
 
 ## resolve.alias
 
-- **Tipo:**
-  `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
+- **Tipo:** `Record<string, string> | Array<{ find: string | RegExp, replacement: string }>`
 
 Define alias utilizados para reemplazar valores en declaraciones `import` o `require`. Esto funciona de manera similar a [`@rollup/plugin-alias`](https://github.com/rollup/plugins/tree/master/packages/alias).
 
@@ -112,7 +111,7 @@ resolve: {
 }
 ```
 
-### Formato de Array (`Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`)
+### Formato de arreglo (`Array<{ find: string | RegExp, replacement: string }>`)
 
 El formato de array permite especificar alias como objetos, lo cual puede ser útil para pares clave/valor complejos.
 
@@ -131,7 +130,7 @@ Cuando `find` es una expresión regular, el `replacement` puede usar [patrones d
 { find:/^(.*)\.js$/, replacement: '$1.alias' }
 ```
 
-La opción `customResolver` puede usarse para proporcionar una resolución de módulo separada para un alias individual.
+`customResolver` está obsoleta. Usa un plugin personalizado con el hook `resolveId` en su lugar.
 
 ## resolve.dedupe
 
@@ -538,6 +537,16 @@ Si tu aplicación es una aplicación de página única (SPA), una [aplicación m
 - `'custom'`: no incluye middleware HTML
 
 Obtén más información en la [guía SSR](/guide/ssr#vite-cli) de Vite. Relacionado: [`server.middlewareMode`](./server-options#server-middlewaremode).
+
+## devtools
+
+- **Experimental:** [Danos tu opinión](https://github.com/vitejs/devtools/discussions)
+- **Tipo:** `boolean` | `DevToolsConfig`
+- **Predeterminado:** `false`
+
+Habilita la integración de herramientas de desarrollo (devtools) para visualizar el estado interno y el análisis de la compilación. Asegúrate de que `@vitejs/devtools` esté instalado como una dependencia. Esta característica actualmente solo se admite en modo de compilación (build mode).
+
+Consulta [Vite DevTools](https://github.com/vitejs/devtools) para más detalles.
 
 ## future
 

@@ -13,15 +13,12 @@ async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 **Ejemplo de Uso:**
 
 ```ts twoslash
-import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
-
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 const server = await createServer({
   // cualquier opción válida de configuración del usuario, además de `mode` y `configFile`.
   configFile: false,
-  root: __dirname,
+  root: import.meta.dirname,
   server: {
     port: 1337,
   },
@@ -134,7 +131,7 @@ interface ViteDevServer {
    */
   transformRequest(
     url: string,
-    options?: TransformOptions
+    options?: TransformOptions,
   ): Promise<TransformResult | null>
   /**
    * Aplica las transformaciones HTML integradas en Vite y las transformaciones HTML de cualquier plugin.
@@ -142,14 +139,14 @@ interface ViteDevServer {
   transformIndexHtml(
     url: string,
     html: string,
-    originalUrl?: string
+    originalUrl?: string,
   ): Promise<string>
   /**
    * Carga una URL dada como un módulo instanciado para SSR.
    */
   ssrLoadModule(
     url: string,
-    options?: { fixStacktrace?: boolean }
+    options?: { fixStacktrace?: boolean },
   ): Promise<Record<string, any>>
   /**
    * Corrige la pila de seguimiento de errores de ssr.
@@ -199,7 +196,7 @@ interface ViteDevServer {
 
 ```ts
 async function build(
-  inlineConfig?: InlineConfig
+  inlineConfig?: InlineConfig,
 ): Promise<RollupOutput | RollupOutput[]>
 ```
 
@@ -207,13 +204,10 @@ async function build(
 
 ```ts twoslash [vite.config.js]
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
-
 await build({
-  root: path.resolve(__dirname, './project'),
+  root: path.resolve(import.meta.dirname, './project'),
   base: '/foo/',
   build: {
     rollupOptions: {
@@ -294,7 +288,7 @@ async function resolveConfig(
   command: 'build' | 'serve',
   defaultMode = 'development',
   defaultNodeEnv = 'development',
-  isPreview = false
+  isPreview = false,
 ): Promise<ResolvedConfig>
 ```
 
@@ -308,7 +302,7 @@ El valor de `command` es `serve` en desarrollo y vista previa, y `build` en comp
 function mergeConfig(
   defaults: Record<string, any>,
   overrides: Record<string, any>,
-  isRoot = true
+  isRoot = true,
 ): Record<string, any>
 ```
 
@@ -331,7 +325,7 @@ declare const configAsObject: UserConfig
 
 // ---cut---
 export default defineConfig((configEnv) =>
-  mergeConfig(configAsCallback(configEnv), configAsObject)
+  mergeConfig(configAsCallback(configEnv), configAsObject),
 )
 ```
 
@@ -344,7 +338,7 @@ export default defineConfig((configEnv) =>
 ```ts
 function searchForWorkspaceRoot(
   current: string,
-  root = searchForPackageRoot(current)
+  root = searchForPackageRoot(current),
 ): string
 ```
 
@@ -365,7 +359,7 @@ Busca la raíz del espacio de trabajo potencial si cumple las siguientes condici
 function loadEnv(
   mode: string,
   envDir: string,
-  prefixes: string | string[] = 'VITE_'
+  prefixes: string | string[] = 'VITE_',
 ): Record<string, string>
 ```
 
@@ -400,7 +394,6 @@ async function transformWithOxc(
 
 Transform JavaScript or TypeScript with [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer). Useful for plugins that prefer matching Vite's internal Oxc Transformer transform.
 
-
 ## `transformWithEsbuild`
 
 **Firma de Tipo:**
@@ -410,7 +403,7 @@ async function transformWithEsbuild(
   code: string,
   filename: string,
   options?: EsbuildTransformOptions,
-  inMap?: object
+  inMap?: object,
 ): Promise<ESBuildTransformResult>
 ```
 
@@ -428,7 +421,7 @@ async function loadConfigFromFile(
   configFile?: string,
   configRoot: string = process.cwd(),
   logLevel?: LogLevel,
-  customLogger?: Logger
+  customLogger?: Logger,
 ): Promise<{
   path: string
   config: UserConfig
@@ -448,7 +441,7 @@ Carga un archivo de configuración de Vite manualmente con esbuild.
 async function preprocessCSS(
   code: string,
   filename: string,
-  config: ResolvedConfig
+  config: ResolvedConfig,
 ): Promise<PreprocessCSSResult>
 interface PreprocessCSSResult {
   code: string

@@ -15,7 +15,7 @@ Estas versiones de navegador se alinean con los conjuntos de características [B
 
 ## Rolldown
 
-Vite 8 utiliza Rolldown y herramientas basadas en Oxc en lugar de esbuild y Rollup.
+Vite 8 utiliza herramientas basadas en [Rolldown](https://rolldown.rs/) y [Oxc](https://oxc.rs/) en lugar de [esbuild](https://esbuild.github.io/) y [Rollup](https://rollupjs.org/).
 
 ### Migración Gradual
 
@@ -264,7 +264,7 @@ En build, las condiciones eran:
 
 Consulta la documentación de Rolldown sobre este problema para obtener más detalles: [Importación `default` ambigua de módulos CJS - Bundling CJS | Rolldown](https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules).
 
-Este cambio puede romper algún código existente que importe módulos CJS. Puedes usar la opción obsoleta `legacy.inconsistentCjsInterop: true` para restaurar temporalmente el comportamiento anterior. Si encuentras un paquete que se ve afectado por este cambio, por favor infórmalo al autor del paquete o envíale un pull request. Asegúrate de enlazar al documento de Rolldown anterior para que el autor pueda entender el contexto.
+Este cambio puede romper algún código existente que importe módulos CJS. Puedes usar la opción obsoleta `legacy.inconsistentCjsInterop: true` para restaurar temporalmente el comportamiento anterior. Si encuentras un paquete que se ve afectado por este cambio, por favor infórmalo al autor del paquete o envíale un pull request. Asegúrate de enlazar a la [documentación de Rolldown](https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules) anterior para que el autor pueda entender el contexto.
 
 ### Eliminación de la Resolución de Módulos Utilizando la Inferencia de Formato
 
@@ -272,7 +272,7 @@ Cuando tanto los campos `browser` como `module` están presentes en `package.jso
 
 ### Llamadas Require Para Módulos Externalizados
 
-Las llamadas `require` para módulos externalizados ahora se preservan como llamadas `require` y no se convierten en declaraciones `import`. Esto es para preservar la semántica de las llamadas `require`. Si quieres convertirlas en declaraciones `import`, puedes usar el plugin incorporado de Rolldown `esmExternalRequirePlugin`, que se reexporta desde `vite`.
+Las llamadas `require` para módulos externalizados ahora se preservan como llamadas `require` y no se convierten en declaraciones `import`. Esto es para preservar la semántica de las llamadas `require`. Si quieres convertirlas en declaraciones `import`, puedes usar el [plugin incorporado de Rolldown `esmExternalRequirePlugin`](https://rolldown.rs/builtin-plugins/esm-external-require), que se reexporta desde `vite`.
 
 ```js
 import { defineConfig, esmExternalRequirePlugin } from 'vite'
@@ -297,9 +297,9 @@ Consulta la documentación de Rolldown para obtener más detalles: [`require` m�
 
 La opción `build.rollupOptions.watch.chokidar` se eliminó. Por favor, migra a la opción [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify).
 
-### Deprecación de `build.rollupOptions.output.manualChunks`
+### Eliminación de la forma de objeto de `build.rollupOptions.output.manualChunks` y deprecación de la forma de función
 
-La opción `build.rollupOptions.output.manualChunks` es obsoleta. Rolldown tiene la opción [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) más flexible. Consulta la documentación de Rolldown para más detalles sobre `codeSplitting`: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
+La opción de forma de objeto `output.manualChunks` ya no es compatible. La forma de función `output.manualChunks` está obsoleta. Rolldown tiene la opción [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) más flexible. Consulta la documentación de Rolldown para más detalles sobre `codeSplitting`: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
 
 ### Soporte y Detección Automática de Tipos de Módulo
 
@@ -328,24 +328,20 @@ Las siguientes opciones están obsoletas y se eliminarán en el futuro:
 
 - `build.rollupOptions`: renombrado a `build.rolldownOptions`
 - `worker.rollupOptions`: renombrado a `worker.rolldownOptions`
-- `build.commonjsOptions`: ahora es una operación no operativa
-- `build.dynamicImportVarsOptions.warnOnError`: ahora es no operativa
-
-## Cambios Generales [<Badge text="NRV" type="warning" />](#migration-from-v7)
+- `build.commonjsOptions`: ahora no hace nada
+- `build.dynamicImportVarsOptions.warnOnError`: ahora no hace nada
+- `resolve.alias[].customResolver`: Usa un plugin personalizado con el hook `resolveId` y `enforce: 'pre'` en su lugar
 
 ## Características Obsoletas Eliminadas [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
 - Pasar una URL a `import.meta.hot.accept` ya no es compatible. Por favor, pasa un id en su lugar. ([#21382](https://github.com/vitejs/vite/pull/21382))
 
-**_POR HACER: Este cambio aún no está implementado, pero se implementará antes de la versión estable._**
-
 ## Avanzado
 
 Estos cambios rotóricos se espera que afecten solo a una minoría de casos de uso:
-- **[POR HACER: esto se corregirá antes de la versión estable]** https://github.com/rolldown/rolldown/issues/5726 (afecta a nuxt, qwik)
-- **[POR HACER: esto se corregirá antes de la versión estable]** Los fragmentos heredados se emiten como un archivo de activo en lugar de un archivo de fragmento debido a la falta de la función de emisión de fragmento preconstruido ([rolldown#4304](https://github.com/rolldown/rolldown/issues/4034)). Esto significa que las opciones relacionadas con los fragmentos no se aplican a los fragmentos heredados y el archivo de manifiesto no incluirá los fragmentos heredados como un archivo de fragmento.
-- **[POR HACER: esto se corregirá antes de la versión estable]** Caso límite del comentario `@vite-ignore` ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
+
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) aún no son compatibles ([rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365))
+- El espacio de nombres heredado de TypeScript solo se admite parcialmente. Consulta la [documentación relacionada del Transformador Oxc](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support) para más detalles.
 - `define` no comparte referencias para objetos: Cuando pasas un objeto como valor a `define`, cada variable tendrá una copia separada del objeto. Consulta el [documento del Transformador Oxc](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define) para más detalles.
 - Cambios en el objeto `bundle` (`bundle` es un objeto pasado en los hooks `generateBundle` / `writeBundle`, devuelto por la función `build`):
   - Asignar a `bundle[foo]` no es compatible. Rollup tampoco recomienda esto. Por favor, usa `this.emitFile()` en su lugar.
@@ -357,12 +353,12 @@ Estos cambios rotóricos se espera que afecten solo a una minoría de casos de u
 - Falta de compatibilidad por parte de Rolldown: Las siguientes características no son compatibles con Rolldown y ya no son compatibles con Vite.
   - `build.rollupOptions.output.format: 'system'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2387))
   - `build.rollupOptions.output.format: 'amd'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2528))
-  - Compatibilidad completa con el espacio de nombres heredado de TypeScript ([oxc-project/oxc#14227](https://github.com/oxc-project/oxc/issues/14227))
   - Hook `shouldTransformCachedModule` ([rolldown#4389](https://github.com/rolldown/rolldown/issues/4389))
   - Hook `resolveImportMeta` ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
   - Hook `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Hook `resolveFileUrl`
 - Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parseSync` / `parse` que ahora tienen más características.
+- (bug) Caso límite del comentario `@vite-ignore` ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
 
 ## Migración desde v6
 

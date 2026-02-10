@@ -10,7 +10,7 @@ Las importaciones nativas de ES no admiten importaciones de módulos descubierto
 import { someMethod } from 'my-dep'
 ```
 
-Lo anterior arrojará un error en el navegador. Vite detectará tales importaciones de módulos descubiertos en todos los archivos fuente servidos y realizará lo siguiente:
+La importación anterior arrojará un error en el navegador. Vite detectará tales importaciones de módulos descubiertos en todos los archivos fuente servidos y realizará lo siguiente:
 
 1. [Preempaquetado](./dep-pre-bundling) para mejorar la velocidad de carga de la página y convertir los módulos CommonJS/UMD a ESM. El paso previo al empaquetado se realiza con [esbuild](https://esbuild.github.io/) y hace que el tiempo de inicio en frío de Vite sea significativamente más rápido que cualquier empaquetador basado en JavaScript.
 
@@ -41,6 +41,8 @@ El trabajo de Vite es hacer que tus módulos fuentes tengan un formato que pueda
 - Para compilaciones de producción, puedes ejecutar `tsc --noEmit` además del comando de compilación de Vite.
 
 - Durante el desarrollo, si necesitas más sugerencias de IDE, te recomendamos ejecutar `tsc --noEmit --watch` en un proceso separado o usar [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker) si prefieres que los errores tipográficos se notifiquen directamente en el navegador.
+
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~058o?via=vite" title="TypeScript en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
 
 Vite usa [esbuild](https://github.com/evanw/esbuild) para transpilar TypeScript en JavaScript, que es entre 20 y 30 veces más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
 
@@ -693,6 +695,12 @@ La [propuesta de integración de módulos ES para WebAssembly](https://github.co
 Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros plugins de la comunidad para darle el manejo apropiado.
 :::
 
+::: warning Para la compilación de SSR, solo se admiten entornos de ejecución compatibles con Node.js
+
+Debido a la falta de una forma universal de cargar un archivo, la implementación interna de `.wasm?init` se basa en el módulo `node:fs`. Esto significa que esta característica solo funcionará en entornos de ejecución compatibles con Node.js para compilaciones de SSR.
+
+:::
+
 ### Acceso al módulo en WebAssembly
 
 Si necesitas acceder al objeto `Module`, por ejemplo, para instanciarlo varias veces, utiliza una [importación de URL explícita](./assets#importar-recursos-como-url) para resolver el recurso y luego realice la instanciación:
@@ -706,31 +714,6 @@ const main = async () => {
   const responsePromise = fetch(wasmUrl)
   const { module, instance } =
     await WebAssembly.instantiateStreaming(responsePromise)
-  /* ... */
-}
-
-main()
-```
-
-### Obteniendo el módulo en Node.js
-
-En SSR, el `fetch()` que ocurre como parte de la importación `?init`, puede fallar con `TypeError: URL no válida`.
-Consulta el problema en el debate de [Soporte wasm en SSR](https://github.com/vitejs/vite/issues/8882).
-
-Aquí hay una alternativa, asumiendo que la base del proyecto es el directorio actual:
-
-```js twoslash
-import 'vite/client'
-// ---cut---
-import wasmUrl from 'foo.wasm?url'
-import { readFile } from 'node:fs/promises'
-
-const main = async () => {
-  const resolvedUrl = (await import('./test/boot.test.wasm?url')).default
-  const buffer = await readFile('.' + resolvedUrl)
-  const { instance } = await WebAssembly.instantiate(buffer, {
-    /* ... */
-  })
   /* ... */
 }
 

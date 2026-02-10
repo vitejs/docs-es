@@ -98,6 +98,8 @@ Ten en cuenta que la propiedad de nivel superior `ssr` se va a declarar obsoleta
 
 Están disponibles APIs de configuración de bajo nivel para que los proveedores de entornos en tiempo de ejecución puedan proporcionar entornos con valores predeterminados adecuados para sus entornos de ejecución. Estos entornos también pueden generar otros procesos o hilos para ejecutar los módulos durante el desarrollo en un entorno de ejecución más cercano al entorno de producción.
 
+Por ejemplo, el [plugin de Cloudflare Vite](https://developers.cloudflare.com/workers/vite-plugin/) utiliza la API de Entornos para ejecutar código en el entorno de ejecución de Cloudflare Workers (`workerd`) durante el desarrollo.
+
 ```js
 import { customEnvironment } from 'vite-environment-provider'
 

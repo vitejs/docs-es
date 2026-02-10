@@ -42,7 +42,7 @@ type ResolveModulePreloadDependenciesFn = (
   context: {
     hostId: string
     hostType: 'html' | 'js'
-  }
+  },
 ) => string[]
 ```
 
@@ -162,7 +162,7 @@ Esta opción es un alias de la opción `build.rolldownOptions`. Usa la opción `
 
 ## build.dynamicImportVarsOptions
 
-- **Tipo:** `{ include?: string | RegExp | (string | RegExp)[], exclude?: string | RegExp | (string | RegExp)[] }`
+- **Tipo:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
 - **Relacionado:** [Importado dinámico](/guide/features#importacion-dinamica)
 
 Determina si transformar importaciones dinámicas con variables.
@@ -180,7 +180,7 @@ Si tu paquete importa CSS, se puede usar `cssFileName` para especificar el nombr
 ```js
 import { defineConfig } from 'vite'
 export default defineConfig({
-  compilar: {
+  build: {
     lib: {
       entry: ['src/main.js'],
       fileName: (format, entryName) => `my-lib-${entryName}.${format}.js`,
@@ -194,9 +194,9 @@ export default defineConfig({
 
 - **Tipo:** `boolean | { fileName?: string }`
 - **Por defecto:** `false`
- - **Relacionado:** [Licencia](/guide/features#licencia)
+- **Relacionado:** [Licencia](/guide/features#licencia)
 
-Cuando se configura en `true`, la compilación generará un archivo `.vite/license.md` que incluye las licencias de todas las dependencias empaquetadas. 
+Cuando se configura en `true`, la compilación generará un archivo `.vite/license.md` que incluye las licencias de todas las dependencias empaquetadas.
 
 ```json
 [

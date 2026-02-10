@@ -582,7 +582,7 @@ export default function myPlugin() {
 ```
 
 ::: tip
-[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) exporta algunas utilidades para filtros de hooks como `exactRegex` y `prefixRegex`.
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) exporta algunas utilidades para filtros de hooks como `exactRegex` y `prefixRegex`. Estas también se re-exportan desde `rolldown/filter` por conveniencia.
 :::
 
 ## Comunicación Cliente-Servidor

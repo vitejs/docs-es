@@ -40,7 +40,7 @@ Provee soporte para los navegadores obsoletos en el compilado para producción.
 
 ## Plugins de la Comunidad
 
-Dale un vistazo a [awesome-vite](https://github.com/vitejs/awesome-vite#plugins). También puedes enviar una solicitud de cambio para enlistar tus plugins ahí.
+Consulta el [Registro de Plugins de Vite](https://registry.vite.dev/plugins) para obtener la lista de los plugins publicados en npm.
 
 ## Plugins de Rolldown
 
@@ -48,6 +48,6 @@ Vite utiliza [Rolldown](https://rolldown.rs/) por debajo y proporciona algunos p
 
 Lee la [sección de plugins integrados de Rolldown](https://rolldown.rs/builtin-plugins/) para obtener más información.
 
-## Plugins de Rollup
+## Plugins de Rolldown / Rollup
 
-Los [Plugins de Vite](../guide/api-plugin) son una extensión a la interfaz de los Plugins de Rollup. Dale un vistazo a la [Sección de compatibilidad para plugins de Rollup](../guide/api-plugin#compatibilidad-de-plugins-rollup) para más información.
+Los [plugins de Vite](../guide/api-plugin) son una extensión de la interfaz de plugins de Rollup. Consulta la [sección de compatibilidad de plugins de Rolldown](../guide/api-plugin#rolldown-plugin-compatibility) para obtener más información.

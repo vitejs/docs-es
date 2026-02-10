@@ -61,8 +61,8 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
     <div class="p-5 sm:p-10 pb-0 sm:pb-0 flex flex-col gap-3 lg:border-b-0">
       <h5 class="text-white">Funciones avanzadas listas para usar</h5>
       <p class="sm:max-w-md text-pretty">
-        TypeScript, JSX, CSS, Workers, Web Assembly... y más con solo un plugin
-        de distancia.
+        TypeScript, JSX, CSS, Workers, WebAssembly... y más a solo un plugin de
+        distancia.
       </p>
       <RiveAnimation
         :desktop-src="viteAnimation"
