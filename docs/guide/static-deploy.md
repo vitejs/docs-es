@@ -127,7 +127,7 @@ La CLI de Netlify te compartirá una URL de vista previa para inspeccionar. Cuan
 4. Haz clic en **Deploy**.
 5. ¡Tu aplicación Vite estará desplegada!
 
-Después de que tu proyecto haya sido importado y desplegado, todos los pushs subsiguientes a ramas que no sean la de producción junto con las solicitudes de cambios generarán una [vista previa de despliegue](https://docs.netlify.com/site-deploys/deploy-previews/), y todos los cambios realizados en la rama de producción (comúnmente "main") darán como resultado un [despliegue en producción](https://docs.netlify.com/site-deploys/overview/#definitions).
+Después de que tu proyecto haya sido importado y desplegado, todos los pushs subsiguientes a ramas que no sean la de producción junto con las solicitudes de cambios generarán una [vista previa de despliegue](https://docs.netlify.com/deploy/deploy-types/deploy-previews/), y todos los cambios realizados en la rama de producción (comúnmente "main") darán como resultado un [despliegue en producción](https://docs.netlify.com/deploy/deploy-overview/#definitions).
 
 ## Vercel
 
