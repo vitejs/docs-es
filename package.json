@@ -67,7 +67,7 @@
     "gsap": "^3.14.2",
     "lint-staged": "^16.2.7",
     "markdown-it-image-size": "^15.0.1",
-    "oxc-minify": "^0.112.0",
+    "oxc-minify": "^0.114.0",
     "prettier": "3.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
