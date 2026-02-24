@@ -95,7 +95,7 @@ export default defineConfig({
 })
 ```
 
-Con el indicador `--watch` habilitado, los cambios en `vite.config.js`, así como cualquier archivo que se empaquete, desencadenarán una recompilación.
+Con el indicador `--watch` habilitado, los cambios en los archivos que se empaquetan desencadenarán una recompilación. Ten en cuenta que los cambios en la configuración y sus dependencias requieren reiniciar el comando de compilación.
 
 ## Aplicación multipáginas
 

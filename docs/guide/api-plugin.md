@@ -466,6 +466,44 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
   }
   ```
 
+## Metadatos del Paquete de Salida
+
+Durante la compilación, Vite agrega un campo específico `viteMetadata` a los objetos de salida de compilación de Rolldown.
+
+Esto está disponible a través de:
+
+- `RenderedChunk` (por ejemplo en `renderChunk` y `augmentChunkHash`)
+- `OutputChunk` y `OutputAsset` (por ejemplo en `generateBundle` y `writeBundle`)
+
+`viteMetadata` proporciona:
+
+- `viteMetadata.importedCss: Set<string>`
+- `viteMetadata.importedAssets: Set<string>`
+
+Esto es útil cuando se escriben plugins que necesitan inspeccionar CSS emitidos y recursos estáticos sin depender de [`build.manifest`](/config/build-options#build-manifest).
+
+Ejemplo:
+
+```ts [vite.config.ts]
+function outputMetadataPlugin(): Plugin {
+  return {
+    name: 'output-metadata-plugin',
+    generateBundle(_, bundle) {
+      for (const output of Object.values(bundle)) {
+        const css = output.viteMetadata?.importedCss
+        const assets = output.viteMetadata?.importedAssets
+        if (!css?.size && !assets?.size) continue
+
+        console.log(output.fileName, {
+          css: css ? [...css] : [],
+          assets: assets ? [...assets] : [],
+        })
+      }
+    },
+  }
+}
+```
+
 ## Orden de Plugins
 
 Un plugin de Vite también puede especificar una propiedad `enforce` (similar a los cargadores de paquetes web) para ajustar su orden de aplicación. El valor de `enforce` puede ser `"pre"` o `"post"`. Los plugins resueltos estarán en el siguiente orden:

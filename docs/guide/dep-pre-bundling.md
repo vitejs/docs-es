@@ -6,7 +6,7 @@ Cuando ejecutas `vite` por primera vez, Vite preempaqueta las dependencias de tu
 
 Este es Vite realizando lo que llamamos "preempaquetado de dependencias". Este proceso tiene dos propósitos:
 
-1. **Compatibilidad con CommonJS y UMD:** Durante el desarrollo, el desarrollador de Vite sirve todo el código como ESM nativo. Por lo tanto, Vite primero debe convertir las dependencias que se envían como CommonJS o UMD en ESM.
+1. **Compatibilidad con CommonJS y UMD:** Durante el desarrollo, Vite sirve todo el código como ESM nativo. Por lo tanto, Vite primero debe convertir las dependencias que se envían como CommonJS o UMD en ESM.
 
    Al convertir las dependencias de CommonJS, Vite realiza un análisis de importación inteligente para que las importaciones con nombre a los módulos de CommonJS funcionen como se espera, incluso si las exportaciones se asignan dinámicamente (por ejemplo, React):
 

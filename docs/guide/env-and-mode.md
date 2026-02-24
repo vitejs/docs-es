@@ -33,14 +33,14 @@ Algunas constantes incorporadas están disponibles en todos los casos:
 
 Vite expone las variables de entorno bajo el objeto `import.meta.env` como cadenas automáticamente.
 
-Para evitar la filtración accidental de variables de entorno al cliente, solo las variables prefijadas con `VITE_` se exponen en el código procesado por Vite. Por ejemplo, para las siguientes variables de entorno:
+Las variables con el prefijo `VITE_` se expondrán en el código fuente del lado del cliente después del empaquetado de Vite. Para evitar la filtración accidental de variables de entorno al cliente, evita usar este prefijo. Como ejemplo, considera lo siguiente:
 
 ```[.env]
 VITE_SOME_KEY=123
 DB_PASSWORD=foobar
 ```
 
-Solo `VITE_SOME_KEY` se expondrá como `import.meta.env.VITE_SOME_KEY` en el código fuente del cliente, pero `DB_PASSWORD` no.
+El valor analizado de `VITE_SOME_KEY` – `"123"` – se expondrá en el cliente, pero el valor de `DB_PASSWORD` no. Puedes comprobar esto añadiendo lo siguiente a tu código:
 
 ```js
 console.log(import.meta.env.VITE_SOME_KEY) // "123"
@@ -51,6 +51,12 @@ Si deseas personalizar el prefijo de las variables de entorno, consulta la opci�
 
 :::tip Análisis de variables de entorno
 Como se muestra arriba, `VITE_SOME_KEY` es un número pero devuelve una cadena cuando se analiza. Lo mismo ocurriría con las variables de entorno booleanas. Asegúrate de convertir al tipo deseado cuando las uses en tu código.
+:::
+
+:::warning Protección de secretos en el código fuente
+
+Las variables `VITE_*` _no_ deben contener información sensible como claves de API. Los valores de estas variables se empaquetan en tu código fuente en tiempo de compilación. Para despliegues en producción, considera un servidor backend o funciones serverless/edge para proteger adecuadamente los secretos en el código fuente.
+
 :::
 
 ### Archivos `.env`
@@ -93,14 +99,6 @@ NEW_KEY2=test\$foo  # test$foo
 NEW_KEY3=test$KEY   # test123
 ```
 
-:::warning NOTAS DE SEGURIDAD
-
-- Los archivos `.env.*.local` son solo locales y pueden contener variables sensibles. Debes agregar `*.local` a tu `.gitignore` para evitar que se suban a git.
-
-- Dado que cualquier variable expuesta en tu código fuente de Vite terminará en tu paquete de cliente, las variables `VITE_*` no deben contener información sensible.
-
-:::
-
 ::: details Expansión de variables en orden inverso
 
 Vite admite la expansión de variables en orden inverso.
@@ -115,6 +113,12 @@ Esto no funciona en scripts de shell y otras herramientas como `docker compose`.
 Dicho esto, Vite admite este comportamiento ya que ha sido soportado por `dotenv-expand` durante mucho tiempo y otras herramientas en el ecosistema de JavaScript utilizan versiones antiguas que soportan este comportamiento.
 
 Para evitar problemas de interoperabilidad, se recomienda evitar depender de este comportamiento. Vite podría comenzar a emitir advertencias por este comportamiento en el futuro.
+
+:::
+
+:::warning Ignorando archivos `.env` locales
+
+Los archivos `.env.*.local` son solo locales y pueden contener variables sensibles. Debes agregar `*.local` a tu `.gitignore` para evitar que se suban a git.
 
 :::
 

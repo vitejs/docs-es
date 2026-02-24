@@ -119,6 +119,12 @@ El directorio predeterminado es `<root>/public`, pero esto se puede configurar a
 
 Ten en cuenta que siempre debes hacer referencia a los recursos de `public` utilizando una ruta absoluta desde la raíz. Por ejemplo, `public/icon.png` debería ser referenciado en el código fuente como `/icon.png`.
 
+::: tip Elección entre importaciones y la carpeta `public`
+
+En general, es preferible **importar recursos** a menos que necesites específicamente las garantías que proporciona la carpeta `public`.
+
+:::
+
 ## new URL(url, import.meta.url)
 
 [import.meta.url](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import.meta) es una característica nativa de ESM que expone la URL del módulo actual. Combinándolo con el [constructor de URL](https://developer.mozilla.org/en-US/docs/Web/API/URL) nativo, podemos obtener la URL completa y resuelta de un recurso estático utilizando la ruta relativa de un Módulo JavaScript:
@@ -147,7 +153,7 @@ Durante la compilación para producción, Vite realizará las transformaciones n
 const imgUrl = new URL(imagePath, import.meta.url).href
 ```
 
-::: detalles Cómo funciona  
+::: detalles Cómo funciona
 Vite transformará la función `getImageUrl` a:
 
 ```js

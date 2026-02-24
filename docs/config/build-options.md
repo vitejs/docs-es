@@ -247,6 +247,8 @@ Indica si se debe generar un archivo de manifiesto que contenga un mapeo de nomb
 
 Cuando el valor es una cadena, se usará como la ruta del archivo de manifiesto relativa a `build.outDir`. Cuando se establece en `true`, la ruta será `.vite/manifest.json`.
 
+Si estás escribiendo un plugin y necesitas inspeccionar los CSS relacionados y recursos estáticos de cada fragmento o recurso de salida durante la compilación, también puedes usar la [API de metadatos del paquete de salida `viteMetadata`](/guide/api-plugin#metadatos-del-paquete-de-salida).
+
 ## build.ssrManifest
 
 - **Tipo:** `boolean`

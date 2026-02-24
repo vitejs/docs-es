@@ -71,7 +71,7 @@ Esto se debe a que `esbuild` solo realiza la transpilación sin información de 
 
 Debes configurar `"isolatedModules": true` en el `tsconfig.json` en `compilerOptions`, para que TS te advierta sobre las funcionalidades omitidas con la transpilación aislada.
 
-Si una dependencia no funciona bien con `"isolatedModules": true`, puedes usar `"skipLibCheck": true` para suprimir temporalmente los errores hasta que se solucione.
+Si una dependencia no funciona bien con `"isolatedModules": true`, puedes usar `"skipLibCheck": true` para suprimir temporalmente los errores hasta que se solucione de forma upstream.
 
 #### `useDefineForClassFields`
 
