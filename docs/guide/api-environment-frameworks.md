@@ -149,7 +149,7 @@ const server = await createServer({
 // Cualquier consumidor de la API de entorno ahora puede llamar a `dispatchFetch`
 if (isFetchableDevEnvironment(server.environments.customo)) {
   const response: Response = await server.environments.custom.dispatchFetch(
-    new Request('/request-to-handle'),
+    new Request('http://example.com/request-to-handle'),
   )
 }
 ```
@@ -194,7 +194,7 @@ if (ssrEnvironment instanceof CustomDevEnvironment) {
 // virtual:entrypoint
 const { createHandler } = await import('./entrypoint.js')
 const handler = createHandler(input)
-const response = handler(new Request('/'))
+const response = handler(new Request('http://example.com/'))
 
 // -------------------------------------
 // ./entrypoint.js
@@ -264,7 +264,7 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
   throw new Error(`Entorno no soportado para ${ssrEnvironment.name}`)
 }
 
-const req = new Request('/')
+const req = new Request('http://example.com/')
 
 const uniqueId = 'a-unique-id'
 ssrEnvironment.send('request', serialize({ req, uniqueId }))
@@ -288,7 +288,7 @@ import.meta.hot.on('request', (data) => {
   import.meta.hot.send('response', serialize({ res: res, uniqueId }))
 })
 
-const response = handler(new Request('/'))
+const response = handler(new Request('http://example.com/'))
 
 // -------------------------------------
 // ./entrypoint.js
