@@ -114,13 +114,13 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
      edge [color="${#67676c|#98989f}" fontname="Arial" fontsize=9 fontcolor="${#67676c|#98989f}"]
      bgcolor="transparent"
 
-     foo [label="views/foo.js\n(entry)" fillcolor="${#e9eaff|#222541}"]
-     bar [label="views/bar.js\n(entry)" fillcolor="${#e9eaff|#222541}"]
-     shared [label="_shared-B7PI925R.js\n(common chunk)" fillcolor="${#f2ecfc|#2c273e}"]
-     baz [label="baz.js\n(dynamic import)" fillcolor="${#fcf4dc|#38301a}"]
+     foo [label="views/foo.js\n(entrada)" fillcolor="${#e9eaff|#222541}"]
+     bar [label="views/bar.js\n(entrada)" fillcolor="${#e9eaff|#222541}"]
+     shared [label="_shared-B7PI925R.js\n(fragmento común)" fillcolor="${#f2ecfc|#2c273e}"]
+     baz [label="baz.js\n(importación dinámica)" fillcolor="${#fcf4dc|#38301a}"]
      foocss [label="foo.css" shape=ellipse fillcolor="${#fde4e8|#3a1d27}"]
      sharedcss [label="shared.css" shape=ellipse fillcolor="${#fde4e8|#3a1d27}"]
-     logo [label="logo.svg\n(asset)" shape=ellipse fillcolor="${#def5ed|#15312d}"]
+     logo [label="logo.svg\n(recurso)" shape=ellipse fillcolor="${#def5ed|#15312d}"]
 
      foo -> shared [label="imports"]
      bar -> shared [label="imports"]

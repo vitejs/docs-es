@@ -103,12 +103,12 @@ digraph hmr_boundary {
 
   root [label="main.js" fillcolor="${#f6f6f7|#2e2e32}"]
   parent [label="App.vue" fillcolor="${#f6f6f7|#2e2e32}"]
-  boundary [label="Component.vue\n(HMR boundary)\nhot.accept()" fillcolor="${#def5ed|#15312d}" color="${#18794e|#3dd68c}" penwidth=2]
-  edited [label="utils.js\n(edited)" fillcolor="${#fcf4dc|#38301a}" color="${#915930|#f9b44e}" penwidth=2]
+  boundary [label="Component.vue\n(Límite HMR)\nhot.accept()" fillcolor="${#def5ed|#15312d}" color="${#18794e|#3dd68c}" penwidth=2]
+  edited [label="utils.js\n(editado)" fillcolor="${#fcf4dc|#38301a}" color="${#915930|#f9b44e}" penwidth=2]
 
-  boundary -> edited [label="imports" color="${#915930|#f9b44e}" style=bold]
-  parent -> boundary [label="imports" style=dashed]
-  root -> parent [label="imports" style=dashed]
+  boundary -> edited [label="importa" color="${#915930|#f9b44e}" style=bold]
+  parent -> boundary [label="importa" style=dashed]
+  root -> parent [label="importa" style=dashed]
 }
 ```
 
