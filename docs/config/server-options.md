@@ -47,7 +47,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
 Los nombres de host a los que Vite tiene permitido responder.
 
-Por defecto, `localhost`, los dominios bajo `.localhost` y todas las direcciones IP están permitidos.  
+Por defecto, `localhost`, los dominios bajo `.localhost` y todas las direcciones IP están permitidos.
 Cuando se usa HTTPS, esta verificación se omite.
 
 Si una cadena comienza con `.`, permitirá ese nombre de host sin el `.` y todos los subdominios bajo ese nombre de host. Por ejemplo, `.example.com` permitirá `example.com`, `foo.example.com` y `foo.bar.example.com`. Si se establece en `true`, el servidor podrá responder a solicitudes de cualquier host.
@@ -219,6 +219,44 @@ Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback.
 - configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
 - configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
   :::
+
+## server.forwardConsole
+
+- **Tipo:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
+- **Por defecto:** automático (`true` cuando se detecta un agente de codificación IA basado en [`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent), de lo contrario `false`)
+
+Reenvía los eventos del runtime del navegador a la consola del servidor Vite durante el desarrollo.
+
+- `true` habilita el reenvío de errores no controlados y los registros de `console.error` / `console.warn`.
+- `unhandledErrors` controla el reenvío de excepciones no capturadas y rechazos de promesas no controlados.
+- `logLevels` controla qué llamadas a `console.*` se reenvían.
+
+Por ejemplo:
+
+```js
+export default defineConfig({
+  server: {
+    forwardConsole: {
+      unhandledErrors: true,
+      logLevels: ['warn', 'error'],
+    },
+  },
+})
+```
+
+Cuando se reenvían errores no controlados, se muestran en la terminal del servidor con formato mejorado, por ejemplo:
+
+```log
+1:18:38 AM [vite] (client) [Unhandled error] Error: this is test error
+ > testError src/main.ts:20:8
+     18|
+     19| function testError() {
+     20|   throw new Error('this is test error')
+       |        ^
+     21| }
+     22|
+ > HTMLButtonElement.<anonymous> src/main.ts:6:2
+```
 
 ## server.warmup
 
