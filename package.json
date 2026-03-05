@@ -47,7 +47,8 @@
   "dependencies": {
     "@voidzero-dev/vitepress-theme": "^4.5.0",
     "search-insights": "^2.17.3",
-    "vite": "^7.1.3"
+    "vite": "^7.1.3",
+    "vitepress-plugin-graphviz": "^0.0.1"
   },
   "devDependencies": {
     "@algolia/client-search": "^5.36.0",

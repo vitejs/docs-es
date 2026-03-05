@@ -28,7 +28,7 @@ interface ViteHotContext {
   accept(dep: string, cb: (mod: ModuleNamespace | undefined) => void): void
   accept(
     deps: readonly string[],
-    cb: (mods: Array<ModuleNamespace | undefined>) => void
+    cb: (mods: Array<ModuleNamespace | undefined>) => void,
   ): void
 
   dispose(cb: (data: any) => void): void
@@ -37,15 +37,15 @@ interface ViteHotContext {
 
   on<T extends CustomEventName>(
     event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void
+    cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
   off<T extends CustomEventName>(
     event: T,
-    cb: (payload: InferCustomEventPayload<T>) => void
+    cb: (payload: InferCustomEventPayload<T>) => void,
   ): void
   send<T extends CustomEventName>(
     event: T,
-    data?: InferCustomEventPayload<T>
+    data?: InferCustomEventPayload<T>,
   ): void
 }
 ```
@@ -92,6 +92,25 @@ if (import.meta.hot) {
 ```
 
 Un módulo que "acepta" actualizaciones instantáneas es considerado un **Límite HMR**.
+
+```dot
+digraph hmr_boundary {
+  rankdir=RL
+  ranksep=0.3
+  node [shape=box style="rounded,filled" fontname="Arial" fontsize=11 margin="0.2,0.1" fontcolor="${#3c3c43|#ffffff}" color="${#c2c2c4|#3c3f44}"]
+  edge [color="${#67676c|#98989f}" fontname="Arial" fontsize=10 fontcolor="${#67676c|#98989f}"]
+  bgcolor="transparent"
+
+  root [label="main.js" fillcolor="${#f6f6f7|#2e2e32}"]
+  parent [label="App.vue" fillcolor="${#f6f6f7|#2e2e32}"]
+  boundary [label="Component.vue\n(HMR boundary)\nhot.accept()" fillcolor="${#def5ed|#15312d}" color="${#18794e|#3dd68c}" penwidth=2]
+  edited [label="utils.js\n(edited)" fillcolor="${#fcf4dc|#38301a}" color="${#915930|#f9b44e}" penwidth=2]
+
+  boundary -> edited [label="imports" color="${#915930|#f9b44e}" style=bold]
+  parent -> boundary [label="imports" style=dashed]
+  root -> parent [label="imports" style=dashed]
+}
+```
 
 Ten en cuenta que el HMR de Vite en realidad no intercambia el módulo importado originalmente: si los límites de un módulo HMR reexportan las importaciones desde un dep, entonces es responsable de actualizar esas reexportaciones (y estas exportaciones deben usar `let`). Además, los importadores relacionados con los límites del modulo no serán notificados de este cambio. Esta implementación simplificada de HMR es suficiente para la mayoría de los casos de uso de desarrollo, al tiempo que nos permite omitir el costoso trabajo de generar módulos proxy.
 

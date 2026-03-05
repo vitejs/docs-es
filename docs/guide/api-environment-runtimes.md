@@ -84,6 +84,52 @@ Un ejecutor de módulos de Vite permite ejecutar cualquier código procesándolo
 
 El navegador se comunica con su entorno correspondiente usando el WebSocket del servidor y mediante solicitudes HTTP. El ejecutor de módulos Node puede realizar llamadas directas a funciones para procesar módulos, ya que se ejecuta en el mismo proceso. Otros entornos podrían ejecutar módulos conectándose a un runtime JS como Workerd o un Worker Thread como lo hace Vitest.
 
+```dot
+digraph module_runner {
+  rankdir=LR
+  node [shape=box style="rounded,filled" fontname="Arial" fontsize=11 margin="0.2,0.1" fontcolor="${#3c3c43|#ffffff}" color="${#c2c2c4|#3c3f44}"]
+  edge [color="${#67676c|#98989f}" fontname="Arial" fontsize=10 fontcolor="${#67676c|#98989f}"]
+  bgcolor="transparent"
+  compound=true
+
+  subgraph cluster_server {
+    label="Vite Dev Server (Node.js)" labeljust=l fontname="Arial" fontsize=12
+    style="rounded,filled" fillcolor="${#f6f6f7|#1a1a1f}" color="${#c2c2c4|#3c3f44}"
+    fontcolor="${#3c3c43|#ffffff}"
+
+    subgraph cluster_env {
+      label="DevEnvironment" labeljust=l fontname="Arial" fontsize=11
+      style="rounded,filled" fillcolor="${#f2ecfc|#2c273e}" color="${#c2c2c4|#3c3f44}"
+      fontcolor="${#3c3c43|#ffffff}"
+
+      plugins [label="Plugin\nPipeline" fillcolor="${#e9eaff|#222541}"]
+      mg [label="Module\nGraph" fillcolor="${#e9eaff|#222541}"]
+      hot [label="HotChannel" fillcolor="${#fcf4dc|#38301a}"]
+
+      plugins -> mg [dir=both]
+      mg -> hot [style=invis]
+    }
+  }
+
+  subgraph cluster_runtime {
+    label="Target Runtime" labeljust=l fontname="Arial" fontsize=12
+    style="rounded,filled" fillcolor="${#f0fdf4|#131b15}" color="${#c2c2c4|#3c3f44}"
+    fontcolor="${#3c3c43|#ffffff}"
+
+    subgraph cluster_runner {
+      label="ModuleRunner" labeljust=l fontname="Arial" fontsize=11
+      style="rounded,filled" fillcolor="${#def5ed|#15312d}" color="${#c2c2c4|#3c3f44}"
+      fontcolor="${#3c3c43|#ffffff}"
+
+      evaluator [label="Module\nEvaluator" fillcolor="${#def5ed|#15312d}"]
+      transport [label="Transport" fillcolor="${#fcf4dc|#38301a}"]
+    }
+  }
+
+  hot -> transport [label="HMR / Module\nfetch & invoke" dir=both style=bold color="${#6f42c1|#c8abfa}"]
+}
+```
+
 Uno de los objetivos de esta funcionalidad es proporcionar una API personalizable para procesar y ejecutar código. Los usuarios pueden crear nuevas fábricas de entornos usando las primitivas expuestas.
 
 ```ts
@@ -181,14 +227,14 @@ export interface ModuleRunnerOptions {
    */
   transport: ModuleRunnerTransport
   /**
-   * Configura cómo se resuelven los mapas de origen. 
-   
+   * Configura cómo se resuelven los mapas de origen.
+
    * Prefiere `node` si `process.setSourceMapsEnabled` está disponible.
-   
-   * De lo contrario, usará `prepareStackTrace` por defecto, que sobrescribe 
-   
+
+   * De lo contrario, usará `prepareStackTrace` por defecto, que sobrescribe
+
    * el método `Error.prepareStackTrace`.
-   * Puedes proporcionar un objeto para configurar cómo se resuelven los contenidos de archivos y 
+   * Puedes proporcionar un objeto para configurar cómo se resuelven los contenidos de archivos y
    * mapas de origen para archivos que no fueron procesados por Vite.
    */
   sourcemapInterceptor?:
@@ -209,7 +255,7 @@ export interface ModuleRunnerOptions {
       }
   /**
    * Caché de módulos personalizado. Si no se proporciona, crea un caché separado
-   
+
    * para cada instancia de ejecutor de módulos.
    */
   evaluatedModules?: EvaluatedModules
