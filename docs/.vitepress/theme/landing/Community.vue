@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import githubIcon from '@assets/social/github-light.svg'
+import githubIcon from '../../../public/social/github-light.svg'
 
 interface Testimonial {
   name: string

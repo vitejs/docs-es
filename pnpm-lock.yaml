@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@voidzero-dev/vitepress-theme':
-        specifier: ^4.5.0
-        version: 4.7.0(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.116.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+        specifier: ^4.8.0
+        version: 4.8.0(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.116.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       search-insights:
         specifier: ^2.17.3
         version: 2.17.3
@@ -1436,8 +1436,8 @@ packages:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
       vue: ^3.2.25
 
-  '@voidzero-dev/vitepress-theme@4.7.0':
-    resolution: {integrity: sha512-99hzQ0N4f9i5PY+HgwJK9PGdO5OJFBZx0FKzwkQMJMnA5N8ByHjpYaAt+5WhZlMtu5ahQ8qWxQQyqscYKbETLw==}
+  '@voidzero-dev/vitepress-theme@4.8.0':
+    resolution: {integrity: sha512-upydmVGsJxUjgAITlYWEsc/w0gA9vDkSs7FPgYn/2rTjcVrZ39LGxkWibrI/i5yJ/Sxhs3UPnWfmKB8Do7C0EA==}
     peerDependencies:
       vitepress: ^2.0.0-alpha.16
       vue: ^3.5.0
@@ -4017,7 +4017,7 @@ snapshots:
       vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2)
       vue: 3.5.29(typescript@5.9.3)
 
-  '@voidzero-dev/vitepress-theme@4.7.0(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.116.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))':
+  '@voidzero-dev/vitepress-theme@4.8.0(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.116.0)(postcss@8.5.6)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))':
     dependencies:
       '@docsearch/css': 4.6.0
       '@docsearch/js': 4.6.0
