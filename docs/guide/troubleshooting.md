@@ -23,8 +23,8 @@ Cuando se importa un paquete solo ESM con `require`, ocurre el siguiente error:
 
 > No se pudo resolver "foo". Este paquete es solo ESM pero se intentó cargar con `require`.
 
-> Error [ERR_REQUIRE_ESM]: no se admite el uso de `require()` de un módulo ES `/path/to/dependency.js` desde `/path/to/vite.config.js`.  
-> En su lugar, cambia la llamada a `require` de `index.js` en `/path/to/vite.config.js` a una importación dinámica `import()`, la cual está disponible en todos los módulos CommonJS.  
+> Error [ERR_REQUIRE_ESM]: no se admite el uso de `require()` de un módulo ES `/path/to/dependency.js` desde `/path/to/vite.config.js`.
+> En su lugar, cambia la llamada a `require` de `index.js` en `/path/to/vite.config.js` a una importación dinámica `import()`, la cual está disponible en todos los módulos CommonJS.
 > En Node.js <=22, los archivos ESM no pueden cargarse mediante `require()` por defecto.
 
 Aunque puede funcionar utilizando `--experimental-require-module` o en versiones de Node.js >22, o en otros entornos, aún se recomienda convertir tu configuración a ESM así:
@@ -71,6 +71,31 @@ Para Linux Ubuntu, es posible que debas agregar la línea `* - nofile 65536` al 
 Ten en cuenta que estas configuraciones persisten pero **se requiere un reinicio**.
 
 Alternativamente, si el servidor se está ejecutando dentro de un _devcontainer_ de VS Code, la solicitud puede parecer bloqueada. Para solucionar este problema, consulta [Contenedores de desarrollo / Redirección de puertos en VS Code](#contenedores-de-desarrollo-redireccion-de-puertos-en-vs-code).
+
+### Vite falla con error ENOSPC
+
+Si ves un error como este en Linux:
+
+> Error: ENOSPC: System limit for number of file watchers reached
+
+Esto sucede cuando tienes demasiados archivos en el directorio de tu proyecto (por ejemplo, muchas imágenes o recursos) y excedes el límite de observadores de archivos del sistema. Linux tiene un límite predeterminado de alrededor de 8,192-10,000 observadores de archivos (file watchers).
+
+Para solucionar esto, puedes:
+
+- Aumentar el límite de observadores de archivos del sistema:
+
+  ```shell
+  # Verifica el límite actual
+  $ cat /proc/sys/fs/inotify/max_user_watches
+  # Aumenta el límite (temporal)
+  $ sudo sysctl fs.inotify.max_user_watches=524288
+  # Hazlo permanente - añádelo a /etc/sysctl.conf (o edítalo si ya existe)
+  $ echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+  $ sudo sysctl -p
+  ```
+
+- Excluir directorios con muchos archivos de la observación de archivos usando [`server.watch.ignored`](/config/server-options#server-watch)
+- Usar polling en lugar de eventos del sistema de archivos con [`server.watch.usePolling`](/config/server-options#server-watch). Ten en cuenta que el polling utiliza más recursos de CPU.
 
 ### Las solicitudes de red dejan de cargarse
 

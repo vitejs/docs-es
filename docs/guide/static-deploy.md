@@ -1,3 +1,21 @@
+<!--
+  LEE ESTO SI QUIERES AGREGAR UNA NUEVA PLATAFORMA DE DESPLIEGUE.
+
+  Siéntete libre de enviar un PR que agregue una nueva sección con un enlace a la guía
+  de implementación de tu plataforma, siempre y cuando cumpla con estos criterios:
+
+  1. Los usuarios deben poder implementar su sitio de forma gratuita.
+  2. Las ofertas de nivel gratuito deben alojar el sitio indefinidamente y no estar limitadas en el tiempo.
+     Ofrecer un número limitado de recursos computacionales o cuentas de sitios a cambio está bien.
+  3. Las guías enlazadas no deben contener contenido malicioso o engañoso.
+
+  Las nuevas secciones deben agregarse al final de este archivo. Por favor, consulta las secciones existentes
+  al final de este archivo como ejemplos de cómo formatear la nueva sección.
+
+  El equipo de Vite puede cambiar los criterios y auditar la lista actual de vez en cuando.
+  Si se elimina una sección, notificaremos a los autores originales del PR antes de hacerlo.
+-->
+
 # Despliegue de un sitio estático
 
 Las siguientes guías se basan en algunas suposiciones compartidas:
@@ -273,17 +291,6 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
 
 También puedes agregar un [dominio personalizado](https://render.com/docs/custom-domains) a tu proyecto.
-
-<!--
-  NOTA: Las secciones a continuación están reservadas para más plataformas de implementación no enumeradas anteriormente.
-  Siéntete libre de enviar una solicitud de cambios que agregue una nueva sección con un enlace a la guía de implementación de tu plataforma, siempre y cuando cumpla con estos criterios:
-  1. Los usuarios deben poder implementar su sitio de forma gratuita.
-  2. Las ofertas de nivel gratuito deben alojar el sitio indefinidamente y no estar limitadas en el tiempo.
-     Ofrecer un número limitado de recursos computacionales o cuentas de sitios a cambio está bien.
-  3. Las guías enlazadas no deben contener contenido malicioso.
-  El equipo de Vite puede cambiar los criterios y auditar la lista actual de vez en cuando.
-  Si se elimina una sección, se notificará a los autores originales de la solicitud de cambios antes de hacerlo.
--->
 
 ## Flightcontrol
 
