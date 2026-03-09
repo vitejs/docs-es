@@ -424,7 +424,7 @@ const config = defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: `Migración desde v${viteMajorVersion - 1}`,
+              text: `Migración desde v${viteMajorVersion}`,
               link: '/guide/migration',
             },
             {
