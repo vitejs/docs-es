@@ -18,3 +18,4 @@ playground-temp
 temp
 TODOs.md
 .eslintcache
+.vitepress/cache/graphviz/*
