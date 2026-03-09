@@ -118,44 +118,47 @@ Ve a [la guía de versiones de decoradores de Babel](https://babeljs.io/docs/bab
 ::: code-group
 
 ```bash [npm]
-$ npm install -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ npm install -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Yarn]
-$ yarn add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ yarn add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [pnpm]
-$ pnpm add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ pnpm add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Bun]
-$ bun add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ bun add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Deno]
-$ deno add -D npm:@rollup/plugin-babel npm:@babel/plugin-proposal-decorators
+$ deno add -D npm:@rolldown/plugin-babel npm:@babel/plugin-proposal-decorators
 ```
 
 :::
 
 ```ts [vite.config.ts]
-import { defineConfig, withFilter } from 'vite'
-import { babel } from '@rollup/plugin-babel'
+import { defineConfig } from 'vite'
+import babel from '@rolldown/plugin-babel'
+
+function decoratorPreset(options: Record<string, unknown>) {
+  return {
+    preset: () => ({
+      plugins: [['@babel/plugin-proposal-decorators', options]],
+    }),
+    rolldown: {
+      // Ejecuta esta transformación solo si el archivo contiene un decorador.
+      filter: {
+        code: '@',
+      },
+    },
+  }
+}
 
 export default defineConfig({
-  plugins: [
-    withFilter(
-      babel({
-        configFile: false,
-        plugins: [
-          ['@babel/plugin-proposal-decorators', { version: '2023-11' }],
-        ],
-      }),
-      // Ejecuta esta transformación solo si el archivo contiene un decorador.
-      { transform: { code: '@' } },
-    ),
-  ],
+  plugins: [babel({ presets: [decoratorPreset({ version: '2023-11' })] })],
 })
 ```
 
@@ -295,7 +298,7 @@ Consulta la documentación de Rolldown para obtener más detalles: [`require` m�
 
 ### Eliminación de la opción `build.rollupOptions.watch.chokidar`
 
-La opción `build.rollupOptions.watch.chokidar` se eliminó. Por favor, migra a la opción [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify).
+La opción `build.rollupOptions.watch.chokidar` se eliminó. Por favor, migra a la opción [`build.rolldownOptions.watch.watcher`](https://rolldown.rs/reference/InputOptions.watch#watcher).
 
 ### Eliminación de la forma de objeto de `build.rollupOptions.output.manualChunks` y deprecación de la forma de función
 
@@ -348,7 +351,7 @@ Estos cambios rotóricos se espera que afecten solo a una minoría de casos de u
   - La referencia no se comparte entre los hooks ([rolldown-vite#410](https://github.com/vitejs/rolldown-vite/issues/410))
 - Todos los hooks paralelos en Rollup funcionan como hooks secuenciales. Consulta la [documentación de Rolldown](https://rolldown.rs/apis/plugin-api#sequential-hook-execution) para más detalles.
 - `"use strict";` no se inyecta a veces. Consulta la [documentación de Rolldown](https://rolldown.rs/in-depth/directives) para más detalles.
-- La transformación a ES5 inferior con plugin-legacy no es compatible ([rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452))
+- La transformación a ES5 y versiones inferiores con plugin-legacy no es compatible ([rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452))
 - Pasar el mismo navegador con múltiples versiones a la opción `build.target` ahora produce un error: esbuild selecciona la última versión de este, lo que probablemente no era lo que pretendías.
 - Falta de compatibilidad por parte de Rolldown: Las siguientes características no son compatibles con Rolldown y ya no son compatibles con Vite.
   - `build.rollupOptions.output.format: 'system'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2387))
@@ -358,7 +361,6 @@ Estos cambios rotóricos se espera que afecten solo a una minoría de casos de u
   - Hook `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Hook `resolveFileUrl`
 - Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parseSync` / `parse` que ahora tienen más características.
-- (bug) Caso límite del comentario `@vite-ignore` ([rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426))
 
 ## Migración desde v6
 

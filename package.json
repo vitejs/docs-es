@@ -45,28 +45,29 @@
     ]
   },
   "dependencies": {
-    "@voidzero-dev/vitepress-theme": "^4.8.0",
+    "@voidzero-dev/vitepress-theme": "^4.8.1",
     "search-insights": "^2.17.3",
     "vite": "^7.1.3",
-    "vitepress-plugin-graphviz": "^0.0.1"
+    "vitepress-plugin-graphviz": "^0.0.1",
+    "@iconify/vue": "^5.0.0"
   },
   "devDependencies": {
     "@algolia/client-search": "^5.36.0",
-    "@eslint/js": "^9.39.2",
-    "@shikijs/vitepress-twoslash": "^4.0.0",
+    "@eslint/js": "^9.39.4",
+    "@shikijs/vitepress-twoslash": "^4.0.2",
     "@types/express": "^5.0.6",
     "@types/node": "24.12.0",
     "@types/react": "^18.3.24",
     "@typescript-eslint/parser": "^8.41.0",
-    "eslint": "^9.39.2",
+    "eslint": "^9.39.4",
     "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-n": "^17.23.2",
-    "eslint-plugin-regexp": "^3.0.0",
+    "eslint-plugin-regexp": "^3.1.0",
     "feed": "^5.2.0",
     "globals": "^17.3.0",
     "gsap": "^3.14.2",
-    "lint-staged": "^16.2.7",
+    "lint-staged": "^16.3.2",
     "markdown-it-image-size": "^15.0.1",
     "oxc-minify": "^0.116.0",
     "prettier": "3.8.1",
@@ -78,7 +79,7 @@
     "typescript-eslint": "^8.54.0",
     "vitepress": "2.0.0-alpha.16",
     "vitepress-plugin-group-icons": "^1.7.1",
-    "vue": "^3.5.28",
+    "vue": "^3.5.30",
     "vue-tsc": "^3.2.5"
   },
   "packageManager": "pnpm@10.31.0"

@@ -88,13 +88,16 @@ export default function myPlugin() {
   return {
     name: 'transform-file',
 
-    transform(src, id) {
-      if (fileRegex.test(id)) {
+    transform: {
+      filter: {
+        id: fileRegex,
+      },
+      handler(src, id) {
         return {
           code: compileFileToJS(src),
           map: null, // provee un mapa de fuentes si es necesario
         }
-      }
+      },
     },
   }
 }
@@ -108,26 +111,30 @@ Mira el ejemplo en [la siguente sección](./api-plugin.md#convencion-de-modulos-
 
 Los módulos virtuales son un esquema útil que le permite pasar información de tiempo de compilación a los archivos de origen utilizando la sintaxis de importación de ESM normal.
 
-```js
-export default function myPlugin() {
-  const virtualModuleId = 'virtual:my-module'
-  const resolvedVirtualModuleId = '\0' + virtualModuleId
+import { exactRegex } from '@rolldown/pluginutils'
 
-  return {
-    name: 'my-plugin', // requerido, aparecerá en advertencias y errores
-    resolveId(id) {
-      if (id === virtualModuleId) {
-        return resolvedVirtualModuleId
-      }
-    },
-    load(id) {
-      if (id === resolvedVirtualModuleId) {
-        return `export const msg = "from virtual module"`
-      }
-    },
-  }
+export default function myPlugin() {
+const virtualModuleId = 'virtual:my-module'
+const resolvedVirtualModuleId = '\0' + virtualModuleId
+
+return {
+name: 'my-plugin', // requerido, aparecerá en advertencias y errores
+resolveId: {
+filter: { id: exactRegex(virtualModuleId) },
+handler() {
+return resolvedVirtualModuleId
+},
+},
+load: {
+filter: { id: exactRegex(resolvedVirtualModuleId) },
+handler() {
+return `export const msg = "from virtual module"`
+},
+},
 }
-```
+}
+
+````
 
 Lo que permite importar el módulo en JavaScript:
 
@@ -135,7 +142,7 @@ Lo que permite importar el módulo en JavaScript:
 import { msg } from 'virtual:my-module'
 
 console.log(msg)
-```
+````
 
 Los módulos virtuales en Vite (y Rolldown / Rollup) tienen el prefijo `virtual:` para la ruta orientada al usuario por convención. Si es posible, el nombre del plugin debe usarse como un espacio de nombre para evitar colisiones con otros plugins en el ecosistema. Por ejemplo, `vite-plugin-posts` podría pedirles a los usuarios que importe módulo virtuales `virtual:posts` o `virtual:posts/helpers` para obtener información sobre el tiempo de compilación. Internamente, los plugins que usan módulos virtuales deben prefijar la ID del módulo con `\0` mientras resuelven la ID, una convención del ecosistema de Rollup. Esto evita que otros plugins intenten procesar el id (como la resolución de node), y las funciones principales, como los mapas de origen, puedan usar esta información para diferenciar entre módulos virtuales y archivos normales. `\0` no es un carácter permitido en las URL de importación, por lo que debemos reemplazarlo durante el análisis de importación. Una identificación virtual `\0{id}` termina codificada como `/@id/__x00__{id}` durante el desarrollo en el navegador. El id se decodificará antes de ingresar a la canalización de plugins, por lo que el código de hooks de plugins no lo ve.
 
