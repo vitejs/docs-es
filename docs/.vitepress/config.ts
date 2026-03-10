@@ -268,7 +268,14 @@ const config = defineConfig({
           { text: 'Equipo', link: '/team' },
           { text: 'Blog', link: '/blog' },
           { text: 'Lanzamientos', link: '/releases' },
-          { text: 'Agradecimientos', link: '/acknowledgements' },
+          {
+            text: 'Agradecimientos',
+            link: '/acknowledgements',
+          },
+          {
+            text: 'Escenario en Vivo',
+            link: '/live',
+          },
           {
             text: 'El Documental',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
