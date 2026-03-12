@@ -13,7 +13,7 @@ importers:
         version: 5.0.0(vue@3.5.30(typescript@5.9.3))
       '@voidzero-dev/vitepress-theme':
         specifier: ^4.8.1
-        version: 4.8.2(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.117.0)(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))
+        version: 4.8.3(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.117.0)(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))
       search-insights:
         specifier: ^2.17.3
         version: 2.17.3
@@ -767,8 +767,8 @@ packages:
   '@package-json/types@0.0.12':
     resolution: {integrity: sha512-uu43FGU34B5VM9mCNjXCwLaGHYjXdNincqKLaraaCW+7S2+SmiBg1Nv8bPnmschrIfZmfKNY9f3fC376MRrObw==}
 
-  '@rive-app/canvas-lite@2.35.1':
-    resolution: {integrity: sha512-Hm5dp9dmIj+3UoZiyTVi42QvO5bRtg5MrWIfidgZiX3L+oM/H94YfhPpX8Ktp6WXZtnHjh7zGy4v5hYkOlfiYA==}
+  '@rive-app/canvas-lite@2.35.2':
+    resolution: {integrity: sha512-bzm4eAkCaBXOpHvxEVnDcpYfBnUCe74y13Dj7LvCjc2MLAQjT9O8xny3q6PAn1WJSWtXHVpu/RDMulz4UzzATw==}
 
   '@rolldown/binding-android-arm64@1.0.0-rc.9':
     resolution: {integrity: sha512-lcJL0bN5hpgJfSIz/8PIf02irmyL43P+j1pTCfbD1DbLkmGRuFIA4DD3B3ZOvGqG0XiVvRznbKtN0COQVaKUTg==}
@@ -1430,8 +1430,8 @@ packages:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
       vue: ^3.2.25
 
-  '@voidzero-dev/vitepress-theme@4.8.2':
-    resolution: {integrity: sha512-M3LfcjJCFv9wQYzMhhvQJbpQZaJ9zUGuWCIvP8g4hMP52vHtJ10AG1/bHctInFglRr90txL+rbdhpVwcNGkcjA==}
+  '@voidzero-dev/vitepress-theme@4.8.3':
+    resolution: {integrity: sha512-JsNrJDxbrpEb8KvoiRiSwI8XIDuqRpC5puLMoh4TO1EmANpy2BWLtHzL24PiS3Mi2yYA9jgj2LFJ5L7/3uk5gQ==}
     peerDependencies:
       vitepress: ^2.0.0-alpha.16
       vue: ^3.5.0
@@ -2583,8 +2583,8 @@ packages:
     resolution: {integrity: sha512-sZuz1dYW/ZsfG17WSAG7eS85r5a0dDsvg+7BiiYR5o6lKCAtUrEwdmRmaGF6rwVj3LcmAeYkOWKEPlbPzN3Y3A==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  reka-ui@2.9.0:
-    resolution: {integrity: sha512-5dpp80u109iLTbRBu+jhAk8R/877/JN20gYGjb3GsuAgS7E/5QTX5ZxuzWtZAVbChBDYDpXc8pkaQAFpa6s+4w==}
+  reka-ui@2.9.1:
+    resolution: {integrity: sha512-5Oa77f4VVNgUsMtGZKh3AnMCjJvA4TJ9phcN+TxPfGutdENaqleXO+NvhCkgK02PEHcyys8fqIF9CdcvSq5Flw==}
     peerDependencies:
       vue: '>= 3.4.0'
 
@@ -3444,7 +3444,7 @@ snapshots:
 
   '@package-json/types@0.0.12': {}
 
-  '@rive-app/canvas-lite@2.35.1': {}
+  '@rive-app/canvas-lite@2.35.2': {}
 
   '@rolldown/binding-android-arm64@1.0.0-rc.9':
     optional: true
@@ -4010,13 +4010,13 @@ snapshots:
       vite: 7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2)
       vue: 3.5.30(typescript@5.9.3)
 
-  '@voidzero-dev/vitepress-theme@4.8.2(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.117.0)(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))':
+  '@voidzero-dev/vitepress-theme@4.8.3(focus-trap@7.8.0)(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))(vitepress@2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.117.0)(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))(vue@3.5.30(typescript@5.9.3))':
     dependencies:
       '@docsearch/css': 4.6.0
       '@docsearch/js': 4.6.0
       '@docsearch/sidepanel-js': 4.6.0
       '@iconify/vue': 5.0.0(vue@3.5.30(typescript@5.9.3))
-      '@rive-app/canvas-lite': 2.35.1
+      '@rive-app/canvas-lite': 2.35.2
       '@tailwindcss/typography': 0.5.19(tailwindcss@4.2.1)
       '@tailwindcss/vite': 4.2.1(vite@7.3.1(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2))
       '@vue/shared': 3.5.30
@@ -4025,7 +4025,7 @@ snapshots:
       '@vueuse/shared': 14.2.1(vue@3.5.30(typescript@5.9.3))
       mark.js: 8.11.1
       minisearch: 7.2.0
-      reka-ui: 2.9.0(vue@3.5.30(typescript@5.9.3))
+      reka-ui: 2.9.1(vue@3.5.30(typescript@5.9.3))
       tailwindcss: 4.2.1
       vitepress: 2.0.0-alpha.16(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.31.1)(oxc-minify@0.117.0)(postcss@8.5.8)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2)
       vue: 3.5.30(typescript@5.9.3)
@@ -5321,7 +5321,7 @@ snapshots:
       '@eslint-community/regexpp': 4.12.2
       refa: 0.12.1
 
-  reka-ui@2.9.0(vue@3.5.30(typescript@5.9.3)):
+  reka-ui@2.9.1(vue@3.5.30(typescript@5.9.3)):
     dependencies:
       '@floating-ui/dom': 1.7.6
       '@floating-ui/vue': 1.1.11(vue@3.5.30(typescript@5.9.3))
