@@ -1,0 +1,81 @@
+From aa1ba2b67ca210fe8f03af8974b4c3c950f0cf3d Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E7=BF=A0?= <green@sapphi.red>
+Date: Thu, 12 Mar 2026 19:24:53 +0900
+Subject: [PATCH] docs(apis): add document for `this.meta.viteVersion` and
+ `*version` variables (#21824)
+
+---
+ docs/guide/api-javascript.md | 24 ++++++++++++++++++++++++
+ docs/guide/api-plugin.md     | 27 +++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+)
+
+diff --git a/docs/guide/api-javascript.md b/docs/guide/api-javascript.md
+index d12433f618aa40..0158a01638e7b4 100644
+--- a/docs/guide/api-javascript.md
++++ b/docs/guide/api-javascript.md
+@@ -461,3 +461,27 @@ Pre-processes `.css`, `.scss`, `.sass`, `.less`, `.styl` and `.stylus` files to
+ The pre-processor used is inferred from the `filename` extension. If the `filename` ends with `.module.{ext}`, it is inferred as a [CSS module](https://github.com/css-modules/css-modules) and the returned result will include a `modules` object mapping the original class names to the transformed ones.
+ 
+ Note that pre-processing will not resolve URLs in `url()` or `image-set()`.
++
++## `version`
++
++**Type:** `string`
++
++The current version of Vite as a string (e.g. `"8.0.0"`).
++
++## `rolldownVersion`
++
++**Type:** `string`
++
++The version of Rolldown used by Vite as a string (e.g. `"1.0.0"`). A re-export of [`VERSION`](https://rolldown.rs/reference/Variable.VERSION) from `rolldown`.
++
++## `esbuildVersion`
++
++**Type:** `string`
++
++Only kept for backward compatibility.
++
++## `rollupVersion`
++
++**Type:** `string`
++
++Only kept for backward compatibility.
+diff --git a/docs/guide/api-plugin.md b/docs/guide/api-plugin.md
+index e418b8503c3320..c6cdbfb81fdd21 100644
+--- a/docs/guide/api-plugin.md
++++ b/docs/guide/api-plugin.md
+@@ -477,6 +477,33 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
+     }
+     ```
+ 
++## Plugin Context Meta
++
++For plugin hooks that has access to the plugin context, Vite exposes additional properties on `this.meta`:
++
++- `this.meta.viteVersion`: The current Vite version string (e.g. `"8.0.0"`).
++
++::: tip Detecting Rolldown powered Vite
++
++[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) is only available for Rolldown powered Vite (i.e. Vite 8+). You can use it to detect whether the current Vite instance is powered by Rolldown:
++
++```ts
++function versionCheckPlugin(): Plugin {
++  return {
++    name: 'version-check',
++    buildStart() {
++      if (this.meta.rolldownVersion) {
++        // only do something if running on a Rolldown powered Vite
++      } else {
++        // do something else if running on a Rollup powered Vite
++      }
++    },
++  }
++}
++```
++
++:::
++
+ ## Output Bundle Metadata
+ 
+ During build, Vite augments Rolldown's build output objects with a Vite-specific `viteMetadata` field.

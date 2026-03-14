@@ -456,3 +456,27 @@ Preprocesa archivos `.css`, `.scss`, `.sass`, `.less`, `.styl` y `.stylus` a CSS
 El preprocesador utilizado se infiere de la extensión del `filename`. Si el `filename` termina con `.module.{ext}`, se infiere como un [módulo CSS](https://github.com/css-modules/css-modules) y el resultado devuelto incluirá un objeto `modules` que mapea los nombres de clases originales a los transformados.
 
 Ten en cuenta que el preprocesamiento no resolverá URLs en `url()` o `image-set()`.
+
+## `version`
+
+**Tipo:** `string`
+
+La versión actual de Vite como string (por ejemplo, `"8.0.0"`).
+
+## `rolldownVersion`
+
+**Tipo:** `string`
+
+La versión de Rolldown utilizada por Vite como string (por ejemplo, `"1.0.0"`). Una reexportación de [`VERSION`](https://rolldown.rs/reference/Variable.VERSION) de `rolldown`.
+
+## `esbuildVersion`
+
+**Tipo:** `string`
+
+Solo se mantiene por compatibilidad hacia atrás.
+
+## `rollupVersion`
+
+**Tipo:** `string`
+
+Solo se mantiene por compatibilidad hacia atrás.

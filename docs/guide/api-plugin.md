@@ -473,6 +473,33 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
   }
   ```
 
+## Contexto Meta del Plugin
+
+Para los hooks de plugins que tienen acceso al contexto del plugin, Vite expone propiedades adicionales en `this.meta`:
+
+- `this.meta.viteVersion`: La versión actual de Vite como string (por ejemplo, `"8.0.0"`).
+
+::: tip Detectando si Vite usa Rolldown
+
+[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) solo está disponible para una versión de Vite potenciada por Rolldown (es decir, Vite 8+). Puedes usarlo para detectar si la instancia actual de Vite está siendo impulsada por Rolldown:
+
+```ts
+function versionCheckPlugin(): Plugin {
+  return {
+    name: 'version-check',
+    buildStart() {
+      if (this.meta.rolldownVersion) {
+        // solo haz algo si se ejecuta en un Vite potenciado por Rolldown
+      } else {
+        // haz algo más si se ejecuta en un Vite potenciado por Rollup
+      }
+    },
+  }
+}
+```
+
+:::
+
 ## Metadatos del Paquete de Salida
 
 Durante la compilación, Vite agrega un campo específico `viteMetadata` a los objetos de salida de compilación de Rolldown.
