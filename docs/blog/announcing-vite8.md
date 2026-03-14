@@ -10,7 +10,7 @@ head:
       content: website
   - - meta
     - property: og:title
-      content: Anuncio de Vite 8
+      content: Anunciando Vite 8
   - - meta
     - property: og:image
       content: https://vite.dev/og-image-announcing-vite8.webp
@@ -38,7 +38,7 @@ Vite se descarga ahora 65 millones de veces a la semana, y el ecosistema contin�
 Enlaces rápidos:
 
 - [Documentación](/)
-- Traducciones: [简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [Español](https://es.vite.dev/), [Português](https://pt.vite.dev/), [한국어](https://ko.vite.dev/), [Deutsch](https://de.vite.dev/), [فارسی](https://fa.vite.dev/)
+- Traducciones: [简体中文](https://cn.vite.dev/), [日本語](https://ja.vite.dev/), [English](https://vite.dev/), [Português](https://pt.vite.dev/), [한국어](https://ko.vite.dev/), [Deutsch](https://de.vite.dev/), [فارسی](https://fa.vite.dev/)
 - [Guía de Migración](/guide/migration)
 - [Historial de Cambios en GitHub](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)
 
@@ -161,4 +161,3 @@ Sin estos dos proyectos, Vite no existiría como lo hace hoy. Incluso a medida q
 Vite 8 fue liderado por [sapphi-red](https://github.com/sapphi-red) y el [Equipo de Vite](/team) con la ayuda de la amplia comunidad de contribuyentes, mantenedores derivados y autores de plugins. Queremos agradecer al [equipo de Rolldown](https://rolldown.rs/team) por su estrecha colaboración. También estamos especialmente agradecidos a todos los que participaron en la vista previa técnica de `rolldown-vite` y el período beta de Vite 8. Sus pruebas, informes de errores y comentarios hicieron posible la migración a Rolldown y dieron forma a nuestro avance sobre esta versión.
 
 Vite es traído a ti por [VoidZero](https://voidzero.dev), en asociación con [Bolt](https://bolt.new/) y [NuxtLabs](https://nuxtlabs.com/). También queremos agradecer a nuestros patrocinadores en [los Sponsors en GitHub](https://github.com/sponsors/vitejs) y [Vite's Open Collective](https://opencollective.com/vite).
-
