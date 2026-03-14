@@ -13,7 +13,9 @@ import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
 import type { FooterLink } from '@voidzero-dev/vitepress-theme'
 import { buildEnd } from './buildEnd.config'
 
-const viteVersion = '7.1.3'
+const viteVersion = JSON.parse(
+  fs.readFileSync(path.resolve(import.meta.dirname, '../../package.json'), 'utf-8'),
+).dependencies.vite.replace(/[^0-9.]/g, '')
 const viteMajorVersion = +viteVersion.split('.')[0]
 
 const ogDescription = 'Herramienta de compilación frontend de próxima generación'
