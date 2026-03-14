@@ -47,7 +47,7 @@
   "dependencies": {
     "@voidzero-dev/vitepress-theme": "^4.8.1",
     "search-insights": "^2.17.3",
-    "vite": "^7.1.3",
+    "vite": "^8.0.0",
     "vitepress-plugin-graphviz": "^0.0.1",
     "@iconify/vue": "^5.0.0"
   },
