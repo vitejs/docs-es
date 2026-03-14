@@ -62,60 +62,60 @@ Este enfoque de doble empaquetador sirvió bien a Vite durante años. Nos permit
 
 - **Rendimiento:** Escrito en Rust, Rolldown opera a nivel nativo. En pruebas de rendimiento benchmark, es [10-30x más rápido que Rollup](https://github.com/rolldown/benchmarks) igualando al nivel de rendimiento de esbuild.
 - **Compatibilidad:** Rolldown soporta la misma API de plugins que Rollup y Vite. La mayoría de los plugins de Vite funcionan con Vite 8 sin necesidad de un cambio adicional.
-- **Características avanzadas:** Un empaquetador individual unificado, el cual ofrece soporte para capacidades que eran difíciles o imposibles con la arquitectura de dos empaquetadores como, un modo bundler dedicado, partición flexible de chunk (fragmentos), guardado a nivel modular persistente de caché, optimización, fragmentación y soporte de la herramienta 'Module Federation'.
+- **Características avanzadas:** Un empaquetador individual unificado abre capacidades que eran difíciles o imposibles con la arquitectura de dos empaquetadores, incluyendo el modo de empaquetado completo (full bundle mode), división de fragmentos (chunk splitting) más flexible, caché persistente a nivel de módulo, y soporte para Module Federation.
 
 ### La evolución hacia Estable
 
-La migración a Rolldown fue deliberada e impulsada por la comunidad de Vite. Fue realizado lanzando un paquete externo de Vite separado [`rolldown-vite`](https://voidzero.dev/posts/announcing-rolldown-vite)  inicialmente que permitió que fuese probado y mejorado antes sin influenciar Vite en estable, permitiendo a los primeros adoptantes el poder examinar si integrarse con Vite causaba conflictos. Las validaciones o retroalimentaciones generadas y entregadas a los primeros adoptantes de esta tecnología probaron el proceso en casos donde proyectos dependían de características no del todo contempladas, resolviendo esto durante una gran cantidad de iteraciones. También implementamos un nivel de validación extra de CI de uso común de las librerias y proyectos Vite junto de diferentes implementacion validando el cambio de este. 
+La migración a Rolldown fue deliberada e impulsada por la comunidad. Primero, un paquete separado [`rolldown-vite`](https://voidzero.dev/posts/announcing-rolldown-vite) fue publicado como una vista previa técnica, permitiendo a los primeros adoptadores probar la integración de Rolldown sin afectar a la versión estable de Vite. Los comentarios de esos primeros adoptadores fueron invaluables. Impulsaron la integración a través de bases de código del mundo real de todas las formas y tamaños, haciendo aflorar casos límite y problemas de compatibilidad que pudimos abordar antes de un lanzamiento más amplio. También configuramos un entorno de pruebas continuas (CI) dedicado para validar los plugins clave y frameworks de Vite mediante el nuevo bundler, detectando regresiones de forma temprana y construyendo confianza en el camino hacia la migración.
 
-Tras haber validado en diciembre de 2025 de las versión Beta [Vite 8 beta](/blog/announcing-vite8-beta), este con su correspondiente transición e integración la versión final de el empaquetador final donde el proyecto avanzo junto de iteraciones consecutivas junto la validación por todos las librerias de entorno que dependen de esté, dando la viabilidad para la final y estable. 
+En diciembre de 2025, publicamos la [beta de Vite 8](/blog/anunciando-vite8-beta) con Rolldown ya completamente integrado. Durante el período beta, Rolldown progresó desde beta a una "release candidate", con continuas mejoras impulsadas por las pruebas y los comentarios de la comunidad de Vite.
 
 ### Rendimiento en el mundo real
 
-Durante la vista técnica (preview) y pruebas (beta) de la versión del paquete `rolldown-vite`, empresas en la fase del uso indicaron tiempos muy bajos de construcción. Un poco mas en detalles de estas: 
+Durante las fases de vista previa técnica y beta de `rolldown-vite`, varias empresas reportaron reducciones medibles en los tiempos de construcción de producción:
 
-- **Linear:** Producción bajo de los valores de 46s a 6s
-- **Ramp:** 57% del porcentaje en total de tiempo
-- **Mercedes-Benz.io:** De los niveles de un ahorro del porcentaje alto 38% del porcentaje general.
-- **Beehiiv:** Un ahorro notable del rendimiento del de más o de unos tiempos por niveles bajos con más reducciones alrededor del orden del 64%.
+- **Linear:** Tiempos de construcción cayeron de 46s a 6s
+- **Ramp:** 57% de reducción en el tiempo de construcción
+- **Mercedes-Benz.io:** Hasta 38% de reducción en el tiempo de construcción
+- **Beehiiv:** 64% de reducción en el tiempo de construcción
 
-Estos tiempos mejorarán todavía más tras ser usados el desarrollo continuo con esta versión con los posibles ajustes por actualizaciones y la madurez total de la plataforma en versiones que estarian siendo pulidas continuamente sobre este entorno. 
+Para proyectos grandes, el impacto puede ser especialmente notable, y esperamos aún mayores mejoras a medida que Rolldown continúe evolucionando.
 
-### Cadena Unificada 
+### Una cadena de herramientas unificada
 
-Al migrarse de y utilizando Rolldown junto a Oxc para dar el salto al compilador e interfaz y soporte total con Vite el proyecto como herramienta pasaría a ser algo consolidado como punto en total único que garantizan estar todos vinculados [Oxc](https://oxc.rs/). Esta estructura brinda tener total control integral en toda dirección sin usar librerias independientes haciendo la estructura nativa para uso y un mayor avance usando menos pasos y dando tiempos mayores permitiendo una sintaxis nueva y avanzada a lo implementado mejor en rendimiento en todas opciones implementadas. Oxc y las soluciones dadas nos dan un empujón del rendimiento a los que depender del desarrollo web para la comunidad.
+Con Vite 8, Vite se convierte en el punto de entrada a una cadena de herramientas completa con equipos que colaboran estrechamente: la herramienta de compilación (Vite), el empaquetador (Rolldown) y el compilador ([Oxc](https://oxc.rs/)). Esta alineación asegura un comportamiento consistente a lo largo de toda la pila técnica, desde el análisis sintáctico (parsing) y resolución, hasta la transformación y minificación. También significa que podemos adoptar rápidamente nuevas especificaciones del lenguaje a medida que JavaScript evoluciona. Y al integrarnos profundamente entre capas, podemos buscar optimizaciones que antes estaban fuera de alcance, como aprovechar el análisis semántico de Oxc para un mejor tree-shaking en Rolldown.
 
-### Agradecimiento total para todas partes
+### Gracias a la comunidad
 
-Dado el impacto para ayudar lograr construirlo nos encanta resaltar este nuevo entorno a todos: ([SvelteKit](https://svelte.dev/docs/kit/introduction), [React Router](https://reactrouter.com/), [Storybook](https://storybook.js.org/), [Astro](https://astro.build/), [Nuxt](https://nuxt.com/), etc..). Todos nos apoyaron y enviaron información vital. Apreciamos inmensamente la participación mediante sus test, usos reales. Ustedes crearon la confiabilidad actual para la nueva versión para este ser implementando la migración hacia que el software esté siendo hoy real o con la calidad posible, de cada una el cual nos ayudó dándonos ideas detalladas!
+Nada de esto habría sido posible sin la comunidad en general. Queremos extender nuestro profundo agradecimiento a los equipos de frameworks ([SvelteKit](https://svelte.dev/docs/kit/introduction), [React Router](https://reactrouter.com/), [Storybook](https://storybook.js.org/), [Astro](https://astro.build/), [Nuxt](https://nuxt.com/), y muchos más) quienes probaron `rolldown-vite` tempranamente, reportaron errores detallados y trabajaron con nosotros para resolver problemas de compatibilidad. Estamos igualmente agradecidos a cada desarrollador que probó la beta, compartió sus mejoras en tiempos de construcción y reportó las asperezas que nos ayudaron a pulir esta versión. Su disposición para probar la migración en proyectos reales ayudó a hacer la transición a Rolldown más fluida y confiable.
 
 ## Soporte para Node.js
 
-Vite 8 soporta versiones obligatorias para poder hacer que pueda correr tales como: la última a nivel global, versiones como Node.js 20.19+, 22.12+. Node.js en esta clase brinda y es base dando acceso o usar ESM para su despliegue y compatibilidad, haciendo posible requerimientos y para este emitiéndose con la nueva versión de soporte. 
+Vite 8 requiere Node.js 20.19+ o 22.12+, los mismos requerimientos que Vite 7. Estos rangos aseguran que Node.js soporte `require(esm)` sin necesidad de un flag, permitiendo que Vite se distribuya exclusivamente como ESM.
 
-## Funciones Extra o Modificaciones Nuevas Añadidos 
+## Funciones adicionales
 
-Con parte final del lanzamiento del empaquetamiento incluimos algunos adicionales u otros. Las caracterísicas y características en sí de importancia son las cuales mostramos: 
+Además de la integración de Rolldown, Vite 8 incluye varias características notables:
 
-- **Integración para uso en Herramienta de DevTools o Herramienta Para Desarrolladores (DevTools):** En la nueva versión la función del cual fue añadido está  habilitado como soporte, por medio el [`devtools`](/config/shared-options#devtools). Herramienta desarrollada permitiendo inspección o más control a nivel código y con mejor análisis brindado [Vite Devtools](https://devtools.vite.dev/) se incorporó dando a ti herramientas y facilidades desde tu terminal del propio servicio directamente para proyectos.
+- **Devtools integradas:** Vite 8 incluye la opción [`devtools`](/config/shared-options#devtools) para habilitar [Vite Devtools](https://devtools.vite.dev/), herramientas de desarrollo para depuración y análisis. Vite Devtools proporciona información más profunda sobre tus proyectos impulsados por Vite directamente desde el servidor de desarrollo.
 
-- **Soporte `paths` para tsconfig:** En el cual a su vez permite alias o ruta tsconfig habilitar alias con TypeScript, habilitable u implementable bajo [`resolve.tsconfigPaths`](/config/shared-options.md#resolve-tsconfigpaths) como opcion `true`. Pero teniendo unos pequeños requerimientos costo rendimiento que viene inhabilitado.
+- **Soporte nativo de `paths` en tsconfig:** Los desarrolladores pueden habilitar la resolución de alias de rutas de TypeScript configurando [`resolve.tsconfigPaths`](/config/shared-options.md#resolve-tsconfigpaths) a `true`. Esto tiene un pequeño costo de rendimiento y no está habilitado por defecto.
 
-- **Integración con Funcionalidad Soporte de `emitDecoratorMetadata`:** El cual ahora integra soporte interno incluido ya usando de base este y la configuración directamente para [Características](/guide/features.md#emitdecoratormetadata), dando de una sola por y con la omisión externa la solución para uso a `emitDecoratorMetadata` o por complementos externos opcionales para la funcionalidad de este sin un intermediador u de código distinto. Ya no tiene una requerimientos plugins usando este. 
+- **Soporte para `emitDecoratorMetadata`:** Vite 8 ahora tiene soporte automático integrado para la opción `emitDecoratorMetadata` de TypeScript, eliminando la necesidad de plugins externos. Consulta la página de [Características](/guide/features.md#emitdecoratormetadata) para más detalles.
 
-- **WASM Integración usando su formato En render (SSR) y SSR con (Soporte Wasm):** Importaciones ya siendo posible o usando extensiones importando como [`.wasm?init`](/guide/features#webassembly) trabajando dentro y expandiendo dentro entornos (SSR). Todo siendo parte usando de sus atributos, siendo ya usados con formato el sistema interno WebAssembly para su implementación en SSR (o compilando e integrando SSR para esta plataforma en render para lado del servidor u de ejecución).
+- **Soporte Wasm en SSR:** Las importaciones [`.wasm?init`](/guide/features#webassembly) ahora funcionan en entornos SSR, expandiendo la funcionalidad de WebAssembly de Vite al renderizado del lado del servidor.
 
-- **Redireccion para (Log) consola en la Web hacía Terminal Interno Del Servidor (Lado Cliente/Dev) Forwarder console Browser Console Forward:** Una muy potente forma en re direccionar errores web e log dándoles visual para errores en código o cliente usando desde del terminal con su integración para habilitarlo y hacer re direccional como: [`server.forwardConsole`](/config/server-options.md#server-forwardconsole) siendo parte el soporte y usado con detectores con su integración si usan asistentes que generan uso de comandos o agentes, este automáticamente.  El cual da mayor rapidez de resolución errores desde donde ejecute tu cli sin uso del motor de depuración que lo usan por fuera con el re-dirección nativo propio a las interfaces o log del cli en visual de donde tú ves que falla todo con los logs cliente que usa tu sistema terminal del momento que ejecutes todo en entorno sin usar el código ni tu terminal que lo integra el desarrollador al lanzar con log sin salirte. 
+- **Reenvío de consola del navegador:** Vite 8 puede reenviar los logs y errores de la consola del navegador a la terminal del servidor de desarrollo. Esto es especialmente útil al trabajar con agentes de codificación (coding agents), ya que los errores de ejecución del cliente se hacen visibles en la salida del CLI. Habilítalo con [`server.forwardConsole`](/config/server-options.md#server-forwardconsole), que se activa automáticamente cuando se detecta un agente de codificación.
 
-## Plugins Vite/Compatibilidad `@vitejs/plugin-react` v6
+## `@vitejs/plugin-react` v6
 
-Liberado en todo junto como soporte principal al proyecto Vite 8 en cual acompaña a la actualización lanzamos además con conjunto de todo `@vitejs/plugin-react` v6 con nuevas, La actualización implementa y se acoplan con base u opción de React (Habilitando Oxc react refresh y dependencias y como también con su respectivo optimizador Babel, lo elimina del código base como también sin uso o instalación extra, de base. Oxc hace mejor integración la transformación para y de un mejor React Refresh con menos dependencia extra y siendo este más ágil y que tenga menos tiempo sin tener más.
+Junto con Vite 8, estamos lanzando `@vitejs/plugin-react` v6. El plugin usa Oxc para la transformación de React Refresh. Babel ya no es una dependencia y el tamaño de instalación es menor.
 
-Y también añade como preset u otra característica opcional React Compiler si es que tu sistema para uso u otros requieren una mejor integración o el optimizados, esto usa un flag como [`reactCompilerPreset`](/guide) que permite acoplarse y trabajando este último trabajando ahora un entorno `@rolldown/plugin-babel` sin dar a o tener como algo impuesto o pesado el entorno si a configuración inicial se lo deseas usar como opción adicional sin serlo inicial el tener un instalador muy cargado, donde puede optar opcional.
+Para proyectos que necesitan el [React Compiler](https://react.dev/learn/react-compiler), la v6 proporciona un helper `reactCompilerPreset` que funciona con `@rolldown/plugin-babel`, dándote una vía de activación explícita sin sobrecargar la configuración por defecto.
 
-Soporte y documentación y con notas en versiones con mayor especificaciones en tu [Documento / Historial de Versiones Oficial o Release](https://github.com/vitejs/vite-plugin-react/releases/tag/plugin-react%406.0.0).  
+Consulta las [notas de la versión](https://github.com/vitejs/vite-plugin-react/releases/tag/plugin-react%406.0.0) para más detalles.
 
-Es necesario para esta y con uso el uso u soporte con este siendo que la versión de Vite soporta todavaía compatibilidad u versión `@vitejs/plugin-react` v5 si quieres usar antes actualizando u usando el tiempo deseando antes a Vite, y su plugin primero que actualizar todo u para cuando sientas con confianza, en el la actualización sin generar algún. 
+Ten en cuenta que la v5 sigue funcionando con Vite 8, por lo que puedes actualizar el plugin después de actualizar Vite.
 
 ## Mirando hacia el futuro
 
