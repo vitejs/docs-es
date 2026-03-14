@@ -1,66 +1,60 @@
-# ¿Por qué Vite?
+# Por qué usar Vite
 
-## Problemas
+A medida que las aplicaciones web han crecido en tamaño y complejidad, las herramientas utilizadas para construirlas han batallado por mantenerse al día. Los desarrolladores que trabajan en proyectos grandes han experimentado inicios muy lentos del servidor de desarrollo, actualizaciones en caliente lentas y largos tiempos de compilación para producción. Cada generación de herramientas de compilación ha mejorado con respecto a la anterior, pero estos problemas han persistido.
 
-Antes de los que módulos ES estuvieran disponibles para navegadores web, los desarrolladores no tenían un mecanismo nativo para crear código Javascript en forma modular. Este es el por qué estamos familizariados con el concepto de "empaquetado": el uso de herramientas que analizan, procesan y concatenan nuestros módulos en archivos que puedan ser ejecutados en el navegador.
+Vite fue creado para abordar esto. En lugar de mejorar de forma incremental los enfoques existentes, replanteó cómo debería servirse el código durante el desarrollo. Desde entonces, Vite ha evolucionado a través de múltiples versiones mayores, adaptándose cada vez a las nuevas capacidades del ecosistema: desde aprovechar los módulos ES nativos en el navegador, hasta adoptar una cadena de herramientas completamente impulsada por Rust.
 
-Con el tiempo hemos visto herramientas como [webpack](https://webpack.js.org/), [Rollup](https://rollupjs.org) y [Parcel](https://parceljs.org/), las cuales han mejorado considerablemente la experiencia de desarrollo de los desarrolladores frontend.
+Hoy en día, Vite impulsa a muchos frameworks y herramientas. Su arquitectura está diseñada para evolucionar con la plataforma web en lugar de encerrarse en un solo enfoque, convirtiéndolo en una base sobre la que puedes construir a largo plazo.
 
-Sin embargo, a medida que empezamos a crear aplicaciones cada vez más ambiciosas, la cantidad de código JavaScript con la que estamos trabajando tambien irá incrementandose dramáticamente. No es raro que los proyectos a gran escala contengan miles de módulos. En este punto empezamos a encontrarnos con un cuello de botella en el rendimiento de las herramientas basadas en JavaScript: a menudo puede llevar a una espera excesivamente larga (¡a veces hasta de minutos!) poner en marcha un servidor de desarrollo, e incluso con Hot Module Replacement (HMR), las ediciones de archivos pueden tardar un par de segundos en reflejarse en el navegador. El ciclo lento de feedback puede afectar en gran medida la productividad y felicidad de los desarrolladores.
+## Los Orígenes
 
-Vite viene a corregir estos problemas aprovechando los nuevos avances en el ecosistema: la disponibilidad de módulos ES nativos en el navegador, y el surgimiento de herramientas JavaScript escritas en lenguajes de compilación a nativo.
+Cuando Vite se creó por primera vez, los navegadores acababan de obtener un amplio soporte para [módulos ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) (ESM), una forma de cargar archivos JavaScript directamente, sin necesidad de una herramienta para agruparlos en un solo archivo primero. Las herramientas de compilación tradicionales (a menudo llamadas _bundlers_) procesarían tu aplicación completa por adelantado antes de que se pudiera mostrar algo en el navegador. Cuanto más grande era la aplicación, más tiempo tenías que esperar.
 
-### Inicio lento del servidor
+Vite tomó un enfoque diferente. Dividió el trabajo en dos partes:
 
-Cuando se inicia desde cero el servidor de desarrollo, la configuración de compilación basada en empaquetadores tiene que analizar y compilar de forma estricta toda la aplicación antes de que pueda ser servida.
+- **Dependencias** (bibliotecas que rara vez cambian) son [preempaquetadas](./dep-pre-bundling.md) una vez usando herramientas nativas rápidas, por lo que están listas al instante.
+- **Código fuente** (el código de tu aplicación que cambia con frecuencia) se sirve bajo demanda sobre ESM nativo. El navegador carga solo lo que necesita para la página actual, y Vite transforma cada archivo a medida que se solicita.
 
-Vite mejora el tiempo de inicio del servidor de desarrollo dividiendo primero los módulos de una aplicación en dos categorías: **dependencias** y **código fuente**.
-
-- Las **dependencias** son en su mayoría código JavaScript plano que no cambia con frecuencia durante el desarrollo. Algunas dependencias grandes (por ejemplo, librerías de componentes con cientos de módulos) también son bastante complejas de procesar. Las dependencias también pueden estar disponibles en varios formatos de módulos (por ejemplo, ESM o CommonJS).
-
-  Vite [preempaqueta dependencias](./dep-pre-bundling.md) usando [esbuild](https://esbuild.github.io/). esbuild está escrito en Go y preempaqueta dependencias de 10 a 100 veces más rápido que los empaquetadores basados en JavaScript.
-
-- **El código fuente** a menudo contiene código JavaScript no plano que necesita transformación (por ejemplo, JSX, CSS o componentes Vue/Svelte) y que se editará con mucha frecuencia. Además, no es necesario cargar todo el código fuente al mismo tiempo (por ejemplo, con división de código basado en rutas).
-
-Vite sirve código fuente sobre [ESM nativo](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules). Básicamente, esto permitirá que el navegador se haga cargo de parte del trabajo de un empaquetador: Vite solo necesita transformar y servir código fuente a petición, según como lo solicite el navegador. El código detrás de las importaciones dinámicas condicionales sólo es procesado si realmente es usado en la pantalla actual.
+Esto significaba que el inicio del servidor de desarrollo era casi instantáneo, independientemente del tamaño de la aplicación. Cuando editabas un archivo, Vite usaba el [Reemplazo de Módulos en Caliente](./features.md#hot-module-replacement) (HMR) sobre ESM nativo para actualizar solo ese módulo en el navegador, sin recargar toda la página y sin esperar a una reconstrucción completa.
 
 <script setup>
 import bundlerSvg from '../images/bundler.svg?raw'
 import esmSvg from '../images/esm.svg?raw'
 </script>
 <svg-image :svg="bundlerSvg" />
+
+_En un servidor de desarrollo basado en un bundler, toda la aplicación se empaqueta antes de poder servirla._
+
 <svg-image :svg="esmSvg" />
 
-### Actualizaciones lentas
+_En un servidor de desarrollo basado en ESM, los módulos se sirven bajo demanda a medida que el navegador los solicita._
 
-Cuando se edita un archivo con una configuración de compilación basada en empaquetadores, es ineficiente recompilar todo el paquete por una razón obvia: la velocidad de actualización se degradará linealmente con el tamaño de la aplicación.
+Vite no fue la primera herramienta en explorar este enfoque. [Snowpack](https://www.snowpack.dev/) fue pionero en el desarrollo sin empaquetar e inspiró el preempaquetado de dependencias de Vite. [WMR](https://github.com/preactjs/wmr) del equipo de Preact inspiró la API de plugins universal que funciona tanto en desarrollo como en compilación. [@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) influyó en la arquitectura del servidor de Vite 1.0. Vite se basó en estas ideas y las llevó hacia adelante.
 
-En algunos empaquetadores, el servidor de desarrollo ejecuta el empaquetado en memoria, por lo que solo necesita invalidar parte de su gráfico de módulo cuando cambia un archivo, pero aún así necesita recompilar todo el paquete y recargar la página web. Recompilar el paquete puede ser costoso y recargar la página arruina el estado actual de la aplicación. Esta es la razón por la que algunos empaquetadores tienen soporte para Hot Module Replacement (HMR): permite que un módulo se "reemplace en caliente" a sí mismo sin afectar el resto de la página. Esto mejora enormemente la experiencia de desarrollo; sin embargo, en la práctica hemos descubierto que incluso con la actualización vía HMR la velocidad se deteriora significativamente a medida que crece el tamaño de la aplicación.
+Aunque el ESM sin empaquetar funciona bien durante el desarrollo, publicarlo en producción sigue siendo ineficiente debido a los viajes de ida y vuelta de red adicionales de las importaciones anidadas. Esa es [la razón por la cual el empaquetado sigue siendo necesario](https://rolldown.rs/in-depth/why-bundlers) para configuraciones óptimas de producción.
 
-En Vite, el HMR es realizado sobre ESM nativo. Cuando se edita un archivo, Vite solo necesita invalidar precisamente la relación entre el módulo editado y su límite HMR más cercano (la mayoría de las veces solo el módulo en sí), lo que hace que las actualizaciones vía HMR sean consistentemente rápidas, independientemente del tamaño de tu aplicación.
+## Creciendo con el ecosistema
 
-Vite también aprovecha los encabezados HTTP para acelerar los refrescos completos de páginas (nuevamente, permitiendo que el navegador haga más trabajo por nosotros): las solicitudes de módulos de código fuente se hacen de forma condicional vía `304 Not Modified`, y las solicitudes de módulos de dependencia son almacenanados fuertemente en caché vía `Cache-Control: max-age=31536000,immutable` para que no lleguen al servidor nuevamente una vez almacenados en caché.
+A medida que Vite maduró, los frameworks comenzaron a adoptarlo como su capa de compilación. Su [API de plugins](./api-plugin.md), basada en las convenciones de Rollup, hizo que la integración fuera natural sin requerir que los frameworks sortearan los componentes internos de Vite. [Nuxt](https://nuxt.com/), [SvelteKit](https://svelte.dev/docs/kit), [Astro](https://astro.build/), [React Router](https://reactrouter.com/), [Analog](https://analogjs.org/), [SolidStart](https://start.solidjs.com/) y otros eligieron a Vite como su base. Herramientas como [Vitest](https://vitest.dev/) y [Storybook](https://storybook.js.org/) también se basaron en él, extendiendo el alcance de Vite más allá del empaquetado de aplicaciones. Los frameworks de backend como [Laravel](https://laravel.com/docs/vite) y [Ruby on Rails](https://vite-ruby.netlify.app/) integraron Vite para sus recolecciones de activos frontend.
 
-Una vez experimentes lo rápido que es Vite, dudamos mucho que estés dispuesto a trabajar nuevamente con el desarrollo en empaquetados.
+Este crecimiento no fue unidireccional. El ecosistema formó a Vite tanto como Vite formó al ecosistema. El equipo de Vite ejecuta [vite-ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci), que prueba los principales proyectos del ecosistema contra cada cambio de Vite. La salud del ecosistema no es una idea de último momento. Es parte del proceso de lanzamiento.
 
-## ¿Por qué empaquetar en producción?
+## Una cadena de herramientas unificada
 
-Aunque el ESM nativo ahora es ampliamente compatible, distribuir ESM desempaquetado en producción sigue siendo ineficiente (incluso con HTTP/2) debido a las rondas de peticiones adicionales causadas ​​por importaciones anidadas. Para obtener el rendimiento óptimo de carga en producción, aún sigue siendo mejor empaquetar tu código con tree-shaking, lazy-loading y división de fragmentos comunes (para un mejor almacenamiento en caché).
+Vite originalmente dependía de dos herramientas separadas tras bastidores: [esbuild](https://esbuild.github.io/) para una compilación rápida durante el desarrollo, y [Rollup](https://rollupjs.org/) para una optimización exhaustiva en compilaciones de producción. Esto funcionaba, pero mantener dos canales introdujo inconsistencias: diferentes comportamientos de transformación, sistemas de plugins separados y un creciente código utilizado para mantenerlos alineados.
 
-Garantizar un resultado óptimo y una coherencia de comportamiento entre el servidor de desarrollo y la compilación para producción no es fácil. Esta es la razón por la que Vite tiene disponible un [comando de compilación](./build.md) preconfigurado que incorpora muchas [optimizaciones de rendimiento](./features.md#optimizaciones-de-compilacion) listas para usar.
+[Rolldown](https://rolldown.rs/) se creó para unificar ambos en un solo empaquetador: escrito en Rust para lograr una velocidad nativa, y compatible con la misma API de plugins en la que ya confiaba el ecosistema. Utiliza [Oxc](https://oxc.rs/) para el análisis lexicográfico, la transformación y la minificación. Esto le da a Vite una cadena de herramientas de extremo a extremo donde la herramienta de análisis, el empaquetador y el compilador se mantienen juntos y evolucionan como una unidad.
 
-## ¿Por qué no empaquetar con esbuild?
+El resultado es un canal de integración consistente desde el desarrollo hasta la [producción](./build.md). La migración se realizó con cuidado: primero se publicó una [vista previa técnica](https://voidzero.dev/posts/announcing-rolldown-vite) para que los primeros usuarios pudieran validar el cambio, el CI del ecosistema detectó problemas de compatibilidad en etapas tempranas, y una capa de compatibilidad preservó las configuraciones existentes.
 
-Mientras que Vite utiliza esbuild para [preempaquetar algunas dependencias en desarrollo](./dep-pre-bundling.md), Vite no utiliza esbuild como un empaquetador para las compilaciones de producción.
+## Hacia dónde se dirige Vite
 
-La API de plugins actual de Vite no es compatible con el uso de `esbuild` como paquete. A pesar de que `esbuild` es más rápido, la adopción por parte de Vite de la infraestructura y API de plugins flexible de Rollup contribuyó en gran medida a su éxito en el ecosistema. Por el momento, creemos que Rollup ofrece una mejor compensación entre rendimiento y flexibilidad.
+La arquitectura de Vite sigue evolucionando. Varios esfuerzos están moldeando su futuro:
 
-Rollup también ha estado trabajando en mejoras de rendimiento, [cambiando su analizador a SWC en la versión 4](https://github.com/rollup/rollup/pull/5073). Además, hay un esfuerzo en curso para construir una versión en Rust de Rollup llamada Rolldown. Una vez que Rolldown esté listo, podría reemplazar tanto a Rollup como a esbuild en Vite, mejorando significativamente el rendimiento de la compilación y eliminando las inconsistencias entre el desarrollo y la compilación. Puedes ver [la presentación principal de Evan You en ViteConf 2023 para obtener más detalles](https://youtu.be/hrdwQHoAp0M).
+- **Modo de empaquetador completo (Full bundle mode)**: El ESM sin empaquetar era el compromiso correcto cuando Vite fue creado porque ninguna herramienta era lo suficientemente rápida como para contar con HMR y con las capacidades de plugins requeridas para empaquetar de forma óptima durante el desarrollo. Rolldown cambia esto. Ya que bases de código excepcionalmente extensas pueden experimentar cargas de página lentas debido a la alta cantidad de peticiones de red sin empaquetar, el equipo está explorando un modo en el que el servidor de desarrollo empaqueta el código de manera similar a la producción, reduciendo la sobrecarga de la red.
 
-## ¿Cómo se relaciona Vite con otras herramientas de compilación sin empaquetado?
+- **API del Entorno**: En lugar de tratar "cliente" y "SSR" como los únicos dos objetivos de compilación, la [API de Entornos](./api-environment-instances.md) permite a los frameworks definir entornos personalizados (runtimes de edge, service workers, y otros destinos de despliegue), cada uno con sus propias reglas de resolución modular y ejecución. A medida que dónde y cómo se ejecuta el código sigue diversificándose, el modelo de Vite se expande junto con él.
 
-[WMR](https://github.com/preactjs/wmr), desarrollado por el equipo de Preact, buscaba ofrecer un conjunto de características similar al de Vite. De hecho, la API universal de plugins de Rollup para desarrollo y compilación de Vite se inspiró en WMR. Sin embargo, WMR ya no está en mantenimiento. Ahora, el equipo de Preact recomienda usar Vite con [@preactjs/preset-vite](https://github.com/preactjs/preset-vite).
+- **Evolucionando con JavaScript**: Ya que Oxc y Rolldown colaboran estrechamente con Vite, las nuevas características del lenguaje y los estándares se pueden adoptar rápidamente en toda la cadena de herramientas, sin esperar a dependencias de terceros.
 
-[Snowpack](https://www.snowpack.dev/) también fue un servidor de desarrollo sin empaquetado basado en ESM, con un enfoque muy similar a Vite. El pre-empaquetado de dependencias de Vite se inspiró en Snowpack v1 (ahora [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)). Actualmente, Snowpack ya no recibe mantenimiento, y su equipo ha cambiado el enfoque a [Astro](https://astro.build/), un generador de sitios estáticos basado en Vite.
-
-[@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) (anteriormente `es-dev-server`) es un proyecto excelente, y la configuración del servidor de Vite 1.0 basada en Koa se inspiró en él. El proyecto `@web` sigue siendo activamente mantenido e incluye muchas otras herramientas que pueden ser útiles para los usuarios de Vite.
+El objetivo de Vite no es ser la herramienta definitiva, sino ser una que continúe evolucionando con la plataforma web y con los desarrolladores que construyen sobre ella.
