@@ -164,13 +164,13 @@ onBeforeUnmount(() => {
           "
           @focus="showActions"
         >
-          Chatea con nosotros
+          Chat with us
         </a>
         <button
           type="button"
           class="button block py-1.5 px-2.25 backdrop-blur transition-opacity"
           @click="toggleFullscreen"
-          :aria-label="isFullscreen ? 'Salida de pantalla completa' : 'Entrar en pantalla completa'"
+          :aria-label="isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'"
           :class="
             actionsVisible || player.state !== 'play'
               ? 'opacity-100'
@@ -210,7 +210,7 @@ onBeforeUnmount(() => {
         type="button"
         class="absolute button block left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 p-4 backdrop-blur transition"
         @click="togglePlayback"
-        :aria-label="player.state === 'play' ? 'Pausar video' : 'Reproducir video'"
+        :aria-label="player.state === 'play' ? 'Pause video' : 'Play video'"
         :class="
           actionsVisible || player.state !== 'play'
             ? 'opacity-100'

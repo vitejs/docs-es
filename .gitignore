@@ -19,3 +19,4 @@ temp
 TODOs.md
 .eslintcache
 .vitepress/cache/graphviz/*
+*.patch

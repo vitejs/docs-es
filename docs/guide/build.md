@@ -184,7 +184,7 @@ export default defineConfig({
       },
       name: 'MyLib',
     },
-    rollupOptions: {
+    rolldownOptions: {
       // Asegúrate de externalizar las dependencias que no deberían estar empaquetadas
       // en tu librería
       external: ['vue'],
