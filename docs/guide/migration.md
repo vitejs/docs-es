@@ -102,16 +102,7 @@ Actualmente, el transformador Oxc no admite la reducción de decoradores nativos
 
 :::: details Solución alternativa para reducir decoradores nativos
 
-Puedes usar [Babel](https://babeljs.io/) o [SWC](https://swc.rs/) para reducir decoradores nativos por el momento. Aunque SWC es más rápido que Babel, **no soporta la última especificación de decoradores** que esbuild admite.
-
-La especificación de decoradores se ha actualizado varias veces desde que alcanzó la etapa 3. Las versiones admitidas por cada herramienta son:
-
-- `"2023-11"` (esbuild, TypeScript 5.4+ y Babel soportan esta versión)
-- `"2023-05"` (TypeScript 5.2+ admite esta versión)
-- `"2023-01"` (TypeScript 5.0+ admite esta versión)
-- `"2022-03"` (SWC admite esta versión)
-
-Ve a [la guía de versiones de decoradores de Babel](https://babeljs.io/docs/babel-plugin-proposal-decorators#version) para ver las diferencias entre cada versión.
+Puedes usar [Babel](https://babeljs.io/) o [SWC](https://swc.rs/) para reducir decoradores nativos por el momento.
 
 **Usando Babel:**
 
@@ -199,8 +190,7 @@ export default defineConfig({
         swc: {
           jsc: {
             parser: { decorators: true, decoratorsBeforeExport: true },
-            // NOTA: SWC no soporta la versión '2023-11' todavía.
-            transform: { decoratorVersion: '2022-03' },
+            transform: { decoratorVersion: '2023-11' },
           },
         },
       }),
