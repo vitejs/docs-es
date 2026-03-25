@@ -357,17 +357,11 @@ Las importaciones predeterminadas y nombradas de archivos CSS (por ejemplo, `imp
 
 ### Lightning CSS
 
-A partir de la versión 4.4 de Vite, existe soporte experimental para [Lightning CSS](https://lightningcss.dev/). Puedes utilizarlo añadiendo [`css.transformer: 'lightningcss'`](../config/shared-options.md#css-transformer) a tu archivo de configuración y luego instalando la dependencia opcional [`lightningcss`](https://www.npmjs.com/package/lightningcss):
+Vite usa [Lightning CSS](https://lightningcss.dev/) para minificar CSS en compilaciones de producción por defecto. Sin embargo, PostCSS todavía se utiliza para otros procesamientos de CSS.
 
-```bash
-npm add -D lightningcss
-```
+Existe soporte experimental para usar Lightning CSS para todo el procesamiento de CSS de manera integral. Puedes optar por usarlo añadiendo [`css.transformer: 'lightningcss'`](../config/shared-options.md#css-transformer).
 
-Si se habilita, los archivos CSS se procesarán con Lightning CSS en lugar de PostCSS. Para configurarlo, puedes pasar las opciones Lightning CSS a la opción de configuración [`css.lightningcss`](../config/shared-options.md#css-lightningcss).
-
-Para configurar CSS Modules, debes utilizar [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) en lugar de [`css.modules`](../config/shared-options.md#css-modules) (que configura la forma en que PostCSS maneja los módulos de CSS).
-
-Por defecto, Vite utiliza esbuild para minificar CSS. Lightning CSS también se puede utilizar como minificador de CSS mediante [`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify).
+Para configurarlo, puedes pasar las opciones de Lightning CSS a la opción de configuración [`css.lightningcss`](../config/shared-options.md#css-lightningcss). Para configurar CSS Modules, debes utilizar [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) en lugar de [`css.modules`](../config/shared-options.md#css-modules) (que configura la forma en que PostCSS maneja los módulos de CSS).
 
 ## Recursos estáticos
 
