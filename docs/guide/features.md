@@ -12,7 +12,7 @@ import { someMethod } from 'my-dep'
 
 La importación anterior arrojará un error en el navegador. Vite detectará tales importaciones de módulos descubiertos en todos los archivos fuente servidos y realizará lo siguiente:
 
-1. [Preempaquetado](./dep-pre-bundling) para mejorar la velocidad de carga de la página y convertir los módulos CommonJS/UMD a ESM. El paso previo al empaquetado se realiza con [esbuild](https://esbuild.github.io/) y hace que el tiempo de inicio en frío de Vite sea significativamente más rápido que cualquier empaquetador basado en JavaScript.
+1. [Preempaquetado](./dep-pre-bundling) para mejorar la velocidad de carga de la página y convertir los módulos CommonJS/UMD a ESM. El paso previo al empaquetado se realiza con [Rolldown](https://rolldown.rs/) y hace que el tiempo de inicio en frío de Vite sea significativamente más rápido que cualquier empaquetador basado en JavaScript.
 
 2. Vuelve a escribir las importaciones en direcciones URL válidas como `/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` para que el navegador pueda importarlas correctamente.
 
@@ -44,7 +44,7 @@ El trabajo de Vite es hacer que tus módulos fuentes tengan un formato que pueda
 
 <ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~058o?via=vite" title="TypeScript en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
 
-Vite usa [esbuild](https://github.com/evanw/esbuild) para transpilar TypeScript en JavaScript, que es entre 20 y 30 veces más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
+Vite usa [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer.html) para transpilar TypeScript en JavaScript, que es más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
 
 Usa la sintaxis de [importaciones y exportaciones de solo tipo](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) para evitar problemas potenciales como las importaciones de solo tipo que se agrupan incorrectamente, por ejemplo:
 
@@ -55,7 +55,7 @@ export type { T }
 
 ### Opciones del compilador de TypeScript
 
-Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes de esbuild. Para cada archivo, Vite usa el `tsconfig.json` en el directorio padre más cercano. Si ese `tsconfig.json` contiene un campo [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite usará el archivo de configuración referenciado que satisfaga los campos [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
+Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes de Oxc Transformer. Para cada archivo, Vite usa el `tsconfig.json` en el directorio padre más cercano. Si ese `tsconfig.json` contiene un campo [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite usará el archivo de configuración referenciado que satisfaga los campos [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
 
 Cuando las opciones se establecen tanto en la configuración de Vite como en `tsconfig.json`, el valor en la configuración de Vite tiene precedencia.
 
@@ -67,7 +67,7 @@ Algunos campos de configuración en `compilerOptions` en `tsconfig.json` requier
 
 Debes configurarse en `true`.
 
-Esto se debe a que `esbuild` solo realiza la transpilación sin información de tipo, no admite ciertas características como const enum e importaciones implícitas de solo tipo.
+Esto se debe a que el transformador de Oxc solo realiza la transpilación sin información de tipo, no admite ciertas características como const enum e importaciones implícitas de solo tipo.
 
 Debes configurar `"isolatedModules": true` en el `tsconfig.json` en `compilerOptions`, para que TS te advierta sobre las funcionalidades omitidas con la transpilación aislada.
 
@@ -91,9 +91,9 @@ Si bien la mayoría de las librerías esperan `"useDefineForClassFields": true`,
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#target)
 
-Vite ignora el valor de `target` en el `tsconfig.json`, siguiendo el mismo comportamiento que `esbuild`.
+Vite ignora el valor de `target` en el `tsconfig.json`, siguiendo el mismo comportamiento que [esbuild](https://esbuild.github.io/).
 
-Para especificar el objetivo en desarrollo, se puede usar la opción [`esbuild.target`](/config/shared-options.html#esbuild), que por defecto está configurada a `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad sobre `esbuild.target` y también se puede configurar si es necesario.
+Para especificar el objetivo en desarrollo, se puede usar la opción [`oxc.target`](/config/shared-options.html#oxc), que por defecto está configurada a `esnext` para una transpilación mínima. En las compilaciones, la opción [`build.target`](/config/build-options.html#build-target) tiene mayor prioridad sobre `oxc.target` y también se puede configurar si es necesario.
 
 ::: warning `useDefineForClassFields`
 
@@ -239,24 +239,25 @@ Consulta la [Guía de Plugins](/plugins/) para más información.
 
 ## JSX
 
-Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [esbuild](https://esbuild.github.io).
+Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/).
 
 Tu framework de preferencia ya configurará JSX de forma predeterminada (por ejemplo, los usuarios de Vue deberían usar el plugin oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluyendo HMR, resolución global de componentes, directivas y slots).
 
-Si usas JSX con tu propio framework, puedes configurar `jsxFactory` y `jsxFragment` utilizando la [opción `esbuild`](/config/shared-options.md#esbuild). Por ejemplo, el plugin de Preact usaría:
+Si usas JSX con tu propio framework, puedes configurar `jsxFactory` y `jsxFragment` utilizando la [opción `oxc`](/config/shared-options.md#oxc). Por ejemplo, el plugin de Preact usaría:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  esbuild: {
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment',
+  oxc: {
+    jsx: {
+      importSource: 'preact',
+    },
   },
 })
 ```
 
-Más detalles en la [documentación de esbuild](https://esbuild.github.io/content-types/#jsx).
+Más detalles en la [documentación de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/jsx.html).
 
 Puedes inyectar los helpers de JSX usando `jsxInject` (que es una opción exclusiva de Vite) para evitar las importaciones manuales:
 
@@ -264,7 +265,7 @@ Puedes inyectar los helpers de JSX usando `jsxInject` (que es una opción exclus
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  esbuild: {
+  oxc: {
     jsxInject: `import React from 'react'`,
   },
 })
