@@ -12,7 +12,7 @@ El objetivo de compatibilidad del navegador para el paquete final. El valor pred
 
 Otro valor especial es `'esnext'`, que asume soporte nativo para importaciones dinámicas y solo realiza una transpilación mínima.
 
-La transformación se realiza con Oxc Transformer y el valor debe ser una [opción de destino de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/lowering#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.
+La transformación se realiza con el Transformador de OXC y el valor debe ser una [opción de destino del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/lowering#target) válida. Los objetivos personalizados pueden ser una versión ES (por ejemplo, `es2015`), un navegador con versión (por ejemplo, `chrome58`) o un array de varias cadenas de destino.
 
 Ten en cuenta que la compilación mostrará una advertencia si el código contiene funciones que Oxc no puede transpilar de manera segura. Consulta la [documentación de Oxc](https://oxc.rs/docs/guide/usage/transformer/lowering#warnings) para obtener más detalles.
 

@@ -398,7 +398,7 @@ Si se configura en `'auto'`, los datos se convertirán en una cadena solo si [lo
 
 - **Tipo:** `OxcOptions | false`
 
-`OxcOptions` amplía [las opciones de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer). El caso de uso más común es personalizar JSX:
+`OxcOptions` amplía [las opciones del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer). El caso de uso más común es personalizar JSX:
 
 ```js
 export default defineConfig({

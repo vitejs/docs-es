@@ -44,7 +44,7 @@ El trabajo de Vite es hacer que tus módulos fuentes tengan un formato que pueda
 
 <ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~058o?via=vite" title="TypeScript en Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
 
-Vite usa [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer.html) para transpilar TypeScript en JavaScript, que es más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
+Vite usa el [Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer.html) para transpilar TypeScript en JavaScript, que es más rápido que `tsc` puro, y las actualizaciones de HMR pueden reflejarse en el navegador en menos de 50 ms.
 
 Usa la sintaxis de [importaciones y exportaciones de solo tipo](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) para evitar problemas potenciales como las importaciones de solo tipo que se agrupan incorrectamente, por ejemplo:
 
@@ -55,7 +55,7 @@ export type { T }
 
 ### Opciones del compilador de TypeScript
 
-Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes de Oxc Transformer. Para cada archivo, Vite usa el `tsconfig.json` en el directorio padre más cercano. Si ese `tsconfig.json` contiene un campo [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite usará el archivo de configuración referenciado que satisfaga los campos [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
+Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes del Transformador de OXC. Para cada archivo, Vite usa el `tsconfig.json` en el directorio padre más cercano. Si ese `tsconfig.json` contiene un campo [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite usará el archivo de configuración referenciado que satisfaga los campos [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
 
 Cuando las opciones se establecen tanto en la configuración de Vite como en `tsconfig.json`, el valor en la configuración de Vite tiene precedencia.
 
@@ -106,7 +106,7 @@ Así que, se recomienda establecer `target` a `ESNext` o `ES2022` o una versión
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
 
-Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators) para obtener más detalles.
+Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators) para obtener más detalles.
 
 ::: tip `skipLibCheck`
 Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
@@ -239,7 +239,7 @@ Consulta la [Guía de Plugins](/plugins/) para más información.
 
 ## JSX
 
-Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través de [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/).
+Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través del [Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/).
 
 Tu framework de preferencia ya configurará JSX de forma predeterminada (por ejemplo, los usuarios de Vue deberían usar el plugin oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluyendo HMR, resolución global de componentes, directivas y slots).
 
@@ -257,7 +257,7 @@ export default defineConfig({
 })
 ```
 
-Más detalles en la [documentación de Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/jsx.html).
+Más detalles en la [documentación del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/jsx.html).
 
 Puedes inyectar los helpers de JSX usando `jsxInject` (que es una opción exclusiva de Vite) para evitar las importaciones manuales:
 

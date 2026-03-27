@@ -22,7 +22,7 @@ Usa [el transformador Oxc](https://oxc.rs/docs/guide/usage/transformer) y [Babel
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-Reemplaza Babel con [SWC](https://swc.rs/) durante el desarrollo. En las compilaciones de producción, se utilizan SWC+Oxc Transformer cuando se usan plugins, y solo Oxc Transformer en caso contrario. Para proyectos grandes que requieren plugins personalizados, el inicio en frío y la sustitución de módulos en caliente (HMR) pueden ser significativamente más rápidos, si el plugin también está disponible para SWC.
+Reemplaza Babel con [SWC](https://swc.rs/) durante el desarrollo. En las compilaciones de producción, se utilizan SWC+Transformador de OXC cuando se usan plugins, y solo Transformador de OXC en caso contrario. Para proyectos grandes que requieren plugins personalizados, el inicio en frío y la sustitución de módulos en caliente (HMR) pueden ser significativamente más rápidos, si el plugin también está disponible para SWC.
 
 ### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 

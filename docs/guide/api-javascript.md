@@ -392,7 +392,7 @@ async function transformWithOxc(
 ): Promise<Omit<OxcTransformResult, 'errors'> & { warnings: string[] }>
 ```
 
-Transform JavaScript or TypeScript with [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer). Useful for plugins that prefer matching Vite's internal Oxc Transformer transform.
+Transforma JavaScript o TypeScript con el [Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer). Es útil para plugins que prefieren coincidir con la transformación interna del Transformador de OXC de Vite.
 
 ## `transformWithEsbuild`
 
