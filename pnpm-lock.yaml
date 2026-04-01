@@ -97,16 +97,16 @@ importers:
         specifier: ^6.0.0
         version: 6.0.2
       typescript-eslint:
-        specifier: ^8.57.1
+        specifier: ^8.57.2
         version: 8.58.0(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.2)
       vitepress:
         specifier: 2.0.0-alpha.17
         version: 2.0.0-alpha.17(@types/node@25.5.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.123.0(@emnapi/core@1.9.0)(@emnapi/runtime@1.9.0))(postcss@8.5.8)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)
       vitepress-plugin-group-icons:
-        specifier: ^1.7.1
+        specifier: ^1.7.3
         version: 1.7.3(vite@8.0.3(@types/node@25.5.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))
       vue:
-        specifier: ^3.5.30
+        specifier: ^3.5.31
         version: 3.5.31(typescript@6.0.2)
       vue-tsc:
         specifier: ^3.2.6

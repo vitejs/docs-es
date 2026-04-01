@@ -76,10 +76,10 @@
     "rolldown": "1.0.0-rc.12",
     "tsx": "^4.21.0",
     "typescript": "^6.0.0",
-    "typescript-eslint": "^8.57.1",
+    "typescript-eslint": "^8.57.2",
     "vitepress": "2.0.0-alpha.17",
-    "vitepress-plugin-group-icons": "^1.7.1",
-    "vue": "^3.5.30",
+    "vitepress-plugin-group-icons": "^1.7.3",
+    "vue": "^3.5.31",
     "vue-tsc": "^3.2.6"
   },
   "packageManager": "pnpm@10.33.0"

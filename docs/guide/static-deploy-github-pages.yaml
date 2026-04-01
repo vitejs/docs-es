@@ -44,7 +44,7 @@ jobs:
       - name: Construir
         run: npm run build
       - name: Configurar Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Subir artefacto
         uses: actions/upload-pages-artifact@v4
         with:
@@ -52,5 +52,5 @@ jobs:
           path: './dist'
       - name: Desplegar a GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 #endregion contenido
