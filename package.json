@@ -73,7 +73,7 @@
     "prettier": "3.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "rolldown": "1.0.0-rc.12",
+    "rolldown": "1.0.0-rc.13",
     "tsx": "^4.21.0",
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.57.2",
