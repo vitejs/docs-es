@@ -109,8 +109,14 @@ interface ViteDevServer {
   watcher: FSWatcher
   /**
    * Servidor web socket con el método `send(payload)`.
+   * @deprecated Usar `server.hot` en su lugar.
    */
   ws: WebSocketServer
+  /**
+   * Canal de comunicación para enviar y recibir mensajes del
+   * ejecutor de módulos asociado en el entorno de destino.
+   */
+  hot: NormalizedHotChannel
   /**
    * Contenedor de plugins de Rollup que puede ejecutar hooks de plugins en un archivo dado.
    */
@@ -381,7 +387,7 @@ Normaliza una ruta para interoperar entre plugins de Vite.
 
 ## `transformWithOxc`
 
-**Type Signature:**
+**Firma de Tipo:**
 
 ```ts
 async function transformWithOxc(

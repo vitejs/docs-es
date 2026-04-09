@@ -445,7 +445,7 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
           true
         )
       }
-      server.ws.send({ type: 'full-reload' })
+      server.hot.send({ type: 'full-reload' })
       return []
     }
   ```
@@ -454,7 +454,7 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
 
   ```js
   handleHotUpdate({ server }) {
-    server.ws.send({
+    server.hot.send({
       type: 'custom',
       event: 'special-update',
       data: {}
@@ -663,7 +663,7 @@ Desde Vite 2.9, proporcionamos algunas utilidades para plugins que ayudan a mane
 
 ### Servidor a Cliente
 
-En el lado del plugin, podríamos usar `server.ws.send` para transmitir eventos al cliente:
+En el lado del plugin, podríamos usar `server.hot.send` para transmitir eventos al cliente:
 
 ```js [vite.config.js]
 export default defineConfig({
@@ -672,7 +672,7 @@ export default defineConfig({
       // ...
       configureServer(server) {
         server.ws.on('connection', () => {
-          server.ws.send('my:greetings', { msg: 'hello' })
+          server.hot.send('my:greetings', { msg: 'hello' })
         })
       },
     },
@@ -708,7 +708,7 @@ if (import.meta.hot) {
 }
 ```
 
-Luego usa `server.ws.on` y así escuchar los eventos en el lado del servidor:
+Luego usa `server.hot.on` y así escuchar los eventos en el lado del servidor:
 
 ```js [vite.config.js]
 export default defineConfig({
@@ -716,7 +716,7 @@ export default defineConfig({
     {
       // ...
       configureServer(server) {
-        server.ws.on('my:from-client', (data, client) => {
+        server.hot.on('my:from-client', (data, client) => {
           console.log('Message from client:', data.msg) // Hey!
           // reply only to the client (if needed)
           client.send('my:ack', { msg: 'Hi! I got your message!' })

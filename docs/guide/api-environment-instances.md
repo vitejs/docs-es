@@ -85,6 +85,18 @@ class DevEnvironment {
    * para que los módulos ya estén procesados cuando sean solicitados.
    */
   async warmupRequest(url: string): Promise<void>
+
+  /**
+   * Llamado por el ejecutor de módulos para recuperar información sobre el módulo
+   * especificado. Internamente llama a `transformRequest` y envuelve el resultado en el
+   * formato que el ejecutor de módulos entiende.
+   * Este método no está destinado a ser llamado manualmente.
+   */
+  async fetchModule(
+    id: string,
+    importer?: string,
+    options?: FetchFunctionOptions,
+  ): Promise<FetchResult>
 }
 ```
 
@@ -209,4 +221,70 @@ export class EnvironmentModuleGraph {
 
   getModuleByEtag(etag: string): EnvironmentModuleNode | undefined
 }
+
+## `FetchResult`
+
+El método `environment.fetchModule` devuelve un `FetchResult` que está destinado a ser consumido por el ejecutor de módulos. `FetchResult` es una unión de `CachedFetchResult`, `ExternalFetchResult` y `ViteFetchResult`.
+
+`CachedFetchResult` es análogo al código de estado HTTP `304` (No modificado).
+
+```ts
+export interface CachedFetchResult {
+  /**
+   * Si el módulo está almacenado en caché en el ejecutor, esto confirma
+   * que no fue invalidado en el lado del servidor.
+   */
+  cache: true
+}
+```
+
+`ExternalFetchResult` indica al ejecutor de módulos que importe el módulo utilizando el método `runExternalModule` en el [`ModuleEvaluator`](/guide/api-environment-runtimes#moduleevaluator). En este caso, el evaluador de módulos predeterminado utilizará el `import` nativo del entorno de ejecución en lugar de procesar el archivo a través de Vite.
+
+```ts
+export interface ExternalFetchResult {
+  /**
+   * La ruta al módulo externalizado que comienza con file://.
+   * Por defecto, esto se importará a través de un "import" dinámico
+   * en lugar de ser transformado por Vite y cargado con el ejecutor de Vite.
+   */
+  externalize: string
+  /**
+   * Tipo del módulo. Se utiliza para determinar si la sentencia de importación es correcta.
+   * Por ejemplo, si Vite necesita lanzar un error si una variable no está realmente exportada.
+   */
+  type: 'module' | 'commonjs' | 'builtin' | 'network'
+}
+```
+
+`ViteFetchResult` devuelve información sobre el módulo actual, incluyendo el `code` a ejecutar y el `id`, `file` y `url` del módulo.
+
+El campo `invalidate` indica al ejecutor de módulos que invalide el módulo antes de ejecutarlo de nuevo en lugar de servirlo desde la caché. Esto suele ser `true` cuando se activó una actualización de HMR.
+
+```ts
+export interface ViteFetchResult {
+  /**
+   * Código que será evaluado por el ejecutor de Vite.
+   * Por defecto, esto se envolverá en una función asíncrona.
+   */
+  code: string
+  /**
+   * Ruta del archivo del módulo en el disco.
+   * Esto se resolverá como import.meta.url/filename.
+   * Será `null` para módulos virtuales.
+   */
+  file: string | null
+  /**
+   * ID del módulo en el gráfico de módulos del servidor.
+   */
+  id: string
+  /**
+   * URL del módulo utilizada en la importación.
+   */
+  url: string
+  /**
+   * Invalidar el módulo en el lado del cliente.
+   */
+  invalidate: boolean
+}
+```
 ```

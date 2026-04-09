@@ -16,18 +16,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 
   Hay casos en los que otros servidores pueden responder en lugar de Vite.
 
-  El primer caso es cuando se usa `localhost`. Node.js bajo v17 reordena el resultado de la dirección resuelta por DNS de forma predeterminada. Al acceder a `localhost`, los navegadores usan DNS para resolver la dirección y esa dirección puede diferir de la dirección que está escuchando Vite. Vite imprime en consola la dirección resuelta cuando difiere.
-
-  Puedes configurar [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) para deshabilitar el comportamiento de reordenación. Vite luego imprimirá la dirección como `localhost`.
-
-  ```js twoslash [vite.config.js]
-  import { defineConfig } from 'vite'
-  import dns from 'node:dns'
-  dns.setDefaultResultOrder('verbatim')
-  export default defineConfig({
-    // omitido
-  })
-  ```
+  El primer caso es cuando se usa `localhost`. [`dns.setDefaultResultOrder`](https://nodejs.org/docs/latest-v24.x/api/dns.html#dnssetdefaultresultorderorder) de Node.js cambia el orden de las direcciones resueltas por DNS, y los navegadores pueden usar una dirección resuelta diferente a la que Vite está escuchando. Vite imprime en consola la dirección resuelta cuando difiere.
 
   El segundo caso es cuando se utilizan hosts comodín (por ejemplo, `0.0.0.0`). Esto se debe a que los servidores que escuchan en hosts que no son comodín tienen prioridad sobre los que escuchan en hosts comodín.
 
@@ -408,6 +397,12 @@ createServer()
 ::: tip NOTA
 
 Esta lista de bloqueo no se aplica al [directorio público](/guide/assets.md#the-public-directory). Todos los archivos en el directorio público se sirven sin ningún tipo de filtrado, ya que se copian directamente al directorio de salida durante la compilación.
+
+:::
+
+::: tip NOTA
+
+El filtro de denegación se aplica contra el id del módulo y el id con los parámetros de consulta eliminados. Dado que un plugin puede leer archivos de cualquier archivo en su hook de carga (incluyendo la resolución de enlaces simbólicos a rutas denegadas), Vite no puede garantizar que un archivo denegado sea inaccesible a través de una ruta alternativa. Si tienes una ruta alternativa, inclúyela también en la lista de denegación.
 
 :::
 

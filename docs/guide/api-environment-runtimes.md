@@ -159,6 +159,8 @@ function createWorkerdDevEnvironment(
 }
 ```
 
+Por defecto, los transportes `HotChannel` tienen aplicadas restricciones de `server.fs`, lo que significa que solo se pueden servir archivos dentro de los directorios permitidos. Si tu transporte no está expuesto a través de la red (por ejemplo, se comunica a través de hilos de trabajo o llamadas en el proceso), puedes configurar `skipFsCheck: true` en el `HotChannel` para omitir estas restricciones.
+
 ## `ModuleRunner`
 
 Un ejecutor de módulos se instancia en el runtime objetivo. Todas las APIs en la siguiente sección se importan desde `vite/module-runner` a menos que se indique lo contrario. Este punto de entrada exporta únicamente lo necesario para crear ejecutores de módulos.
@@ -356,6 +358,8 @@ function createWorkerEnvironment(name, config, context) {
   }
 
   const workerHotChannel = {
+    // Los mensajes postMessage de los hilos de trabajo no están expuestos a través de la red, omitir las comprobaciones de server.fs
+    skipFsCheck: true,
     send: (data) => worker.postMessage(data),
     on: (event, handler) => {
 
