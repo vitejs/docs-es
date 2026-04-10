@@ -55,7 +55,7 @@
     "@eslint/js": "^9.39.4",
     "@shikijs/vitepress-twoslash": "^4.0.2",
     "@types/express": "^5.0.6",
-    "@types/node": "25.5.2",
+    "@types/node": "25.6.0",
     "@types/react": "^18.3.28",
     "@typescript-eslint/parser": "^8.57.0",
     "@voidzero-dev/vitepress-theme": "^4.8.4",
