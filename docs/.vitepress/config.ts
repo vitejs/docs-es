@@ -161,52 +161,32 @@ const config = defineConfig({
     ],
     darkModeSwitchLabel: 'Apariencia',
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
-        appId: '7H67QR5P0A',
-        apiKey: '208bb9c14574939326032b937431014b',
-        indexName: 'vitejs',
-        searchParameters: {
-          facetFilters: ['tags:es'],
-        },
-        insights: true,
-        placeholder: 'Buscar',
         translations: {
           button: {
             buttonText: 'Buscar',
+            buttonAriaLabel: 'Buscar',
           },
-
           modal: {
-            searchBox: {
-              clearButtonTitle: 'Limpiar criterios de búsqueda',
-              clearButtonAriaLabel: 'Limpiar criterios de búsqueda',
-              closeButtonText: 'Cancelar',
-              closeButtonAriaLabel: 'Cancelar',
-            },
-            startScreen: {
-              recentSearchesTitle: 'Búsquedas recientes',
-              noRecentSearchesText: 'No hay búsquedas recientes',
-              saveRecentSearchButtonTitle: 'Guardar en búsquedas recientes',
-              removeRecentSearchButtonTitle: 'Eliminar de búsquedas recientes',
-              favoriteSearchesTitle: 'Favoritos',
-              removeFavoriteSearchButtonTitle: 'Eliminar de favoritos',
-            },
-            errorScreen: {
-              titleText: 'No se pueden obtener resultados',
-              helpText: 'Es posible que debas revisar tu conexión de red',
-            },
+            displayDetails: 'Mostrar vista detallada',
+            resetButtonTitle: 'Limpiar búsqueda',
+            backButtonTitle: 'Cerrar búsqueda',
+            noResultsText: 'No se encontraron resultados para',
             footer: {
-              selectText: 'Seleccionar',
-              navigateText: 'Cambiar',
-              closeText: 'Cerrar',
-              poweredByText: 'Buscado por',
+              selectText: 'seleccionar',
+              navigateText: 'navegar',
+              closeText: 'cerrar',
             },
-            noResultsScreen: {
-              noResultsText: 'No se encontraron resultados relacionados',
-              suggestedQueryText: 'Puedes intentar buscar',
-              reportMissingResultsText:
-                '¿Crees que esta búsqueda debería tener resultados?',
-              reportMissingResultsLinkText: 'Informar de un problema',
+          },
+        },
+        miniSearch: {
+          searchOptions: {
+            boostDocument(page) {
+              if (page.startsWith('/guide/')) return 2 // Preferir páginas de guía
+              if (page.startsWith('/config/')) return 1.5 // Luego páginas de configuración
+              if (page.startsWith('/blog/')) return 0 // No indexar publicaciones del blog
+              return 1
             },
           },
         },
