@@ -104,7 +104,7 @@ importers:
         version: 2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.125.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)
       vitepress-plugin-group-icons:
         specifier: ^1.7.3
-        version: 1.7.3(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))
+        version: 1.7.5(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))
       vue:
         specifier: ^3.5.31
         version: 3.5.32(typescript@6.0.2)
@@ -406,8 +406,8 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@iconify-json/logos@1.2.10':
-    resolution: {integrity: sha512-qxaXKJ6fu8jzTMPQdHtNxlfx6tBQ0jXRbHZIYy5Ilh8Lx9US9FsAdzZWUR8MXV8PnWTKGDFO4ZZee9VwerCyMA==}
+  '@iconify-json/logos@1.2.11':
+    resolution: {integrity: sha512-fOo4pGEatuyuCFNL+cwquYMa2Im0oJHRHV7lt/Qqs5Ode/lPImHCQcfTtPzZj7qYMPb/h8YHN3TG54uEowrjNQ==}
 
   '@iconify-json/simple-icons@1.2.73':
     resolution: {integrity: sha512-nQZTwul4c2zBqH/aLP4zMOiElj93T6HawbrP+sFQKpxmBdS5x1duCK3cAnkj6dntHz84EYkzaQRM83V2pj4qxA==}
@@ -2532,6 +2532,10 @@ packages:
     resolution: {integrity: sha512-u9r3uZC0bdpGOXtlxUIdwf9pkmvhqJdrVCH9fapQtgy/OeTTMZ1nqH7agtvEfmGui6e1XxjcdrlxvxJvc3sMqw==}
     engines: {node: '>=18'}
 
+  tinyexec@1.1.1:
+    resolution: {integrity: sha512-VKS/ZaQhhkKFMANmAOhhXVoIfBXblQxGX1myCQ2faQrfmobMftXeJPcZGp0gS07ocvGJWDLZGyOZDadDBqYIJg==}
+    engines: {node: '>=18'}
+
   tinyglobby@0.2.16:
     resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
     engines: {node: '>=12.0.0'}
@@ -2717,8 +2721,8 @@ packages:
     peerDependencies:
       vitepress: ^1.0.0
 
-  vitepress-plugin-group-icons@1.7.3:
-    resolution: {integrity: sha512-Nj2znOveQC7KH1CQ1k2WlVvEDAuymhumcUvD51ognVUv2yjrfAhOzL1VEESPzoJN0kWoRxXK+iu+OKNLe7unGQ==}
+  vitepress-plugin-group-icons@1.7.5:
+    resolution: {integrity: sha512-QzcroUuIiVKyXpmEiiHVbfRTQIy9Zbwxpk5JC/zavO8mavitwumz2RZWlwTchMCCHducYyPptkYvXvdnNUWkog==}
     peerDependencies:
       vite: '>=3'
     peerDependenciesMeta:
@@ -2834,7 +2838,7 @@ snapshots:
   '@antfu/install-pkg@1.1.0':
     dependencies:
       package-manager-detector: 1.6.0
-      tinyexec: 1.0.4
+      tinyexec: 1.1.1
 
   '@babel/helper-string-parser@7.27.1': {}
 
@@ -3044,7 +3048,7 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@iconify-json/logos@1.2.10':
+  '@iconify-json/logos@1.2.11':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -5217,6 +5221,8 @@ snapshots:
 
   tinyexec@1.0.4: {}
 
+  tinyexec@1.1.1: {}
+
   tinyglobby@0.2.16:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.4)
@@ -5385,9 +5391,9 @@ snapshots:
       '@hpcc-js/wasm-graphviz': 1.21.1
       vitepress: 2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.125.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.2)(yaml@2.8.2)
 
-  vitepress-plugin-group-icons@1.7.3(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2)):
+  vitepress-plugin-group-icons@1.7.5(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:
-      '@iconify-json/logos': 1.2.10
+      '@iconify-json/logos': 1.2.11
       '@iconify-json/vscode-icons': 1.2.45
       '@iconify/utils': 3.1.0
     optionalDependencies:
