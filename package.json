@@ -70,7 +70,7 @@
     "lint-staged": "^16.3.3",
     "markdown-it-image-size": "^15.0.1",
     "oxc-minify": "^0.125.0",
-    "prettier": "3.8.2",
+    "prettier": "3.8.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rolldown": "1.0.0-rc.15",
