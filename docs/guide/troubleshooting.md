@@ -289,6 +289,18 @@ Un ejemplo de enlaces cruzados entre unidades son:
 
 Issue relacionada: [#10802](https://github.com/vitejs/vite/issues/10802)
 
+### Importación por defecto devuelve inesperadamente un objeto
+
+La importación por defecto devuelve el objeto `module.exports` para los módulos CJS, mientras que tal vez esperabas que devolviese el valor `module.exports.default`.
+
+Esto puede causar errores como:
+
+> Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
+
+> foo is not a function
+
+Consulta la documentación de Rolldown sobre este problema para obtener más detalles: [Ambiguous `default` import from CJS modules - Bundling CJS | Rolldown](https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules).
+
 <script setup lang="ts">
 // redirigir enlaces antiguos con hash a la documentación de la versión anterior
 if (typeof window !== "undefined") {
