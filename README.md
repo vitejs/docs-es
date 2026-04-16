@@ -28,7 +28,7 @@ Vite (palabra en francés para "rápido", pronunciado como [`/viːt/`](https://c
 
 - Un servidor de desarrollo que proporciona [mejoras enriquecidas de funcionalidades](./features) sobre [módulos ES nativos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), por ejemplo [Hot Module Replacement (HMR)](./features#hot-module-replacement) extremadamente rápido.
 
-- Un comando de compilación que empaqueta tu código con [Rollup](https://rollupjs.org), preconfigurado para generar recursos estáticos altamente optimizados para producción.
+- Un comando de compilación que empaqueta tu código con [Rolldown](https://rolldown.rs), preconfigurado para generar recursos estáticos altamente optimizados para producción.
 
 Además, Vite es altamente extensible a través de sus [API de plugins](./api-plugin) y [API de JavaScript](./api-javascript) con soporte completo de tipado.
 
@@ -53,7 +53,7 @@ MIT
 ## Patrocinadores
 
 <p align="center">
-  <a target="_blank" href="https://github.com/sponsors/yyx990803">
-    <img alt="sponsors" src="https://sponsors.vuejs.org/vite.svg">
+  <a target="_blank" href="https://github.com/sponsors/vite">
+    <img alt="sponsors" src="https://sponsors.vite.dev/sponsors.svg">
   </a>
 </p>
