@@ -18,8 +18,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.8(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2)
       vitepress-plugin-graphviz:
-        specifier: ^0.0.1
-        version: 0.0.1(vitepress@2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.126.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.3)(yaml@2.8.2))
+        specifier: ^0.1.0
+        version: 0.1.0(vitepress@2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.126.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.3)(yaml@2.8.2))
     devDependencies:
       '@algolia/client-search':
         specifier: ^5.49.2
@@ -387,8 +387,8 @@ packages:
   '@floating-ui/vue@1.1.11':
     resolution: {integrity: sha512-HzHKCNVxnGS35r9fCHBc3+uCnjw9IWIlCPL683cGgM9Kgj2BiAl8x1mS7vtvP6F9S/e/q4O6MApwSHj8hNLGfw==}
 
-  '@hpcc-js/wasm-graphviz@1.21.1':
-    resolution: {integrity: sha512-PHwgQEbfSPblh/cV422FRNU1mD3ISErOmGP8knX+TNWeUCfrbSV4dvPJnN36D+Cg6Dm4vjtnhlt3J8cUkbAS3Q==}
+  '@hpcc-js/wasm-graphviz@1.21.2':
+    resolution: {integrity: sha512-UKvY3MSI1CfkOsVL6Wgg9m8S0x/28u27NgFX5UG+myTYfxU0Sl6jYKXQkcEQLZfulHKQjgHjz5/Rpw5R0CC3/g==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2822,10 +2822,10 @@ packages:
       yaml:
         optional: true
 
-  vitepress-plugin-graphviz@0.0.1:
-    resolution: {integrity: sha512-WEbW1674RKHmoeKG2q9dTqemZEAhGnt2pKtuhCNsJx9mJrqoyiZCpmYt7imR0+gnEcS0APsCkwzlzkfDosqubg==}
+  vitepress-plugin-graphviz@0.1.0:
+    resolution: {integrity: sha512-KpDPhq+jcoJfccJTKvVY19TfkOO4RnRyt1ua/F9Xukd6PHj+Gs76G8FsCpk8svCu0Ei1AioC0x+aXKpg59capw==}
     peerDependencies:
-      vitepress: ^1.0.0
+      vitepress: ^1.0.0 || ^2.0.0-alpha.17
 
   vitepress-plugin-group-icons@1.7.5:
     resolution: {integrity: sha512-QzcroUuIiVKyXpmEiiHVbfRTQIy9Zbwxpk5JC/zavO8mavitwumz2RZWlwTchMCCHducYyPptkYvXvdnNUWkog==}
@@ -3141,7 +3141,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@hpcc-js/wasm-graphviz@1.21.1': {}
+  '@hpcc-js/wasm-graphviz@1.21.2': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -5566,9 +5566,9 @@ snapshots:
       tsx: 4.21.0
       yaml: 2.8.2
 
-  vitepress-plugin-graphviz@0.0.1(vitepress@2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.126.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.3)(yaml@2.8.2)):
+  vitepress-plugin-graphviz@0.1.0(vitepress@2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.126.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.3)(yaml@2.8.2)):
     dependencies:
-      '@hpcc-js/wasm-graphviz': 1.21.1
+      '@hpcc-js/wasm-graphviz': 1.21.2
       vitepress: 2.0.0-alpha.17(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(oxc-minify@0.126.0)(postcss@8.5.9)(tsx@4.21.0)(typescript@6.0.3)(yaml@2.8.2)
 
   vitepress-plugin-group-icons@1.7.5(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2)):
