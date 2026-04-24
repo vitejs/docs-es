@@ -50,13 +50,13 @@ vite build [root]
 
 | Opción                         | Descripción                                                                                                                           |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `--target <target>`            | Objetivo de la transpilación (predeterminado: `"modules"`) (`string`)                                                                 |
+| `--target <target>`            | Objetivo de la transpilación (predeterminado: `"baseline-widely-available"`) (`string`)                                                                 |
 | `--outDir <dir>`               | Directorio de salida (predeterminado: `dist`) (`string`)                                                                              |
 | `--assetsDir <dir>`            | Carpeta para colocar los assets dentro de `outDir` (predeterminado: `"assets"`) (`string`)                                            |
 | `--assetsInlineLimit <number>` | Límite en bytes para incrustar assets como base64 (predeterminado: `4096`) (`number`)                                                 |
 | `--ssr [entry]`                | Compilación del SSR para la entrada especificada (`string`)                                                                          |
 | `--sourcemap [output]`         | Generar mapas de origen (`boolean \| "inline" \| "hidden"`)                                                                           |
-| `--minify [minifier]`          | Habilitar/deshabilitar minificación o especificar minificador (predeterminado: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`)      |
+| `--minify [minifier]`          | Habilitar/deshabilitar minificación o especificar minificador (predeterminado: `"oxc"`) (`boolean \| "oxc" \| "terser" \| "esbuild"`)      |
 | `--manifest [name]`            | Generar un manifiesto JSON de compilación (`boolean \| string`)                                                                       |
 | `--ssrManifest [name]`         | Generar un manifiesto JSON para SSR (`boolean \| string`)                                                                             |
 | `--emptyOutDir`                | Vaciar `outDir` si está fuera del directorio raíz (`boolean`)                                                                         |

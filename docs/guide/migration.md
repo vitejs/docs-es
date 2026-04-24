@@ -369,6 +369,8 @@ Estos cambios rotóricos se espera que afecten solo a una minoría de casos de u
   - Hook `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Hook `resolveFileUrl`
 - Las funciones `parseAst` / `parseAstAsync` ahora están obsoletas en favor de las funciones `parseSync` / `parse` que ahora tienen más características.
+- Los comentarios se eliminan antes del hook `renderChunk` en lugar de después del hook `renderChunk`.
+- Los comentarios que no están enumerados [aquí](https://rolldown.rs/reference/OutputOptions.comments) se mueven, mientras que Rollup solo elimina los comentarios si se elimina el código adyacente.
 
 ## Migración desde v6
 
