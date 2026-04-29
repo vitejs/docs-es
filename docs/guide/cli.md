@@ -65,7 +65,7 @@ vite build [root]
 | `--base <path>`                | Ruta base pública (predeterminado: `/`) (`string`)                                                                                    |
 | `-l, --logLevel <level>`       | Nivel de log: info \| warn \| error \| silent (`string`)                                                                              |
 | `--clearScreen`                | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                                           |
-| `--configLoader <loader>`      | Usar `bundle` para compilar la configuración con `Rolldown` o `runner` (experimental) para procesarla en tiempo real                   |
+| `--configLoader <loader>`      | Usar `bundle` para compilar la configuración con Rolldown, o `runner` (experimental) para procesarla en tiempo real, o `native` (experimental) para cargarla con el runtime nativo (predeterminado: `bundle`) |
 | `--profile`                    | Iniciar el inspector de Node.js incorporado (ver [cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks)) |
 | `-d, --debug [feat]`           | Mostrar logs de depuración (`string \| boolean`)                                                                                      |
 | `-f, --filter <filter>`        | Filtrar logs de depuración (`string`)                                                                                                 |
@@ -96,7 +96,7 @@ vite optimize [root]
 | `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                  |
 | `-l, --logLevel <level>`  | Nivel de log: info \| warn \| error \| silent (`string`)                                                            |
 | `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                         |
-| `--configLoader <loader>` | Usar `bundle` para compilar la configuración con `Rolldown` o `runner` (experimental) para procesarla en tiempo real (por defecto: `bundle`) |
+| `--configLoader <loader>` | Usar `bundle` para compilar la configuración con Rolldown, o `runner` (experimental) para procesarla en tiempo real, o `native` (experimental) para cargarla con el runtime nativo (por defecto: `bundle`) |
 | `-d, --debug [feat]`      | Mostrar logs de depuración (`string \| boolean`)                                                                    |
 | `-f, --filter <filter>`   | Filtrar logs de depuración (`string`)                                                                               |
 | `-m, --mode <mode>`       | Definir el modo de entorno (`string`)                                                                               |
@@ -127,7 +127,7 @@ vite preview [root]
 | `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                  |
 | `-l, --logLevel <level>`  | Nivel de log: info \| warn \| error \| silent (`string`)                                                            |
 | `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                         |
-| `--configLoader <loader>` | Usar `bundle` para compilar la configuración con `esbuild` o `runner` (experimental) para procesarla en tiempo real (por defecto: `bundle`) |
+| `--configLoader <loader>` | Usar `bundle` para compilar la configuración con Rolldown, o `runner` (experimental) para procesarla en tiempo real, o `native` (experimental) para cargarla con el runtime nativo (por defecto: `bundle`) |
 | `-d, --debug [feat]`      | Mostrar logs de depuración (`string \| boolean`)                                                                    |
 | `-f, --filter <filter>`   | Filtrar logs de depuración (`string`)                                                                               |
 | `-m, --mode <mode>`       | Definir el modo de entorno (`string`)                                                                               |
