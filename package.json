@@ -40,8 +40,10 @@
         "react": "18"
       }
     },
-    "ignoredBuiltDependencies": [
-      "unrs-resolver"
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver",
+      "vue-demi"
     ]
   },
   "dependencies": {
@@ -82,5 +84,5 @@
     "vue": "^3.5.34",
     "vue-tsc": "^3.2.8"
   },
-  "packageManager": "pnpm@10.33.4"
+  "packageManager": "pnpm@11.0.8"
 }
