@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@iconify/vue':
-        specifier: ^5.0.0
+        specifier: ^5.0.1
         version: 5.0.1(vue@3.5.34(typescript@6.0.3))
       search-insights:
         specifier: ^2.17.3
@@ -40,7 +40,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.14
       '@typescript-eslint/parser':
-        specifier: ^8.57.0
+        specifier: ^8.59.2
         version: 8.59.2(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)
       '@voidzero-dev/vitepress-theme':
         specifier: ^4.8.4
@@ -64,7 +64,7 @@ importers:
         specifier: ^5.2.1
         version: 5.2.1
       globals:
-        specifier: ^17.4.0
+        specifier: ^17.6.0
         version: 17.6.0
       gsap:
         specifier: ^3.14.2
@@ -97,7 +97,7 @@ importers:
         specifier: ^6.0.0
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.57.2
+        specifier: ^8.59.2
         version: 8.59.2(eslint@9.39.4(jiti@2.6.1))(typescript@6.0.3)
       vitepress:
         specifier: 2.0.0-alpha.17
@@ -106,10 +106,10 @@ importers:
         specifier: ^1.7.5
         version: 1.7.5(vite@8.0.11(@types/node@25.6.1)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.4))
       vue:
-        specifier: ^3.5.33
+        specifier: ^3.5.34
         version: 3.5.34(typescript@6.0.3)
       vue-tsc:
-        specifier: ^3.2.7
+        specifier: ^3.2.8
         version: 3.2.8(typescript@6.0.3)
 
 packages:
