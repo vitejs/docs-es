@@ -44,7 +44,10 @@
       "esbuild",
       "unrs-resolver",
       "vue-demi"
-    ]
+    ],
+    "overrides": {
+      "vite": "^8.0.0"
+    }
   },
   "dependencies": {
     "@iconify/vue": "^5.0.1",

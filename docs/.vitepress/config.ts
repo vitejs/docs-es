@@ -634,7 +634,7 @@ const config = defineConfig({
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
         },
-      }) as any,
+      }),
     ],
     optimizeDeps: {
       include: ['@shikijs/vitepress-twoslash/client'],
