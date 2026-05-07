@@ -44,15 +44,12 @@
       "esbuild",
       "unrs-resolver",
       "vue-demi"
-    ],
-    "overrides": {
-      "vite": "^8.0.0"
-    }
+    ]
   },
   "dependencies": {
     "@iconify/vue": "^5.0.1",
     "search-insights": "^2.17.3",
-    "vite": "^8.0.0",
+    "vite": "^8.0.10",
     "vitepress-plugin-graphviz": "^0.1.0"
   },
   "devDependencies": {

@@ -629,6 +629,7 @@ const config = defineConfig({
       chunkSizeWarningLimit: 2000
     },
     plugins: [
+      // @ts-expect-error: Vite 8 (project) vs Vite 7 (VitePress) PluginContextMeta type conflict
       groupIconVitePlugin({
         customIcon: {
           firebase: 'vscode-icons:file-type-firebase',
