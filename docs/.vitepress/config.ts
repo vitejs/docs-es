@@ -625,6 +625,9 @@ const config = defineConfig({
     },
   },
   vite: {
+    build: {
+      chunkSizeWarningLimit: 2000
+    },
     plugins: [
       groupIconVitePlugin({
         customIcon: {
