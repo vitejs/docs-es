@@ -265,7 +265,7 @@ Cuando el valor es una cadena, se usará como la ruta del archivo de manifiesto 
 - **Por defecto:** `false`
 - **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
-Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rollupOptions.input`.
+Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rolldownOptions.input`.
 
 ## build.emitAssets
 

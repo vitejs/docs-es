@@ -22,7 +22,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
      build: {
        // genera el archivo .vite/manifest.json en outDir
        manifest: true,
-       rollupOptions: {
+       rolldownOptions: {
          // sobreescribe la entrada por defecto .html
          input: '/path/to/main.js',
        },
@@ -180,7 +180,7 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    ```
 
    Cada entrada en el manifiesto representa uno de los siguientes:
-   - **Fragmentos de entrada**: Generados a partir de archivos especificados en [`build.rollupOptions.input`](https://rollupjs.org/configuration-options/#input). Estos fragmentos tienen `isEntry: true` y su clave es la ruta src relativa desde la raíz del proyecto.
+   - **Fragmentos de entrada**: Generados a partir de archivos especificados en [`build.rolldownOptions.input`](https://rollupjs.org/configuration-options/#input). Estos fragmentos tienen `isEntry: true` y su clave es la ruta src relativa desde la raíz del proyecto.
    - **Fragmentos de entrada dinámica**: Generados a partir de importaciones dinámicas. Estos fragmentos tienen `isDynamicEntry: true` y su clave es la ruta src relativa desde la raíz del proyecto.
    - **Fragmentos no de entrada**: Su clave es el nombre base del archivo generado con `_` como prefijo.
    - **Fragmentos de activos**: Generados a partir de activos importados como imágenes, fuentes. Su clave es la ruta src relativa desde la raíz del proyecto.

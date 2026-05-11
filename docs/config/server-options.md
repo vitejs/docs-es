@@ -427,7 +427,7 @@ El filtro de denegación se aplica contra el id del módulo y el id con los par�
 
 Permite configurar si se ignoran o no los archivos de origen en el mapa de origen del servidor, que se usan para completar la [extensión del mapa de origen de `x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/).
 
-`server.sourcemapIgnoreList` es el equivalente de [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) para el servidor de desarrollo. Una diferencia entre las dos opciones de configuración es que la función de Rollup se invoca con una ruta relativa para `sourcePath` mientras que `server.sourcemapIgnoreList` lo hace con una ruta absoluta. Durante el desarrollo, la mayoría de los módulos tienen el mapa y la fuente en la misma carpeta, por lo que la ruta relativa para `sourcePath` es el nombre del archivo en sí. En estos casos, las rutas absolutas se hacen convenientes para su uso.
+`server.sourcemapIgnoreList` es el equivalente de [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) para el servidor de desarrollo. Una diferencia entre las dos opciones de configuración es que la función de Rollup se invoca con una ruta relativa para `sourcePath` mientras que `server.sourcemapIgnoreList` lo hace con una ruta absoluta. Durante el desarrollo, la mayoría de los módulos tienen el mapa y la fuente en la misma carpeta, por lo que la ruta relativa para `sourcePath` es el nombre del archivo en sí. En estos casos, las rutas absolutas se hacen convenientes para su uso.
 
 Por defecto, se excluyen todas las rutas que contienen `node_modules`. Puedes pasar `false` para deshabilitar este comportamiento o, para un control total, una función que toma la ruta de origen y la ruta del mapa de origen y devuelve si se ignora la ruta de origen.
 
@@ -444,5 +444,5 @@ export default defineConfig({
 ```
 
 ::: tip Nota
-[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) y [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) necesitan ser configurados independientemente. `server.sourcemapIgnoreList` es únicamente una configuración de servidor y no obtiene su valor por defecto de las opciones definidas de Rollup.
+[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) y [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) necesitan ser configurados independientemente. `server.sourcemapIgnoreList` es únicamente una configuración de servidor y no obtiene su valor por defecto de las opciones definidas de Rollup.
 :::
