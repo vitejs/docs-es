@@ -268,7 +268,7 @@ Luego ve a tu proyecto basado en Vite y ejecuta `pnpm link vite` (o el gestor de
 Para saber más sobre cómo y cuándo Vite realiza lanzamientos, consulta la documentación de [Lanzamientos](../releases.md).
 
 ::: tip Dependencias que usan Vite  
-Para reemplazar la versión de Vite utilizada por las dependencias de forma transitiva, debes usar [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) o [pnpm overrides](https://pnpm.io/9.x/package_json#pnpmoverrides).  
+Para reemplazar la versión de Vite utilizada por las dependencias de forma transitiva, debes usar [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) o [pnpm overrides](https://pnpm.io/settings#overrides).  
 :::
 
 ## Comunidad
