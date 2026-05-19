@@ -13,3 +13,7 @@ ignoredBuiltDependencies:
 minimumReleaseAgeExclude:
   - "@shikijs/*"
   - "shiki"
+  - "@types/node"
+  - "@types/react"
+  - "@vue/language-core"
+  - "vue-tsc"
