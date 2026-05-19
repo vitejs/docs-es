@@ -34,18 +34,6 @@
     "url": "https://github.com/vitejs/docs-es/issues"
   },
   "homepage": "https://github.com/vitejs/docs-es#readme",
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "react": "18"
-      }
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "unrs-resolver",
-      "vue-demi"
-    ]
-  },
   "dependencies": {
     "@iconify/vue": "^5.0.1",
     "search-insights": "^2.17.3",
