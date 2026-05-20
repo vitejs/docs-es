@@ -4,6 +4,7 @@ on:
   # Schedule the interval of the checks.
   schedule:
     - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
