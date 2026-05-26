@@ -17,7 +17,3 @@ minimumReleaseAgeExclude:
   - "@types/react"
   - "@vue/language-core"
   - "vue-tsc"
-allowBuilds:
-  esbuild: true
-  unrs-resolver: true
-  vue-demi: true
