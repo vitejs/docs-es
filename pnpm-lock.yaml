@@ -28,7 +28,7 @@ importers:
         specifier: ^10.0.0
         version: 10.0.1(eslint@10.4.0(jiti@2.6.1))
       '@shikijs/vitepress-twoslash':
-        specifier: ^4.0.2
+        specifier: ^4.1.0
         version: 4.1.0(typescript@6.0.3)
       '@types/express':
         specifier: ^5.0.6
@@ -40,7 +40,7 @@ importers:
         specifier: ^19.0.0
         version: 19.2.15
       '@typescript-eslint/parser':
-        specifier: ^8.59.2
+        specifier: ^8.59.4
         version: 8.59.4(eslint@10.4.0(jiti@2.6.1))(typescript@6.0.3)
       '@voidzero-dev/vitepress-theme':
         specifier: ^4.8.4
@@ -91,13 +91,13 @@ importers:
         specifier: 1.0.2
         version: 1.0.2
       tsx:
-        specifier: ^4.21.0
+        specifier: ^4.22.3
         version: 4.22.3
       typescript:
         specifier: ^6.0.0
         version: 6.0.3
       typescript-eslint:
-        specifier: ^8.59.2
+        specifier: ^8.59.4
         version: 8.59.4(eslint@10.4.0(jiti@2.6.1))(typescript@6.0.3)
       vitepress:
         specifier: 2.0.0-alpha.17
@@ -109,7 +109,7 @@ importers:
         specifier: ^3.5.34
         version: 3.5.34(typescript@6.0.3)
       vue-tsc:
-        specifier: ^3.2.8
+        specifier: ^3.3.1
         version: 3.3.1(typescript@6.0.3)
 
 packages:
@@ -1566,9 +1566,6 @@ packages:
 
   '@vue/devtools-shared@8.1.0':
     resolution: {integrity: sha512-h8uCb4Qs8UT8VdTT5yjY6tOJ//qH7EpxToixR0xqejR55t5OdISIg7AJ7eBkhBs8iu1qG5gY3QQNN1DF1EelAA==}
-
-  '@vue/language-core@3.3.0':
-    resolution: {integrity: sha512-EyUxq1b8Yoxk6hQ6X33BIRnfFLb9Rbm9w/8G8y6uMxlQu7CW7yy9JS/z54xSpIvBvVWX6Lt5v1aBGwmrqD4aJw==}
 
   '@vue/language-core@3.3.1':
     resolution: {integrity: sha512-NP8g6V7x81NVOXbLupUvYY6i6LqUkjkVowe2epRedmpgaFCOdjgWHE/rQBvEJ4r7koAYODIjGeBWEdt6n7jYXQ==}
@@ -4187,16 +4184,6 @@ snapshots:
 
   '@vue/devtools-shared@8.1.0': {}
 
-  '@vue/language-core@3.3.0':
-    dependencies:
-      '@volar/language-core': 2.4.28
-      '@vue/compiler-dom': 3.5.34
-      '@vue/shared': 3.5.34
-      alien-signals: 3.2.1
-      muggle-string: 0.4.1
-      path-browserify: 1.0.1
-      picomatch: 4.0.4
-
   '@vue/language-core@3.3.1':
     dependencies:
       '@volar/language-core': 2.4.28
@@ -5579,7 +5566,7 @@ snapshots:
 
   twoslash-vue@0.3.8(typescript@6.0.3):
     dependencies:
-      '@vue/language-core': 3.3.0
+      '@vue/language-core': 3.3.1
       twoslash: 0.3.8(typescript@6.0.3)
       twoslash-protocol: 0.3.8
       typescript: 6.0.3

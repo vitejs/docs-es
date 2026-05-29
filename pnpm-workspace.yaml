@@ -3,13 +3,6 @@ packages:
 peerDependencyRules:
   allowedVersions:
     react: "18"
-onlyBuiltDependencies:
-  - esbuild
-  - unrs-resolver
-  - vue-demi
-ignoredBuiltDependencies:
-  - core-js
-  - es5-ext
 minimumReleaseAgeExclude:
   - "@shikijs/*"
   - "shiki"
@@ -17,3 +10,7 @@ minimumReleaseAgeExclude:
   - "@types/react"
   - "@vue/language-core"
   - "vue-tsc"
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true
+  vue-demi: true
