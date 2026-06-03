@@ -52,7 +52,7 @@ Configurar `server.allowedHosts` en `true` permite que cualquier sitio web enví
 :::
 
 ::: details Configurar mediante variable de entorno
-Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` para agregar un host adicional permitido.
+Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` para añadir hosts permitidos adicionales. Usa comas para separar varios hosts (por ejemplo, `host1.example.com,host2.example.com`).
 :::
 
 ## server.port
@@ -180,17 +180,45 @@ Configurar `server.cors` en `true` permite que cualquier sitio web envíe solici
 
 ## server.hmr
 
-- **Tipo:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **Tipo:** `boolean | { overlay?: boolean }`
 
-Deshabilita o configura la conexión HMR (en los casos en que el websocket HMR deba usar una dirección diferente del servidor http).
+Desactiva o configura el comportamiento de HMR.
 
 Coloca `server.hmr.overlay` en `false` para deshabilitar la superposición de errores del servidor.
 
-`protocol` establece el protocolo WebSocket utilizado para la conexión HMR: `ws` (WebSocket) o `wss` (WebSocket Seguro).
+::: warning Opciones Obsoletas
 
-`clientPort` es una opción avanzada que sobreescribe el puerto solo en el lado del cliente, lo que le permite servir el websocket en un puerto diferente al que busca el código del cliente.
+Las opciones relacionadas a WebSocket (`protocol`, `host`, `port`, `path`, `clientPort`, `timeout`, `server`) están obsoletas. Usa [`server.ws`](#server-ws) en su lugar. Estas opciones se sincronizan automáticamente, por lo que las configuraciones existentes seguirán funcionando.
 
-Cuando se define `server.hmr.server`, Vite procesará las solicitudes de conexión HMR a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión HMR a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando desea exponer a Vite a través de una red en un solo puerto.
+:::
+
+## server.ws
+
+- **Tipo:** `false | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, clientPort?: number, server?: Server }`
+
+Configura las opciones de conexión WebSocket. Establécelo en `false` para desactivar la conexión WebSocket por completo.
+
+- `protocol` - Protocolo WebSocket (`ws` o `wss`)
+- `host` - Host del servidor WebSocket
+- `port` - Puerto del servidor WebSocket
+- `path` - Ruta WebSocket
+- `clientPort` - Sobrescribe el puerto en el lado del cliente, lo que te permite servir el websocket en un puerto diferente al que busca el código del cliente
+- `timeout` - Tiempo de espera de la conexión en milisegundos (predeterminado: 30000)
+- `server` - Usa un servidor HTTP personalizado para las conexiones WebSocket
+
+Cuando se define `server.ws.server`, Vite procesará las solicitudes de conexión WebSocket a través del servidor provisto. Si no está en modo middleware, Vite intentará procesar las solicitudes de conexión WebSocket a través del servidor existente. Esto puede ser útil cuando se usan certificados autofirmados o cuando deseas exponer a Vite a través de una red en un solo puerto.
+
+```js
+export default defineConfig({
+  server: {
+    ws: {
+      protocol: 'wss',
+      host: 'localhost',
+      port: 3001,
+    },
+  },
+})
+```
 
 Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) para ver algunos ejemplos.
 
@@ -199,14 +227,14 @@ Consulta [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catal
 Con la configuración predeterminada, se espera que los proxies inversos frente a Vite admitan WebSocket de proxy. Si el cliente de Vite HMR no logra conectar WebSocket, el cliente recurrirá a conectar WebSocket directamente al servidor de Vite HMR sin pasar por los proxies inversos:
 
 ```
-Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-hmr to remove the previous connection error.
+Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-ws to remove the previous connection error.
 ```
 
 Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback. Para evitar el error al omitir directamente los proxies inversos, podrías:
 
 - configurar el proxy inverso para el proxy de WebSocket también
-- configurar [`server.strictPort = true`](#server-strictport) y configurar `server.hmr.clientPort` con el mismo valor que `server.port`
-- configurar `server.hmr.port` en un valor diferente de [`server.port`](#server-port)
+- configurar [`server.strictPort = true`](#server-strictport) y configurar `server.ws.clientPort` con el mismo valor que `server.port`
+- configurar `server.ws.port` en un valor diferente de [`server.port`](#server-port)
   :::
 
 ## server.forwardConsole

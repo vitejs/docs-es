@@ -373,7 +373,7 @@ function loadEnv(
 
 **Relacionado:** [Archivos `.env`](./env-and-mode.md#archivos-env)
 
-Carga archivos `.env` dentro de `envDir`. De forma predeterminada, solo se cargan las variables env con el prefijo `VITE_`, a menos que se cambie `prefixes`.
+Carga los archivos `.env` que están dentro de `envDir` y los fusiona con las correspondientes variables que ya se encuentran presentes en `process.env`. Por defecto, solo se cargan las variables de entorno con el prefijo `VITE_`, a menos que se cambie `prefixes`.
 
 ## `normalizePath`
 

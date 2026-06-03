@@ -207,6 +207,48 @@ Habilita la función de resolución de rutas tsconfig. La opción `paths` en `ts
 
 Un placeholder de valor de nonce que se utilizará al generar etiquetas de script/style. Establecer este valor también generará una etiqueta meta con el valor de nonce.
 
+## html.additionalAssetSources
+
+- **Tipo:** `Record<string, HtmlAssetSource>`
+
+```ts
+interface HtmlAssetSource {
+  srcAttributes?: string[]
+  srcsetAttributes?: string[]
+  filter?: (data: {
+    key: string
+    value: string
+    attributes: Record<string, string>
+  }) => boolean
+}
+```
+
+Define elementos y atributos HTML adicionales que se tratarán como fuentes de recursos estáticos. Esto amplía la lista integrada que incluye elementos estándar como `<img src>`, `<video src>`, `<link href>`, etc.
+
+Esto es útil cuando se utilizan componentes web personalizados o atributos no estándar (como `data-*`) que hacen referencia a recursos estáticos.
+
+**Ejemplo:**
+
+```js
+export default defineConfig({
+  html: {
+    additionalAssetSources: {
+      // Componente web personalizado
+      'html-import': { srcAttributes: ['src'] },
+      // Agrega atributos data-* al elemento existente
+      img: { srcAttributes: ['data-src-dark', 'data-src-light'] },
+      // Con formato srcset
+      'my-picture': { srcsetAttributes: ['data-srcset'] },
+      // Con función de filtro
+      'my-component': {
+        srcAttributes: ['asset'],
+        filter: ({ attributes }) => attributes.type === 'image',
+      },
+    },
+  },
+})
+```
+
 ## css.modules
 
 - **Tipo:**
