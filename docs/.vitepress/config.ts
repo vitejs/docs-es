@@ -255,6 +255,10 @@ const config = defineConfig({
             link: '/acknowledgements',
           },
           {
+            text: 'Código de Conducta',
+            link: 'https://github.com/vitejs/.github/blob/main/CODE_OF_CONDUCT.md',
+          },
+          {
             text: 'Escenario en Vivo',
             link: '/live',
           },
