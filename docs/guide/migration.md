@@ -218,7 +218,7 @@ El obfuscado de propiedades y sus opciones relacionadas ([`mangleProps`, `reserv
 esbuild y el Minificador de Oxc hacen suposiciones ligeramente diferentes sobre el código fuente. En caso de que sospeches que el minificador está causando problemas en tu código, puedes comparar estas suposiciones aquí:
 
 - [Suposiciones de minificación de esbuild](https://esbuild.github.io/api/#minify-considerations)
-- [Suposiciones del Minificador de Oxc](https://oxc.rs/docs/guide/usage/minifier.html#assumptions)
+- [Suposiciones del Minificador de Oxc](https://github.com/oxc-project/oxc/blob/main/crates/oxc_minifier/docs/ASSUMPTIONS.md)
 
 Por favor, informa cualquier problema que encuentres relacionado con la minificación en tus aplicaciones JavaScript.
 
