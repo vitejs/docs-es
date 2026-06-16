@@ -75,16 +75,6 @@ const versionLinks = (() => {
   return links
 })()
 
-function inlineScript(file: string): HeadConfig {
-  return [
-    'script',
-    {},
-    fs.readFileSync(
-      path.resolve(import.meta.dirname, `./inlined-scripts/${file}`),
-      'utf-8',
-    ),
-  ]
-}
 
 const config = defineConfig({
   lang: 'es',
@@ -104,7 +94,7 @@ const config = defineConfig({
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
     ],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    inlineScript('banner.js'),
+
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: ogTitle }],
@@ -139,12 +129,10 @@ const config = defineConfig({
 
   themeConfig: {
     variant: 'vite',
-    logo: '/logo.svg',
-
     banner: {
-      id: 'viteplus-alpha',
-      text: 'Anunciando Vite+ Alpha: Código abierto. Unificado. Próxima generación.',
-      url: 'https://voidzero.dev/posts/announcing-vite-plus-alpha?utm_source=vite&utm_content=top_banner',
+      id: 'cloudflare-supports-vite',
+      text: `Cloudflare apoya la misión de Vite`,
+      url: '/blog/cloudflare-supports-vite',
     },
 
     editLink: {
@@ -629,6 +617,14 @@ const config = defineConfig({
     },
   },
   vite: {
+    resolve: {
+      alias: {
+        '@components/oss/TopBanner.vue': path.resolve(
+          import.meta.dirname,
+          'theme/components/TopBanner.vue',
+        ),
+      },
+    },
     build: {
       chunkSizeWarningLimit: 2000
     },

@@ -44,7 +44,7 @@ Ten en cuenta que si tanto `ssr.noExternal: true` como `ssr.external: true` est√
 ## ssr.resolve.externalConditions
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['node']`
+- **Por defecto:** `['node', 'module-sync']`
 
   Condiciones que se utilizan durante la importaci√≥n en SSR (incluyendo `ssrLoadModule`) de dependencias directas externalizadas (dependencias externas importadas por Vite).
 

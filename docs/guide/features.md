@@ -106,7 +106,7 @@ Así que, se recomienda establecer `target` a `ESNext` o `ES2022` o una versión
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
 
-Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators) para obtener más detalles.
+Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/typescript.html#decorators) para obtener más detalles.
 
 ::: tip `skipLibCheck`
 Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
@@ -239,7 +239,7 @@ Consulta la [Guía de Plugins](/plugins/) para más información.
 
 ## JSX
 
-Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través del [Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/).
+Los archivos `.jsx` y `.tsx` también son compatibles de fábrica. La transpilación JSX también se maneja a través del [Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer.html).
 
 Tu framework de preferencia ya configurará JSX de forma predeterminada (por ejemplo, los usuarios de Vue deberían usar el plugin oficial [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx), que proporciona características específicas de Vue 3, incluyendo HMR, resolución global de componentes, directivas y slots).
 
@@ -624,6 +624,21 @@ Solo los globs que son rutas relativas se interpretan como relativas al director
 
 Todas las claves de módulo resultantes se modifican para que sean relativas al directorio base si se proporciona.
 
+#### Coincidencia sensible a mayúsculas y minúsculas
+
+Por defecto, la coincidencia de patrones glob distingue entre mayúsculas y minúsculas. Puedes utilizar la opción `caseSensitive` para cambiar este comportamiento:
+
+```ts twoslash
+import 'vite/client'
+// ---cut---
+// @errors: 2769
+const modules = import.meta.glob('./dir/module*.js', {
+  caseSensitive: false,
+})
+```
+
+Con `caseSensitive: false`, el glob coincidirá con los archivos sin importar su capitalización (por ejemplo, `Module.js`, `module.js`, `MODULE.js` serán todos identificados por `module*.js`).
+
 ### Advertencias de importación glob
 
 Ten en cuenta que:
@@ -653,9 +668,25 @@ Estas reglas se aplican para evitar importar accidentalmente archivos que no est
 
 ## WebAssembly
 
-Los archivos `.wasm` precompilados se pueden importar con `?init`.
+Vite admite la importación de archivos `.wasm` precompilados de dos maneras: directamente como un [módulo ES](#integracion-esm) cuando solo necesitas las exportaciones del módulo, o con [`?init`](#inicializacion-manual) cuando necesitas un control explícito sobre la instanciación.
 
-La exportación por defecto será una función de inicialización que devuelve una Promesa de [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
+### Integración ESM
+
+Un archivo `.wasm` puede importarse directamente. Vite lee las importaciones y exportaciones del módulo desde el binario, lo instancia y vuelve a exponer sus exportaciones como exportaciones nombradas de un módulo ES:
+
+```js
+import { add } from './add.wasm'
+
+console.log(add(1, 2)) // 3
+```
+
+Si el módulo de WebAssembly declara importaciones propias, Vite las resuelve a partir de módulos de JavaScript. El nombre de módulo de cada importación se trata como un especificador de importación (resuelto con relación al archivo `.wasm`) y los miembros solicitados se vinculan automáticamente a la instancia.
+
+Esto sigue la [propuesta de Integración de WebAssembly/ES Module](https://github.com/WebAssembly/esm-integration). Debido a que un módulo de WebAssembly se instancia de forma asincrónica, un archivo `.wasm` importado directamente se comporta como un módulo asíncrono y requiere soporte de `await` en el nivel superior.
+
+### Inicialización Manual
+
+Cuando necesitas control sobre cuándo y cómo se instancia el módulo, impórtalo con `?init`. La exportación por defecto será una función de inicialización que devuelve una Promesa de [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
 
 ```js twoslash
 import 'vite/client'
@@ -685,14 +716,9 @@ init({
 
 En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se tratarán como un [recurso estático](./assets) y se obtendrán a pedido.
 
-::: tip NOTA
-La [propuesta de integración de módulos ES para WebAssembly](https://github.com/WebAssembly/esm-integration) no es compatible actualmente.
-Usa [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) u otros plugins de la comunidad para darle el manejo apropiado.
-:::
-
 ::: warning Para la compilación de SSR, solo se admiten entornos de ejecución compatibles con Node.js
 
-Debido a la falta de una forma universal de cargar un archivo, la implementación interna de `.wasm?init` se basa en el módulo `node:fs`. Esto significa que esta característica solo funcionará en entornos de ejecución compatibles con Node.js para compilaciones de SSR.
+Debido a la falta de una forma universal de cargar un archivo, la implementación interna tanto de las importaciones directas de `.wasm` como de `.wasm?init` se basa en el módulo `node:fs`. Esto significa que estas características solo funcionarán en entornos de ejecución compatibles con Node.js para compilaciones de SSR.
 
 :::
 
@@ -827,7 +853,7 @@ Para servir el archivo en una ruta diferente, puedes pasar por ejemplo `{ fileNa
 
 ## Optimizaciones de compilación
 
-> Las funcionalidades que se enumeran a continuación se aplican automáticamente como parte del proceso de compilación y no hay necesidad de una configuración explícita a menos que desees deshabilitarlas.
+> Las funcionalidades que se enumeran a continuación se aplican automáticamente (excepto por la funcionalidad experimental de mapas de importación de fragmentos) como parte del proceso de compilación y no hay necesidad de una configuración explícita a menos que desees deshabilitarlas.
 
 ### División de código CSS
 
@@ -861,3 +887,21 @@ Entrada ---> (A + C)
 ```
 
 Es posible que `C` tenga más importaciones, lo que dará como resultado aún más consultas de ida y vuelta en el escenario no optimizado. La optimización de Vite rastreará todas las importaciones directas para eliminar por completo esas consultas, independientemente de la profundidad de la importación.
+
+### Optimización de mapas de importación de fragmentos
+
+Para mejorar la tasa de aciertos en caché de los fragmentos, Vite puede crear un mapa de importación (import map) para ellos. Esto evita el problema de la invalidación de caché en cascada, lo cual es un inconveniente con los módulos ES.
+
+Por ejemplo, considera el siguiente escenario:
+
+```
+Entrada --> A ---> C
+```
+
+Si `C` se actualiza, el único fragmento que inherentemente necesita ser invalidado es `C`. Sin embargo, si `A` referencia a `C` a través de una URL normal en una importación estática (es decir, el hash de `C` está incluido en la URL), el contenido de `A` cambia, por lo que `A` también tendría que ser invalidado. Lo mismo aplica para la `Entrada`.
+
+Al utilizar la característica de mapas de importación, este problema puede evitarse. Cuando esta optimización está habilitada, Vite creará un mapa de importación que asocia el ID de cada fragmento con su URL y usa el ID del fragmento en las declaraciones de importación en lugar de la URL. De esta manera, cuando un fragmento se actualiza, solo es necesario invalidar el fragmento actualizado, mientras que los fragmentos que lo referencian no serán invalidados.
+
+Ten en cuenta que esta optimización actualmente no se aplica al CSS ni a los recursos estáticos. Si actualizas un recurso, los fragmentos que lo referencian serán invalidados. Dicho esto, la invalidación no se daría en cascada y el fragmento que importa el fragmento invalidado no sería invalidado.
+
+Para habilitar esta característica, establece [`build.chunkImportMap`](/config/build-options.md#build-chunkimportmap) en `true`.
