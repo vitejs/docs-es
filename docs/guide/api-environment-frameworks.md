@@ -19,7 +19,13 @@ Dado que los entornos pueden ejecutarse en diferentes runtimes, la comunicación
 
 ### `RunnableDevEnvironment`
 
-`RunnableDevEnvironment` es un entorno que puede comunicar valores arbitrarios. El entorno implícito `ssr` y otros entornos no cliente usan `RunnableDevEnvironment` por defecto durante el desarrollo. Mientras que esto requiere que el runtime sea el mismo con el que se está ejecutando el servidor Vite, esto funciona de manera similar con `ssrLoadModule` y permite a los frameworks migrar y habilitar HMR para su historia de desarrollo SSR. Puedes proteger cualquier entorno ejecutable con una función `isRunnableDevEnvironment`.
+`RunnableDevEnvironment` es un entorno que puede comunicar valores de JavaScript arbitrarios con el código de tu aplicación. La importación de un módulo devuelve sus exportaciones reales y en vivo (funciones, instancias de clases y cualquier otro valor), de modo que los frameworks pueden ejecutar sus entradas de servidor directamente. El entorno implícito `ssr` y otros entornos no cliente usan `RunnableDevEnvironment` por defecto durante el desarrollo. Puedes proteger el acceso al runner con la función `isRunnableDevEnvironment`.
+
+Su `runner` es un `ModuleRunner`. Puedes importar módulos a través de él con `runner.import(url)`, que obtiene, transforma y evalúa un módulo desde el gráfico de módulos de Vite (la `url` acepta una ruta de archivo, una ruta de servidor o una id relativa a la raíz) y devuelve el módulo instanciado con soporte completo de HMR. Es el reemplazo moderno de `server.ssrLoadModule`, por lo que los frameworks pueden migrar hacia él para habilitar HMR en su flujo de desarrollo SSR.
+
+:::info Por qué puede comunicar valores arbitrarios
+Un `RunnableDevEnvironment` evalúa los módulos en el mismo runtime que el servidor de Vite, de manera que los valores cruzan la frontera en el mismo proceso en lugar de ser serializados. Esto es lo que lo diferencia del [`FetchableDevEnvironment`](#fetchabledevenvironment), que solo puede comunicarse a través de objetos `Request`/`Response` serializados usando la API Fetch. Como resultado, usar un `RunnableDevEnvironment` requiere que el runtime del runner sea el mismo en el que se ejecuta el servidor de Vite.
+:::
 
 ```ts
 export class RunnableDevEnvironment extends DevEnvironment {
@@ -117,7 +123,9 @@ if (import.meta.hot) {
 Estamos buscando feedback sobre [la propuesta `FetchableDevEnvironment`](https://github.com/vitejs/vite/discussions/18191).
 :::
 
-`FetchableDevEnvironment` es un entorno que puede comunicarse con su runtime a través de la [API Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) interface. Dado que el `RunnableDevEnvironment` solo es posible implementar en un conjunto limitado de runtimes, recomendamos usar el `FetchableDevEnvironment` en lugar del `RunnableDevEnvironment`.
+`FetchableDevEnvironment` es un entorno que puede comunicarse con su runtime a través de la interfaz de la [API Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch). Dado que el `RunnableDevEnvironment` solo es posible implementar en un conjunto limitado de runtimes, recomendamos usar el `FetchableDevEnvironment` en lugar del `RunnableDevEnvironment`.
+
+Una razón común para optar por este entorno es cuando un framework necesita soportar un runtime que no puede ejecutar Vite directamente (por ejemplo, Cloudflare Workers). Un `RunnableDevEnvironment` no se puede utilizar ahí, ya que requiere que el runner comparta el runtime del servidor de Vite para que los valores crucen la frontera en el mismo proceso. Estandarizar sobre la API Fetch permite al framework mantener una única ruta de manejo de solicitudes para todos sus runtimes objetivo: su middleware de desarrollo reenvía cada solicitud entrante del navegador como un `Request` y envía el `Response` resultante de vuelta al navegador, reflejando cómo la aplicación maneja las solicitudes en producción.
 
 Este entorno proporciona una forma estándar de manejar solicitudes a través del método `handleRequest`:
 
@@ -303,7 +311,11 @@ export function createHandler(input) {
 
 En el CLI, llamar a `vite build` y `vite build --ssr` todavía compilará los entornos del cliente solo y ssr solo para retrocompatibilidad.
 
-Cuando la opción `builder` no es `undefined` (o cuando se llama a `vite build --app`), `vite build` opta por compilar la aplicación completa en su lugar. En el futuro, esta será la opción predeterminada. Se creará una instancia de `ViteBuilder` (equivalente de tiempo de compilación a `ViteDevServer`) para compilar todos los entornos configurados para producción. Por defecto, la compilación de entornos se ejecuta en serie, respetando el orden de la `environments` record. Un framework o usuario puede configurar adicionalmente cómo se compilan los entornos usando la opción `builder.buildApp`:
+Cuando se establece la opción `builder` (incluso como un objeto vacío `{}`, que es lo que hace `vite build --app`), `vite build` opta por compilar la aplicación completa en su lugar. En el futuro, esta será la opción predeterminada. En este modo, Vite crea una instancia de `ViteBuilder` (el equivalente de tiempo de compilación de un `ViteDevServer`) y lo usa para compilar todos los entornos configurados para producción. Por defecto, los entornos se compilan en serie, siguiendo el orden del objeto `environments`.
+
+### Configurando la compilación de la aplicación con `builder.buildApp`
+
+Un framework o usuario puede controlar cómo se compilan los entornos a través de la opción `builder.buildApp`. Recibe la instancia de `ViteBuilder` (llamada `builder` en el ejemplo a continuación) y es responsable de compilar cada entorno; por ejemplo, para compilar algunos de ellos en paralelo:
 
 ```js [vite.config.js]
 import { defineConfig } from 'vite'
@@ -320,7 +332,22 @@ export default defineConfig({
 })
 ```
 
-Los plugins también pueden definir un hook `buildApp`. Las órdenes `'pre'` y `null` se ejecutan antes que `builder.buildApp`, y la orden `'post'` se ejecuta después de ella. `environment.isBuilt` se puede usar para verificar si un entorno ya ha sido compilado.
+### El hook de plugin `buildApp`
+
+Además de la opción de configuración `builder.buildApp`, los plugins pueden definir un hook `buildApp` para participar en la compilación de la aplicación. La opción de configuración y los hooks de plugin se ejecutan en un orden definido: los hooks con el orden `'pre'` o `null` se ejecutan primero, luego el `builder.buildApp` configurado, y luego los hooks con el orden `'post'`. Dentro de un hook, `environment.isBuilt` te indica si un entorno ya ha sido compilado, lo que permite que un plugin evite compilarlo dos veces.
+
+### Compilando programáticamente con `createBuilder`
+
+Para activar una compilación de aplicación desde tu propio código, usa `createBuilder` en lugar de la función independiente `build`. `createBuilder` es el equivalente de tiempo de compilación de `createServer`: resuelve la configuración y devuelve un `ViteBuilder`, cuyo método `buildApp` compila cada entorno configurado. También puedes compilar un solo entorno con `builder.build(environment)`.
+
+```js [build.js]
+import { createBuilder } from 'vite'
+
+const builder = await createBuilder()
+await builder.buildApp()
+```
+
+`createBuilder` reemplaza a la función independiente `build` para compilaciones conscientes del entorno. `build` sigue funcionando como el punto de entrada simple para las compilaciones heredadas orientadas solo al cliente o solo a ssr descritas anteriormente, pero no puede compilar entornos arbitrarios. Ejecutar `builder.buildApp()` es el equivalente programático de `vite build --app`.
 
 ## Código Agnóstico de Entorno
 

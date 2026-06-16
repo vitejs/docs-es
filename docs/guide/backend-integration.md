@@ -266,3 +266,10 @@ export default function importedChunks(
 ```
 
 :::
+
+:::info Soporte de mapas de importación de fragmentos (Experimental)
+
+Si estás usando la opción experimental [`build.chunkImportMap`](/config/build-options#build-chunkimportmap), también necesitas inyectar el mapa de importación en el HTML.
+
+El mapa de importación se genera en `importmap.json` dentro del directorio de salida. Asegúrate de inyectar la etiqueta `<script type="importmap">` antes de cualquier etiqueta `<script type="module">` o `<link rel="modulepreload">`.
+:::

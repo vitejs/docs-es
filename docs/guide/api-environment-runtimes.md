@@ -13,9 +13,11 @@ Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un 
 Por favor, comparte tus comentarios con nosotros.
 :::
 
+Esta página es para proveedores de runtime, autores que integran un runtime de JavaScript con Vite. Aquí, un runtime es el motor de JavaScript donde se ejecuta el código transformado, como Node.js, el navegador, workerd de Cloudflare o un hilo Worker. Un proveedor de runtime empaqueta la integración para uno de estos runtimes, de manera que los autores de frameworks y los usuarios finales (los desarrolladores que construyen una aplicación) no tengan que configurarlo ellos mismos.
+
 ## Fábricas de Entornos
 
-Las fábricas de entornos están destinadas a ser implementadas por proveedores de entornos, como Cloudflare, y no por usuarios finales. Las fábricas de entornos devuelven una instancia de `EnvironmentOptions` para el caso común de usar el runtime objetivo tanto en desarrollo como en entornos de compilación. También se pueden establecer opciones predeterminadas para que el usuario no necesite configurarlas manualmente.
+Las fábricas de entornos están destinadas a ser implementadas por proveedores de runtimes, no por usuarios finales. Las fábricas de entornos devuelven un `EnvironmentOptions` para el caso más común de usar el runtime objetivo tanto en desarrollo como en entornos de compilación. Las opciones de entorno predeterminadas también se pueden configurar para que el usuario no necesite hacerlo.
 
 ```ts
 function createWorkerdEnvironment(
@@ -463,4 +465,13 @@ server.onRequest((request: Request) => {
 
 Pero ten en cuenta que para el soporte de HMR, se requieren los métodos `send` y `connect`. El método `send` generalmente se llama cuando se activa un evento personalizado (como, `import.meta.hot.send("my-event")`).
 
-Vite exporta `createServerHotChannel` desde el punto de entrada principal para soportar HMR durante Vite SSR.
+Para un entorno SSR que se ejecuta en el mismo proceso Node.js que el servidor de Vite, Vite exporta `createServerHotChannel` como un `HotChannel` listo para usar:
+
+```js
+import { createServerHotChannel, DevEnvironment } from 'vite'
+
+new DevEnvironment(name, config, {
+  hot: true,
+  transport: createServerHotChannel(),
+})
+```

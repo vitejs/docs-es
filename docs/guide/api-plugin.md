@@ -658,6 +658,44 @@ export default function myPlugin() {
 [`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) exporta algunas utilidades para filtros de hooks como `exactRegex` y `prefixRegex`. Estas también se re-exportan desde `rolldown/filter` por conveniencia.
 :::
 
+## Información de mapas de importación de fragmentos
+
+:::info Experimental
+
+Esta funcionalidad es experimental y puede cambiar en el futuro.
+
+:::
+
+Cuando la opción [`build.chunkImportMap`](/config/build-options#build-chunkimportmap) está habilitada, las declaraciones de importación en los fragmentos generados usarán un ID único para cada fragmento en lugar de la ruta del archivo.
+
+Para obtener el mapeo del ID del fragmento a la ruta del archivo, puedes acceder al mapa de importación emitido para el bundle en el hook `generateBundle` o en el hook `writeBundle`. El mapa de importación tiene el nombre especificado por [`build.rolldownOptions.experimental.chunkImportMap.fileName`](https://rolldown.rs/reference/InputOptions.experimental#chunkimportmap) (por defecto es `importmap.json`).
+
+```ts
+function accessImportMap() {
+  let config: ResolvedConfig
+  return {
+    name: 'access-import-map',
+    configResolved(resolvedConfig) {
+      config = resolvedConfig
+    },
+    generateBundle(options, bundle) {
+      const chunkImportMap =
+        config.build.rolldownOptions.experimental?.chunkImportMap
+      if (chunkImportMap) {
+        const importMapFilename =
+          typeof chunkImportMap === 'object' && chunkImportMap.fileName
+            ? chunkImportMap.fileName
+            : 'importmap.json'
+        const importMap = bundle[importMapFilename]! as OutputAsset
+        const mapping = JSON.parse(importMap.source).imports
+        console.log(mapping)
+        // { "./entry.hash1.js": "./entry.hash2.js" }
+      }
+    },
+  }
+}
+```
+
 ## Comunicación Cliente-Servidor
 
 Desde Vite 2.9, proporcionamos algunas utilidades para plugins que ayudan a manejar la comunicación con los clientes.

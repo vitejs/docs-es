@@ -8,7 +8,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 - **Por defecto:** `'baseline-widely-available'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
-El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/web-features/) Widely Available el 2026-01-01. En particular, es `['chrome111', 'edge111', 'firefox114', 'safari16.4']`.
+El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/web-features/) Widely Available el 2026-01-01. En particular, es `['chrome111', 'edge111', 'firefox114', 'safari16.4', 'ios16.4']`.
 
 Otro valor especial es `'esnext'`, que asume soporte nativo para importaciones dinámicas y solo realiza una transpilación mínima.
 
@@ -146,6 +146,17 @@ npm add -D esbuild
 - **Por defecto:** `false`
 
 Genera mapas de fuentes de producción. Si es `true`, se creará un archivo de mapa fuente independiente. Si es `'inline'`, el mapa fuente se agregará al archivo de salida resultante como un URI de datos. `'hidden'` funciona como `true` excepto que se suprimen los comentarios del mapa fuente correspondiente en los archivos incluidos.
+
+## build.chunkImportMap
+
+- **Tipo:** `boolean`
+- **Por defecto:** `false`
+- **Experimental**
+- **Relacionado:** [Optimización de mapas de importación de fragmentos](/guide/features#optimizacion-de-mapas-de-importacion-de-fragmentos)
+
+Si se debe usar la característica de mapas de importación (import maps) para optimizar la eficiencia del caché de fragmentos (chunks).
+
+Ten en cuenta que esta opción requiere [soporte para `import.meta.resolve`](https://caniuse.com/mdn-javascript_operators_import_meta_resolve). Si necesitas soportar navegadores más antiguos, revisa [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy).
 
 ## build.rolldownOptions
 
