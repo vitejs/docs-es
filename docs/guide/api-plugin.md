@@ -154,7 +154,7 @@ Durante el desarrollo, el servidor de desarrollo de Vite crea un contenedor de p
 
 Los siguientes hooks se llaman una vez en el inicio del servidor:
 
-- [`options`](https://rolldown.rs/reference/interface.plugin#options)
+- [`options`](https://rolldown.rs/reference/Interface.Plugin#options)
 - [`buildStart`](https://rolldown.rs/reference/Interface.Plugin#buildstart)
 
 Los siguientes hooks se llaman en cada solicitud de módulo entrante:
@@ -182,7 +182,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
 ### `config`
 
-- **Tipo:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
+- **Tipo:** `(config: UserConfig, env: { mode: 'build' | 'serve', command: string, isSsrBuild?: boolean, isPreview?: boolean }) => UserConfig | null | void`
 - **Clase:** `async`, `sequential`
 
   Modifica la configuración de Vite antes de que se resuelva. El enlace recibe la configuración de usuario sin procesar (las opciones de CLI se fusionaron con el archivo de configuración) y el entorno de configuración actual que expone el `mode` y el `command` que se están utilizando. Puede devolver un objeto de configuración parcial que se fusionará profundamente con la configuración existente, o mutar directamente la configuración (si la fusión predeterminada no puede lograr el resultado deseado).
@@ -376,8 +376,9 @@ type IndexHtmlTransformHook = (
     path: string
     filename: string
     server?: ViteDevServer
-    bundle?: import('rollup').OutputBundle
-    chunk?: import('rollup').OutputChunk
+    bundle?: import('rolldown').OutputBundle
+    chunk?: import('rolldown').OutputChunk
+    originalUrl?: string
   },
 ) => IndexHtmlTransformResult | void | Promise<IndexHtmlTransformResult | void>
 
@@ -738,7 +739,7 @@ if (import.meta.hot) {
 
 ### Cliente a Servidor
 
-Para enviar eventos del cliente al servidor, podemos usar [`hot.send`](/guide/api-hmr.html#hot-send-event-payload):
+Para enviar eventos del cliente al servidor, podemos usar [`hot.send`](/guide/api-hmr.html#hot-send-event-data):
 
 ```ts
 // client side

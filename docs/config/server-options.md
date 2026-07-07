@@ -98,7 +98,7 @@ Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
 
 - **Tipo:** `Record<string, string | ProxyOptions>`
 
-  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de pares `{ key: options }`. Cualquier solicitud cuya ruta de solicitud comience con esa clave se enviará a ese destino especificado. Si la clave comienza con `^`, se interpretará como `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia del proxy. Si una solicitud coincide con alguna de las reglas de proxy configuradas, la solicitud no será transformada por Vite.
+  Configura reglas de proxy personalizadas para el servidor de desarrollo. Espera un objeto de pares `{ key: options }`. Cualquier solicitud cuya ruta comience con esa clave será redirigida al destino especificado. Si la clave comienza con `^`, se interpretará como un `RegExp`. La opción `configure` se puede utilizar para acceder a la instancia de proxy. Si una solicitud coincide con alguna de las reglas del proxy configurado, la solicitud no será transformada por Vite.
 
   Ten en cuenta que si estás utilizando una [`base`](/config/shared-options.md#base) no relativa, debes prefijar cada clave con esa `base`.
 
@@ -418,7 +418,7 @@ createServer()
 ## server.fs.deny
 
 - **Tipo:** `string[]`
-- **Por defecto:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
+- **Por defecto:** `['.env', '.env.*', '*.{crt,pem,key,p12,pfx,cer,der}', '.npmrc', '.yarnrc.yml', '**/.git/**']`
 
   Lista de bloqueo para archivos sensibles que están restringidos para ser servidos por el servidor de desarrollo de Vite. Esto tendrá mayor prioridad que [`server.fs.allow`](#server-fs-allow). Se admiten [patrones de picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
