@@ -37,7 +37,7 @@ Si tu plugin solo funcionará para un marco de trabajo en particular, su nombre 
 - Prefijo `vite-plugin-react-` para React
 - Prefijo `vite-plugin-svelte-` para plugins Svelte
 
-Puedes ver también la [Convención de Módulos Virtuales](./api-plugin.md#convencion-de-modulos-virtuales).
+Puedes ver también la [Convención de Módulos Virtuales](https://rolldown.rs/apis/plugin-api#virtual-modules).
 
 ## Configuración de Plugins
 
@@ -105,11 +105,7 @@ export default function myPlugin() {
 
 ### Importación de un Archivo Virtual
 
-Mira el ejemplo en [la siguente sección](./api-plugin.md#convencion-de-modulos-virtuales).
-
-## Convención de módulos virtuales
-
-Los módulos virtuales son un esquema útil que le permite pasar información de tiempo de compilación a los archivos de origen utilizando la sintaxis de importación de ESM normal.
+Los módulos virtuales te permiten pasar información en tiempo de compilación a los archivos fuente usando la sintaxis normal de importación ESM. Consulta la [Convención de Módulos Virtuales](https://rolldown.rs/apis/plugin-api#virtual-modules) para conocer la convención completa.
 
 ```js
 import { exactRegex } from '@rolldown/pluginutils'
@@ -144,9 +140,7 @@ import { msg } from 'virtual:my-module'
 console.log(msg)
 ```
 
-Los módulos virtuales en Vite (y Rolldown / Rollup) tienen el prefijo `virtual:` para la ruta orientada al usuario por convención. Si es posible, el nombre del plugin debe usarse como un espacio de nombre para evitar colisiones con otros plugins en el ecosistema. Por ejemplo, `vite-plugin-posts` podría pedirles a los usuarios que importe módulo virtuales `virtual:posts` o `virtual:posts/helpers` para obtener información sobre el tiempo de compilación. Internamente, los plugins que usan módulos virtuales deben prefijar la ID del módulo con `\0` mientras resuelven la ID, una convención del ecosistema de Rollup. Esto evita que otros plugins intenten procesar el id (como la resolución de node), y las funciones principales, como los mapas de origen, puedan usar esta información para diferenciar entre módulos virtuales y archivos normales. `\0` no es un carácter permitido en las URL de importación, por lo que debemos reemplazarlo durante el análisis de importación. Una identificación virtual `\0{id}` termina codificada como `/@id/__x00__{id}` durante el desarrollo en el navegador. El id se decodificará antes de ingresar a la canalización de plugins, por lo que el código de hooks de plugins no lo ve.
-
-Ten en cuenta que los módulos derivados directamente de un archivo real, como en el caso de un módulo de secuencia de comandos en un componente de archivo único (como .vue o .svelte SFC) no necesitan seguir esta convención. Los SFC generalmente generan un conjunto de submódulos cuando se procesan, pero el código en estos se puede mapear de nuevo al sistema de archivos. El uso de `\0` para estos submódulos evitaría que los mapas de origen funcionen correctamente.
+En Vite, dado que `\0` no es un carácter permitido en las URL de importación, un id virtual `\0{id}` termina codificado como `/@id/__x00__{id}` durante el desarrollo en el navegador. El id se decodifica antes de ingresar a la canalización de plugins, por lo que el código de hooks de plugins no lo ve.
 
 ## Hooks Universales
 
