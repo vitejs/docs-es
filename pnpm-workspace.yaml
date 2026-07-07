@@ -42,6 +42,11 @@ minimumReleaseAgeExclude:
   - '@typescript-eslint/utils@8.63.0'
   - '@typescript-eslint/visitor-keys@8.63.0'
   - typescript-eslint@8.63.0
+  - '@algolia/client-common@5.55.2'
+  - '@algolia/client-search@5.55.2'
+  - '@algolia/requester-browser-xhr@5.55.2'
+  - '@algolia/requester-fetch@5.55.2'
+  - '@algolia/requester-node-http@5.55.2'
 allowBuilds:
   esbuild: true
   unrs-resolver: true
