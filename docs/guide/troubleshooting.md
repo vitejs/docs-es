@@ -103,7 +103,7 @@ Al usar un certificado SSL autofirmado, Chrome ignora todas las directivas de al
 
 Para resolver el problema, utiliza un certificado SSL de confianza.
 
-Consulta: [Problemas de caché](https://helpx.adobe.com/mt/experience-manager/kb/cache-problems-on-chrome-with-SSL-certificate-errors.html), [Problemas de Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
+Consulta: [Problemas de Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
 
 #### MacOS
 

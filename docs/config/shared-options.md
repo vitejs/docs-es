@@ -200,6 +200,18 @@ Habilitar esta configuración hace que vite determine la identidad del archivo p
 
 Habilita la función de resolución de rutas tsconfig. La opción `paths` en `tsconfig.json` se utilizará para resolver las importaciones. Consulta [Características](/guide/features.md#paths) para obtener más detalles.
 
+`paths` solo se aplica a un archivo coincidente por un `tsconfig.json` a través de sus campos `files` o `include`. Los archivos con extensiones que no sean de JS deben listarse explícitamente en ellos, ya que un `include` simple con `"src"` o `"**/*"` solo coincide con extensiones TS/JS, alineándose con el comportamiento de TypeScript. Por ejemplo, para usar un alias de `paths` dentro de un archivo CSS (como `@import '@/foo.css'`), lista esos archivos en `files` o añade una extensión explícita a `include`:
+
+```json [tsconfig.json]
+{
+  "include": ["src", "src/**/*.css", "src/**/*.scss"]
+}
+```
+
+::: warning Less no está soportado
+`resolve.tsconfigPaths` no se aplica dentro de archivos `.less`. Less solo le proporciona a Vite el directorio del archivo importador, no el archivo en sí, por lo que Vite no puede encontrar el `tsconfig.json` que coincida con él. Utiliza una ruta relativa o [`resolve.alias`](#resolve-alias) para `@import` en Less.
+:::
+
 ## html.cspNonce
 
 - **Tipo:** `string`

@@ -55,7 +55,7 @@ export type { T }
 
 ### Opciones del compilador de TypeScript
 
-Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes del Transformador de OXC. Para cada archivo, Vite usa el `tsconfig.json` en el directorio padre más cercano. Si ese `tsconfig.json` contiene un campo [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite usará el archivo de configuración referenciado que satisfaga los campos [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
+Vite respeta algunas de las opciones en `tsconfig.json` y establece las opciones correspondientes del Transformador de OXC. Para cada archivo, Vite usa el `tsconfig.json` padre más cercano que coincida con el archivo, o una configuración referenciada por su campo [`references`](https://www.typescriptlang.org/tsconfig/#references) que coincida con el archivo. Vite considera que una configuración coincide con el archivo cuando este satisface los campos [`files`](https://www.typescriptlang.org/tsconfig/#files), [`include`](https://www.typescriptlang.org/tsconfig/#include) y [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude) de la configuración.
 
 Cuando las opciones se establecen tanto en la configuración de Vite como en `tsconfig.json`, el valor en la configuración de Vite tiene precedencia.
 
@@ -109,14 +109,14 @@ Así que, se recomienda establecer `target` a `ESNext` o `ES2022` o una versión
 Esta opción solo es compatible parcialmente. El soporte completo requiere inferencia de tipos por parte del compilador de TypeScript, lo cual no está soportado. Consulta la [documentación del Transformador de OXC](https://oxc.rs/docs/guide/usage/transformer/typescript.html#decorators) para obtener más detalles.
 
 ::: tip `skipLibCheck`
-Las plantillas de inicio de Vite tienen `"skipLibCheck": "true"` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
+Las plantillas de inicio de Vite tienen `"skipLibCheck": true` por defecto para evitar la comprobación de tipos en las dependencias, ya que estas pueden optar por admitir solo versiones y configuraciones específicas de TypeScript. Puedes obtener más información en [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
 :::
 
 #### `paths`
 
 - [Documentación de TypeScript](https://www.typescriptlang.org/tsconfig/#paths)
 
-`resolve.tsconfigPaths: true` puede especificarse para decirle a Vite que use la opción `paths` en `tsconfig.json` para resolver las importaciones.
+[`resolve.tsconfigPaths: true`](/config/shared-options.md#resolve-tsconfigpaths) puede especificarse para decirle a Vite que use la opción `paths` en `tsconfig.json` para resolver las importaciones.
 
 Ten en cuenta que esta característica tiene un costo de rendimiento y es [desaconsejado por el equipo de TypeScript usar esta opción para cambiar el comportamiento de las herramientas externas](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.).
 
@@ -684,6 +684,16 @@ Si el módulo de WebAssembly declara importaciones propias, Vite las resuelve a 
 
 Esto sigue la [propuesta de Integración de WebAssembly/ES Module](https://github.com/WebAssembly/esm-integration). Debido a que un módulo de WebAssembly se instancia de forma asincrónica, un archivo `.wasm` importado directamente se comporta como un módulo asíncrono y requiere soporte de `await` en el nivel superior.
 
+::: tip Soporte de TypeScript
+
+Dado que los tipos de los archivos `.wasm` son desconocidos, TypeScript reportará errores como `Module '"*.wasm"' has no exported member 'add'`. Para solucionar esto, habilita [`allowArbitraryExtensions`](https://www.typescriptlang.org/tsconfig/#allowArbitraryExtensions) en tu `tsconfig.json` y crea un archivo de declaración junto a tu archivo `.wasm`. Con `allowArbitraryExtensions` habilitado, TypeScript buscará un archivo de declaración llamado `{filename}.d.wasm.ts` al resolver una importación de `.wasm`. Por ejemplo, para `add.wasm`, crea `add.d.wasm.ts`:
+
+```ts [add.d.wasm.ts]
+export function add(a: number, b: number): number
+```
+
+:::
+
 ### Inicialización Manual
 
 Cuando necesitas control sobre cuándo y cómo se instancia el módulo, impórtalo con `?init`. La exportación por defecto será una función de inicialización que devuelve una Promesa de [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
@@ -759,7 +769,7 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 })
 ```
 
-La detección de workers solo funcionará si el constructor `new URL()` se usa directamente dentro de la declaración `new Worker()`. Además, todos los parámetros de opciones deben ser valores estáticos (es decir, cadenas literales).
+La detección de workers solo funcionará si el constructor `new URL()` se usa directamente dentro de la declaración `new Worker()`. De lo contrario, se tratará como una [URL de recurso estático](./assets#new-url-url-import-meta-url) en su lugar. Además, todos los parámetros de opciones deben ser valores estáticos (es decir, cadenas literales).
 
 ### Importar con sufijos de consulta
 
