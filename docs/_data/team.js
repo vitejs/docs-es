@@ -5,7 +5,7 @@ export const core = [
     title: 'Creador',
     org: 'Vue.js',
     orgLink: 'https://vuejs.org/',
-    desc: 'Desarrollador independiente de código abierto, creador de Vue.js y Vite.',
+    desc: 'Creador de Vue.js y Vite.',
     links: [
       { icon: 'github', link: 'https://github.com/yyx990803' },
       { icon: 'x', link: 'https://x.com/evanyou' },
@@ -118,6 +118,43 @@ export const core = [
     name: 'btea',
     title: 'Desarrollador Web',
     links: [{ icon: 'github', link: 'https://github.com/btea' }],
+  },
+]
+
+export const advisors = [
+  {
+    avatar: 'https://github.com/serhalp.png',
+    name: 'Philippe Serhal',
+    title: 'Staff Software Engineer',
+    org: 'Netlify',
+    orgLink: 'https://www.netlify.com/',
+    desc: 'Haciendo malabares con todos los frameworks en Netlify',
+    links: [
+      { icon: 'github', link: 'https://github.com/serhalp' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/philippeserhal.com' },
+    ],
+  },
+  {
+    avatar: 'https://github.com/jamesopstad.png',
+    name: 'James Opstad',
+    title: 'Ingeniero Senior',
+    org: 'Cloudflare',
+    orgLink: 'https://www.cloudflare.com/',
+    desc: 'Construyendo herramientas de desarrollo en Cloudflare',
+    links: [{ icon: 'github', link: 'https://github.com/jamesopstad' }],
+  },
+  {
+    avatar: 'https://github.com/danielroe.png',
+    name: 'Daniel Roe',
+    title: 'Mantenedor de código abierto',
+    org: 'Vercel',
+    orgLink: 'https://vercel.com/',
+    desc: 'Liderando el equipo de Nuxt',
+    links: [
+      { icon: 'github', link: 'https://github.com/danielroe' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/danielroe.dev' },
+    ],
+    sponsor: 'https://github.com/sponsors/danielroe',
   },
 ]
 
