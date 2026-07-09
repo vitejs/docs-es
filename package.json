@@ -67,7 +67,7 @@
     "tsx": "^4.23.0",
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.63.0",
-    "vitepress": "2.0.0-alpha.17",
+    "vitepress": "2.0.0-alpha.18",
     "vitepress-plugin-group-icons": "^1.7.5",
     "vue": "^3.5.39",
     "vue-tsc": "^3.3.7"
