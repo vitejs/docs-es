@@ -11,7 +11,7 @@ import {
   VPTeamPageSection,
   VPTeamMembers
 } from '@voidzero-dev/vitepress-theme'
-import { core, emeriti } from './_data/team'
+import { core, advisors, emeriti } from './_data/team'
 </script>
 
 <VPTeamPage>
@@ -22,6 +22,16 @@ import { core, emeriti } from './_data/team'
     </template>
   </VPTeamPageTitle>
   <VPTeamMembers :members="core" />
+  <VPTeamPageSection>
+    <template #title>Asesores</template>
+    <template #lead>
+      Los asesores ayudan a guiar a Vite desde el ecosistema, compartiendo su
+      experiencia para dar forma a la Environment API y al diseño de futuras APIs.
+    </template>
+    <template #members>
+      <VPTeamMembers size="small" :members="advisors" />
+    </template>
+  </VPTeamPageSection>
   <VPTeamPageSection>
     <template #title>Team Emeriti</template>
     <template #lead>

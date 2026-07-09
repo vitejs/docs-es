@@ -47,6 +47,8 @@ minimumReleaseAgeExclude:
   - '@algolia/requester-browser-xhr@5.55.2'
   - '@algolia/requester-fetch@5.55.2'
   - '@algolia/requester-node-http@5.55.2'
+  - prettier@3.9.5
+  - vite@8.1.4
 allowBuilds:
   esbuild: true
   unrs-resolver: true
