@@ -72,5 +72,5 @@
     "vue": "^3.5.39",
     "vue-tsc": "^3.3.7"
   },
-  "packageManager": "pnpm@11.11.0"
+  "packageManager": "pnpm@11.12.0"
 }
