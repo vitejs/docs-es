@@ -139,7 +139,7 @@ Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
           configure: (proxy, options) => {
-            // proxy será una instancia de 'http-proxy'
+            // proxy será una instancia de 'http-proxy-3'
           },
         },
         // Proxy de websockets o socket.io:
