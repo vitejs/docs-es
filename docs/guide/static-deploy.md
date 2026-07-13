@@ -302,7 +302,7 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https:/
 
 ## Alojamiento de sitio estático en xmit
 
-Despliega tu sitio estático utilizando [xmit](https://xmit.co) siguiendo esta [guía](https://xmit.dev/posts/vite-quickstart/).
+Despliega tu sitio estático utilizando [xmit](https://xmit.co) siguiendo esta [guía](https://xmit.dev/guides/vite-quickstart/).
 
 ## Zephyr Cloud
 
