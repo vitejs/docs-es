@@ -13,6 +13,14 @@ Planeamos estabilizar estas nuevas API (con posibles cambios importantes) en un 
 Por favor, comparte tus comentarios con nosotros.
 :::
 
+## Hooks por entorno y hooks globales
+
+Los plugins se ejecutan en un pipeline compartido, pero sus hooks se dividen en dos categorías dependiendo de si se ejecutan una vez para todo el servidor o una vez para cada entorno.
+
+Los hooks globales se llaman una sola vez, independientemente de los entornos configurados. Manejan aspectos de toda la aplicación, como la resolución de la configuración o la preparación de los servidores de desarrollo y de vista previa (preview), por lo que `this.environment` no es relevante para ellos. Los hooks relacionados con la resolución de configuración y con el servidor son hooks globales.
+
+Los hooks por entorno se llaman una vez para cada entorno y exponen el entorno actual a través de `this.environment` en su contexto. Todos los [hooks de Rolldown](/guide/api-plugin#hooks-de-rolldown) son por entorno, al igual que otros hooks específicos de Vite que manejan módulos. Sin embargo, ten en cuenta que `buildStart` y `buildEnd` solo se llaman para el entorno client sin [la bandera `perEnvironmentStartEndDuringDev: true`](#estado-por-entorno-en-plugins).
+
 ## Accediendo al Entorno Actual en Hooks
 
 Dado que solo había dos entornos hasta Vite 6 (`client` y `ssr`), un booleano `ssr` era suficiente para identificar el entorno actual en las APIs de Vite. Los hooks de plugins recibían un booleano `ssr` en el último parámetro de opciones, y varias APIs esperaban un parámetro `ssr` opcional para asociar correctamente los módulos con el entorno adecuado (por ejemplo, `server.moduleGraph.getModuleByUrl(url, { ssr })`).
@@ -49,7 +57,11 @@ Los plugins pueden agregar nuevos entornos en el hook `config`. Por ejemplo, [el
 
 Un objeto vacío es suficiente para registrar el entorno, usando los valores predeterminados desde la configuración de entorno a nivel raíz.
 
-## Configuración del Entorno usando Hooks
+## Configuración del Entorno usando el hook `configEnvironment`
+
+- **Tipo:** `(name: string, config: EnvironmentOptions, env: { mode: string, command: 'build' | 'serve', isSsrBuild?: boolean, isPreview?: boolean, isSsrTargetWebworker?: boolean }) => EnvironmentOptions | null | void`
+- **Forma:** `async`, `sequential`
+- **Ámbito:** [Por entorno](#hooks-por-entorno-y-hooks-globales)
 
 Mientras el hook `config` se está ejecutando, la lista completa de entornos aún no es conocida y los entornos pueden verse afectados tanto por los valores predeterminados desde la configuración de entorno a nivel raíz como explícitamente a través del registro `config.environments`.
 
@@ -72,6 +84,7 @@ configEnvironment(name: string, options: EnvironmentOptions) {
 
 - **Tipo:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
 - **Forma:** `async`, `sequential`
+- **Ámbito:** [Por entorno](#hooks-por-entorno-y-hooks-globales)
 - **Ver también:** [API de HMR](./api-hmr)
 
 El hook `hotUpdate` permite a los plugins realizar un manejo personalizado de actualizaciones HMR para un entorno dado. Cuando un archivo cambia, el algoritmo HMR se ejecuta para cada entorno en serie según el orden en `server.environments`, por lo que el hook `hotUpdate` se llamará múltiples veces. El hook recibe un objeto de contexto con la siguiente firma:
@@ -163,7 +176,11 @@ function PerEnvironmentCountTransformedModulesPlugin() {
 }
 ```
 
-## Plugins por entorno
+## Plugins por entorno usando el hook `applyToEnvironment`
+
+- **Tipo:** `(environment: PartialEnvironment) => boolean | PluginOption | Promise<boolean>`
+- **Forma:** `async`, `sequential`
+- **Ámbito:** [Por entorno](#hooks-por-entorno-y-hooks-globales)
 
 Un plugin puede definir cuáles son los entornos a los que debe aplicarse con la función `applyToEnvironment`.
 
@@ -275,7 +292,7 @@ Esto obligaba a los frameworks a compartir estado entre la compilación `client`
 
 En una futura versión principal, podríamos tener una alineación completa:
 
-- **Tanto durante el desarrollo como la compilación:** los plugins son compartidos, con [filtrado por entorno](#per-environment-plugins).
+- **Tanto durante el desarrollo como la compilación:** los plugins son compartidos, con [filtrado por entorno usando el hook applyToEnvironment](#plugins-por-entorno-usando-el-hook-applytoenvironment).
 
 También habrá una única instancia de `ResolvedConfig` compartida durante la compilación, permitiendo almacenamiento en caché a nivel de proceso de compilación de toda la aplicación de la misma manera que lo hemos estado haciendo con `WeakMap<ResolvedConfig, CachedData>` durante el desarrollo.
 

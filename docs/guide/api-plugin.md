@@ -142,9 +142,11 @@ console.log(msg)
 
 En Vite, dado que `\0` no es un carácter permitido en las URL de importación, un id virtual `\0{id}` termina codificado como `/@id/__x00__{id}` durante el desarrollo en el navegador. El id se decodifica antes de ingresar a la canalización de plugins, por lo que el código de hooks de plugins no lo ve.
 
-## Hooks Universales
+## Hooks de Rolldown
 
 Durante el desarrollo, el servidor de desarrollo de Vite crea un contenedor de plugins que invoca [Hooks de compilación de Rolldown](https://rolldown.rs/apis/plugin-api#build-hooks) de la misma manera que lo hace Rolldown.
+
+Todos los hooks de Rolldown son [hooks por entorno](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales).
 
 Los siguientes hooks se llaman una vez en el inicio del servidor:
 
@@ -178,6 +180,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
 - **Tipo:** `(config: UserConfig, env: { mode: 'build' | 'serve', command: string, isSsrBuild?: boolean, isPreview?: boolean }) => UserConfig | null | void`
 - **Clase:** `async`, `sequential`
+- **Ámbito:** [Global](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
 
   Modifica la configuración de Vite antes de que se resuelva. El enlace recibe la configuración de usuario sin procesar (las opciones de CLI se fusionaron con el archivo de configuración) y el entorno de configuración actual que expone el `mode` y el `command` que se están utilizando. Puede devolver un objeto de configuración parcial que se fusionará profundamente con la configuración existente, o mutar directamente la configuración (si la fusión predeterminada no puede lograr el resultado deseado).
 
@@ -215,6 +218,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
 - **Tipo:** `(config: ResolvedConfig) => void | Promise<void>`
 - **Clase:** `async`, `parallel`
+- **Ámbito:** [Global](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
 
   Se llama después de que se resuelve la configuración de Vite. Use este hook para leer y almacenar la configuración final resuelta. También es útil cuando el plugin necesita hacer algo diferente según el comando que se está ejecutando.
 
@@ -250,6 +254,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
 - **Tipo:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
 - **Clase:** `async`, `sequential`
+- **Ámbito:** [Global](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
 - **Ver además:** [ViteDevServer](./api-javascript#vitedevserver)
 
   Hook para configurar el servidor dev. El caso de uso más común es agregar middlewares personalizados a la aplicación interna [connect](https://github.com/senchalabs/connect):
@@ -311,6 +316,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
 - **Tipo:** `(server: PreviewServer) => (() => void) | void | Promise<(() => void) | void>`
 - **Clase:** `async`, `sequential`
+- **Ámbito:** [Global](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
 - **Ver también:** [PreviewServer](./api-javascript#previewserver)
 
   Tal como [`configureServer`](/guide/api-plugin.html#configureserver) pero para el servidor de vista previa. De manera similar a `configureServer`, el hook `configurePreviewServer` se llama antes de que se instalen otros middlewares. Si deseas inyectar un middleware **después** de otros middlewares, puede devolver una función desde `configurePreviewServer`, que se llamará después de que se instalen los middlewares internos:
@@ -334,6 +340,7 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
 
 - **Tipo:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
 - **Clase:** `async`, `sequential`
+- **Ámbito:** [Por entorno](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
 
 Hook dedicado para transformar archivos de punto de entrada HTML como `index.html`. El hook recibe la cadena HTML actual y un contexto de transformación. El contexto expone la instancia de [`ViteDevServer`](./api-javascript#vitedevserver) durante el desarrollo y expone el paquete de salida de Rollup durante la compilación.
 
@@ -405,7 +412,8 @@ Este hook no se invocará si estás utilizando un framework que tenga un manejo 
 ### `handleHotUpdate`
 
 - **Tipo:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
-- **Forma:** `async`, `sequential`
+- **Clase:** `async`, `sequential`
+- **Ámbito:** [Por entorno](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
 - **Ver tambien:** [HMR API](./api-hmr)
 
   Realiza el manejo personalizado de actualizaciones de HMR. El hook recibe un objeto de contexto con la siguiente firma:

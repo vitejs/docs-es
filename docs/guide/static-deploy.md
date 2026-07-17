@@ -162,7 +162,7 @@ Después de que tu proyecto haya sido importado y desplegado, todos los pushs su
 3. Vercel detectará que estás utilizando Vite y habilitará la configuración correcta para su despliegue.
 4. ¡Tu aplicación está desplegada! (por ejemplo, [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
 
-Después de que tu proyecto haya sido importado y desplegado, todos los push subsiguientes a las ramas generarán [Vistas previas de despliegues](https://vercel.com/docs/concepts/deployments/environments#preview), y todos los cambios realizados en la rama de producción (comúnmente "main") dará como resultado un [Despliegue en producción](https://vercel.com/docs/concepts/deployments/environments#production).
+Después de que tu proyecto haya sido importado y desplegado, todos los push subsiguientes a las ramas generarán [Vistas previas de despliegues](https://vercel.com/docs/deployments/environments#preview-environment-pre-production), y todos los cambios realizados en la rama de producción (comúnmente "main") dará como resultado un [Despliegue en producción](https://vercel.com/docs/deployments/environments#production-environment).
 
 Obtén más información sobre [Integración Git](https://vercel.com/docs/concepts/git) de Vercel.
 
