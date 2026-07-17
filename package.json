@@ -37,11 +37,11 @@
   "dependencies": {
     "@iconify/vue": "^5.0.1",
     "search-insights": "^2.17.3",
-    "vite": "^8.1.4",
+    "vite": "^8.1.5",
     "vitepress-plugin-graphviz": "^0.1.0"
   },
   "devDependencies": {
-    "@algolia/client-search": "^5.55.2",
+    "@algolia/client-search": "^5.56.0",
     "@eslint/js": "^10.0.0",
     "@shikijs/vitepress-twoslash": "^4.3.1",
     "@types/express": "^5.0.6",
@@ -59,18 +59,18 @@
     "gsap": "^3.14.2",
     "lint-staged": "^17.0.8",
     "markdown-it-image-size": "^15.0.1",
-    "oxc-minify": "^0.139.0",
+    "oxc-minify": "^0.140.0",
     "prettier": "^3.9.5",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "rolldown": "1.1.5",
+    "rolldown": "1.2.0",
     "tsx": "^4.23.1",
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.64.0",
     "vitepress": "2.0.0-alpha.18",
     "vitepress-plugin-group-icons": "^1.7.5",
-    "vue": "^3.5.39",
+    "vue": "^3.5.40",
     "vue-tsc": "^3.3.7"
   },
-  "packageManager": "pnpm@11.12.0"
+  "packageManager": "pnpm@11.13.1"
 }
