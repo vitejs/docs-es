@@ -213,7 +213,7 @@ Cloudflare Pages te ofrece una forma de desplegar directamente en Cloudflare sin
 
 Después de que tu proyecto haya sido importado y desplegado, todos los push subsiguientes a las ramas generarán [Vistas previas de despliegues](https://developers.cloudflare.com/pages/platform/preview-deployments/) a menos que se especifique lo contrario en los [controles de compilación de ramas](https://developers.cloudflare.com/pages/platform/branch-build-controls/). Todos los cambios en la rama de producción (comúnmente "main") darán como resultado un despliegue de producción.
 
-También puedes agregar dominios personalizados y manejar la configuración de compilación personalizada en las páginas. Obtén más información sobre la [Integración de Cloudflare Pages con Git](https://developers.cloudflare.com/pages/get-started/#manage-your-site).
+También puedes agregar dominios personalizados y manejar la configuración de compilación personalizada en las páginas. Obtén más información sobre la [Integración de Cloudflare Pages con Git](https://developers.cloudflare.com/pages/configuration/git-integration/).
 
 ## Google Firebase
 
@@ -288,7 +288,7 @@ Puedes desplegar tu aplicación Vite como un sitio estático en [Render](https:/
 
 5. Has clic en **Crear sitio estático**. Tu aplicación debe desplegarse en `https://<PROJECTNAME>.onrender.com/`.
 
-De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) se puede configurar en la configuración del proyecto.
+De forma predeterminada, cualquier nueva confirmación enviada a la rama especificada activará automáticamente un nuevo despliegue. El [autodespliegue](https://render.com/docs/deploys#configuring-auto-deploys) se puede configurar en la configuración del proyecto.
 
 También puedes agregar un [dominio personalizado](https://render.com/docs/custom-domains) a tu proyecto.
 
