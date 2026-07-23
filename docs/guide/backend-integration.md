@@ -13,6 +13,8 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
    // ---cut---
    // vite.config.js
    export default defineConfig({
+     // sobreescribe la entrada por defecto .html
+     input: '/path/to/main.js',
      server: {
        cors: {
          // el origin al que accederás a través del navegador
@@ -22,10 +24,6 @@ Si necesitas una integración personalizada, puedes seguir los pasos de esta gu�
      build: {
        // genera el archivo .vite/manifest.json en outDir
        manifest: true,
-       rolldownOptions: {
-         // sobreescribe la entrada por defecto .html
-         input: '/path/to/main.js',
-       },
      },
    })
    ```

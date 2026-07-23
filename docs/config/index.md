@@ -14,7 +14,7 @@ export default {
 }
 ```
 
-Ten en cuenta que Vite admite el uso de la sintaxis de los módulos ES en el archivo de configuración, incluso si el proyecto no utiliza ESM de nodo nativo, por ejemplo `"type": "module"` en el `package.json`. En este caso, el archivo de configuración se preprocesa automáticamente antes de cargarlo.
+Ten en cuenta que para usar la sintaxis de módulos ES en el archivo de configuración, este debe estar en un archivo detectado como ESM por Node.js, por ejemplo `.mjs` o `.js` con `"type": "module"` en el `package.json` más cercano.
 
 También puedes especificar explícitamente un archivo de configuración para usar con la opción CLI `--config` (resuelta relativa a `cwd`):
 
@@ -25,9 +25,7 @@ vite --config my-config.js
 <ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05jg?via=vite" title="Configurando Vite">Ver una lección interactiva en Scrimba</ScrimbaLink>
 
 ::: tip CARGA DE CONFIGURACIÓN
-Por defecto, Vite utiliza [Rolldown](https://rolldown.rs/) para empaquetar la configuración en un archivo temporal y cargarlo. Esto puede causar problemas al importar archivos TypeScript en un monorepo. Si encuentras inconvenientes con este enfoque, puedes especificar `--configLoader runner` para usar el [módulo runner](/guide/api-environment-runtimes.html#modulerunner) en su lugar, el cual no creará un archivo de configuración temporal y transformará los archivos sobre la marcha. Ten en cuenta que el módulo runner no admite CJS en archivos de configuración, pero los paquetes CJS externos deberían funcionar con normalidad.
-
-Alternativamente, si utilizas un entorno que admite TypeScript (por ejemplo, `node --experimental-strip-types`), o si solo escribes JavaScript puro, puedes especificar `--configLoader native` para usar el runtime nativo del entorno para cargar el archivo de configuración. Sin embargo, las actualizaciones de los módulos importados por el archivo de configuración no se detectarán y, por lo tanto, no reiniciarán automáticamente el servidor de Vite.
+Por defecto, Vite utiliza [Rolldown](https://rolldown.rs/) para empaquetar la configuración en un archivo temporal y cargarlo. Si utilizas un entorno que admite TypeScript (por ejemplo, Node 22.18+), o si solo escribes JavaScript puro, puedes especificar `--configLoader native` para usar el runtime nativo del entorno para cargar el archivo de configuración. Se planea que `configLoader: 'native'` se convierta en el valor predeterminado en una versión principal futura.
 :::
 
 ## Configuración de Intellisense
