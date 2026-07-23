@@ -34,6 +34,22 @@ Especificar esto en la configuración sobreescribe el modo predeterminado para *
 
 Consulta [Modos y variables de entorno](/guide/env-and-mode) para obtener más detalles.
 
+## input <NonInheritBadge />
+
+- **Tipo:** `string | string[] | { [entryAlias: string]: string }`
+
+Puntos de entrada de tu aplicación, resueltos de forma relativa a la raíz del proyecto. Funciona como el valor predeterminado para [`build.rolldownOptions.input`](/config/build-options#build-rolldownoptions), [`build.lib.entry`](/config/build-options#build-lib), [`build.ssr`](/config/build-options#build-ssr) (si es `true`) y [`optimizeDeps.entries`](/config/dep-optimization-options#optimizedeps-entries) cuando no se establecen explícitamente.
+
+Esto es útil cuando tu aplicación no utiliza una entrada `index.html`, por lo que solo necesitas declarar la entrada una vez en lugar de repetirla en las opciones anteriores.
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  input: 'src/main.ts',
+})
+```
+
 ## define
 
 - **Tipo:** `Record<string, any>`

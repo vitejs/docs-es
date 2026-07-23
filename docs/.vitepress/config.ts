@@ -11,7 +11,7 @@ import { graphvizMarkdownPlugin } from 'vitepress-plugin-graphviz'
 import { markdownItImageSize } from 'markdown-it-image-size'
 import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
 import type { FooterLink } from '@voidzero-dev/vitepress-theme'
-import { buildEnd } from './buildEnd.config'
+import { buildEnd } from './buildEnd.config.ts'
 
 const viteVersion = JSON.parse(
   fs.readFileSync(path.resolve(import.meta.dirname, '../../package.json'), 'utf-8'),

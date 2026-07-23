@@ -164,6 +164,8 @@ Ten en cuenta que esta opción requiere [soporte para `import.meta.resolve`](htt
 
 Personaliza directamente el paquete Rolldown subyacente. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rolldown y se fusionarán con las opciones de Rolldown internas de Vite. Consulta la [documentación de opciones de Rolldown](https://rolldown.rs/reference/) para obtener más detalles.
 
+En lugar de `build.rolldownOptions.input`, se recomienda configurar la opción de nivel superior [`input`](/config/shared-options#input), ya que también se utilizará en desarrollo. Si se establece `build.rolldownOptions.input`, anulará la opción `input` de nivel superior solo para la compilación.
+
 ## build.rollupOptions
 
 - **Tipo:** `RolldownOptions`
@@ -180,10 +182,10 @@ Determina si transformar importaciones dinámicas con variables.
 
 ## build.lib
 
-- **Tipo:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
+- **Tipo:** `{ entry?: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
 - **Relacionado:** [Modo Librería](/guide/build#modo-libreria)
 
-Compilar como una librería. `entry` es obligatorio ya que la librería no puede usar HTML como punto de entrada. `name` es la variable global expuesta y es obligatoria cuando `formats` incluye `'umd'` o `'iife'`. Los valores predeterminados de `formats` son `['es', 'umd']`, o `['es', 'cjs']`, si se usan múltiples entradas.
+Compilar como una librería. `entry` por defecto utiliza la opción de nivel superior [`input`](/config/shared-options#input), y uno de ellos es obligatorio ya que la librería no puede usar HTML como punto de entrada. `name` es la variable global expuesta y es obligatoria cuando `formats` incluye `'umd'` o `'iife'`. Los valores predeterminados de `formats` son `['es', 'umd']`, o `['es', 'cjs']`, si se usan múltiples entradas.
 
 `fileName` es el nombre del archivo de salida del paquete, que por defecto es el `"name"` en `package.json`. También puede definirse como una función que toma `format` y `entryName` como argumentos y devuelve el nombre del archivo.
 Si tu paquete importa CSS, se puede usar `cssFileName` para especificar el nombre del archivo CSS de salida. Por defecto, toma el mismo valor que `fileName` si se establece como una cadena, de lo contrario también recae en el `"name"` en `package.json`.
@@ -276,7 +278,7 @@ Cuando el valor es una cadena, se usará como la ruta del archivo de manifiesto 
 - **Por defecto:** `false`
 - **Relacionado:** [Server-Side Rendering](/guide/ssr)
 
-Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de `rolldownOptions.input`.
+Produce la compilación orientada a SSR. El valor puede ser una cadena para especificar directamente la entrada SSR, o `true`, que requiere especificar la entrada SSR a través de [`input`](/config/shared-options#input) o `build.rolldownOptions.input`.
 
 ## build.emitAssets
 
