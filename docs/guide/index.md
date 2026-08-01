@@ -106,7 +106,7 @@ $ deno init --npm vite my-vue-app --template vue
 
 :::
 
-Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
+Consulta [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite) para más detalles sobre cada plantilla admitida: `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-compiler`, `react-ts`, `react-compiler-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 Puedes usar `.` como nombre del proyecto para generar la estructura en el directorio actual.
 
@@ -224,7 +224,7 @@ En un proyecto donde está instalado Vite, puedes usar el binario `vite` en tus 
 
 Puedes especificar opciones CLI adicionales como `--port` o `--open`. Para obtener una lista completa de las opciones de la CLI, ejecuta `npx vite --help` en tu proyecto.
 
-Aprende más sobre la [interfaz de línea de comnando](./cli.md)
+Aprende más sobre la [interfaz de línea de comandos](./cli.md).
 
 ## Uso de confirmaciones no publicadas
 

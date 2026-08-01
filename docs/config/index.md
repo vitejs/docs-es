@@ -128,9 +128,17 @@ export default defineConfig(({ mode }) => {
 })
 ```
 
-## Depuración del Archivo de Configuración en VS Code
+## Depuración del archivo de configuración en VS Code
 
-Con el comportamiento por defecto `--configLoader bundle`, Vite escribe el archivo de configuración temporal generado en la carpeta `node_modules/.vite-temp`, y se producirá un error de archivo no encontrado al establecer un punto de interrupción para depurar el archivo de configuración de Vite. Para solucionar este problema, agrega la siguiente configuración en `.vscode/settings.json`:
+Para obtener la experiencia de depuración más confiable, usa el cargador de configuración nativo cuando inicies Vite:
+
+```bash
+vite --configLoader native
+```
+
+El cargador nativo ejecuta directamente el archivo de configuración original, por lo que los puntos de interrupción en el archivo de configuración y en los hooks de los plugins como `transform` se asignan al código fuente original. Requiere un entorno de ejecución que admita la sintaxis utilizada por tu archivo de configuración, como Node.js 22.18+ para archivos TypeScript.
+
+Al usar `--configLoader bundle` (el valor predeterminado actual, aunque se planea que `native` sea el predeterminado en una versión principal futura), Vite genera un mapa de fuentes (source map) en línea y escribe la configuración empaquetada en `node_modules/.vite-temp` antes de cargarla. Si necesitas usar el cargador bundle, agrega el directorio temporal para la terminal de depuración de JavaScript en `.vscode/settings.json`:
 
 ```json
 {
@@ -141,5 +149,29 @@ Con el comportamiento por defecto `--configLoader bundle`, Vite escribe el archi
       "**/node_modules/.vite-temp/**"
     ]
   }
+}
+```
+
+Esta configuración solo se aplica a la Terminal de depuración de JavaScript; no afecta a las configuraciones de inicio iniciadas desde la vista Ejecutar y depurar. Para admitir esto en la vista Ejecutar y depurar, agrega el directorio temporal en `.vscode/launch.json`:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vite",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["exec", "vite", "--configLoader", "bundle"],
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+        "**/node_modules/.vite-temp/**"
+      ]
+    }
+  ]
 }
 ```

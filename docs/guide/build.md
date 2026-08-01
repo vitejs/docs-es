@@ -116,7 +116,7 @@ Durante el desarrollo, simplemente navega o enlaza a `/nested/` - funcionará co
 Durante la compilación, todo lo que necesitas hacer es especificar varios archivos `.html` como puntos de entrada:
 
 ```js twoslash [vite.config.js]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
