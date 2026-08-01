@@ -724,7 +724,7 @@ init({
 })
 ```
 
-En la compilación de producción, los archivos `.wasm` más pequeños que `assetInlineLimit` se insertarán como cadenas base64. De lo contrario, se tratarán como un [recurso estático](./assets) y se obtendrán a pedido.
+En la compilación de producción, los archivos `.wasm` más pequeños que `assetsInlineLimit` se insertarán como cadenas base64. De lo contrario, se tratarán como un [recurso estático](./assets) y se obtendrán a pedido.
 
 ::: warning Para la compilación de SSR, solo se admiten entornos de ejecución compatibles con Node.js
 

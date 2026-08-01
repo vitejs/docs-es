@@ -4,7 +4,7 @@
 Danos tu opinión en la [discusión de feedback sobre la API de Entorno](https://github.com/vitejs/vite/discussions/16358).
 :::
 
-Estamos planeando colocar en desuso el hook de plugin `handleHotUpdate` a favor del [hook `hotUpdate`](/guide/api-environment#the-hotupdate-hook) para que sea compatible con la [API de Entorno](/guide/api-environment.md) y maneje eventos adicionales de observación con `create` y `delete`.
+Estamos planeando colocar en desuso el hook de plugin `handleHotUpdate` a favor del [hook `hotUpdate`](/guide/api-environment-plugins#the-hotupdate-hook) para que sea compatible con la [API de Entorno](/guide/api-environment.md) y maneje eventos adicionales de observación con `create` y `delete`.
 
 Ámbito afectado: **`Autores de Plugins para Vite`**
 
