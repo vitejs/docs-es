@@ -8,7 +8,7 @@ A menos que se indique lo contrario, las opciones en esta sección solo se aplic
 - **Por defecto:** `'baseline-widely-available'`
 - **Relacionado:** [Compatibilidad de navegadores](/guide/build#compatibilidad-de-navegadores)
 
-El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/web-features/) Widely Available el 2026-01-01. En particular, es `['chrome111', 'edge111', 'firefox114', 'safari16.4', 'ios16.4']`.
+El objetivo de compatibilidad del navegador para el paquete final. El valor predeterminado es un valor especial de Vite, `'baseline-widely-available'`, que apunta a los navegadores que se encuentran en la [Línea de base](https://web-platform-dx.github.io/baseline/) Widely Available el 2026-01-01. En particular, es `['chrome111', 'edge111', 'firefox114', 'safari16.4', 'ios16.4']`.
 
 Otro valor especial es `'esnext'`, que asume soporte nativo para importaciones dinámicas y solo realiza una transpilación mínima.
 
@@ -122,6 +122,8 @@ Si especificas `build.lib`, `build.cssCodeSplit` será `false` por defecto.
 - **Por defecto:** Igual que [`build.target`](#build-target)
 
 Esta opción permite a los usuarios configurar un destino de navegador diferente para la minificación de CSS del que se usa normalmente para la transpilación de JavaScript.
+
+Cuando `build.cssMinify` es `'lightningcss'` (el valor por defecto), esta opción tiene prioridad sobre [`css.lightningcss.targets`](./shared-options.md#css-lightningcss) para el paso de minificación.
 
 Solo debe usarse cuando se dirige a un navegador no convencional.
 Un ejemplo es WeChat WebView de Android, que es compatible con la mayoría de las funciones modernas de JavaScript, pero no con la [notación de color hexadecimal `#RGBA` en CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#colores_rgb).

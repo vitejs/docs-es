@@ -8,6 +8,7 @@
   2. Las ofertas de nivel gratuito deben alojar el sitio indefinidamente y no estar limitadas en el tiempo.
      Ofrecer un número limitado de recursos computacionales o cuentas de sitios a cambio está bien.
   3. Las guías enlazadas no deben contener contenido malicioso o engañoso.
+  4. La plataforma debe haber estado en funcionamiento durante al menos 1 año. Muestra alguna prueba de esto en la descripción de tu PR.
 
   Las nuevas secciones deben agregarse al final de este archivo. Por favor, consulta las secciones existentes
   al final de este archivo como ejemplos de cómo formatear la nueva sección.
@@ -295,10 +296,6 @@ También puedes agregar un [dominio personalizado](https://render.com/docs/custo
 ## Flightcontrol
 
 Despliega tu sitio estático usando [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite), siguiendo estas [instrucciones](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
-
-## Alojamiento de sitios estáticos en Kinsta
-
-Puedes desplegar tu aplicación Vite como un sitio estático en [Kinsta](https://kinsta.com/static-site-hosting/) siguiendo estas [instrucciones](https://kinsta.com/docs/static-site-hosting/static-site-quick-start/react-static-site-examples/#react-with-vite).
 
 ## Alojamiento de sitio estático en xmit
 

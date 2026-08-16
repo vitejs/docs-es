@@ -74,9 +74,7 @@ Los usuarios ahora pueden [proporcionar un callback](/config/build-options.html#
 
 ### Mejora del HMR para importaciones circulares
 
-En Vite 5.0, los módulos aceptados dentro de las importaciones circulares siempre desencadenaban una recarga completa de la página incluso si podían manejarse bien en el cliente. Esto ahora se hace flexible para permitir que el HMR se aplique sin una recarga completa de la página, pero si ocurre algún error durante el HMR, se recargará la página. Ver ([#15118](https://github.com/vitejs
-
-/vite/issues/15118)).
+En Vite 5.0, si el gráfico contenía una importación circular donde todos los exportadores del ciclo eran módulos de límite no aceptables (lo que significa que no podían manejar la actualización por sí mismos), HMR provocaba una recarga completa. Vite 5.1 mejora esto al analizar los gráficos de importación circular y romper el ciclo si todos los módulos del ciclo son módulos ES y ninguno de ellos exporta una vinculación que sea importada por otro módulo en el ciclo.
 
 ### Soporte `ssr.external: true` para externalizar todos los paquetes SSR
 
