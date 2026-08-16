@@ -11,7 +11,7 @@ El valor de los navegadores predeterminados de `build.target` y `'baseline-widel
 - Firefox 104 → 114
 - Safari 16.0 → 16.4
 
-Estas versiones de navegador se alinean con los conjuntos de características [Baseline Widely Available](https://web-platform-dx.github.io/web-features/) a partir de 2026-01-01. En otras palabras, fueron lanzadas hace aproximadamente dos años y medio.
+Estas versiones de navegador se alinean con los conjuntos de características [Baseline Widely Available](https://web-platform-dx.github.io/baseline/) a partir de 2026-01-01. En otras palabras, fueron lanzadas hace aproximadamente dos años y medio.
 
 ## Rolldown
 
@@ -181,6 +181,7 @@ $ deno add -D npm:@rollup/plugin-swc npm:@swc/core
 
 ```js
 import { defineConfig, withFilter } from 'vite'
+import swc from '@rollup/plugin-swc'
 
 export default defineConfig({
   // ...

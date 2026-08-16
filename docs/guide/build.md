@@ -6,7 +6,7 @@ Cuando sea el momento de implementar tu aplicación en producción, simplemente 
 
 ## Compatibilidad de navegadores
 
-Por defecto, el paquete de producción asume un navegador moderno que se incluye en los [Baseline](https://web-platform-dx.github.io/web-features/) objetivos de disponibilidad amplia. El rango de soporte de navegadores predeterminado es:
+Por defecto, para las compilaciones de producción, Vite apunta a versiones de navegadores ampliamente disponibles en la [Línea de base (Baseline)](https://web-platform-dx.github.io/baseline/) a partir de una fecha fija para cada versión principal. Para esta versión principal, esto corresponde a [versiones de navegadores lanzadas a mediados de 2023](https://web-platform-dx.github.io/supported-browsers/?widelyAvailableOnDate=2026-01-01) (`['chrome111', 'edge111', 'firefox114', 'safari16.4', 'ios16.4']`). El rango de soporte predeterminado es:
 
 <!-- Busca la constante `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` para más información -->
 
