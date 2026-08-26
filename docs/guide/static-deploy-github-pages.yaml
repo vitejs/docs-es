@@ -1,7 +1,7 @@
 # Importado en static-deploy.md
 # Este archivo se extrae como un archivo separado para que Renovate pueda actualizar las versiones de las acciones
 #
-#region contenido
+#region content
 # Flujo de trabajo simple para desplegar contenido estático en GitHub Pages
 name: Desplegar contenido estático en Pages
 
@@ -53,4 +53,4 @@ jobs:
       - name: Desplegar a GitHub Pages
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
-#endregion contenido
+#endregion content

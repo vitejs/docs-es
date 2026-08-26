@@ -22,12 +22,13 @@ vite [root]
 | `--cors`                  | Habilitar CORS (`boolean`)                                                                                                                                                                                    |
 | `--strictPort`            | Salir si el puerto especificado ya está en uso (`boolean`)                                                                                                                                                    |
 | `--force`                 | Obligar al optimizador a ignorar la caché y volver a empaquetar (`boolean`)                                                                                                                                   |
+| `--experimentalBundle`    | Usar el modo experimental de empaquetado completo (altamente experimental) (`boolean`)                                                                                                                        |
 | `-c, --config <file>`     | Usar el archivo de configuración especificado (`string`)                                                                                                                                                      |
 | `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                                                                                                            |
-| `-l, --logLevel <level>`  | `info` \| `warn` \| `error` \| `silent` (`string`)                                                                                                                                                            |
+| `-l, --logLevel <level>`  | info \| warn \| error \| silent (`string`)                                                                                                                                                                    |
 | `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla en los registros (`boolean`)                                                                                                                                    |
 | `--configLoader <loader>` | Usar `bundle` para empaquetar la configuración con Rolldown, `runner` (experimental) para procesarla sobre la marcha, o `native` (experimental) para cargarla con el runtime nativo (predeterminado: `bundle`) |
-| `--profile`               | Iniciar el inspector de Node.js integrado (ver [Cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks))                                                                           |
+| `--profile [name]`        | Iniciar el inspector de Node.js integrado y escribir el perfil en `<name>.cpuprofile` (ver [Cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks)) (`boolean \| string`)       |
 | `-d, --debug [feat]`      | Mostrar registros de depuración (`string \| boolean`)                                                                                                                                                         |
 | `-f, --filter <filter>`   | Filtrar registros de depuración (`string`)                                                                                                                                                                    |
 | `-m, --mode <mode>`       | Establecer el modo de entorno (`string`)                                                                                                                                                                      |
@@ -63,10 +64,10 @@ vite build [root]
 | `-w, --watch`                  | Reconstrucción automática al detectar cambios en los archivos (`boolean`)                                                             |
 | `-c, --config <file>`          | Usar el archivo de configuración especificado (`string`)                                                                              |
 | `--base <path>`                | Ruta base pública (predeterminado: `/`) (`string`)                                                                                    |
-| `-l, --logLevel <level>`       | Nivel de log: info \| warn \| error \| silent (`string`)                                                                              |
+| `-l, --logLevel <level>`       | info \| warn \| error \| silent (`string`)                                                                                            |
 | `--clearScreen`                | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                                           |
 | `--configLoader <loader>`      | Usar `bundle` para compilar la configuración con Rolldown, o `runner` (experimental) para procesarla en tiempo real, o `native` (experimental) para cargarla con el runtime nativo (predeterminado: `bundle`) |
-| `--profile`                    | Iniciar el inspector de Node.js incorporado (ver [cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks)) |
+| `--profile [name]`             | Iniciar el inspector de Node.js incorporado y escribir el perfil en `<name>.cpuprofile` (ver [cuellos de botella de rendimiento](/guide/troubleshooting#performance-bottlenecks)) (`boolean \| string`) |
 | `-d, --debug [feat]`           | Mostrar logs de depuración (`string \| boolean`)                                                                                      |
 | `-f, --filter <filter>`        | Filtrar logs de depuración (`string`)                                                                                                 |
 | `-m, --mode <mode>`            | Definir el modo de entorno (`string`)                                                                                                 |
@@ -94,7 +95,7 @@ vite optimize [root]
 | `--force`                 | Forzar al optimizador a ignorar la caché y volver a compilar (`boolean`)                                            |
 | `-c, --config <file>`     | Usar el archivo de configuración especificado (`string`)                                                            |
 | `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                  |
-| `-l, --logLevel <level>`  | Nivel de log: info \| warn \| error \| silent (`string`)                                                            |
+| `-l, --logLevel <level>`  | info \| warn \| error \| silent (`string`)                                                                          |
 | `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                         |
 | `--configLoader <loader>` | Usar `bundle` para compilar la configuración con Rolldown, o `runner` (experimental) para procesarla en tiempo real, o `native` (experimental) para cargarla con el runtime nativo (por defecto: `bundle`) |
 | `-d, --debug [feat]`      | Mostrar logs de depuración (`string \| boolean`)                                                                    |
@@ -125,7 +126,7 @@ vite preview [root]
 | `--outDir <dir>`          | Directorio de salida (predeterminado: `dist`) (`string`)                                                            |
 | `-c, --config <file>`     | Usar el archivo de configuración especificado (`string`)                                                            |
 | `--base <path>`           | Ruta base pública (predeterminado: `/`) (`string`)                                                                  |
-| `-l, --logLevel <level>`  | Nivel de log: info \| warn \| error \| silent (`string`)                                                            |
+| `-l, --logLevel <level>`  | info \| warn \| error \| silent (`string`)                                                                          |
 | `--clearScreen`           | Permitir/deshabilitar la limpieza de pantalla al registrar logs (`boolean`)                                         |
 | `--configLoader <loader>` | Usar `bundle` para compilar la configuración con Rolldown, o `runner` (experimental) para procesarla en tiempo real, o `native` (experimental) para cargarla con el runtime nativo (por defecto: `bundle`) |
 | `-d, --debug [feat]`      | Mostrar logs de depuración (`string \| boolean`)                                                                    |
