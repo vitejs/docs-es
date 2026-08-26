@@ -78,7 +78,7 @@ window.addEventListener('vite:preloadError', (event) => {
 })
 ```
 
-Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los recursos de despliegues anteriores. Como resultado, un usuario que visitó tu sitio antes del nuevo despliegue podría encontrarse con un error de importación. Este error ocurre porque los recursos que se ejecutan en el dispositivo de ese usuario están desactualizados e intenta importar el fragmento antiguo correspondiente, que se ha eliminado. Este evento es útil para abordar esta situación.
+Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los recursos de despliegues anteriores. Como resultado, un usuario que visitó tu sitio antes del nuevo despliegue podría encontrarse con un error de importación. Este error ocurre porque los recursos que se ejecutan en el dispositivo de ese usuario están desactualizados y el código intenta importar el fragmento antiguo correspondiente, que se ha eliminado. Este evento es útil para abordar esta situación. En este caso, asegúrate de configurar `Cache-Control: no-cache` en el archivo HTML; de lo contrario, se seguirán referenciando los recursos antiguos.
 
 ## Recompilar en Cambios de Archivos
 

@@ -336,6 +336,58 @@ Los plugins de Vite también pueden proporcionar hooks que sirven para propósit
   })
   ```
 
+### `closeServer`
+
+- **Tipo:** `(context: { reason: 'restart' | 'close' }) => void | Promise<void>`
+- **Clase:** `async`, `parallel`
+- **Ámbito:** [Global](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
+
+  Se llama cuando el servidor de desarrollo se reinicia o se cierra, después de que el servidor ha sido desmontado. Normalmente se usa para liberar recursos creados en [`configureServer`](/guide/api-plugin.html#configureserver).
+
+  `context.reason` distingue los dos casos:
+  - `'restart'`: el servidor se está reiniciando (por ejemplo, un cambio en el archivo de configuración o una llamada a `server.restart()`).
+  - `'close'`: el servidor se está cerrando (por ejemplo, el atajo `q` o una llamada a `server.close()`).
+
+  ```js
+  const myPlugin = () => {
+    let resource
+    return {
+      name: 'close-server',
+      configureServer(server) {
+        resource = createResource()
+      },
+      async closeServer({ reason }) {
+        if (reason === 'close') {
+          await resource.dispose()
+        }
+      },
+    }
+  }
+  ```
+
+### `closePreviewServer`
+
+- **Tipo:** `() => void | Promise<void>`
+- **Clase:** `async`, `parallel`
+- **Ámbito:** [Global](/guide/api-environment-plugins#hooks-por-entorno-y-hooks-globales)
+
+  Igual que [`closeServer`](/guide/api-plugin.html#closeserver), pero para el servidor de vista previa. El servidor de vista previa nunca se reinicia, por lo que no se proporciona `reason`.
+
+  ```js
+  const myPlugin = () => {
+    let resource
+    return {
+      name: 'close-preview-server',
+      configurePreviewServer(server) {
+        resource = createResource()
+      },
+      async closePreviewServer() {
+        await resource.dispose()
+      },
+    }
+  }
+  ```
+
 ### `transformIndexHtml`
 
 - **Tipo:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
@@ -608,6 +660,33 @@ export default defineConfig({
 ```
 
 Consulta [Vite Rollup Plugins](https://vite-rollup-plugins.patak.dev) para obtener una lista de plugins oficiales de rollup compatibles con instrucciones de uso.
+
+## Referencia a Recursos Emitidos
+
+Para emitir un recurso desde un plugin, llama a [`this.emitFile({ type: 'asset', ... })`](https://rolldown.rs/reference/Interface.PluginContext#in-depth-type-asset). Devuelve un `referenceId` que puedes usar para generar la URL del recurso, ya que su nombre de archivo final no se conoce hasta que se genera el bundle.
+
+### En JavaScript
+
+Usa `import.meta.ROLLDOWN_FILE_URL_<referenceId>`:
+
+```js
+const referenceId = this.emitFile({
+  type: 'asset',
+  name: 'icon.png',
+  source: fileContent,
+})
+
+// es una expresión JavaScript, así que añade cualquier query o hash con concatenación de cadenas
+return `export default import.meta.ROLLDOWN_FILE_URL_${referenceId} + '#frag'`
+```
+
+### En CSS o HTML
+
+`import.meta.ROLLDOWN_FILE_URL_<referenceId>` solo funciona en posiciones de expresiones JavaScript. En CSS o HTML, usa el token `__VITE_ASSET__<referenceId>__` en su lugar, añadiendo cualquier query o hash justo después:
+
+```css
+background: url(__VITE_ASSET__<referenceId>__#frag);
+```
 
 ## Normalización de Rutas
 

@@ -660,7 +660,7 @@ Ten en cuenta que las variables solo representan nombres de archivo de un nivel 
 
 También ten en cuenta que la importación dinámica debe cumplir con las siguientes reglas para ser incluida en el bundle:
 
-- Las importaciones deben comenzar con `./` o `../`: ``import(`./dir/${foo}.js`)`` es válido, pero ``import(`${foo}.js`)`` no lo es.
+- Las importaciones deben comenzar con `./`, `../` o `#`: ``import(`./dir/${foo}.js`)`` es válido, pero ``import(`${foo}.js`)`` no lo es.
 - Las importaciones deben terminar con una extensión de archivo: ``import(`./dir/${foo}.js`)`` es válido, pero ``import(`./dir/${foo}`)`` no lo es.
 - Las importaciones al propio directorio deben especificar un patrón de nombre de archivo: ``import(`./prefix-${foo}.js`)`` es válido, pero ``import(`./${foo}.js`)`` no lo es.
 

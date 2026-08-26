@@ -8,7 +8,6 @@ import {
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
 import { graphvizMarkdownPlugin } from 'vitepress-plugin-graphviz'
-import { markdownItImageSize } from 'markdown-it-image-size'
 import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
 import type { FooterLink } from '@voidzero-dev/vitepress-theme'
 import { buildEnd } from './buildEnd.config.ts'
@@ -112,10 +111,8 @@ const config = defineConfig({
     en: { label: 'English', link: 'https://vite.dev' },
     zh: { label: '简体中文', link: 'https://cn.vite.dev' },
     ja: { label: '日本語', link: 'https://ja.vite.dev' },
-    pt: { label: 'Português', link: 'https://pt.vite.dev' },
     ko: { label: '한국어', link: 'https://ko.vite.dev' },
     de: { label: 'Deutsch', link: 'https://de.vite.dev' },
-    fa: { label: 'فارsi', link: 'https://fa.vite.dev' },
   },
 
   themeConfig: {
@@ -600,9 +597,6 @@ const config = defineConfig({
         titleBar: {
           includeSnippet: true,
         },
-      })
-      md.use(markdownItImageSize, {
-        publicDir: path.resolve(import.meta.dirname, '../public'),
       })
       await graphvizMarkdownPlugin(md)
     },

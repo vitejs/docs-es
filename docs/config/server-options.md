@@ -159,6 +159,12 @@ Puedes configurar la variable de entorno `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS
   })
   ```
 
+::: warning Comprobación de origen para WebSockets
+
+Vite no comprueba el origen de las solicitudes WebSocket antes de aplicar el proxy. Se espera que el destino del proxy compruebe el encabezado `Origin` u otras comprobaciones. Ten en cuenta que la opción `rewriteWsOrigin` reescribirá el origen con el origen de destino y provocará que se eluda la comprobación de origen.
+
+:::
+
 ## server.cors
 
 - **Tipo:** `boolean | CorsOptions`
@@ -302,6 +308,8 @@ export defineConfig default ({
 - **Tipo:** `object | null`
 
 Opciones del observador del sistema de archivos que se pasan a [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
+
+Cuando el modo bundled-dev está habilitado, también se aceptan [opciones de observación de Rolldown](https://rolldown.rs/reference/InputOptions.watch) (por ejemplo, `usePolling`, `pollInterval`, `useDebounce`, `debounceDuration`, `include`, `exclude`). Las opciones exclusivas de chokidar aún son utilizadas por el observador de chokidar, que continúa observando archivos fuera del gráfico de módulos, como dependencias del archivo de configuración y archivos de entorno.
 
 El observador del servidor Vite observa el `root` y omite los directorios `.git/`, `node_modules/`, `test-results/`, y las carpetas de Vite `cacheDir` y `build.outDir` de forma predeterminada. Al actualizar un archivo observado, Vite aplicará HMR y actualizará la página solo si es necesario.
 
