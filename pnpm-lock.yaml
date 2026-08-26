@@ -104,7 +104,7 @@ importers:
         version: 3.5.41(typescript@6.0.3)
       vue-tsc:
         specifier: ^3.3.10
-        version: 3.3.10(typescript@6.0.3)
+        version: 3.3.11(typescript@6.0.3)
 
 packages:
 
@@ -1007,8 +1007,8 @@ packages:
   '@vue/language-core@3.3.10':
     resolution: {integrity: sha512-CR7ByBbgPHqhxrioKPOcZBqttaozzLNwtkCzXQ+uF8gLPHnUe03srPnGpdtHD3zp+bq5iyVkZ1WNx7W564RPwg==}
 
-  '@vue/language-core@3.3.8':
-    resolution: {integrity: sha512-ieGT8jJdhhy0mGzStZhsg/qPw5bQZJg5yF+3+XU6saf4sM7yo9ZXy3h+nCwrm2+b4qS/SypkNdR2jAF3uei9tA==}
+  '@vue/language-core@3.3.11':
+    resolution: {integrity: sha512-QJmpliwAVpC/OxubIByPAhNzsQPRc8/gxlN2qnVzVfIMjMDz/9RnXRFoetjz5yEgXVXyp4LqhXq3V53PjmNzFw==}
 
   '@vue/reactivity@3.5.41':
     resolution: {integrity: sha512-rznsqKM0np0x18EjzF8x88MpEhdNsffbvFbckLL5+oUKz1BxAImEmO7J1ArRYSyo6aQaVoBDp7jEkT91OOxydA==}
@@ -2286,8 +2286,8 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
-  vue-tsc@3.3.10:
-    resolution: {integrity: sha512-YaDVxcW+CGtaOt3pZahMG5jYPx0hsUTxyEoPOTSMebcGUXP9lIBabQ14vfKMORb2CqqK5CxsNo/d1d+4IQwiKg==}
+  vue-tsc@3.3.11:
+    resolution: {integrity: sha512-gOb0B9rtU2+f1dszwPqSH5kAieIF9ReeLhD3kSRNHv5WZZUQz/JdVXW0RTdqhNTMlQkqKzrTTviqKr/4FYZraQ==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.0.0'
@@ -3169,7 +3169,7 @@ snapshots:
       path-browserify: 1.0.1
       picomatch: 4.0.5
 
-  '@vue/language-core@3.3.8':
+  '@vue/language-core@3.3.11':
     dependencies:
       '@volar/language-core': 2.4.28
       '@vue/compiler-dom': 3.5.41
@@ -4299,7 +4299,7 @@ snapshots:
 
   twoslash-vue@0.3.9(typescript@6.0.3):
     dependencies:
-      '@vue/language-core': 3.3.8
+      '@vue/language-core': 3.3.10
       twoslash: 0.3.9(typescript@6.0.3)
       twoslash-protocol: 0.3.9
       typescript: 6.0.3
@@ -4500,10 +4500,10 @@ snapshots:
     dependencies:
       vue: 3.5.41(typescript@6.0.3)
 
-  vue-tsc@3.3.10(typescript@6.0.3):
+  vue-tsc@3.3.11(typescript@6.0.3):
     dependencies:
       '@volar/typescript': 2.4.28(typescript@6.0.3)
-      '@vue/language-core': 3.3.10
+      '@vue/language-core': 3.3.11
       typescript: 6.0.3
 
   vue@3.5.41(typescript@6.0.3):
