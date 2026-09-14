@@ -102,6 +102,52 @@ createServer()
 
 Aquí `vite` es una instancia de [ViteDevServer](./api-javascript#vitedevserver). `vite.middlewares` es una instancia de [Connect](https://github.com/senchalabs/connect) que se puede usar como middleware en cualquier marco Node.js compatible con connect.
 
+::: tip Actualizaciones de módulos exclusivos de SSR
+Por defecto, actualizar un módulo que solo es importado por el entorno SSR no recarga la página en el navegador. Las integraciones de frameworks normalmente manejan esto por ti. Para una configuración de SSR personalizada de bajo nivel, puedes añadir un plugin que recargue el navegador cuando cambie un módulo exclusivo de SSR:
+
+```ts twoslash
+import type { EnvironmentModuleNode, Plugin } from 'vite'
+
+export function ssrReload(): Plugin {
+  return {
+    name: 'ssr-reload',
+    enforce: 'post',
+    hotUpdate: {
+      order: 'post',
+      handler({ modules, server, timestamp }) {
+        if (this.environment.name !== 'ssr') return
+
+        const invalidatedModules = new Set<EnvironmentModuleNode>()
+        let hasSsrOnlyModules = false
+
+        for (const mod of modules) {
+          if (mod.file == null) continue
+          const clientModules =
+            server.environments.client.moduleGraph.getModulesByFile(mod.file)
+          if (clientModules != null) continue
+
+          this.environment.moduleGraph.invalidateModule(
+            mod,
+            invalidatedModules,
+            timestamp,
+            true,
+          )
+          hasSsrOnlyModules = true
+        }
+
+        if (hasSsrOnlyModules) {
+          server.environments.client.hot.send({ type: 'full-reload' })
+          return []
+        }
+      },
+    },
+  }
+}
+```
+
+Añade `ssrReload()` al arreglo `plugins` pasado a `createViteServer` en el ejemplo anterior. Consulta el [hook `hotUpdate`](./api-environment-plugins#the-hotupdate-hook) para más detalles.
+:::
+
 El siguiente paso es implementar el controlador `*` para servir el HTML generado por el servidor:
 
 ```js twoslash [server.js]

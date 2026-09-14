@@ -236,6 +236,8 @@ export default defineConfig({
 })
 ```
 
+Ten en cuenta que el plugin devuelto por `applyToEnvironment` o `perEnvironmentPlugin` no debe utilizar hooks específicos de Vite.
+
 El hook `applyToEnvironment` se llama en el momento de la configuración, actualmente después de `configResolved` debido a que proyectos del ecosistema modifican los plugins en él. La resolución de plugins de entorno puede ser movida antes de `configResolved` en el futuro.
 
 ## Comunicación Aplicación-Plugin

@@ -127,7 +127,7 @@ Cuando `build.cssMinify` es `'lightningcss'` (el valor por defecto), esta opció
 
 Solo debe usarse cuando se dirige a un navegador no convencional.
 Un ejemplo es WeChat WebView de Android, que es compatible con la mayoría de las funciones modernas de JavaScript, pero no con la [notación de color hexadecimal `#RGBA` en CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#colores_rgb).
-En este caso, debes configurar `build.cssTarget` en `chrome61` para evitar que vite transforme los colores `rgba()` en notaciones hexadecimales `#RGBA`.
+En este caso, debes configurar `build.cssTarget` en `chrome61` para evitar que Vite transforme los colores `rgba()` en notaciones hexadecimales `#RGBA`.
 
 ## build.cssMinify
 
