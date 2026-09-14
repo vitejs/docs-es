@@ -30,7 +30,7 @@ Por defecto, Vite utiliza [Rolldown](https://rolldown.rs/) para empaquetar la co
 
 ## Configuración de Intellisense
 
-Dado que Vite se distribuye con tipados de TypeScript, puedes aprovechar el intellisense de tu IDE con sugerencias de tipo jsdoc:
+Dado que Vite se distribuye con tipados de TypeScript, puedes aprovechar el intellisense de tu IDE con sugerencias de tipo JSDoc:
 
 ```js
 /** @type {import('vite').UserConfig} */
@@ -39,7 +39,7 @@ export default {
 }
 ```
 
-Alternativamente, puedes usar el helper `defineConfig` que debería proporcionar intellisense sin necesidad de anotaciones jsdoc:
+Alternativamente, puedes usar el helper `defineConfig` que debería proporcionar intellisense sin necesidad de anotaciones JSDoc:
 
 ```js
 import { defineConfig } from 'vite'

@@ -616,9 +616,37 @@ Obtén más información en la [guía SSR](/guide/ssr#vite-cli) de Vite. Relacio
 - **Tipo:** `boolean` | `DevToolsConfig`
 - **Predeterminado:** `false`
 
-Habilita la integración de herramientas de desarrollo (devtools) para visualizar el estado interno y el análisis de la compilación. Asegúrate de que `@vitejs/devtools` esté instalado como una dependencia. Esta característica actualmente solo se admite en modo de compilación (build mode).
+Habilita la integración de devtools para inspeccionar el servidor de desarrollo y analizar compilaciones. Asegúrate de que `@vitejs/devtools` esté instalado como una dependencia. Instala `@vitejs/devtools-vite` para inspeccionar el servidor de desarrollo de Vite y `@vitejs/devtools-rolldown` para habilitar el análisis de compilación. Por defecto, DevTools se ejecuta tanto para `serve` como para `build`; usa `apply` para limitarlo a cualquiera de los comandos.
+
+Los hooks `config` de los plugins no pueden cambiar la opción `devtools`. Configúrala en la configuración del usuario en su lugar.
+
+Cuando está instalado, `@vitejs/devtools` proporciona las definiciones de tipos para esta opción:
+
+```ts
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  devtools: {
+    apply: 'serve',
+  },
+})
+```
 
 Consulta [Vite DevTools](https://github.com/vitejs/devtools) para más detalles.
+
+## tsconfig
+
+- **Tipo:** `string`
+
+Ruta al archivo de configuración de TypeScript utilizado por Vite. Las rutas relativas se resuelven desde la raíz del proyecto ([`root`](#root)).
+
+Cuando esta opción no está establecida, Vite descubre el `tsconfig.json` coincidente más cercano para cada archivo. Consulta [Opciones del compilador de TypeScript](/guide/features#typescript-compiler-options) para más detalles.
+
+::: warning Preferir el descubrimiento automático
+Se desaconseja configurar esta opción porque anula el descubrimiento de tsconfig por archivo de Vite, el cual está alineado con el servidor de lenguaje de TypeScript. Es preferible colocar un `tsconfig.json` cerca de los archivos que configura y usar [`references`](https://www.typescriptlang.org/tsconfig/#references) de TypeScript para configuraciones multiproyecto.
+
+Si el objetivo es reasignar importaciones, es preferible usar [`resolve.alias`](#resolve-alias) o los campos `imports` y `exports` en `package.json` en lugar de seleccionar un tsconfig únicamente por [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig/#paths). Usa esta opción únicamente cuando el descubrimiento automático no pueda identificar la configuración prevista.
+:::
 
 ## future
 
