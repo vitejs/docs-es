@@ -166,6 +166,8 @@ Ten en cuenta que esta opción requiere [soporte para `import.meta.resolve`](htt
 
 Personaliza directamente el paquete Rolldown subyacente. Esto es lo mismo que las opciones que se pueden exportar desde un archivo de configuración de Rolldown y se fusionarán con las opciones de Rolldown internas de Vite. Consulta la [documentación de opciones de Rolldown](https://rolldown.rs/reference/) para obtener más detalles.
 
+Vite sobrescribe el valor predeterminado de Rolldown para `preserveEntrySignatures`. Cuando esta opción no está establecida, Vite usa `false` para compilaciones regulares de cliente, `'strict'` para compilaciones de librerías y `'allow-extension'` para compilaciones de SSR.
+
 En lugar de `build.rolldownOptions.input`, se recomienda configurar la opción de nivel superior [`input`](/config/shared-options#input), ya que también se utilizará en desarrollo. Si se establece `build.rolldownOptions.input`, anulará la opción `input` de nivel superior solo para la compilación.
 
 ## build.rollupOptions

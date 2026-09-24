@@ -461,21 +461,21 @@ El filtro de denegación se aplica contra el id del módulo y el id con los par�
 ## server.sourcemapIgnoreList
 
 - **Tipo:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
-- **Por defecto:** `(sourcePath) => sourcePath.includes('node_modules')`
+- **Por defecto:** `(sourcePath) => /(?:^|[\\/])node_modules(?:[\\/]|$)/.test(sourcePath)`
 
 Permite configurar si se ignoran o no los archivos de origen en el mapa de origen del servidor, que se usan para completar la [extensión del mapa de origen de `x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/).
 
 `server.sourcemapIgnoreList` es el equivalente de [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rolldown.rs/reference/OutputOptions.sourcemapIgnoreList) para el servidor de desarrollo. Una diferencia entre las dos opciones de configuración es que la función de Rolldown se invoca con una ruta relativa para `sourcePath` mientras que `server.sourcemapIgnoreList` lo hace con una ruta absoluta. Durante el desarrollo, la mayoría de los módulos tienen el mapa y la fuente en la misma carpeta, por lo que la ruta relativa para `sourcePath` es el nombre del archivo en sí. En estos casos, las rutas absolutas se hacen convenientes para su uso.
 
-Por defecto, se excluyen todas las rutas que contienen `node_modules`. Puedes pasar `false` para deshabilitar este comportamiento o, para un control total, una función que toma la ruta de origen y la ruta del mapa de origen y devuelve si se ignora la ruta de origen.
+Por defecto, excluye todas las rutas que contienen `node_modules` como un segmento de ruta. Puedes pasar `false` para deshabilitar este comportamiento o, para un control total, una función que toma la ruta de origen y la ruta del mapa de origen y devuelve si se ignora la ruta de origen.
 
 ```js twoslash
 export default defineConfig({
   server: {
-    // Este es el valor predeterminado y agregará todos los archivos
-    // con node_modules en sus rutas a la lista de ignorados.
+    // Este es el valor predeterminado y agregará todos los archivos que
+    // tengan node_modules como un segmento de ruta a la lista de ignorados.
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
-      return sourcePath.includes('node_modules')
+      return /(?:^|[\\/])node_modules(?:[\\/]|$)/.test(sourcePath)
     },
   },
 })
