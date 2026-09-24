@@ -42,7 +42,7 @@ Provee soporte para los navegadores obsoletos en el compilado para producción.
 
 Consulta el [Registro de Plugins de Vite](https://registry.vite.dev/plugins) para obtener la lista de los plugins publicados en npm.
 
-## Plugins de Rolldown
+## Plugins integrados de Rolldown
 
 Vite utiliza [Rolldown](https://rolldown.rs/) por debajo y proporciona algunos plugins integrados para casos de uso comunes.
 
