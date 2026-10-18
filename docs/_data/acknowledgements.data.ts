@@ -12,7 +12,7 @@ const notableDependencies = [
 
 // Herramientas de desarrollo utilizadas
 const devToolNames = [
-    'eslint',
+    'oxlint',
     'oxfmt',
     'typescript',
     'vitest',
@@ -180,7 +180,7 @@ function parseAuthor(author: PackageJson['author']): {
     // Analiza el formato de cadena: "Nombre <email> (url)" o "Nombre (url)" o "Nombre <email>" o "Nombre"
     let str = author
     let url: string | undefined
-    const urlMatch = str.match(/\(([^)]+)\)$/)
+    const urlMatch = /\(([^)]+)\)$/.exec(str)
     if (urlMatch) {
         url = urlMatch[1]
         str = str.slice(0, urlMatch.index).trim()

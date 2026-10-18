@@ -62,6 +62,7 @@ Los recursos pueden ser importados explícitamente con o sin inlining utilizando
 ```js twoslash
 import 'vite/client'
 // ---corte---
+// prettier-ignore
 import imgUrl1 from './img.svg?no-inline'
 import imgUrl2 from './img.png?inline'
 ```

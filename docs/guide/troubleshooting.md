@@ -133,6 +133,20 @@ Esto se debe a que [la función de redirección de puertos en VS Code no admite 
 
 Consulta el [#16522](https://github.com/vitejs/vite/issues/16522) para más detalles.
 
+### Error de operación no permitida al observar archivos
+
+Si el archivo o directorio se encuentra en un sistema de archivos que no admite eventos del sistema de archivos, es posible que Vite no pueda observarlo.
+
+Un ejemplo de error que puedes encontrar es:
+
+```
+Error: EISDIR: illegal operation on a directory, watch 'C:/Users/me/project/vite.config.js'
+```
+
+Por ejemplo, esto puede ocurrir con una carpeta compartida de VirtualBox.
+
+Para resolver esto, puedes habilitar [`server.watch.usePolling`](/config/server-options#server-watch). Ten en cuenta que [`usePolling` genera un alto consumo de CPU](https://github.com/paulmillr/chokidar/tree/3.6.0#performance).
+
 ## HMR
 
 ### Vite detecta un cambio de archivo pero el HMR no funciona
@@ -208,7 +222,9 @@ Para resolver esto, puedes:
 
 Este error puede ocurrir en entornos de red inestables. Por ejemplo, cuando la solicitud falla debido a errores de red o downtime del servidor.
 
-Ten en cuenta que no puedes reintentar la importación dinámica debido a limitaciones del navegador ([whatwg/html#6768](https://github.com/whatwg/html/issues/6768)).
+Los navegadores que admiten la [carga reintentable de módulos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility) no almacenan en caché los errores de red y HTTP en el mapa de módulos. En estos navegadores, tu aplicación o framework puede reintentar la importación dinámica original. Los navegadores más antiguos almacenan en caché el fallo, por lo que recargar la página sigue siendo la alternativa de respaldo.
+
+Reintentar tampoco soluciona el [despliegue de versiones](#despliegue-de-versiones) cuando un fragmento ha sido eliminado permanentemente por un despliegue.
 
 #### Extensiones del navegador bloqueando las solicitudes
 
