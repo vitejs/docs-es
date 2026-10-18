@@ -178,7 +178,7 @@ Si tu código puede ejecutarse en el mismo runtime que los módulos del usuario 
 // código que utiliza las APIs de Vite
 import { createServer } from 'vite'
 
-const server = createServer({
+const server = await createServer({
   plugins: [
     // un plugin que maneja `virtual:entrypoint`
     {
@@ -187,7 +187,7 @@ const server = createServer({
     },
   ],
 })
-const ssrEnvironment = server.environment.ssr
+const ssrEnvironment = server.environments.ssr
 const input = {}
 
 // usar las funciones expuestas por cada factoría de entorno que ejecuta el código
@@ -250,7 +250,7 @@ Si tu código requiere APIs de Node.js, puedes usar `hot.send` para comunicarte 
 // código que utiliza las APIs de Vite
 import { createServer } from 'vite'
 
-const server = createServer({
+const server = await createServer({
   plugins: [
     // un plugin que maneja `virtual:entrypoint`
     {
@@ -259,13 +259,13 @@ const server = createServer({
     },
   ],
 })
-const ssrEnvironment = server.environment.ssr
+const ssrEnvironment = server.environments.ssr
 const input = {}
 
 // usar las funciones expuestas por cada factoría de entorno que ejecuta el código
 // verificar para cada factoría de entorno lo que proporcionan
 if (ssrEnvironment instanceof RunnableDevEnvironment) {
-  ssrEnvironment.runner.import('virtual:entrypoint')
+  await ssrEnvironment.runner.import('virtual:entrypoint')
 } else if (ssrEnvironment instanceof CustomDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
@@ -275,9 +275,9 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
 const req = new Request('http://example.com/')
 
 const uniqueId = 'a-unique-id'
-ssrEnvironment.send('request', serialize({ req, uniqueId }))
+ssrEnvironment.hot.send('request', serialize({ req, uniqueId }))
 const response = await new Promise((resolve) => {
-  ssrEnvironment.on('response', (data) => {
+  ssrEnvironment.hot.on('response', (data) => {
     data = deserialize(data)
     if (data.uniqueId === uniqueId) {
       resolve(data.res)
@@ -295,8 +295,6 @@ import.meta.hot.on('request', (data) => {
   const res = handler(req)
   import.meta.hot.send('response', serialize({ res: res, uniqueId }))
 })
-
-const response = handler(new Request('http://example.com/'))
 
 // -------------------------------------
 // ./entrypoint.js

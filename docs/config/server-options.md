@@ -246,7 +246,7 @@ Se puede ignorar el error que aparece en el navegador cuando ocurre el fallback.
 ## server.forwardConsole
 
 - **Tipo:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
-- **Por defecto:** automático (`true` cuando se detecta un agente de codificación IA basado en [`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent), de lo contrario `false`)
+- **Por defecto:** automático (`true` cuando se detecta un agente de codificación IA basado en [`std-env`](https://www.npmjs.com/package/std-env), de lo contrario `false`)
 
 Reenvía los eventos del runtime del navegador a la consola del servidor Vite durante el desarrollo.
 

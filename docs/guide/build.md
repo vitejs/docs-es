@@ -78,6 +78,8 @@ window.addEventListener('vite:preloadError', (event) => {
 })
 ```
 
+Los navegadores que admiten la [carga reintentable de módulos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import#browser_compatibility) permiten que una aplicación o framework reintente la importación dinámica original después de un error de red o HTTP transitorio. Los navegadores más antiguos requieren recargar la página porque almacenan en caché el fallo en el mapa de módulos.
+
 Cuando ocurre un nuevo despliegue, el servicio de alojamiento puede eliminar los recursos de despliegues anteriores. Como resultado, un usuario que visitó tu sitio antes del nuevo despliegue podría encontrarse con un error de importación. Este error ocurre porque los recursos que se ejecutan en el dispositivo de ese usuario están desactualizados y el código intenta importar el fragmento antiguo correspondiente, que se ha eliminado. Este evento es útil para abordar esta situación. En este caso, asegúrate de configurar `Cache-Control: no-cache` en el archivo HTML; de lo contrario, se seguirán referenciando los recursos antiguos.
 
 ## Recompilar en Cambios de Archivos
@@ -201,8 +203,8 @@ export default defineConfig({
 El archivo de entrada contendría exportaciones que los usuarios de su paquete pueden importar:
 
 ```js [lib/main.js]
-import Foo from './Foo.vue'
 import Bar from './Bar.vue'
+import Foo from './Foo.vue'
 export { Foo, Bar }
 ```
 
@@ -333,8 +335,8 @@ experimental: {
 Si los recursos con hash y los archivos públicos no se despliegan juntos, las opciones para cada grupo se pueden definir de forma independiente utilizando el `type` de recurso incluido en el segundo parámetro de `context` proporcionado a la función.
 
 ```ts twoslash
-import type { UserConfig } from 'vite'
 import path from 'node:path'
+import type { UserConfig } from 'vite'
 // prettier-ignore
 const config: UserConfig = {
   // ---cut-before---

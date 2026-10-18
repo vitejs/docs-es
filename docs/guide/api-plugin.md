@@ -44,8 +44,8 @@ Puedes ver también la [Convención de Módulos Virtuales](https://rolldown.rs/a
 Los usuarios agregarán plugins al proyecto `devDependencies` y los configurarán usando la opción de array `plugins`.
 
 ```js [vite.config.js]
-import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
+import vitePlugin from 'vite-plugin-feature'
 
 export default defineConfig({
   plugins: [vitePlugin(), rollupPlugin()],
@@ -57,9 +57,8 @@ Se ignorarán los plugins falsos, que se pueden usar para activar o desactivar p
 `plugins` también acepta ajustes predefinidos que incluyen varios plugins como un solo elemento. Esto es útil para funciones complejas (como la integración de marcos) que se implementan mediante varios plugins. El array se aplanará internamente.
 
 ```js
-// framework-plugin
+import frameworkDevTools from 'vite-plugin-framework-devtools'
 import frameworkRefresh from 'vite-plugin-framework-refresh'
-import frameworkDevtools from 'vite-plugin-framework-devtools'
 
 export default function framework(config) {
   return [frameworkRefresh(config), frameworkDevTools(config)]
@@ -432,8 +431,10 @@ type IndexHtmlTransformHook = (
     bundle?: import('rolldown').OutputBundle
     chunk?: import('rolldown').OutputChunk
     originalUrl?: string
-  },
-) => IndexHtmlTransformResult | void | Promise<IndexHtmlTransformResult | void>
+  ) =>
+    | IndexHtmlTransformResult
+    | void
+    | Promise<IndexHtmlTransformResult | void>
 
 type IndexHtmlTransformResult =
   | string

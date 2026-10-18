@@ -43,7 +43,7 @@
   "devDependencies": {
     "@algolia/client-search": "^5.59.0",
     "@eslint/js": "^10.0.0",
-    "@shikijs/vitepress-twoslash": "^4.4.3",
+    "@shikijs/vitepress-twoslash": "^4.5.0",
     "@types/express": "^5.0.6",
     "@types/node": "25.9.5",
     "@types/react": "^19.2.18",
@@ -66,9 +66,9 @@
     "typescript": "^6.0.0",
     "typescript-eslint": "^8.70.0",
     "vitepress": "^2.0.0-alpha.20",
-    "vitepress-plugin-group-icons": "^1.7.6",
+    "vitepress-plugin-group-icons": "^1.7.7",
     "vue": "^3.5.42",
-    "vue-tsc": "^3.3.11"
+    "vue-tsc": "^3.3.13"
   },
   "packageManager": "pnpm@11.27.0"
 }

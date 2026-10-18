@@ -9,11 +9,11 @@ La API HMR está pensada para autores de marco de trabajo y autores de herramien
 Vite expone su API HMR a través del objeto especial `import.meta.hot`:
 
 ```ts twoslash
-import type { ModuleNamespace } from 'vite/types/hot.d.ts'
 import type {
   CustomEventName,
   InferCustomEventPayload,
 } from 'vite/types/customEvent.d.ts'
+import type { ModuleNamespace } from 'vite/types/hot.d.ts'
 
 // ---cut---
 interface ImportMeta {

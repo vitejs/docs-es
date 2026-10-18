@@ -318,8 +318,8 @@ Debes combinarlo con la instancia de `HotChannel` en el servidor, como en este e
 ::: code-group
 
 ```js [worker.js]
-import { parentPort } from 'node:worker_threads'
 import { fileURLToPath } from 'node:url'
+import { parentPort } from 'node:worker_threads'
 import {
   ESModulesEvaluator,
   ModuleRunner,

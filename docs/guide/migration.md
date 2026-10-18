@@ -58,7 +58,7 @@ const plugin = {
   configResolved(config) {
     console.log('options', config.optimizeDeps.rolldownOptions)
   },
-},
+}
 ```
 
 ### Transformaciones de JavaScript por Oxc
@@ -93,7 +93,7 @@ const plugin = {
   configResolved(config) {
     console.log('options', config.oxc)
   },
-},
+}
 ```
 
 <!-- TODO: add link to rolldownOptions.output.minify -->
@@ -131,8 +131,8 @@ $ deno add -D npm:@rolldown/plugin-babel npm:@babel/plugin-proposal-decorators
 :::
 
 ```ts [vite.config.ts]
-import { defineConfig } from 'vite'
 import babel from '@rolldown/plugin-babel'
+import { defineConfig } from 'vite'
 
 function decoratorPreset(options: Record<string, unknown>) {
   return {
@@ -180,8 +180,8 @@ $ deno add -D npm:@rollup/plugin-swc npm:@swc/core
 :::
 
 ```js
-import { defineConfig, withFilter } from 'vite'
 import swc from '@rollup/plugin-swc'
+import { defineConfig, withFilter } from 'vite'
 
 export default defineConfig({
   // ...
@@ -320,16 +320,19 @@ _Este cambio solo afecta a los autores de plugins._
 Rolldown tiene soporte experimental para [Tipos de módulo](https://rolldown.rs/guide/notable-features#module-types), similar a la [opción `loader` de esbuild](https://esbuild.github.io/api/#loader). Debido a esto, Rolldown establece automáticamente un tipo de módulo basado en la extensión del id resuelto. Si estás convirtiendo contenido de otros tipos de módulo a JavaScript en los hooks `load` o `transform`, es posible que necesites agregar `moduleType: 'js'` al valor devuelto:
 
 ```js
+import fs from 'node:fs'
+
 const plugin = {
   name: 'txt-loader',
-  load(id) {
-    if (id.endsWith('.txt')) {
-      const content = fs.readFile(id, 'utf-8')
+  load: {
+    filter: { id: /\.txt$/ },
+    handler(id) {
+      const content = fs.readFileSync(id, 'utf-8')
       return {
         code: `export default ${JSON.stringify(content)}`,
         moduleType: 'js', // [!code ++]
       }
-    }
+    },
   },
 }
 ```
