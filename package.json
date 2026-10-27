@@ -37,7 +37,7 @@
   "dependencies": {
     "@iconify/vue": "^5.0.1",
     "search-insights": "^2.17.3",
-    "vite": "^8.2.2",
+    "vite": "^8.3.5",
     "vitepress-plugin-graphviz": "^0.1.0"
   },
   "devDependencies": {
